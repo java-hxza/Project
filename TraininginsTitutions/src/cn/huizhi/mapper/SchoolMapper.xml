@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.SchoolMapper">
+	<!--查询学校所需字段-->
+	<sql id="schoolCol">
+		schoolId,
+		schoolName,
+		cityId,
+		schoolRemarks
+	</sql>
+	<!--查询全部学校-->
+	<select id="selectSchools" resultType="School">
+		select <include refid="schoolCol"/>
+		from school
+	</select>
+	<!--根据城市主键查询学校所在省市-->
+	<select id="selectSchoolByCityId" resultType="School" parameterType="java.lang.Integer">	
+		select <include refid="schoolCol"/>
+		from school
+		<where>
+			<if test="cityId != null and cityId != ''">
+				cityId = #{cityId}
+			</if>
+		</where>
+	</select>
+</mapper>

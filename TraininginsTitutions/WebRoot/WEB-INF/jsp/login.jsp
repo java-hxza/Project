@@ -48,13 +48,23 @@
 									<label for="emailaddress">省份：</label> 
 									<select id="provinceId" name="provinceId" onchange="provinceChange()">
 										<c:forEach items="${provinceList }" var="pro">
-										<option value="${pro.provinceId }">${pro.provinceName}</option>
+											<option value="${pro.provinceId }">${pro.provinceName}</option>
 										</c:forEach>
 									</select>
 									<label for="emailaddress">城市：</label> 
-									<select id="cityId" name="cityId">
+									<select id="cityId" name="cityId" onchange="cityChange()">
+										<option value=''>请选择城市</option>
 										<c:forEach items="${cityList }" var="city">
-										<option value="${city.cityId }">${city.cityName}</option>
+											<option value="${city.cityId }">${city.cityName}</option>
+										</c:forEach>
+									</select>
+									
+								</div>
+								<div class="form-group">
+									<label for="emailaddress">学校：</label>
+									<select id="schoolId" name="schoolId">
+										<c:forEach items="${schoolList }" var="school">
+											<option value="${school.schoolId }">${school.schoolName}</option>
 										</c:forEach>
 									</select>
 								</div>

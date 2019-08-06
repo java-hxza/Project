@@ -17,7 +17,7 @@
 		select <include refid="userCol"/>
 		from user 
 		<where>
-			<if test="loginName!=null loginName!=''">
+			<if test="loginName!=null and  loginName!=''">
 				and loginName=#{loginName}
 			</if>
 			<if test="loginPassword!=null and loginPassword!=''">

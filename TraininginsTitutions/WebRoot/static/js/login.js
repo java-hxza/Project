@@ -5,20 +5,19 @@ $(function() {
 	
 	provinceChange = function(){
 		var provinceId = $("#provinceId").val();
-		alert(provinceId);
 		$.ajax({
 			url:'login.html',
 			data: {
 				provinceId:provinceId
 			},
-			dataType:"JSON",
-			type: "post",
+			dataType:'JSON',
+			type: 'post',
 			success:function(data){
-			alert(data);
+			data = JSON.parse(data);
+			$("#cityId").empty();
+			$("#cityId").append("<option value=''>请选择城市</option>");
 			for (var i = 0; i < data.length; i++) {
-					alert(data.cityId);
-					$("#provinceId").attr("value",data.cityId);
-					$("#provinceId").attr("text",data.cityName);
+					$("#cityId").append("<option value='"+data[i].cityId+"'> "+data[i].cityName+"</option>");
 			}
 			}, error: function (XMLHttpRequest, textStatus, errorThrown) { 
 	 　　           	   alert(XMLHttpRequest.status); 
@@ -27,10 +26,36 @@ $(function() {
 		　　} 
 			
 		})
-			
 		
 	}
 	
+	cityChange = function(){
+		
+		var cityId = $("#cityId").val();
+		$.ajax({
+			url : 'city.html',
+			data :{
+				cityId : cityId
+			},
+			dataType : 'JSON',
+			type : 'post',
+			success : function(data){
+				data = eval(data);
+				$("#schoolId").empty();
+				$("#schoolId").append("<option value=''>请选择学校</option>");
+				for (var i = 0; i < data.length; i++) {
+					$("#schoolId").append("<option value='"+data[i].schoolId+"'>"+data[i].schoolName+"</option>");
+				}
+			}, 
+			error: function (XMLHttpRequest, textStatus, errorThrown) { 
+           	   alert(XMLHttpRequest.status); 
+		　               alert(XMLHttpRequest.readyState); 
+　   	           alert(textStatus); 
+	　　		} 
+		
+			
+		});
+	}
 	
 	UserLogin = function() {
 
@@ -38,9 +63,10 @@ $(function() {
 		$("#loginBtn span").text("");
 		$("#loginBtn").attr("disabled", "disabled");
 
-		var username = $("#username").val();
-		var password = $("#password").val();
-
+		var loginName = $("#username").val();
+		var loginPassword = $("#password").val();
+		var schoolId = $("#schoolId").val();
+		
 		if (username, password == "") {
 			$.NotificationApp.send("错误!", "你必须输入账户名及密码。", "top-right", "rgba(0,0,0,0.2)", "error")
 			$("#loginBtn span").removeClass("spinner-border spinner-border-sm");
@@ -53,19 +79,26 @@ $(function() {
 		$.ajax({
 			url : 'user.html',
 			data : {
-				opr:"login",
-				username : username,
-				password : password
+				loginName : loginName,
+				loginPassword : loginPassword,
+				schoolId : schoolId
 			},
 			dataType : 'JSON',
 			type : 'post',
 			success : function(data) {
+				data = eval(data);
 				if (data.state == "1") {
 					$.NotificationApp.send("成功！", "账户密码校验正确！。", "top-right", "rgba(0,0,0,0.2)", "success")
-					location.href = "jsp/index.jsp";
+					setTimeout(function () { 
+						location.href = "index.html";
+					}, 2000);
+					
 				} else {
 					$.NotificationApp.send("错误!", "账号密码错误，请检查重试。", "top-right", "rgba(0,0,0,0.2)", "error")
-					location.href = "erro.html";
+					setTimeout(function () { 
+						location.href = "erro.html";
+					}, 2000);
+					
 				}
 			}
 			, error: function (XMLHttpRequest, textStatus, errorThrown) { 
