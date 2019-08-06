@@ -41,6 +41,6 @@ public class WelcomeController {
 	
 	@RequestMapping("erro.html")
 	public String errorView() {
-		return "pages-404";
+		return "error";
 	}
 }
