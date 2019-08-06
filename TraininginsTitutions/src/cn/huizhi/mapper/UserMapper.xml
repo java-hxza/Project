@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.UserMapper">
+	<!--查询调用参数-->
+	<sql id="userCol">
+		uId,
+		userName,
+		loginName,
+		loginPassword,
+		schoolId,
+		userTypeId
+	</sql>
+	<!--添加登录sql语句根据账号密码校区校验-->
+	<select id="selectUserByLogin" resultType="User">
+		select <include refid="userCol"/>
+		from user 
+		<where>
+			<if test="loginName!=null loginName!=''">
+				and loginName=#{loginName}
+			</if>
+			<if test="loginPassword!=null and loginPassword!=''">
+				and loginPassword=#{loginPassword}
+			</if>
+			<if test="schoolId!= null and schoolId!=''">
+				and schoolId=#{schoolId}
+			</if>
+		</where>
+	</select>
+</mapper>

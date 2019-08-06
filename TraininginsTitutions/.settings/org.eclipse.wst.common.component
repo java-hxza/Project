@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+        
     <wb-module deploy-name="TraininginsTitutions">
+                
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/resource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/sql"/>
+                
         <property name="context-root" value="TraininginsTitutions"/>
+                
         <property name="java-output-path" value="/TraininginsTitutions/WebRoot/WEB-INF/classes"/>
+            
     </wb-module>
+    
 </project-modules>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.ProvinceMapper">
+	<!--查询时的参数-->
+	<sql id="proinceCol">
+		provinceId,
+		provinceName
+	</sql>
+	
+	<!--查询省份sql语句-->
+	<select id="selectProvinces" resultType="Province">
+		select <include refid="proinceCol"/> 
+		from province
+	</select>
+
+</mapper>
