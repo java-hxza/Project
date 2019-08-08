@@ -22,7 +22,18 @@ $(function(){
 			},
 			dataType: "JSON",
 			success: function(data){
-				
+				data = eval(data);
+				if(data.state == "1"){
+					$.NotificationApp.send("成功！", "创建账户成功！。", "top-right", "rgba(0,0,0,0.2)", "success");
+					setTimeout(function() {
+						location.href = "adminIndex.html";
+					}, 2000);
+				}else{
+					$.NotificationApp.send("失败！", "创建学校失败请重新创建！。", "top-right", "rgba(0,0,0,0.2)", "success");
+					setTimeout(function() {
+						location.href = "erro.html";
+					}, 2000);
+				}
 			},
 			 error: function (XMLHttpRequest, textStatus, errorThrown) { 
 		 　　             alert(XMLHttpRequest.status); 

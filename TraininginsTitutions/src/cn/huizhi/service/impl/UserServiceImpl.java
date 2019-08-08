@@ -19,4 +19,8 @@ public class UserServiceImpl implements UserService {
 		return   userMapper.selectUserByLogin(loginName, loginPassword, schoolId);
 	}
 
+	public int addtUser(User user) {
+		return userMapper.insertUser(user);
+	}
+
 }

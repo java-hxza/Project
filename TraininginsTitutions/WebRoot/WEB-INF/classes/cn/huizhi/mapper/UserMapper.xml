@@ -31,6 +31,6 @@
 	
 	<select id="insertUser" parameterType="User">
 		insert into user  ( loginName, loginPassword, schoolId, userTypeId )
-		values (#{userName}, #{loginName}, #{loginPassword}, #{schoolId}, #{userTypeId} )
+			values (#{userName}, #{loginName}, #{loginPassword}, #{schoolId}, #{userTypeId} )
 	</select>
 </mapper>

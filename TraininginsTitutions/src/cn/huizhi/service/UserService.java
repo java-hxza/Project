@@ -12,5 +12,10 @@ public interface UserService {
 	 */
 	public User findUserByLogin(String loginName,String loginPassword,Integer schoolId);
 	
-	
+	/**
+	 * 添加用户方法
+	 * @param user
+	 * @return
+	 */
+	public int addtUser(User user);
 }
