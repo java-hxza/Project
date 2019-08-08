@@ -19,8 +19,15 @@ public class SchoolServiceImpl implements SchoolService {
 		return schoolMapper.selectSchools();
 	}
 
-	public List<School> sfindSchoolByCityId(Integer cityId) {
+	public List<School> findSchoolByCityId(Integer cityId) {
 		return schoolMapper.selectSchoolByCityId(cityId);
+	}
+
+
+
+	@Override
+	public int addSchool(School school) {
+		return schoolMapper.insertSchool(school);
 	}
 
 }

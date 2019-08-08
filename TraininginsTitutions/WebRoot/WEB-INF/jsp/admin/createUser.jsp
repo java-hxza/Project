@@ -70,14 +70,20 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="emailaddress">账户名：</label> <input
-										class="form-control" type="text" id="username" name="username"
+									<label for="emailaddress">用户名：</label> <input
+										class="form-control" type="text" id="userName" name="userName"
 										required placeholder="Enter your username">
 								</div>
-
+								
 								<div class="form-group">
-									<a href="pages-recoverpw.html" class="text-muted float-right"><small>忘记密码?</small></a> <label for="password">Password</label> <input
-										class="form-control" type="password" required id="password" name="password"
+									<label for="emailaddress">登录名：</label> <input
+										class="form-control" type="text" id="loginName" name="loginName"
+										required placeholder="警告 登录名只可创建一次并且不可修改">
+								</div>
+								
+								<div class="form-group">
+									<a href="#" class="text-muted float-right"><small>忘记密码?</small></a> <label for="password">Password</label> <input
+										class="form-control" type="password" required id="loginPassword" name="loginPassword"
 										placeholder="Enter your password">
 								</div>
 
@@ -85,12 +91,12 @@
 									<div class="custom-control custom-checkbox">
 										<input type="checkbox" class="custom-control-input"
 											id="checkbox-signin" checked> <label
-											class="custom-control-label" for="checkbox-signin">记住我</label>
+											class="custom-control-label" for="checkbox-signin">我同意阅读条款信息</label>
 									</div>
 								</div>
 
 								<div class="form-group mb-0 text-center">
-									<button class="btn btn-primary" id="loginBtn" type="submit" onclick="UserLogin()">
+									<button class="btn btn-primary" id="loginBtn" type="button" onclick="regitUser()">
 									<span class="" role="status" aria-hidden="true">立即登录</span>
 									</button>
 								</div>
@@ -126,6 +132,7 @@
 	<!-- App js -->
 	<script src="${Path }/static/js/jquery.min.js"></script>
 	<script src="${Path }/static/js/login.js"></script>
+	<script src="${Path }/static/js/admin/create/createUser.js"></script>
 	<script src="${Path }/static/js/app.min.js"></script>
 </body>
 </html>

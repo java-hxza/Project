@@ -23,4 +23,11 @@ public interface SchoolMapper {
 	 * @return
 	 */
 	public List<School> selectSchoolByCityId(@Param("cityId")Integer cityId);
+	
+	/**
+	 * 添加学校
+	 * @param school
+	 * @return
+	 */
+	public int insertSchool(School school);
 }

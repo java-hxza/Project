@@ -25,4 +25,10 @@
 			</if>
 		</where>
 	</select>
+	
+	
+	<insert id="insertSchool" parameterType="School">
+		insert into school  (schoolName,  cityId,  schoolRemarks,cityProperId )
+			values (#{schoolName},#{cityId},#{schoolRemarks},#{cityProperId})
+	</insert>
 </mapper>

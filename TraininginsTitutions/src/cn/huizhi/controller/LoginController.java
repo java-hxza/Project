@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,7 +54,7 @@ public class LoginController {
 			return JSON.toJSONString(cityList);
 		}
 		
-		return null;
+		return "";
 	}
 	/**
 	 * 根据城市查询所有该城市下的学校
@@ -63,14 +64,14 @@ public class LoginController {
 	@RequestMapping("city.html")
 	@ResponseBody
 	public String cityChange(Integer cityId) {
-		List<School> schoolList = schoolService.sfindSchoolByCityId(cityId);
+		List<School> schoolList = schoolService.findSchoolByCityId(cityId);
 		
 		if(schoolList.size()>0) {
 			return JSON.toJSONString(schoolList);
 		}
 		
 		
-		return null;
+		return "";
 	}
 	
 	/**
@@ -82,17 +83,20 @@ public class LoginController {
 	 */
 	@RequestMapping("user.html")
 	@ResponseBody
-	public HashMap<String, String> validateLogin(String loginName,String loginPassword,Integer schoolId) {
+	public HashMap<String, String> validateLogin(String loginName,String loginPassword,Integer schoolId,HttpSession session) {
 		
 		User user = userService.findUserByLogin(loginName, loginPassword, schoolId);
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
 		if(user!=null) {
+			session.setAttribute("user", user);
 			jsonMap.put("state", "1");
+			jsonMap.put("UsertypeId",Integer.toString(user.getUserTypeId()));
 		}else {
 			jsonMap.put("state", "0");
 		}
 		return jsonMap;
 	}
+	
 	@RequestMapping("index.html")
 	public String toIndex() {
 		return"index";

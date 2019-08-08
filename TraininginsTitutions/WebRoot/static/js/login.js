@@ -16,6 +16,7 @@ $(function() {
 			data = JSON.parse(data);
 			$("#cityId").empty();
 			$("#cityId").append("<option value=''>请选择城市</option>");
+			$("#schoolId").append("<option value=''>请选择学校</option>");
 			for (var i = 0; i < data.length; i++) {
 					$("#cityId").append("<option value='"+data[i].cityId+"'> "+data[i].cityName+"</option>");
 			}
@@ -42,7 +43,11 @@ $(function() {
 			success : function(data){
 				data = eval(data);
 				$("#schoolId").empty();
-				$("#schoolId").append("<option value=''>请选择学校</option>");
+				if(data == '' || data ==null){
+					$("#schoolId").append("<option value=''>该城市还没有学校</option>");
+				}else{
+					$("#schoolId").append("<option value=''>请选择学校</option>");
+				}
 				for (var i = 0; i < data.length; i++) {
 					$("#schoolId").append("<option value='"+data[i].schoolId+"'>"+data[i].schoolName+"</option>");
 				}
@@ -89,9 +94,15 @@ $(function() {
 				data = eval(data);
 				if (data.state == "1") {
 					$.NotificationApp.send("成功！", "账户密码校验正确！。", "top-right", "rgba(0,0,0,0.2)", "success")
-					setTimeout(function () { 
-						location.href = "index.html";
-					}, 2000);
+					if(data.UsertypeId == "0"){
+						setTimeout(function () { 
+							location.href = "adminIndex.html";
+						}, 2000);
+					}else{
+						setTimeout(function () { 
+							location.href = "index.html";
+						}, 2000);
+					}
 					
 				} else {
 					$.NotificationApp.send("错误!", "账号密码错误，请检查重试。", "top-right", "rgba(0,0,0,0.2)", "error")
