@@ -70,5 +70,6 @@
 
         <!-- App js -->
         <script src="${Path }/static/js/app.min.js"></script>
+        <script src="${Path }/static/js/selectionModule.js"></script>
     </body>
 </html>
