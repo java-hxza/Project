@@ -34,15 +34,15 @@
                             <div class="row mt-5">
                                 <div class="col-md-4">
                                     <div class="text-center mt-3 pl-1 pr-1">
-                                        <i class="dripicons-jewel bg-primary maintenance-icon text-white mb-2"></i>
-                                        <h5 class="text-uppercase">少儿版</h5>
+                                        <i class="dripicons-jewel bg-primary maintenance-icon text-white mb-2" onclick="childrenJump()"></i>
+                                        <h5 class="text-uppercase" onclick="childrenJump()">少儿版</h5>
                                         <p class="text-muted">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.</p>
                                     </div>
                                 </div> <!-- end col-->
                                 <div class="col-md-4">
                                     <div class="text-center mt-3 pl-1 pr-1">
-                                        <i class="dripicons-clock bg-primary maintenance-icon text-white mb-2"></i>
-                                        <h5 class="text-uppercase">高中版</h5>
+                                        <i class="dripicons-clock bg-primary maintenance-icon text-white mb-2" onclick="highJump()"></i>
+                                        <h5 class="text-uppercase" onclick="highJump()">高中版</h5>
                                         <p class="text-muted">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical but the majority.</p>
                                     </div>
                                 </div> <!-- end col-->

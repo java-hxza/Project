@@ -106,4 +106,20 @@ public class WelcomeController {
 		session.setAttribute("userTypeList", userTypeList);
 		return"admin/createUser";
 	}
+	/**
+	 * 返回到少儿首页
+	 * @return
+	 */
+	@RequestMapping("childrenIndex.html")
+	public String childrenIndex() {
+		return "children/childrenIndex";
+	}
+	
+	@RequestMapping("highIndex.html")
+	public String highIndex() {
+		return "high/highIndex";
+	}
+	
+	
+	
 }
