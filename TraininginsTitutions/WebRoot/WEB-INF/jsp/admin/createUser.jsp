@@ -68,6 +68,13 @@
 											<option value="${school.schoolId }">${school.schoolName}</option>
 										</c:forEach>
 									</select>
+									<select id="userTypeId" name="userTypeId">
+										<option value="0">请选择用户身份</option>
+										<c:forEach items="${userTypeList }" var="userType">
+											<option value="${userType.userTypeId }">${userType.userTypeName}</option>
+										</c:forEach>
+									</select>
+									
 								</div>
 								<div class="form-group">
 									<label for="emailaddress">用户名：</label> <input
@@ -78,7 +85,7 @@
 								<div class="form-group">
 									<label for="emailaddress">登录名：</label> <input
 										class="form-control" type="text" id="loginName" name="loginName"
-										required placeholder="警告 登录名只可创建一次并且不可修改">
+										required placeholder="警告 登录名只可创建一次并且不可修改" onblur="loginNameVerification()">
 								</div>
 								
 								<div class="form-group">

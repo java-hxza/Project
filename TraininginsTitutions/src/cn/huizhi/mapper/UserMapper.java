@@ -24,4 +24,11 @@ public interface UserMapper {
 	 */
 	public int insertUser(User user);
 	
+	/**
+	 * 根据登录名校验账户是否存在 
+	 * @param loginName
+	 * @return
+	 */
+	public User selectUserByUserName(@Param("loginName")String loginName);
+	
 }

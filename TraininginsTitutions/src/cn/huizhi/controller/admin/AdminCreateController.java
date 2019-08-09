@@ -18,6 +18,7 @@ import cn.huizhi.service.SchoolService;
  *
  */
 import cn.huizhi.service.UserService;
+
 @Controller
 public class AdminCreateController {
 	/**
@@ -30,8 +31,10 @@ public class AdminCreateController {
 	 */
 	@Resource
 	UserService userservice;
+
 	/**
 	 * 创建学校并以json数组形式返回
+	 * 
 	 * @param provinceId
 	 * @param cityId
 	 * @param schoolName
@@ -40,38 +43,59 @@ public class AdminCreateController {
 	 */
 	@RequestMapping("regitSchool.html")
 	@ResponseBody
-	public HashMap<String, String> createSchool(Integer provinceId ,Integer cityId,String schoolName,String schoolRemarks) {
+	public HashMap<String, String> createSchool(Integer provinceId, Integer cityId, String schoolName,
+			String schoolRemarks) {
 		School school = new School();
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
 		school.setCityProperId(provinceId);
 		school.setCityId(cityId);
 		school.setSchoolName(schoolName);
 		school.setSchoolRemarks(schoolRemarks);
-		if(schoolService.addSchool(school)>0) {
+		if (schoolService.addSchool(school) > 0) {
 			jsonMap.put("state", "1");
-		}else { 
+		} else {
 			jsonMap.put("state", "0");
 		}
-		 
+
 		return jsonMap;
 	}
-	
-	@RequestMapping("createUser.html")
+
+	@RequestMapping("regitUser.html")
 	@ResponseBody
-	public HashMap<String, String> createUser(String userName,String loginName,String loginPassword,Integer schoolId){
+	public HashMap<String, String> createUser(String userName, String loginName, String loginPassword, Integer schoolId,
+			Integer userTypeId) {
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
 		User user = new User();
 		user.setLoginName(loginName);
 		user.setLoginPassword(loginPassword);
 		user.setUserName(userName);
 		user.setSchoolId(schoolId);
-		if(userservice.addtUser(user)>0) {
+		user.setUserTypeId(userTypeId);
+		if (userservice.addtUser(user) > 0) {
 			jsonMap.put("state", "1");
-		}else {
+		} else {
 			jsonMap.put("state", "0");
 		}
-		
-		
-		return jsonMap; 
+
+		return jsonMap;
+	}
+
+	/**
+	 * 登录名验证
+	 * 
+	 * @param loginName
+	 * @return
+	 */
+	@RequestMapping("loginNameVerification.html")
+	@ResponseBody
+	public Map<String, String> loginNameVerification(String loginName) {
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		User user = userservice.findUserByUserName(loginName);
+		if (user != null) {
+			jsonMap.put("state", "0");
+		} else {
+			jsonMap.put("state", "1");
+		}
+		return jsonMap;
 	}
 }

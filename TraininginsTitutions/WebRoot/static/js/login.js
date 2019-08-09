@@ -100,7 +100,7 @@ $(function() {
 						}, 2000);
 					}else{
 						setTimeout(function () { 
-							location.href = "index.html";
+							location.href = "selectionModule.html";
 						}, 2000);
 					}
 					

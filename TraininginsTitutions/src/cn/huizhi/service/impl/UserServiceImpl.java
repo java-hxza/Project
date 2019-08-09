@@ -18,9 +18,17 @@ public class UserServiceImpl implements UserService {
 	public User findUserByLogin(String loginName, String loginPassword, Integer schoolId) {
 		return   userMapper.selectUserByLogin(loginName, loginPassword, schoolId);
 	}
-
+	/**
+	 * 创建用户
+	 */
 	public int addtUser(User user) {
 		return userMapper.insertUser(user);
+	}
+	/**
+	 * 根据的登录名校验账号是否存在
+	 */
+	public User findUserByUserName(String loginName) {
+		return userMapper.selectUserByUserName(loginName);
 	}
 
 }

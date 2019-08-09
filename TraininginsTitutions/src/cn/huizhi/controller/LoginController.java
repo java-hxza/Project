@@ -97,8 +97,8 @@ public class LoginController {
 		return jsonMap;
 	}
 	
-	@RequestMapping("index.html")
+	@RequestMapping("selectionModule.html")
 	public String toIndex() {
-		return"index";
+		return"selectionModule";
 	}
 }

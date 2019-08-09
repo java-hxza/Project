@@ -11,14 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.huizhi.pojo.City;
 import cn.huizhi.pojo.Province;
 import cn.huizhi.pojo.School;
+import cn.huizhi.pojo.UserType;
 import cn.huizhi.service.CityService;
 import cn.huizhi.service.ProvinceService;
 import cn.huizhi.service.SchoolService;
+import cn.huizhi.service.UserService;
 /**
  * 默认进入页面并控制视图跳转Controller
  * @author wye
  *
  */
+import cn.huizhi.service.UserTypeService;
 @Controller
 public class WelcomeController {
 	/**
@@ -36,7 +39,11 @@ public class WelcomeController {
 	 */
 	@Resource
 	SchoolService schoolService;
-
+	/**
+	 * 用户类型
+	 */
+	@Resource
+	UserTypeService userTypeService;
 	/**
 	 * 默认进入登陆页面并把查询结果封装到session域
 	 * @param session
@@ -94,7 +101,9 @@ public class WelcomeController {
 	 * @return
 	 */
 	@RequestMapping("createUser.html")
-	public String createUser() {
+	public String createUser(HttpSession session) {
+		List<UserType> userTypeList = userTypeService.findUserTypes();
+		session.setAttribute("userTypeList", userTypeList);
 		return"admin/createUser";
 	}
 }

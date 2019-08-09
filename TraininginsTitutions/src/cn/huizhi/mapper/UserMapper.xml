@@ -28,9 +28,20 @@
 			</if>
 		</where>
 	</select>
-	
-	<select id="insertUser" parameterType="User">
-		insert into user  ( loginName, loginPassword, schoolId, userTypeId )
+	<!-- 创建用户-->
+	<insert id="insertUser" parameterType="User" >
+		insert into user  ( userName,loginName, loginPassword, schoolId, userTypeId )
 			values (#{userName}, #{loginName}, #{loginPassword}, #{schoolId}, #{userTypeId} )
+	</insert>
+	
+	
+	<select id="selectUserByUserName" resultType="User">
+		select <include refid="userCol"/>
+		from user
+		<where>
+			<if test="loginName !=null and loginName !=''">
+				loginName = #{loginName}
+			</if>
+		</where>
 	</select>
 </mapper>

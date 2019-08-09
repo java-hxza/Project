@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.UserTypeMapper">
+	<!--查询所需字段-->
+	<sql id="userTypeCol">
+		userTypeId,
+		userTypeName
+	</sql>
+	<!--查询所有用户类型-->
+	<select id="selectUserTypes" resultType="UserType">
+		select <include refid="userTypeCol"/>
+		from userType
+	</select>	
+	
+</mapper>
