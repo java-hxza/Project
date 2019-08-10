@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.ChildrenescClassMapper">
+	<sql id="ChildrenescClassCol">
+		childrenesClassId,
+		classNumber,
+		className,
+		dpId,
+		schoolId
+	</sql>
+	
+	<sql id="selectChildrenescClassesCol">
+		cc.childrenesClassId,
+		cc.classNumber,
+		cc.className,
+		cc.dpId as dpIds,
+		cc.schoolId as schoolIds,
+		s.schoolName,
+		dp.dpTypeName
+	</sql>
+	
+	<select id="selectChildrenescClasses" resultMap="selectChildrenescClassesMap" parameterType="java.lang.Integer">
+		select 
+		<include refid="selectChildrenescClassesCol"/>
+		from childrenesclass cc 
+		join school s on cc.schoolId = s.schoolId
+		join departmentofpediatrics dp on cc.dpId = dp.dpId
+		 
+		<where>
+				<if test="schoolId !=null and schoolId !=''">
+					cc.schoolId =#{schoolId}
+				</if>				
+		</where>
+	</select>
+	<resultMap type="ChildrenescClass" id="selectChildrenescClassesMap">
+		<id column="cc.childrenesClassId" property="childrenesClassId"/>
+		<result column="cc.classNumber" property="classNumber"/>
+		<result column="cc.className" property="className"/>
+		<result column="cc.dpId" property="dpId"/>
+		<result column="cc.schoolId" property="schoolId"/>
+		<collection property="school" javaType="School" column="school">
+			<result column="s.schoolName" property="schoolName"/>
+		</collection>
+		<collection property="departmentOfPediatrics" javaType="DepartmentOfPediatrics" column="departmentofpediatrics">
+			<result column="dp.dpTypeName" property="dpTypeName"/>
+		</collection>
+	</resultMap>
+</mapper>
