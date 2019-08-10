@@ -36,7 +36,7 @@
 								班级管理</span> <span class="menu-arrow"></span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
-							<li><a href="apps-calendar.html">学员信息管理 </a></li>
+							<li><a href="apps-calendar.html" onclick="studentInfo()">学员信息管理 </a></li>
 							<li><a href="apps-calendar.html">学员班级管理 -->分班</a></li>
 							<li><a href="apps-calendar.html">上课登记</a></li>
 							<li><a href="apps-tasks.html">上课批量登记</a></li>

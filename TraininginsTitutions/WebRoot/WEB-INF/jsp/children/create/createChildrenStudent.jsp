@@ -257,21 +257,10 @@
                                             <a href="#billing-information" data-toggle="tab" aria-expanded="false"
                                                 class="nav-link rounded-0 active">
                                                 <i class="mdi mdi-account-circle font-18"></i>
-                                                <span class="d-none d-lg-block">Billing Info</span>
+                                                <span class="d-none d-lg-block">请录入学员信息</span>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a href="#shipping-information" data-toggle="tab" aria-expanded="true" class="nav-link rounded-0">
-                                                <i class="mdi mdi-truck-fast font-18"></i>
-                                                <span class="d-none d-lg-block">Shipping Info</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#payment-information" data-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
-                                                <i class="mdi mdi-cash-multiple font-18"></i>
-                                                <span class="d-none d-lg-block">Payment Info</span>
-                                            </a>
-                                        </li>
+                                      
                                     </ul>
 
                                     <!-- Steps Information -->
@@ -1028,7 +1017,7 @@
                                                         <h4 class="mt-4">Shipping Method</h4>
 
                                                         <p class="text-muted mb-3">Fill the form below in order to
-                                                            send you the order's invoice.</p>
+                                                            send you the order7-0987ytrewq41y's invoice.</p>
 
                                                         <div class="row">
                                                             <div class="col-md-6">

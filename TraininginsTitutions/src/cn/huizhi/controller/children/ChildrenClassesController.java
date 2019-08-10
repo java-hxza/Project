@@ -41,6 +41,14 @@ public class ChildrenClassesController {
 	public String createChildrenStudent() {
 		return "children/create/createChildrenStudent";
 	}
+	/**
+	 * 跳转到学生信息管理页面
+	 * @return
+	 */
+	@RequestMapping("studentInfo.html")
+	public String studentInfo() {
+		return "children/studentInfo";
+	}
 	
 	
 	

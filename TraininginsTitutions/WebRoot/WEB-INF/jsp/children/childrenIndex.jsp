@@ -317,8 +317,7 @@
 														<td>
 															<div class="custom-control custom-checkbox">
 																<input type="checkbox" class="custom-control-input"
-																	id="customCheck2"> <label
-																	class="custom-control-label" for="customCheck2">&nbsp;</label>
+																	id="customCheck2"> <label class="custom-control-label" for="customCheck2">&nbsp;</label>
 															</div>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
@@ -434,7 +433,6 @@
 				</div>
 
 			</div>
-
 
 			<!-- Timeline -->
 			<hr class="mt-0" />
