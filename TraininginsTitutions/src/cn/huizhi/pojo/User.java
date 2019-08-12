@@ -7,15 +7,16 @@ public class User {
 	private String loginPassword;
 	private String schoolId;
 	private String userTypeId;
-	private Integer telephone;
+	private String telephone;
 	private String remarks;
+	private String teacherId;
 
 	public User() {
 		super();
 	}
 
 	public User(Integer uId, String userName, String loginName, String loginPassword, String schoolId,
-			String userTypeId, Integer telephone, String remarks) {
+			String userTypeId, String telephone, String remarks, String teacherId) {
 		super();
 		this.uId = uId;
 		this.userName = userName;
@@ -25,6 +26,7 @@ public class User {
 		this.userTypeId = userTypeId;
 		this.telephone = telephone;
 		this.remarks = remarks;
+		this.teacherId = teacherId;
 	}
 
 	public Integer getuId() {
@@ -75,11 +77,11 @@ public class User {
 		this.userTypeId = userTypeId;
 	}
 
-	public Integer getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
-	public void setTelephone(Integer telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
@@ -89,6 +91,14 @@ public class User {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public String getTeacherId() {
+		return teacherId;
+	}
+
+	public void setTeacherId(String teacherId) {
+		this.teacherId = teacherId;
 	}
 
 }

@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
 	 * 查询所有教师
 	 */
 	@Override
-	public List<User> selectUserByAll(String schoolId) {
-		return userMapper.selectUserByAll(schoolId);
+	public List<User> selectUserByAll() {
+		return userMapper.selectUserByAll();
 	}
 
 	

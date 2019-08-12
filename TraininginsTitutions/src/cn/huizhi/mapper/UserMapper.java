@@ -38,6 +38,6 @@ public interface UserMapper {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<User> selectUserByAll(String schoolId);
+	public List<User> selectUserByAll();
 	
 }

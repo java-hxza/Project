@@ -523,7 +523,8 @@
 
 		<!-- third party js -->
 		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-		<script src="${Path }/static/js/highes/highes.js"></script>
+		<script src="${Path }/static/js/highes/leftSidebar.js"></script>
+		<script src="${Path }/static/js/highes/Expenditureitemses.js"></script>
 		<!-- third party js ends -->
 </body>
 </html>
