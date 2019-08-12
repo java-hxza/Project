@@ -15,7 +15,6 @@ import cn.huizhi.pojo.UserType;
 import cn.huizhi.service.CityService;
 import cn.huizhi.service.ProvinceService;
 import cn.huizhi.service.SchoolService;
-import cn.huizhi.service.UserService;
 /**
  * 默认进入页面并控制视图跳转Controller
  * @author wye
@@ -109,7 +108,8 @@ public class WelcomeController {
 	
 	
 	@RequestMapping("highIndex.html")
-	public String highIndex() {
+	public String highIndex(HttpSession session) {
+		session.setAttribute("feeCategory", 2);
 		return "high/highIndex";
 	}
 	
