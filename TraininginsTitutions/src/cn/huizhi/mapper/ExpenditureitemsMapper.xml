@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.ExpenditureitemsMapper">
+
+	<select id="selectExpenditureitems" resultType="Expenditureitems">
+		SELECT * FROM expenditureitems where feeCategory = #{0}
+	</select>
+	
+	<delete id="delExpenditureitems" parameterType="java.lang.Integer">
+		DELETE FROM expenditureitems WHERE expenditureitemsId =#{0}
+	</delete>
+	
+	<insert id="addExpenditureitems" parameterType="java.lang.Integer">
+		INSERT INTO expenditureitems (expenditureitemsName, category,feeCategory)VALUES(#{0}, #{1},#{2});
+	</insert>
+
+</mapper>

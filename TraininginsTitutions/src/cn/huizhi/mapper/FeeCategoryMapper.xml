@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.FeeCategoryMapper">
+
+	<select id="selectFeeCategory" resultType="FeeCategory">
+		SELECT * FROM feecategory where feeCategory = #{0}
+	</select>
+	
+	<delete id="delFeeCategory" parameterType="java.lang.Integer">
+		DELETE FROM feecategory WHERE chargeTypeId =#{0}
+	</delete>
+	
+	<insert id="addFeeCategory" parameterType="java.lang.Integer">
+		INSERT INTO feecategory (chargeTypeName,category,feeCategory)VALUES(#{0}, #{1},#{2});
+	</insert>
+
+</mapper>
