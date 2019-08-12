@@ -72,7 +72,7 @@ $(function() {
 		var loginPassword = $("#password").val();
 		var schoolId = $("#schoolId").val();
 		
-		if (username, password == "") {
+		if (loginName, loginPassword == "") {
 			$.NotificationApp.send("错误!", "你必须输入账户名及密码。", "top-right", "rgba(0,0,0,0.2)", "error")
 			$("#loginBtn span").removeClass("spinner-border spinner-border-sm");
 			$("#loginBtn span").text("立即登录");
@@ -115,8 +115,12 @@ $(function() {
 			, error: function (XMLHttpRequest, textStatus, errorThrown) { 
 				 　　             alert(XMLHttpRequest.status); 
 				　　               alert(XMLHttpRequest.readyState); 
-				　　               alert(textStatus); 
-				 　　} 
+				　　               alert(textStatus);
+				　　               $.NotificationApp.send("错误!", "账号密码错误，请检查重试。", "top-right", "rgba(0,0,0,0.2)", "error")
+			                 setTimeout(function () { 
+								location.href = "erro.html";
+							}, 2000);
+		 　　		} 
 		})
 
 	}
