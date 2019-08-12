@@ -1,6 +1,8 @@
 package cn.huizhi.service;
 
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import cn.huizhi.pojo.User;
@@ -27,4 +29,11 @@ public interface UserService {
 	 * @return
 	 */
 	public User findUserByUserName(String loginName);
+	
+	/**
+	 * 查询所有教师
+	 * @param schoolId
+	 * @return
+	 */
+	public List<User> selectUserByAll();
 }

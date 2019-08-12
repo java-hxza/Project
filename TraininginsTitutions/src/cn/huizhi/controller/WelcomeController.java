@@ -110,7 +110,7 @@ public class WelcomeController {
 	@RequestMapping("highIndex.html")
 	public String highIndex(HttpSession session) {
 		session.setAttribute("feeCategory", 2);
-		return "high/highIndex";
+		return "redirect:/Accountinformation.html";
 	}
 	
 	

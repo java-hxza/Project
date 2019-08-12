@@ -279,31 +279,35 @@
 								<div class="card-body">
 									<div class="row mb-2">
 										<div class="col-sm-4">
-											<a href="javascript:void(0);" class="btn btn-danger mb-2" onclick="addAccountinformation()"><i
+											<a href="javascript:void(0);" class="btn btn-danger mb-2" onclick="addIncomeitems()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 添加</a> 
-											<a href="javascript:void(0);" class="btn btn-danger mb-2" onclick="delAccountinformation()"><i
+											<a href="javascript:void(0);" class="btn btn-danger mb-2" onclick="delIncomeitems()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 删除</a>
 										</div>
 
 										<!-- end col-->
 									</div>
-									<div class="table-responsive mt-4 Accountinformation">
+
+									<div class="table-responsive mt-4 Incomeitems">
 										<table class="table table-bordered table-centered mb-0">
 											<thead class="thead-light">
 												<tr>
 													<th style="width: 20px;">
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input"
-																id="customCheck1"  disabled> <label
+																id="customCheck1" disabled> <label
 																class="custom-control-label" for="customCheck1">&nbsp;</label>
 														</div>
 													</th>
-													<th>编码</th>
-													<th>名称</th>
+													<th>校区</th>
+													<th>名字</th>
+													<th>职业</th>
+													<th>电话</th>
+													<th>备注</th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${list}" var="p">
+												<c:forEach items="${ list}" var="u">
 													<tr>
 														<td>
 															<div class="custom-control custom-checkbox">
@@ -312,21 +316,25 @@
 																	class="custom-control-label customCheck" for="customCheck2">&nbsp;</label>
 															</div>
 														</td>
-														<td>${p.paymentmethodId }</td>
-														<td>${p.paymentmethodName }</td>
+														<td>${u.schoolId }</td>
+														<td>${u.userName }</td>
+														<td>${u.teacherId }</td>
+														<td>${u.telephone }</td>
+														<td>${u.remarks }</td>
 													</tr>
 												</c:forEach>
 											</tbody>
 										</table>
 									</div>
-									
-							<div class="col-lg-6 addAccountinformations " style="display:none;">
+									<div class="col-lg-6 addIncomeitemses " style="display:none;">
                                 <div class="card">
                                     <div class="card-body">
                                         <form class="needs-validation" novalidate>
                                             <div class="form-group position-relative mb-3">
-                                                <label for="validationTooltip01">名称</label>
-                                                <input type="text" class="form-control" id="validationTooltip01" placeholder="请填写名称"  required>
+                                                <label for="validationTooltip01">类别</label>
+                                                <input type="text" class="form-control category" id="validationTooltip01" placeholder="请填写类别"  required>
+                                                <label for="validationTooltip01">收入项目名称</label>
+                                                <input type="text" class="form-control chargeTypeName" id="validationTooltip01" placeholder="请填写收入项目名称"  required>
                                             </div>
                                             <button class="btn btn-primary add" type="submit">提交</button>
                                             <button class="btn btn-primary back" type="reset" style="float: right;">重置</button>
@@ -335,7 +343,6 @@
                                     </div> <!-- end card-body-->
                                 </div> <!-- end card-->
                             </div>
-									
 									<!-- end card-body-->
 								</div>
 								<!-- end card-->
@@ -521,7 +528,7 @@
 		<!-- third party js -->
 		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
 		<script src="${Path }/static/js/highes/leftSidebar.js"></script>
-		<script src="${Path }/static/js/highes/Accountinformation.js"></script>
+		<script src="${Path }/static/js/highes/Teacher.js"></script>
 		<!-- third party js ends -->
 </body>
 </html>

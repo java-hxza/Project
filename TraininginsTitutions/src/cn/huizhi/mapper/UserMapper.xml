@@ -44,4 +44,9 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="selectUserByAll" resultType="User">
+		SELECT u.userName,s.schoolName schoolId,te.teacherName teacherId,u.telephone,u.remarks FROM USER u ,school s ,usertype t ,teacher te WHERE u.schoolId=s.schoolId AND u.userTypeId=t.userTypeId AND u.teacherId=te.teacherId AND u.userTypeId=3
+	</select>
+	
 </mapper>

@@ -1,5 +1,7 @@
 package cn.huizhi.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -30,5 +32,14 @@ public class UserServiceImpl implements UserService {
 	public User findUserByUserName(String loginName) {
 		return userMapper.selectUserByUserName(loginName);
 	}
+	
+	/**
+	 * 查询所有教师
+	 */
+	@Override
+	public List<User> selectUserByAll() {
+		return userMapper.selectUserByAll();
+	}
 
+	
 }

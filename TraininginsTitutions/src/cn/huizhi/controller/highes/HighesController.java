@@ -18,9 +18,11 @@ import com.alibaba.fastjson.JSONArray;
 import cn.huizhi.pojo.Expenditureitems;
 import cn.huizhi.pojo.FeeCategory;
 import cn.huizhi.pojo.PaymentMethod;
+import cn.huizhi.pojo.User;
 import cn.huizhi.service.ExpenditureitemsService;
 import cn.huizhi.service.FeeCategoryService;
 import cn.huizhi.service.PaymentMethodService;
+import cn.huizhi.service.UserService;
 
 @Controller
 public class HighesController {
@@ -34,6 +36,8 @@ public class HighesController {
 	private PaymentMethodService paymentMethodService;
 	@Resource
 	private ExpenditureitemsService expenditureitemsService;
+	@Resource
+	private UserService userService;
 	
 	/**
 	 * 查询所有账户信息
@@ -172,5 +176,17 @@ public class HighesController {
 			map.put("add", "0");
 		}
 		return JSONArray.toJSONString(map);
+	}
+	
+	/**
+	 * 查询所有的教师
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("Teacher.html")
+	public String Teacher(Model model) {
+		List<User> list = userService.selectUserByAll();
+		model.addAttribute("list", list);
+		return "high/Teacher";
 	}
 }

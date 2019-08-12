@@ -1,5 +1,7 @@
 package cn.huizhi.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import cn.huizhi.pojo.User;
@@ -30,5 +32,12 @@ public interface UserMapper {
 	 * @return
 	 */
 	public User selectUserByUserName(@Param("loginName")String loginName);
+	
+	/**
+	 * 查询所有教师
+	 * @param schoolId
+	 * @return
+	 */
+	public List<User> selectUserByAll();
 	
 }
