@@ -38,6 +38,8 @@ public class HighesController {
 	private ExpenditureitemsService expenditureitemsService;
 	@Resource
 	private UserService userService;
+	@Resource
+	HttpSession session;
 	
 	/**
 	 * 查询所有账户信息
@@ -92,7 +94,7 @@ public class HighesController {
 	 */
 	@RequestMapping("Incomeitems.html")
 	public String Incomeitems(Model model,HttpSession session) {
-		List<FeeCategory> list = feecategoryService.selectFeeCategory((Integer)session.getAttribute("feeCategory"));
+		List<FeeCategory> list = feecategoryService.selectFeeCategory();
 		model.addAttribute("list", list);
 		return "high/Incomeitems";
 	}
@@ -121,9 +123,9 @@ public class HighesController {
 	 */
 	@RequestMapping("addIncomeitems.html")
 	@ResponseBody
-	public Object AddIncomeitems(@RequestParam String chargeTypeName,@RequestParam String category,HttpSession session) {
+	public Object AddIncomeitems(@RequestParam String chargeTypeName,@RequestParam String category) {
 		HashMap<String, String> map = new HashMap<String, String>();
-		if(feecategoryService.addFeeCategory(chargeTypeName, category, (Integer)session.getAttribute("feeCategory")) == 1) {
+		if(feecategoryService.addFeeCategory(chargeTypeName, category) == 1) {
 			map.put("add", "1");
 		}else {
 			map.put("add", "0");
@@ -137,8 +139,9 @@ public class HighesController {
 	 * @return
 	 */
 	@RequestMapping("Expenditureitemses.html")
-	public String Expenditureitemses(Model model,HttpSession session) {
-		List<Expenditureitems> list = expenditureitemsService.selectExpenditureitems((Integer)session.getAttribute("feeCategory"));
+	public String Expenditureitemses(Model model) {
+		User user = (User) session.getAttribute("user");
+		List<Expenditureitems> list = expenditureitemsService.selectExpenditureitems(user.getSchoolId());
 		model.addAttribute("list", list);
 		return "high/Expenditureitemses";
 	}
@@ -168,9 +171,10 @@ public class HighesController {
 	 */
 	@RequestMapping("addExpenditureitemses.html")
 	@ResponseBody
-	public Object AddExpenditureitemses(@RequestParam String expenditureitemsName,@RequestParam String category,HttpSession session) {
+	public Object AddExpenditureitemses(@RequestParam String expenditureitemsName,@RequestParam String category) {
 		HashMap<String, String> map = new HashMap<String, String>();
-		if(expenditureitemsService.addExpenditureitems(expenditureitemsName, category, (Integer)session.getAttribute("feeCategory")) == 1) {
+		User user = (User) session.getAttribute("user");
+		if(expenditureitemsService.addExpenditureitems(expenditureitemsName, category,user.getSchoolId()) == 1) {
 			map.put("add", "1");
 		}else {
 			map.put("add", "0");
@@ -184,9 +188,58 @@ public class HighesController {
 	 * @return
 	 */
 	@RequestMapping("Teacher.html")
-	public String Teacher(Model model) {
-		List<User> list = userService.selectUserByAll();
+	public String Teacher(Model model,HttpSession session) {
+		User u = (User) session.getAttribute("user");
+		List<User> list = userService.selectUserByAll(u.getSchoolId());
 		model.addAttribute("list", list);
 		return "high/Teacher";
+	}
+	
+	/**
+	 * 删除教师
+	 * @return
+	 */
+	@RequestMapping("delTeacher.html")
+	@ResponseBody
+	public Object delTeacher(@RequestParam Integer uId) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		if(userService.delTeacher(uId) == 1) {
+			map.put("del", "1");
+		}else {
+			map.put("del", "0");
+		}
+		return JSONArray.toJSONString(map);
+	}
+	
+	/**
+	 * 修改教师
+	 * @return
+	 */
+	@RequestMapping("updateTeacher.html")
+	@ResponseBody
+	public Object updateTeacher(@RequestParam User user) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		if(userService.updateTeacher(user) == 1) {
+			map.put("update", "1");
+		}else {
+			map.put("update", "0");
+		}
+		return JSONArray.toJSONString(map);
+	}
+	
+	/**
+	 * 添加教师
+	 * @return
+	 */
+	@RequestMapping("addTeacher.html")
+	@ResponseBody
+	public Object addTeacher(@RequestParam User user) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		if(userService.addtUser(user) == 1) {
+			map.put("add", "1");
+		}else {
+			map.put("add", "0");
+		}
+		return JSONArray.toJSONString(map);
 	}
 }

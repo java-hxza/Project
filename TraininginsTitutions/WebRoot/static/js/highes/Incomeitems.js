@@ -6,6 +6,7 @@ $(function(){
 	addIncomeitems = function() {
 		$(".Incomeitems").remove();
 		$(".addIncomeitemses").show();
+		$(".del").remove();
 		$(".add").click(function() {
 			var chargeTypeName = $(".chargeTypeName").val();
 			var category = $(".category").val();

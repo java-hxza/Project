@@ -10,7 +10,7 @@ public interface ExpenditureitemsService {
 	 * 查询所有支出项目
 	 * @return
 	 */
-	public List<Expenditureitems> selectExpenditureitems(Integer feeCategory);
+	public List<Expenditureitems> selectExpenditureitems(String schoolId);
 	
 	/**
 	 * 删除支出项目
@@ -23,5 +23,5 @@ public interface ExpenditureitemsService {
 	 * 添加支出项目
 	 * @return
 	 */
-	public Integer addExpenditureitems(String expenditureitemsName,String category,Integer feeCategory);
+	public Integer addExpenditureitems(String expenditureitemsName,String category,String schoolId);
 }

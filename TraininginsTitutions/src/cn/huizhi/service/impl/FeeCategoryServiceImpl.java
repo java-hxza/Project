@@ -20,8 +20,8 @@ public class FeeCategoryServiceImpl implements FeeCategoryService {
 	 * 查询所有收入项目
 	 */
 	@Override
-	public List<FeeCategory> selectFeeCategory(Integer feeCategory) {
-		return feecategoryMapper.selectFeeCategory(feeCategory);
+	public List<FeeCategory> selectFeeCategory() {
+		return feecategoryMapper.selectFeeCategory();
 	}
 
 	/**
@@ -38,8 +38,8 @@ public class FeeCategoryServiceImpl implements FeeCategoryService {
 	 * 添加收入项目
 	 */
 	@Override
-	public Integer addFeeCategory(String chargeTypeName,String category,Integer feeCategory) {
-		return feecategoryMapper.addFeeCategory(chargeTypeName, category, feeCategory);
+	public Integer addFeeCategory(String chargeTypeName,String category) {
+		return feecategoryMapper.addFeeCategory(chargeTypeName, category);
 	}
 
 }

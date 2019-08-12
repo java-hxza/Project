@@ -1,5 +1,7 @@
 package cn.huizhi.pojo;
 
+import java.util.List;
+
 public class User {
 	private Integer uId;
 	private String userName;
@@ -9,14 +11,17 @@ public class User {
 	private String userTypeId;
 	private String telephone;
 	private String remarks;
-	private String teacherId;
+	private Integer teacherId;
+	private Teacher teacher;
 
 	public User() {
 		super();
 	}
 
+	
+
 	public User(Integer uId, String userName, String loginName, String loginPassword, String schoolId,
-			String userTypeId, String telephone, String remarks, String teacherId) {
+			String userTypeId, String telephone, String remarks, Integer teacherId, Teacher teacher) {
 		super();
 		this.uId = uId;
 		this.userName = userName;
@@ -27,7 +32,10 @@ public class User {
 		this.telephone = telephone;
 		this.remarks = remarks;
 		this.teacherId = teacherId;
+		this.teacher = teacher;
 	}
+
+
 
 	public Integer getuId() {
 		return uId;
@@ -93,12 +101,26 @@ public class User {
 		this.remarks = remarks;
 	}
 
-	public String getTeacherId() {
+	public Integer getTeacherId() {
 		return teacherId;
 	}
 
-	public void setTeacherId(String teacherId) {
+	public void setTeacherId(Integer teacherId) {
 		this.teacherId = teacherId;
 	}
+
+
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+
+
 
 }

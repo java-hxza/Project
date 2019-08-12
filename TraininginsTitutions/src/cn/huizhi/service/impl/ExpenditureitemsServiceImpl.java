@@ -20,8 +20,8 @@ public class ExpenditureitemsServiceImpl implements ExpenditureitemsService{
 	 * 查询所有支出项目
 	 */
 	@Override
-	public List<Expenditureitems> selectExpenditureitems(Integer feeCategory) {
-		return expenditureitemsMapper.selectExpenditureitems(feeCategory);
+	public List<Expenditureitems> selectExpenditureitems(String schoolId) {
+		return expenditureitemsMapper.selectExpenditureitems(schoolId);
 	}
 
 	/**
@@ -36,8 +36,8 @@ public class ExpenditureitemsServiceImpl implements ExpenditureitemsService{
 	 * 添加支出项目
 	 */
 	@Override
-	public Integer addExpenditureitems(String expenditureitemsName, String category,Integer feeCategory) {
-		return expenditureitemsMapper.addExpenditureitems(expenditureitemsName, category, feeCategory);
+	public Integer addExpenditureitems(String expenditureitemsName, String category,String schoolId) {
+		return expenditureitemsMapper.addExpenditureitems(expenditureitemsName, category,schoolId);
 	}
 	
 	

@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	/**
 	 * 创建用户
 	 */
-	public int addtUser(User user) {
+	public Integer addtUser(User user) {
 		return userMapper.insertUser(user);
 	}
 	/**
@@ -37,9 +37,27 @@ public class UserServiceImpl implements UserService {
 	 * 查询所有教师
 	 */
 	@Override
-	public List<User> selectUserByAll() {
-		return userMapper.selectUserByAll();
+	public List<User> selectUserByAll(String schoolId) {
+		return userMapper.selectUserByAll(schoolId);
 	}
+	
+	/**
+	 * 删除教师
+	 */
+	@Override
+	public Integer delTeacher(Integer uId) {
+		return userMapper.delTeacher(uId);
+	}
+	
+	/**
+	 * 修改教师
+	 */
+	@Override
+	public Integer updateTeacher(User user) {
+		return userMapper.updateTeacher(user);
+	}
+	
+	
 
 	
 }

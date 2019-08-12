@@ -24,7 +24,7 @@ public interface UserMapper {
 	 * @param user
 	 * @return
 	 */
-	public int insertUser(User user);
+	public Integer insertUser(User user);
 	
 	/**
 	 * 根据登录名校验账户是否存在 
@@ -38,6 +38,20 @@ public interface UserMapper {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<User> selectUserByAll();
+	public List<User> selectUserByAll(String schoolId);
+	
+	/**
+	 * 删除教师
+	 * @param uId
+	 * @return
+	 */
+	public Integer delTeacher(Integer uId);
+	
+	/**
+	 * 修改教师
+	 * @param user
+	 * @return
+	 */
+	public Integer updateTeacher(User user);
 	
 }

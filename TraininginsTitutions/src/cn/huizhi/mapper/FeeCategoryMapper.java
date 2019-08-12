@@ -15,7 +15,7 @@ public interface FeeCategoryMapper {
 	 * 查询所有收入项目
 	 * @return
 	 */
-	public List<FeeCategory> selectFeeCategory(Integer feeCategory);
+	public List<FeeCategory> selectFeeCategory();
 	
 	/**
 	 * 删除收入项目
@@ -27,5 +27,5 @@ public interface FeeCategoryMapper {
 	 * 添加收入项目
 	 * @return
 	 */
-	public Integer addFeeCategory(String chargeTypeName,String category,Integer feeCategory);
+	public Integer addFeeCategory(String chargeTypeName,String category);
 }
