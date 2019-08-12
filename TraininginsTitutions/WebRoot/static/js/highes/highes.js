@@ -22,7 +22,7 @@ $(function(){
 		}
 	});
 	
-	$(".delAccountinformation").click(function() {
+	delAccountinformation = function() {
 		if($(".customCheckes:checked").length <1) {
 			if(!$(".customCheckes").prop("checked")) {
 				alert("请选中一条数据！");
@@ -59,9 +59,9 @@ $(function(){
 		}else {
 			return false;
 		}
-	});
+	};
 	
-	$(".delIncomeitems").click(function() {
+	delIncomeitems = function() {
 		if($(".customCheckes:checked").length <1) {
 			if(!$(".customCheckes").prop("checked")) {
 				alert("请选中一条数据！");
@@ -98,9 +98,9 @@ $(function(){
 		}else {
 			return false;
 		}
-	});
+	};
 	
-	$(".addAccountinformation").click(function() {
+	addAccountinformation = function() {
 		$(".Accountinformation").remove();
 		$(".addAccountinformations").show();
 		$(".add").click(function() {
@@ -126,9 +126,9 @@ $(function(){
 			}
 			});
 		});
-	});
+	};
 	
-	$(".addIncomeitems").click(function() {
+	addIncomeitems = function() {
 		$(".Incomeitems").remove();
 		$(".addIncomeitemses").show();
 		$(".add").click(function() {
@@ -155,9 +155,9 @@ $(function(){
 			}
 			});
 		});
-	});
+	};
 	
-	$(".delExpenditureitemses").click(function() {
+	delExpenditureitemses = function() {
 		if($(".customCheckes:checked").length <1) {
 			if(!$(".customCheckes").prop("checked")) {
 				alert("请选中一条数据！");
@@ -194,9 +194,9 @@ $(function(){
 		}else {
 			return false;
 		}
-	});
+	};
 	
-	$(".Expenditureitemses2").click(function() {
+	Expenditureitemses2 = function() {
 		$(".Expenditureitemses").remove();
 		$(".addExpenditureitemses").show();
 		$(".add").click(function() {
@@ -223,5 +223,5 @@ $(function(){
 			}
 			});
 		});
-	});
+	};
 });

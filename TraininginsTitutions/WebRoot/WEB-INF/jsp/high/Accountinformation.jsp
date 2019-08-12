@@ -279,9 +279,9 @@
 								<div class="card-body">
 									<div class="row mb-2">
 										<div class="col-sm-4">
-											<a href="javascript:void(0);" class="btn btn-danger mb-2 addAccountinformation"><i
+											<a href="javascript:void(0);" class="btn btn-danger mb-2" onclick="addAccountinformation()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 添加</a> 
-											<a href="javascript:void(0);" class="btn btn-danger mb-2 delAccountinformation"><i
+											<a href="javascript:void(0);" class="btn btn-danger mb-2" onclick="delAccountinformation()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 删除</a>
 										</div>
 
@@ -294,7 +294,7 @@
 													<th style="width: 20px;">
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input"
-																id="customCheck1" disabled> <label
+																id="customCheck1"  disabled> <label
 																class="custom-control-label" for="customCheck1">&nbsp;</label>
 														</div>
 													</th>

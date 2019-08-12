@@ -279,9 +279,9 @@
 								<div class="card-body">
 									<div class="row mb-2">
 										<div class="col-sm-4">
-											<a href="javascript:void(0);" class="btn btn-danger mb-2 Expenditureitemses2"><i
+											<a href="javascript:void(0);" class="btn btn-danger mb-2" onclick="Expenditureitemses2()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 添加</a> 
-											<a href="javascript:void(0);" class="btn btn-danger mb-2 delExpenditureitemses"><i
+											<a href="javascript:void(0);" class="btn btn-danger mb-2" onclick="delExpenditureitemses()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 删除</a>
 										</div>
 
