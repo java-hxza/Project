@@ -83,14 +83,14 @@ public class LoginController {
 	 */
 	@RequestMapping("user.html")
 	@ResponseBody
-	public HashMap<String, String> validateLogin(String loginName,String loginPassword,Integer schoolId,HttpSession session) {
+	public HashMap<String, String> validateLogin(String loginName,String loginPassword,String schoolId,HttpSession session) {
 		
 		User user = userService.findUserByLogin(loginName, loginPassword, schoolId);
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
 		if(user!=null) {
 			session.setAttribute("user", user);
 			jsonMap.put("state", "1");
-			jsonMap.put("UsertypeId",Integer.toString(user.getUserTypeId()));
+			jsonMap.put("UsertypeId",user.getUserTypeId());
 		}else {
 			jsonMap.put("state", "0");
 		}

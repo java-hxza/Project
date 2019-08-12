@@ -16,7 +16,7 @@ public class ChildrenescClassServiceImpl implements ChildrenescClassService{
 	ChildrenescClassMapper childrenescClassMapper;
 	
 	
-	public List<ChildrenescClass> findChildrenescClasses(Integer schoolId) {
+	public List<ChildrenescClass> findChildrenescClasses(String schoolId) {
 		return childrenescClassMapper.selectChildrenescClasses(schoolId);
 	}
 

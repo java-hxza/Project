@@ -21,7 +21,7 @@
 		dp.dpTypeName
 	</sql>
 	
-	<select id="selectChildrenescClasses" resultMap="selectChildrenescClassesMap" parameterType="java.lang.Integer">
+	<select id="selectChildrenescClasses" resultMap="selectChildrenescClassesMap" parameterType="java.lang.String">
 		select 
 		<include refid="selectChildrenescClassesCol"/>
 		from childrenesclass cc 
