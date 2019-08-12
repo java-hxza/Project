@@ -17,8 +17,10 @@
 		cc.className,
 		cc.dpId as dpIds,
 		cc.schoolId as schoolIds,
+		s.schoolId,
 		s.schoolName,
-		dp.dpTypeName
+		dp.dpTypeName,
+		dp.dpId
 	</sql>
 	
 	<select id="selectChildrenescClasses" resultMap="selectChildrenescClassesMap" parameterType="java.lang.String">
@@ -41,9 +43,11 @@
 		<result column="cc.dpId" property="dpId"/>
 		<result column="cc.schoolId" property="schoolId"/>
 		<collection property="school" javaType="School" column="school">
+			<id column="s.schoolId" property="schoolId"/>
 			<result column="s.schoolName" property="schoolName"/>
 		</collection>
 		<collection property="departmentOfPediatrics" javaType="DepartmentOfPediatrics" column="departmentofpediatrics">
+			<id column="dp.dpId" property="dpId"/>
 			<result column="dp.dpTypeName" property="dpTypeName"/>
 		</collection>
 	</resultMap>

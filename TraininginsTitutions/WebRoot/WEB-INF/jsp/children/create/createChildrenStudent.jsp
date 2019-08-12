@@ -332,6 +332,15 @@
 																</div>
 															</div>
 														</div>
+														<div class="row">
+															<div class="col-12">
+																<div class="form-group">
+																	<label for="billing-address">学员出生日期</label> <input
+																		class="form-control" type="datetime-local" placeholder="出生日期"
+																		id="studentBirth">
+																</div>
+															</div>
+														</div>
 														<!-- end row -->
 														<div class="row">
 															<div class="col-12">
@@ -348,7 +357,7 @@
 																<div class="form-group">
 																	<label for="billing-town-city">学校</label> <input
 																		class="form-control" type="text" placeholder="在读学校"
-																		id="billing-town-city" />
+																		id="school" />
 																</div>
 															</div>
 															<div class="col-md-4">
@@ -368,7 +377,7 @@
 															<div class="col-md-4">
 																<div class="form-group">
 																	<label for="billing-zip-postal">报名时间</label> <input
-																		class="form-control" type="datetime"
+																		class="form-control" type="datetime-local"
 																		placeholder="默认是当前时间" id=startTime />
 																</div>
 															</div>
@@ -377,7 +386,7 @@
 																	<label for="billing-zip-postal">请选择班级</label> 
 																	<select class="form-control" id="studentClassId">
 																		<c:forEach items="${childrenClassList }" var="childrenClass">
-																			<option value="${childrenClass.childrenesClassId }">${childrenClass.className }</option>
+																			<option class="dp" data_schoolId="${childrenClass.school.schoolId }" data_dpId="${childrenClass.departmentOfPediatrics.dpId }" value="${childrenClass.childrenesClassId }">${childrenClass.className } </option>
 																		</c:forEach>
 																	</select>
 																</div>
@@ -389,7 +398,7 @@
 
 																<div class="form-group mt-3">
 																	<label for="example-textarea">备注</label>
-																	<textarea class="form-control" id="example-textarea"
+																	<textarea class="form-control" id="remarks"
 																		rows="3" placeholder="Write some note.."></textarea>
 																</div>
 															</div>
@@ -408,8 +417,8 @@
 															<div class="col-sm-6">
 																<div class="text-sm-right">
 																	<a href="javascript:void(0)"
-																		class="btn btn-danger"> <i
-																		class="mdi mdi-truck-fast mr-1" onclick="insertChildrenStudent()"></i> 保存
+																		class="btn btn-danger"  onclick="insertChildrenStudent()"> <i
+																		class="mdi mdi-truck-fast mr-1"></i> 保存
 																	</a>
 																</div>
 															</div>

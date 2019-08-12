@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.ChildrenMapper">
+
+	<sql id="childrenCol">
+		remarkschildrenId,
+		studentName,
+		studentSex,
+		studentBirth,
+		school,
+		parentName,
+		telephone,
+		familyAddress,
+		registrationChannels,
+		registrationConsultant,
+		startTime,
+		endTime,
+		remarks
+	</sql>
+
+
+	<insert id="insertChildren" parameterType="Children">
+		insert into children ( studentName, studentSex, studentBirth, school,
+		parentName, telephone, familyAddress, registrationChannels,
+		registrationConsultant, startTime, endTime,remarks)
+		values ( #{studentName}, #{studentSex}, #{studentBirth}, #{school},
+		#{parentName}, #{telephone},#{familyAddress}, #{registrationChannels},
+		#{registrationConsultant}, #{startTime}, null, #{remarks});
+	</insert>
+
+
+
+
+</mapper>

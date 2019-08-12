@@ -61,6 +61,7 @@ $(function(){
 		}
 	});
 	
+	
 	$(".delIncomeitems").click(function() {
 		if($(".customCheckes:checked").length <1) {
 			if(!$(".customCheckes").prop("checked")) {

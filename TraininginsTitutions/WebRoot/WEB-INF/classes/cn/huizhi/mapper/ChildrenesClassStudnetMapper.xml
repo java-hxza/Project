@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.ChildrenesClassStudnetMapper">
+	<sql id="childrenesClassStudnetCol">
+		classesStudentId,
+		studentName,
+		headmaster,
+		enrollmentTime,
+		classId,
+		studentId,
+		state
+	</sql>
+	<insert id="insertChildrenesClassStudnet" parameterType="ChildrenesClassStudnet">
+		insert into  childrenesclassstudnet  ( studentName,  headmaster, enrollmentTime,  classId,  studentId,  state )
+			values (  #{studentName}, #{headmaster}, #{enrollmentTime}, #{classId}, #{studentId}, #{state})
+	</insert>
+
+</mapper>
