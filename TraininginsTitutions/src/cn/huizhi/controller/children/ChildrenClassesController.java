@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.huizhi.pojo.ChildrenescClass;
+import cn.huizhi.pojo.DepartmentOfPediatrics;
 import cn.huizhi.pojo.User;
 import cn.huizhi.service.ChildrenescClassService;
+import cn.huizhi.service.DepartmentOfPediatricsService;
 
 @Controller
 public class ChildrenClassesController {
@@ -19,6 +21,11 @@ public class ChildrenClassesController {
 	 */
 	@Resource
 	ChildrenescClassService childrenescClassService;
+	/**
+	 * 少儿班级科别
+	 */
+	@Resource
+	DepartmentOfPediatricsService departmentOfPediatricsService;
 	
 	/**
 	 * 返回到少儿首页
@@ -48,6 +55,14 @@ public class ChildrenClassesController {
 	@RequestMapping("studentInfo.html")
 	public String studentInfo() {
 		return "children/studentInfo";
+	}
+	
+	@RequestMapping("regitChildrenClass.html")
+	public String createChildrenClass(HttpSession session) {
+		
+		List<DepartmentOfPediatrics> dpList = departmentOfPediatricsService.findDepartmentOfPediatrics();
+		session.setAttribute("dpList", dpList);
+		return "children/create/createChildrenClass";
 	}
 	
 	

@@ -16,7 +16,6 @@
 <meta content="Coderthemes" name="author" />
 <!-- App favicon -->
 <link rel="shortcut icon" href="assets/images/favicon.ico">
-
 <!-- App css -->
 <link href="${Path }/static/css/icons.min.css" rel="stylesheet"
 	type="text/css" />
@@ -336,8 +335,8 @@
 															<div class="col-12">
 																<div class="form-group">
 																	<label for="billing-address">学员出生日期</label> <input
-																		class="form-control" type="datetime-local" placeholder="出生日期"
-																		id="studentBirth">
+																		class="form-control" type="date" 
+																		placeholder="出生日期" id="studentBirth">
 																</div>
 															</div>
 														</div>
@@ -374,19 +373,23 @@
 																		id="registrationConsultant" />
 																</div>
 															</div>
-															<div class="col-md-4">
+															<div class="col-md-6">
 																<div class="form-group">
 																	<label for="billing-zip-postal">报名时间</label> <input
-																		class="form-control" type="datetime-local"
-																		placeholder="默认是当前时间" id=startTime />
+																		class="form-control" type="date" placeholder="默认是当前时间"
+																		id=startTime />
 																</div>
 															</div>
 															<div class="col-md-4">
 																<div class="form-group">
-																	<label for="billing-zip-postal">请选择班级</label> 
-																	<select class="form-control" id="studentClassId">
-																		<c:forEach items="${childrenClassList }" var="childrenClass">
-																			<option class="dp" data_schoolId="${childrenClass.school.schoolId }" data_dpId="${childrenClass.departmentOfPediatrics.dpId }" value="${childrenClass.childrenesClassId }">${childrenClass.className } </option>
+																	<label for="billing-zip-postal">请选择班级</label> <select
+																		class="form-control" id="studentClassId">
+																		<c:forEach items="${childrenClassList }"
+																			var="childrenClass">
+																			<option class="dp"
+																				headmaster="${childrenClass.headmaster }"
+																				value="${childrenClass.childrenesClassId }">${childrenClass.className }
+																			</option>
 																		</c:forEach>
 																	</select>
 																</div>
@@ -398,8 +401,8 @@
 
 																<div class="form-group mt-3">
 																	<label for="example-textarea">备注</label>
-																	<textarea class="form-control" id="remarks"
-																		rows="3" placeholder="Write some note.."></textarea>
+																	<textarea class="form-control" id="remarks" rows="3"
+																		placeholder="Write some note.."></textarea>
 																</div>
 															</div>
 														</div>
@@ -416,8 +419,8 @@
 															<!-- end col -->
 															<div class="col-sm-6">
 																<div class="text-sm-right">
-																	<a href="javascript:void(0)"
-																		class="btn btn-danger"  onclick="insertChildrenStudent()"> <i
+																	<a href="javascript:void(0)" class="btn btn-danger"
+																		onclick="insertChildrenStudent()"> <i
 																		class="mdi mdi-truck-fast mr-1"></i> 保存
 																	</a>
 																</div>
@@ -485,7 +488,6 @@
 
 		<!-- App js -->
 		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-
 		<script type="text/javascript"
 			src="${Path }/static/js/children/create/createChildrenStudent.js"></script>
 </body>

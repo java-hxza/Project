@@ -15,6 +15,7 @@ public class Children {
 	private String registrationConsultant;
 	private Date startTime;
 	private Date endTime;
+	private String remarks;
 
 	public Children() {
 		super();
@@ -22,7 +23,7 @@ public class Children {
 
 	public Children(Integer childrenId, String studentName, Integer studentSex, Date studentBirth, String school,
 			String parentName, String telephone, String familyAddress, String registrationChannels,
-			String registrationConsultant, Date startTime, Date endTime) {
+			String registrationConsultant, Date startTime, Date endTime, String remarks) {
 		super();
 		this.childrenId = childrenId;
 		this.studentName = studentName;
@@ -36,6 +37,7 @@ public class Children {
 		this.registrationConsultant = registrationConsultant;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.remarks = remarks;
 	}
 
 	public Integer getChildrenId() {
@@ -104,6 +106,14 @@ public class Children {
 
 	public String getRegistrationChannels() {
 		return registrationChannels;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 	public void setRegistrationChannels(String registrationChannels) {

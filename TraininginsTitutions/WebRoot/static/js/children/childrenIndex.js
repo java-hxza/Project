@@ -13,4 +13,8 @@ $(function(){
 		
 	}
 	
+	createChildrenClass = function(){
+		location.href="regitChildrenClass.html";
+	}
+	
 });

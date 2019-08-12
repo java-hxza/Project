@@ -16,6 +16,8 @@
 		cc.classNumber,
 		cc.className,
 		cc.dpId as dpIds,
+		cc.headmaster,
+		cc.uId,
 		cc.schoolId as schoolIds,
 		s.schoolId,
 		s.schoolName,
@@ -42,6 +44,8 @@
 		<result column="cc.className" property="className"/>
 		<result column="cc.dpId" property="dpId"/>
 		<result column="cc.schoolId" property="schoolId"/>
+		<result column="cc.headmaster" property="headmaster"/>
+		<result column="cc.uId" property="uId"/>
 		<collection property="school" javaType="School" column="school">
 			<id column="s.schoolId" property="schoolId"/>
 			<result column="s.schoolName" property="schoolName"/>

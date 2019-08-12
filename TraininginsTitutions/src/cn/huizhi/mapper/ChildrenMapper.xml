@@ -5,7 +5,7 @@
 <mapper namespace="cn.huizhi.mapper.ChildrenMapper">
 
 	<sql id="childrenCol">
-		remarkschildrenId,
+		childrenId,
 		studentName,
 		studentSex,
 		studentBirth,
@@ -19,8 +19,8 @@
 		endTime,
 		remarks
 	</sql>
-
-
+	
+	<!--添加少儿学生-->
 	<insert id="insertChildren" parameterType="Children">
 		insert into children ( studentName, studentSex, studentBirth, school,
 		parentName, telephone, familyAddress, registrationChannels,
@@ -30,6 +30,32 @@
 		#{registrationConsultant}, #{startTime}, null, #{remarks});
 	</insert>
 
+ 	<select id="selectChildrenInfoByChildren" parameterType="Children" resultType="Children">
+		select <include refid="childrenCol"/>
+		from children
+		<where>
+			<if test="studentName!=null and studentName!=''">
+				and studentName = #{studentName}
+			</if>
+			<if test="studentSex!=null and studentSex!=''">
+				and studentSex = #{studentSex}
+			</if>
+			<if test="studentBirth!=null and studentBirth!=''">
+				and studentBirth=#{studentBirth}
+			</if>
+			<if test="school!=null and school!=''">
+				and school = #{school}
+			</if>
+			<if test="parentName!='' and parentName!=null">
+				and parentName = #{parentName}
+			</if>
+			<if test="telephone!='' and telephone!=null">
+				and telephone = #{telephone}
+			</if> 
+			
+		</where>
+	
+	</select>
 
 
 
