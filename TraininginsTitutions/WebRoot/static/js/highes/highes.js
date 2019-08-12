@@ -11,6 +11,9 @@ $(function(){
 	Expenditureitemses = function(){
 		location.href="Expenditureitemses.html";
 	}
+	Teacher = function(){
+		location.href="Teacher.html";
+	}
 	$(".customCheck").click(function() {
 		if($(this).prev().prop("checked")) {
 			$(this).prev().prop("checked", false);

@@ -26,7 +26,7 @@
 							<li><a href="#" onclick="Accountinformation()">账户信息</a></li>
 							<li><a href="#" onclick="Incomeitems()">收入项目</a></li>
 							<li><a href="#" onclick="Expenditureitemses()">支出项目</a></li>
-							<li><a href="dashboard-projects.html">教师信息</a></li>
+							<li><a href="#" onclick="Teacher()">教师信息</a></li>
 							<li><a href="dashboard-projects.html">课程信息</a></li>
 							<li><a href="dashboard-projects.html">班级信息</a></li>
 							<li><a href="dashboard-projects.html">学员信息</a></li>

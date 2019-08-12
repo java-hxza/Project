@@ -15,7 +15,7 @@ public interface ChildrenescClassService {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<ChildrenescClass> findChildrenescClasses(Integer schoolId);
+	public List<ChildrenescClass> findChildrenescClasses(String schoolId);
 
 	/**
 	 * 添加少儿班级

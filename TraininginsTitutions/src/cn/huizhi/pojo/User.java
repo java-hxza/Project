@@ -5,15 +5,17 @@ public class User {
 	private String userName;
 	private String loginName;
 	private String loginPassword;
-	private Integer schoolId;
-	private Integer userTypeId;
+	private String schoolId;
+	private String userTypeId;
+	private Integer telephone;
+	private String remarks;
 
 	public User() {
 		super();
 	}
 
-	public User(Integer uId, String userName, String loginName, String loginPassword, Integer schoolId,
-			Integer userTypeId) {
+	public User(Integer uId, String userName, String loginName, String loginPassword, String schoolId,
+			String userTypeId, Integer telephone, String remarks) {
 		super();
 		this.uId = uId;
 		this.userName = userName;
@@ -21,6 +23,8 @@ public class User {
 		this.loginPassword = loginPassword;
 		this.schoolId = schoolId;
 		this.userTypeId = userTypeId;
+		this.telephone = telephone;
+		this.remarks = remarks;
 	}
 
 	public Integer getuId() {
@@ -55,20 +59,36 @@ public class User {
 		this.loginPassword = loginPassword;
 	}
 
-	public Integer getSchoolId() {
+	public String getSchoolId() {
 		return schoolId;
 	}
 
-	public void setSchoolId(Integer schoolId) {
+	public void setSchoolId(String schoolId) {
 		this.schoolId = schoolId;
 	}
 
-	public Integer getUserTypeId() {
+	public String getUserTypeId() {
 		return userTypeId;
 	}
 
-	public void setUserTypeId(Integer userTypeId) {
+	public void setUserTypeId(String userTypeId) {
 		this.userTypeId = userTypeId;
+	}
+
+	public Integer getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(Integer telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 }

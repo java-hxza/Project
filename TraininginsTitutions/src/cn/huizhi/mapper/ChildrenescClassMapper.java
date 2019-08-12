@@ -18,7 +18,7 @@ public interface ChildrenescClassMapper {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<ChildrenescClass> selectChildrenescClasses(@Param("schoolId")Integer schoolId);
+	public List<ChildrenescClass> selectChildrenescClasses(@Param("schoolId")String schoolId);
 
 	/**
 	 * 添加少儿班级

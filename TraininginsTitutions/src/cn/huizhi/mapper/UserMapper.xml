@@ -30,8 +30,8 @@
 	</select>
 	<!-- 创建用户-->
 	<insert id="insertUser" parameterType="User" >
-		insert into user  ( userName,loginName, loginPassword, schoolId, userTypeId )
-			values (#{userName}, #{loginName}, #{loginPassword}, #{schoolId}, #{userTypeId} )
+		insert into user  ( userName,loginName, loginPassword, schoolId, userTypeId, telephone, remarks)
+			values (#{userName}, #{loginName}, #{loginPassword}, #{schoolId}, #{userTypeId}, #{telephone}, #{remarks})
 	</insert>
 	
 	

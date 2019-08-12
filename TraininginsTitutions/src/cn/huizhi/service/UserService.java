@@ -12,7 +12,7 @@ public interface UserService {
 	 * @param loginPassword
 	 * @return
 	 */
-	public User findUserByLogin(String loginName,String loginPassword,Integer schoolId);
+	public User findUserByLogin(String loginName,String loginPassword,String schoolId);
 	
 	/**
 	 * 添加用户方法
