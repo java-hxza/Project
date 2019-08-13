@@ -5,7 +5,7 @@
 <mapper namespace="cn.huizhi.mapper.ExpenditureitemsMapper">
 
 	<select id="selectExpenditureitems" resultType="Expenditureitems">
-		SELECT * FROM expenditureitems where feeCategory = #{0}
+		SELECT * FROM expenditureitems where feeCategory = 2 and schoolId=#{0}
 	</select>
 	
 	<delete id="delExpenditureitems" parameterType="java.lang.Integer">
@@ -13,7 +13,7 @@
 	</delete>
 	
 	<insert id="addExpenditureitems" parameterType="java.lang.Integer">
-		INSERT INTO expenditureitems (expenditureitemsName, category,feeCategory)VALUES(#{0}, #{1},#{2});
+		INSERT INTO expenditureitems (expenditureitemsName, category,feeCategory,schoolId)VALUES(#{0}, #{1},2,#{2});
 	</insert>
 
 </mapper>

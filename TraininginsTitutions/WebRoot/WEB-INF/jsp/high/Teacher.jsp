@@ -279,16 +279,16 @@
 								<div class="card-body">
 									<div class="row mb-2">
 										<div class="col-sm-4">
-											<a href="javascript:void(0);" class="btn btn-danger mb-2" onclick="addIncomeitems()"><i
+											<a href="javascript:void(0);" class="btn btn-danger mb-2 "  onclick="addTeacher()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 添加</a> 
-											<a href="javascript:void(0);" class="btn btn-danger mb-2" onclick="delIncomeitems()"><i
+											<a href="javascript:void(0);" class="btn btn-danger mb-2 del" onclick="delTeacher()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 删除</a>
 										</div>
 
 										<!-- end col-->
 									</div>
 
-									<div class="table-responsive mt-4 Incomeitems">
+									<div class="table-responsive mt-4 Teachers">
 										<table class="table table-bordered table-centered mb-0">
 											<thead class="thead-light">
 												<tr>
@@ -300,7 +300,7 @@
 														</div>
 													</th>
 													<th>校区</th>
-													<th>名字</th>
+													<th>姓名</th>
 													<th>职业</th>
 													<th>电话</th>
 													<th>备注</th>
@@ -316,9 +316,9 @@
 																	class="custom-control-label customCheck" for="customCheck2">&nbsp;</label>
 															</div>
 														</td>
-														<td>${u.schoolId }</td>
+														<td id="${u.uId }">${u.schoolId }</td>
 														<td>${u.userName }</td>
-														<td>${u.teacherId }</td>
+														<td>${u.teacher.teacherName}</td>
 														<td>${u.telephone }</td>
 														<td>${u.remarks }</td>
 													</tr>
@@ -326,15 +326,29 @@
 											</tbody>
 										</table>
 									</div>
-									<div class="col-lg-6 addIncomeitemses " style="display:none;">
+									<div class="col-lg-6 addTeacher " style="display:none;">
                                 <div class="card">
                                     <div class="card-body">
                                         <form class="needs-validation" novalidate>
                                             <div class="form-group position-relative mb-3">
-                                                <label for="validationTooltip01">类别</label>
-                                                <input type="text" class="form-control category" id="validationTooltip01" placeholder="请填写类别"  required>
-                                                <label for="validationTooltip01">收入项目名称</label>
-                                                <input type="text" class="form-control chargeTypeName" id="validationTooltip01" placeholder="请填写收入项目名称"  required>
+                                                <label for="validationTooltip01">姓名</label>
+                                                <input type="text" class="form-control userName" id="validationTooltip01" placeholder="请填写姓名"  required>
+                                                <label for="validationTooltip01">职业</label>
+                                                <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <select data-toggle="select2" title="Country">
+                                                                    <c:forEach items="${list }" var="t">
+                                                                    	<option value="">${t.teacherId}</option>
+                                                                    </c:forEach>           
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>     
+                                                <label for="validationTooltip01">电话</label>
+                                                <input type="text" class="form-control telephone" id="validationTooltip01" placeholder="XXX-XXXX-XXXX"  required>
+                                                <label for="validationTooltip01">备注</label>
+                                                <input type="text" class="form-control remarks" id="validationTooltip01" placeholder="请填写备注"  required>
                                             </div>
                                             <button class="btn btn-primary add" type="submit">提交</button>
                                             <button class="btn btn-primary back" type="reset" style="float: right;">重置</button>

@@ -9,11 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+
 import cn.huizhi.pojo.ChildrenescClass;
 import cn.huizhi.pojo.DepartmentOfPediatrics;
 import cn.huizhi.pojo.User;
 import cn.huizhi.service.ChildrenescClassService;
 import cn.huizhi.service.DepartmentOfPediatricsService;
+import cn.huizhi.service.UserService;
 
 @Controller
 public class ChildrenClassesController {
@@ -27,6 +30,11 @@ public class ChildrenClassesController {
 	 */
 	@Resource
 	DepartmentOfPediatricsService departmentOfPediatricsService;
+	/**
+	 * 用户
+	 */
+	@Resource
+	UserService userService;
 	
 	/**
 	 * 返回到少儿首页
@@ -65,11 +73,22 @@ public class ChildrenClassesController {
 		session.setAttribute("dpList", dpList);
 		return "children/create/createChildrenClass";
 	}
+	
+	/**
+	 * 根据教师科别，学校主键查询所有老师并异步返回数据
+	 * @param dpId
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("dpChange.html")
 	@ResponseBody
-	public String dpChange(Integer dpId) {
-		
-		
+	public String dpChange(Integer dpId,HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		Integer schoolId = Integer.valueOf(user.getSchoolId());
+		List<User> teacherUserList = userService.findtUserByDpId(dpId,schoolId);
+		if(teacherUserList.size()>0) {
+			return JSON.toJSONString(teacherUserList);
+		}
 		return "";
 	}
 	

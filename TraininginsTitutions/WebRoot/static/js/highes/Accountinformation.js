@@ -47,6 +47,7 @@ delAccountinformation = function() {
 	addAccountinformation = function() {
 		$(".Accountinformation").remove();
 		$(".addAccountinformations").show();
+		$(".del").remove();
 		$(".add").click(function() {
 			var paymentmethodName = $("#validationTooltip01").val();
 			$.ajax({

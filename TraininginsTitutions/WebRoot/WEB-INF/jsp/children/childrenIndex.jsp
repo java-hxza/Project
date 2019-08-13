@@ -278,8 +278,8 @@
 								<div class="card-body">
 									<div class="row mb-2">
 										<div class="col-sm-4">
-											<a href="javascript:void(0);" class="btn btn-danger mb-2"><i
-												class="mdi mdi-plus-circle mr-2" onclick="createChildrenClass()"></i> 添加班级</a>
+											<a href="javascript:void(0);" onclick="createChildrenClass()" class="btn btn-danger mb-2"><i
+												class="mdi mdi-plus-circle mr-2" ></i> 添加班级</a>
 										</div>
 										<div class="col-sm-8">
 											<div class="text-sm-right">

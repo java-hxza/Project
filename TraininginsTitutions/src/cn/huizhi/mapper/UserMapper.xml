@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.UserMapper">
-	<!--查询调用参数-->
+	<!--查询调用参数 -->
 	<sql id="userCol">
 		uId,
 		userName,
@@ -12,10 +12,11 @@
 		schoolId,
 		userTypeId
 	</sql>
-	<!--添加登录sql语句根据账号密码校区校验-->
+	<!--添加登录sql语句根据账号密码校区校验 -->
 	<select id="selectUserByLogin" resultType="User">
-		select <include refid="userCol"/>
-		from user 
+		select
+		<include refid="userCol" />
+		from user
 		<where>
 			<if test="loginName!=null and  loginName!=''">
 				and loginName=#{loginName}
@@ -28,15 +29,21 @@
 			</if>
 		</where>
 	</select>
-	<!-- 创建用户-->
-	<insert id="insertUser" parameterType="User" >
-		insert into user  ( userName,loginName, loginPassword, schoolId, userTypeId, telephone, remarks)
-			values (#{userName}, #{loginName}, #{loginPassword}, #{schoolId}, #{userTypeId}, #{telephone}, #{remarks})
+	<!-- 创建用户 -->
+	<insert id="insertUser" parameterType="User">
+		INSERT INTO
+		traininginstitutions.user (userName, loginName, loginPassword,
+		schoolId, userTypeId, telephone, remarks,
+		teacherId)VALUES(#{userName},
+		#{loginName}, #{loginPassword},
+		#{schoolId}, #{userTypeId}, #{telephone},
+		#{remarks}, #{teacherId});
 	</insert>
-	
-	
+
+
 	<select id="selectUserByUserName" resultType="User">
-		select <include refid="userCol"/>
+		select
+		<include refid="userCol" />
 		from user
 		<where>
 			<if test="loginName !=null and loginName !=''">
@@ -44,9 +51,72 @@
 			</if>
 		</where>
 	</select>
-	
-	<select id="selectUserByAll" resultType="User">
-		SELECT u.userName,s.schoolName schoolId,te.teacherName teacherId,u.telephone,u.remarks FROM USER u ,school s ,usertype t ,teacher te WHERE u.schoolId=s.schoolId AND u.userTypeId=t.userTypeId AND u.teacherId=te.teacherId AND u.userTypeId=3
+
+	<select id="selectUserByAll" resultMap="selectUserByAlls">
+		SELECT
+		u.uId ud,u.userName,u.telephone,u.remarks,u.teacherId td,s.schoolName
+		sd,t.teacherName
+		FROM `user` u
+		JOIN school s ON
+		u.schoolId=s.schoolId
+		JOIN teacher t ON u.teacherId=t.teacherId
+		WHERE
+		u.userTypeId=3 AND u.schoolId=#{0}
+		ORDER BY u.uId
 	</select>
+
+	<resultMap type="User" id="selectUserByAlls">
+		<id column="ud" property="uId" javaType="java.lang.Integer" />
+		<result property="userName" column="u.userName"
+			javaType="java.lang.String" />
+		<result property="schoolId" column="sd"
+			javaType="java.lang.String" />
+		<result property="remarks" column="u.remarks"
+			javaType="java.lang.String" />
+		<result property="teacherId" column="td"
+			javaType="java.lang.Integer" />
+		<result property="telephone" column="u.telephone"
+			javaType="java.lang.String" />
+		<collection property="teacher" javaType="Teacher"
+			column="teacher">
+			<result property="teacherName" column="t.teacherName"
+				javaType="java.lang.String" />
+		</collection>
+	</resultMap>
+
+	<update id="updateTeacher" parameterType="User">
+		UPDATE
+		traininginstitutions.user SET userName = #{userName} , loginName =
+		#{loginName} , loginPassword = #{loginPassword} , schoolId =
+		#{schoolId}
+		, userTypeId = #{userTypeId} , telephone = #{telephone} ,
+		remarks =
+		#{remarks} , teacherId = #{teacherId} WHERE uId = #{uId} ;
+	</update>
+
+	<delete id="delTeacher">
+		DELETE FROM traininginstitutions.user WHERE uId = #{0}
+	</delete>
+	
+	<!--根据科别查询老师-->
+	<select id="selectUserByDpId" resultMap="dpIdCol">
+		select u.userName,u.uId
+		from user u
+		join teacher t on t.teacherId = u.teacherId
+		join departmentofpediatrics dp on dp.dpId = t.dpId
+		<where>
+			<if test="dpId!=null and dpId!=''">
+				dp.dpId = #{dpId}  
+			</if>
+			<if test="schoolId!=null and schoolId!=''">
+				and  u.schoolId = #{schoolId}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap type="User" id="dpIdCol">
+		<id column="u.uId" property="uId" javaType="java.lang.Integer"/>		
+		<result column="u.userName" property="userName" javaType="java.lang.String"/>
+	</resultMap>
 	
 </mapper>

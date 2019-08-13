@@ -6,6 +6,7 @@ $(function(){
 	Expenditureitemses2 = function() {
 		$(".Expenditureitemses").remove();
 		$(".addExpenditureitemses").show();
+		$(".del").remove();
 		$(".add").click(function() {
 			var category = $(".category").val();
 			var expenditureitemsName = $(".expenditureitemsName").val();
