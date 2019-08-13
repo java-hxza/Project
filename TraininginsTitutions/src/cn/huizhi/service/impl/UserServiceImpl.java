@@ -64,7 +64,14 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectUserByDpId(dpId, schoolId);
 	}
 	
+	/**
+	 * 添加教师
+	 */
+	@Override
+	public Integer addTeacher(User user) {
+		return userMapper.addTeacher(user);
+	}
 	
-
+	
 	
 }

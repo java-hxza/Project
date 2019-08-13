@@ -98,6 +98,7 @@
 		DELETE FROM traininginstitutions.user WHERE uId = #{0}
 	</delete>
 	
+<<<<<<< HEAD
 	<!--根据科别查询老师-->
 	<select id="selectUserByDpId" resultMap="dpIdCol">
 		select u.userName,u.uId
@@ -119,4 +120,16 @@
 		<result column="u.userName" property="userName" javaType="java.lang.String"/>
 	</resultMap>
 	
+=======
+	<insert id="addTeacher" parameterType="User">
+		INSERT INTO
+		traininginstitutions.user (userName, loginName, loginPassword,
+		schoolId, userTypeId, telephone, remarks,
+		teacherId)VALUES(#{userName},
+		#{loginName}, #{loginPassword},
+		#{schoolId}, 3, #{telephone},
+		#{remarks}, #{teacherId});
+	</insert>
+
+>>>>>>> branch 'master' of https://github.com/tianmabdqn/TraininginsTitutions.git
 </mapper>

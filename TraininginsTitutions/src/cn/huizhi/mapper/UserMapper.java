@@ -55,8 +55,16 @@ public interface UserMapper {
 	public Integer updateTeacher(User user);
 	
 	/**
+<<<<<<< HEAD
 	 * 根据班级科别查询所有教师
 	 */
 	public List<User> selectUserByDpId(@Param("dpId")Integer dpId,@Param("schoolId")Integer schoolId);
+=======
+	 * 添加教师
+	 * @param user
+	 * @return
+	 */
+	public Integer addTeacher(User user);
+>>>>>>> branch 'master' of https://github.com/tianmabdqn/TraininginsTitutions.git
 	
 }
