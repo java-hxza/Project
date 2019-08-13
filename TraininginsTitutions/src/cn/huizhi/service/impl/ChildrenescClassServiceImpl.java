@@ -21,7 +21,7 @@ public class ChildrenescClassServiceImpl implements ChildrenescClassService{
 	}
 
 	public int addChildrenescClass(ChildrenescClass childrenescClass) {
-		return 0;
+		return childrenescClassMapper.insertChildrenescClass(childrenescClass);
 	}
 
 	public int modifyChildrenescClass(ChildrenescClass childrenescClass) {

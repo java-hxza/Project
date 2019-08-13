@@ -43,4 +43,6 @@ public interface ChildrenescClassMapper {
 	 * @return
 	 */
 	public int deleteChildrenescClass(Integer childrenesClassId);
+	
+	
 }

@@ -10,49 +10,54 @@
 		dpId,
 		schoolId
 	</sql>
-	
+
 	<sql id="selectChildrenescClassesCol">
-		cc.childrenesClassId,
-		cc.classNumber,
-		cc.className,
-		cc.dpId as dpIds,
-		cc.headmaster,
-		cc.uId,
-		cc.schoolId as schoolIds,
-		s.schoolId,
-		s.schoolName,
-		dp.dpTypeName,
-		dp.dpId
+		cc.childrenesClassId as cc_childrenesClassId,
+		cc.classNumber as cc_classNumber,
+		cc.className as cc_className,
+		cc.dpId as cc_dpId,
+		cc.headmaster as cc_headmaster ,
+		cc.uId as cc_uId,
+		cc.schoolId as cc_schoolId,
+		s.schoolId as s_schoolId,
+		s.schoolName as s_schoolName,
+		dp.dpTypeName as dp_dpTypeName,
+		dp.dpId as dp_dpId
 	</sql>
-	
+
 	<select id="selectChildrenescClasses" resultMap="selectChildrenescClassesMap" parameterType="java.lang.String">
-		select 
-		<include refid="selectChildrenescClassesCol"/>
-		from childrenesclass cc 
+		select
+		<include refid="selectChildrenescClassesCol" />
+		from childrenesclass cc
 		join school s on cc.schoolId = s.schoolId
 		join departmentofpediatrics dp on cc.dpId = dp.dpId
-		 
 		<where>
-				<if test="schoolId !=null and schoolId !=''">
-					cc.schoolId =#{schoolId}
-				</if>				
+			<if test="schoolId !=null and schoolId !=''">
+				cc.schoolId =#{schoolId}
+			</if>
 		</where>
 	</select>
-	<resultMap type="ChildrenescClass" id="selectChildrenescClassesMap">
-		<id column="cc.childrenesClassId" property="childrenesClassId"/>
-		<result column="cc.classNumber" property="classNumber"/>
-		<result column="cc.className" property="className"/>
-		<result column="cc.dpId" property="dpId"/>
-		<result column="cc.schoolId" property="schoolId"/>
-		<result column="cc.headmaster" property="headmaster"/>
-		<result column="cc.uId" property="uId"/>
-		<collection property="school" javaType="School" column="school">
-			<id column="s.schoolId" property="schoolId"/>
-			<result column="s.schoolName" property="schoolName"/>
+	<resultMap id="selectChildrenescClassesMap" type="ChildrenescClass">
+		<id column="cc_childrenesClassId" property="childrenesClassId" />
+		<result column="cc_classNumber" property="classNumber" />
+		<result column="cc_className" property="className" />
+		<result column="cc_dpId" property="dpId" />
+		<result column="cc_schoolId" property="schoolId" />
+		<result column="cc_headmaster" property="headmaster" />
+		<result column="cc_uId" property="uId" />
+		<collection property="school" javaType="School">
+			<id column="s_schoolId" property="schoolId" javaType="java.lang.Integer"/>
+			<result column="s_schoolName" property="schoolName" javaType="java.lang.String"/>
 		</collection>
-		<collection property="departmentOfPediatrics" javaType="DepartmentOfPediatrics" column="departmentofpediatrics">
-			<id column="dp.dpId" property="dpId"/>
-			<result column="dp.dpTypeName" property="dpTypeName"/>
+		<collection property="departmentOfPediatrics" javaType="DepartmentOfPediatrics" >
+			<id column="dp_dpId" property="dpId" javaType="java.lang.Integer"/>
+			<result column="dp_dpTypeName" property="dpTypeName" javaType="java.lang.String"/>
 		</collection>
 	</resultMap>
+
+	<insert id="insertChildrenescClass" parameterType="ChildrenescClass">
+		insert into childrenesclass ( classNumber, className, dpId, schoolId,headmaster, uId )
+			values (#{classNumber}, #{className}, #{dpId}, #{schoolId}, #{headmaster},#{uId})
+	</insert>
+
 </mapper>

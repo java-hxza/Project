@@ -73,19 +73,9 @@
 								<option value="">请选择班主任</option>
 							</select>
 						</div>
-						<div class="form-group">
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input"
-									id="checkbox-signup"> <label
-									class="custom-control-label" for="checkbox-signup">I
-									accept <a href="javascript: void(0);" class="text-muted">Terms
-										and Conditions</a>
-								</label>
-							</div>
-						</div>
 						<div class="form-group mb-0 text-center">
-							<button class="btn btn-primary btn-block" type="submit">
-								<i class="mdi mdi-account-circle"></i> Sign Up
+							<button class="btn btn-primary btn-block" type="button" onclick="createChildrenClass()" >
+								<i class="mdi mdi-account-circle"></i> 保存
 							</button>
 						</div>
 						<!-- social-->

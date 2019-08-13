@@ -1,6 +1,8 @@
 package cn.huizhi.controller.children;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -91,7 +93,24 @@ public class ChildrenClassesController {
 		}
 		return "";
 	}
-	
+	/**
+	 * 创建学生班级
+	 * @param childrenescClass
+	 * @return
+	 */
+	@RequestMapping("createChildrenClass.html")
+	@ResponseBody
+	public Map<String, String> createChildrenClass(ChildrenescClass childrenescClass,HttpSession session) {
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		User user = (User) session.getAttribute("user");
+		childrenescClass.setSchoolId(Integer.valueOf(user.getSchoolId()));
+		if(childrenescClassService.addChildrenescClass(childrenescClass)>0) {
+			jsonMap.put("state", "1");
+		}else {
+			jsonMap.put("state", "0");
+		}
+		return jsonMap;
+	}
 	
 	
 }
