@@ -97,5 +97,15 @@
 	<delete id="delTeacher">
 		DELETE FROM traininginstitutions.user WHERE uId = #{0}
 	</delete>
+	
+	<insert id="addTeacher" parameterType="User">
+		INSERT INTO
+		traininginstitutions.user (userName, loginName, loginPassword,
+		schoolId, userTypeId, telephone, remarks,
+		teacherId)VALUES(#{userName},
+		#{loginName}, #{loginPassword},
+		#{schoolId}, 3, #{telephone},
+		#{remarks}, #{teacherId});
+	</insert>
 
 </mapper>

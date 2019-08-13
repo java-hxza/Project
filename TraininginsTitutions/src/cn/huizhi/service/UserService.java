@@ -50,4 +50,11 @@ public interface UserService {
 	 * @return
 	 */
 	public Integer updateTeacher(User user);
+	
+	/**
+	 * 添加教师
+	 * @param user
+	 * @return
+	 */
+	public Integer addTeacher(User user);
 }

@@ -22,7 +22,9 @@ import cn.huizhi.pojo.User;
 import cn.huizhi.service.ExpenditureitemsService;
 import cn.huizhi.service.FeeCategoryService;
 import cn.huizhi.service.PaymentMethodService;
+import cn.huizhi.service.TeacherService;
 import cn.huizhi.service.UserService;
+import cn.huizhi.pojo.Teacher;
 
 @Controller
 public class HighesController {
@@ -40,6 +42,8 @@ public class HighesController {
 	private UserService userService;
 	@Resource
 	HttpSession session;
+	@Resource
+	private TeacherService teacherService;
 	
 	/**
 	 * 查询所有账户信息
@@ -187,11 +191,13 @@ public class HighesController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("Teacher.html")
-	public String Teacher(Model model,HttpSession session) {
+	@RequestMapping("User.html")
+	public String User(Model model,HttpSession session) {
 		User u = (User) session.getAttribute("user");
 		List<User> list = userService.selectUserByAll(u.getSchoolId());
+		List<Teacher> teachers = teacherService.selectTeacher();
 		model.addAttribute("list", list);
+		model.addAttribute("teachers", teachers);
 		return "high/Teacher";
 	}
 	
@@ -199,9 +205,9 @@ public class HighesController {
 	 * 删除教师
 	 * @return
 	 */
-	@RequestMapping("delTeacher.html")
+	@RequestMapping("delUser.html")
 	@ResponseBody
-	public Object delTeacher(@RequestParam Integer uId) {
+	public Object delUser(@RequestParam Integer uId) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		if(userService.delTeacher(uId) == 1) {
 			map.put("del", "1");
@@ -215,9 +221,9 @@ public class HighesController {
 	 * 修改教师
 	 * @return
 	 */
-	@RequestMapping("updateTeacher.html")
+	@RequestMapping("updateUser.html")
 	@ResponseBody
-	public Object updateTeacher(@RequestParam User user) {
+	public Object updateUser(@RequestParam User user) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		if(userService.updateTeacher(user) == 1) {
 			map.put("update", "1");
@@ -231,11 +237,20 @@ public class HighesController {
 	 * 添加教师
 	 * @return
 	 */
-	@RequestMapping("addTeacher.html")
+	@RequestMapping("addUser.html")
 	@ResponseBody
-	public Object addTeacher(@RequestParam User user) {
+	public Object addUser(@RequestParam String userName,@RequestParam String telephone,@RequestParam String remarks,@RequestParam Integer teacherId,@RequestParam String loginName,@RequestParam String loginPassword) {
+		User user = new User();
+		User user2 = (cn.huizhi.pojo.User) session.getAttribute("user");
+		user.setLoginName(loginName);
+		user.setLoginPassword(loginPassword);
+		user.setRemarks(remarks);
+		user.setSchoolId(user2.getSchoolId());
+		user.setTeacherId(teacherId);
+		user.setTelephone(telephone);
+		user.setUserName(userName);
 		HashMap<String, String> map = new HashMap<String, String>();
-		if(userService.addtUser(user) == 1) {
+		if(userService.addTeacher(user) == 1) {
 			map.put("add", "1");
 		}else {
 			map.put("add", "0");

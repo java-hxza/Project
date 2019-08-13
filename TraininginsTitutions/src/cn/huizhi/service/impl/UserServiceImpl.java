@@ -57,7 +57,14 @@ public class UserServiceImpl implements UserService {
 		return userMapper.updateTeacher(user);
 	}
 	
+	/**
+	 * 添加教师
+	 */
+	@Override
+	public Integer addTeacher(User user) {
+		return userMapper.addTeacher(user);
+	}
 	
-
+	
 	
 }
