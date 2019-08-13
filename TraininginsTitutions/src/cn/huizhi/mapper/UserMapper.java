@@ -40,4 +40,9 @@ public interface UserMapper {
 	 */
 	public List<User> selectUserByAll();
 	
+	/**
+	 * 根据班级科别查询所有教师
+	 */
+	public List<User> selectUserByDpId(Integer dpId);
+	
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.huizhi.pojo.ChildrenescClass;
 import cn.huizhi.pojo.DepartmentOfPediatrics;
@@ -63,6 +64,13 @@ public class ChildrenClassesController {
 		List<DepartmentOfPediatrics> dpList = departmentOfPediatricsService.findDepartmentOfPediatrics();
 		session.setAttribute("dpList", dpList);
 		return "children/create/createChildrenClass";
+	}
+	@RequestMapping("dpChange.html")
+	@ResponseBody
+	public String dpChange(Integer dpId) {
+		
+		
+		return "";
 	}
 	
 	
