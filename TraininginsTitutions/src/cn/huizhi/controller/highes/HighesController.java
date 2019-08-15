@@ -23,7 +23,6 @@ import cn.huizhi.service.ExpenditureitemsService;
 import cn.huizhi.service.FeeCategoryService;
 import cn.huizhi.service.PaymentMethodService;
 import cn.huizhi.service.TeacherService;
-import cn.huizhi.service.UserService;
 import cn.huizhi.pojo.Teacher;
 
 @Controller
@@ -38,8 +37,6 @@ public class HighesController {
 	private PaymentMethodService paymentMethodService;
 	@Resource
 	private ExpenditureitemsService expenditureitemsService;
-	@Resource
-	private UserService userService;
 	@Resource
 	HttpSession session;
 	@Resource
@@ -191,13 +188,13 @@ public class HighesController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("User.html")
-	public String User(Model model,HttpSession session) {
+	@RequestMapping("Teacher.html")
+	public String Teacher(Model model) {
 		User u = (User) session.getAttribute("user");
-		List<User> list = userService.selectUserByAll(u.getSchoolId());
-		List<Teacher> teachers = teacherService.selectTeacher();
+		List<Teacher> list = teacherService.selectTeacher(Integer.parseInt(u.getSchoolId()));
+		//List<Teacher> teachers = teacherService.selectTeacher();
 		model.addAttribute("list", list);
-		model.addAttribute("teachers", teachers);
+		//model.addAttribute("teachers", teachers);
 		return "high/Teacher";
 	}
 	
@@ -205,11 +202,11 @@ public class HighesController {
 	 * 删除教师
 	 * @return
 	 */
-	@RequestMapping("delUser.html")
+	@RequestMapping("delTeacher.html")
 	@ResponseBody
-	public Object delUser(@RequestParam Integer uId) {
+	public Object delTeacher(@RequestParam Integer Integer) {
 		HashMap<String, String> map = new HashMap<String, String>();
-		if(userService.delTeacher(uId) == 1) {
+		if(teacherService.delTeacher(Integer) == 1) {
 			map.put("del", "1");
 		}else {
 			map.put("del", "0");
@@ -221,11 +218,18 @@ public class HighesController {
 	 * 修改教师
 	 * @return
 	 */
-	@RequestMapping("updateUser.html")
+	@RequestMapping("updateTeacher.html")
 	@ResponseBody
-	public Object updateUser(@RequestParam User user) {
+	public Object updateTeacher(@RequestParam String teacherName,@RequestParam Integer telephone,@RequestParam String remarks,@RequestParam Integer teacherTypeId,@RequestParam String loginPassword,@RequestParam Integer feeCategory) {
+		Teacher teacher = new Teacher();
+		teacher.setFeeCategory(feeCategory);
+		teacher.setLoginPassword(loginPassword);
+		teacher.setTeacherName(teacherName);
+		teacher.setTeacherTypeId(teacherTypeId);
+		teacher.setRemarks(remarks);
+		teacher.setTelephone(telephone);
 		HashMap<String, String> map = new HashMap<String, String>();
-		if(userService.updateTeacher(user) == 1) {
+		if(teacherService.updateTeacher(teacher) == 1) {
 			map.put("update", "1");
 		}else {
 			map.put("update", "0");
@@ -237,20 +241,19 @@ public class HighesController {
 	 * 添加教师
 	 * @return
 	 */
-	@RequestMapping("addUser.html")
+	@RequestMapping("addTeacher.html")
 	@ResponseBody
-	public Object addUser(@RequestParam String userName,@RequestParam String telephone,@RequestParam String remarks,@RequestParam Integer teacherId,@RequestParam String loginName,@RequestParam String loginPassword) {
-		User user = new User();
+	public Object addTeacher(@RequestParam String teacherName,@RequestParam Integer telephone,@RequestParam String remarks,@RequestParam Integer teacherTypeId,@RequestParam String loginPassword,@RequestParam Integer feeCategory) {
+		Teacher teacher = new Teacher();
 		User user2 = (cn.huizhi.pojo.User) session.getAttribute("user");
-		user.setLoginName(loginName);
-		user.setLoginPassword(loginPassword);
-		user.setRemarks(remarks);
-		user.setSchoolId(user2.getSchoolId());
-		user.setTeacherId(teacherId);
-		user.setTelephone(telephone);
-		user.setUserName(userName);
+		teacher.setFeeCategory(feeCategory);
+		teacher.setLoginPassword(loginPassword);
+		teacher.setTeacherName(teacherName);
+		teacher.setTeacherTypeId(teacherTypeId);
+		teacher.setRemarks(remarks);
+		teacher.setTelephone(telephone);
 		HashMap<String, String> map = new HashMap<String, String>();
-		if(userService.addTeacher(user) == 1) {
+		if(teacherService.addTeacher(teacher) == 1) {
 			map.put("add", "1");
 		}else {
 			map.put("add", "0");

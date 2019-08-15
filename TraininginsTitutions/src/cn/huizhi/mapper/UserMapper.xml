@@ -54,7 +54,7 @@
 
 	<select id="selectUserByAll" resultMap="selectUserByAlls">
 		SELECT
-		u.uId ud,u.userName,u.telephone,u.remarks,u.teacherId td,s.schoolName
+		u.uId ud,u.userName,u.telephone,u.remarks,u.teacherId td,u.loginName,u.loginPassword,s.schoolName
 		sd,t.teacherName
 		FROM `user` u
 		JOIN school s ON
@@ -75,6 +75,10 @@
 			javaType="java.lang.String" />
 		<result property="teacherId" column="td"
 			javaType="java.lang.Integer" />
+		<result property="loginName" column="u.loginName"
+			javaType="java.lang.String" />
+		<result property="loginPassword" column="u.loginPassword"
+			javaType="java.lang.String" />
 		<result property="telephone" column="u.telephone"
 			javaType="java.lang.String" />
 		<collection property="teacher" javaType="Teacher"
@@ -84,28 +88,6 @@
 		</collection>
 	</resultMap>
 
-	<update id="updateTeacher" parameterType="User">
-		UPDATE
-		traininginstitutions.user SET userName = #{userName} , loginName =
-		#{loginName} , loginPassword = #{loginPassword} , schoolId =
-		#{schoolId}
-		, userTypeId = #{userTypeId} , telephone = #{telephone} ,
-		remarks =
-		#{remarks} , teacherId = #{teacherId} WHERE uId = #{uId} ;
-	</update>
 
-	<delete id="delTeacher">
-		DELETE FROM traininginstitutions.user WHERE uId = #{0}
-	</delete>
-	
-	<insert id="addTeacher" parameterType="User">
-		INSERT INTO
-		traininginstitutions.user (userName, loginName, loginPassword,
-		schoolId, userTypeId, telephone, remarks,
-		teacherId)VALUES(#{userName},
-		#{loginName}, #{loginPassword},
-		#{schoolId}, 3, #{telephone},
-		#{remarks}, #{teacherId});
-	</insert>
 
 </mapper>

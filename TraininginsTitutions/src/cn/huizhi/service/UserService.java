@@ -30,31 +30,5 @@ public interface UserService {
 	 */
 	public User findUserByUserName(String loginName);
 	
-	/**
-	 * 查询所有教师
-	 * @param schoolId
-	 * @return
-	 */
-	public List<User> selectUserByAll(String schoolId);
 	
-	/**
-	 * 删除教师
-	 * @param uId
-	 * @return
-	 */
-	public Integer delTeacher(Integer uId);
-	
-	/**
-	 * 修改教师
-	 * @param user
-	 * @return
-	 */
-	public Integer updateTeacher(User user);
-	
-	/**
-	 * 添加教师
-	 * @param user
-	 * @return
-	 */
-	public Integer addTeacher(User user);
 }

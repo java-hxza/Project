@@ -20,9 +20,33 @@ public class TeacherServiceImpl implements TeacherService{
 	 * 查询所有教师
 	 */
 	@Override
-	public List<Teacher> selectTeacher() {
-		return teacherMapper.selectTeacher();
+	public List<Teacher> selectTeacher(Integer schoolId) {
+		return teacherMapper.selectTeacher(schoolId);
+	}
+
+	
+	/**
+	 * 删除教师
+	 */
+	@Override
+	public Integer delTeacher(Integer uId) {
+		return teacherMapper.delTeacher(uId);
 	}
 	
+	/**
+	 * 修改教师
+	 */
+	@Override
+	public Integer updateTeacher(Teacher teacher) {
+		return updateTeacher(teacher);
+	}
+	
+	/**
+	 * 添加教师
+	 */
+	@Override
+	public Integer addTeacher(Teacher teacher) {
+		return addTeacher(teacher);
+	}
 	
 }

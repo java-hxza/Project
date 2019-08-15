@@ -5,7 +5,34 @@
 <mapper namespace="cn.huizhi.mapper.TeacherMapper">
 
 	<select id="selectTeacher" resultType="Teacher">
-		SELECT * FROM teacher
+		SELECT t.*
+		FROM teacher t
+		JOIN teacherdiction td
+		ON t.teacherId=td.teacherId
+		WHERE
+		td.schoolId=#{0}
 	</select>
+
+	<update id="updateTeacher" parameterType="Teacher">
+		UPDATE
+		traininginstitutions.user SET userName = #{userName} , loginName =
+		#{loginName} , loginPassword = #{loginPassword} ,telephone =
+		#{telephone} ,
+		remarks =
+		#{remarks} , teacherId = #{teacherId} WHERE uId
+		= #{uId} ;
+	</update>
+
+	<delete id="delTeacher">
+		DELETE FROM traininginstitutions.user WHERE uId =
+		#{0}
+	</delete>
+
+	<insert id="addTeacher" parameterType="Teacher">
+		INSERT INTO
+		traininginstitutions.teacher (teacherName, loginPassword,
+		teacherTypeId, feeCategory)VALUES(#{teacherName}, #{loginPassword},
+		#{teacherTypeId}, #{feeCategory});
+	</insert>
 
 </mapper>

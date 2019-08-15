@@ -5,37 +5,27 @@ import java.util.List;
 public class User {
 	private Integer uId;
 	private String userName;
-	private String loginName;
 	private String loginPassword;
 	private String schoolId;
 	private String userTypeId;
 	private String telephone;
 	private String remarks;
-	private Integer teacherId;
-	private Teacher teacher;
 
 	public User() {
 		super();
 	}
 
-	
-
-	public User(Integer uId, String userName, String loginName, String loginPassword, String schoolId,
-			String userTypeId, String telephone, String remarks, Integer teacherId, Teacher teacher) {
+	public User(Integer uId, String userName, String loginPassword, String schoolId, String userTypeId,
+			String telephone, String remarks) {
 		super();
 		this.uId = uId;
 		this.userName = userName;
-		this.loginName = loginName;
 		this.loginPassword = loginPassword;
 		this.schoolId = schoolId;
 		this.userTypeId = userTypeId;
 		this.telephone = telephone;
 		this.remarks = remarks;
-		this.teacherId = teacherId;
-		this.teacher = teacher;
 	}
-
-
 
 	public Integer getuId() {
 		return uId;
@@ -51,14 +41,6 @@ public class User {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	public String getLoginName() {
-		return loginName;
-	}
-
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
 	}
 
 	public String getLoginPassword() {
@@ -100,27 +82,5 @@ public class User {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-
-	public Integer getTeacherId() {
-		return teacherId;
-	}
-
-	public void setTeacherId(Integer teacherId) {
-		this.teacherId = teacherId;
-	}
-
-
-
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
-
-
 
 }

@@ -279,8 +279,10 @@
 								<div class="card-body">
 									<div class="row mb-2">
 										<div class="col-sm-4">
-											<a href="javascript:void(0);" class="btn btn-danger mb-2 "  onclick="addTeacher()"><i
+											<a href="javascript:void(0);" class="btn btn-danger mb-2 adds"  onclick="addTeacher()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 添加</a> 
+											<a href="javascript:void(0);" class="btn btn-danger mb-2 update" onclick="updateUser()"><i
+												class="mdi mdi-plus-circle mr-2"></i> 修改</a>
 											<a href="javascript:void(0);" class="btn btn-danger mb-2 del" onclick="delTeacher()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 删除</a>
 										</div>
@@ -319,8 +321,8 @@
 														<td id="${u.uId }" class = "schoolIds">${u.schoolId }</td>
 														<td>${u.userName }</td>
 														<td>${u.teacher.teacherName}</td>
-														<td>${u.telephone }</td>
-														<td>${u.remarks }</td>
+														<td id="${u.loginName} ">${u.telephone }</td>
+														<td id="${u.loginPassword }">${u.remarks }</td>
 													</tr>
 												</c:forEach>
 											</tbody>

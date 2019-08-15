@@ -62,11 +62,10 @@ public class AdminCreateController {
 
 	@RequestMapping("regitUser.html")
 	@ResponseBody
-	public HashMap<String, String> createUser(String userName, String loginName, String loginPassword, Integer schoolId,
+	public HashMap<String, String> createUser(String userName,String loginPassword, Integer schoolId,
 			Integer userTypeId) {
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
 		User user = new User();
-		user.setLoginName(loginName);
 		user.setLoginPassword(loginPassword);
 		user.setUserName(userName);
 		user.setSchoolId(Integer.toString(schoolId));
