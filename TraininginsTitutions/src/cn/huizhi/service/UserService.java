@@ -21,6 +21,13 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
+	public User findUserByLogin(String loginName,String loginPassword,String schoolId);
+	
+	/**
+	 * 添加用户方法
+	 * @param user
+	 * @return
+	 */
 	public Integer addtUser(User user);
 	
 	/**
@@ -30,5 +37,25 @@ public interface UserService {
 	 */
 	public User findUserByUserName(String loginName);
 	
+	/**
+	 * 删除教师
+	 * @param uId
+	 * @return
+	 */
+	public Integer delTeacher(Integer uId);
 	
+	/**
+	 * 修改教师
+	 * @param user
+	 * @return
+	 */
+	public Integer updateTeacher(User user);
+	
+
+	/**
+	 * 添加教师
+	 * @param user
+	 * @return
+	 */
+	public Integer addTeacher(User user);
 }

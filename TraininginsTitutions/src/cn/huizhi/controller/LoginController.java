@@ -1,5 +1,6 @@
 package cn.huizhi.controller;
 
+import java.nio.channels.NonWritableChannelException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,9 +19,11 @@ import com.alibaba.fastjson.JSON;
 import cn.huizhi.mapper.UserMapper;
 import cn.huizhi.pojo.City;
 import cn.huizhi.pojo.School;
+import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.User;
 import cn.huizhi.service.CityService;
 import cn.huizhi.service.SchoolService;
+import cn.huizhi.service.TeacherService;
 import cn.huizhi.service.UserService;
 
 @Controller
@@ -41,6 +45,11 @@ public class LoginController {
 	 */
 	@Resource
 	SchoolService schoolService;
+	/**
+	 * 教师
+	 */
+	@Resource
+	TeacherService teacherService;
 	/**
 	 * 根据省份查询城市并返回数据
 	 * @param provinceId
@@ -100,5 +109,20 @@ public class LoginController {
 	@RequestMapping("selectionModule.html")
 	public String toIndex() {
 		return"selectionModule";
+	}
+	
+	
+	@RequestMapping("teacherLogin.html")
+	@ResponseBody
+	public Map<String, String> teacherLogin(String loginName,String loginPassword,Integer schoolId,HttpSession session){
+		Map< String, String> jsonMap = new HashMap<String, String>();
+		Teacher teacher = teacherService.findTeacherByLogin(loginName, loginPassword, schoolId);
+		if(teacher!=null) {
+			session.setAttribute("teacher", teacher);
+			jsonMap.put("state","1");
+		}else {
+			jsonMap.put("state","0");
+		}
+		return jsonMap;
 	}
 }

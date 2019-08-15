@@ -1,9 +1,11 @@
 package cn.huizhi.mapper;
 
 /**
- * 教师分类
+ * 教师
  */
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.User;
@@ -36,4 +38,28 @@ public interface TeacherMapper {
 	 * @return
 	 */
 	public Integer addTeacher(Teacher teacher );
+	
+	public List<Teacher> selectTeacher();
+	/**
+	 * 根据学校主键和教师类别主键查询老师
+	 * @param teacherTypeId
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Teacher> selecTeachersByTeacherTypeId(@Param("teacherTypeId")Integer teacherTypeId,@Param("schoolId")Integer schoolId);
+	
+	/**
+	 * 教师登录
+	 * @param loginName
+	 * @param loginPassword
+	 * @param schoolId
+	 * @return
+	 */
+	public Teacher selectTeacherByLogin(@Param("teacherName")String loginName,@Param("loginPassword")String loginPassword,@Param("schoolId")Integer schoolId);
+	/**
+	 * 添加教师
+	 * @param teacher
+	 * @return
+	 */
+	public int	insertTeacher(Teacher teacher);
 }

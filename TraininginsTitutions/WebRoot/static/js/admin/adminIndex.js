@@ -12,5 +12,14 @@ $(function(){
 		location.href="createSchool.html";
 	}
 	
-	
+	clickSchool = function(){
+		var schoolId = $("#schoolId").children().next().children().html();
+		location.href="schoolInfo.html?schoolId="+schoolId;
+	}
+	/**
+	 * 创建教师
+	 */
+	createTeacher = function(){
+		location.href="creageTeacher.html";
+	}
 });

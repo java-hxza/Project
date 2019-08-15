@@ -6,6 +6,11 @@ public class School {
 	private Integer cityId;
 	private Integer cityProperId;
 	private String schoolRemarks;
+	
+	private City city;
+	
+	private Province province;
+	
 
 	public School() {
 		super();
@@ -18,6 +23,34 @@ public class School {
 		this.cityId = cityId;
 		this.cityProperId = cityProperId;
 		this.schoolRemarks = schoolRemarks;
+	}
+	
+	public School(Integer schoolId, String schoolName, Integer cityId, Integer cityProperId, String schoolRemarks,
+			City city, Province province) {
+		super();
+		this.schoolId = schoolId;
+		this.schoolName = schoolName;
+		this.cityId = cityId;
+		this.cityProperId = cityProperId;
+		this.schoolRemarks = schoolRemarks;
+		this.city = city;
+		this.province = province;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	public Province getProvince() {
+		return province;
+	}
+
+	public void setProvince(Province province) {
+		this.province = province;
 	}
 
 	public Integer getSchoolId() {

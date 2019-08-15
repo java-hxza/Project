@@ -7,13 +7,14 @@ public class Teacher {
 	private String loginPassword;
 	private Integer teacherTypeId;
 	private Integer feeCategory;
-	private Integer telephone;
 	private String remarks;
+	private String telephone;
+	private TeacherDiction teacherDiction;
 
 
 
 	public Teacher(Integer teacherId, String teacherName, String loginPassword, Integer teacherTypeId,
-			Integer feeCategory, Integer telephone, String remarks) {
+			Integer feeCategory, String telephone, String remarks) {
 		super();
 		this.teacherId = teacherId;
 		this.teacherName = teacherName;
@@ -26,6 +27,36 @@ public class Teacher {
 
 	public Teacher() {
 		super();
+	}
+
+	public Teacher(Integer teacherId, String teacherName, String loginPassword, Integer teacherTypeId,
+			Integer feeCategory, String telephone, String remarks, TeacherDiction teacherDiction) {
+		super();
+		this.teacherId = teacherId;
+		this.teacherName = teacherName;
+		this.loginPassword = loginPassword;
+		this.teacherTypeId = teacherTypeId;
+		this.feeCategory = feeCategory;
+		this.telephone = telephone;
+		this.remarks = remarks;
+		this.teacherDiction = teacherDiction;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+
+	public TeacherDiction getTeacherDiction() {
+		return teacherDiction;
+	}
+
+	public void setTeacherDiction(TeacherDiction teacherDiction) {
+		this.teacherDiction = teacherDiction;
 	}
 
 	public Integer getTeacherId() {
@@ -68,13 +99,7 @@ public class Teacher {
 		this.feeCategory = feeCategory;
 	}
 
-	public Integer getTelephone() {
-		return telephone;
-	}
 
-	public void setTelephone(Integer telephone) {
-		this.telephone = telephone;
-	}
 
 	public String getRemarks() {
 		return remarks;

@@ -278,8 +278,8 @@
 								<div class="card-body">
 									<div class="row mb-2">
 										<div class="col-sm-4">
-											<a href="javascript:void(0);" class="btn btn-danger mb-2"><i
-												class="mdi mdi-plus-circle mr-2" onclick="createChildrenClass()"></i> 添加班级</a>
+											<a href="javascript:void(0);" onclick="createChildrenClass()" class="btn btn-danger mb-2"><i
+												class="mdi mdi-plus-circle mr-2" ></i> 添加班级</a>
 										</div>
 										<div class="col-sm-8">
 											<div class="text-sm-right">
@@ -308,6 +308,7 @@
 													<th>班级班号</th>
 													<th>班级名称</th>
 													<th>班级类型</th>
+													<th>任课老师</th>
 													<th>班级所属学校</th>
 												</tr>
 											</thead>
@@ -328,6 +329,9 @@
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${childrenClass.departmentOfPediatrics.dpTypeName}</a>
+														</td>
+														<td class="table-user"><a href="javascript:void(0);"
+															class="text-body font-weight-semibold">${childrenClass.headmaster}</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${childrenClass.school.schoolName}</a>

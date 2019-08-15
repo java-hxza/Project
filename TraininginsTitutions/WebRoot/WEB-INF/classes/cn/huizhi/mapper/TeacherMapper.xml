@@ -4,6 +4,8 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.TeacherMapper">
 
+
+	<!--查询所有教师 -->
 	<select id="selectTeacher" resultType="Teacher">
 		SELECT t.*
 		FROM teacher t
@@ -12,6 +14,36 @@
 		WHERE
 		td.schoolId=#{0}
 	</select>
+	<!--登陆时查询字段-->
+	<sql id="teacherByLoginCol">
+		t.feeCategory as t_feeCategory,
+		t.loginPassword as t_loginPassword,
+		t.teacherId t_teacherId,
+		t.teacherName t_teacherName,
+		t.teacherTypeId t_teacherTypeId,
+		t.telephone as t_telephone,
+		t.remarks as t_remarks
+	</sql>
+	<!--登陆时返回Map-->
+	<resultMap type="Teacher" id="teacherByLogin">
+		<id column="t_teacherId" property="teacherId"/>
+		<result column="t_loginPassword" property="loginPassword"/>
+		<result column="t_feeCategory" property="feeCategory"/>
+		<result column="t_teacherName" property="teacherName"/>
+		<result column="t_teacherTypeId" property="teacherTypeId"/>
+		<result column="t_telephone" property="telephone"/>
+		<result column="t_remarks" property="remarks"/>
+	</resultMap>
+	<!--教师登录-->
+	<select id="selectTeacherByLogin" resultMap="teacherByLogin">
+		select
+		<include refid="teacherByLoginCol" />
+		from teacher t
+		join teacherdiction td on td.teacherId = t.teacherId
+		<where>
+			<if test="teacherName!='' and teacherName!=null">
+				t.teacherName = #{teacherName }
+			</if>
 
 	<update id="updateTeacher" parameterType="Teacher">
 		UPDATE
@@ -35,4 +67,36 @@
 		#{teacherTypeId}, #{feeCategory});
 	</insert>
 
+			<if test="loginPassword !='' and loginPassword!=null">
+				and t.loginPassword = #{loginPassword}
+			</if>
+			<if test="schoolId!=null and schoolId!=''">
+				and td.schoolId =#{schoolId}
+			</if>
+		</where>
+	</select>
+	
+	<!--加入教师-->
+	<insert id="insertTeacher" parameterType="Teacher">
+		insert into  teacher ( teacherName,  loginPassword,  teacherTypeId,  feeCategory )
+			values (  #{teacherName}, #{loginPassword}, #{teacherTypeId}, #{feeCategory} )
+	</insert>
+	
+
+	<!--根据学校逐渐和教师类别查询教师-->
+	<select id="selecTeachersByTeacherTypeId" resultType="Teacher">
+	select t.*
+	from teacher t 
+	join teacherdiction td on td.teacherId = t.teacherId
+	join school sc on sc.schoolId = td.schoolId
+	<where>
+		<if test="schoolId !=null and schoolId!=''">
+			sc.schoolId = #{schoolId }
+		</if>
+		<if test="teacherTypeId !=null and teacherTypeId !=''">
+			and t.teacherTypeId  = #{teacherTypeId }
+		</if>
+	</where> 
+		
+	</select>
 </mapper>

@@ -7,7 +7,6 @@ $(function(){
 		/**
 		 * 获取用户录入的值
 		 */
-		var userName = $("#userName").val();
 		var loginName = $("#loginName").val();
 		var loginPassword = $("#loginPassword").val();
 		var schoolId = $("#schoolId").val();
@@ -25,7 +24,6 @@ $(function(){
 		$.ajax({
 			url	: 'regitUser.html',
 			data : {
-				userName : userName,
 				loginName : loginName,
 				loginPassword : loginPassword,
 				schoolId : schoolId,

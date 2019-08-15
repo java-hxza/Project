@@ -61,7 +61,9 @@ $(function() {
 			
 		});
 	}
-	
+	/**
+	 * 管理员登录
+	 */
 	UserLogin = function() {
 
 		$("#loginBtn span").addClass("spinner-border spinner-border-sm");
@@ -79,7 +81,7 @@ $(function() {
 			$("#loginBtn").attr("disabled", false);
 			return false;
 		}
-
+		
 		// Login Ajax
 		$.ajax({
 			url : 'user.html',
@@ -124,5 +126,70 @@ $(function() {
 		})
 
 	}
+	
+	/**
+	 *教师登录 
+	 */
+	TeacherLogin = function(){
+		$("#loginBtn span").addClass("spinner-border spinner-border-sm");
+		$("#loginBtn span").text("");
+		$("#loginBtn").attr("disabled", "disabled");
 
+		var loginName = $("#username").val();
+		var loginPassword = $("#password").val();
+		var schoolId = $("#schoolId").val();
+		
+		if (loginName, loginPassword == "") {
+			$.NotificationApp.send("错误!", "你必须输入账户名及密码。", "top-right", "rgba(0,0,0,0.2)", "error")
+			$("#loginBtn span").removeClass("spinner-border spinner-border-sm");
+			$("#loginBtn span").text("立即登录");
+			$("#loginBtn").attr("disabled", false);
+			return false;
+		}
+
+		// Login Ajax
+		$.ajax({
+			url : 'teacherLogin.html',
+			data : {
+				loginName : loginName,
+				loginPassword : loginPassword,
+				schoolId : schoolId
+			},
+			dataType : 'JSON',
+			type : 'post',
+			success : function(data) {
+				data = eval(data);
+				if (data.state == "1") {
+					$.NotificationApp.send("成功！", "账户密码校验正确！。", "top-right", "rgba(0,0,0,0.2)", "success")
+					if(data.UsertypeId == "0"){
+						setTimeout(function () { 
+							location.href = "adminIndex.html";
+						}, 2000);
+					}else{
+						setTimeout(function () { 
+							location.href = "selectionModule.html";
+						}, 2000);
+					}
+					
+				} else {
+					$.NotificationApp.send("错误!", "账号密码错误，请检查重试。", "top-right", "rgba(0,0,0,0.2)", "error")
+					setTimeout(function () { 
+						location.href = "erro.html";
+					}, 2000);
+					
+				}
+			}
+			, error: function (XMLHttpRequest, textStatus, errorThrown) { 
+				 　　             alert(XMLHttpRequest.status); 
+				　　               alert(XMLHttpRequest.readyState); 
+				　　               alert(textStatus);
+				　　               $.NotificationApp.send("错误!", "账号密码错误，请检查重试。", "top-right", "rgba(0,0,0,0.2)", "error")
+			                 setTimeout(function () { 
+								location.href = "erro.html";
+							}, 2000);
+		 　　		} 
+		})
+
+	}
+	
 })

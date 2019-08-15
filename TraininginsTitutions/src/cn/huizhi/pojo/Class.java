@@ -6,11 +6,11 @@ package cn.huizhi.pojo;
  * @author wye
  *
  */
-public class ChildrenescClass {
+public class Class {
 	/**
 	 * 少儿班级主键
 	 */
-	private Integer childrenesClassId;
+	private Integer classId;
 	/**
 	 * 少儿班级班号
 	 */
@@ -22,7 +22,7 @@ public class ChildrenescClass {
 	/**
 	 * 少儿班级类型主键
 	 */
-	private Integer dpId;
+	private Integer classTypeId;
 	/**
 	 * 班主任
 	 */
@@ -30,7 +30,7 @@ public class ChildrenescClass {
 	/**
 	 * 班主任主键
 	 */
-	private Integer uId;
+	private Integer teacherId;
 
 	/**
 	 * 少儿班级所属学校主键
@@ -45,44 +45,31 @@ public class ChildrenescClass {
 	 */
 	private DepartmentOfPediatrics departmentOfPediatrics;
 
-	public ChildrenescClass() {
+	public Class() {
 		super();
 	}
 
-	public ChildrenescClass(Integer childrenesClassId, Integer classNumber, String className, Integer dpId,
-			String headmaster, Integer uId, Integer schoolId, School school,
-			DepartmentOfPediatrics departmentOfPediatrics) {
+
+
+
+
+	public Class(Integer classId, Integer classNumber, String className, Integer classTypeId, String headmaster,
+			Integer teacherId, Integer schoolId, School school, DepartmentOfPediatrics departmentOfPediatrics) {
 		super();
-		this.childrenesClassId = childrenesClassId;
+		this.classId = classId;
 		this.classNumber = classNumber;
 		this.className = className;
-		this.dpId = dpId;
+		this.classTypeId = classTypeId;
 		this.headmaster = headmaster;
-		this.uId = uId;
+		this.teacherId = teacherId;
 		this.schoolId = schoolId;
 		this.school = school;
 		this.departmentOfPediatrics = departmentOfPediatrics;
 	}
 
-	public ChildrenescClass(Integer childrenesClassId, Integer classNumber, String className, Integer dpId,
-			Integer schoolId, School school, DepartmentOfPediatrics departmentOfPediatrics) {
-		super();
-		this.childrenesClassId = childrenesClassId;
-		this.classNumber = classNumber;
-		this.className = className;
-		this.dpId = dpId;
-		this.schoolId = schoolId;
-		this.school = school;
-		this.departmentOfPediatrics = departmentOfPediatrics;
-	}
 
-	public Integer getChildrenesClassId() {
-		return childrenesClassId;
-	}
 
-	public void setChildrenesClassId(Integer childrenesClassId) {
-		this.childrenesClassId = childrenesClassId;
-	}
+
 
 	public Integer getClassNumber() {
 		return classNumber;
@@ -104,25 +91,44 @@ public class ChildrenescClass {
 		this.headmaster = headmaster;
 	}
 
-	public Integer getuId() {
-		return uId;
+	
+	public Integer getClassId() {
+		return classId;
 	}
 
-	public void setuId(Integer uId) {
-		this.uId = uId;
+	public void setClassId(Integer classId) {
+		this.classId = classId;
+	}
+
+	public Integer getTeacherId() {
+		return teacherId;
+	}
+
+	public void setTeacherId(Integer teacherId) {
+		this.teacherId = teacherId;
 	}
 
 	public void setClassName(String className) {
 		this.className = className;
 	}
 
-	public Integer getDpId() {
-		return dpId;
+
+
+	public Integer getClassTypeId() {
+		return classTypeId;
 	}
 
-	public void setDpId(Integer dpId) {
-		this.dpId = dpId;
+
+
+
+
+	public void setClassTypeId(Integer classTypeId) {
+		this.classTypeId = classTypeId;
 	}
+
+
+
+
 
 	public Integer getSchoolId() {
 		return schoolId;

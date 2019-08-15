@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.ClassMapper">
+	<sql id="ChildrenescClassCol">
+		classId,
+		classNumber,
+		className,
+		dpId,
+		schoolId,
+		teacherId
+	</sql>
+
+	<sql id="selectChildrenescClassesCol">
+		cc.classId as cc_classId,
+		cc.classNumber as cc_classNumber,
+		cc.className as cc_className,
+		cc.classTypeId as cc_classTypeId,
+		cc.headmaster as cc_headmaster ,
+		cc.teacherId as cc_teacherId,
+		cc.schoolId as cc_schoolId,
+		s.schoolId as s_schoolId,
+		s.schoolName as s_schoolName,
+		dp.dpTypeName as dp_dpTypeName,
+		dp.dpId as dp_dpId
+	</sql>
+
+	<select id="selectChildrenescClasses" resultMap="selectChildrenescClassesMap" parameterType="java.lang.String">
+		select
+		<include refid="selectChildrenescClassesCol" />
+		from class cc
+		join school s on cc.schoolId = s.schoolId
+		join departmentofpediatrics dp on cc.classTypeId = dp.dpId
+		<where>
+			<if test="schoolId !=null and schoolId !=''">
+				cc.schoolId =#{schoolId}
+			</if>
+		</where>
+	</select>
+	<resultMap id="selectChildrenescClassesMap" type="Class">
+		<id column="cc_classId" property="classId" />
+		<result column="cc_classNumber" property="classNumber" />
+		<result column="cc_className" property="className" />
+		<result column="cc_classTypeId" property="classTypeId" />
+		<result column="cc_schoolId" property="schoolId" />
+		<result column="cc_headmaster" property="headmaster" />
+		<result column="cc_teacherId" property="teacherId" />
+		<collection property="school" javaType="School">
+			<id column="s_schoolId" property="schoolId" javaType="java.lang.Integer"/>
+			<result column="s_schoolName" property="schoolName" javaType="java.lang.String"/>
+		</collection>
+		<collection property="departmentOfPediatrics" javaType="DepartmentOfPediatrics" >
+			<id column="dp_dpId" property="dpId" javaType="java.lang.Integer"/>
+			<result column="dp_dpTypeName" property="dpTypeName" javaType="java.lang.String"/>
+		</collection>
+	</resultMap>
+
+	<insert id="insertChildrenescClass" parameterType="Class">
+		insert into class ( classNumber, className, classTypeId, schoolId,headmaster, teacherId )
+			values (#{classNumber}, #{className}, #{classTypeId}, #{schoolId}, #{headmaster},#{teacherId})
+	</insert>
+
+</mapper>

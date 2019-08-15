@@ -4,7 +4,7 @@ import java.util.List;
 
 public class User {
 	private Integer uId;
-	private String userName;
+	private String loginName;
 	private String loginPassword;
 	private String schoolId;
 	private String userTypeId;
@@ -15,17 +15,41 @@ public class User {
 		super();
 	}
 
-	public User(Integer uId, String userName, String loginPassword, String schoolId, String userTypeId,
+	
+
+
+
+	public User(Integer uId, String loginName, String loginPassword, String schoolId, String userTypeId,
 			String telephone, String remarks) {
 		super();
 		this.uId = uId;
-		this.userName = userName;
+		this.loginName = loginName;
 		this.loginPassword = loginPassword;
 		this.schoolId = schoolId;
 		this.userTypeId = userTypeId;
 		this.telephone = telephone;
 		this.remarks = remarks;
 	}
+
+
+
+
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+
+
+
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+
+
+
 
 	public Integer getuId() {
 		return uId;
@@ -35,13 +59,6 @@ public class User {
 		this.uId = uId;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
 	public String getLoginPassword() {
 		return loginPassword;
@@ -82,5 +99,10 @@ public class User {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+
+
+
+
+
 
 }

@@ -5,6 +5,7 @@ package cn.huizhi.service;
  */
 import java.util.List;
 
+
 import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.User;
 
@@ -37,4 +38,30 @@ public interface TeacherService {
 	 * @return
 	 */
 	public Integer addTeacher(Teacher teacher );
+	public List<Teacher> selectTeacher();
+	
+	/**
+	 * 教师登录
+	 * @param loginName
+	 * @param loginPassword
+	 * @param schoolId
+	 * @return
+	 */
+	public Teacher findTeacherByLogin(String loginName,String loginPassword,Integer schoolId);
+	/**
+	 * 添加教师
+	 * @param teacher
+	 * @return
+	 */
+	public int	addTeacher(Teacher teacher);
+	
+	
+	/**
+	 * 根据学校主键和教师类别主键查询老师
+	 * @param teacherTypeId
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Teacher> findTeachersByTeacherTypeId(Integer teacherTypeId,Integer schoolId);
+	
 }

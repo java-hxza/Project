@@ -32,6 +32,20 @@ public class TeacherServiceImpl implements TeacherService{
 	public Integer delTeacher(Integer uId) {
 		return teacherMapper.delTeacher(uId);
 	}
+
+	@Override
+	public Teacher findTeacherByLogin(String loginName, String loginPassword, Integer schoolId) {
+		return teacherMapper.selectTeacherByLogin(loginName, loginPassword, schoolId);
+	}
+
+	@Override
+	public int addTeacher(Teacher teacher) {
+		return teacherMapper.insertTeacher(teacher);
+	}
+
+	public List<Teacher> findTeachersByTeacherTypeId(Integer teacherTypeId, Integer schoolId) {
+		return teacherMapper.selecTeachersByTeacherTypeId(teacherTypeId, schoolId);
+	}
 	
 	/**
 	 * 修改教师

@@ -34,6 +34,33 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	
+<<<<<<< HEAD
+=======
+	/**
+	 * 删除教师
+	 */
+	@Override
+	public Integer delTeacher(Integer uId) {
+		return userMapper.delTeacher(uId);
+	}
+	
+	/**
+	 * 修改教师
+	 */
+	@Override
+	public Integer updateTeacher(User user) {
+		return userMapper.updateTeacher(user);
+	}
+
+	
+	/**
+	 * 添加教师
+	 */
+	@Override
+	public Integer addTeacher(User user) {
+		return userMapper.addTeacher(user);
+	}
+>>>>>>> branch 'master' of https://github.com/tianmabdqn/Project.git
 	
 	
 	
