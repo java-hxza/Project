@@ -2,22 +2,23 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.huizhi.mapper.ChildrenescClassMapper">
+<mapper namespace="cn.huizhi.mapper.ClassMapper">
 	<sql id="ChildrenescClassCol">
-		childrenesClassId,
+		classId,
 		classNumber,
 		className,
 		dpId,
-		schoolId
+		schoolId,
+		teacherId
 	</sql>
 
 	<sql id="selectChildrenescClassesCol">
-		cc.childrenesClassId as cc_childrenesClassId,
+		cc.classId as cc_classId,
 		cc.classNumber as cc_classNumber,
 		cc.className as cc_className,
-		cc.dpId as cc_dpId,
+		cc.classTypeId as cc_classTypeId,
 		cc.headmaster as cc_headmaster ,
-		cc.uId as cc_uId,
+		cc.teacherId as cc_teacherId,
 		cc.schoolId as cc_schoolId,
 		s.schoolId as s_schoolId,
 		s.schoolName as s_schoolName,
@@ -28,23 +29,23 @@
 	<select id="selectChildrenescClasses" resultMap="selectChildrenescClassesMap" parameterType="java.lang.String">
 		select
 		<include refid="selectChildrenescClassesCol" />
-		from childrenesclass cc
+		from class cc
 		join school s on cc.schoolId = s.schoolId
-		join departmentofpediatrics dp on cc.dpId = dp.dpId
+		join departmentofpediatrics dp on cc.classTypeId = dp.dpId
 		<where>
 			<if test="schoolId !=null and schoolId !=''">
 				cc.schoolId =#{schoolId}
 			</if>
 		</where>
 	</select>
-	<resultMap id="selectChildrenescClassesMap" type="ChildrenescClass">
-		<id column="cc_childrenesClassId" property="childrenesClassId" />
+	<resultMap id="selectChildrenescClassesMap" type="Class">
+		<id column="cc_classId" property="classId" />
 		<result column="cc_classNumber" property="classNumber" />
 		<result column="cc_className" property="className" />
-		<result column="cc_dpId" property="dpId" />
+		<result column="cc_classTypeId" property="classTypeId" />
 		<result column="cc_schoolId" property="schoolId" />
 		<result column="cc_headmaster" property="headmaster" />
-		<result column="cc_uId" property="uId" />
+		<result column="cc_teacherId" property="teacherId" />
 		<collection property="school" javaType="School">
 			<id column="s_schoolId" property="schoolId" javaType="java.lang.Integer"/>
 			<result column="s_schoolName" property="schoolName" javaType="java.lang.String"/>
@@ -55,9 +56,9 @@
 		</collection>
 	</resultMap>
 
-	<insert id="insertChildrenescClass" parameterType="ChildrenescClass">
-		insert into childrenesclass ( classNumber, className, dpId, schoolId,headmaster, uId )
-			values (#{classNumber}, #{className}, #{dpId}, #{schoolId}, #{headmaster},#{uId})
+	<insert id="insertChildrenescClass" parameterType="Class">
+		insert into class ( classNumber, className, classTypeId, schoolId,headmaster, teacherId )
+			values (#{classNumber}, #{className}, #{classTypeId}, #{schoolId}, #{headmaster},#{teacherId})
 	</insert>
 
 </mapper>

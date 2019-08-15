@@ -51,18 +51,11 @@ public interface UserService {
 	 */
 	public Integer updateTeacher(User user);
 	
-<<<<<<< HEAD
-	
-	/**
-	 * 根据班级科别查询所有教师
-	 */
-	public List<User> findtUserByDpId(Integer dpId,Integer schoolId);
-=======
+
 	/**
 	 * 添加教师
 	 * @param user
 	 * @return
 	 */
 	public Integer addTeacher(User user);
->>>>>>> branch 'master' of https://github.com/tianmabdqn/TraininginsTitutions.git
 }

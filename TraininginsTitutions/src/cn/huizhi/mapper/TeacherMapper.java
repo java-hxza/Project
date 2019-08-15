@@ -16,6 +16,13 @@ public interface TeacherMapper {
 	 * @return
 	 */
 	public List<Teacher> selectTeacher();
+	/**
+	 * 根据学校主键和教师类别主键查询老师
+	 * @param teacherTypeId
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Teacher> selecTeachersByTeacherTypeId(@Param("teacherTypeId")Integer teacherTypeId,@Param("schoolId")Integer schoolId);
 	
 	/**
 	 * 教师登录

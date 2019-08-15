@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 
-import cn.huizhi.pojo.ChildrenescClass;
+import cn.huizhi.pojo.Class;
 import cn.huizhi.pojo.DepartmentOfPediatrics;
+import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.User;
-import cn.huizhi.service.ChildrenescClassService;
+import cn.huizhi.service.ClassService;
 import cn.huizhi.service.DepartmentOfPediatricsService;
+import cn.huizhi.service.TeacherService;
 import cn.huizhi.service.UserService;
 
 @Controller
@@ -26,7 +28,7 @@ public class ChildrenClassesController {
 	 * 少儿班级业务逻辑
 	 */
 	@Resource
-	ChildrenescClassService childrenescClassService;
+	ClassService classService;
 	/**
 	 * 少儿班级科别
 	 */
@@ -37,7 +39,11 @@ public class ChildrenClassesController {
 	 */
 	@Resource
 	UserService userService;
-	
+	/**
+	 * 教师
+	 */
+	@Resource
+	TeacherService teacherService;
 	/**
 	 * 返回到少儿首页
 	 * @return
@@ -45,7 +51,7 @@ public class ChildrenClassesController {
 	@RequestMapping("childrenIndex.html")
 	public String childrenIndex(HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		List<ChildrenescClass> childrenClassList = childrenescClassService.findChildrenescClasses(user.getSchoolId());
+		List<Class> childrenClassList = classService.findChildrenescClasses(user.getSchoolId());
 		if(childrenClassList !=null) {
 			session.setAttribute("childrenClassList", childrenClassList);
 		}
@@ -87,7 +93,7 @@ public class ChildrenClassesController {
 	public String dpChange(Integer dpId,HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		Integer schoolId = Integer.valueOf(user.getSchoolId());
-		List<User> teacherUserList = userService.findtUserByDpId(dpId,schoolId);
+		List<Teacher> teacherUserList = teacherService.findTeachersByTeacherTypeId(dpId,schoolId);
 		if(teacherUserList.size()>0) {
 			return JSON.toJSONString(teacherUserList);
 		}
@@ -100,11 +106,11 @@ public class ChildrenClassesController {
 	 */
 	@RequestMapping("createChildrenClass.html")
 	@ResponseBody
-	public Map<String, String> createChildrenClass(ChildrenescClass childrenescClass,HttpSession session) {
+	public Map<String, String> createChildrenClass(Class classes,HttpSession session) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
-		childrenescClass.setSchoolId(Integer.valueOf(user.getSchoolId()));
-		if(childrenescClassService.addChildrenescClass(childrenescClass)>0) {
+		classes.setSchoolId(Integer.valueOf(user.getSchoolId()));
+		if(classService.addChildrenescClass(classes)>0) {
 			jsonMap.put("state", "1");
 		}else {
 			jsonMap.put("state", "0");

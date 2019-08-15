@@ -49,10 +49,27 @@
 		</where>
 	</select>
 	
-	
+	<!--加入教师-->
 	<insert id="insertTeacher" parameterType="Teacher">
 		insert into  teacher ( teacherName,  loginPassword,  teacherTypeId,  feeCategory )
 			values (  #{teacherName}, #{loginPassword}, #{teacherTypeId}, #{feeCategory} )
 	</insert>
+	
 
+	<!--根据学校逐渐和教师类别查询教师-->
+	<select id="selecTeachersByTeacherTypeId" resultType="Teacher">
+	select t.*
+	from teacher t 
+	join teacherdiction td on td.teacherId = t.teacherId
+	join school sc on sc.schoolId = td.schoolId
+	<where>
+		<if test="schoolId !=null and schoolId!=''">
+			sc.schoolId = #{schoolId }
+		</if>
+		<if test="teacherTypeId !=null and teacherTypeId !=''">
+			and t.teacherTypeId  = #{teacherTypeId }
+		</if>
+	</where> 
+		
+	</select>
 </mapper>

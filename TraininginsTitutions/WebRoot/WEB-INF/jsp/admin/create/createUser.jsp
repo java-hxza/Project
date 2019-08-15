@@ -41,7 +41,7 @@
 							<div class="text-center w-75 m-auto">
 								<h4 class="text-dark-50 text-center mt-0 font-weight-bold">Sign
 									In</h4>
-								<p class="text-muted mb-4">请选择您的校区并输入您的账户密码登录：</p>
+								<p class="text-muted mb-4">请选择您的校区并输入您的账户密码：</p>
 							</div>
 								
 								<div class="form-group">
@@ -76,11 +76,6 @@
 									</select>
 									
 								</div>
-								<div class="form-group">
-									<label for="emailaddress">用户名：</label> <input
-										class="form-control" type="text" id="userName" name="userName"
-										required placeholder="Enter your username">
-								</div>
 								
 								<div class="form-group">
 									<label for="emailaddress">登录名：</label> <input
@@ -104,7 +99,7 @@
 
 								<div class="form-group mb-0 text-center">
 									<button class="btn btn-primary" id="loginBtn" type="button" onclick="regitUser()">
-									<span class="" role="status" aria-hidden="true">立即登录</span>
+									<span class="" role="status" aria-hidden="true">立即注册</span>
 									</button>
 								</div>
 						</div>

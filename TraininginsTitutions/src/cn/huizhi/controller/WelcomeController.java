@@ -38,6 +38,7 @@ public class WelcomeController {
 	 */
 	@Resource
 	SchoolService schoolService;
+	
 	/**
 	 * 用户类型
 	 */
@@ -95,19 +96,30 @@ public class WelcomeController {
 	 */
 	@RequestMapping("createSchool.html")
 	public String createSchool() {
-		return"admin/createSchool";
+		return"admin/create/createSchool";
 	}
 	/**
-	 * 返回创建学校视图
+	 * 返回创建学校用户视图
 	 * @return
 	 */
 	@RequestMapping("createUser.html")
 	public String createUser(HttpSession session) {
 		List<UserType> userTypeList = userTypeService.findUserTypes();
 		session.setAttribute("userTypeList", userTypeList);
-		return"admin/createUser";
+		return"admin//create/createUser";
 	}
 	
+	
+	/**
+	 * 返回创建教师视图
+	 * @return
+	 */
+	@RequestMapping("creageTeacher.html")
+	public String createTeacher(HttpSession session) {
+		
+		
+		return "admin/create/createTeacher";
+	}
 	
 	@RequestMapping("highIndex.html")
 	public String highIndex() {

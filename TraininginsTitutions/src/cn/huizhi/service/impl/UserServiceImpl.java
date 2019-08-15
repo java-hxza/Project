@@ -56,13 +56,7 @@ public class UserServiceImpl implements UserService {
 	public Integer updateTeacher(User user) {
 		return userMapper.updateTeacher(user);
 	}
-	/**
-	 * 根据科别查询科别下所有教师
-	 */
-	@Override
-	public List<User> findtUserByDpId(Integer dpId,Integer schoolId) {
-		return userMapper.selectUserByDpId(dpId, schoolId);
-	}
+
 	
 	/**
 	 * 添加教师

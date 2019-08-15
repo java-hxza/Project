@@ -5,11 +5,10 @@ public class Teacher {
 	private Integer teacherId;
 	private String teacherName;
 	private String loginPassword;
-	private Integer teacherTypeId;
 	private Integer feeCategory;
 	private String telephone;
 	private String remarks;
-
+	private Integer teacherTypeId;
 	private TeacherDiction teacherDiction;
 
 	public Teacher() {

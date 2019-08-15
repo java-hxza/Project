@@ -1,6 +1,6 @@
 package cn.huizhi.mapper;
 /**
- * 少儿班级mapper
+ * 班级mapper
  * @author wye
  *
  */
@@ -8,17 +8,15 @@ package cn.huizhi.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-
-import cn.huizhi.pojo.ChildrenescClass;
-
-public interface ChildrenescClassMapper {
+import cn.huizhi.pojo.Class;;
+public interface ClassMapper {
 	/**
 	 * 根据学校查询所有学校下的少儿班级
 	 * 
 	 * @param schoolId
 	 * @return
 	 */
-	public List<ChildrenescClass> selectChildrenescClasses(@Param("schoolId")String schoolId);
+	public List<Class> selectChildrenescClasses(@Param("schoolId")String schoolId);
 
 	/**
 	 * 添加少儿班级
@@ -26,7 +24,7 @@ public interface ChildrenescClassMapper {
 	 * @param childrenescClass
 	 * @return
 	 */
-	public int insertChildrenescClass(ChildrenescClass childrenescClass);
+	public int insertChildrenescClass(Class childrenescClass);
 
 	/**
 	 * 修改班级信息
@@ -34,7 +32,7 @@ public interface ChildrenescClassMapper {
 	 * @param childrenescClass
 	 * @return
 	 */
-	public int updateChildrenescClass(ChildrenescClass childrenescClass);
+	public int updateChildrenescClass(Class childrenescClass);
 
 	/**
 	 * 根据主键删除班级

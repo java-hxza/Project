@@ -81,7 +81,7 @@ $(function() {
 			$("#loginBtn").attr("disabled", false);
 			return false;
 		}
-
+		
 		// Login Ajax
 		$.ajax({
 			url : 'user.html',

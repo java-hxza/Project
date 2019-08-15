@@ -33,6 +33,10 @@ public class TeacherServiceImpl implements TeacherService{
 	public int addTeacher(Teacher teacher) {
 		return teacherMapper.insertTeacher(teacher);
 	}
+
+	public List<Teacher> findTeachersByTeacherTypeId(Integer teacherTypeId, Integer schoolId) {
+		return teacherMapper.selecTeachersByTeacherTypeId(teacherTypeId, schoolId);
+	}
 	
 	
 }

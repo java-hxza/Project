@@ -2,20 +2,20 @@ package cn.huizhi.service;
 
 import java.util.List;
 
-import cn.huizhi.pojo.ChildrenescClass;
+import cn.huizhi.pojo.Class;
 /**
  * 少儿学生班级
  * @author wye
  *
  */
-public interface ChildrenescClassService {
+public interface ClassService {
 	/**
 	 * 根据学校查询所有学校下的少儿班级
 	 * 
 	 * @param schoolId
 	 * @return
 	 */
-	public List<ChildrenescClass> findChildrenescClasses(String schoolId);
+	public List<Class> findChildrenescClasses(String schoolId);
 
 	/**
 	 * 添加少儿班级
@@ -23,7 +23,7 @@ public interface ChildrenescClassService {
 	 * @param childrenescClass
 	 * @return
 	 */
-	public int addChildrenescClass(ChildrenescClass childrenescClass);
+	public int addChildrenescClass(Class childrenescClass);
 
 	/**
 	 * 修改班级信息
@@ -31,7 +31,7 @@ public interface ChildrenescClassService {
 	 * @param childrenescClass
 	 * @return
 	 */
-	public int modifyChildrenescClass(ChildrenescClass childrenescClass);
+	public int modifyChildrenescClass(Class childrenescClass);
 
 	/**
 	 * 根据主键删除班级
