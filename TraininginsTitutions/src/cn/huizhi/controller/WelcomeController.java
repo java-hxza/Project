@@ -82,7 +82,9 @@ public class WelcomeController {
 	 * @return
 	 */
 	@RequestMapping("adminIndex.html")
-	public String adminIndex() {
+	public String adminIndex(HttpSession session) {
+		List<School> schoolListAll = schoolService.findSchools();
+		session.setAttribute("schoolListAll", schoolListAll);
 		return	"admin/adminIndex";
 	}
 

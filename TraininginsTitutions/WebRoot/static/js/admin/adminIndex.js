@@ -12,5 +12,9 @@ $(function(){
 		location.href="createSchool.html";
 	}
 	
+	clickSchool = function(){
+		var schoolId = $("#schoolId").children().next().children().html();
+		location.href="schoolInfo.html?schoolId="+schoolId;
+	}
 	
 });

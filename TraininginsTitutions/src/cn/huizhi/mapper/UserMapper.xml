@@ -33,11 +33,10 @@
 	<insert id="insertUser" parameterType="User">
 		INSERT INTO
 		traininginstitutions.user (userName, loginName, loginPassword,
-		schoolId, userTypeId, telephone, remarks,
-		teacherId)VALUES(#{userName},
+		schoolId, userTypeId, telephone, remarks)VALUES(#{userName},
 		#{loginName}, #{loginPassword},
 		#{schoolId}, #{userTypeId}, #{telephone},
-		#{remarks}, #{teacherId});
+		#{remarks}
 	</insert>
 
 
@@ -54,12 +53,11 @@
 
 	<select id="selectUserByAll" resultMap="selectUserByAlls">
 		SELECT
-		u.uId ud,u.userName,u.telephone,u.remarks,u.teacherId td,s.schoolName
+		u.uId ud,u.userName,u.telephone,u.remarks,s.schoolName
 		sd,t.teacherName
 		FROM `user` u
 		JOIN school s ON
 		u.schoolId=s.schoolId
-		JOIN teacher t ON u.teacherId=t.teacherId
 		WHERE
 		u.userTypeId=3 AND u.schoolId=#{0}
 		ORDER BY u.uId
@@ -77,11 +75,6 @@
 			javaType="java.lang.Integer" />
 		<result property="telephone" column="u.telephone"
 			javaType="java.lang.String" />
-		<collection property="teacher" javaType="Teacher"
-			column="teacher">
-			<result property="teacherName" column="t.teacherName"
-				javaType="java.lang.String" />
-		</collection>
 	</resultMap>
 
 	<update id="updateTeacher" parameterType="User">
@@ -91,7 +84,7 @@
 		#{schoolId}
 		, userTypeId = #{userTypeId} , telephone = #{telephone} ,
 		remarks =
-		#{remarks} , teacherId = #{teacherId} WHERE uId = #{uId} ;
+		#{remarks}  WHERE uId = #{uId} ;
 	</update>
 
 	<delete id="delTeacher">
@@ -99,35 +92,16 @@
 	</delete>
 
 	<!--根据科别查询老师-->
-	<select id="selectUserByDpId" resultMap="dpIdCol">
-		select u.userName,u.uId
-		from user u
-		join teacher t on t.teacherId = u.teacherId
-		join departmentofpediatrics dp on dp.dpId = t.dpId
-		<where>
-			<if test="dpId!=null and dpId!=''">
-				dp.dpId = #{dpId}  
-			</if>
-			<if test="schoolId!=null and schoolId!=''">
-				and  u.schoolId = #{schoolId}
-			</if>
-		</where>
-	</select>
-	
-	<resultMap type="User" id="dpIdCol">
-		<id column="u.uId" property="uId" javaType="java.lang.Integer"/>		
-		<result column="u.userName" property="userName" javaType="java.lang.String"/>
-	</resultMap>
 	
 
 	<insert id="addTeacher" parameterType="User">
 		INSERT INTO
 		traininginstitutions.user (userName, loginName, loginPassword,
-		schoolId, userTypeId, telephone, remarks,
-		teacherId)VALUES(#{userName},
+		schoolId, userTypeId, telephone, remarks
+		)VALUES(#{userName},
 		#{loginName}, #{loginPassword},
 		#{schoolId}, 3, #{telephone},
-		#{remarks}, #{teacherId});
+		#{remarks}, 
 	</insert>
 
 </mapper>

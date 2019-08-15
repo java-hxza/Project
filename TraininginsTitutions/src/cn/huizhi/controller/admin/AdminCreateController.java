@@ -1,16 +1,20 @@
 package cn.huizhi.controller.admin;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.huizhi.pojo.School;
+import cn.huizhi.pojo.SchoolAccount;
 import cn.huizhi.pojo.User;
+import cn.huizhi.service.SchoolAccountService;
 import cn.huizhi.service.SchoolService;
 /**
  * 管理员创建管理controller
@@ -31,7 +35,12 @@ public class AdminCreateController {
 	 */
 	@Resource
 	UserService userservice;
-
+	/**
+	 * 学校账户主键
+	 */
+	@Resource
+	SchoolAccountService schoolAccountService;
+	
 	/**
 	 * 创建学校并以json数组形式返回
 	 * 
@@ -98,4 +107,19 @@ public class AdminCreateController {
 		}
 		return jsonMap;
 	}
+	@RequestMapping("schoolInfo.html")
+	public String schoolInfo(Integer schoolId,HttpSession session) {
+		List<SchoolAccount> schoolAccountList = schoolAccountService.findSchoolAccountsBySchoolId(schoolId);
+		Double schoolExPenSum =0.0;
+		Double schoolfeeceatDouble = 0.0;
+		if(schoolAccountList.size()>0) {
+			for (SchoolAccount schoolAccount : schoolAccountList) {
+				schoolExPenSum += schoolAccount.getExpenMoney();
+				schoolfeeceatDouble +=schoolAccount.getFeectaeMoney();
+			}
+		}
+		session.setAttribute("schoolAccountList", schoolAccountList);
+		return "schoolInfo";
+	}
+	
 }

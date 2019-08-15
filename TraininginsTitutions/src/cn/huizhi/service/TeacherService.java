@@ -5,6 +5,8 @@ package cn.huizhi.service;
  */
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.huizhi.pojo.Teacher;
 
 public interface TeacherService {
@@ -15,4 +17,19 @@ public interface TeacherService {
 	 * @return
 	 */
 	public List<Teacher> selectTeacher();
+	
+	/**
+	 * 教师登录
+	 * @param loginName
+	 * @param loginPassword
+	 * @param schoolId
+	 * @return
+	 */
+	public Teacher findTeacherByLogin(String loginName,String loginPassword,Integer schoolId);
+	/**
+	 * 添加教师
+	 * @param teacher
+	 * @return
+	 */
+	public int	addTeacher(Teacher teacher);
 }

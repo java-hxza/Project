@@ -23,6 +23,16 @@ public class TeacherServiceImpl implements TeacherService{
 	public List<Teacher> selectTeacher() {
 		return teacherMapper.selectTeacher();
 	}
+
+	@Override
+	public Teacher findTeacherByLogin(String loginName, String loginPassword, Integer schoolId) {
+		return teacherMapper.selectTeacherByLogin(loginName, loginPassword, schoolId);
+	}
+
+	@Override
+	public int addTeacher(Teacher teacher) {
+		return teacherMapper.insertTeacher(teacher);
+	}
 	
 	
 }

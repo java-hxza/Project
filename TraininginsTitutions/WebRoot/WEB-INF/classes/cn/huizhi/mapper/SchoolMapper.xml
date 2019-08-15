@@ -4,17 +4,49 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.SchoolMapper">
 	<!--查询学校所需字段-->
+	
 	<sql id="schoolCol">
 		schoolId,
 		schoolName,
 		cityId,
-		schoolRemarks
+		schoolRemarks,
+		cityProperId
 	</sql>
-	<!--查询全部学校-->
-	<select id="selectSchools" resultType="School">
-		select <include refid="schoolCol"/>
-		from school
+	<sql id="schoolColByPro">
+		sc.schoolId as sc_schoolId,
+		sc.schoolName as sc_schoolName,
+		sc.cityId as sc_cityId,
+		sc.schoolRemarks sc_schoolRemarks,
+		sc.cityProperId as sc_cityProperId,
+		p.provinceId as p_provinceId, 
+		p.provinceName p_provinceName,
+		c.cityId c_cityId,
+		c.cityName c_cityName
+	</sql>
+	
+	<select id="selectSchools" resultMap="schoolAllCol">
+		select <include refid="schoolColByPro"/>
+		from school sc 
+		join city c on c.cityId = sc.cityId
+		join province p on p.provinceId = sc.cityProperId
 	</select>
+	<!--查询全部学校映射字段-->
+	<resultMap type="School" id="schoolAllCol">
+		<result column="sc_schoolId"	property="schoolId"/>
+		<result column="sc_schoolName" property="schoolName"/>
+		<result column="sc_cityId" property="cityId"/>
+		<result column="sc_schoolRemarks" property="schoolRemarks"/>
+		<result column="sc_cityProperId" property="cityProperId"/>
+		<collection property="city" javaType="City">
+				<id column="c_cityId" property="cityId"/>
+				<result column="c_cityName" property="cityName"/>
+		</collection>
+		<collection property="province" javaType="Province">
+			<id column="p_provinceId" property="provinceId"/>
+			<result column="p_provinceName" property="provinceName"/>
+		</collection>
+	</resultMap>
+	
 	<!--根据城市主键查询学校所在省市-->
 	<select id="selectSchoolByCityId" resultType="School" parameterType="java.lang.Integer">	
 		select <include refid="schoolCol"/>
