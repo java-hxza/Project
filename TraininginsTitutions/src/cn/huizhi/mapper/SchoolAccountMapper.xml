@@ -22,7 +22,7 @@
 		sa.schoolId sa_schoolId, 
 		sa.startTime sa_startTime,
 		ft.chargeTypeName ft_chargeTypeName,
-		ed.expenditureitemsName ed_expenditureitemsName,
+		ed.expenditureitemsName ed_expenditureitemsName
 			
 	</sql>
 	
@@ -39,7 +39,7 @@
 			<result column="ed_expenditureitemsName" property="expenditureitemsName"/>
 		</association>
 		<association property="feeCategory" javaType="FeeCategory">
-			<result column="ft_chargeTypeName" javaType="chargeTypeName"/>
+			<result column="ft_chargeTypeName" property="chargeTypeName"/>
 		</association>
 	</resultMap>
 	

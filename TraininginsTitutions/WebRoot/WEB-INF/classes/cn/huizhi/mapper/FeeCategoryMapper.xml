@@ -5,7 +5,7 @@
 <mapper namespace="cn.huizhi.mapper.FeeCategoryMapper">
 
 	<select id="selectFeeCategory" resultType="FeeCategory">
-		SELECT * FROM feecategory where feeCategory = 2
+		SELECT * FROM feecategory
 	</select>
 	
 	<delete id="delFeeCategory" parameterType="java.lang.Integer">
@@ -13,7 +13,7 @@
 	</delete>
 	
 	<insert id="addFeeCategory" parameterType="java.lang.Integer">
-		INSERT INTO feecategory (chargeTypeName,category,feeCategory)VALUES(#{0}, #{1},2);
+		INSERT INTO feecategory (chargeTypeName,category)VALUES(#{0}, #{1});
 	</insert>
 
 </mapper>

@@ -21,7 +21,7 @@ $(function(){
 	 * 跳转到教师信息的页面
 	 */
 	Teacher = function(){
-		location.href="User.html";
+		location.href="Teacher.html";
 	}
 	/**
 	 * 复选框单击选中取消事件
