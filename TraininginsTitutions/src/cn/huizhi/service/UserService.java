@@ -16,12 +16,6 @@ public interface UserService {
 	 */
 	public User findUserByLogin(String loginName,String loginPassword,String schoolId);
 	
-	/**
-	 * 添加用户方法
-	 * @param user
-	 * @return
-	 */
-	public User findUserByLogin(String loginName,String loginPassword,String schoolId);
 	
 	/**
 	 * 添加用户方法

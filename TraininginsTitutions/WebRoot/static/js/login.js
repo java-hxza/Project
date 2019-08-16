@@ -84,7 +84,7 @@ $(function() {
 		
 		// Login Ajax
 		$.ajax({
-			url : 'user.html',
+			url : 'userLogin.html',
 			data : {
 				loginName : loginName,
 				loginPassword : loginPassword,

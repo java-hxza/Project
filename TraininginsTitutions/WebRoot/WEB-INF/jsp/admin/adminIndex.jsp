@@ -94,7 +94,7 @@
 											</thead>
 											<tbody>
 												<c:forEach items="${schoolListAll }" var="school">
-													<tr onclick="clickSchool()"  id="schoolId"  name="${school.schoolId }">
+													<tr class="schoolId" >
 														<td>
 															<div class="custom-control custom-checkbox">
 																<input type="checkbox" class="custom-control-input"

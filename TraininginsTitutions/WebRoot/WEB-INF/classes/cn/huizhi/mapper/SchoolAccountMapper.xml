@@ -12,12 +12,42 @@
 		schoolId,
 		startTime
 	</sql>
-	<select id="selectSchoolAccountsBySchoolId" resultType="SchoolAccount" parameterType="java.lang.Integer">
-		select <include refid="schoolAccountCol"/>
-		from schoolaccount
+	
+	<sql id="SchoolAccountsBySchoolIdCol">
+		sa.accountId sa_accountId,
+		sa.expenId sa_expenId,
+		sa.expenMoney sa_expenMoney,
+		sa.feecateId sa_feecateId,
+		sa.feectaeMoney sa_feectaeMoney,
+		sa.schoolId sa_schoolId, 
+		sa.startTime sa_startTime,
+		ft.chargeTypeName ft_chargeTypeName,
+		ft.chargeTypeId ft_chargeTypeId,
+		ed.expenditureitemsName ed_expenditureitemsName,
+		ed.expenditureitemsId ed_expenditureitemsId
+			
+	</sql>
+	
+	
+	<resultMap type="SchoolAccount" id="schoolAccountMap">
+		<id column="sa_accountId" property="accountId"/>
+		<id column="sa_expenId" property="expenId"/>
+		<id column="sa_expenMoney" property="expenMoney"/>
+		<id column="sa_feecateId" property="sa_feecateId"/>
+		<id column="sa_accountId" property="accountId"/>
+		<id column="sa_accountId" property="accountId"/>
+		<id column="sa_accountId" property="accountId"/>
+	</resultMap>
+	
+	<!-- 根据学校主键查询该校的账户信息-->
+	<select id="selectSchoolAccountsBySchoolId" resultMap="schoolAccountMap" parameterType="java.lang.Integer">
+		select <include refid="SchoolAccountsBySchoolIdCol"/>
+		from schoolaccount sa
+		join expenditureitems ed on ed.expenditureitemsId = sa.expenId
+		join feecategory ft on ft.chargeTypeId = sa.feecateId
 		<where>
 			<if test="schoolId != null and schoolId != ''">
-				schoolId = #{schoolId}
+				sa.schoolId = #{schoolId}
 			</if>
 		</where>
 	</select>

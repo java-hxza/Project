@@ -33,9 +33,6 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectUserByUserName(loginName);
 	}
 	
-	
-<<<<<<< HEAD
-=======
 	/**
 	 * 删除教师
 	 */
@@ -60,7 +57,6 @@ public class UserServiceImpl implements UserService {
 	public Integer addTeacher(User user) {
 		return userMapper.addTeacher(user);
 	}
->>>>>>> branch 'master' of https://github.com/tianmabdqn/Project.git
 	
 	
 	

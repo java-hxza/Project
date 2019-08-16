@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set scope="request" value="${pageContext.request.contextPath }"
 	var="Path" />
 <!DOCTYPE html>
@@ -17,10 +17,8 @@
 <link rel="shortcut icon" href="assets/images/favicon.ico">
 
 <!-- App css -->
-<link href="${Path }/static/css/icons.min.css" rel="stylesheet"
-	type="text/css" />
-<link href="${Path }/static/css/app.min.css" rel="stylesheet"
-	type="text/css" />
+<link href="${Path }/static/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="${Path }/static/css/app.min.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -60,11 +58,10 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="text-center">
-								<h3 class="">管理学校及城市</h3>
-								<p class="text-muted mt-3">需要先添加 省份--->城市--->学校--->创建账号 步骤</p>
-        
-                                     <button type="button" class="btn btn-success btn-sm mt-2" onclick="createSchool()"> 创建学校</button>
-                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="createUser()"> 创建账号</button>
+								<h3 class="">${schoolName }</h3>
+								<p class="text-muted mt-3"></p>
+                                     <button type="button" class="btn btn-success btn-sm mt-2" onclick="printOrders()"> 打印订单</button>
+                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="exportOrder()">导出exsal</button>
                                 </div>
                             </div>
 						<!-- end col -->
@@ -92,8 +89,8 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${schoolListAll }" var="school">
-													<tr onclick="clickSchool()"  id="schoolId"  name="${school.schoolId }">
+												<c:forEach items="${schoolAccountList }" var="sa">
+													<tr onclick="clickSchool()"  id="schoolId"  name="${sa.accountId }">
 														<td>
 															<div class="custom-control custom-checkbox">
 																<input type="checkbox" class="custom-control-input"
@@ -101,19 +98,19 @@
 															</div>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" ></a>
+															class="text-body font-weight-semibold" >${sa.expenId }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold"></a>
+															class="text-body font-weight-semibold">${sa.expenMoney }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" ></a>
+															class="text-body font-weight-semibold" >${sa.feecateId }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >$</a>
+															class="text-body font-weight-semibold" >${sa.feectaeMoney }</a>
 														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold"></a>
+														<td class="table-user">
+															<span class="text-body font-weight-semibold"> <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"  value="${sa.startTime}" /> </span>
 														</td>
 													</tr>
 												</c:forEach>	
@@ -125,13 +122,8 @@
             <!-- End Page content -->
             <!-- ============================================================== -->
 
-
         </div>
 				<!-- END wrapper -->
-
-
-				<!-- Right Sidebar -->
-				<!-- /Right-bar -->
 
 				<!-- App js -->
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>

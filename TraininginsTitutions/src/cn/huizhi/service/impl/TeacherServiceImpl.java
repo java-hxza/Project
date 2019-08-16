@@ -38,7 +38,6 @@ public class TeacherServiceImpl implements TeacherService{
 		return teacherMapper.selectTeacherByLogin(loginName, loginPassword, schoolId);
 	}
 
-	@Override
 	public int addTeacher(Teacher teacher) {
 		return teacherMapper.insertTeacher(teacher);
 	}
@@ -52,15 +51,13 @@ public class TeacherServiceImpl implements TeacherService{
 	 */
 	@Override
 	public Integer updateTeacher(Teacher teacher) {
-		return updateTeacher(teacher);
+		return teacherMapper.updateTeacher(teacher);
 	}
-	
-	/**
-	 * 添加教师
-	 */
+
+
 	@Override
-	public Integer addTeacher(Teacher teacher) {
-		return addTeacher(teacher);
+	public List<Teacher> selectTeacher() {
+		return teacherMapper.selectTeacher();
 	}
 	
 }

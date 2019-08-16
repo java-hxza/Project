@@ -37,7 +37,12 @@ public interface TeacherService {
 	 * @param user
 	 * @return
 	 */
-	public Integer addTeacher(Teacher teacher );
+	public int addTeacher(Teacher teacher );
+	
+	/**
+	 * 查询所有教师
+	 * @return
+	 */
 	public List<Teacher> selectTeacher();
 	
 	/**
@@ -48,12 +53,7 @@ public interface TeacherService {
 	 * @return
 	 */
 	public Teacher findTeacherByLogin(String loginName,String loginPassword,Integer schoolId);
-	/**
-	 * 添加教师
-	 * @param teacher
-	 * @return
-	 */
-	public int	addTeacher(Teacher teacher);
+
 	
 	
 	/**

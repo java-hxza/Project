@@ -106,19 +106,35 @@ public class AdminCreateController {
 		}
 		return jsonMap;
 	}
+	/**
+	 * 查询学校信息并返回视图
+	 * @param schoolId
+	 * @param schoolName
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("schoolInfo.html")
-	public String schoolInfo(Integer schoolId,HttpSession session) {
+	public String schoolInfo(Integer schoolId,String schoolName,HttpSession session) {
 		List<SchoolAccount> schoolAccountList = schoolAccountService.findSchoolAccountsBySchoolId(schoolId);
+		/**
+		 * 共支出
+		 */
 		Double schoolExPenSum =0.0;
-		Double schoolfeeceatDouble = 0.0;
+		/**
+		 * 共收入
+		 */
+		Double schoolFeeceat = 0.0;
 		if(schoolAccountList.size()>0) {
 			for (SchoolAccount schoolAccount : schoolAccountList) {
 				schoolExPenSum += schoolAccount.getExpenMoney();
-				schoolfeeceatDouble +=schoolAccount.getFeectaeMoney();
+				schoolFeeceat +=schoolAccount.getFeectaeMoney();
 			}
 		}
+		session.setAttribute("schoolExPenSum", schoolExPenSum);
+		session.setAttribute("schoolFeeceat", schoolFeeceat);
+		session.setAttribute("schoolName", schoolName);
 		session.setAttribute("schoolAccountList", schoolAccountList);
-		return "schoolInfo";
+		return "admin/schoolInfo/schoolInfo";
 	}
 	
 }

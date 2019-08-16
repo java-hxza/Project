@@ -10,7 +10,17 @@ public class SchoolAccount {
 	private Double feectaeMoney;
 	private Integer schoolId;
 	private Date startTime;
-
+	
+	
+	/**
+	 * 支出类
+	 */
+	private Expenditureitems expenditureitems;
+	/**
+	 * 收入类
+	 */
+	private FeeCategory feeCategory;
+	
 	public SchoolAccount() {
 		super();
 	}
@@ -25,6 +35,37 @@ public class SchoolAccount {
 		this.feectaeMoney = feectaeMoney;
 		this.schoolId = schoolId;
 		this.startTime = startTime;
+	}
+	
+	
+	public SchoolAccount(Integer accountId, Integer expenId, Double expenMoney, Integer feecateId, Double feectaeMoney,
+			Integer schoolId, Date startTime, Expenditureitems expenditureitems, FeeCategory feeCategory) {
+		super();
+		this.accountId = accountId;
+		this.expenId = expenId;
+		this.expenMoney = expenMoney;
+		this.feecateId = feecateId;
+		this.feectaeMoney = feectaeMoney;
+		this.schoolId = schoolId;
+		this.startTime = startTime;
+		this.expenditureitems = expenditureitems;
+		this.feeCategory = feeCategory;
+	}
+
+	public Expenditureitems getExpenditureitems() {
+		return expenditureitems;
+	}
+
+	public void setExpenditureitems(Expenditureitems expenditureitems) {
+		this.expenditureitems = expenditureitems;
+	}
+
+	public FeeCategory getFeeCategory() {
+		return feeCategory;
+	}
+
+	public void setFeeCategory(FeeCategory feeCategory) {
+		this.feeCategory = feeCategory;
 	}
 
 	public Integer getAccountId() {

@@ -12,10 +12,12 @@ $(function(){
 		location.href="createSchool.html";
 	}
 	
-	clickSchool = function(){
-		var schoolId = $("#schoolId").children().next().children().html();
-		location.href="schoolInfo.html?schoolId="+schoolId;
-	}
+	$(".schoolId").unbind("click").click(function(){
+		var schoolId = $(this).children().next().children().html();
+		var schoolName = $(this).children().next().next().children().html();
+		location.href="schoolInfo.html?schoolId="+schoolId+"&schoolName="+schoolName;
+	});
+	
 	/**
 	 * 创建教师
 	 */

@@ -90,7 +90,7 @@ public class LoginController {
 	 * @param schoolId
 	 * @return
 	 */
-	@RequestMapping("user.html")
+	@RequestMapping("userLogin.html")
 	@ResponseBody
 	public HashMap<String, String> validateLogin(String loginName,String loginPassword,String schoolId,HttpSession session) {
 		

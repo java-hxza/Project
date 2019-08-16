@@ -44,7 +44,14 @@
 			<if test="teacherName!='' and teacherName!=null">
 				t.teacherName = #{teacherName }
 			</if>
-
+			<if test="loginPassword !='' and loginPassword!=null">
+				and t.loginPassword = #{loginPassword}
+			</if>
+			<if test="schoolId!=null and schoolId!=''">
+				and td.schoolId =#{schoolId}
+			</if>
+		</where>
+	</select>
 	<update id="updateTeacher" parameterType="Teacher">
 		UPDATE
 		traininginstitutions.user SET userName = #{userName} , loginName =
@@ -67,14 +74,8 @@
 		#{teacherTypeId}, #{feeCategory});
 	</insert>
 
-			<if test="loginPassword !='' and loginPassword!=null">
-				and t.loginPassword = #{loginPassword}
-			</if>
-			<if test="schoolId!=null and schoolId!=''">
-				and td.schoolId =#{schoolId}
-			</if>
-		</where>
-	</select>
+			
+
 	
 	<!--加入教师-->
 	<insert id="insertTeacher" parameterType="Teacher">
