@@ -133,6 +133,7 @@ public class AdminCreateController {
 		session.setAttribute("schoolExPenSum", schoolExPenSum);
 		session.setAttribute("schoolFeeceat", schoolFeeceat);
 		session.setAttribute("schoolName", schoolName);
+		session.setAttribute("schoolId", schoolId);
 		session.setAttribute("schoolAccountList", schoolAccountList);
 		return "admin/schoolInfo/schoolInfo";
 	}

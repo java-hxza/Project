@@ -39,6 +39,14 @@ public interface TeacherMapper {
 	 */
 	public Integer addTeacher(Teacher teacher );
 	
+	/**
+	 * 根据学校主键查询该学校下所有老师
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Teacher> selectTeacherListBySchoolId(@Param("schoolId")Integer schoolId);
+	
+	
 	public List<Teacher> selectTeacher();
 	/**
 	 * 根据学校主键和教师类别主键查询老师

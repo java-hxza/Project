@@ -23,13 +23,11 @@
 						</span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
-							<li><a href="#" onclick="Accountinformation()">学校账户信息</a></li>
-							<li><a href="#" onclick="Incomeitems()">学校收入项目</a></li>
-							<li><a href="#" onclick="Expenditureitemses()">学校支出项目</a></li>
-							<li><a href="#" onclick="Teacher()">教师信息</a></li>
+							<li><a href="javascript:void(0)" onclick="schoolListInfo()">学校账户信息</a></li>
+							<li><a href="javascript:void(0)" onclick="Incomeitems()">学校收入项目</a></li>
+							<li><a href="javascript:void(0)" onclick="Expenditureitemses()">学校支出项目</a></li>
+							<li><a href="javascript:void(0)" onclick="teacherInto()">教师信息</a></li>
 						</ul></li>
-				
-					
 					<li class="side-nav-item"><a href="javascript: void(0);"
 						class="side-nav-link"> <i class="dripicons-view-apps"></i> <span>
 								报表统计</span> <span class="menu-arrow"></span>

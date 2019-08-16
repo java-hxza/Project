@@ -20,4 +20,5 @@ public interface SchoolAccountMapper {
 	public List<SchoolAccount> selectSchoolAccountsBySchoolId(@Param("schoolId")Integer schoolId);
 	
 	
+	
 }

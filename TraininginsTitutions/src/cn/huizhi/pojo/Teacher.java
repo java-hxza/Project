@@ -10,7 +10,7 @@ public class Teacher {
 	private String remarks;
 	private String telephone;
 	private TeacherDiction teacherDiction;
-
+	private TeacherType teacherType;
 
 
 	public Teacher(Integer teacherId, String teacherName, String loginPassword, Integer teacherTypeId,

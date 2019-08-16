@@ -24,4 +24,6 @@ $(function(){
 	createTeacher = function(){
 		location.href="creageTeacher.html";
 	}
+	
+
 });

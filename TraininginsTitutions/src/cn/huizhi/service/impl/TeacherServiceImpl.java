@@ -60,5 +60,11 @@ public class TeacherServiceImpl implements TeacherService{
 	public List<Teacher> selectTeacher() {
 		return teacherMapper.selectTeacher();
 	}
+
+	@Override
+	public List<Teacher> selectTeacherListBySchoolId(Integer schoolId) {
+		// TODO Auto-generated method stub
+		return teacherMapper.selectTeacherListBySchoolId(schoolId);
+	}
 	
 }

@@ -23,7 +23,12 @@ public interface UserService {
 	 * @return
 	 */
 	public User findUserByUserName(String loginName);
-
+	/**
+	 * 管理员登录
+	 * @param loginName
+	 * @param loginPassword
+	 * @param schoolId
+	 * @return
+	 */
 	public User findUserByLogin(String loginName, String loginPassword, String schoolId);
-
 }

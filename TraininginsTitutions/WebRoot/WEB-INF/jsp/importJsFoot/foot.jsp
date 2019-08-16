@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <script src="${Path }/static/js/app.min.js"></script>
 
-<!-- third party js -->
+
 <script src="${Path }/static/js/js/vendor/jquery.dataTables.min.js"></script>
 <script src="${Path }/static/js/js/vendor/dataTables.bootstrap4.js"></script>
 <script src="${Path }/static/js/js/vendor/dataTables.responsive.min.js"></script>

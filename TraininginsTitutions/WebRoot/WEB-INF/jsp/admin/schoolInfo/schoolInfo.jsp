@@ -53,15 +53,26 @@
 						</div>
 					</div>
 					<!-- end page title -->
-
-
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="text-center">
-								<h3 class="">${schoolName }</h3>
+								<h3 class="schoolId" name="${schoolId }">${schoolName }</h3>
+								<div class="app-search">
+                            		<form>
+                             		  	<div class="input-group">
+                                 		   <input type="text" class="form-control" placeholder="Search...">
+                                   		   <span class="mdi mdi-magnify"></span>
+                                   	 	   <div class="input-group-append">
+                                       		 <button class="btn btn-primary" type="button">搜索</button>
+                                    	   </div>
+                              		  	</div>
+                           			 </form>	
+                        		</div>
 								<p class="text-muted mt-3"></p>
                                      <button type="button" class="btn btn-success btn-sm mt-2" onclick="printOrders()"> 打印订单</button>
-                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="exportOrder()">导出exsal</button>
+                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="exportExsal()">导出exsal</button>
+                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="expenditureOrder()">支出订单</button>
+                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="incomeOrder()">收入订单</button>
                                 </div>
                             </div>
 						<!-- end col -->
@@ -98,13 +109,13 @@
 															</div>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${sa.expenId }</a>
+															class="text-body font-weight-semibold" >${sa.expenditureitems.expenditureitemsName }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${sa.expenMoney }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${sa.feecateId }</a>
+															class="text-body font-weight-semibold" >${sa.feeCategory.chargeTypeName }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold" >${sa.feectaeMoney }</a>
@@ -127,6 +138,7 @@
 
 				<!-- App js -->
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
-				<script src="${Path }/static/js/app.min.js"></script>
+				<script src="${Path }/static/js/admin/info/schoolInfo.js"></script>
+				<script src="${Path }/static/js/admin/leftSidebar.js"></script>
 </body>
 </html>

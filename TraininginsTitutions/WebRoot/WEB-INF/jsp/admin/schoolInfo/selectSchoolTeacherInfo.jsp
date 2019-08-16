@@ -61,8 +61,7 @@
 						<div class="col-sm-12">
 							<div class="text-center">
 								<h3 class="">管理学校及城市</h3>
-								<p class="text-muted mt-3">需要先添加 省份--->城市--->学校--->创建账号 步骤</p>
-        
+								<p class="text-muted mt-3">请选择要查看的教师学校</p>
                                     <button type="button" class="btn btn-success btn-sm mt-2" onclick="createSchool()"> 创建学校</button>
                                     <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="createUser()"> 创建账号</button>
                                     <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="createTeacher()"> 创建教师账号</button>
@@ -130,7 +129,7 @@
         </div>
 				<!-- App js -->
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
-				<script type="text/javascript" src="${Path }/static/js/admin/adminIndex.js"></script>
-				<script src="${Path }/static/js/admin/leftSidebar.js"></script>
+				<script type="text/javascript" src="${Path }/static/js/admin/leftSidebar.js"></script>
+				<script type="text/javascript" src="${Path }/static/js/admin/selectSchoolTeacherInfo.js"></script>
 </body>
 </html>

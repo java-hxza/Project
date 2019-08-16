@@ -17,4 +17,6 @@ $(function(){
 		location.href="regitChildrenClass.html";
 	}
 	
+	
+	
 });

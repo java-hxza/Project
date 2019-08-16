@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import cn.huizhi.pojo.School;
+import cn.huizhi.pojo.Teacher;
 
 public interface SchoolMapper {
 	/**
@@ -30,4 +31,6 @@ public interface SchoolMapper {
 	 * @return
 	 */
 	public int insertSchool(School school);
+	
+	
 }
