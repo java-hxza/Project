@@ -8,13 +8,6 @@ import org.apache.ibatis.annotations.Param;
 import cn.huizhi.pojo.User;
 
 public interface UserService {
-	/**
-	 * 登录方法根据登录名密码学校进行查询
-	 * @param loginName
-	 * @param loginPassword
-	 * @return
-	 */
-	public User findUserByLogin(String loginName,String loginPassword,String schoolId);
 	
 	
 	/**
@@ -31,25 +24,5 @@ public interface UserService {
 	 */
 	public User findUserByUserName(String loginName);
 	
-	/**
-	 * 删除教师
-	 * @param uId
-	 * @return
-	 */
-	public Integer delTeacher(Integer uId);
-	
-	/**
-	 * 修改教师
-	 * @param user
-	 * @return
-	 */
-	public Integer updateTeacher(User user);
-	
 
-	/**
-	 * 添加教师
-	 * @param user
-	 * @return
-	 */
-	public Integer addTeacher(User user);
 }

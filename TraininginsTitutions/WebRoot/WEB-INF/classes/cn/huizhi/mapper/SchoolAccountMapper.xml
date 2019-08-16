@@ -22,9 +22,7 @@
 		sa.schoolId sa_schoolId, 
 		sa.startTime sa_startTime,
 		ft.chargeTypeName ft_chargeTypeName,
-		ft.chargeTypeId ft_chargeTypeId,
 		ed.expenditureitemsName ed_expenditureitemsName,
-		ed.expenditureitemsId ed_expenditureitemsId
 			
 	</sql>
 	
@@ -33,10 +31,16 @@
 		<id column="sa_accountId" property="accountId"/>
 		<id column="sa_expenId" property="expenId"/>
 		<id column="sa_expenMoney" property="expenMoney"/>
-		<id column="sa_feecateId" property="sa_feecateId"/>
-		<id column="sa_accountId" property="accountId"/>
-		<id column="sa_accountId" property="accountId"/>
-		<id column="sa_accountId" property="accountId"/>
+		<id column="sa_feecateId" property="feecateId"/>
+		<id column="sa_feectaeMoney" property="feectaeMoney"/>
+		<id column="sa_schoolId" property="schoolId"/>
+		<id column="sa_startTime" property="startTime"/>
+		<association property="expenditureitems" javaType="Expenditureitems">
+			<result column="ed_expenditureitemsName" property="expenditureitemsName"/>
+		</association>
+		<association property="feeCategory" javaType="FeeCategory">
+			<result column="ft_chargeTypeName" javaType="chargeTypeName"/>
+		</association>
 	</resultMap>
 	
 	<!-- 根据学校主键查询该校的账户信息-->

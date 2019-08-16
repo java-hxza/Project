@@ -38,9 +38,10 @@ public class TeacherServiceImpl implements TeacherService{
 		return teacherMapper.selectTeacherByLogin(loginName, loginPassword, schoolId);
 	}
 
-	public int addTeacher(Teacher teacher) {
+	public Integer addTeacher(Teacher teacher) {
 		return teacherMapper.insertTeacher(teacher);
 	}
+
 
 	public List<Teacher> findTeachersByTeacherTypeId(Integer teacherTypeId, Integer schoolId) {
 		return teacherMapper.selecTeachersByTeacherTypeId(teacherTypeId, schoolId);

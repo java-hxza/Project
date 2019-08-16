@@ -83,5 +83,4 @@
 		#{schoolId}, 3, #{telephone},
 		#{remarks}, 
 	</insert>
-
 </mapper>
