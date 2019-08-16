@@ -33,14 +33,6 @@ public interface TeacherService {
 	public Integer updateTeacher(Teacher teacher);
 	
 	/**
-	 * 添加教师
-	 * @param user
-	 * @return
-	 */
-	public Integer addTeacher(Teacher teacher );
-	public List<Teacher> selectTeacher();
-	
-	/**
 	 * 教师登录
 	 * @param loginName
 	 * @param loginPassword
@@ -53,7 +45,7 @@ public interface TeacherService {
 	 * @param teacher
 	 * @return
 	 */
-	public int	addTeacher(Teacher teacher);
+	public Integer	addTeacher(Teacher teacher);
 	
 	
 	/**

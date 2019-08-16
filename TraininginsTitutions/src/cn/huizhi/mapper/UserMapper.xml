@@ -51,38 +51,4 @@
 			</if>
 		</where>
 	</select>
-
-
-
-
-
-	<update id="updateTeacher" parameterType="User">
-		UPDATE
-		traininginstitutions.user SET userName = #{userName} , loginName =
-		#{loginName} , loginPassword = #{loginPassword} , schoolId =
-		#{schoolId}
-		, userTypeId = #{userTypeId} , telephone = #{telephone} ,
-		remarks =
-		#{remarks}  WHERE uId = #{uId} ;
-	</update>
-
-
-	<delete id="delTeacher">
-		DELETE FROM traininginstitutions.user WHERE uId = #{0}
-	</delete>
-
-	<!--根据科别查询老师-->
-	
-
-	<insert id="addTeacher" parameterType="User">
-		INSERT INTO
-		traininginstitutions.user (userName, loginName, loginPassword,
-		schoolId, userTypeId, telephone, remarks
-		)VALUES(#{userName},
-		#{loginName}, #{loginPassword},
-		#{schoolId}, 3, #{telephone},
-		#{remarks}, 
-	</insert>
-
->>>>>>> branch 'master' of https://github.com/tianmabdqn/Project.git
 </mapper>

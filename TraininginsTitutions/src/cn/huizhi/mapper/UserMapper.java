@@ -33,35 +33,12 @@ public interface UserMapper {
 	 */
 	public User selectUserByUserName(@Param("loginName")String loginName);
 	
-	/**
-	 * 查询所有教师
-	 * @param schoolId
-	 * @return
-	 */
-	public List<User> selectUserByAll(String schoolId);
-	
-	/**
-	 * 删除教师
-	 * @param uId
-	 * @return
-	 */
-	public Integer delTeacher(Integer uId);
-	
-	/**
-	 * 修改教师
-	 * @param user
-	 * @return
-	 */
-	public Integer updateTeacher(User user);
+
 	
 	/**
 	 * 根据班级科别查询所有教师
 	 */
 	public List<User> selectUserByDpId(@Param("dpId")Integer dpId,@Param("schoolId")Integer schoolId);
 
-	
-	
-	
-	public Integer addTeacher(User user);
 
 }

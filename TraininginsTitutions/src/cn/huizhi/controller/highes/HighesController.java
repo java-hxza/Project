@@ -220,7 +220,7 @@ public class HighesController {
 	 */
 	@RequestMapping("updateTeacher.html")
 	@ResponseBody
-	public Object updateTeacher(@RequestParam String teacherName,@RequestParam Integer telephone,@RequestParam String remarks,@RequestParam Integer teacherTypeId,@RequestParam String loginPassword,@RequestParam Integer feeCategory) {
+	public Object updateTeacher(@RequestParam String teacherName,@RequestParam String telephone,@RequestParam String remarks,@RequestParam Integer teacherTypeId,@RequestParam String loginPassword,@RequestParam Integer feeCategory) {
 		Teacher teacher = new Teacher();
 		teacher.setFeeCategory(feeCategory);
 		teacher.setLoginPassword(loginPassword);
@@ -243,7 +243,7 @@ public class HighesController {
 	 */
 	@RequestMapping("addTeacher.html")
 	@ResponseBody
-	public Object addTeacher(@RequestParam String teacherName,@RequestParam Integer telephone,@RequestParam String remarks,@RequestParam Integer teacherTypeId,@RequestParam String loginPassword,@RequestParam Integer feeCategory) {
+	public Object addTeacher(@RequestParam String teacherName,@RequestParam String telephone,@RequestParam String remarks,@RequestParam Integer teacherTypeId,@RequestParam String loginPassword,@RequestParam Integer feeCategory) {
 		Teacher teacher = new Teacher();
 		User user2 = (cn.huizhi.pojo.User) session.getAttribute("user");
 		teacher.setFeeCategory(feeCategory);
