@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.TeacherDictionMapper">
+
+	<delete id="delTeacherDiction">
+		DELETE FROM teacherdiction WHERE schoolId=#{0} AND teacherId=#{1}
+	</delete>
+	
+	<insert id="addTeacherDiction" parameterType="java.lang.Integer">
+		INSERT INTO traininginstitutions.teacherdiction (schoolId, teacherId)VALUES(#{0}, #{1});
+	</insert>
+
+</mapper>

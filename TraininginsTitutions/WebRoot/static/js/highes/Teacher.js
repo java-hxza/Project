@@ -1,32 +1,37 @@
 $(function(){
 	addTeacher = function() {
-		var schoolId = $(".schoolIds:eq(0)").text();
-		$(".schoolId").val(schoolId);
+		var schoolName = $(".schoolIds:eq(0)").text();
+		$(".schoolName").val(schoolName);
 		$(".Teachers").remove();
 		$(".addTeacher").show();
 		$(".del").remove();
+		$(".update").remove();
+		$(".adds").remove();
 		$(".add").click(function() {
-			var userName = $.trim($(".userName").val());
+			var teacherName = $.trim($(".teacherName").val());
 			var telephone = $.trim($(".telephone").val());
 			var remarks = $.trim($(".remarks").val());
-			var teacherId = $.trim($(".teacherName").val());
-			var loginName = $.trim($(".loginName").val());
+			var teacherTypeId = $.trim($(".teacherTypeName").val());
 			var loginPassword = $.trim($(".loginPassword").val());
 			var loginPasswords = $.trim($(".loginPasswords").val());
-			if(userName == "") {
+			if(teacherName == "") {
 				alert("请填写姓名！");
-				return false;
-			}
-			if(loginName == "") {
-				alert("请填写用户名！");
 				return false;
 			}
 			if(loginPassword == "") {
 				alert("请填写密码！");
 				return false;
 			}
+			if(loginPassword.length < 6) {
+				alert("密码最少为6位！");
+				return false;
+			}
 			if(loginPasswords == "") {
 				alert("请填写第二次密码！");
+				return false;
+			}
+			if(loginPasswords.length < 6) {
+				alert("密码最少为6位！");
 				return false;
 			}
 			if(loginPassword != loginPasswords) {
@@ -43,22 +48,22 @@ $(function(){
 			}
 			$.ajax({
 				type : "POST",
-				url : "addUser.html",
-				data :{userName : userName,telephone : telephone,remarks : remarks,teacherId : teacherId,loginName : loginName,loginPassword : loginPassword},
+				url : "addTeacher.html",
+				data :{teacherName : teacherName,telephone : telephone,remarks : remarks,teacherTypeId : teacherTypeId,loginPassword : loginPassword},
 				dataType : "json",
 				success : function(data) {
 					data = JSON.parse(data);
 							if(data.add == "1") {
-									alert("添加成功！");
-										location.href = "User.html";
+									alert("添加成功！！！");
+										location.href = "Teacher.html";
 								}else {
-										alert("添加失败！");
-										location.href = "User.html";
+										alert("添加失败！！！");
+										location.href = "Teacher.html";
 									}
 					},
 						error : function(data) {
-								alert("系统出错！");
-								location.href = "User.html";
+								alert("系统出错！！！");
+								location.href = "Teacher.html";
 			}
 			});
 		});
@@ -77,25 +82,25 @@ $(function(){
 			}
 		}
 		if(confirm("确认删除吗？")) {
-			var uId = $(".customCheckes:checked").parent().parent().next().attr("id");
+			var teacherId = $(".customCheckes:checked").parent().parent().next().attr("id");
 			$.ajax({
 				type : "POST",
-				url : "delUser.html",
-				data :{uId : uId},
+				url : "delTeacher.html",
+				data :{teacherId : teacherId},
 				dataType : "json",
 				success : function(data) {
 					data = JSON.parse(data);
 							if(data.del == "1") {
 									alert("删除成功！");
-										location.href = "User.html";
+										location.href = "Teacher.html";
 								}else {
 										alert("删除失败！");
-										location.href = "User.html";
+										location.href = "Teacher.html";
 									}
 					},
 						error : function(data) {
 								alert("系统出错！");
-								location.href = "User.html";
+								location.href = "Teacher.html";
 			}
 			});
 		}else {
@@ -117,12 +122,10 @@ $(function(){
 		}
 		$(".addTeacher").show();
 		var uId = $(".customCheckes:checked").parent().parent().next().attr("id");
-		$(".schoolId").val($(".schoolIds:eq(0)").text());
-		$(".userName").val($(".customCheckes:checked").parent().parent().next().next().text());
+		$(".schoolName").val($(".schoolIds:eq(0)").text());
+		$(".teacherName").val($(".customCheckes:checked").parent().parent().next().next().text());
 		$(".telephone").val($(".customCheckes:checked").parent().parent().next().next().next().next().text());
 		$(".remarks").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().text());
-		$(".teacherName").val(4);
-		$(".loginName").val($(".customCheckes:checked").parent().parent().next().next().next().next().attr("id"));
 		$(".loginPassword").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().attr("id"));
 		$(".loginPasswords").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().attr("id"));
 		$(".Teachers").remove();
@@ -130,27 +133,31 @@ $(function(){
 		$(".update").remove();
 		$(".del").remove();
 		$(".add").click(function() {
-			var userName = $.trim($(".userName").val());
+			var teacherName = $.trim($(".teacherName").val());
 			var telephone = $.trim($(".telephone").val());
 			var remarks = $.trim($(".remarks").val());
-			var teacherId = $.trim($(".teacherName").val());
-			var loginName = $.trim($(".loginName").val());
 			var loginPassword = $.trim($(".loginPassword").val());
 			var loginPasswords = $.trim($(".loginPasswords").val());
-			if(userName == "") {
+			var teacherTypeId = $.trim($("#teacherTypeName").val());
+			var teacherId = $(".customCheckes:checked").parent().parent().next().attr("id");
+			if(teacherName == "") {
 				alert("请填写姓名！");
-				return false;
-			}
-			if(loginName == "") {
-				alert("请填写用户名！");
 				return false;
 			}
 			if(loginPassword == "") {
 				alert("请填写密码！");
 				return false;
 			}
+			if(loginPassword.length < 6) {
+				alert("密码最少为6位！");
+				return false;
+			}
 			if(loginPasswords == "") {
 				alert("请填写第二次密码！");
+				return false;
+			}
+			if(loginPasswords.length < 6) {
+				alert("密码最少为6位！");
 				return false;
 			}
 			if(loginPassword != loginPasswords) {
@@ -167,22 +174,22 @@ $(function(){
 			}
 			$.ajax({
 				type : "POST",
-				url : "updateUser.html",
-				data :{userName : userName,telephone : telephone,remarks : remarks,teacherId : teacherId,loginName : loginName,loginPassword : loginPassword,uId:uId},
+				url : "updateTeacher.html",
+				data :{teacherName : teacherName,telephone : telephone,remarks : remarks,loginPassword : loginPassword,teacherTypeId:teacherTypeId,teacherId:teacherId},
 				dataType : "json",
 				success : function(data) {
 					data = JSON.parse(data);
 							if(data.update == "1") {
 									alert("修改成功！");
-										location.href = "User.html";
+										location.href = "Teacher.html";
 								}else {
 										alert("修改失败！");
-										location.href = "User.html";
+										location.href = "Teacher.html";
 									}
 					},
 						error : function(data) {
 								alert("系统出错！");
-								location.href = "User.html";
+								location.href = "Teacher.html";
 			}
 			});
 		});

@@ -309,7 +309,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${ list}" var="u">
+												<c:forEach items="${ teacher}" var="t">
 													<tr>
 														<td>
 															<div class="custom-control custom-checkbox">
@@ -318,11 +318,11 @@
 																	class="custom-control-label customCheck" for="customCheck2">&nbsp;</label>
 															</div>
 														</td>
-														<td id="${u.uId }" class = "schoolIds">${u.schoolId }</td>
-														<td>${u.userName }</td>
-														<td>${u.teacher.teacherName}</td>
-														<td id="${u.loginName} ">${u.telephone }</td>
-														<td id="${u.loginPassword }">${u.remarks }</td>
+														<td id="${t.teacherId }" class = "schoolIds">${t.school.schoolName }</td>
+														<td>${t.teacherName }</td>
+														<td>${t.teacherType.teacherTypeName}</td>
+														<td>${t.telephone }</td>
+														<td id="${t.loginPassword }">${t.remarks }</td>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -334,11 +334,9 @@
                                         <form class="needs-validation" novalidate>
                                             <div class="form-group position-relative mb-3">
                                             <label for="validationTooltip01">校区</label>
-                                                <input type="text" class="form-control schoolId" id="validationTooltip01" disabled required>
+                                                <input type="text" class="form-control schoolName" id="validationTooltip01" disabled required>
                                                 <label for="validationTooltip01">姓名</label>
-                                                <input type="text" class="form-control userName" id="validationTooltip01" placeholder="请填写姓名"  required>
-                                                <label for="validationTooltip01">用户名</label>
-                                                <input type="text" class="form-control loginName" id="validationTooltip01" placeholder="请填写用户名"  required>
+                                                <input type="text" class="form-control teacherName" id="validationTooltip01" placeholder="请填写姓名"  required>
                                                 <label for="validationTooltip01">密码</label>
                                                 <input type="text" class="form-control loginPassword" id="validationTooltip01" placeholder="请填写密码"  required>
                                                 <label for="validationTooltip01">请再次密码</label>
@@ -347,9 +345,9 @@
                                                 <div class="row">
                                                             <div class="col-12">
                                                                 <div class="form-group">
-                                                                    <select data-toggle="select2" class="teacherName" title="Country">
-                                                                    <c:forEach items="${teachers }" var="t">
-                                                                    	<option value="${t.teacherId }">${t.teacherName}</option>
+                                                                    <select data-toggle="select2" class="teacherTypeName" title="Country">
+                                                                    <c:forEach items="${teacherType }" var="t">
+                                                                    	<option value="${t.teacherTypeId }">${t.teacherTypeName}</option>
                                                                     </c:forEach>           
                                                                     </select>
                                                                 </div>

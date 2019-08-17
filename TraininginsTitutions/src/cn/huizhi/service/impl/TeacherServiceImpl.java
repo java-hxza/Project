@@ -39,7 +39,7 @@ public class TeacherServiceImpl implements TeacherService{
 	}
 
 	public Integer addTeacher(Teacher teacher) {
-		return teacherMapper.insertTeacher(teacher);
+		return teacherMapper.addTeacher(teacher);
 	}
 
 
@@ -55,10 +55,13 @@ public class TeacherServiceImpl implements TeacherService{
 		return teacherMapper.updateTeacher(teacher);
 	}
 
-
+	/**
+	 * 添加教师-查询新插入数据的id
+	 */
 	@Override
-	public List<Teacher> selectTeacher() {
-		return teacherMapper.selectTeacher();
+	public Teacher selectTeachers(Teacher teacher) {
+		return teacherMapper.selectTeachers(teacher);
 	}
+	
 	
 }
