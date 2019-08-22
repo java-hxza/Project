@@ -10,12 +10,34 @@ public class User {
 	private String userTypeId;
 	private String telephone;
 	private String remarks;
-
+	
+	private School school;
+	
+	private UserType userType;
+	
 	public User() {
 		super();
 	}
 
 	
+
+
+
+	public User(Integer uId, String loginName, String loginPassword, String schoolId, String userTypeId,
+			String telephone, String remarks, School school, UserType userType) {
+		super();
+		this.uId = uId;
+		this.loginName = loginName;
+		this.loginPassword = loginPassword;
+		this.schoolId = schoolId;
+		this.userTypeId = userTypeId;
+		this.telephone = telephone;
+		this.remarks = remarks;
+		this.school = school;
+		this.userType = userType;
+	}
+
+
 
 
 
@@ -45,6 +67,38 @@ public class User {
 
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
+	}
+
+
+
+
+
+	public School getSchool() {
+		return school;
+	}
+
+
+
+
+
+	public void setSchool(School school) {
+		this.school = school;
+	}
+
+
+
+
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+
+
+
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 
 

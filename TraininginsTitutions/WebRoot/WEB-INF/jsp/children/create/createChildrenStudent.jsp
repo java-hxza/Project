@@ -388,7 +388,7 @@
 																			var="childrenClass">
 																			<option class="dp"
 																				headmaster="${childrenClass.headmaster }"
-																				value="${childrenClass.childrenesClassId }">${childrenClass.className }
+																				value="${childrenClass.classId }">${childrenClass.className }
 																			</option>
 																		</c:forEach>
 																	</select>

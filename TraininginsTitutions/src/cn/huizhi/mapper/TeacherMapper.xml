@@ -4,36 +4,57 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.TeacherMapper">
 
-
 	<!--查询所有教师 -->
-	<select id="selectTeacher" resultType="Teacher">
-		SELECT t.*
+	<select id="selectTeacher" resultMap="selectTeacherCol">
+		SELECT
+		t.teacherId
+		tid,t.teacherName
+		tname,t.telePhone,t.remarks,t.loginPassword,tt.teacherTypeName
+		ttname,s.schoolName sname
 		FROM teacher t
-		JOIN teacherdiction td ON t.teacherId=td.teacherId
-		WHERE
-		td.schoolId=#{0}
+		JOIN teacherdiction td ON t.teacherId = td.teacherId
+		JOIN teachertype tt ON t.teacherTypeId = tt.teacherTypeId
+		JOIN school s ON td.schoolId=s.schoolId
+		WHERE t.feeCategory=2 AND s.schoolId=#{0}
 	</select>
-	<!--登陆时查询字段-->
+
+	<resultMap type="Teacher" id="selectTeacherCol">
+		<id column="tid" property="teacherId" />
+		<result column="tname" property="teacherName" />
+		<result column="t.loginPassword" property="loginPassword" />
+		<result column="t.telePhone" property="telephone" />
+		<result column="t.remarks" property="remarks" />
+		<collection property="school" javaType="School">
+			<result column="sname" property="schoolName" />
+		</collection>
+		<collection property="teacherType" javaType="TeacherType">
+			<result column="ttname" property="teacherTypeName" />
+		</collection>
+	</resultMap>
+
+	<!--登陆时查询字段 -->
 	<sql id="teacherByLoginCol">
 		t.feeCategory as t_feeCategory,
-		t.loginPassword as t_loginPassword,
+		t.loginPassword as
+		t_loginPassword,
 		t.teacherId t_teacherId,
 		t.teacherName t_teacherName,
 		t.teacherTypeId t_teacherTypeId,
 		t.telephone as t_telephone,
-		t.remarks as t_remarks
+		t.remarks
+		as t_remarks
 	</sql>
-	<!--登陆时返回Map-->
+	<!--登陆时返回Map -->
 	<resultMap type="Teacher" id="teacherByLogin">
-		<id column="t_teacherId" property="teacherId"/>
-		<result column="t_loginPassword" property="loginPassword"/>
-		<result column="t_feeCategory" property="feeCategory"/>
-		<result column="t_teacherName" property="teacherName"/>
-		<result column="t_teacherTypeId" property="teacherTypeId"/>
-		<result column="t_telephone" property="telephone"/>
-		<result column="t_remarks" property="remarks"/>
+		<id column="t_teacherId" property="teacherId" />
+		<result column="t_loginPassword" property="loginPassword" />
+		<result column="t_feeCategory" property="feeCategory" />
+		<result column="t_teacherName" property="teacherName" />
+		<result column="t_teacherTypeId" property="teacherTypeId" />
+		<result column="t_telephone" property="telephone" />
+		<result column="t_remarks" property="remarks" />
 	</resultMap>
-	<!--教师登录-->
+	<!--教师登录 -->
 	<select id="selectTeacherByLogin" resultMap="teacherByLogin">
 		select
 		<include refid="teacherByLoginCol" />
@@ -53,37 +74,30 @@
 	</select>
 	<update id="updateTeacher" parameterType="Teacher">
 		UPDATE
-		traininginstitutions.user SET userName = #{userName} , loginName =
-		#{loginName} , loginPassword = #{loginPassword} ,telephone =
-		#{telephone} ,
-		remarks =
-		#{remarks} , teacherId = #{teacherId} WHERE uId
-		= #{uId} ;
+		traininginstitutions.teacher SET teacherName = #{teacherName} ,
+		loginPassword = #{loginPassword} , teacherTypeId = #{teacherTypeId} ,
+		telePhone = #{telephone} , remarks = #{remarks} WHERE teacherId =
+		#{teacherId} ;
 	</update>
 
 	<delete id="delTeacher">
-		DELETE FROM traininginstitutions.user WHERE uId =
+		DELETE FROM traininginstitutions.teacher WHERE
+		teacherId =
 		#{0}
 	</delete>
 
 	<insert id="addTeacher" parameterType="Teacher">
 		INSERT INTO
 		traininginstitutions.teacher (teacherName, loginPassword,
-		teacherTypeId, feeCategory)VALUES(#{teacherName}, #{loginPassword},
-		#{teacherTypeId}, #{feeCategory});
+		teacherTypeId, feeCategory,telePhone,remarks)VALUES(#{teacherName},
+		#{loginPassword},
+		#{teacherTypeId},
+		#{feeCategory},#{telephone},#{remarks});
 	</insert>
 
-			
 
-	
-	<!--加入教师-->
-	<insert id="insertTeacher" parameterType="Teacher">
-		insert into  teacher ( teacherName,  loginPassword,  teacherTypeId,  feeCategory )
-			values (  #{teacherName}, #{loginPassword}, #{teacherTypeId}, #{feeCategory} )
-	</insert>
-	
 
-	<!--根据学校逐渐和教师类别查询教师-->
+	<!--根据学校逐渐和教师类别查询教师 -->
 	<select id="selecTeachersByTeacherTypeId" resultType="Teacher">
 		select t.*
 		from teacher t 
@@ -110,9 +124,9 @@
 		t.teacherTypeId t_teacherTypeId,
 		t.telePhone t_telePhone,
 		ty.teacherTypeName ty_teacherTypeName,
-		td.schoolId t_schoolId,
-		td.teacherDictionId t_teacherDictionId,
-		td.teacherId t_teacherId
+		td.schoolId td_schoolId,
+		td.teacherDictionId td_teacherDictionId,
+		td.teacherId td_teacherId
 	</sql> 
 	<!--  根据学校主键查询学校下所有老师以及教师类别-->
 	<select id="selectTeacherListBySchoolId" resultMap="selectTeacherListBySchoolIdMap" parameterType="java.lang.Integer">
@@ -134,14 +148,43 @@
 		<result column="t_loginPassword" property="loginPassword"/>
 		<result column="t_remarks" property="remarks"/>
 		<result column="t_teacherTypeId" property="teacherTypeId"/>
-		<result column="t_telePhone" property="telePhone"/>
+		<result column="t_telePhone" property="telephone" javaType="java.lang.String"/>
 		<association property="teacherType" javaType="TeacherType">
 			<result column="ty_teacherTypeName" property="teacherTypeName"/>
 		</association>
 		<association property="teacherDiction" javaType="TeacherDiction">
-			<result column="t_schoolId" property="schoolId"/>
-			<result column="t_teacherDictionId" property="teacherDictionId"/>
-			<result column="t_teacherId" property="teacherId"/>
+			<result column="td_schoolId" property="schoolId"/>
+			<result column="td_teacherDictionId" property="teacherDictionId"/>
+			<result column="td_teacherId" property="teacherId"/>
 		</association>
 	</resultMap>
+
+	<select id="selectTeachers" parameterType="Teacher" resultType="Teacher">
+		SELECT * FROM teacher
+		WHERE teacherName=#{teacherName} AND
+		loginPassword=#{loginPassword} AND teacherTypeId=#{teacherTypeId} AND
+		feeCategory=#{feeCategory}
+	</select>
+	<!--根据教师主键查询教师是否存在-->
+	<select id="selectTeacherByTeacherId" resultType="Teacher" parameterType="java.lang.Integer">
+		select * 
+		from teacher
+		<where>
+			<if test="teacherId !=null and teacherId!=''">
+				teacherId = #{teacherId}
+			</if>
+		</where>
+	</select>
+	
+	
+ 	<select id="selecTeacherByTeacherName" resultType="Teacher" parameterType="java.lang.String">
+ 		select * 
+ 		from teacher
+ 		<where>
+ 			<if test="teacherName !=null and teacherName!=''">
+ 				teacherName =#{teacherName}
+ 			</if>
+ 		</where>
+ 	</select>
+
 </mapper>

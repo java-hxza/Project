@@ -121,15 +121,17 @@
 										</table>
 									</div>
 
+							
+
             <!-- ============================================================== -->
             <!-- End Page content -->
             <!-- ============================================================== -->
-
 
         </div>
 				<!-- App js -->
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
 				<script type="text/javascript" src="${Path }/static/js/admin/leftSidebar.js"></script>
-				<script type="text/javascript" src="${Path }/static/js/admin/selectSchoolTeacherInfo.js"></script>
+				<script type="text/javascript" src="${Path }/static/js/admin/orderSchool/selectOrderSchoolInfo.js"></script>
+				<script src="${Path }/static/js/highes/leftSidebar.js"></script>
 </body>
 </html>

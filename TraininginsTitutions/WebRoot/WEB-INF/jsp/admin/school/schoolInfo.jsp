@@ -87,21 +87,47 @@
 												<tr>
 													<th style="width: 20px;">
 														<div class="custom-control custom-checkbox">
+															
+														</div>
+													</th>
+													<th>支出总额</th>
+													<th>收入总额</th>
+													<th>账户余额</th>
+												</tr>
+												<tr>
+														<td>
+															<div class="custom-control custom-checkbox">
+																	
+															</div>
+														</td>
+														<td class="table-user"><a href="javascript:void(0);"
+															class="text-body font-weight-semibold" >${schoolExPenSum }</a>
+														</td>
+														<td class="table-user"><a href="javascript:void(0);"
+															class="text-body font-weight-semibold" >${schoolFeeceat }</a>
+														</td>
+														<td class="table-user"><a href="javascript:void(0);"
+															class="text-body font-weight-semibold" >${schoolFeeceat-schoolExPenSum }</a>
+														</td>
+														
+												</tr>
+												<tr>
+													<th style="width: 20px;">
+														<div class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input"
 																id="customCheck1"> <label
 																class="custom-control-label" for="customCheck1">&nbsp;</label>
 														</div>
 													</th>
-													<th>支出项目名称</th>
-													<th>金额</th>
-													<th>收入项目名称</th>
-													<th>金额</th>
-													<th>发生时间</th>
+													<th>校区</th>
+													<th>账户</th>
+													<th>收入</th>
+													<th>支出</th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${schoolAccountList }" var="sa">
-													<tr onclick="clickSchool()"  id="schoolId"  name="${sa.accountId }">
+												<c:forEach items="${schoolOrderList }" var="sa">
+													<tr onclick="clickSchool()"  id="schoolId">
 														<td>
 															<div class="custom-control custom-checkbox">
 																<input type="checkbox" class="custom-control-input"
@@ -109,19 +135,16 @@
 															</div>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${sa.expenditureitems.expenditureitemsName }</a>
+															class="text-body font-weight-semibold" >${schoolName}</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${sa.expenMoney }</a>
+															class="text-body font-weight-semibold">${sa.paymentMethod.paymentmethodName}</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${sa.feeCategory.chargeTypeName }</a>
+															class="text-body font-weight-semibold" >${sa.dpMoney }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${sa.feectaeMoney }</a>
-														</td>
-														<td class="table-user">
-															<span class="text-body font-weight-semibold"> <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"  value="${sa.startTime}" /> </span>
+															class="text-body font-weight-semibold" >${sa.feecategoryMoney }</a>
 														</td>
 													</tr>
 												</c:forEach>	
@@ -140,5 +163,6 @@
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
 				<script src="${Path }/static/js/admin/info/schoolInfo.js"></script>
 				<script src="${Path }/static/js/admin/leftSidebar.js"></script>
+				<script src="${Path }/static/js/highes/leftSidebar.js"></script>
 </body>
 </html>

@@ -31,4 +31,24 @@ public interface UserService {
 	 * @return
 	 */
 	public User findUserByLogin(String loginName, String loginPassword, String schoolId);
+	
+
+	/**
+	 * 查询全部管理员
+	 * @return
+	 */
+	public List<User> findListAll(String uId);
+	
+	/**
+	 * 修改操作员信息
+	 * @param user
+	 * @return
+	 */
+	public Integer modifyUser(User user);
+	/**
+	 * 删除教师
+	 * @param uId
+	 * @return
+	 */
+	public Integer delUser(Integer uId);
 }

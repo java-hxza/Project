@@ -96,7 +96,7 @@ $(function() {
 				data = eval(data);
 				if (data.state == "1") {
 					$.NotificationApp.send("成功！", "账户密码校验正确！。", "top-right", "rgba(0,0,0,0.2)", "success")
-					if(data.UsertypeId == "0"){
+					if(data.UsertypeId == "1"){
 						setTimeout(function () { 
 							location.href = "adminIndex.html";
 						}, 2000);

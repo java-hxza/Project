@@ -10,37 +10,30 @@ public class Teacher {
 	private String remarks;
 	private String telephone;
 	private TeacherDiction teacherDiction;
+	private School school;
 	private TeacherType teacherType;
-
-
-	public Teacher(Integer teacherId, String teacherName, String loginPassword, Integer teacherTypeId,
-			Integer feeCategory, String telephone, String remarks) {
-		super();
-		this.teacherId = teacherId;
-		this.teacherName = teacherName;
-		this.loginPassword = loginPassword;
-		this.teacherTypeId = teacherTypeId;
-		this.feeCategory = feeCategory;
-		this.telephone = telephone;
-		this.remarks = remarks;
-	}
 
 	public Teacher() {
 		super();
 	}
 
+
 	public Teacher(Integer teacherId, String teacherName, String loginPassword, Integer teacherTypeId,
-			Integer feeCategory, String telephone, String remarks, TeacherDiction teacherDiction) {
+			Integer feeCategory, String remarks, String telephone, TeacherDiction teacherDiction, School school,
+			TeacherType teacherType) {
 		super();
 		this.teacherId = teacherId;
 		this.teacherName = teacherName;
 		this.loginPassword = loginPassword;
 		this.teacherTypeId = teacherTypeId;
 		this.feeCategory = feeCategory;
-		this.telephone = telephone;
 		this.remarks = remarks;
+		this.telephone = telephone;
 		this.teacherDiction = teacherDiction;
+		this.school = school;
+		this.teacherType = teacherType;
 	}
+
 
 	public String getTelephone() {
 		return telephone;
@@ -49,7 +42,6 @@ public class Teacher {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-
 
 	public TeacherDiction getTeacherDiction() {
 		return teacherDiction;
@@ -99,8 +91,6 @@ public class Teacher {
 		this.feeCategory = feeCategory;
 	}
 
-
-
 	public String getRemarks() {
 		return remarks;
 	}
@@ -108,7 +98,21 @@ public class Teacher {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	
-	
+
+	public School getSchool() {
+		return school;
+	}
+
+	public void setSchool(School school) {
+		this.school = school;
+	}
+
+	public TeacherType getTeacherType() {
+		return teacherType;
+	}
+
+	public void setTeacherType(TeacherType teacherType) {
+		this.teacherType = teacherType;
+	}
 
 }

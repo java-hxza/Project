@@ -34,18 +34,6 @@ public interface TeacherService {
 	public Integer updateTeacher(Teacher teacher);
 	
 	/**
-	 * 添加教师
-	 * @param user
-	 * @return
-	 */
-	
-	/**
-	 * 查询所有教师
-	 * @return
-	 */
-	public List<Teacher> selectTeacher();
-	
-	/**
 	 * 教师登录
 	 * @param loginName
 	 * @param loginPassword
@@ -76,6 +64,28 @@ public interface TeacherService {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<Teacher> selectTeacherListBySchoolId(Integer schoolId);
+	public List<Teacher> findTeacherListBySchoolId(Integer schoolId);	
+	/**
+	 * 添加教师-查询新插入数据的id
+	 * @param teacher
+	 * @return
+	 */
+	public Teacher selectTeachers(Teacher teacher);
+	
+	/**
+	 * 根据教师主键查询教师信息
+	 * @param teacherId
+	 * @return
+	 */
+	public Teacher findTeacherByTeacherId(Integer teacherId);	
+	
+	
+	/**
+	 * 根据教师名称查询教师是否存在
+	 * @param teacherName
+	 * @return
+	 */
+	public Teacher findTeacherByTeacherName(String teacherName);
+	
 	
 }

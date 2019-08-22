@@ -61,7 +61,7 @@
 						<div class="col-sm-12">
 							<div class="text-center">
 								<h3 class="">管理学校及城市</h3>
-								<p class="text-muted mt-3">教师信息</p>
+								<p class="text-muted mt-3">请选择要查看的教师学校</p>
                                     <button type="button" class="btn btn-success btn-sm mt-2" onclick="createSchool()"> 创建学校</button>
                                     <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="createUser()"> 创建账号</button>
                                     <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="createTeacher()"> 创建教师账号</button>
@@ -84,17 +84,16 @@
 																class="custom-control-label" for="customCheck1">&nbsp;</label>
 														</div>
 													</th>
-													<th>教师编号</th>
-													<th>教师名称</th>
-													<th>教学名称</th>
-													<th>教师所属分类</th>
-													<th>教师电话</th>
-													<th>备注</th>
+													<th>学校编号</th>
+													<th>学校名称</th>
+													<th>学校所属城市</th>
+													<th>学校备注</th>
+													<th>学校所属省份</th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${teacherListBYSchoolId }" var="teacher">
-													<tr class="teacherId" >
+												<c:forEach items="${schoolListAll }" var="school">
+													<tr class="schoolId" >
 														<td>
 															<div class="custom-control custom-checkbox">
 																<input type="checkbox" class="custom-control-input"
@@ -102,34 +101,27 @@
 															</div>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${teacher.teacherId }</a>
+															class="text-body font-weight-semibold" >${school.schoolId }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${teacher.teachName }</a>
+															class="text-body font-weight-semibold">${school.schoolName }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${teacher.teachertype.teacherTypeName }</a>
+															class="text-body font-weight-semibold" >${school.city.cityName }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >
-																<c:choose>
-																	<c:when test="${teacher.feeCategory ==1} ">少儿</c:when>
-																	<c:when test="${teacher.feeCategory ==1} ">高中</c:when>
-																	<c:otherwise>艺考</c:otherwise>
-																</c:choose>
-															</a>
+															class="text-body font-weight-semibold" >${school.schoolRemarks }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${teacher.telePhone }</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${teacher.remarks }</a>
+															class="text-body font-weight-semibold">${school.province.provinceName }</a>
 														</td>
 													</tr>
 												</c:forEach>	
 											</tbody>
 										</table>
 									</div>
+
+							
 
             <!-- ============================================================== -->
             <!-- End Page content -->
@@ -140,5 +132,7 @@
 				<!-- App js -->
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
 				<script type="text/javascript" src="${Path }/static/js/admin/leftSidebar.js"></script>
+				<script type="text/javascript" src="${Path }/static/js/admin/info/selectSchoolTeacherInfo.js"></script>
+				<script src="${Path }/static/js/highes/leftSidebar.js"></script>
 </body>
 </html>

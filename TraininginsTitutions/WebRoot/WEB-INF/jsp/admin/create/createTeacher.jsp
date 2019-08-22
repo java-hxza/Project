@@ -62,10 +62,18 @@
 										</c:forEach>
 									</select>
 								</div>
-								
+								<div class="form-group">
+								<label for="emailaddress">学校：</label>
+									<select id="schoolId" name="schoolId">
+										<option value="0">请选择学校</option>
+										<c:forEach items="${schoolList }" var="school">
+											<option value="${school.schoolId }">${school.schoolName}</option>
+										</c:forEach>
+									</select>
+								</div>
 								<div class="form-group">
 									<label for="emailaddress">教师名</label> <input
-										class="form-control" type="text" id="teacherName" required
+										class="form-control" type="text" onchange="teacherNameCheck()" id="teacherName" required
 										placeholder="教师登录名  不能重复创建相同的名称">
 								</div>
 								<div class="form-group">
@@ -78,9 +86,14 @@
 										class="form-control" type="password" onblur="teacherPasswordBlue()" id="loginPasswords" required
 										placeholder="登陆密码">
 								</div>
+								<div class="form-group">
+									<label for="emailaddress">教师手机号</label> <input
+										class="form-control" type="text"  id="telephone" required
+										placeholder="xxx xxxx xxxx">
+								</div>
 									<div class="form-group">
 									<label for="emailaddress">教师级别</label> 
-									<select	class="form-control" id="teacherTypeId">
+									<select	class="form-control" id="feeCategory">
 											<option value="">请选择教师级别</option>
 											<option value="1">少儿</option>
 											<option value="2">高中</option>
@@ -91,7 +104,14 @@
 									<label for="emailaddress">教师分类</label> 
 									<select	class="form-control" id="teacherTypeId">
 											<option value="">请选择教师分类</option>
+											<c:forEach items="${teacherTypeListAl }" var="teacherType">
+												<option value="${teacherType.teacherTypeId }">${teacherType.teacherTypeName }</option>											
+											</c:forEach>
 									</select>
+								</div>
+									<div class="form-group">
+									<label for="emailaddress">教师备注</label> <input
+										class="form-control" type="text"  id="remarks" required placeholder="教师备注">
 								</div>
 								
 								<div class="form-group">
@@ -103,11 +123,9 @@
 										</label>
 									</div>
 								</div>
-
 								<div class="form-group mb-0 text-center">
-									<button class="btn btn-primary" type="button" onclick="regitSchool()">注册</button>
+									<button class="btn btn-primary" type="button" onclick="regitTeacher()" >注册</button>
 								</div>
-
 							</form>
 						</div>
 						<!-- end card-body -->
@@ -117,7 +135,7 @@
 					<div class="row mt-3">
 						<div class="col-12 text-center">
 							<p class="text-muted">
-								已有账户 <a href="welCome.html" class="text-muted ml-1"><b>登录</b></a>
+								已有账户 <a href="#" class="text-muted ml-1"><b>登录</b></a>
 							</p>
 						</div>
 						<!-- end col-->

@@ -12,6 +12,7 @@
 		studentId,
 		state
 	</sql>
+	
 	<insert id="insertChildrenesClassStudnet" parameterType="ChildrenesClassStudnet">
 		insert into  childrenesclassstudnet  ( studentName,  headmaster, enrollmentTime,  classId,  studentId,  state )
 			values (  #{studentName}, #{headmaster}, #{enrollmentTime}, #{classId}, #{studentId}, #{state})

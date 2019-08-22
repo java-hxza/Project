@@ -19,11 +19,11 @@ public interface TeacherMapper {
 	public List<Teacher> selectTeacher(Integer schoolId);
 	
 	/**
-	 * 删除教师
+	 * 删除教师 
 	 * @param uId
 	 * @return
 	 */
-	public Integer delTeacher(Integer uId);
+	public Integer delTeacher(Integer teacherId);
 	
 	/**
 	 * 修改教师
@@ -47,7 +47,6 @@ public interface TeacherMapper {
 	public List<Teacher> selectTeacherListBySchoolId(@Param("schoolId")Integer schoolId);
 	
 	
-	public List<Teacher> selectTeacher();
 	/**
 	 * 根据学校主键和教师类别主键查询老师
 	 * @param teacherTypeId
@@ -65,9 +64,23 @@ public interface TeacherMapper {
 	 */
 	public Teacher selectTeacherByLogin(@Param("teacherName")String loginName,@Param("loginPassword")String loginPassword,@Param("schoolId")Integer schoolId);
 	/**
-	 * 添加教师
+	 * 根据教师主键查询教师信息
+	 * @param teacherId
+	 * @return
+	 */
+	public Teacher selectTeacherByTeacherId(@Param("teacherId")Integer teacherId);
+	
+	/**
+	 * 添加教师-查询新插入数据的id
 	 * @param teacher
 	 * @return
 	 */
-	public int	insertTeacher(Teacher teacher);
+	public Teacher selectTeachers(Teacher teacher);
+	
+	/**
+	 * 根据教师名称查询教师是否存在
+	 * @param teacherName
+	 * @return
+	 */
+	public Teacher selecTeacherByTeacherName(@Param("teacherName")String teacherName);
 }

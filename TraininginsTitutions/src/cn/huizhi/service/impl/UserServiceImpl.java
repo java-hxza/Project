@@ -32,6 +32,20 @@ public class UserServiceImpl implements UserService {
 	public User findUserByUserName(String loginName) {
 		return userMapper.selectUserByUserName(loginName);
 	}
+	@Override
+	public List<User> findListAll(String uId) {
+		return userMapper.selectListAll(uId);
+	}
+	@Override
+	public Integer modifyUser(User user) {
+		// TODO Auto-generated method stub
+		return userMapper.updateUser(user);
+	}
+	@Override
+	public Integer delUser(Integer uId) {
+		// TODO Auto-generated method stub
+		return userMapper.deleteUser(uId);
+	}
 	
 
 	

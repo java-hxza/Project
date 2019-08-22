@@ -33,8 +33,8 @@
 								报表统计</span> <span class="menu-arrow"></span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
-							<li><a href="apps-calendar.html">资金账余额</a></li>
-							<li><a href="apps-calendar.html">收支明细报表</a></li>
+							<li><a href="javascript:void(0)" onclick="schoolListInfo()">资金账余额</a></li>
+							<li><a href="javascript:void(0)" onclick="selectOrderSchoolInfo() ">收支明细报表</a></li>
 							<li><a href="apps-tasks.html">收支汇总报表</a></li>
 							<li><a href="apps-calendar.html">教师课时总表</a></li>
 							<li><a href="apps-calendar.html">学院课时总表</a></li>
@@ -47,9 +47,9 @@
 								系统维护</span> <span class="menu-arrow"></span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
-							<li><a href="apps-calendar.html">操作员</a></li>
-							<li><a href="apps-calendar.html">操作员授权</a></li>
-							<li><a href="apps-tasks.html">修改密码</a></li>
+							<li><a href="javascript:void(0)" onclick="operatorChilk()">操作员</a></li>
+							<li><a href="javascript:void(0)" onclick="teacherInto()">教师授权</a></li>
+							<li><a href="javascript:void(0)" onclick="operatorChilk()">修改密码</a></li>
 						</ul></li>
 				</ul>
 

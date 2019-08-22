@@ -11,7 +11,7 @@ $(function(){
 		var loginPassword = $("#loginPassword").val();
 		var schoolId = $("#schoolId").val();
 		var userTypeId = $("#userTypeId").val();
-		if(userName,loginName,loginPassword,schoolId== null || userTypeId =="0"){
+		if((loginName,loginPassword,schoolId== null) || (userTypeId =="0")){
 			$.NotificationApp.send("错误!", "你必须输入账户名及密码。", "top-right", "rgba(0,0,0,0.2)", "error")
 			$("#loginBtn span").removeClass("spinner-border spinner-border-sm");
 			$("#loginBtn span").text("立即登录");

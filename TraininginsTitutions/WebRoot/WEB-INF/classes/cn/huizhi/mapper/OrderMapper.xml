@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.huizhi.mapper.OrderMapper">
+	
+	<sql id="orderCol">
+		orderId,
+		feecateId,
+		dpMoney,
+		stuId,
+		startTime,
+		schoolId,
+		identification,
+		feecategoryId,
+		paymentmethodId,
+		personliable,
+		departmentofpediatricsId,
+		addhour,
+		givehour,
+		firstdate,
+		lastdate,
+		remarks,
+		orderNumber,
+		expenditureitemsId
+	</sql>
+	<!--查询学校支出-->
+	
+	
+	<!-- 查询学校支出情况 -->
+	<sql id="selectOrderExpenListBySchoolCol">
+		 o.addhour o_addhour,
+		 o.departmentofpediatricsId o_departmentofpediatricsId,
+		 o.dpMoney o_dpMoney,
+		 o.expenditureitemsId o_expenditureitemsId,
+		 o.feecategoryMoney o_feecategoryMoney,
+		 o.feecateId o_feecateId,
+		 o.firstdate o_firstdate,
+		 o.givehour o_givehour,
+		 o.identification o_identification,
+		 o.lastdate o_lastdate,
+		 o.orderId o_orderId,
+		 o.orderNumber o_orderNumber,
+		 o.paymentmethodId o_paymentmethodId,
+		 o.personliable o_personliable,
+		 o.remarks o_remarks,
+		 o.schoolId o_schoolId,
+		 o.startTime o_startTime,
+		 o.stuId o_stuId ,  
+		 ed.expenditureitemsId ed_expenditureitemsId,
+	 	 ed.expenditureitemsName ed_expenditureitemsName,
+	 	 ed.category ed_category,
+	 	 ed.schoolId  ed_schoolId
+	</sql>
+
+	<!-- 查询学校支出情况 -->
+	<resultMap type="Order" id="selectOrderExpenListBySchoolMap">
+		<id column="o_orderId" property="orderId"/>
+		<result column="o_departmentofpediatricsId" property="departmentofpediatricsId"/>
+		<result column="o_dpMoney" property="dpMoney"/>
+		<result column="o_expenditureitemsId" property="expenditureitemsId"/>
+		<result column="o_feecategoryMoney" property="feecategoryMoney"/>
+		<result column="o_feecateId" property="feecateId"/>
+		<result column="o_firstdate" property="firstdate"/>
+		<result column="o_givehour" property="givehour"/>
+		<result column="o_identification" property="identification"/>
+		<result column="o_lastdate" property="lastdate"/>
+		<result column="o_orderNumber" property="orderNumber"/>
+		<result column="o_paymentmethodId" property="paymentmethodId"/>
+		<result column="o_personliable" property="personliable"/>
+		<result column="o_remarks" property="remarks"/>
+		<result column="o_schoolId" property="schoolId"/>
+		<result column="o_startTime" property="startTime"/>
+		<result column="o_stuId" property="stuId"/>
+		<association property="expenditureitems" javaType="Expenditureitems">
+			<id column="ed_expenditureitemsId" property="expenditureitemsId"/>
+			<result column="ed_expenditureitemsName" property="expenditureitemsName"/>
+			<result column="ed_expenditureitemsName" property="expenditureitemsName"/>
+			<result column="ed_category" property="category"/>
+			<result column="ed_schoolId" property="schoolId"/>
+		</association>
+	</resultMap>
+		
+	<!-- 查询学校支出情况 -->
+	<select id="selectOrderExpenListBySchool" resultMap="selectOrderExpenListBySchoolMap" parameterType="Order">
+		select <include refid="selectOrderExpenListBySchoolCol"/>
+		from Order
+		join expenditureitems ed on ed.expenditureitemsId = o.expenditureitemsId
+		<where>
+			<if test="expenditureitemsId !=null and expenditureitemsId!=''">
+				o.expenditureitemsId = #{expenditureitemsId}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询学校收入情况-->
+	<sql id="selectOrderListBySchoolCol">
+		 o.addhour o_addhour,
+		 o.departmentofpediatricsId o_departmentofpediatricsId,
+		 o.dpMoney o_dpMoney,
+		 o.expenditureitemsId o_expenditureitemsId,
+		 o.feecategoryMoney o_feecategoryMoney,
+		 o.feecateId o_feecateId,
+		 o.firstdate o_firstdate,
+		 o.addhour o_addhour,
+		 o.givehour o_givehour,
+		 o.identification o_identification,
+		 o.lastdate o_lastdate,
+		 o.orderId o_orderId,
+		 o.orderNumber o_orderNumber,
+		 o.paymentmethodId o_paymentmethodId,
+		 o.personliable o_personliable,
+		 o.remarks o_remarks,
+		 o.schoolId o_schoolId,
+		 o.startTime o_startTime,
+		 o.stuId o_stuId,
+		 p.paymentmethodId p_paymentmethodId,
+		 p.paymentmethodName p_paymentmethodName,
+ 		 dp.dpId dp_dpId,
+		 dp.dpTypeName dp_dpTypeName,
+		 dp.chargeTypeId dp_chargeTypeId,
+		 fc.chargeTypeId fc_chargeTypeId,
+		 fc.chargeTypeName fc_chargeTypeName,
+		 fc.category fc_category,
+		 stu.studentId stu_studentId,
+		 stu.studentName stu_studentName
+	</sql>
+
+	<!-- 查询学校收入情况-->
+	<resultMap type="Order" id="selectOrderListBySchoolMap">
+		<id column="o_orderId" property="orderId"/>
+		<result column="o_departmentofpediatricsId" property="departmentofpediatricsId"/>
+		<result column="o_dpMoney" property="dpMoney"/>
+		<result column="o_expenditureitemsId" property="expenditureitemsId"/>
+		<result column="o_feecategoryMoney" property="feecategoryMoney"/>
+		<result column="o_feecateId" property="feecateId"/>
+		<result column="o_firstdate" property="firstdate"/>
+		<result column="o_addhour" property="addhour"/>
+		<result column="o_givehour" property="givehour"/>
+		<result column="o_identification" property="identification"/>
+		<result column="o_lastdate" property="lastdate"/>
+		<result column="o_orderNumber" property="orderNumber"/>
+		<result column="o_paymentmethodId" property="paymentmethodId"/>
+		<result column="o_personliable" property="personliable"/>
+		<result column="o_remarks" property="remarks"/>
+		<result column="o_schoolId" property="schoolId"/>
+		<result column="o_startTime" property="startTime"/>
+		<result column="o_stuId" property="stuId"/>
+		<association property="paymentMethod" javaType="PaymentMethod">
+			<id column="p_paymentmethodId" property="paymentmethodId"/>
+			<result column="p_paymentmethodName" property="paymentmethodName"/>
+		</association>
+		<association property="departmentOfPediatrics" javaType="DepartmentOfPediatrics">
+			<id column="dp_dpId" property="dpId"/>
+			<result column="dp_dpTypeName" property="dpTypeName"/>
+			<result column="dp_chargeTypeId" property="chargeTypeId"/>
+		</association>
+		<association property="feeCategory" javaType="FeeCategory">
+			<id column="fc_chargeTypeId" property="chargeTypeId"/>
+			<result column="fc_chargeTypeName" property="chargeTypeName"/>
+			<result column="fc_category" property="category"/>
+		</association>
+		<association property="student" javaType="Student">
+			<id column="stu_studentId" property="studentId"/>
+			<result column="stu_studentName" property="studentName"/>
+		</association>
+	</resultMap>
+	
+	<!--根据学校主键查询学校收入明细-->
+	<select id="selectOrderListBySchool" resultMap="selectOrderListBySchoolMap" parameterType="Order">
+		select <include refid="selectOrderListBySchoolCol"/>
+		from traininginstitutions.order o 
+		join paymentmethod p on p.paymentmethodId = o.paymentmethodId
+		join departmentofpediatrics dp on dp.dpId = o.departmentofpediatricsId
+		join feecategory fc on fc.chargeTypeId = o.feecateId
+		join student stu on stu.studentId = o.stuId
+		<where>
+			<if test="schoolId !=null and schoolId != ''">
+				o.schoolId =#{schoolId} 
+			</if>
+			<if test="startTime != null and startTime != ''">
+				and date(o.startTime)between #{startTime} and #{endTime}
+			</if>
+			<if test="paymentmethodId !=null and paymentmethodId!=''">
+				and o.paymentmethodId = #{paymentmethodId}
+			</if>
+			<if test="departmentofpediatricsId !=null and departmentofpediatricsId != ''">
+				and o.departmentofpediatricsId = #{departmentofpediatricsId}
+			</if>
+			<if test="feecateId !=null and feecateId != '' ">
+				and o.feecateId = #{feecateId}
+			</if>
+		</where> 
+	</select>
+	
+</mapper>   

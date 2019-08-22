@@ -39,7 +39,7 @@ public class TeacherServiceImpl implements TeacherService{
 	}
 
 	public Integer addTeacher(Teacher teacher) {
-		return teacherMapper.insertTeacher(teacher);
+		return teacherMapper.addTeacher(teacher);
 	}
 
 
@@ -55,16 +55,33 @@ public class TeacherServiceImpl implements TeacherService{
 		return teacherMapper.updateTeacher(teacher);
 	}
 
-
+	/**
+	 * 添加教师-查询新插入数据的id
+	 */
 	@Override
-	public List<Teacher> selectTeacher() {
-		return teacherMapper.selectTeacher();
+	public Teacher selectTeachers(Teacher teacher) {
+		return teacherMapper.selectTeachers(teacher);
 	}
 
 	@Override
-	public List<Teacher> selectTeacherListBySchoolId(Integer schoolId) {
+	public List<Teacher> findTeacherListBySchoolId(Integer schoolId) {
 		// TODO Auto-generated method stub
 		return teacherMapper.selectTeacherListBySchoolId(schoolId);
 	}
+
+
+	@Override
+	public Teacher findTeacherByTeacherId(Integer teacherId) {
+		// TODO Auto-generated method stub
+		return teacherMapper.selectTeacherByTeacherId(teacherId);
+	}
+
+
+	@Override
+	public Teacher findTeacherByTeacherName(String teacherName) {
+		// TODO Auto-generated method stub
+		return teacherMapper.selecTeacherByTeacherName(teacherName);
+	}
+	
 	
 }

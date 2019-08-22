@@ -33,11 +33,11 @@
 	<!-- 创建用户 -->
 	<insert id="insertUser" parameterType="User">
 		INSERT INTO
-		traininginstitutions.user (userName, loginName, loginPassword,
-		schoolId, userTypeId, telephone, remarks)VALUES(#{userName},
+		traininginstitutions.user ( loginName, loginPassword,
+		schoolId, userTypeId, telephone, remarks)VALUES(
 		#{loginName}, #{loginPassword},
 		#{schoolId}, #{userTypeId}, #{telephone},
-		#{remarks}
+		#{remarks})
 	</insert>
 
 
@@ -83,4 +83,78 @@
 		#{schoolId}, 3, #{telephone},
 		#{remarks}, 
 	</insert>
+	<!--查询所有管理员-->
+	<sql id="selectListAllCol">
+		 u.loginName u_loginName,
+		 u.loginPassword u_loginPassword,
+		 u.remarks u_remarks,
+		 u.schoolId u_schoolId,
+		 u.telephone u_telephone,
+		 u.uId u_uId,
+		 u.userTypeId u_userTypeId,
+		 ut.userTypeId ut_userTypeId,
+		 ut.userTypeName ut_userTypeName,
+		 sc.schoolId sc_schoolId,
+		 sc.cityId sc_cityId,
+		 sc.cityProperId sc_cityProperId,
+		 sc.schoolName sc_schoolName,
+		 sc.schoolRemarks sc_schoolRemarks
+	</sql>
+	<resultMap type="User" id="selectListAllMap">
+		<id column="u_uId" property="uId"/>
+		<result column="u_loginName" property="loginName"/>
+		<result column="u_loginPassword" property="loginPassword"/>
+		<result column="u_remarks" property="remarks"/>
+		<result column="u_schoolId" property="schoolId"/>
+		<result column="u_telephone" property="telephone"/>
+		<result column="u_userTypeId" property="userTypeId"/>
+		<association property="school" javaType="School">
+			<id column="sc_schoolId" property="schoolId"/>
+			<result column="sc_cityId" property="cityId"/>
+			<result column="sc_cityProperId" property="cityProperId"/>
+			<result column="sc_schoolName" property="schoolName"/>
+			<result column="sc_schoolRemarks" property="schoolRemarks"/>
+		</association>
+		<association property="userType" javaType="UserType">
+			<id column="ut_userTypeId" property="userTypeId"/>
+			<result column="ut_userTypeName" property="userTypeName"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectListAll" resultMap="selectListAllMap">
+		select<include refid="selectListAllCol"/>
+		from user u
+		join school sc on sc.schoolId = u.schoolId
+		join userType ut on ut.userTypeId = u.userTypeId
+		<where>
+			<if test="uId !=null and uId!=''">
+				u.uId = #{uId}
+			</if>
+		</where>
+	</select>
+	<!--修改操作员信息-->
+	<update id="updateUser" parameterType="User">
+	update  user 
+	set 
+	loginName = #{loginName} , 
+	loginPassword = #{loginPassword} , 
+	schoolId = #{schoolId} , 
+	userTypeId = #{userTypeId} , 
+	telephone = #{telephone} , 
+	remarks = #{remarks}
+	<where>
+		<if test="uId!=null and uId !=''">
+			uId = #{uId} 
+		</if>
+	</where>
+	</update>
+	
+	<delete id="deleteUser" parameterType="java.lang.Integer">
+		delete from  user 
+		<where>
+			<if test="uId != null and  uId != ''">
+				uId = #{uId} 
+			</if>
+		</where> 
+	</delete>
 </mapper>

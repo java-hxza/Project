@@ -10,4 +10,15 @@ $(function(){
 		location.href="selectSchoolTeacherInfo.html";
 	}
 	
+	/**
+	 * 操作员页面跳转
+	 */
+	operatorChilk = function(){
+		location.href="operator.html";
+	}
+	
+	selectOrderSchoolInfo = function(){
+		location.href="selectOrderSchoolInfo.html";
+	}
+	
 });

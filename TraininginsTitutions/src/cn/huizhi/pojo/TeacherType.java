@@ -1,6 +1,7 @@
 package cn.huizhi.pojo;
 
 public class TeacherType {
+
 	private Integer teacherTypeId;
 	private String teacherTypeName;
 

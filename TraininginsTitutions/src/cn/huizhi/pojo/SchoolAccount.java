@@ -1,8 +1,6 @@
 package cn.huizhi.pojo;
 
-import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class SchoolAccount {
 	private Integer accountId;
@@ -11,8 +9,6 @@ public class SchoolAccount {
 	private Integer feecateId;
 	private Double feectaeMoney;
 	private Integer schoolId;
-	@JsonFormat(timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-	private Date startTime;
 	
 	
 	/**
@@ -28,8 +24,9 @@ public class SchoolAccount {
 		super();
 	}
 
+
 	public SchoolAccount(Integer accountId, Integer expenId, Double expenMoney, Integer feecateId, Double feectaeMoney,
-			Integer schoolId, Date startTime) {
+			Integer schoolId, Expenditureitems expenditureitems, FeeCategory feeCategory) {
 		super();
 		this.accountId = accountId;
 		this.expenId = expenId;
@@ -37,23 +34,10 @@ public class SchoolAccount {
 		this.feecateId = feecateId;
 		this.feectaeMoney = feectaeMoney;
 		this.schoolId = schoolId;
-		this.startTime = startTime;
-	}
-	
-	
-	public SchoolAccount(Integer accountId, Integer expenId, Double expenMoney, Integer feecateId, Double feectaeMoney,
-			Integer schoolId, Date startTime, Expenditureitems expenditureitems, FeeCategory feeCategory) {
-		super();
-		this.accountId = accountId;
-		this.expenId = expenId;
-		this.expenMoney = expenMoney;
-		this.feecateId = feecateId;
-		this.feectaeMoney = feectaeMoney;
-		this.schoolId = schoolId;
-		this.startTime = startTime;
 		this.expenditureitems = expenditureitems;
 		this.feeCategory = feeCategory;
 	}
+
 
 	public Expenditureitems getExpenditureitems() {
 		return expenditureitems;
@@ -117,13 +101,6 @@ public class SchoolAccount {
 
 	public void setSchoolId(Integer schoolId) {
 		this.schoolId = schoolId;
-	}
-	@JsonFormat(timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-	public Date getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
 	}
 
 }

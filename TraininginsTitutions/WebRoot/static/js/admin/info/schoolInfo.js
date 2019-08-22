@@ -42,9 +42,9 @@ $(function(){
 						"<label class='custom-control-label' for='customCheck1'>&nbsp;</label>" +
 						"</div>" +
 					"</th>" +
-					"<th>支出项目名称</th>" +
-					"<th>金额</th>" +
-					"<th>发生时间</th>" +
+					"<th>账户</th>" +
+					"<th>支出</th>" +
+					"<th>支出时间</th>" +
 					"</tr>" +
 					"</thead>";
 		return $html;
@@ -56,7 +56,7 @@ $(function(){
 	expenditureOrderforeach=  function(data) {
 		var $html = "<tbody>";
 		for (var i = 0; i < data.length; i++) {
-			if(data[i].expenditureitems.expenditureitemsName == null){
+			if(data[i].feecategoryMoney == null){
 				continue;
 			}
 				$html +="<tr>" +
@@ -68,17 +68,13 @@ $(function(){
 							"</td>" +
 							"<td class='table-user'>" +
 								"<a href='javascript:void(0);'class='text-body font-weight-semibold'>" +
-									""+data[i].expenditureitems.expenditureitemsName +"</a>" +
+									""+data[i].paymentMethod.paymentmethodName +"</a>" +
 							"</td>" +
 							"<td class='table-user'>" +
 								"<a href='javascript:void(0);'class='text-body font-weight-semibold'>" +
-									""+data[i].expenMoney+"</a>" +
-							"</td>、" +
-							"<td class='table-user'>" +
-									"<span class='text-body font-weight-semibold'> "+data[i].startTime+" </span>" +
-							"</td>";
+									""+data[i].feecategoryMoney+"</a>" +
+							"</td>" ;
 			}
-		
 					$html += "</tbody>";
 					return $html;
 	}
@@ -93,9 +89,9 @@ $(function(){
 				"<label class='custom-control-label' for='customCheck1'>&nbsp;</label>" +
 				"</div>" +
 			"</th>" +
-			"<th>收入项目名称</th>" +
-			"<th>金额</th>" +
-			"<th>发生时间</th>" +
+			"<th>账户</th>" +
+			"<th>收入金额</th>" +
+			"<th>收入时间</th>" +
 			"</tr>" +
 			"</thead>";
 		return $html;
@@ -105,7 +101,7 @@ $(function(){
 	incomeOrderForeachHtml = function(data){
 		var $html = "<tbody>";
 		for (var i = 0; i < data.length; i++) {
-			if(data[i].feeCategory.chargeTypeName == null){
+			if(data[i].dpMoney == null){
 				continue;
 			}
 				$html +="<tr>" +
@@ -117,11 +113,11 @@ $(function(){
 							"</td>" +
 							"<td class='table-user'>" +
 								"<a href='javascript:void(0);'class='text-body font-weight-semibold'>" +
-									""+data[i].feeCategory.chargeTypeName +"</a>" +
+									""+data[i].paymentMethod.paymentmethodName +"</a>" +
 							"</td>" +
 							"<td class='table-user'>" +
 								"<a href='javascript:void(0);'class='text-body font-weight-semibold'>" +
-									""+data[i].feectaeMoney+"</a>" +
+									""+data[i].dpMoney+"</a>" +
 							"</td>、" +
 							"<td class='table-user'>" +
 									"<span class='text-body font-weight-semibold'> "+data[i].startTime+" </span>" +

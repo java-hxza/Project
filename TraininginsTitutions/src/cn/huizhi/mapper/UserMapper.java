@@ -40,5 +40,20 @@ public interface UserMapper {
 	 */
 	public List<User> selectUserByDpId(@Param("dpId")Integer dpId,@Param("schoolId")Integer schoolId);
 
-
+	
+	/**
+	 * 查询全部管理员
+	 * @return
+	 */
+	public List<User> selectListAll(@Param("uId")String uId);
+	
+	/**
+	 * 修改操作员信息
+	 * @param user
+	 * @return
+	 */
+	public Integer updateUser(User user);
+	
+	
+	public Integer deleteUser(@Param("uId")Integer uId);
 }
