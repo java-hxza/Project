@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.StudentMapper">
+
+	<select id="selectHigh" resultType="Student">
+		SELECT t.*
+		FROM student t
+		JOIN highesclassstudnet hc ON t.highId=hc.studentId
+		JOIN class c ON hc.classId=c.classId
+		WHERE c.schoolId=#{0} AND feeCategory = 2
+	</select>
+	
+	<select id="selectChildren" resultType="Student">
+		SELECT t.*
+		FROM student t
+		JOIN highesclassstudnet hc ON t.highId=hc.studentId
+		JOIN class c ON hc.classId=c.classId
+		WHERE c.schoolId=#{0} AND feeCategory = 1
+	</select>
+	
+	<select id="selectYiKao" resultType="Student">
+		SELECT t.*
+		FROM student t
+		JOIN highesclassstudnet hc ON t.highId=hc.studentId
+		JOIN class c ON hc.classId=c.classId
+		WHERE c.schoolId=#{0} AND feeCategory = 3
+	</select>
+
+</mapper>

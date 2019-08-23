@@ -1,33 +1,33 @@
 package cn.huizhi.pojo;
 
-import java.util.Date;
+public class Student {
 
-public class Children {
-	private Integer childrenId;
+	private Integer highId;
 	private String studentName;
 	private Integer studentSex;
-	private Date studentBirth;
+	private String studentIDCard;
+	private String studentBirth;
 	private String school;
 	private String parentName;
 	private String telephone;
 	private String familyAddress;
 	private String registrationChannels;
 	private String registrationConsultant;
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
+	private String theSurrogate;
 	private String remarks;
+	private Integer feeCategory;
 
-	public Children() {
+	public Student(Integer highId, String studentName, Integer studentSex, String studentIDCard, String studentBirth,
+			String school, String parentName, String telephone, String familyAddress, String registrationChannels,
+			String registrationConsultant, String startTime, String endTime, String theSurrogate, String remarks,
+			Integer feeCategory) {
 		super();
-	}
-
-	public Children(Integer childrenId, String studentName, Integer studentSex, Date studentBirth, String school,
-			String parentName, String telephone, String familyAddress, String registrationChannels,
-			String registrationConsultant, Date startTime, Date endTime, String remarks) {
-		super();
-		this.childrenId = childrenId;
+		this.highId = highId;
 		this.studentName = studentName;
 		this.studentSex = studentSex;
+		this.studentIDCard = studentIDCard;
 		this.studentBirth = studentBirth;
 		this.school = school;
 		this.parentName = parentName;
@@ -37,15 +37,21 @@ public class Children {
 		this.registrationConsultant = registrationConsultant;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.theSurrogate = theSurrogate;
 		this.remarks = remarks;
+		this.feeCategory = feeCategory;
 	}
 
-	public Integer getChildrenId() {
-		return childrenId;
+	public Student() {
+		super();
 	}
 
-	public void setChildrenId(Integer childrenId) {
-		this.childrenId = childrenId;
+	public Integer getHighId() {
+		return highId;
+	}
+
+	public void setHighId(Integer highId) {
+		this.highId = highId;
 	}
 
 	public String getStudentName() {
@@ -60,15 +66,31 @@ public class Children {
 		return studentSex;
 	}
 
+	public Integer getFeeCategory() {
+		return feeCategory;
+	}
+
+	public void setFeeCategory(Integer feeCategory) {
+		this.feeCategory = feeCategory;
+	}
+
 	public void setStudentSex(Integer studentSex) {
 		this.studentSex = studentSex;
 	}
 
-	public Date getStudentBirth() {
+	public String getStudentIDCard() {
+		return studentIDCard;
+	}
+
+	public void setStudentIDCard(String studentIDCard) {
+		this.studentIDCard = studentIDCard;
+	}
+
+	public String getStudentBirth() {
 		return studentBirth;
 	}
 
-	public void setStudentBirth(Date studentBirth) {
+	public void setStudentBirth(String studentBirth) {
 		this.studentBirth = studentBirth;
 	}
 
@@ -108,14 +130,6 @@ public class Children {
 		return registrationChannels;
 	}
 
-	public String getRemarks() {
-		return remarks;
-	}
-
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-
 	public void setRegistrationChannels(String registrationChannels) {
 		this.registrationChannels = registrationChannels;
 	}
@@ -128,20 +142,36 @@ public class Children {
 		this.registrationConsultant = registrationConsultant;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
+	}
+
+	public String getTheSurrogate() {
+		return theSurrogate;
+	}
+
+	public void setTheSurrogate(String theSurrogate) {
+		this.theSurrogate = theSurrogate;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 }

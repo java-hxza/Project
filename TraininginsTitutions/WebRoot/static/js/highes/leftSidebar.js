@@ -23,6 +23,18 @@ $(function(){
 	Teacher = function(){
 		location.href="Teacher.html";
 	}
+	ChargeHours = function(){
+		location.href="ChargeHours.html";
+	}
+	ChargePeriod = function(){
+		location.href="ChargePeriod.html";
+	}
+	ChargeOthers = function(){
+		location.href="ChargeOthers.html";
+	}
+	Expenditure = function(){
+		location.href="OrderExpenditure.html";
+	}
 	/**
 	 * 复选框单击选中取消事件
 	 */

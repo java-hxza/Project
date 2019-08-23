@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.OrderMapper">
+
+	<select id="selectOrderHour" resultType="Order">
+		SELECT * FROM `order`
+		WHERE identification = 0 AND departmentofpediatricsId!=NULL
+	</select>
+
+	<select id="selectOrderPeriod" resultType="Order">
+		SELECT * FROM `order`
+		WHERE identification = 0 AND firstdate!=NULL
+	</select>
+
+	<select id="selectOrderOther" resultType="Order">
+		SELECT * FROM `order`
+		WHERE identification = 0 AND firstdate=NULL AND
+		departmentofpediatricsId = NULL
+	</select>
+
+	<delete id="delOrder" parameterType="java.lang.Integer">
+		DELETE FROM
+		traininginstitutions.order WHERE orderId = #{0} ;
+	</delete>
+
+	<insert id="addOrder" parameterType="java.lang.Integer">
+		INSERT INTO
+		traininginstitutions.order(feecateId,dpMoney,stuId,startTime,schoolId,identification,feecategoryMoney,paymentmethodId,personliable,departmentofpediatricsId,addhour,givehour,firstdate,lastdate,remarks,orderNumber,expenditureitemsId)VALUES(#{feecateId},#{dpMoney},#{stuId},#{startTime},#{schoolId},#{identification},#{feecategoryMoney},#{paymentmethodId},#{personliable},#{departmentofpediatricsId},#{addhour},#{givehour},#{firstdate},#{lastdate},#{remarks},#{orderNumber},#{expenditureitemsId});
+	</insert>
+
+	<update id="updateOrderAll" parameterType="Order">
+		UPDATE
+		traininginstitutions.order SET feecateId = #{feecateId} , dpMoney =
+		#{dpMoney} , stuId = #{stuId} , startTime = #{startTime} , schoolId =
+		#{schoolId} , identification = #{identification} , feecategoryMoney =
+		#{feecategoryMoney} , paymentmethodId = #{paymentmethodId} ,
+		personliable = #{personliable} , departmentofpediatricsId =
+		#{departmentofpediatricsId} , addhour = #{addhour} , givehour =
+		#{givehour} , firstdate = #{firstdate} , lastdate = #{lastdate} , remarks
+		= #{remarks} , orderNumber = #{orderNumber} , expenditureitemsId =
+		#{expenditureitemsId} WHERE orderId = #{orderId} ;
+	</update>
+
+
+</mapper>

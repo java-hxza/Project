@@ -47,9 +47,10 @@
 								培训收款 </span> <span class="menu-arrow"></span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
-							<li><a href="apps-calendar.html">收费--按课时</a></li>
-							<li><a href="apps-calendar.html">收费--按时间段</a></li>
-							<li><a href="apps-tasks.html">收费其他</a></li>
+							<li><a href="#" onclick="ChargeHours()">收费--按课时</a></li>
+							<li><a href="#" onclick="ChargePeriod()">收费--按时间段</a></li>
+							<li><a href="#" onclick="ChargeOthers()">收费其他</a></li>
+							<li><a href="#" onclick="Expenditure()">费用支出</a></li>
 
 						</ul></li>
 					<li class="side-nav-item"><a href="javascript: void(0);"
