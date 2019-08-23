@@ -267,7 +267,7 @@
 										<li class="breadcrumb-item active">Customers</li>
 									</ol>
 								</div>
-								<h4 class="page-title">Customers</h4>
+								<h4 class="page-title">全国统一收款收据</h4>
 							</div>
 						</div>
 					</div>
@@ -277,94 +277,148 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-body">
+								<h4 style="text-align:center">全国统一收款收据</h4>
 									<div class="row mb-2">
-										<div class="col-sm-4">
-											<a href="javascript:void(0);" class="btn btn-danger mb-2 adds"  onclick="addTeacher()"><i
-												class="mdi mdi-plus-circle mr-2"></i> 添加</a> 
-											<a href="javascript:void(0);" class="btn btn-danger mb-2 update" onclick="updateUser()"><i
-												class="mdi mdi-plus-circle mr-2"></i> 修改</a>
-											<a href="javascript:void(0);" class="btn btn-danger mb-2 del" onclick="delTeacher()"><i
-												class="mdi mdi-plus-circle mr-2"></i> 删除</a>
-										</div>
-
-										<!-- end col-->
-									</div>
-
-									<div class="table-responsive mt-4 Teachers">
-										<table class="table table-bordered table-centered mb-0">
-											<thead class="thead-light">
-												<tr>
-													<th style="width: 20px;">
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="customCheck1" disabled> <label
-																class="custom-control-label" for="customCheck1">&nbsp;</label>
-														</div>
-													</th>
-													<th>校区</th>
-													<th>姓名</th>
-													<th>职业</th>
-													<th>电话</th>
-													<th>备注</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${ teacher}" var="t">
-													<tr>
-														<td>
-															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input customCheckes"
-																	> <label
-																	class="custom-control-label customCheck" for="customCheck2">&nbsp;</label>
-															</div>
-														</td>
-														<td id="${t.teacherId }" class = "schoolIds">${t.school.schoolName }</td>
-														<td>${t.teacherName }</td>
-														<td>${t.teacherType.teacherTypeName}</td>
-														<td>${t.telephone }</td>
-														<td id="${t.loginPassword }">${t.remarks }</td>
-													</tr>
-												</c:forEach>
-											</tbody>
+										<table id="ChargePeriod" border="1"  width="1600">
+											<tr>
+												<th  width="400" height="20px">
+													日期：&nbsp;<span id="year"></span>&nbsp;年&nbsp;<span id="month"></span>&nbsp;月&nbsp;<span id="day"></span>&nbsp;日
+												</th>
+												<th width="400" colspan="2" height="20px">
+													
+												</th>
+												<th width="100" height="20px">
+												
+												</th>
+												<th width="300" height="20px">
+													报读课程：&nbsp;<span id="curriculum"></span>&nbsp;
+													</select>
+												</th>
+												<th width="400" height="20px">
+													单据编号：&nbsp;<span id="number"></span>&nbsp;
+													<span id="school">(${school })</span>
+												</th>
+											</tr>
+											<tr>
+												<td width="400" height="40px">
+													学生姓名:
+													<span id="studentName"></span>
+													<select id="studentNames" style="float: right; width: 300px;">
+														<option value="0"></option>
+															<c:forEach items="${high }" var="h">
+																<option value="${h.studentBirth }">${h.studentName}</option>
+															</c:forEach>
+													</select>
+												</td>
+												<td width="100" height="40px">
+												
+												</td>
+												<td width="300" height="40px">
+													年龄：
+													<span id="gender"></span>
+												</td>
+												<td width="400" height="40px" colspan="2">
+													
+												</td>
+												<td width="400" height="40px">
+													就读学校：
+													<!-- <span id="school">${school }</span> -->
+												</td>
+											</tr>
+											<tr>
+												<td width="400" height="40px">
+													课时：
+												</td>
+												<td width="100" height="40px">
+												
+												</td>
+												<td width="300" height="40px">
+													课程有效期：
+												</td>
+												<td width="800" colspan="4" style="text-align:center" height="40px">
+													&nbsp;<span id="year2"></span>&nbsp;年&nbsp;<span id="month2"></span>&nbsp;月&nbsp;<span id="day2"></span>&nbsp;日至&nbsp;<span id="year2"></span>&nbsp;年&nbsp;<span id="month2"></span>&nbsp;月&nbsp;<span id="day2"></span>&nbsp;日
+												</td>
+											</tr>
+											<tr>
+												<td width="800" colspan="3" style="text-align:center" height="40px">
+													货物或劳务、服务名称：
+												</td>
+												<td width="800" colspan="3" style="text-align:center" height="40px">
+													金额
+												</td>
+											</tr>
+											<tr>
+												<td width="800" colspan="3" height="40px">
+													学费（包含设计费）
+												</td>
+												<td width="800" colspan="3" style="text-align:center" height="40px">
+												
+												</td>
+											</tr>
+											<tr>
+												<td width="800" colspan="3" height="40px">
+													教材费
+												</td>
+												<td width="800" colspan="3" style="text-align:center" height="40px"> 
+												
+												</td>
+											</tr>
+											<tr>
+												<td width="800" colspan="3" height="40px">
+													其他费用
+												</td>
+												<td width="800" colspan="3" style="text-align:center" height="40px">
+												
+												</td>
+											</tr>
+											<tr>
+												<td width="800" colspan="3" height="40px">
+													押金
+												</td>
+												<td width="800" colspan="3" style="text-align:center" height="40px">
+												
+												</td>
+											</tr>
+											<tr>
+												<td width="800" colspan="3" height="40px">
+												
+												</td>
+												<td width="800" colspan="3" style="text-align:center" height="40px">
+												
+												</td>
+											</tr>
+											<tr>
+												<td width="800" colspan="3" height="40px">
+												
+												</td>
+												<td width="800" colspan="3" style="text-align:center" height="40px">
+												
+												</td>
+											</tr>
+											<tr>
+											<td width="400" height="40px" style="text-align:center;border-right: 0px;">
+												人民币大写：
+											</td>
+											<td width="800" height="40px" colspan="4" style="border-left: 0px;">
+											
+											</td>
+											<td width="400" height="40px">
+													￥0.00
+											</td>
+											</tr>
+											<tr>
+												<td width="500" height="80px" colspan="2">
+													收款单位盖章：
+												</td>
+												<td width="400" height="80px" colspan="2">
+													收款人：
+												</td>
+												<td width="700" height="80px" colspan="2">
+													备注：
+												</td>
+											</tr>
 										</table>
 									</div>
-                                </div> <!-- end card-->
-								<div class="col-lg-6 addTeacher " style="display:none;">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <form class="needs-validation" novalidate>
-                                            <div class="form-group position-relative mb-3">
-                                            <label for="validationTooltip01">校区</label>
-                                                <input type="text" class="form-control schoolName" id="validationTooltip01" disabled required>
-                                                <label for="validationTooltip01">姓名</label>
-                                                <input type="text" class="form-control teacherName" id="validationTooltip01" placeholder="请填写姓名"  required>
-                                                <label for="validationTooltip01">密码</label>
-                                                <input type="password" class="form-control loginPassword" id="exampleInputPassword1" placeholder="请填写密码"required>
-                                                <label for="validationTooltip01">请再次密码</label>
-                                                <input type="password" class="form-control loginPasswords" id="exampleInputPassword1" placeholder="请再次填写密码"required>
-                                                <label for="validationTooltip01">职业</label>
-                                                <div class="row">
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <select data-toggle="select2" class="teacherTypeName" title="Country">
-                                                                    <c:forEach items="${teacherType }" var="t">
-                                                                    	<option value="${t.teacherTypeId }">${t.teacherTypeName}</option>
-                                                                    </c:forEach>           
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>     
-                                                <label for="validationTooltip01">电话</label>
-                                                 <input type="text" class="form-control telephone" data-toggle="input-mask" data-mask-format="(00) 00000-0000">
-                                                <label for="validationTooltip01">备注</label>
-                                                <input type="text" class="form-control remarks" id="validationTooltip01" placeholder="请填写备注"  required>
-                                            </div>
-                                            <button class="btn btn-primary add" type="submit">提交</button>
-                                            <button class="btn btn-primary back" type="reset" style="float: right;">重置</button>
-                                        </form>
-                                        
-                                    </div> <!-- end card-body-->
-                            </div>
 									<!-- end card-body-->
 								</div>
 								<!-- end card-->
@@ -550,7 +604,7 @@
 		<!-- third party js -->
 		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
 		<script src="${Path }/static/js/highes/leftSidebar.js"></script>
-		<script src="${Path }/static/js/highes/Teacher.js"></script>
+		<script src="${Path }/static/js/highes/Charge.js"></script>
 		<!-- third party js ends -->
 </body>
 </html>

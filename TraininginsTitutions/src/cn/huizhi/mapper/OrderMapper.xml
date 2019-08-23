@@ -39,8 +39,7 @@
 		personliable = #{personliable} , departmentofpediatricsId =
 		#{departmentofpediatricsId} , addhour = #{addhour} , givehour =
 		#{givehour} , firstdate = #{firstdate} , lastdate = #{lastdate} ,
-		remarks
-		= #{remarks} , orderNumber = #{orderNumber} ,
+		remarks = #{remarks} , orderNumber = #{orderNumber} ,
 		expenditureitemsId =
 		#{expenditureitemsId} WHERE orderId = #{orderId} ;
 	</update>
@@ -273,3 +272,5 @@
 </mapper>   
 
 
+
+</mapper>

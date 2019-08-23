@@ -78,6 +78,69 @@ public class Order {
 		this.expenditureitems = expenditureitems;
 	}
 
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public DepartmentOfPediatrics getDepartmentOfPediatrics() {
+		return departmentOfPediatrics;
+	}
+
+	public void setDepartmentOfPediatrics(DepartmentOfPediatrics departmentOfPediatrics) {
+		this.departmentOfPediatrics = departmentOfPediatrics;
+	}
+
+	public FeeCategory getFeeCategory() {
+		return feeCategory;
+	}
+
+	public void setFeeCategory(FeeCategory feeCategory) {
+		this.feeCategory = feeCategory;
+	}
+
+	public Expenditureitems getExpenditureitems() {
+		return expenditureitems;
+	}
+
+
+
+	public Order(Integer orderId, Integer feecateId, double dpMoney, Integer stuId, Date startTime, Integer schoolId,
+			Integer identification, double feecategoryMoney, Integer paymentmethodId, String personliable,
+			Integer departmentofpediatricsId, double addhour, double givehour, Date firstdate, Date lastdate,
+			String remarks, String orderNumber, Integer expenditureitemsId) {
+		super();
+		this.orderId = orderId;
+		this.feecateId = feecateId;
+		this.dpMoney = dpMoney;
+		this.stuId = stuId;
+		this.startTime = startTime;
+		this.schoolId = schoolId;
+		this.identification = identification;
+		this.feecategoryMoney = feecategoryMoney;
+		this.paymentmethodId = paymentmethodId;
+		this.personliable = personliable;
+		this.departmentofpediatricsId = departmentofpediatricsId;
+		this.addhour = addhour;
+		this.givehour = givehour;
+		this.firstdate = firstdate;
+		this.lastdate = lastdate;
+		this.remarks = remarks;
+		this.orderNumber = orderNumber;
+		this.expenditureitemsId = expenditureitemsId;
+	}
+
 	public Order() {
 		super();
 	}
@@ -224,46 +287,6 @@ public class Order {
 
 	public void setExpenditureitemsId(Integer expenditureitemsId) {
 		this.expenditureitemsId = expenditureitemsId;
-	}
-
-	public Student getStudent() {
-		return student;
-	}
-
-	public void setStudent(Student student) {
-		this.student = student;
-	}
-
-	public PaymentMethod getPaymentMethod() {
-		return paymentMethod;
-	}
-
-	public void setPaymentMethod(PaymentMethod paymentMethod) {
-		this.paymentMethod = paymentMethod;
-	}
-
-	public DepartmentOfPediatrics getDepartmentOfPediatrics() {
-		return departmentOfPediatrics;
-	}
-
-	public void setDepartmentOfPediatrics(DepartmentOfPediatrics departmentOfPediatrics) {
-		this.departmentOfPediatrics = departmentOfPediatrics;
-	}
-
-	public FeeCategory getFeeCategory() {
-		return feeCategory;
-	}
-
-	public void setFeeCategory(FeeCategory feeCategory) {
-		this.feeCategory = feeCategory;
-	}
-
-	public Expenditureitems getExpenditureitems() {
-		return expenditureitems;
-	}
-
-	public void setExpenditureitems(Expenditureitems expenditureitems) {
-		this.expenditureitems = expenditureitems;
 	}
 
 }

@@ -10,7 +10,6 @@ import cn.huizhi.mapper.OrderMapper;
 import cn.huizhi.pojo.Order;
 import cn.huizhi.service.OrderService;
 
-
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -67,6 +66,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Order> findOrderListBySchool(Order order) {
-		return null;
+		// TODO Auto-generated method stub
+		return orderMapper.selectOrderListBySchool(order);
 	}
 }
