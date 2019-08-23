@@ -1,32 +1,28 @@
+
 package cn.huizhi.pojo;
 
-import java.util.Date;
-
 public class Student {
+
 	private Integer studentId;
 	private String studentName;
 	private Integer studentSex;
 	private String studentIDCard;
-	private Date studentBirth;
+	private String studentBirth;
 	private String school;
 	private String parentName;
 	private String telephone;
 	private String familyAddress;
 	private String registrationChannels;
 	private String registrationConsultant;
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
 	private String theSurrogate;
 	private String remarks;
 	private Integer feeCategory;
 
-	public Student() {
-		super();
-	}
-
-	public Student(Integer studentId, String studentName, Integer studentSex, String studentIDCard, Date studentBirth,
+	public Student(Integer studentId, String studentName, Integer studentSex, String studentIDCard, String studentBirth,
 			String school, String parentName, String telephone, String familyAddress, String registrationChannels,
-			String registrationConsultant, Date startTime, Date endTime, String theSurrogate, String remarks,
+			String registrationConsultant, String startTime, String endTime, String theSurrogate, String remarks,
 			Integer feeCategory) {
 		super();
 		this.studentId = studentId;
@@ -45,6 +41,10 @@ public class Student {
 		this.theSurrogate = theSurrogate;
 		this.remarks = remarks;
 		this.feeCategory = feeCategory;
+	}
+
+	public Student() {
+		super();
 	}
 
 	public Integer getStudentId() {
@@ -67,6 +67,14 @@ public class Student {
 		return studentSex;
 	}
 
+	public Integer getFeeCategory() {
+		return feeCategory;
+	}
+
+	public void setFeeCategory(Integer feeCategory) {
+		this.feeCategory = feeCategory;
+	}
+
 	public void setStudentSex(Integer studentSex) {
 		this.studentSex = studentSex;
 	}
@@ -79,11 +87,11 @@ public class Student {
 		this.studentIDCard = studentIDCard;
 	}
 
-	public Date getStudentBirth() {
+	public String getStudentBirth() {
 		return studentBirth;
 	}
 
-	public void setStudentBirth(Date studentBirth) {
+	public void setStudentBirth(String studentBirth) {
 		this.studentBirth = studentBirth;
 	}
 
@@ -135,19 +143,19 @@ public class Student {
 		this.registrationConsultant = registrationConsultant;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 
@@ -165,14 +173,7 @@ public class Student {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
-	}
 
-	public Integer getFeeCategory() {
-		return feeCategory;
-	}
-
-	public void setFeeCategory(Integer feeCategory) {
-		this.feeCategory = feeCategory;
 	}
 
 }

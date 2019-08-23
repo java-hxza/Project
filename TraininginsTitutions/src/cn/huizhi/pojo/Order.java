@@ -3,26 +3,25 @@ package cn.huizhi.pojo;
 import java.util.Date;
 
 public class Order {
+
 	private Integer orderId;
 	private Integer feecateId;
-	private Double dpMoney;
+	private double dpMoney;
 	private Integer stuId;
 	private Date startTime;
 	private Integer schoolId;
 	private Integer identification;
-	private Double feecategoryMoney;
+	private double feecategoryMoney;
 	private Integer paymentmethodId;
 	private String personliable;
 	private Integer departmentofpediatricsId;
-	private Double addhour;
-	private Double givehour;
+	private double addhour;
+	private double givehour;
 	private Date firstdate;
 	private Date lastdate;
 	private String remarks;
 	private String orderNumber;
 	private Integer expenditureitemsId;
-	
-	private Date endTime;
 	/**
 	 * 学生
 	 */
@@ -47,46 +46,9 @@ public class Order {
 	 */
 	private Expenditureitems expenditureitems;
 
-	public Order() {
-		super();
-	}
-
-	public Order(Integer orderId, Integer feecateId, Double dpMoney, Integer stuId, Date startTime, Integer schoolId,
-			Integer identification, Double feecategoryMoney, Integer paymentmethodId, String personliable,
-			Integer departmentofpediatricsId, Double addhour, Double givehour, Date firstdate, Date lastdate,
-			String remarks, String orderNumber, Integer expenditureitemsId, Date endTime, Student student,
-			PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics, FeeCategory feeCategory,
-			Expenditureitems expenditureitems) {
-		super();
-		this.orderId = orderId;
-		this.feecateId = feecateId;
-		this.dpMoney = dpMoney;
-		this.stuId = stuId;
-		this.startTime = startTime;
-		this.schoolId = schoolId;
-		this.identification = identification;
-		this.feecategoryMoney = feecategoryMoney;
-		this.paymentmethodId = paymentmethodId;
-		this.personliable = personliable;
-		this.departmentofpediatricsId = departmentofpediatricsId;
-		this.addhour = addhour;
-		this.givehour = givehour;
-		this.firstdate = firstdate;
-		this.lastdate = lastdate;
-		this.remarks = remarks;
-		this.orderNumber = orderNumber;
-		this.expenditureitemsId = expenditureitemsId;
-		this.endTime = endTime;
-		this.student = student;
-		this.paymentMethod = paymentMethod;
-		this.departmentOfPediatrics = departmentOfPediatrics;
-		this.feeCategory = feeCategory;
-		this.expenditureitems = expenditureitems;
-	}
-
-	public Order(Integer orderId, Integer feecateId, Double dpMoney, Integer stuId, Date startTime, Integer schoolId,
-			Integer identification, Double feecategoryMoney, Integer paymentmethodId, String personliable,
-			Integer departmentofpediatricsId, Double addhour, Double givehour, Date firstdate, Date lastdate,
+	public Order(Integer orderId, Integer feecateId, double dpMoney, Integer stuId, Date startTime, Integer schoolId,
+			Integer identification, double feecategoryMoney, Integer paymentmethodId, String personliable,
+			Integer departmentofpediatricsId, double addhour, double givehour, Date firstdate, Date lastdate,
 			String remarks, String orderNumber, Integer expenditureitemsId, Student student,
 			PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics, FeeCategory feeCategory,
 			Expenditureitems expenditureitems) {
@@ -116,6 +78,10 @@ public class Order {
 		this.expenditureitems = expenditureitems;
 	}
 
+	public Order() {
+		super();
+	}
+
 	public Integer getOrderId() {
 		return orderId;
 	}
@@ -132,20 +98,12 @@ public class Order {
 		this.feecateId = feecateId;
 	}
 
-	public Double getDpMoney() {
+	public double getDpMoney() {
 		return dpMoney;
 	}
 
-	public void setDpMoney(Double dpMoney) {
+	public void setDpMoney(double dpMoney) {
 		this.dpMoney = dpMoney;
-	}
-
-	public Integer getExpenditureitemsId() {
-		return expenditureitemsId;
-	}
-
-	public void setExpenditureitemsId(Integer expenditureitemsId) {
-		this.expenditureitemsId = expenditureitemsId;
 	}
 
 	public Integer getStuId() {
@@ -164,14 +122,6 @@ public class Order {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
-
 	public Integer getSchoolId() {
 		return schoolId;
 	}
@@ -188,11 +138,11 @@ public class Order {
 		this.identification = identification;
 	}
 
-	public Double getFeecategoryMoney() {
+	public double getFeecategoryMoney() {
 		return feecategoryMoney;
 	}
 
-	public void setFeecategoryMoney(Double feecategoryMoney) {
+	public void setFeecategoryMoney(double feecategoryMoney) {
 		this.feecategoryMoney = feecategoryMoney;
 	}
 
@@ -220,19 +170,19 @@ public class Order {
 		this.departmentofpediatricsId = departmentofpediatricsId;
 	}
 
-	public Double getAddhour() {
+	public double getAddhour() {
 		return addhour;
 	}
 
-	public void setAddhour(Double addhour) {
+	public void setAddhour(double addhour) {
 		this.addhour = addhour;
 	}
 
-	public Double getGivehour() {
+	public double getGivehour() {
 		return givehour;
 	}
 
-	public void setGivehour(Double givehour) {
+	public void setGivehour(double givehour) {
 		this.givehour = givehour;
 	}
 
@@ -268,6 +218,22 @@ public class Order {
 		this.orderNumber = orderNumber;
 	}
 
+	public Integer getExpenditureitemsId() {
+		return expenditureitemsId;
+	}
+
+	public void setExpenditureitemsId(Integer expenditureitemsId) {
+		this.expenditureitemsId = expenditureitemsId;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
 	public PaymentMethod getPaymentMethod() {
 		return paymentMethod;
 	}
@@ -298,14 +264,6 @@ public class Order {
 
 	public void setExpenditureitems(Expenditureitems expenditureitems) {
 		this.expenditureitems = expenditureitems;
-	}
-
-	public Student getStudent() {
-		return student;
-	}
-
-	public void setStudent(Student student) {
-		this.student = student;
 	}
 
 }
