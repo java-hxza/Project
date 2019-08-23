@@ -25,9 +25,6 @@
 			success: function(data){
 				$(".table-responsive").empty();
 				data = JSON.parse(data); 
-				for (var i = 0; i < data.length; i++) {
-					alert(data[i].toString());
-				}
 				$(".table-responsive").append(updateInfo(data));
 				/**
 				 * 修改

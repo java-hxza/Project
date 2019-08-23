@@ -21,6 +21,8 @@ public class Order {
 	private String remarks;
 	private String orderNumber;
 	private Integer expenditureitemsId;
+	
+	private Date endTime;
 	/**
 	 * 学生
 	 */
@@ -47,6 +49,39 @@ public class Order {
 
 	public Order() {
 		super();
+	}
+
+	public Order(Integer orderId, Integer feecateId, Double dpMoney, Integer stuId, Date startTime, Integer schoolId,
+			Integer identification, Double feecategoryMoney, Integer paymentmethodId, String personliable,
+			Integer departmentofpediatricsId, Double addhour, Double givehour, Date firstdate, Date lastdate,
+			String remarks, String orderNumber, Integer expenditureitemsId, Date endTime, Student student,
+			PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics, FeeCategory feeCategory,
+			Expenditureitems expenditureitems) {
+		super();
+		this.orderId = orderId;
+		this.feecateId = feecateId;
+		this.dpMoney = dpMoney;
+		this.stuId = stuId;
+		this.startTime = startTime;
+		this.schoolId = schoolId;
+		this.identification = identification;
+		this.feecategoryMoney = feecategoryMoney;
+		this.paymentmethodId = paymentmethodId;
+		this.personliable = personliable;
+		this.departmentofpediatricsId = departmentofpediatricsId;
+		this.addhour = addhour;
+		this.givehour = givehour;
+		this.firstdate = firstdate;
+		this.lastdate = lastdate;
+		this.remarks = remarks;
+		this.orderNumber = orderNumber;
+		this.expenditureitemsId = expenditureitemsId;
+		this.endTime = endTime;
+		this.student = student;
+		this.paymentMethod = paymentMethod;
+		this.departmentOfPediatrics = departmentOfPediatrics;
+		this.feeCategory = feeCategory;
+		this.expenditureitems = expenditureitems;
 	}
 
 	public Order(Integer orderId, Integer feecateId, Double dpMoney, Integer stuId, Date startTime, Integer schoolId,
@@ -127,6 +162,14 @@ public class Order {
 
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	public Integer getSchoolId() {

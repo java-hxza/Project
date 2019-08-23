@@ -106,6 +106,7 @@ public class AdminCreateController {
 		}
 		return jsonMap;
 	}
+	
 	/**
 	 * 查询学校信息并返回视图
 	 * @param schoolId

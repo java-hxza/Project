@@ -1,5 +1,6 @@
 package cn.huizhi.controller.admin.school;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
+import cn.huizhi.pojo.DepartmentOfPediatrics;
+import cn.huizhi.pojo.FeeCategory;
 import cn.huizhi.pojo.Order;
+import cn.huizhi.pojo.PaymentMethod;
 import cn.huizhi.pojo.SchoolAccount;
 import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.User;
+import cn.huizhi.service.DepartmentOfPediatricsService;
+import cn.huizhi.service.FeeCategoryService;
 import cn.huizhi.service.OrderService;
+import cn.huizhi.service.PaymentMethodService;
 import cn.huizhi.service.UserService;
 
 @Controller
@@ -32,6 +39,15 @@ public class SchoolController {
 	
 	@Resource
 	UserService userService;
+	
+	@Resource
+	DepartmentOfPediatricsService departmentOfPediatricsService;
+	
+	@Resource
+	FeeCategoryService feeCategoryService;
+	
+	@Resource
+	PaymentMethodService paymentMethodService;
 	
 	@RequestMapping("expenditureOrder.html")
 	@ResponseBody
@@ -139,19 +155,87 @@ public class SchoolController {
 	 * @return
 	 */
 	@RequestMapping("schoolOrderInfo.html")
-	public String schoolOrderInfo(Integer schoolId,String schoolName,HttpSession session) {
-		Order order = new Order();
-		order.setSchoolId(schoolId);
+	public String schoolOrderInfo(Order order,String schoolName,HttpSession session) {
 		/**
 		 * 查询数据
 		 */
 		List<Order> orderListBySchool = orderService.findOrderListBySchool(order);
 		
+		//课程类型
+		List<DepartmentOfPediatrics> departmentOfPediatricsList = departmentOfPediatricsService.findDepartmentOfPediatrics();
+
+		//账户类型信息
+		List<PaymentMethod> payMentList = paymentMethodService.selectPaymentMethod();
+		//收入项目类型
+		List<FeeCategory> feeCategoryList = feeCategoryService.selectFeeCategory();
+		
+		/**
+		 * 共支出
+		 */
+		Double schoolExPenSum =0.0;
+		/**
+		 * 共收入
+		 */
+		Double schoolFeeceat = 0.0;
+		if(orderListBySchool.size()>0) {
+			for (Order order2 : orderListBySchool) {
+				if(order2.getIdentification()==0) {
+					schoolFeeceat += order2.getDpMoney();
+				}else if(order2.getIdentification() == 1) {
+					schoolExPenSum +=order2.getFeecategoryMoney();
+				}
+			}
+		}
+		//总收入，总支出
+		session.setAttribute("schoolExPenSum", schoolExPenSum);
+		session.setAttribute("schoolFeeceat", schoolFeeceat);
+		session.setAttribute("schoolId", order.getSchoolId());
+		
+		//查询添加
+		session.setAttribute("departmentOfPediatricsList", departmentOfPediatricsList);
+		session.setAttribute("payMentList", payMentList);
+		session.setAttribute("feeCategoryList", feeCategoryList);
 		session.setAttribute("orderListBySchool", orderListBySchool);
 		
 		return "admin/orderSchool/schoolOrderInfo";
 	}
 	
+	
+	
+	@RequestMapping("schoolFeecateOrderInfo.html")
+	@ResponseBody
+	public Map<String, String> schoolFeecateOrderInfo(Order order,String schoolName,HttpSession session) {
+		
+		
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		/**
+		 * 查询数据
+		 */
+		List<Order> orderListBySchool = orderService.findOrderListBySchool(order);
+		
+		/**
+		 * 共支出
+		 */
+		Double schoolExPenSum =0.0;
+		/**
+		 * 共收入
+		 */
+		Double schoolFeeceat = 0.0;
+		if(orderListBySchool.size()>0) {
+			for (Order order2 : orderListBySchool) {
+				if(order2.getIdentification()==0) {
+					schoolFeeceat += order2.getDpMoney();
+				}else if(order2.getIdentification() == 1) {
+					schoolExPenSum +=order2.getFeecategoryMoney();
+				}
+			}
+		}
+		
+		jsonMap.put("orderListBySchool",JSON.toJSONStringWithDateFormat(orderListBySchool, "yyyy-MM-dd hh:mm:ss", SerializerFeature.WriteDateUseDateFormat));
+		jsonMap.put("schoolFeeceat", schoolFeeceat.toString());
+		return jsonMap;
+		
+	}
 	
 	
 	
