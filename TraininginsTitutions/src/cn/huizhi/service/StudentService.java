@@ -25,4 +25,17 @@ public interface StudentService {
 	 * @return
 	 */
 	public List<Student> selectYiKao(Integer schoolId);
+	
+	/**
+	 * 添加学生班级查询学生主键
+	 * @param stu
+	 * @return
+	 */
+	public Student findChildrenInfoByStudnet(Student stu);
+	/**
+	 * 添加学生信息
+	 * @param stu
+	 * @return
+	 */
+	public int addStudnetInfo(Student stu);
 }

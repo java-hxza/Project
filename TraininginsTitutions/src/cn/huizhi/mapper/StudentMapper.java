@@ -25,4 +25,18 @@ public interface StudentMapper {
 	 * @return
 	 */
 	public List<Student> selectYiKao(Integer schoolId);
+	
+	/**
+	 * 添加学生班级查询学生主键
+	 * @param stu
+	 * @return
+	 */
+	public Student selectChildrenInfoByStudnet(Student stu);
+	
+	/**
+	 * 添加学生信息
+	 * @param stu
+	 * @return
+	 */
+	public int insertStudnetInfo(Student stu);
 }

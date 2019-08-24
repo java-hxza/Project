@@ -39,6 +39,18 @@ public class StudentServiceImpl implements StudentService{
 	public List<Student> selectYiKao(Integer schoolId) {
 		return studentMapper.selectYiKao(schoolId);
 	}
+
+	@Override
+	public Student findChildrenInfoByStudnet(Student stu) {
+		// TODO Auto-generated method stub
+		return studentMapper.selectChildrenInfoByStudnet(stu);
+	}
+
+	@Override
+	public int addStudnetInfo(Student stu) {
+		// TODO Auto-generated method stub
+		return studentMapper.insertStudnetInfo(stu);
+	}
 	
 	
 }
