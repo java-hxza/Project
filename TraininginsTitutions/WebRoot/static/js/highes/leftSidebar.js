@@ -24,7 +24,7 @@ $(function(){
 		location.href="Teacher.html";
 	}
 	ChargeHours = function(){
-		location.href="ChargeHours.html";
+		location.href="selectOrderHour.html";
 	}
 	ChargePeriod = function(){
 		location.href="ChargePeriod.html";

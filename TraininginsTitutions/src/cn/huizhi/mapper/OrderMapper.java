@@ -10,19 +10,26 @@ public interface OrderMapper {
 	 * 查询课时订单
 	 * @return
 	 */
-	public List<Order> selectOrderHour();
+	public List<Order> selectOrderHour(Integer schoolId);
 	
 	/**
 	 * 查询时间段订单
 	 * @return
 	 */
-	public List<Order> selectOrderPeriod();
+	public List<Order> selectOrderPeriod(Integer schoolId);
 	
 	/**
 	 * 查询其他订单
 	 * @return
 	 */
-	public List<Order> selectOrderOther();
+	public List<Order> selectOrderOther(Integer schoolId);
+	
+	/**
+	 * 查询费用支出订单
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Order> selectOrderExpenditure(Integer schoolId);
 	
 	/**
 	 * 修改订单

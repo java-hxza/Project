@@ -4,20 +4,55 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.OrderMapper">
 
-	<select id="selectOrderHour" resultType="Order">
-		SELECT * FROM `order`
-		WHERE identification = 0 AND departmentofpediatricsId!=NULL
+	<select id="selectOrderHour" resultMap="selectOrderHours">
+		SELECT o.orderId od,o.dpMoney,o.remarks,o.addhour,o.givehour,o.startTime,o.orderNumber,s.studentName,s.school,p.paymentmethodName,d.dpTypeName
+		FROM `order` o
+		JOIN student s ON o.stuId=s.studentId
+		JOIN paymentmethod p ON o.paymentmethodId=p.paymentmethodId
+		JOIN departmentofpediatrics d ON o.departmentofpediatricsId=d.dpId
+		WHERE o.identification = 0 AND o.departmentofpediatricsId IS NOT NULL AND
+		o.schoolId=#{0}
 	</select>
+	
+	<resultMap type="Order" id="selectOrderHours">
+		<id column="od" property="orderId" />
+		<result column="o.dpMoney" property="dpMoney" />
+		<result column="o.remarks" property="remarks" />
+		<result column="o.addhour" property="addhour" />
+		<result column="o.givehour" property="givehour" />
+		<result column="o.startTime" property="startTime" />
+		<result column="o.orderNumber" property="orderNumber" />
+		<collection property="student" javaType="Student">
+			<result column="s.studentName" property="studentName" />
+			<result column="s.school" property="school" />
+		</collection>
+		<collection property="paymentMethod" javaType="PaymentMethod">
+			<result column="p.paymentmethodName" property="paymentmethodName" />
+		</collection>
+		<collection property="departmentOfPediatrics" javaType="DepartmentOfPediatrics">
+			<result column="d.dpTypeName" property="dpTypeName" />
+		</collection>
+	</resultMap>
 
 	<select id="selectOrderPeriod" resultType="Order">
-		SELECT * FROM `order`
-		WHERE identification = 0 AND firstdate!=NULL
+		SELECT o.*
+		FROM `order` o
+		JOIN student s ON o.stuId=s.studentId
+		WHERE o.identification = 0 AND o.firstdate IS NOT NULL AND o.schoolId=#{0}
 	</select>
 
 	<select id="selectOrderOther" resultType="Order">
-		SELECT * FROM `order`
-		WHERE identification = 0 AND firstdate=NULL AND
-		departmentofpediatricsId = NULL
+		SELECT o.*
+		FROM `order` o
+		JOIN student s ON o.stuId=s.studentId
+		WHERE o.identification = 0 AND o.firstdate IS NULL AND o.addhour IS NULL AND o.schoolId=#{0}
+	</select>
+	
+	<select id="selectOrderExpenditure" resultType="Order">
+		SELECT o.*
+		FROM `order` o
+		JOIN student s ON o.stuId=s.studentId
+		WHERE o.identification =1 AND o.schoolId=#{0}
 	</select>
 
 	<delete id="delOrder" parameterType="java.lang.Integer">
@@ -268,9 +303,5 @@
 			</if>
 		</where>
 	</select>
-
-</mapper>   
-
-
 
 </mapper>

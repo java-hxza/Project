@@ -293,7 +293,7 @@
 															<label for="example-select">学员</label> <select
 																class="form-control stuId" id="example-select">
 																<c:forEach items="${high }" var="h">
-																	<option value="${h.highId }" studentBirth="${h.studentBirth }">${h.studentName}</option>
+																	<option value="${h.studentId }">${h.studentName}</option>
 																</c:forEach>
 															</select>
 														</div>
@@ -309,9 +309,10 @@
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="form-group">
-															<label>金额</label> <input class="form-control dpMoney"
-																id="example-number" type="number" name="number">
+														<div class="form-group mb-3">
+															<label for="example-number">收费金额</label> <input
+																class="form-control dpMoney" id="example-number" type="number"
+																name="number">
 														</div>
 													</div>
 													<div class="col-md-6">

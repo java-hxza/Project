@@ -1,6 +1,12 @@
 $(function() {
 	var Time = new Date();
-	$(".date").val(Time.getFullYear() + "-" + (Time.getMonth() + 1) + "-" + Time.getDate());
+	var month = null;
+	if ((Time.getMonth() + 1) < 10) {
+		month = 0 + (Time.getMonth() + 1).toString();
+	}else {
+		month = Time.getMonth()+1;
+	}
+	$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
 	$(".TiJiao").click(function() {
 		var dpMoney = $.trim($(".dpMoney").val());
 		var firstdate = $.trim($(".firstdate").val());
@@ -11,6 +17,7 @@ $(function() {
 		var remarks = $.trim($(".remarks").val());
 		var paymentmethodId = $.trim($(".paymentmethodId").val());
 		var feecateId = $.trim($(".feecateId").val());
+		var date = Time.getFullYear().toString() + month.toString() + Time.getDate().toString();
 		if (dpMoney == "") {
 			alert("请填写金额！");
 			return false;
@@ -23,7 +30,6 @@ $(function() {
 			alert("请选择截止日期！");
 			return false;
 		}
-		alert($(".studentBirth").val());
 		$.ajax({
 			type : "POST",
 			url : "addChargePeriod.html",
@@ -36,7 +42,8 @@ $(function() {
 				startTime : startTime,
 				paymentmethodId : paymentmethodId,
 				remarks : remarks,
-				feecateId : feecateId
+				feecateId : feecateId,
+				date : date
 			},
 			dataType : "json",
 			success : function(data) {
@@ -55,15 +62,15 @@ $(function() {
 			}
 		});
 	});
-	//	$("#studentNames").change(function() {
-	//		if($("#studentNames").val() != 0) {
-	//			//$("#studentName").text($("#studentNames option:selected").text());
-	//			var gender = new Date($("#studentNames").val());
-	//			var year = Time.getFullYear() - gender.getFullYear();
-	//			var month = Time.getMonth() - gender.getMonth();
-	//			if(month < 0 || (month === 0 && Time.getDate() < gender.getDate())) {
-	//				$("#gender").text(year-1);
-	//			}
-	//		}
-	//	});
+//	$("#studentNames").change(function() {
+//		if($("#studentNames").val() != 0) {
+//			//$("#studentName").text($("#studentNames option:selected").text());
+//			var gender = new Date($("#studentNames").val());
+//			var year = Time.getFullYear() - gender.getFullYear();
+//			var month = Time.getMonth() - gender.getMonth();
+//			if(month < 0 || (month === 0 && Time.getDate() < gender.getDate())) {
+//				$("#gender").text(year-1);
+//			}
+//		}
+//	});
 });
