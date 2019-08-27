@@ -6,33 +6,25 @@ public class School {
 	private Integer cityId;
 	private Integer cityProperId;
 	private String schoolRemarks;
-	
+	private Integer schoolType;
+
 	private City city;
-	
+
 	private Province province;
-	
 
 	public School() {
 		super();
 	}
 
-	public School(Integer schoolId, String schoolName, Integer cityId, Integer cityProperId, String schoolRemarks) {
-		super();
-		this.schoolId = schoolId;
-		this.schoolName = schoolName;
-		this.cityId = cityId;
-		this.cityProperId = cityProperId;
-		this.schoolRemarks = schoolRemarks;
-	}
-	
 	public School(Integer schoolId, String schoolName, Integer cityId, Integer cityProperId, String schoolRemarks,
-			City city, Province province) {
+			Integer schoolType, City city, Province province) {
 		super();
 		this.schoolId = schoolId;
 		this.schoolName = schoolName;
 		this.cityId = cityId;
 		this.cityProperId = cityProperId;
 		this.schoolRemarks = schoolRemarks;
+		this.schoolType = schoolType;
 		this.city = city;
 		this.province = province;
 	}
@@ -51,6 +43,14 @@ public class School {
 
 	public void setProvince(Province province) {
 		this.province = province;
+	}
+
+	public Integer getSchoolType() {
+		return schoolType;
+	}
+
+	public void setSchoolType(Integer schoolType) {
+		this.schoolType = schoolType;
 	}
 
 	public Integer getSchoolId() {

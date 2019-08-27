@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.TeacherHourMapper">
+	
+	<sql id="selecTeacherHourListBySchoolIdCol">
+		th.dpId,
+		th.dpName,
+		th.hours,
+		th.remarks,
+		th.classId,
+		th.schoolId,
+		th.startTime,
+		th.teacherHourId,
+		th.teacherId,
+		th.teacherName, 
+		SUM(th.hours) sumHours
+	</sql>
+	
+	<!--查询教师课时-->	
+	<select id="selecTeacherHourListBySchoolId" resultType="TeacherHour" parameterType="java.lang.Integer">
+		select <include refid="selecTeacherHourListBySchoolIdCol"/>
+		from teacherhour th
+		<where>
+			<if test="schoolId !=null and schoolId !=''">
+				th.schoolId =#{schoolId} 
+				group by th.teacherId  
+			</if>
+			
+		</where> 
+	</select>
+	
+
+</mapper>

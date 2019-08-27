@@ -44,6 +44,13 @@ public class ChildrenClassesController {
 	 */
 	@Resource
 	TeacherService teacherService;
+	@RequestMapping("childrenSchoolLogin.html")
+	public String childrenSchoolLogin(HttpSession session) {
+		session.setAttribute("schoolType", 1);
+		
+		return "login";
+	}
+	
 	/**
 	 * 返回到少儿首页
 	 * @return

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.ChildStuReistrationMapper">
+
+
+	<sql id="col">
+		rOCCId,
+		studentName,
+		classHours,
+		dpId,
+		contentOfCourses,
+		classHour,
+		teacherInClass,
+		childStuId,
+		state,
+		remarks
+	</sql>
+	
+	<sql id="ChildStuReistrationCol">
+		css.childStuId ccs_childStuId,
+		css.classHour ccs_classHour,
+		css.classHours ccs_classHours,
+		css.contentOfCourses ccs_contentOfCourses,
+		css.dpId ccs_dpId,
+		css.remarks ccs_remarks,
+		css.rOCCId ccs_rOCCId,
+		css.state ccs_state,
+		css.studentName ccs_studentName,
+		css.teacherInClass ccs_teacherInClass,
+		ccs.teacherId ccs_teacherId,
+		ccs.classId ccs_classId,
+		o.givehour o_givehour,
+		o.addhour o_addhour
+	</sql>
+	
+	<resultMap type="ChildStuReistration" id="ChildStuReistrationMap">
+		<id column="ccs_rOCCId" property="rOCCId"/>
+		<result column="ccs_childStuId" property="childStuId"/>
+		<result column="ccs_classHour" property="classHour"/>
+		<result column="ccs_classHours" property="classHours"/>
+		<result column="ccs_contentOfCourses" property="contentOfCourses"/>
+		<result column="ccs_dpId" property="dpId"/>
+		<result column="ccs_remarks" property="remarks"/>
+		<result column="ccs_classId" property="classId"/>
+		<result column="ccs_teacherId" property="teacherId"/>
+		<result column="ccs_state" property="state"/>
+		<result column="ccs_studentName" property="studentName"/>
+		<result column="ccs_teacherInClass" property="teacherInClass"/>
+		<association property="order" javaType="Order">
+			<result column="o_givehour" property="givehour"/>
+			<result column="o_addhour" property="addhour"/>
+		</association>
+	</resultMap>
+	
+	<select id="childStuReistrationListByClass" resultMap="ChildStuReistrationMap">
+		select <include refid="ChildStuReistrationCol"/>
+		from childsturegistration css
+		join childrenesclassstudnet ccs on ccs.classesStudentId = css.childStuId
+		join traininginstitutions.class  c on c.classId = ccs.classId
+		join traininginstitutions.order o on o.stuId  =css.childStuId
+		<where>
+			c.classId = #{classId}
+		</where> 
+	</select>
+	
+</mapper>
