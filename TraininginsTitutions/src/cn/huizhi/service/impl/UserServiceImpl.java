@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
 	/**
 	 * 登录业务处理
 	 */
-	public User findUserByLogin(String loginName, String loginPassword, String schoolId) {
-		return   userMapper.selectUserByLogin(loginName, loginPassword, schoolId);
+	public User findUserByLogin(String loginName, String loginPassword, String schoolId,Integer schoolType) {
+		return   userMapper.selectUserByLogin(loginName, loginPassword, schoolId,schoolType);
 	}
 	/**
 	 * 创建用户

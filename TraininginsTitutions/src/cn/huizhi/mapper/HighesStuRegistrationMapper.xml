@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.HighesStuRegistrationMapper">
+
+	<sql id="selectHighesStuRegistrationListByClassIdCol">
+		hss.classHour,
+		hss.classHours,
+		hss.classId,
+		hss.contentOfCourses,
+		hss.dpId,
+		hss.highesHourId,
+		hss.highesStuId,
+		hss.remarks,
+		hss.studentName,
+		hss.teacherId,
+		hss.state,
+		hss.teacherInClass,
+		o.addhour,
+		o.givehour			
+	</sql>
+	<resultMap type="HighesStuRegistration" id="HighesStuRegistrationMap">
+	
+		
+	</resultMap>
+	
+	<select id="selectHighesStuRegistrationListByClassId" resultMap="HighesStuRegistrationMap" parameterType="java.lang.Integer">
+		select 
+		from highesclassstudnet hss
+		join traininginstitutions.class  c on c.classId = hss.classId
+		join traininginstitutions.order o on o.stuId  =hss.studentId
+		<where>
+			c.classId = #{classId}
+		</where> 
+	</select>
+	
+</mapper>

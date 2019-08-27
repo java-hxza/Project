@@ -64,7 +64,7 @@
 							<div class="text-center">
 								<h3 class="">管理学校及城市</h3>
 								<p class="text-muted mt-3" id="schoolId" id_schoolName="${schoolName}" name=${schoolId }>请按规则查询</p>
-									
+									<button type="button" class="btn btn-success btn-sm mt-2" onclick="expen()">支出</button>
                                     <button type="button" class="btn btn-success btn-sm mt-2" onclick="query()">查询</button>
                              </div>
                           </div>

@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,18 +15,31 @@ import com.alibaba.fastjson.JSON;
 
 import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.TeacherDiction;
-import cn.huizhi.pojo.TeacherType;
+import cn.huizhi.pojo.TeacherHour;
 import cn.huizhi.pojo.User;
+import cn.huizhi.service.ChildStuReistrationService;
+import cn.huizhi.service.ClassService;
 import cn.huizhi.service.TeacherDictionService;
+import cn.huizhi.service.TeacherHourService;
 import cn.huizhi.service.TeacherService;
-
+import cn.huizhi.pojo.ChildStuReistration;
+import cn.huizhi.pojo.Class;
 @Controller
 public class AdminTeacherController {
 	@Resource
 	TeacherService teacherService;
+	@Resource
+	TeacherHourService teacherHourService;
 	
 	@Resource
 	TeacherDictionService teacherDictionService;
+	
+	@Resource
+	ClassService classService;
+	
+	@Resource
+	ChildStuReistrationService childStuReistrationService;
+	
 	@RequestMapping("schoolTeacherInfo.html")
 	public String schoolTeacherInfo(Integer schoolId,String schoolName,HttpSession session) {
 		session.setAttribute("schoolName", schoolName);
@@ -128,5 +140,63 @@ public class AdminTeacherController {
 		}
 		return jsonMap;
 	}
+	
+	/**
+	 * 返回选择学校教师视图
+	 * @return
+	 */
+	@RequestMapping("selectOrderTeacherInfo.html")
+	public String selectOrderTeacherInfo() {
+		return "admin/teacher/selectOrderTeacherInfo";
+	}
+	
+	/**
+	 * 查询教师课时并返回信息
+	 * @param schoolId
+	 * @param schoolName
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("teacherInfo.html")
+	public String teacherInfo(Integer schoolId,String schoolName,HttpSession session) {
+		
+		List<TeacherHour> teacherHourList = teacherHourService.findTeacherHourListBySchoolId(schoolId);
+		
+		session.setAttribute("schoolName", schoolName);
+		session.setAttribute("teacherHourList", teacherHourList);
+		return "admin/teacher/teacherInfo";
+	}
+	/**
+	 * 返回选择学校视图
+	 * @return
+	 */
+	@RequestMapping("selectClassSchoolInfo.html")
+	public String selectClassSchool() {
+		return "admin/classStudent/selectClassSchoolInfo";
+	}
+	
+	@RequestMapping("classSchoolInfo.html")
+	public String classSchoolInfo(Integer schoolId,String schoolName,HttpSession session) {
+		
+		List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
+		
+		session.setAttribute("classList", classList);
+		
+		return "admin/classStudent/classSchoolInfo";
+	}
+	
+	@RequestMapping("studentHourInfo.html")
+	public String studentHourInfo(Integer classId,Integer classLevel) {
+		if(classLevel == 1)  {
+			List<ChildStuReistration> cilChildStuReistrationList = childStuReistrationService.findchildStuReistrationListByClass(classId);
+		}
+		
+		if(classLevel == 2) {
+			
+		}
+		
+		return "studentHourInfo";
+	}
+	
 	
 }

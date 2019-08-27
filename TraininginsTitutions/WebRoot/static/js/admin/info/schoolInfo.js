@@ -43,12 +43,12 @@ $(function(){
 						"</div>" +
 					"</th>" +
 					"<th>账户</th>" +
+					"<th>支出类型</th>" +
 					"<th>支出</th>" +
 					"<th>支出时间</th>" +
 					"</tr>" +
 					"</thead>";
 		return $html;
-		
 	}
 	/**
 	 * 支出项目循环添加
@@ -56,7 +56,7 @@ $(function(){
 	expenditureOrderforeach=  function(data) {
 		var $html = "<tbody>";
 		for (var i = 0; i < data.length; i++) {
-			if(data[i].feecategoryMoney == null){
+			if(data[i].identification == 0){
 				continue;
 			}
 				$html +="<tr>" +
@@ -69,6 +69,10 @@ $(function(){
 							"<td class='table-user'>" +
 								"<a href='javascript:void(0);'class='text-body font-weight-semibold'>" +
 									""+data[i].paymentMethod.paymentmethodName +"</a>" +
+							"</td>" +
+							"<td class='table-user'>" +
+							"<a href='javascript:void(0);'class='text-body font-weight-semibold'>" +
+							""+data[i].expenditureitems.expenditureitemsName  +"</a>" +
 							"</td>" +
 							"<td class='table-user'>" +
 								"<a href='javascript:void(0);'class='text-body font-weight-semibold'>" +
@@ -90,6 +94,7 @@ $(function(){
 				"</div>" +
 			"</th>" +
 			"<th>账户</th>" +
+			"<th>收入类型</th>" +
 			"<th>收入金额</th>" +
 			"<th>收入时间</th>" +
 			"</tr>" +
@@ -101,7 +106,7 @@ $(function(){
 	incomeOrderForeachHtml = function(data){
 		var $html = "<tbody>";
 		for (var i = 0; i < data.length; i++) {
-			if(data[i].dpMoney == null){
+			if(data[i].identification == 1){
 				continue;
 			}
 				$html +="<tr>" +
@@ -114,6 +119,10 @@ $(function(){
 							"<td class='table-user'>" +
 								"<a href='javascript:void(0);'class='text-body font-weight-semibold'>" +
 									""+data[i].paymentMethod.paymentmethodName +"</a>" +
+							"</td>" +
+							"<td class='table-user'>" +
+							"<a href='javascript:void(0);'class='text-body font-weight-semibold'>" +
+							""+data[i].feeCategory.chargeTypeName +"</a>" +
 							"</td>" +
 							"<td class='table-user'>" +
 								"<a href='javascript:void(0);'class='text-body font-weight-semibold'>" +

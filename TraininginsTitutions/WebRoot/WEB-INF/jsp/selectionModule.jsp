@@ -16,9 +16,16 @@
         <!-- App css -->
         <link href="${Path }/static/css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="${Path }/static/css/app.min.css" rel="stylesheet" type="text/css" />
-
+	<style type="text/css">
+		body{
+			background-image:url(${Path}/static/images/back.png);
+			 background-repeat:no-repeat; 
+			 background-size:100% 100%;
+			 -moz-background-size:100% 100%;}
+		}
+	</style>
     </head>
-
+	
     <body>
 
         <div class="mt-5 mb-5">
@@ -34,19 +41,19 @@
                             <div class="row mt-5">
                                 <div class="col-md-4">
                                     <div class="text-center mt-3 pl-1 pr-1"  onclick="childrenJump()">
-                                        <img alt="" src="${Path }/static/images/logo.jpg" height="200">
+                                        <img alt="" style="border-radius:50%" src="${Path }/static/images/logo.jpg" width="180" height="200">
                                         <h5 class="text-uppercase" onclick="childrenJump()">少儿版</h5>
                                     </div>
                                 </div> <!-- end col-->
                                 <div class="col-md-4">
                                     <div class="text-center mt-3 pl-1 pr-1" onclick="highJump()">
-                                   	 <img alt="" src="${Path }/static/images/logo.jpg" height="200">
+                                   	 <img alt="" style="border-radius:50%" src="${Path }/static/images/maintenance.jpg" width="180" height="200">
                                         <h5 class="text-uppercase" onclick="highJump()">高中版</h5>
                                     </div>
                                 </div> <!-- end col-->
                                 <div class="col-md-4">
                                     <div class="text-center mt-3 pl-1 pr-1">
-                                  	  <img alt="" src="${Path }/static/images/logo.jpg" height="200">
+                                  	  <img alt="" style="border-radius:50%" src="${Path }/static/images/maintenance.jpg" width="180" height="200">
                                        <h5 class="text-uppercase">艺考版</h5>
                                     </div>
                                 </div> <!-- end col-->
@@ -64,7 +71,6 @@
         <footer class="footer footer-alt">
             2018 - 2019 Â© Hyper - Coderthemes.com
         </footer>
-
         <!-- App js -->
         <script src="${Path }/static/js/app.min.js"></script>
         <script src="${Path }/static/js/selectionModule.js"></script>

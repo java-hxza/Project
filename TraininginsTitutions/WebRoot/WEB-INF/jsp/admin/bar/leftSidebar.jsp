@@ -35,9 +35,9 @@
 						<ul class="side-nav-second-level" aria-expanded="false">
 							<li><a href="javascript:void(0)" onclick="schoolListInfo()">资金账余额</a></li>
 							<li><a href="javascript:void(0)" onclick="selectOrderSchoolInfo() ">收支明细报表</a></li>
-							<li><a href="apps-tasks.html">收支汇总报表</a></li>
-							<li><a href="apps-calendar.html">教师课时总表</a></li>
-							<li><a href="apps-calendar.html">学院课时总表</a></li>
+							<li><a href="javascript:void(0)" onclick="schoolListInfo()">收支汇总报表</a></li>
+							<li><a href="javascript:void(0)" onclick="teacherHour()">教师课时总表</a></li>
+							<li><a href="javascript:void(0)" onclick="studentHour()">学员课时总表</a></li>
 							<li><a href="apps-tasks.html">新增学院报表</a></li>
 							<li><a href="apps-tasks.html">教师上课明细</a></li>
 						</ul></li>

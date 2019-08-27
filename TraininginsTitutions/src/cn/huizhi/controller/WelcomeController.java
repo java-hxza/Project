@@ -67,7 +67,7 @@ public class WelcomeController {
 		session.setAttribute("provinceList", provinceList);
 		session.setAttribute("cityList", cityList);
 		session.setAttribute("schoolList", schoolList);
-		return "login";
+		return "selectionModule";
 	}
 	/**
 	 * 错误页面返回
@@ -113,7 +113,7 @@ public class WelcomeController {
 	public String createUser(HttpSession session) {
 		List<UserType> userTypeList = userTypeService.findUserTypes();
 		session.setAttribute("userTypeList", userTypeList);
-		return"admin//create/createUser";
+		return"admin/create/createUser";
 	}
 	
 	
@@ -126,6 +126,12 @@ public class WelcomeController {
 		List<TeacherType> teacherTypeListAl = teacherTypeService.selectTeacherType();
 		session.setAttribute("teacherTypeListAl", teacherTypeListAl);
 		return "admin/create/createTeacher";
+	}
+	@RequestMapping("highSchoolLogin.html")
+	public String highSchoolLogin(HttpSession session) {
+		session.setAttribute("schoolType", 2);
+		
+		return "login";
 	}
 	
 	@RequestMapping("highIndex.html")

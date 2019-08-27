@@ -5,7 +5,9 @@ $(function(){
 	schoolListInfo = function(){
 		location.href ="adminIndex.html";
 	}
-	
+	/**
+	 * 教师信息页面跳转
+	 */
 	teacherInto = function(){
 		location.href="selectSchoolTeacherInfo.html";
 	}
@@ -20,5 +22,20 @@ $(function(){
 	selectOrderSchoolInfo = function(){
 		location.href="selectOrderSchoolInfo.html";
 	}
+	
+	/**
+	 * 教师课时页面跳转
+	 */
+	teacherHour = function(){
+		location.href="selectOrderTeacherInfo.html";
+	}
+	
+	/**
+	 * 学员课时页面跳转
+	 */
+	studentHour = function(){
+		location.href = "selectClassSchoolInfo.html";
+	}
+	
 	
 });

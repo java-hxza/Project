@@ -3,13 +3,14 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.ClassMapper">
-	<sql id="ChildrenescClassCol">
+	<sql id="classCol">
 		classId,
 		classNumber,
 		className,
 		dpId,
 		schoolId,
-		teacherId
+		teacherId,
+		classLevel
 	</sql>
 
 	<sql id="selectChildrenescClassesCol">
@@ -20,6 +21,7 @@
 		cc.headmaster as cc_headmaster ,
 		cc.teacherId as cc_teacherId,
 		cc.schoolId as cc_schoolId,
+		cc.classlevel as cc_classlevel,
 		s.schoolId as s_schoolId,
 		s.schoolName as s_schoolName,
 		dp.dpTypeName as dp_dpTypeName,
@@ -46,6 +48,7 @@
 		<result column="cc_schoolId" property="schoolId" />
 		<result column="cc_headmaster" property="headmaster" />
 		<result column="cc_teacherId" property="teacherId" />
+		<result column="cc_classlevel" property="classLevel" />
 		<collection property="school" javaType="School">
 			<id column="s_schoolId" property="schoolId" javaType="java.lang.Integer"/>
 			<result column="s_schoolName" property="schoolName" javaType="java.lang.String"/>
@@ -57,8 +60,10 @@
 	</resultMap>
 
 	<insert id="insertChildrenescClass" parameterType="Class">
-		insert into class ( classNumber, className, classTypeId, schoolId,headmaster, teacherId )
-			values (#{classNumber}, #{className}, #{classTypeId}, #{schoolId}, #{headmaster},#{teacherId})
+		insert into class ( classNumber, className, classTypeId, schoolId,headmaster, teacherId,classLevel)
+			values (#{classNumber}, #{className}, #{classTypeId}, #{schoolId}, #{headmaster},#{teacherId},#{classLevel})
 	</insert>
-
+	
+	
+	
 </mapper>

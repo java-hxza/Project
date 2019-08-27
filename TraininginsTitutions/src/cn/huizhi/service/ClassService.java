@@ -2,6 +2,8 @@ package cn.huizhi.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.huizhi.pojo.Class;
 /**
  * 少儿学生班级
@@ -40,4 +42,6 @@ public interface ClassService {
 	 * @return
 	 */
 	public int delChildrenescClass(Integer childrenesClassId);
+	
+	
 }

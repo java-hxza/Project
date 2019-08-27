@@ -3,9 +3,28 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.StudentMapper">
-
+	
+	<sql id="studentCol">
+		t.studentId, 
+		t.studentName, 
+		t.studentSex, 
+		t.studentIDCard, 
+		t.studentBirth, 
+		t.school, 
+		t.parentName, 
+		t.telephone, 
+		t.familyAddress, 
+		t.registrationChannels, 
+		t.registrationConsultant, 
+		t.startTime, 
+		t.endTime, 
+		t.theSurrogate, 
+		t.remarks, 
+		t.feeCategory
+	</sql>
+	
 	<select id="selectHigh" resultType="Student">
-		SELECT t.*
+		SELECT <include refid="studentCol"/>
 		FROM student t
 		JOIN highesclassstudnet hc ON t.studentId=hc.studentId
 		JOIN class c ON hc.classId=c.classId
@@ -13,7 +32,7 @@
 	</select>
 	
 	<select id="selectChildren" resultType="Student">
-		SELECT t.*
+		SELECT <include refid="studentCol"/>
 		FROM student t
 		JOIN childrenesclassstudnet cl ON t.studentId=cl.studentId
 		JOIN class c ON cl.classId=c.classId
@@ -21,11 +40,80 @@
 	</select>
 	
 	<select id="selectYiKao" resultType="Student">
-		SELECT t.*
+		SELECT<include refid="studentCol"/>
 		FROM student t
 		JOIN highesclassstudnet hc ON t.studentId=hc.studentId
 		JOIN class c ON hc.classId=c.classId
 		WHERE c.schoolId=#{0} AND t.feeCategory = 2
 	</select>
+	
+	
+	<select id="selectChildrenInfoByStudnet" parameterType="Student" resultType="Student">
+			select <include refid="studentCol"/>
+			from student t
+			<where>
+			<if test="studentId !=null and studentId!=''">
+				 studentId =#{studentId} 
+			</if>
+			<if test="studentSex !=null and studentSex''">
+				and studentName =#{studentSex} 
+			</if>
+			<if test="studentSex !=null and studentSex''">
+				and studentSex =#{studentSex} 
+			</if>
+			<if test="studentIDCard !=null and studentIDCard''">
+				and studentIDCard =#{studentIDCard} 
+			</if>
+			<if test="studentBirth !=null and studentBirth''">
+				and studentBirth =#{studentBirth} 
+			</if>
+			<if test="school !=null and school''">
+				and school =#{school} 
+			</if>
+			<if test="parentName !=null and parentName''">
+				and parentName =#{parentName} 
+			</if>
+			<if test="telephone !=null and telephone''">
+				and telephone =#{telephone} 
+			</if>
+			<if test="familyAddress !=null and familyAddress''">
+				and familyAddress =#{familyAddress} 
+			</if>
+			<if test="registrationChannels !=null and registrationChannels''">
+				and registrationChannels =#{registrationChannels} 
+			</if>
+			<if test="registrationChannels !=null and registrationChannels''">
+				and registrationChannels =#{registrationChannels} 
+			</if>
+			<if test="registrationConsultant !=null and registrationConsultant''">
+				and registrationConsultant =#{registrationConsultant} 
+			</if>
+			<if test="startTime !=null and startTime''">
+				and startTime =#{startTime} 
+			</if>
+			<if test="endTime !=null and endTime''">
+				and endTime =#{endTime} 
+			</if>
+			<if test="theSurrogate !=null and theSurrogate''">
+				and theSurrogate =#{theSurrogate} 
+			</if>
+			<if test="remarks !=null and remarks''">
+				and remarks =#{remarks} 
+			</if>
+			<if test="feeCategory !=null and feeCategory''">
+				and feeCategory =#{feeCategory} 
+			</if>
+				
+			</where>
+	</select>
+	
+	
+	<insert id="insertStudnetInfo" parameterType="Student"> 
+		insert into traininginstitutions.student  
+			(studentName,studentSex,studentIDCard, studentBirth, school,  parentName,  telephone, familyAddress, registrationChannels,registrationConsultant, 
+			startTime,  endTime,  theSurrogate,  remarks,  feeCategory )
+		values (#{studentName}, #{studentSex},  #{studentIDCard},  #{studentBirth},  #{school}, #{parentName},  #{telephone}, #{familyAddress},  #{registrationChannels}, 
+			#{registrationConsultant},  #{startTime},  #{endTime},  #{theSurrogate},  #{remarks},  #{feeCategory} )
+	</insert>
 
 </mapper>
