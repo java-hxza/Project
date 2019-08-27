@@ -102,6 +102,21 @@ public class LoginController {
 		return jsonMap;
 	}
 	
+	@RequestMapping("adminLogin.html")
+	@ResponseBody
+	public HashMap<String, String> validateAdminLogin(String loginName,String loginPassword,String schoolId,HttpSession session) {
+		User user = userService.findUserByLogin(loginName, loginPassword, "1",null);
+		HashMap<String, String> jsonMap = new HashMap<String, String>();
+		if(user!=null) {
+			session.setAttribute("user", user);
+			jsonMap.put("state", "1");
+			jsonMap.put("UsertypeId",user.getUserTypeId());
+		}else {
+			jsonMap.put("state", "0");
+		}
+		return jsonMap;
+	}
+	
 	@RequestMapping("selectionModule.html")
 	public String toIndex() {
 		return"selectionModule";

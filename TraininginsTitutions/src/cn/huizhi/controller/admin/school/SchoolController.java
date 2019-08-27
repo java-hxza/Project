@@ -17,13 +17,17 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import cn.huizhi.pojo.DepartmentOfPediatrics;
+import cn.huizhi.pojo.Expenditureitems;
 import cn.huizhi.pojo.FeeCategory;
 import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.PaymentMethod;
 import cn.huizhi.pojo.SchoolAccount;
 import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.User;
+import cn.huizhi.pojo.Class;
+import cn.huizhi.service.ClassService;
 import cn.huizhi.service.DepartmentOfPediatricsService;
+import cn.huizhi.service.ExpenditureitemsService;
 import cn.huizhi.service.FeeCategoryService;
 import cn.huizhi.service.OrderService;
 import cn.huizhi.service.PaymentMethodService;
@@ -49,12 +53,16 @@ public class SchoolController {
 	@Resource
 	PaymentMethodService paymentMethodService;
 	
+	@Resource
+	ClassService classService;
+	@Resource
+	ExpenditureitemsService expenditureitemsService;
+	
 	@RequestMapping("expenditureOrder.html")
 	@ResponseBody
-	public String expenditureOrder(Integer schoolId) {
-		Order order = new Order();
-		order.setSchoolId(schoolId);
-		List<Order> expenditureOrderList = orderService.findOrderListBySchool(order);
+	public String expenditureOrder(Order order) {
+		
+		List<Order> expenditureOrderList = orderService.findExpenOrderList(order);
 		if(expenditureOrderList.size()>0) {
 			return JSON.toJSONStringWithDateFormat(expenditureOrderList, "yyyy-MM-dd hh:mm:ss", SerializerFeature.WriteDateUseDateFormat);
 		}
@@ -163,12 +171,15 @@ public class SchoolController {
 		
 		//课程类型
 		List<DepartmentOfPediatrics> departmentOfPediatricsList = departmentOfPediatricsService.findDepartmentOfPediatrics();
-
+		
+		List<Expenditureitems> expenditureitemList = expenditureitemsService.selectExpenditureitems(String.valueOf(order.getSchoolId()));
+		
 		//账户类型信息
 		List<PaymentMethod> payMentList = paymentMethodService.selectPaymentMethod();
 		//收入项目类型
 		List<FeeCategory> feeCategoryList = feeCategoryService.selectFeeCategory();
 		
+		List<Class> classBySchooList =  classService.findChildrenescClasses(String.valueOf(order.getSchoolId()));
 		/**
 		 * 共支出
 		 */
@@ -193,9 +204,11 @@ public class SchoolController {
 		
 		//查询添加
 		session.setAttribute("departmentOfPediatricsList", departmentOfPediatricsList);
+		session.setAttribute("classBySchooList", classBySchooList);
 		session.setAttribute("payMentList", payMentList);
 		session.setAttribute("feeCategoryList", feeCategoryList);
 		session.setAttribute("orderListBySchool", orderListBySchool);
+		session.setAttribute("expenditureitemList", expenditureitemList);
 		
 		return "admin/orderSchool/schoolOrderInfo";
 	}

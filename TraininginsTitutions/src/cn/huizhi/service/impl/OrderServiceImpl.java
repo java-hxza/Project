@@ -69,4 +69,10 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderMapper.selectOrderListBySchool(order);
 	}
+
+	@Override
+	public List<Order> findExpenOrderList(Order order) {
+		// TODO Auto-generated method stub
+		return orderMapper.selectExpenOrderList(order);
+	}
 }

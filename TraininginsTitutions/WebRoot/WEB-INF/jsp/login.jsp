@@ -90,11 +90,14 @@
 								</div>
 
 								<div class="form-group mb-0 text-center">
+									<button class="btn btn-primary" id="loginBtn" type="submit" onclick="adminLogin()">
+										<span class="" role="status" aria-hidden="true">超管登录</span>
+									</button>
 									<button class="btn btn-primary" id="loginBtn" type="submit" onclick="UserLogin()">
-									<span class="" role="status" aria-hidden="true">管理员登录</span>
+										<span class="" role="status" aria-hidden="true">管理员登录</span>
 									</button>
 									<button class="btn btn-primary" id="loginBtn" type="submit" onclick="TeacherLogin()">
-									<span class="" role="status" aria-hidden="true">教师登录</span>
+										<span class="" role="status" aria-hidden="true">教师登录</span>
 									</button>
 								</div>
 						</div>

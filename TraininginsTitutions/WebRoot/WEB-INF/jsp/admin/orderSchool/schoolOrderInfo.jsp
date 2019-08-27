@@ -64,20 +64,31 @@
 							<div class="text-center">
 								<h3 class="">管理学校及城市</h3>
 								<p class="text-muted mt-3" id="schoolId" id_schoolName="${schoolName}" name=${schoolId }>请按规则查询</p>
-									<button type="button" class="btn btn-success btn-sm mt-2" onclick="expen()">支出</button>
-                                    <button type="button" class="btn btn-success btn-sm mt-2" onclick="query()">查询</button>
+									<button type="button" id="btn1" class="btn btn-success btn-sm mt-2" onclick="expen()">支出查询</button>
+                                    <button type="button" id="btn2"  class="btn btn-success btn-sm mt-2" onclick="query()">收入查询</button>
                              </div>
                           </div>
                      </div>      
                                  
                         <div class="row">
-                         	<div  class="col-md-6">
+                         	<div  class="col-md-4">
 								<div class="form-group">
 									<label for="billing-first-name">开始日期</label> <input
 										class="form-control" type="date" id="startTime" />
 								</div>
+							</div>
+							<div  class="col-md-4">
+								<div class="form-group">
+									<label for="billing-first-name">支出项目</label>
+									<select id="expenditureitemsId" class="form-control">
+                            			<option value="">请选择</option>
+                            			<c:forEach items="${expenditureitemList}" var="expen">
+                            				<option value="${expen.expenditureitemsId }">${expen.expenditureitemsName }</option>
+                            			</c:forEach>
+                           			</select>
+								</div>
 							</div>		
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<div class="form-group">
 									<label for="billing-first-name">结束日期</label> <input class="form-control" type="date" id="endTime" />
 								</div>
@@ -85,33 +96,44 @@
 						</div>
 								
                         <div class="row">
-                       		<div  class="col-md-4">
+                       		<div  class="col-md-3">
 								<div class="form-group">
 									<label for="billing-first-name">账户</label> 
-									<select id="paymentmethodId" class="form-control col-sm-4">
-                            			<option value="0">请选择</option>
+									<select id="paymentmethodId" class="form-control col-sm-8">
+                            			<option value="">请选择</option>
                             			<c:forEach items="${payMentList}" var="pay">
                             				<option value="${pay.paymentmethodId }">${pay.paymentmethodName }</option>
                             			</c:forEach>
                            			</select>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<div class="form-group">
 									<label for="billing-first-name">收入类型:</label> 
-									<select id="feecateId" class="form-control col-sm-4" >
-                            			<option value="0">请选择</option>
+									<select id="feecateId" class="form-control col-sm-8" >
+                            			<option value="">请选择</option>
                             			<c:forEach items="${feeCategoryList}" var="fee">
                             				<option value="${fee.chargeTypeId}">${fee.chargeTypeName }</option>
                             			</c:forEach>
                       				</select>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="billing-first-name">班级:</label> 
+									<select id="classId" class="form-control col-sm-8" >
+                            			<option value="">请选择</option>
+                            			<c:forEach items="${classBySchooList}" var="c">
+                            				<option value="${c.classId}">${c.className}</option>
+                            			</c:forEach>
+                      				</select>
+								</div>
+							</div>
+							<div class="col-md-3">
 								<div class="form-group">
 									<label for="billing-first-name">课程:</label> 
-                            		<select id="departmentofpediatricsId" class="form-control col-sm-4">
-                            			<option value="0">请选择</option>
+                            		<select id="departmentofpediatricsId" class="form-control col-sm-8">
+                            			<option value="">请选择</option>
                             			<c:forEach items="${departmentOfPediatricsList}" var="dp">
                             				<option value="${dp.dpId}">${dp.dpTypeName }</option>
                             			</c:forEach>

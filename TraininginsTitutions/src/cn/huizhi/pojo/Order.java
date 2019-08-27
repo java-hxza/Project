@@ -22,6 +22,10 @@ public class Order {
 	private String remarks;
 	private String orderNumber;
 	private Integer expenditureitemsId;
+	private Integer classId; 
+	
+	
+	private Date endTime;
 	/**
 	 * 学生
 	 */
@@ -45,6 +49,42 @@ public class Order {
 	 * 支出类型
 	 */
 	private Expenditureitems expenditureitems;
+
+	
+	
+	public Order(Integer orderId, Integer feecateId, double dpMoney, Integer stuId, Date startTime, Integer schoolId,
+			Integer identification, double feecategoryMoney, Integer paymentmethodId, String personliable,
+			Integer departmentofpediatricsId, double addhour, double givehour, Date firstdate, Date lastdate,
+			String remarks, String orderNumber, Integer expenditureitemsId, Integer classId, Date endTime,
+			Student student, PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics,
+			FeeCategory feeCategory, Expenditureitems expenditureitems) {
+		super();
+		this.orderId = orderId;
+		this.feecateId = feecateId;
+		this.dpMoney = dpMoney;
+		this.stuId = stuId;
+		this.startTime = startTime;
+		this.schoolId = schoolId;
+		this.identification = identification;
+		this.feecategoryMoney = feecategoryMoney;
+		this.paymentmethodId = paymentmethodId;
+		this.personliable = personliable;
+		this.departmentofpediatricsId = departmentofpediatricsId;
+		this.addhour = addhour;
+		this.givehour = givehour;
+		this.firstdate = firstdate;
+		this.lastdate = lastdate;
+		this.remarks = remarks;
+		this.orderNumber = orderNumber;
+		this.expenditureitemsId = expenditureitemsId;
+		this.classId = classId;
+		this.endTime = endTime;
+		this.student = student;
+		this.paymentMethod = paymentMethod;
+		this.departmentOfPediatrics = departmentOfPediatrics;
+		this.feeCategory = feeCategory;
+		this.expenditureitems = expenditureitems;
+	}
 
 	public Order(Integer orderId, Integer feecateId, double dpMoney, Integer stuId, Date startTime, Integer schoolId,
 			Integer identification, double feecategoryMoney, Integer paymentmethodId, String personliable,
@@ -88,6 +128,14 @@ public class Order {
 
 	public PaymentMethod getPaymentMethod() {
 		return paymentMethod;
+	}
+
+	public Integer getClassId() {
+		return classId;
+	}
+
+	public void setClassId(Integer classId) {
+		this.classId = classId;
 	}
 
 	public void setPaymentMethod(PaymentMethod paymentMethod) {
@@ -287,6 +335,18 @@ public class Order {
 
 	public void setExpenditureitemsId(Integer expenditureitemsId) {
 		this.expenditureitemsId = expenditureitemsId;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+	public void setExpenditureitems(Expenditureitems expenditureitems) {
+		this.expenditureitems = expenditureitems;
 	}
 
 }

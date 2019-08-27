@@ -10,13 +10,16 @@ $(function(){
 	 * 收入ajax
 	 */
 	query = function(){
-		var startTime = new Date($("#startTime").val());
+		$("#btn1").addClass("spinner-border spinner-border-sm");
+		$("#btn2").addClass("spinner-border spinner-border-sm");
+		var startTime = $("#startTime").val();
 		var endTime =$("#endTime").val();
 		var paymentmethodId = $("#paymentmethodId").val();
 		var feecateId = $("#feecateId").val();
 		var departmentofpediatricsId = $("#departmentofpediatricsId").val();
 		var schoolId = $("#schoolId").attr("name");
 		var schoolName = $("#schoolId").attr("id_schoolName");
+		var classId = $("#classId").val();
 		//判断时间是都空值
 		if(startTime != null && startTime !=''){
 			startTime = new Date(startTime);
@@ -41,6 +44,7 @@ $(function(){
 				departmentofpediatricsId : departmentofpediatricsId,
 				schoolId : schoolId,
 				schoolName : schoolName,
+				classId : classId
 			},
 			dataType : 'JSON',
 			type: 'post',
@@ -49,6 +53,12 @@ $(function(){
 				$("#info").empty();
 				//在添加
 				queryIndex(data);
+				/*$(".text-center").append("<button type='button' id='btn1' class='btn btn-success btn-sm mt-2' onclick='expen()'>支出查询</button>" +
+					"<button type='button'	id='btn2' class='btn btn-success btn-sm mt-2' onclick='query()'>收入查询</button>");
+				*/
+				$("#btn1").removeClass("spinner-border spinner-border-sm");
+				$("#btn2").removeClass("spinner-border spinner-border-sm");
+				
 			},
 			error : function(data){
 				alert("系统出错！");
@@ -112,10 +122,32 @@ $(function(){
 	 */
 	expen = function(){
 		var schoolId = $("#schoolId").attr("name");
+		var expenditureitemsId = $("#expenditureitemsId").val();
+		var startTime = $("#startTime").val();
+		var endTime =$("#endTime").val();
+		$("#btn1").addClass("spinner-border spinner-border-sm");
+		$("#btn2").addClass("spinner-border spinner-border-sm");
+		
+		//判断时间是都空值
+		if(startTime != null && startTime !=''){
+			startTime = new Date(startTime);
+		}
+		if(startTime == '' || startTime == null){
+			startTime = new Date();
+		}
+		if(endTime != null && endTime !=''){
+			endTime = new Date(endTime);
+		}
+		if(endTime == '' || endTime == null){
+			endTime = new Date();
+		}
 		$.ajax({
 			url	: 'expenditureOrder.html',
 			data : {
-				schoolId : schoolId
+				schoolId : schoolId,
+				expenditureitemsId : expenditureitemsId,
+				startTime : startTime,
+				endTime : endTime
 			},
 			dataType: "JSON",
 			type:'post',
@@ -125,6 +157,11 @@ $(function(){
 				data = eval(data);
 				if(data != null){
 					$("#products-datatable").append(expenditureOrderforeach(data));
+					/*$(".text-center").append("<button type='button' id='btn1' class='btn btn-success btn-sm mt-2' onclick='expen()'>支出查询</button>" +
+							"<button type='button'	id='btn2' class='btn btn-success btn-sm mt-2' onclick='query()'>收入查询</button>);**/
+					$("#btn1").removeClass("spinner-border spinner-border-sm");
+					$("#btn2").removeClass("spinner-border spinner-border-sm");
+                    
 				}
 				
 			},error: function(){

@@ -52,5 +52,10 @@ public interface OrderMapper {
 	 */
 	public List<Order> selectOrderListBySchool(Order order);
 
-
+	/**
+	 * 根据条件查询支出项目
+	 * @param order
+	 * @return
+	 */
+	public List<Order> selectExpenOrderList(Order order);
 }
