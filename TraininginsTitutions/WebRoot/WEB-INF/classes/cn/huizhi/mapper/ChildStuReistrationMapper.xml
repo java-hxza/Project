@@ -26,10 +26,10 @@
 		css.dpId ccs_dpId,
 		css.remarks ccs_remarks,
 		css.rOCCId ccs_rOCCId,
+		SUM(css.classHour) sum_Hour,
 		css.state ccs_state,
 		css.studentName ccs_studentName,
 		css.teacherInClass ccs_teacherInClass,
-		ccs.teacherId ccs_teacherId,
 		ccs.classId ccs_classId,
 		o.givehour o_givehour,
 		o.addhour o_addhour
@@ -46,6 +46,7 @@
 		<result column="ccs_classId" property="classId"/>
 		<result column="ccs_teacherId" property="teacherId"/>
 		<result column="ccs_state" property="state"/>
+		<result column="sum_Hour" property="sumHour"/>
 		<result column="ccs_studentName" property="studentName"/>
 		<result column="ccs_teacherInClass" property="teacherInClass"/>
 		<association property="order" javaType="Order">
@@ -55,14 +56,17 @@
 	</resultMap>
 	
 	<select id="childStuReistrationListByClass" resultMap="ChildStuReistrationMap">
-		select <include refid="ChildStuReistrationCol"/>
+		select distinct <include refid="ChildStuReistrationCol"/> 
 		from childsturegistration css
 		join childrenesclassstudnet ccs on ccs.classesStudentId = css.childStuId
-		join traininginstitutions.class  c on c.classId = ccs.classId
+		join traininginstitutions.class  c on c.classId = css.classId
 		join traininginstitutions.order o on o.stuId  =css.childStuId
 		<where>
-			c.classId = #{classId}
+			<if test="classId!=null and classId!=''">
+				c.classId = #{classId}
+			</if>
 		</where> 
+		group by ccs.studentId
 	</select>
 	
 </mapper>

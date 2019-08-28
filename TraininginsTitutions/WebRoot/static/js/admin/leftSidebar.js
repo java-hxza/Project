@@ -36,6 +36,17 @@ $(function(){
 	studentHour = function(){
 		location.href = "selectClassSchoolInfo.html";
 	}
-	
+	/**
+	 * 新增学员报表
+	 */
+	addStudent = function(){
+		location.href = "selectAddStuInfo.html";
+	} 
+	/**
+	 * 返回教师上课明细
+	 */
+	teacherClassHour = function(){
+		location.href ="selectSchoolTeacherClassHourInfo.html";
+	}
 	
 });

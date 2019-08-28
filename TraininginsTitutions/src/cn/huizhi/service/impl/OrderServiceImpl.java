@@ -20,24 +20,32 @@ public class OrderServiceImpl implements OrderService {
 	 * 查询课时订单
 	 */
 	@Override
-	public List<Order> selectOrderHour() {
-		return orderMapper.selectOrderHour();
+	public List<Order> selectOrderHour(Integer schoolId) {
+		return orderMapper.selectOrderHour(schoolId);
 	}
 
 	/**
 	 * 查询时间段订单
 	 */
 	@Override
-	public List<Order> selectOrderPeriod() {
-		return orderMapper.selectOrderPeriod();
+	public List<Order> selectOrderPeriod(Integer schoolId) {
+		return orderMapper.selectOrderPeriod(schoolId);
 	}
 
 	/**
 	 * 查询其他订单
 	 */
 	@Override
-	public List<Order> selectOrderOther() {
-		return selectOrderOther();
+	public List<Order> selectOrderOther(Integer schoolId) {
+		return selectOrderOther(schoolId);
+	}
+
+	/**
+	 * 查询费用支出订单
+	 */
+	@Override
+	public List<Order> selectOrderExpenditure(Integer schoolId) {
+		return orderMapper.selectOrderExpenditure(schoolId);
 	}
 
 	/**

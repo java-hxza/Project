@@ -10,12 +10,14 @@
 		schoolName,
 		cityId,
 		schoolRemarks,
-		cityProperId
+		cityProperId,
+		schoolType
 	</sql>
 	<sql id="schoolColByPro">
 		sc.schoolId as sc_schoolId,
 		sc.schoolName as sc_schoolName,
 		sc.cityId as sc_cityId,
+		sc.schooltype sc_schoolType,
 		sc.schoolRemarks sc_schoolRemarks,
 		sc.cityProperId as sc_cityProperId,
 		p.provinceId as p_provinceId, 
@@ -37,6 +39,7 @@
 		<result column="sc_cityId" property="cityId"/>
 		<result column="sc_schoolRemarks" property="schoolRemarks"/>
 		<result column="sc_cityProperId" property="cityProperId"/>
+		<result column="sc_schoolType" property="schoolType"/>
 		<collection property="city" javaType="City">
 				<id column="c_cityId" property="cityId"/>
 				<result column="c_cityName" property="cityName"/>
@@ -58,9 +61,8 @@
 		</where>
 	</select>
 	
-	
 	<insert id="insertSchool" parameterType="School">
-		insert into school  (schoolName,  cityId,  schoolRemarks,cityProperId )
-			values (#{schoolName},#{cityId},#{schoolRemarks},#{cityProperId})
+		insert into school  (schoolName,  cityId,  schoolRemarks,cityProperId,schoolType )
+			values (#{schoolName},#{cityId},#{schoolRemarks},#{cityProperId},#{schoolType})
 	</insert>
 </mapper>

@@ -298,7 +298,7 @@
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-select">付款项目</label> <select
-																class="form-control" id="example-select">
+																class="form-control expenditureitemsId" id="example-select">
 																<c:forEach items="${expenditureitems }" var="e">
 																	<option value="${e.expenditureitemsId }">${e.expenditureitemsName}</option>
 																</c:forEach>
@@ -308,9 +308,9 @@
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-select">收款人</label> <select
-																class="form-control" id="example-select">
+																class="form-control stuId" id="example-select">
 																<c:forEach items="${high }" var="h">
-																	<option value="${h.studentBirth }">${h.studentName}</option>
+																	<option value="${h.studentId }">${h.studentName}</option>
 																</c:forEach>
 															</select>
 														</div>
@@ -318,7 +318,7 @@
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-select">资金账户</label> <select
-																class="form-control" id="example-select">
+																class="form-control paymentmethodId" id="example-select">
 																<c:forEach items="${paymentMethod }" var="p">
 																	<option value="${p.paymentmethodId }">${p.paymentmethodName}</option>
 																</c:forEach>
@@ -327,23 +327,23 @@
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
-															<label>金额</label> <input type="text" class="form-control money"
-																data-toggle="input-mask"
-																data-mask-format="000.000.000.000.000,00"
-																data-reverse="true"> <span
-																class="font-13 text-muted"></span>
+															<div class="form-group mb-3">
+															<label for="example-number">金额</label> <input
+																class="form-control feecategoryMoney" id="example-number" type="number"
+																name="number">
+														</div>
 														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
 															<label for="billing-first-name">责任人</label> <input
-																class="form-control" type="text" id="billing-first-name" />
+																class="form-control personliable" type="text" id="billing-first-name" />
 														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
 															<label for="billing-last-name">备注</label> <input
-																class="form-control" type="text" id="billing-last-name" />
+																class="form-control remarks" type="text" id="billing-last-name" />
 														</div>
 													</div>
 													<div class="col-md-12">

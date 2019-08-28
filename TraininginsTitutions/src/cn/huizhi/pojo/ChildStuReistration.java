@@ -7,15 +7,18 @@ public class ChildStuReistration {
 	private Integer rOCCId;
 	private String studentName;
 	private Date classHours;
-	private Integer chargeTypeId;
 	private String contentOfCourses;
-	private double classHour;
+	private double classHour;	
 	private String teacherInClass;
 	private Integer childStuId;
-	private Integer state;
+	private Integer state;	
 	private String remarks;
 	private Integer classId;
 	private Integer teacherId;
+	private Integer dpId;
+	private Double sumHour;
+	
+	
 	/**
 	 * 学生订单
 	 */
@@ -36,15 +39,14 @@ public class ChildStuReistration {
 	}
 
 
-	public ChildStuReistration(Integer rOCCId, String studentName, Date classHours, Integer chargeTypeId,
-			String contentOfCourses, double classHour, String teacherInClass, Integer childStuId, Integer state,
-			String remarks, Integer classId, Integer teacherId, Order order, Class class1,
+	public ChildStuReistration(Integer rOCCId, String studentName, Date classHours, String contentOfCourses,
+			double classHour, String teacherInClass, Integer childStuId, Integer state, String remarks, Integer classId,
+			Integer teacherId, Integer dpId, Double sumHour, Order order, Class class1,
 			ChildrenesClassStudnet childrenesClassStudnet) {
 		super();
 		this.rOCCId = rOCCId;
 		this.studentName = studentName;
 		this.classHours = classHours;
-		this.chargeTypeId = chargeTypeId;
 		this.contentOfCourses = contentOfCourses;
 		this.classHour = classHour;
 		this.teacherInClass = teacherInClass;
@@ -53,14 +55,22 @@ public class ChildStuReistration {
 		this.remarks = remarks;
 		this.classId = classId;
 		this.teacherId = teacherId;
+		this.dpId = dpId;
+		this.sumHour = sumHour;
 		this.order = order;
 		this.class1 = class1;
 		this.childrenesClassStudnet = childrenesClassStudnet;
 	}
 
 
+	public Double getSumHour() {
+		return sumHour;
+	}
 
 
+	public void setSumHour(Double sumHour) {
+		this.sumHour = sumHour;
+	}
 
 
 	public Integer getrOCCId() {
@@ -123,13 +133,6 @@ public class ChildStuReistration {
 		this.classHours = classHours;
 	}
 
-	public Integer getChargeTypeId() {
-		return chargeTypeId;
-	}
-
-	public void setChargeTypeId(Integer chargeTypeId) {
-		this.chargeTypeId = chargeTypeId;
-	}
 
 	public String getContentOfCourses() {
 		return contentOfCourses;

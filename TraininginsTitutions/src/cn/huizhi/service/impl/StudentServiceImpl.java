@@ -1,6 +1,7 @@
 package cn.huizhi.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -20,24 +21,24 @@ public class StudentServiceImpl implements StudentService{
 	 * 查询所有高中学生
 	 */
 	@Override
-	public List<Student> selectHigh(Integer schoolId) {
-		return studentMapper.selectHigh(schoolId);
+	public List<Student> selectHigh(Integer schoolId,Map<Object,Object> map) {
+		return studentMapper.selectHigh(schoolId,map);
 	}
 
 	/**
 	 * 查询所有少儿学生
 	 */
 	@Override
-	public List<Student> selectChildren(Integer schoolId) {
-		return studentMapper.selectChildren(schoolId);
+	public List<Student> selectChildren(Integer schoolId,Map<Object,Object> map) {
+		return studentMapper.selectChildren(schoolId,map);
 	}
 
 	/**
 	 * 查询所有艺考学生
 	 */
 	@Override
-	public List<Student> selectYiKao(Integer schoolId) {
-		return studentMapper.selectYiKao(schoolId);
+	public List<Student> selectYiKao(Integer schoolId,Map<Object,Object> map) {
+		return studentMapper.selectYiKao(schoolId,map);
 	}
 
 	@Override

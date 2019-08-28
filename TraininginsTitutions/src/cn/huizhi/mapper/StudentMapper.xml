@@ -26,25 +26,35 @@
 	<select id="selectHigh" resultType="Student">
 		SELECT <include refid="studentCol"/>
 		FROM student t
-		JOIN highesclassstudnet hc ON t.highId=hc.studentId
+		JOIN highesclassstudnet hc ON t.studentId=hc.studentId
 		JOIN class c ON hc.classId=c.classId
-		WHERE c.schoolId=#{0} AND feeCategory = 2
+		WHERE c.schoolId=#{0} AND t.feeCategory = 2
+		<if test="map.startTime !=null and map.startTime!=''">
+			and date(t.startTime) between  #{map.startTime} and #{map.endTime} 
+		</if>
+		
 	</select>
 	
 	<select id="selectChildren" resultType="Student">
 		SELECT <include refid="studentCol"/>
 		FROM student t
-		JOIN highesclassstudnet hc ON t.highId=hc.studentId
-		JOIN class c ON hc.classId=c.classId
-		WHERE c.schoolId=#{0} AND feeCategory = 1
+		JOIN childrenesclassstudnet cl ON t.studentId=cl.studentId
+		JOIN class c ON cl.classId=c.classId
+		WHERE c.schoolId=#{0} AND t.feeCategory = 1
+		<if test="map.startTime !=null and map.startTime!=''">
+			and date(t.startTime) between #{map.startTime} and #{map.endTime} 
+		</if>
 	</select>
 	
 	<select id="selectYiKao" resultType="Student">
 		SELECT<include refid="studentCol"/>
 		FROM student t
-		JOIN highesclassstudnet hc ON t.highId=hc.studentId
+		JOIN highesclassstudnet hc ON t.studentId=hc.studentId
 		JOIN class c ON hc.classId=c.classId
-		WHERE c.schoolId=#{0} AND feeCategory = 3
+		WHERE c.schoolId=#{0} AND t.feeCategory = 3
+		<if test="map.startTime !=null and map.startTime!=''">
+			and date(t.startTime) between #{map.startTime} and #{map.endTime} 
+		</if>
 	</select>
 	
 	

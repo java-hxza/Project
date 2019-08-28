@@ -1,5 +1,6 @@
 package cn.huizhi.controller.admin.school;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,11 +21,12 @@ import cn.huizhi.pojo.TeacherHour;
 import cn.huizhi.pojo.User;
 import cn.huizhi.service.ChildStuReistrationService;
 import cn.huizhi.service.ClassService;
+import cn.huizhi.service.StudentService;
 import cn.huizhi.service.TeacherDictionService;
 import cn.huizhi.service.TeacherHourService;
 import cn.huizhi.service.TeacherService;
-import cn.huizhi.pojo.ChildStuReistration;
 import cn.huizhi.pojo.Class;
+import cn.huizhi.pojo.Student;
 @Controller
 public class AdminTeacherController {
 	@Resource
@@ -39,6 +42,9 @@ public class AdminTeacherController {
 	
 	@Resource
 	ChildStuReistrationService childStuReistrationService;
+	
+	@Resource
+	StudentService studentService;
 	
 	@RequestMapping("schoolTeacherInfo.html")
 	public String schoolTeacherInfo(Integer schoolId,String schoolName,HttpSession session) {
@@ -175,6 +181,14 @@ public class AdminTeacherController {
 		return "admin/classStudent/selectClassSchoolInfo";
 	}
 	
+	
+	/**
+	 * 返回班级学校页面
+	 * @param schoolId
+	 * @param schoolName
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("classSchoolInfo.html")
 	public String classSchoolInfo(Integer schoolId,String schoolName,HttpSession session) {
 		
@@ -185,18 +199,90 @@ public class AdminTeacherController {
 		return "admin/classStudent/classSchoolInfo";
 	}
 	
-	@RequestMapping("studentHourInfo.html")
-	public String studentHourInfo(Integer classId,Integer classLevel) {
-		if(classLevel == 1)  {
-			List<ChildStuReistration> cilChildStuReistrationList = childStuReistrationService.findchildStuReistrationListByClass(classId);
-		}
+	/**
+	 * 返回少儿班级学生课时信息
+	 * @param classId
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("childrenStudentHourInfo.html")
+	public String studentHourInfo(Integer classId,HttpSession session) {
+		List stuReistrationList = childStuReistrationService.findchildStuReistrationListByClass(classId);
 		
-		if(classLevel == 2) {
+		session.setAttribute("stuReistrationList", stuReistrationList);
+		
+		return "admin/classStudent/studentHourInfo";
+	}
+	
+	/**
+	 * 返回高中班级课时信息
+	 * @param classId
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("highStudentHourInfo.html")
+	public String HighStudentHourInfo(Integer classId,HttpSession session) {
+		List stuReistrationList = childStuReistrationService.findchildStuReistrationListByClass(classId);
+		
+		session.setAttribute("stuReistrationList", stuReistrationList);
+		
+		return "admin/classStudent/studentHourInfo";
+	}
+	
+	
+	/**
+	 * 返回选择学校页面
+	 * @return
+	 */
+	@RequestMapping("selectAddStuInfo.html")
+	public String selectAddStuInfo() {
+		
+		return "admin/addStudentInfo/selectAddStuInfo";
+	}
+	
+	
+	/**
+	 * 返回新增学员信息
+	 * @return
+	 */
+	@RequestMapping("childrenAddStudentInfo.html")
+	public String ChildrenAddStudentInfo(Integer schoolId,String startTime,String endTime,HttpSession session) {
+		
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("startTime",startTime);
+		map.put("endTime",endTime);
+		
+		List<Student> addstudentList = studentService.selectChildren(schoolId,map);
+		
+		session.setAttribute("stuCount", addstudentList.size());
+		session.setAttribute("stuClassification", "少儿");
+		return "admin/addStudentInfo/addStudentInfo";
+	}
+	
+	/**
+	 * 教师上课明细
+	 * @return
+	 */
+	@RequestMapping("selectSchoolTeacherClassHourInfo.html")
+	public String selectSchoolTeacherClassHourInfo() {
+		return "admin/teacher/selectSchoolTeacherClassHourInfo";
+	}
+	
+	/**
+	 * 返回教师上课明细页面
+	 * @param schoolId
+	 * @param schoolName
+	 * @return
+	 */
+	@RequestMapping("teacherClassHourInfo.html")
+	public String teacherClassHourInfo(Integer schoolId,String schoolName,Integer schoolType) {
+		
+		if(schoolType ==1) {
 			
 		}
 		
-		return "studentHourInfo";
+		
+		return "admin/teacher/teacherClassHourInfo";
 	}
-	
 	
 }

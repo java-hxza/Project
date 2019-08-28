@@ -38,8 +38,9 @@
 							<li><a href="javascript:void(0)" onclick="schoolListInfo()">收支汇总报表</a></li>
 							<li><a href="javascript:void(0)" onclick="teacherHour()">教师课时总表</a></li>
 							<li><a href="javascript:void(0)" onclick="studentHour()">学员课时总表</a></li>
-							<li><a href="apps-tasks.html">新增学院报表</a></li>
-							<li><a href="apps-tasks.html">教师上课明细</a></li>
+							<li><a href="javascript:void(0)" onclick="addStudent()">新增学员报表</a></li>
+							<li><a href="javascript:void(0)" onclick="teacherClassHour()">教师上课明细</a></li>
+							<li><a href="apps-tasks.html">学员收费情况表</a></li>
 						</ul></li>
 
 					<li class="side-nav-item"><a href="javascript: void(0);"
