@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set scope="request" value="${pageContext.request.contextPath }"
 	var="Path" />
 <!DOCTYPE html>
@@ -276,48 +276,64 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-body">
-									<h4 style="text-align:center">费用支出单</h4>
-									<div class="row mb-2">
+									<h4 style="text-align:center">按课时收费单</h4>
+									<div class="row mb-2 addOrderChildren">
 										<div class="col-md-12">
-											<form>
+											<form novalidate>
 												<div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
 															<label for="billing-first-name">校区信息</label> <input
-																class="form-control" type="text" id="billing-first-name"
+																class="form-control school" type="text" id="billing-first-name"
 																value="${school }" disabled />
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="form-group">
-															<label for="billing-last-name">付款日期</label> <input
-																class="form-control date" type="text"
-																id="billing-last-name" disabled/>
-														</div>
-													</div>
-													<div class="col-md-6">
 														<div class="form-group mb-3">
-															<label for="example-select">付款项目</label> <select
-																class="form-control expenditureitemsId" id="example-select">
-																<c:forEach items="${expenditureitems }" var="e">
-																	<option value="${e.expenditureitemsId }" name="${e.expenditureitemsMoney }">${e.expenditureitemsName}</option>
-																</c:forEach>
-															</select>
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group mb-3">
-															<label for="example-select">收款人</label> <select
+															<label for="example-select">学员名称</label> <select
 																class="form-control stuId" id="example-select">
-																<c:forEach items="${high }" var="h">
-																	<option value="${h.studentId }" name="${h.childrenesClassStudnet.classId }">${h.studentName}</option>
+																<c:forEach items="${children }" var="c">
+																	<option value="${c.studentId }"
+																		name="${c.childrenesClassStudnet.classId }">${c.studentName}</option>
+																</c:forEach>
+															</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="billing-last-name">收费日期</label> <input
+																class="form-control date" type="text"
+																id="billing-last-name" disabled />
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-select">课程名称</label> <select
+																class="form-control departmentofpediatricsId"
+																id="example-select">
+																<c:forEach items="${departmentOfPediatric }" var="d">
+																	<option value="${d.dpId }">${d.dpTypeName}</option>
 																</c:forEach>
 															</select>
 														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group mb-3">
-															<label for="example-select">资金账户</label> <select
+															<label for="example-number">收费金额</label> <input
+																class="form-control money" id="example-number"
+																type="number" name="number">
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-number">本次新增课时</label> <input
+																class="form-control hour" id="example-number"
+																type="number" name="number">
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-select">交费方式</label> <select
 																class="form-control paymentmethodId" id="example-select">
 																<c:forEach items="${paymentMethod }" var="p">
 																	<option value="${p.paymentmethodId }">${p.paymentmethodName}</option>
@@ -326,29 +342,33 @@
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="form-group">
-															<div class="form-group mb-3">
-															<label for="example-number">金额</label> <input
-																class="form-control feecategoryMoney" id="example-number" type="number"
-																name="number" >
+														<div class="form-group mb-3">
+															<label for="example-number">本次赠送课时</label> <input
+																class="form-control hours" id="example-number"
+																type="number" name="number">
 														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-select">核算项目</label> <select
+																class="form-control feecateId" id="example-select">
+																<c:forEach items="${feeCategory }" var="f">
+																	<option value="${f.chargeTypeId }" name="${f.chargeMoney }">${f.chargeTypeName}</option>
+																</c:forEach>
+															</select>
 														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
-															<label for="billing-first-name">责任人</label> <input
-																class="form-control personliable" type="text" id="billing-first-name" />
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group">
-															<label for="billing-last-name">备注</label> <input
-																class="form-control remarks" type="text" id="billing-last-name" />
+															<label for="billing-last-name">备注信息</label> <input
+																class="form-control remarks" type="text"
+																id="billing-last-name" />
 														</div>
 													</div>
 													<div class="col-md-12">
 														<div class="form-group">
-															<button type="button" class="btn btn-block btn-primary TiJiao">提交</button>
+															<button type="submit"
+																class="btn btn-block btn-primary TiJiao">提交</button>
 														</div>
 													</div>
 												</div>
@@ -541,7 +561,7 @@
 			<!-- third party js -->
 			<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
 			<script src="${Path }/static/js/highes/leftSidebar.js"></script>
-			<script src="${Path }/static/js/highes/Expenditure.js"></script>
+			<script src="${Path }/static/js/highes/AddChargeHours.js"></script>
 			<!-- third party js ends -->
 </body>
 </html>

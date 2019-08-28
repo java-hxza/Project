@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -318,7 +320,7 @@ public class HighesController {
 	@RequestMapping("ChargeHours.html")
 	public String ChargeHours(Model model) {
 		User user = (User) session.getAttribute("user");
-		List<Student> children = studentService.selectChildren(Integer.parseInt(user.getSchoolId()),null);
+		List<Student> children = studentService.selectChildren(Integer.parseInt(user.getSchoolId()),new HashMap<Object, Object>());
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<FeeCategory> feeCategory = feecategoryService.selectFeeCategory();
 		List<DepartmentOfPediatrics> departmentOfPediatric = departmentOfPediatricsService.findDepartmentOfPediatrics();
@@ -327,7 +329,7 @@ public class HighesController {
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("departmentOfPediatric", departmentOfPediatric);
 		model.addAttribute("feeCategory", feeCategory);
-		return "high/ChargeHours";
+		return "high/AddChargeHours";
 	}
 
 	/**
@@ -341,7 +343,7 @@ public class HighesController {
 	public Object AddChargeHours(@RequestParam Integer stuId, @RequestParam Integer feecateId,
 			@RequestParam double dpMoney, @RequestParam String startTime, @RequestParam Integer departmentofpediatricsId,
 			@RequestParam double addhour, @RequestParam double givehour, @RequestParam String remarks,
-			@RequestParam Integer paymentmethodId,@RequestParam String date) {
+			@RequestParam Integer paymentmethodId,@RequestParam String date,@RequestParam Integer classId) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
 		Order order = new Order();
@@ -357,11 +359,12 @@ public class HighesController {
 		}
 		order.setIdentification(0);
 		order.setAddhour(addhour);
-		order.setOrderNumber("KS" + date + stuId);
+		order.setOrderNumber("KS" + date + stuId + new Random().nextInt(100));
 		order.setGivehour(givehour);
 		order.setDepartmentofpediatricsId(departmentofpediatricsId);
 		order.setFeecateId(feecateId);
 		order.setDpMoney(dpMoney);
+		order.setClassId(classId);
 		order.setPaymentmethodId(paymentmethodId);
 		if (orderService.addOrder(order) == 1) {
 			map.put("add", "1");
@@ -380,7 +383,7 @@ public class HighesController {
 	@RequestMapping("ChargePeriod.html")
 	public String ChargePeriod(Model model) {
 		User user = (User) session.getAttribute("user");
-		List<Student> high = studentService.selectHigh(Integer.parseInt(user.getSchoolId()),null);
+		List<Student> high = studentService.selectHigh(Integer.parseInt(user.getSchoolId()),new HashMap<Object, Object>());
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<FeeCategory> feeCategory = feecategoryService.selectFeeCategory();
 		model.addAttribute("high", high);
@@ -401,7 +404,7 @@ public class HighesController {
 	public Object AddChargePeriod(@RequestParam Integer stuId, @RequestParam String startTime,
 			@RequestParam Integer feecateId, @RequestParam double dpMoney, @RequestParam String firstdate,
 			@RequestParam String lastdate, @RequestParam String personliable, @RequestParam String remarks,
-			@RequestParam Integer paymentmethodId,@RequestParam String date) {
+			@RequestParam Integer paymentmethodId,@RequestParam String date,@RequestParam Integer classId) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
 		Order order = new Order();
@@ -422,7 +425,8 @@ public class HighesController {
 		order.setRemarks(remarks);
 		order.setFeecateId(feecateId);
 		order.setDpMoney(dpMoney);
-		order.setOrderNumber("SJ" + date + stuId);
+		order.setClassId(classId);
+		order.setOrderNumber("SJ" + date + stuId + new Random().nextInt(100));
 		order.setPaymentmethodId(paymentmethodId);
 		order.setIdentification(0);
 		if (orderService.addOrder(order) == 1) {
@@ -442,7 +446,7 @@ public class HighesController {
 	@RequestMapping("ChargeOthers.html")
 	public String ChargeOthers(Model model) {
 		User user = (User) session.getAttribute("user");
-		List<Student> high = studentService.selectYiKao(Integer.parseInt(user.getSchoolId()),null);
+		List<Student> high = studentService.selectChildren(Integer.parseInt(user.getSchoolId()),new HashMap<Object, Object>());
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<FeeCategory> feeCategory = feecategoryService.selectFeeCategory();
 		model.addAttribute("high", high);
@@ -462,7 +466,7 @@ public class HighesController {
 	@ResponseBody
 	public Object AddChargeOthers(@RequestParam Integer stuId, @RequestParam String startTime,
 			@RequestParam Integer feecateId, @RequestParam double dpMoney, @RequestParam String personliable,
-			@RequestParam String remarks, @RequestParam Integer paymentmethodId,@RequestParam String date) {
+			@RequestParam String remarks, @RequestParam Integer paymentmethodId,@RequestParam String date,@RequestParam Integer classId) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
 		Order order = new Order();
@@ -480,7 +484,8 @@ public class HighesController {
 		order.setFeecateId(feecateId);
 		order.setPersonliable(personliable);
 		order.setDpMoney(dpMoney);
-		order.setOrderNumber("QT" + date + stuId);
+		order.setClassId(classId);
+		order.setOrderNumber("QT" + date + stuId + new Random().nextInt(100));
 		order.setStuId(stuId);
 		if (orderService.addOrder(order) == 1) {
 			map.put("add", "1");
@@ -516,26 +521,24 @@ public class HighesController {
 	@RequestMapping("updateChargeHour.html")
 	@ResponseBody
 	public Object updateChargeHour(@RequestParam Integer stuId, @RequestParam Integer feecateId,
-			@RequestParam double dpMoney, @RequestParam Date startTime, @RequestParam Integer departmentofpediatricsId,
+			@RequestParam double dpMoney,@RequestParam Integer departmentofpediatricsId,
 			@RequestParam double addhour, @RequestParam double givehour, @RequestParam String remarks,
-			@RequestParam Integer paymentmethodId) {
+			@RequestParam Integer paymentmethodId,@RequestParam Integer orderId) {
 		Order order = new Order();
-		User user = (User) session.getAttribute("user");
 		HashMap<String, String> map = new HashMap<String, String>();
 		order.setStuId(stuId);
-		order.setSchoolId(Integer.parseInt(user.getSchoolId()));
 		order.setRemarks(remarks);
-		order.setStartTime(startTime);
 		order.setAddhour(addhour);
 		order.setGivehour(givehour);
+		order.setOrderId(orderId);
 		order.setDepartmentofpediatricsId(departmentofpediatricsId);
 		order.setFeecateId(feecateId);
 		order.setDpMoney(dpMoney);
 		order.setPaymentmethodId(paymentmethodId);
-		if (orderService.updateOrderAll(order) == 1) {
-			map.put("update", "1");
-		} else {
+		if (orderService.updateOrderAll(order) < 0) {
 			map.put("update", "0");
+		} else {
+			map.put("update", "1");
 		}
 		return JSONArray.toJSONString(map);
 	}
@@ -554,7 +557,6 @@ public class HighesController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
 		Order order = new Order();
-		order.setSchoolId(Integer.parseInt(user.getSchoolId()));
 		order.setStuId(stuId);
 		order.setStartTime(startTime);
 		order.setPersonliable(personliable);
@@ -585,7 +587,6 @@ public class HighesController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
 		Order order = new Order();
-		order.setSchoolId(Integer.parseInt(user.getSchoolId()));
 		order.setStartTime(startTime);
 		order.setRemarks(remarks);
 		order.setPaymentmethodId(paymentmethodId);
@@ -610,7 +611,7 @@ public class HighesController {
 	@RequestMapping("OrderExpenditure.html")
 	public String OrderExpenditure(Model model) {
 		User user = (User) session.getAttribute("user");
-		List<Student> high = studentService.selectHigh(Integer.parseInt(user.getSchoolId()),null);
+		List<Student> high = studentService.selectHigh(Integer.parseInt(user.getSchoolId()),new HashMap<Object, Object>());
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<Expenditureitems> expenditureitems = expenditureitemsService.selectExpenditureitems(user.getSchoolId());
 		model.addAttribute("high", high);
@@ -637,7 +638,7 @@ public class HighesController {
 	@ResponseBody
 	public Object AddOrderExpenditure(@RequestParam Integer stuId, @RequestParam String startTime,
 			@RequestParam double feecategoryMoney, @RequestParam Integer expenditureitemsId,
-			@RequestParam Integer paymentmethodId, @RequestParam String personliable, @RequestParam String remarks,@RequestParam String date) {
+			@RequestParam Integer paymentmethodId, @RequestParam String personliable, @RequestParam String remarks,@RequestParam String date,@RequestParam Integer classId) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
 		Order order = new Order();
@@ -647,7 +648,8 @@ public class HighesController {
 		order.setPaymentmethodId(paymentmethodId);
 		order.setSchoolId(Integer.parseInt(user.getSchoolId()));
 		order.setStuId(stuId);
-		order.setOrderNumber("ZC" + date + stuId);
+		order.setClassId(classId);
+		order.setOrderNumber("ZC" + date + stuId + new Random().nextInt(100));
 		try {
 			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd").parse(startTime);
 			order.setStartTime(startTime1);
@@ -710,6 +712,15 @@ public class HighesController {
 	@RequestMapping("selectOrderHour.html")
 	public String selectOrderHour(Model model) {
 		User user = (User) session.getAttribute("user");
+		List<Student> children = studentService.selectChildren(Integer.parseInt(user.getSchoolId()),new HashMap<Object, Object>());
+		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
+		List<FeeCategory> feeCategory = feecategoryService.selectFeeCategory();
+		List<DepartmentOfPediatrics> departmentOfPediatric = departmentOfPediatricsService.findDepartmentOfPediatrics();
+		model.addAttribute("school", children.get(0).getSchool());
+		model.addAttribute("children", children);
+		model.addAttribute("paymentMethod", paymentMethod);
+		model.addAttribute("departmentOfPediatric", departmentOfPediatric);
+		model.addAttribute("feeCategory", feeCategory);
 		List<Order> order = orderService.selectOrderHour(Integer.parseInt(user.getSchoolId()));
 		model.addAttribute("order", order);
 		return "high/ChargeHours";
