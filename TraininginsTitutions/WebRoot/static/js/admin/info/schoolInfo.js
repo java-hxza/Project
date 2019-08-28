@@ -83,7 +83,9 @@ $(function(){
 					return $html;
 	}
 
-
+	/**
+	 * 收入
+	 */
 	incomeOrderHtml = function(){
 		var $html = "<thead>" +
 		"<tr> " +

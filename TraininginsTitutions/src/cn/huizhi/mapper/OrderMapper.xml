@@ -305,7 +305,6 @@
 		</where>
 	</select>
 	
-	
 	<sql id="selectExpenOrderListCol">
 		o.expenditureitemsId
 		o_expenditureitemsId,

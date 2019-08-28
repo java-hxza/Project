@@ -85,6 +85,12 @@
 											class="form-control" type="date" id="startTime" />
 									</div>
 								</div>
+								<div  class="col-md-4">
+									<div class="form-group">
+										<label for="billing-first-name">截至日期</label> <input
+											class="form-control" type="date" id="endTime" />
+									</div>
+								</div>
 							</div>
                                 <!-- Question/Answer -->
                                 	<div class="table-responsive">
@@ -98,7 +104,7 @@
 															
 														</div>
 													</th>
-													<th>校区</th>
+													<th id="schoolId" name = "${schoolId }" id_type="${schoolType }">校区</th>
 													<th>学员分类</th>
 													<th>新增学员</th>
 												</tr>
@@ -112,7 +118,7 @@
 															</div>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${schoolName }</a>
+															class="text-body font-weight-semibold" id="schoolName">${schoolName }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${stuClassification}</a>
