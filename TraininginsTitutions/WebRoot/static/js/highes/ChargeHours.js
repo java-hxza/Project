@@ -24,20 +24,19 @@ $(function() {
 		$(".paymentmethodId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().attr("class"));
 		$(".feecateId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().attr("class"));
 		$(".customCheckes:checked").parent().parent().next().text();
-		
-		var date = $.trim($(".date").val());
-		var dpMoney = $.trim($(".money").val());
-		var hour = $.trim($(".hour").val());
-		var hours = $.trim($(".hours").val());
-		var stuId = $.trim($(".stuId").val());
-		var departmentofpediatricsId = $.trim($(".departmentofpediatricsId").val());
-		var remarks = $.trim($(".remarks").val());
-		var paymentmethodId = $.trim($(".paymentmethodId").val());
-		var feecateId = $.trim($(".feecateId").val());
-		var orderId = $(".customCheckes:checked").parent().parent().next().text();
+		var orderIds = $(".customCheckes:checked").parent().parent().next().text();
 		$(".showOrderChildren").remove();
 		$(".addOrderChildren").show();
 		$(".TiJiao").click(function() {
+			var date = $.trim($(".date").val());
+			var dpMoney = $.trim($(".money").val());
+			var hour = $.trim($(".hour").val());
+			var hours = $.trim($(".hours").val());
+			var stuId = $.trim($(".stuId").val());
+			var departmentofpediatricsId = $.trim($(".departmentofpediatricsId").val());
+			var remarks = $.trim($(".remarks").val());
+			var paymentmethodId = $.trim($(".paymentmethodId").val());
+			var feecateId = $.trim($(".feecateId").val());
 			if (dpMoney == "") {
 				alert("请填写收费金额！");
 				return false;
@@ -59,7 +58,7 @@ $(function() {
 					givehour : hours,
 					remarks : remarks,
 					paymentmethodId : paymentmethodId,
-					orderId:orderId
+					orderId:orderIds
 				},
 				dataType : "json",
 				success : function(data) {

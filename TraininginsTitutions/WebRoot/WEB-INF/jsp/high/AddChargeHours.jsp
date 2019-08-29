@@ -367,7 +367,7 @@
 													</div>
 													<div class="col-md-12">
 														<div class="form-group">
-															<button type="submit"
+															<button type="button"
 																class="btn btn-block btn-primary TiJiao">提交</button>
 														</div>
 													</div>
@@ -560,8 +560,8 @@
 
 			<!-- third party js -->
 			<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-			<script src="${Path }/static/js/highes/leftSidebar.js"></script>
-			<script src="${Path }/static/js/highes/AddChargeHours.js"></script>
+			<script type="text/javascript" src="${Path }/static/js/highes/leftSidebar.js"></script>
+			<script type="text/javascript" src="${Path }/static/js/highes/AddChargeHours.js"></script>
 			<!-- third party js ends -->
 </body>
 </html>

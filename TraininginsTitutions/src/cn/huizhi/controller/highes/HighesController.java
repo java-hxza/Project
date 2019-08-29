@@ -341,8 +341,8 @@ public class HighesController {
 	@RequestMapping("addChargeHours.html")
 	@ResponseBody
 	public Object AddChargeHours(@RequestParam Integer stuId, @RequestParam Integer feecateId,
-			@RequestParam double dpMoney, @RequestParam String startTime, @RequestParam Integer departmentofpediatricsId,
-			@RequestParam double addhour, @RequestParam double givehour, @RequestParam String remarks,
+			@RequestParam Double dpMoney, @RequestParam String startTime, @RequestParam Integer departmentofpediatricsId,
+			@RequestParam Double addhour, @RequestParam Double givehour, @RequestParam String remarks,
 			@RequestParam Integer paymentmethodId,@RequestParam String date,@RequestParam Integer classId) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
@@ -402,7 +402,7 @@ public class HighesController {
 	@RequestMapping("addChargePeriod.html")
 	@ResponseBody
 	public Object AddChargePeriod(@RequestParam Integer stuId, @RequestParam String startTime,
-			@RequestParam Integer feecateId, @RequestParam double dpMoney, @RequestParam String firstdate,
+			@RequestParam Integer feecateId, @RequestParam Double dpMoney, @RequestParam String firstdate,
 			@RequestParam String lastdate, @RequestParam String personliable, @RequestParam String remarks,
 			@RequestParam Integer paymentmethodId,@RequestParam String date,@RequestParam Integer classId) {
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -465,7 +465,7 @@ public class HighesController {
 	@RequestMapping("addChargeOthers.html")
 	@ResponseBody
 	public Object AddChargeOthers(@RequestParam Integer stuId, @RequestParam String startTime,
-			@RequestParam Integer feecateId, @RequestParam double dpMoney, @RequestParam String personliable,
+			@RequestParam Integer feecateId, @RequestParam Double dpMoney, @RequestParam String personliable,
 			@RequestParam String remarks, @RequestParam Integer paymentmethodId,@RequestParam String date,@RequestParam Integer classId) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
@@ -521,8 +521,8 @@ public class HighesController {
 	@RequestMapping("updateChargeHour.html")
 	@ResponseBody
 	public Object updateChargeHour(@RequestParam Integer stuId, @RequestParam Integer feecateId,
-			@RequestParam double dpMoney,@RequestParam Integer departmentofpediatricsId,
-			@RequestParam double addhour, @RequestParam double givehour, @RequestParam String remarks,
+			@RequestParam Double dpMoney,@RequestParam Integer departmentofpediatricsId,
+			@RequestParam Double addhour, @RequestParam Double givehour, @RequestParam String remarks,
 			@RequestParam Integer paymentmethodId,@RequestParam Integer orderId) {
 		Order order = new Order();
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -550,18 +550,26 @@ public class HighesController {
 	 */
 	@RequestMapping("updateCharge.html")
 	@ResponseBody
-	public Object updateCharge(@RequestParam Integer stuId, @RequestParam Date startTime,
-			@RequestParam Integer feecateId, @RequestParam double dpMoney, @RequestParam Date firstdate,
-			@RequestParam Date lastdate, @RequestParam String personliable, @RequestParam String remarks,
+	public Object updateCharge(@RequestParam Integer stuId, @RequestParam String startTime,
+			@RequestParam Integer feecateId, @RequestParam Double dpMoney, @RequestParam String firstdate,
+			@RequestParam String lastdate, @RequestParam String personliable, @RequestParam String remarks,
 			@RequestParam Integer paymentmethodId) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
 		Order order = new Order();
 		order.setStuId(stuId);
-		order.setStartTime(startTime);
 		order.setPersonliable(personliable);
-		order.setFirstdate(firstdate);
-		order.setLastdate(lastdate);
+		try {
+			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd").parse(startTime);
+			Date firstdate1 = new SimpleDateFormat("yyyy-MM-dd").parse(firstdate);
+			Date lastdate1 = new SimpleDateFormat("yyyy-MM-dd").parse(lastdate);
+			order.setStartTime(startTime1);
+			order.setFirstdate(firstdate1);
+			order.setLastdate(lastdate1);
+		} catch (ParseException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		order.setRemarks(remarks);
 		order.setFeecateId(feecateId);
 		order.setDpMoney(dpMoney);
@@ -581,13 +589,19 @@ public class HighesController {
 	 */
 	@RequestMapping("updateChargeOther.html")
 	@ResponseBody
-	public Object updateChargeOther(@RequestParam Integer stuId, @RequestParam Date startTime,
-			@RequestParam Integer feecateId, @RequestParam double dpMoney, @RequestParam String personliable,
+	public Object updateChargeOther(@RequestParam Integer stuId, @RequestParam String startTime,
+			@RequestParam Integer feecateId, @RequestParam Double dpMoney, @RequestParam String personliable,
 			@RequestParam String remarks, @RequestParam Integer paymentmethodId) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
 		Order order = new Order();
-		order.setStartTime(startTime);
+		try {
+			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd").parse(startTime);
+			order.setStartTime(startTime1);
+		} catch (ParseException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		order.setRemarks(remarks);
 		order.setPaymentmethodId(paymentmethodId);
 		order.setFeecateId(feecateId);
@@ -637,7 +651,7 @@ public class HighesController {
 	@RequestMapping("AddOrderExpenditure.html")
 	@ResponseBody
 	public Object AddOrderExpenditure(@RequestParam Integer stuId, @RequestParam String startTime,
-			@RequestParam double feecategoryMoney, @RequestParam Integer expenditureitemsId,
+			@RequestParam Double feecategoryMoney, @RequestParam Integer expenditureitemsId,
 			@RequestParam Integer paymentmethodId, @RequestParam String personliable, @RequestParam String remarks,@RequestParam String date,@RequestParam Integer classId) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
@@ -682,8 +696,8 @@ public class HighesController {
 	 */
 	@RequestMapping("UpdateOrderExpenditure.html")
 	@ResponseBody
-	public Object UpdateOrderExpenditure(@RequestParam Integer stuId, @RequestParam Date startTime,
-			@RequestParam double feecategoryMoney, @RequestParam Integer expenditureitemsId,
+	public Object UpdateOrderExpenditure(@RequestParam Integer stuId, @RequestParam String startTime,
+			@RequestParam Double feecategoryMoney, @RequestParam Integer expenditureitemsId,
 			@RequestParam Integer paymentmethodId, @RequestParam String personliable, @RequestParam String remarks) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
@@ -693,7 +707,13 @@ public class HighesController {
 		order.setPaymentmethodId(paymentmethodId);
 		order.setSchoolId(Integer.parseInt(user.getSchoolId()));
 		order.setStuId(stuId);
-		order.setStartTime(startTime);
+		try {
+			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd").parse(startTime);
+			order.setStartTime(startTime1);
+		} catch (ParseException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		order.setExpenditureitemsId(expenditureitemsId);
 		order.setFeecategoryMoney(feecategoryMoney);
 		if (orderService.updateOrderAll(order) == 1) {
