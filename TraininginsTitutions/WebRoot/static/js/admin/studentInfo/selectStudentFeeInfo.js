@@ -5,9 +5,4 @@ $(function(){
 		var schoolType = $(this).children("td:last-child").children().attr("name");
 		location.href="studentFeeInfo.html?schoolId="+schoolId+"&schoolName="+schoolName+"&schoolType="+schoolType;
 	});
-	
-	
-	
-	
-	
-}
+});
