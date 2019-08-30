@@ -1,4 +1,11 @@
 $(function(){
+	
+	rootSchoolInfo = function(){
+		var schoolId = $("#schoolId").val();
+		location.href = "rootSchoolInfo.html?schoolId="+schoolId;
+	}
+	
+	
 	/**
 	 * 跳转到账户信息的页面
 	 */

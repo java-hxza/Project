@@ -293,7 +293,7 @@
 															<label for="example-select">学员</label> <select
 																class="form-control stuId" id="example-select">
 																<c:forEach items="${high }" var="h">
-																	<option value="${h.studentId }">${h.studentName}</option>
+																	<option value="${h.studentId }" name="${h.childrenesClassStudnet.classId }">${h.studentName}</option>
 																</c:forEach>
 															</select>
 														</div>
@@ -303,7 +303,7 @@
 															<label for="example-select">收款项目</label> <select
 																class="form-control feecateId " id="example-select">
 																<c:forEach items="${feeCategory }" var="f">
-																	<option value="${f.chargeTypeId }">${f.chargeTypeName}</option>
+																	<option value="${f.chargeTypeId }" name="${f.chargeMoney }">${f.chargeTypeName}</option>
 																</c:forEach>
 															</select>
 														</div>
@@ -312,7 +312,7 @@
 														<div class="form-group mb-3">
 															<label for="example-number">收费金额</label> <input
 																class="form-control dpMoney" id="example-number" type="number"
-																name="number">
+																name="number" >
 														</div>
 													</div>
 													<div class="col-md-6">

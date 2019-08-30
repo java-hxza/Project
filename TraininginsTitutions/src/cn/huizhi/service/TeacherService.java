@@ -40,7 +40,7 @@ public interface TeacherService {
 	 * @param schoolId
 	 * @return
 	 */
-	public Teacher findTeacherByLogin(String loginName,String loginPassword,Integer schoolId);
+	public Teacher findTeacherByLogin(String loginName,String loginPassword,Integer schoolId,Integer departmentId,Integer schoolType);
 	/**
 	 * 添加教师
 	 * @param teacher

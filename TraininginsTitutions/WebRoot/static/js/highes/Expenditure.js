@@ -1,4 +1,5 @@
 $(function(){
+	$(".feecategoryMoney").val($(".expenditureitemsId option:selected").attr("name"));
 	var Time = new Date();
 	var month = null;
 	if ((Time.getMonth() + 1) < 10) {
@@ -6,12 +7,16 @@ $(function(){
 	}else {
 		month = Time.getMonth()+1;
 	}
+	$(".expenditureitemsId").click(function() {
+		$(".feecategoryMoney").val($(".expenditureitemsId option:selected").attr("name"));
+	});
 	$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
 	$(".TiJiao").click(function() {
 		var stuId = $.trim($(".stuId").val());
 		var remarks = $.trim($(".remarks").val());
 		var paymentmethodId = $.trim($(".paymentmethodId").val());
 		var personliable = $.trim($(".personliable").val());
+		var classId = $.trim($(".stuId option:selected").attr("name"));
 		var feecategoryMoney = $.trim($(".feecategoryMoney").val());
 		var expenditureitemsId = $.trim($(".expenditureitemsId").val());
 		var startTime = $.trim($(".date").val());
@@ -31,7 +36,8 @@ $(function(){
 				paymentmethodId : paymentmethodId,
 				remarks : remarks,
 				expenditureitemsId : expenditureitemsId,
-				date : date
+				date : date,
+				classId:classId
 			},
 			dataType : "json",
 			success : function(data) {

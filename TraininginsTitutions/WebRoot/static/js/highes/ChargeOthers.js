@@ -1,4 +1,5 @@
 $(function(){
+	$(".dpMoney").val($(".feecateId option:selected").attr("name"));
 	var Time = new Date();
 	var month = null;
 	if ((Time.getMonth() + 1) < 10) {
@@ -6,12 +7,16 @@ $(function(){
 	}else {
 		month = Time.getMonth()+1;
 	}
+	$(".feecateId").click(function() {
+		$(".dpMoney").val($(".feecateId option:selected").attr("name"));
+	});
 	$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
 	$(".TiJiao").click(function() {
 	var stuId = $.trim($(".stuId").val());
 	var startTime = $.trim($(".date").val());
 	var feecateId = $.trim($(".feecateId").val());
 	var dpMoney = $.trim($(".dpMoney").val());
+	var classId = $.trim($(".stuId option:selected").attr("name"));
 	var remarks = $.trim($(".remarks").val());
 	var paymentmethodId = $.trim($(".paymentmethodId").val());
 	var personliable = $.trim($(".personliable").val());
@@ -31,7 +36,8 @@ $(function(){
 			paymentmethodId : paymentmethodId,
 			remarks : remarks,
 			feecateId : feecateId,
-			date : date
+			date : date,
+			classId:classId
 		},
 		dataType : "json",
 		success : function(data) {

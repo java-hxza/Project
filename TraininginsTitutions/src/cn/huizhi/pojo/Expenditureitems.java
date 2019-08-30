@@ -10,6 +10,7 @@ public class Expenditureitems {
 	private String expenditureitemsName;
 	private String category;
 	private Integer schoolId;
+	private double expenditureitemsMoney;
 
 	public Integer getExpenditureitemsId() {
 		return expenditureitemsId;
@@ -39,16 +40,23 @@ public class Expenditureitems {
 		super();
 	}
 
+	public double getExpenditureitemsMoney() {
+		return expenditureitemsMoney;
+	}
 
+	public void setExpenditureitemsMoney(double expenditureitemsMoney) {
+		this.expenditureitemsMoney = expenditureitemsMoney;
+	}
 
-	public Expenditureitems(Integer expenditureitemsId, String expenditureitemsName, String category,Integer schoolId) {
+	public Expenditureitems(Integer expenditureitemsId, String expenditureitemsName, String category, Integer schoolId,
+			double expenditureitemsMoney) {
 		super();
 		this.expenditureitemsId = expenditureitemsId;
 		this.expenditureitemsName = expenditureitemsName;
 		this.category = category;
 		this.schoolId = schoolId;
+		this.expenditureitemsMoney = expenditureitemsMoney;
 	}
-
 
 	public Integer getSchoolId() {
 		return schoolId;
@@ -57,6 +65,5 @@ public class Expenditureitems {
 	public void setSchoolId(Integer schoolId) {
 		this.schoolId = schoolId;
 	}
-	
 
 }

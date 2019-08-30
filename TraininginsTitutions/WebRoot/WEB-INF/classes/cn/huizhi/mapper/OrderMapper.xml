@@ -5,20 +5,32 @@
 <mapper namespace="cn.huizhi.mapper.OrderMapper">
 
 	<select id="selectOrderHour" resultMap="selectOrderHours">
-		SELECT o.orderId od,o.dpMoney,o.remarks,o.addhour,o.givehour,o.startTime,o.orderNumber,s.studentName,s.school,p.paymentmethodName,d.dpTypeName
-		FROM `order` o
+		SELECT o.orderId
+		od,o.dpMoney,o.remarks,o.paymentmethodId
+		opi,o.departmentofpediatricsId odf,o.feecateId
+		ofi,o.addhour,o.givehour,o.startTime,o.orderNumber,o.stuId
+		sd,s.studentName,s.school,p.paymentmethodName,d.dpTypeName
+		FROM `order`
+		o
 		JOIN student s ON o.stuId=s.studentId
-		JOIN paymentmethod p ON o.paymentmethodId=p.paymentmethodId
-		JOIN departmentofpediatrics d ON o.departmentofpediatricsId=d.dpId
-		WHERE o.identification = 0 AND o.departmentofpediatricsId IS NOT NULL AND
-		o.schoolId=#{0}
+		JOIN paymentmethod p ON
+		o.paymentmethodId=p.paymentmethodId
+		JOIN departmentofpediatrics d ON
+		o.departmentofpediatricsId=d.dpId
+		WHERE o.identification = 0 AND
+		o.departmentofpediatricsId IS NOT NULL AND
+		o.schoolId=#{0} ORDER BY od
 	</select>
-	
+
 	<resultMap type="Order" id="selectOrderHours">
 		<id column="od" property="orderId" />
 		<result column="o.dpMoney" property="dpMoney" />
 		<result column="o.remarks" property="remarks" />
 		<result column="o.addhour" property="addhour" />
+		<result column="sd" property="stuId" />
+		<result column="opi" property="paymentmethodId" />
+		<result column="odf" property="departmentofpediatricsId" />
+		<result column="ofi" property="feecateId" />
 		<result column="o.givehour" property="givehour" />
 		<result column="o.startTime" property="startTime" />
 		<result column="o.orderNumber" property="orderNumber" />
@@ -26,33 +38,43 @@
 			<result column="s.studentName" property="studentName" />
 			<result column="s.school" property="school" />
 		</collection>
-		<collection property="paymentMethod" javaType="PaymentMethod">
-			<result column="p.paymentmethodName" property="paymentmethodName" />
+		<collection property="paymentMethod"
+			javaType="PaymentMethod">
+			<result column="p.paymentmethodName"
+				property="paymentmethodName" />
 		</collection>
-		<collection property="departmentOfPediatrics" javaType="DepartmentOfPediatrics">
+		<collection property="departmentOfPediatrics"
+			javaType="DepartmentOfPediatrics">
 			<result column="d.dpTypeName" property="dpTypeName" />
 		</collection>
 	</resultMap>
 
 	<select id="selectOrderPeriod" resultType="Order">
 		SELECT o.*
-		FROM `order` o
+		FROM `order`
+		o
 		JOIN student s ON o.stuId=s.studentId
-		WHERE o.identification = 0 AND o.firstdate IS NOT NULL AND o.schoolId=#{0}
+		WHERE o.identification = 0 AND
+		o.firstdate IS NOT NULL AND o.schoolId=#{0} ORDER BY od
 	</select>
 
 	<select id="selectOrderOther" resultType="Order">
 		SELECT o.*
-		FROM `order` o
+		FROM `order`
+		o
 		JOIN student s ON o.stuId=s.studentId
-		WHERE o.identification = 0 AND o.firstdate IS NULL AND o.addhour IS NULL AND o.schoolId=#{0}
+		WHERE o.identification = 0 AND
+		o.firstdate IS NULL AND o.addhour IS NULL AND o.schoolId=#{0} ORDER BY
+		od
 	</select>
-	
+
 	<select id="selectOrderExpenditure" resultType="Order">
 		SELECT o.*
-		FROM `order` o
+		FROM
+		`order` o
 		JOIN student s ON o.stuId=s.studentId
-		WHERE o.identification =1 AND o.schoolId=#{0}
+		WHERE o.identification
+		=1 AND o.schoolId=#{0} ORDER BY od
 	</select>
 
 	<delete id="delOrder" parameterType="java.lang.Integer">
@@ -62,21 +84,56 @@
 
 	<insert id="addOrder" parameterType="java.lang.Integer">
 		INSERT INTO
-		traininginstitutions.order(feecateId,dpMoney,stuId,startTime,schoolId,identification,feecategoryMoney,paymentmethodId,personliable,departmentofpediatricsId,addhour,givehour,firstdate,lastdate,remarks,orderNumber,expenditureitemsId)VALUES(#{feecateId},#{dpMoney},#{stuId},#{startTime},#{schoolId},#{identification},#{feecategoryMoney},#{paymentmethodId},#{personliable},#{departmentofpediatricsId},#{addhour},#{givehour},#{firstdate},#{lastdate},#{remarks},#{orderNumber},#{expenditureitemsId});
+		traininginstitutions.order(feecateId,dpMoney,stuId,startTime,schoolId,identification,feecategoryMoney,paymentmethodId,personliable,departmentofpediatricsId,addhour,givehour,firstdate,lastdate,remarks,orderNumber,expenditureitemsId,classId)VALUES(#{feecateId},#{dpMoney},#{stuId},#{startTime},#{schoolId},#{identification},#{feecategoryMoney},#{paymentmethodId},#{personliable},#{departmentofpediatricsId},#{addhour},#{givehour},#{firstdate},#{lastdate},#{remarks},#{orderNumber},#{expenditureitemsId},#{classId});
 	</insert>
 
 	<update id="updateOrderAll" parameterType="Order">
 		UPDATE
-		traininginstitutions.order SET feecateId = #{feecateId} , dpMoney =
-		#{dpMoney} , stuId = #{stuId} , startTime = #{startTime} , schoolId =
-		#{schoolId} , identification = #{identification} , feecategoryMoney =
-		#{feecategoryMoney} , paymentmethodId = #{paymentmethodId} ,
-		personliable = #{personliable} , departmentofpediatricsId =
-		#{departmentofpediatricsId} , addhour = #{addhour} , givehour =
-		#{givehour} , firstdate = #{firstdate} , lastdate = #{lastdate} ,
-		remarks = #{remarks} , orderNumber = #{orderNumber} ,
-		expenditureitemsId =
-		#{expenditureitemsId} WHERE orderId = #{orderId} ;
+		traininginstitutions.order SET
+		<if test="stuId !=null and stuId !=''">
+			stuId = #{stuId}
+		</if>
+		<if test="feecateId !=null and feecateId !=''">
+			,feecateId = #{feecateId}
+		</if>
+		<if test="dpMoney !=null and dpMoney !=''">
+			,dpMoney = #{dpMoney}
+		</if>
+		<if test="schoolId !=null and schoolId !=''">
+			,schoolId = #{schoolId}
+		</if>
+		<if test="feecategoryMoney !=null and feecategoryMoney !=''">
+			,feecategoryMoney = #{feecategoryMoney}
+		</if>
+		<if test="paymentmethodId !=null and paymentmethodId !=''">
+			,paymentmethodId = #{paymentmethodId}
+		</if>
+		<if test="personliable !=null and personliable !=''">
+			,personliable = #{personliable}
+		</if>
+		<if
+			test="departmentofpediatricsId !=null and departmentofpediatricsId !=''">
+			,departmentofpediatricsId = #{departmentofpediatricsId}
+		</if>
+		<if test="addhour !=null and addhour !=''">
+			,addhour = #{addhour}
+		</if>
+		<if test="givehour !=null and givehour !=''">
+			,givehour = #{givehour}
+		</if>
+		<if test="firstdate !=null and firstdate !=''">
+			,firstdate = #{firstdate}
+		</if>
+		<if test="lastdate !=null and lastdate !=''">
+			,lastdate = #{lastdate}
+		</if>
+		<if test="remarks !=null and remarks !=''">
+			,remarks = #{remarks}
+		</if>
+		<if test="expenditureitemsId !=null and expenditureitemsId !=''">
+			,expenditureitemsId = #{expenditureitemsId}
+		</if>
+		WHERE orderId = #{orderId} ;
 	</update>
 
 	<sql id="orderCol">
@@ -185,7 +242,8 @@
 	<!-- 查询学校收入情况 -->
 	<sql id="selectOrderListBySchoolCol">
 		o.addhour o_addhour,
-		o.departmentofpediatricsId o_departmentofpediatricsId,
+		o.departmentofpediatricsId
+		o_departmentofpediatricsId,
 		o.dpMoney o_dpMoney,
 		o.expenditureitemsId
 		o_expenditureitemsId,
@@ -267,7 +325,8 @@
 	</resultMap>
 
 	<!--根据学校主键查询学校收入明细 -->
-	<select id="selectOrderListBySchool" resultMap="selectOrderListBySchoolMap" parameterType="Order">
+	<select id="selectOrderListBySchool"
+		resultMap="selectOrderListBySchoolMap" parameterType="Order">
 		select
 		<include refid="selectOrderListBySchoolCol" />
 		from traininginstitutions.order o
@@ -304,11 +363,14 @@
 			</if>
 		</where>
 	</select>
-	
+
+
+
 	<sql id="selectExpenOrderListCol">
 		o.expenditureitemsId
 		o_expenditureitemsId,
-		o.identification o_identification,
+		o.identification
+		o_identification,
 		o.orderId o_orderId,
 		o.orderNumber o_orderNumber,
 		o.paymentmethodId o_paymentmethodId,
@@ -317,40 +379,51 @@
 		o.schoolId o_schoolId,
 		o.startTime o_startTime,
 		o.feecategoryMoney o_feecategoryMoney,
-		e.expenditureitemsId e_expenditureitemsId,
+		e.expenditureitemsId
+		e_expenditureitemsId,
 		e.category e_category,
-		e.expenditureitemsName e_expenditureitemsName,
+		e.expenditureitemsName
+		e_expenditureitemsName,
 		p.paymentmethodId p_paymentmethodId,
 		p.paymentmethodName p_paymentmethodName
 	</sql>
-	
+
 	<resultMap type="Order" id="selectExpenOrderListMap">
-		<id column="o_orderId" property="orderId"/>
-		<result column="o_expenditureitemsId" property="expenditureitemsId"/>
-		<result column="o_identification" property="identification"/>
-		<result column="o_orderId" property="orderId"/>
-		<result column="o_orderNumber" property="orderNumber"/>
-		<result column="o_paymentmethodId" property="paymentmethodId"/>
-		<result column="o_personliable" property="personliable"/>
-		<result column="o_remarks" property="remarks"/>
-		<result column="o_schoolId" property="schoolId"/>
-		<result column="o_startTime" property="startTime"/>
-		<result column="o_feecategoryMoney" property="feecategoryMoney"/>
-		<association property="expenditureitems" javaType="Expenditureitems">
-			<id column="e_expenditureitemsId" property="expenditureitemsId"/>
-			<result column="e_category" property="category"/>
-			<result column="e_expenditureitemsName" property="expenditureitemsName"/>
+		<id column="o_orderId" property="orderId" />
+		<result column="o_expenditureitemsId"
+			property="expenditureitemsId" />
+		<result column="o_identification" property="identification" />
+		<result column="o_orderId" property="orderId" />
+		<result column="o_orderNumber" property="orderNumber" />
+		<result column="o_paymentmethodId" property="paymentmethodId" />
+		<result column="o_personliable" property="personliable" />
+		<result column="o_remarks" property="remarks" />
+		<result column="o_schoolId" property="schoolId" />
+		<result column="o_startTime" property="startTime" />
+		<result column="o_feecategoryMoney" property="feecategoryMoney" />
+		<association property="expenditureitems"
+			javaType="Expenditureitems">
+			<id column="e_expenditureitemsId" property="expenditureitemsId" />
+			<result column="e_category" property="category" />
+			<result column="e_expenditureitemsName"
+				property="expenditureitemsName" />
 		</association>
-		<association property="paymentMethod" javaType="PaymentMethod">
+		<association property="paymentMethod"
+			javaType="PaymentMethod">
 			<id column="p_paymentmethodId" property="paymentmethodId" />
-			<result column="p_paymentmethodName" property="paymentmethodName" />
+			<result column="p_paymentmethodName"
+				property="paymentmethodName" />
 		</association>
 	</resultMap>
-	<select id="selectExpenOrderList" resultMap="selectExpenOrderListMap" parameterType="Order"> 
-		select <include refid="selectExpenOrderListCol"/>
-		from traininginstitutions.order o 
-		join expenditureitems e on e.expenditureitemsId = o.expenditureitemsId
-		join paymentmethod p on p.paymentmethodId = o.paymentmethodId
+	<select id="selectExpenOrderList"
+		resultMap="selectExpenOrderListMap" parameterType="Order">
+		select
+		<include refid="selectExpenOrderListCol" />
+		from traininginstitutions.order o
+		join expenditureitems e on
+		e.expenditureitemsId = o.expenditureitemsId
+		join paymentmethod p on
+		p.paymentmethodId = o.paymentmethodId
 		<where>
 			<if test="expenditureitemsId !=null and expenditureitemsId!=null">
 				o.expenditureitemsId = #{expenditureitemsId}
@@ -361,7 +434,7 @@
 			<if test="startTime != null and startTime != ''">
 				and date(o.startTime)between #{startTime} and #{endTime}
 			</if>
-		</where> 
+		</where>
 	</select>
 
 </mapper>   

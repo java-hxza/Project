@@ -1,5 +1,6 @@
 package cn.huizhi.pojo;
 
+
 public class Teacher {
 
 	private Integer teacherId;
@@ -9,10 +10,24 @@ public class Teacher {
 	private Integer feeCategory;
 	private String remarks;
 	private String telephone;
+	
+	/**
+	 * 教师权限
+	 */
 	private TeacherDiction teacherDiction;
+	/**
+	 * 学校
+	 */
 	private School school;
+	/**
+	 * 教师类型
+	 */
 	private TeacherType teacherType;
-
+	/**
+	 * 部门
+	 */
+	private DepartMent deparMent;
+	
 	public Teacher() {
 		super();
 	}
@@ -20,7 +35,7 @@ public class Teacher {
 
 	public Teacher(Integer teacherId, String teacherName, String loginPassword, Integer teacherTypeId,
 			Integer feeCategory, String remarks, String telephone, TeacherDiction teacherDiction, School school,
-			TeacherType teacherType) {
+			TeacherType teacherType, DepartMent deparMent) {
 		super();
 		this.teacherId = teacherId;
 		this.teacherName = teacherName;
@@ -32,8 +47,19 @@ public class Teacher {
 		this.teacherDiction = teacherDiction;
 		this.school = school;
 		this.teacherType = teacherType;
+		this.deparMent = deparMent;
 	}
 
+
+
+
+	public DepartMent getDeparMent() {
+		return deparMent;
+	}
+
+	public void setDeparMent(DepartMent deparMent) {
+		this.deparMent = deparMent;
+	}
 
 	public String getTelephone() {
 		return telephone;

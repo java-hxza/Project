@@ -49,4 +49,11 @@ $(function(){
 		location.href ="selectSchoolTeacherClassHourInfo.html";
 	}
 	
+	/**
+	 * 返回学生收费情况表
+	 */
+	studentFeeInfo = function(){
+		location.href ="selectStudentFeeInfo.html";
+	}
+	
 });

@@ -44,22 +44,14 @@ public class AdminCreateController {
 	/**
 	 * 创建学校并以json数组形式返回
 	 * 
-	 * @param provinceId
-	 * @param cityId
-	 * @param schoolName
-	 * @param schoolRemarks
+	 * @param school
 	 * @return
 	 */
 	@RequestMapping("regitSchool.html")
 	@ResponseBody
-	public HashMap<String, String> createSchool(Integer provinceId, Integer cityId, String schoolName,
-			String schoolRemarks) {
-		School school = new School();
+	public HashMap<String, String> createSchool(School school) {
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
-		school.setCityProperId(provinceId);
-		school.setCityId(cityId);
-		school.setSchoolName(schoolName);
-		school.setSchoolRemarks(schoolRemarks);
+		
 		if (schoolService.addSchool(school) > 0) {
 			jsonMap.put("state", "1");
 		} else {

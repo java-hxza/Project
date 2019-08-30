@@ -300,7 +300,7 @@
 															<label for="example-select">付款项目</label> <select
 																class="form-control expenditureitemsId" id="example-select">
 																<c:forEach items="${expenditureitems }" var="e">
-																	<option value="${e.expenditureitemsId }">${e.expenditureitemsName}</option>
+																	<option value="${e.expenditureitemsId }" name="${e.expenditureitemsMoney }">${e.expenditureitemsName}</option>
 																</c:forEach>
 															</select>
 														</div>
@@ -310,7 +310,7 @@
 															<label for="example-select">收款人</label> <select
 																class="form-control stuId" id="example-select">
 																<c:forEach items="${high }" var="h">
-																	<option value="${h.studentId }">${h.studentName}</option>
+																	<option value="${h.studentId }" name="${h.childrenesClassStudnet.classId }">${h.studentName}</option>
 																</c:forEach>
 															</select>
 														</div>
@@ -330,7 +330,7 @@
 															<div class="form-group mb-3">
 															<label for="example-number">金额</label> <input
 																class="form-control feecategoryMoney" id="example-number" type="number"
-																name="number">
+																name="number" >
 														</div>
 														</div>
 													</div>

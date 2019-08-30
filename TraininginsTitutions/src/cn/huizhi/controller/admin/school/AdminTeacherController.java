@@ -263,6 +263,47 @@ public class AdminTeacherController {
 	}
 	
 	/**
+	 * 返回新增学员信息
+	 * @return
+	 */
+	@RequestMapping("highAddStudentInfo.html")
+	public String hegiAddStudentInfo(Integer schoolId,String schoolName,String startTime,String endTime,Integer schoolType,HttpSession session) {
+		
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("startTime",startTime);
+		map.put("endTime",endTime);
+		
+		List<Student> addstudentList = studentService.selectHigh(schoolId,map);
+		
+		session.setAttribute("stuCount", addstudentList.size());
+		session.setAttribute("stuClassification", "少儿");
+		session.setAttribute("schoolType", schoolType);
+		session.setAttribute("schoolName", schoolName);
+		session.setAttribute("schoolId", schoolId);
+		return "admin/addStudentInfo/addStudentInfo";
+	}
+	/**
+	 * 返回新增学员信息
+	 * @return
+	 */
+	@RequestMapping("yiKaoAddStudentInfo.html")
+	public String yiKaoAddStudentInfo(Integer schoolId,String schoolName,String startTime,String endTime,Integer schoolType,HttpSession session) {
+		
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("startTime",startTime);
+		map.put("endTime",endTime);
+		
+		List<Student> addstudentList = studentService.selectHigh(schoolId,map);
+		
+		session.setAttribute("stuCount", addstudentList.size());
+		session.setAttribute("stuClassification", "少儿");
+		session.setAttribute("schoolType", schoolType);
+		session.setAttribute("schoolName", schoolName);
+		session.setAttribute("schoolId", schoolId);
+		return "admin/addStudentInfo/addStudentInfo";
+	}
+	
+	/**
 	 * 教师上课明细
 	 * @return
 	 */
@@ -292,6 +333,28 @@ public class AdminTeacherController {
 		
 		
 		return "admin/teacher/teacherClassHourInfo";
+	}
+	
+	/**
+	 * 返回学生明细表
+	 * @return
+	 */
+	@RequestMapping("selectStudentFeeInfo.html")
+	public String selectStudentFeeInfo(Integer schoolId,String schoolName,Integer schoolType) {
+		
+		
+		if(schoolType == 1) {
+			
+		}
+		if(schoolType == 2) {
+			
+		}
+		if(schoolType == 3) {
+			
+		}
+		
+		
+		return "admin/studentInfo/selectStudentFeeInfo";
 	}
 	
 }

@@ -4,6 +4,7 @@ public class FeeCategory {
 	private Integer chargeTypeId;
 	private String chargeTypeName;
 	private String category;
+	private double chargeMoney;
 
 	/**
 	 * 
@@ -12,11 +13,20 @@ public class FeeCategory {
 		super();
 	}
 
-	public FeeCategory(Integer chargeTypeId, String chargeTypeName, String category) {
+	public FeeCategory(Integer chargeTypeId, String chargeTypeName, String category, double chargeMoney) {
 		super();
 		this.chargeTypeId = chargeTypeId;
 		this.chargeTypeName = chargeTypeName;
 		this.category = category;
+		this.chargeMoney = chargeMoney;
+	}
+
+	public double getChargeMoney() {
+		return chargeMoney;
+	}
+
+	public void setChargeMoney(double chargeMoney) {
+		this.chargeMoney = chargeMoney;
 	}
 
 	public Integer getChargeTypeId() {
@@ -35,7 +45,6 @@ public class FeeCategory {
 		this.chargeTypeName = chargeTypeName;
 	}
 
-
 	public String getCategory() {
 		return category;
 	}
@@ -43,5 +52,5 @@ public class FeeCategory {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	
+
 }

@@ -10,6 +10,7 @@ $(function() {
 		var provinceId = $("#provinceId").val();
 		var cityId = $("#cityId").val();
 		var schoolName = $("#schoolName").val();
+		var schoolType = $("#schoolType").val();
 		var schoolRemarks = $("#schoolRemarks").val();
 		if (schoolName == '' || schoolName == null) {
 			$.NotificationApp.send("错误!", "你必须城市名及学校名。", "top-right", "rgba(0,0,0,0.2)", "error")
@@ -18,14 +19,14 @@ $(function() {
 			$("#loginBtn").attr("disabled", false);
 			return false;
 		}
-		alert("aaa");
 		$.ajax({
 			url : 'regitSchool.html',
 			data : {
 				provinceId : provinceId,
 				cityId : cityId,
 				schoolName : schoolName,
-				schoolRemarks : schoolRemarks
+				schoolRemarks : schoolRemarks,
+				schoolType : schoolType
 			},
 			dataType : 'JSON',
 			type : 'post',

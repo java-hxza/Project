@@ -66,6 +66,7 @@
 								<p class="text-muted mt-3" id="schoolId" id_schoolName="${schoolName}" name=${schoolId }>请按规则查询</p>
 									<button type="button" id="btn1" class="btn btn-success btn-sm mt-2" onclick="expen()">支出查询</button>
                                     <button type="button" id="btn2"  class="btn btn-success btn-sm mt-2" onclick="query()">收入查询</button>
+                                    <button type="button" id="btn2"  class="btn btn-success btn-sm mt-2" onclick="print()">打印</button>
                              </div>
                           </div>
                      </div>      
@@ -147,7 +148,7 @@
                 </div>
 						<!-- end col -->
                                 <!-- Question/Answer -->
-                                	<div class="table-responsive">
+                                	<div class="table-responsive" id="dayin"><!--startprint-->
 										<table
 											class="table table-centered table-striped dt-responsive nowrap w-100"
 											id="products-datatable">
@@ -223,8 +224,9 @@
 												</c:forEach>	
 											</tbody>
 										</table>
+										<!--endprint-->
 									</div>
-
+				<iframe id="iframe1" style="display: none"></iframe>
             <!-- ============================================================== -->
             <!-- End Page content -->
             <!-- ============================================================== -->

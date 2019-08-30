@@ -19,11 +19,13 @@ public class Student {
 	private String theSurrogate;
 	private String remarks;
 	private Integer feeCategory;
+	private double studentHour;
+	private ChildrenesClassStudnet childrenesClassStudnet;
 
 	public Student(Integer studentId, String studentName, Integer studentSex, String studentIDCard, String studentBirth,
 			String school, String parentName, String telephone, String familyAddress, String registrationChannels,
 			String registrationConsultant, String startTime, String endTime, String theSurrogate, String remarks,
-			Integer feeCategory) {
+			Integer feeCategory, double studentHour, ChildrenesClassStudnet childrenesClassStudnet) {
 		super();
 		this.studentId = studentId;
 		this.studentName = studentName;
@@ -41,10 +43,20 @@ public class Student {
 		this.theSurrogate = theSurrogate;
 		this.remarks = remarks;
 		this.feeCategory = feeCategory;
+		this.studentHour = studentHour;
+		this.childrenesClassStudnet = childrenesClassStudnet;
 	}
 
 	public Student() {
 		super();
+	}
+
+	public ChildrenesClassStudnet getChildrenesClassStudnet() {
+		return childrenesClassStudnet;
+	}
+
+	public void setChildrenesClassStudnet(ChildrenesClassStudnet childrenesClassStudnet) {
+		this.childrenesClassStudnet = childrenesClassStudnet;
 	}
 
 	public Integer getStudentId() {
@@ -53,6 +65,14 @@ public class Student {
 
 	public void setStudentId(Integer studentId) {
 		this.studentId = studentId;
+	}
+
+	public double getStudentHour() {
+		return studentHour;
+	}
+
+	public void setStudentHour(double studentHour) {
+		this.studentHour = studentHour;
 	}
 
 	public String getStudentName() {

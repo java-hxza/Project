@@ -102,6 +102,14 @@ public class LoginController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 超管登录
+	 * @param loginName
+	 * @param loginPassword
+	 * @param schoolId
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("adminLogin.html")
 	@ResponseBody
 	public HashMap<String, String> validateAdminLogin(String loginName,String loginPassword,String schoolId,HttpSession session) {
@@ -117,17 +125,30 @@ public class LoginController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 返回主页面
+	 * @return
+	 */
 	@RequestMapping("selectionModule.html")
 	public String toIndex() {
 		return"selectionModule";
 	}
 	
-	
+	/**
+	 *教师登录 
+	 * @param loginName
+	 * @param loginPassword
+	 * @param schoolId
+	 * @param departmentId
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("teacherLogin.html")
 	@ResponseBody
-	public Map<String, String> teacherLogin(String loginName,String loginPassword,Integer schoolId,HttpSession session){
+	public Map<String, String> teacherLogin(String loginName,String loginPassword,Integer schoolId,Integer departmentId,HttpSession session){
 		Map< String, String> jsonMap = new HashMap<String, String>();
-		Teacher teacher = teacherService.findTeacherByLogin(loginName, loginPassword, schoolId);
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		Teacher teacher = teacherService.findTeacherByLogin(loginName, loginPassword, schoolId,departmentId,schoolType);
 		if(teacher!=null) {
 			session.setAttribute("teacher", teacher);
 			jsonMap.put("state","1");
