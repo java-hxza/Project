@@ -31,6 +31,9 @@ $(function() {
 			alert("请填写本次新增课时！");
 			return false;
 		}
+		if(hours == "") {
+			hours = 0;
+		}
 		$.ajax({
 			type : "POST",
 			url : "addChargeHours.html",

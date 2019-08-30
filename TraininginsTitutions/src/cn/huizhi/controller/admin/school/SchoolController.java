@@ -164,20 +164,21 @@ public class SchoolController {
 	 */
 	@RequestMapping("schoolOrderInfo.html")
 	public String schoolOrderInfo(Order order,String schoolName,HttpSession session) {
+		User user = (User) session.getAttribute("user");
 		/**
 		 * 查询数据
 		 */
 		List<Order> orderListBySchool = orderService.findOrderListBySchool(order);
 		
 		//课程类型
-		List<DepartmentOfPediatrics> departmentOfPediatricsList = departmentOfPediatricsService.findDepartmentOfPediatrics();
+		List<DepartmentOfPediatrics> departmentOfPediatricsList = departmentOfPediatricsService.findDepartmentOfPediatrics(Integer.parseInt(user.getSchoolId()));
 		
 		List<Expenditureitems> expenditureitemList = expenditureitemsService.selectExpenditureitems(String.valueOf(order.getSchoolId()));
 		
 		//账户类型信息
 		List<PaymentMethod> payMentList = paymentMethodService.selectPaymentMethod();
 		//收入项目类型
-		List<FeeCategory> feeCategoryList = feeCategoryService.selectFeeCategory();
+		List<FeeCategory> feeCategoryList = feeCategoryService.selectFeeCategory(Integer.parseInt(user.getSchoolId()));
 		
 		List<Class> classBySchooList =  classService.findChildrenescClasses(String.valueOf(order.getSchoolId()));
 		/**

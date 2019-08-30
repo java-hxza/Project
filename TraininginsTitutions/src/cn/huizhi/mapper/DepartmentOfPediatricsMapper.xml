@@ -6,19 +6,21 @@
 	<sql id="dpCol">
 		dpId,
 		dpTypeName,
-		chargeTypeId
+		chargeTypeId,
+		schoolId,
+		dpMoney
 	</sql>
 	<!--查询所有班级科别 -->
 	<select id="selectDepartmentOfPediatrics" resultType="DepartmentOfPediatrics">
 		select
 		<include refid="dpCol" />
-		from departmentofpediatrics
+		from departmentofpediatrics where schoolId = #{0}
 	</select>
 
 	<!--新增班级科别-->
 	<insert id="insertDepartmentOfPediatrics" parameterType="DepartmentOfPediatrics" >
-		insert into departmentofpediatrics ( dpTypeName, chargeTypeId )
-		values ( #{dpTypeName}, #{chargeTypeId} )
+		insert into departmentofpediatrics ( dpTypeName, chargeTypeId,schoolId,dpMoney )
+		values ( #{dpTypeName}, #{chargeTypeId} ,#{schoolId} ,#{dpMoney})
 	</insert>
 	
 	<!--删除班级科别-->

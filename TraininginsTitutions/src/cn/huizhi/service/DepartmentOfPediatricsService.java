@@ -10,7 +10,7 @@ public interface DepartmentOfPediatricsService {
 	 * 查询所有班级科别
 	 * @return
 	 */
-	public List<DepartmentOfPediatrics> findDepartmentOfPediatrics();
+	public List<DepartmentOfPediatrics> findDepartmentOfPediatrics(Integer schoolId);
 	
 	/**
 	 * 添加班级科别

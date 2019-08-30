@@ -83,8 +83,8 @@ public class ChildrenClassesController {
 	
 	@RequestMapping("regitChildrenClass.html")
 	public String createChildrenClass(HttpSession session) {
-		
-		List<DepartmentOfPediatrics> dpList = departmentOfPediatricsService.findDepartmentOfPediatrics();
+		User user = (User) session.getAttribute("user");
+		List<DepartmentOfPediatrics> dpList = departmentOfPediatricsService.findDepartmentOfPediatrics(Integer.parseInt(user.getSchoolId()));
 		session.setAttribute("dpList", dpList);
 		return "children/create/createChildrenClass";
 	}

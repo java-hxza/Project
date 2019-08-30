@@ -56,18 +56,20 @@
 		t.remarks srk,
 		t.feeCategory sfc,
 		cl.classId cd
-		FROM student t
+		FROM
+		student t
 		JOIN childrenesclassstudnet cl ON
 		t.studentId=cl.studentId
 		JOIN class c ON cl.classId=c.classId
 		WHERE
-		c.schoolId=#{0} AND t.feeCategory = 1
+		c.schoolId=#{0} AND
+		t.feeCategory = 1
 		<if test="map.startTime !=null and map.startTime!=''">
 			and date(t.startTime) between #{map.startTime} and
 			#{map.endTime}
 		</if>
 	</select>
-	
+
 	<resultMap type="Student" id="selectChildrens">
 		<id column="si" property="studentId" />
 		<result column="sn" property="studentName" />
@@ -85,11 +87,12 @@
 		<result column="sts" property="theSurrogate" />
 		<result column="srk" property="remarks" />
 		<result column="sfc" property="feeCategory" />
-		<collection property="childrenesClassStudnet" javaType="ChildrenesClassStudnet">
+		<collection property="childrenesClassStudnet"
+			javaType="ChildrenesClassStudnet">
 			<result column="cd" property="classId" />
 		</collection>
 	</resultMap>
-	
+
 
 	<select id="selectYiKao" resultType="Student">
 		SELECT
@@ -170,17 +173,26 @@
 
 
 	<insert id="insertStudnetInfo" parameterType="Student">
-		insert into traininginstitutions.student
-		(studentName,studentSex,studentIDCard, studentBirth, school,
+		insert into
+		traininginstitutions.student
+		(studentName,studentSex,studentIDCard,
+		studentBirth, school,
 		parentName, telephone, familyAddress,
 		registrationChannels,registrationConsultant,
-		startTime, endTime, theSurrogate, remarks, feeCategory )
+		startTime, endTime,
+		theSurrogate, remarks, feeCategory )
 		values (#{studentName},
 		#{studentSex}, #{studentIDCard}, #{studentBirth}, #{school},
 		#{parentName}, #{telephone}, #{familyAddress},
 		#{registrationChannels},
-		#{registrationConsultant}, #{startTime}, #{endTime}, #{theSurrogate}, #{remarks}, #{feeCategory}
+		#{registrationConsultant}, #{startTime},
+		#{endTime}, #{theSurrogate}, #{remarks}, #{feeCategory}
 		)
 	</insert>
+
+	<update id="updateStudentOrderHour">
+		UPDATE traininginstitutions.student
+		SET studentHour = studentHour + #{0} WHERE studentId = #{1} ;
+	</update>
 
 </mapper>

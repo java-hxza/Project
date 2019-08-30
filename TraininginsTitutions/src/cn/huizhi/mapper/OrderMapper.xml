@@ -84,55 +84,65 @@
 
 	<insert id="addOrder" parameterType="java.lang.Integer">
 		INSERT INTO
-		traininginstitutions.order(feecateId,dpMoney,stuId,startTime,schoolId,identification,feecategoryMoney,paymentmethodId,personliable,departmentofpediatricsId,addhour,givehour,firstdate,lastdate,remarks,orderNumber,expenditureitemsId,classId)VALUES(#{feecateId},#{dpMoney},#{stuId},#{startTime},#{schoolId},#{identification},#{feecategoryMoney},#{paymentmethodId},#{personliable},#{departmentofpediatricsId},#{addhour},#{givehour},#{firstdate},#{lastdate},#{remarks},#{orderNumber},#{expenditureitemsId},#{classId});
+		traininginstitutions.order
+		(feecateId,dpMoney,stuId,startTime,schoolId,identification,
+		feecategoryMoney,paymentmethodId,personliable,departmentofpediatricsId,
+		addhour,givehour,firstdate,lastdate,remarks,orderNumber,expenditureitemsId,
+		classId)VALUES(
+		#{feecateId},#{dpMoney},#{stuId},#{startTime},#{schoolId},
+		#{identification},#{feecategoryMoney},#{paymentmethodId},#{personliable},
+		#{departmentofpediatricsId},#{addhour},#{givehour},#{firstdate},#{lastdate},
+		#{remarks},#{orderNumber},#{expenditureitemsId},#{classId});
 	</insert>
 
-	<update id="updateOrderAll" parameterType="Order">
+	<update id="updateOrderAll">
 		UPDATE
-		traininginstitutions.order SET
+		traininginstitutions.order
+		<trim prefix="set" suffixOverrides=",">
 		<if test="stuId !=null and stuId !=''">
-			stuId = #{stuId}
+			stuId = #{stuId},
 		</if>
 		<if test="feecateId !=null and feecateId !=''">
-			,feecateId = #{feecateId}
+			feecateId = #{feecateId},
 		</if>
 		<if test="dpMoney !=null and dpMoney !=''">
-			,dpMoney = #{dpMoney}
+			dpMoney = #{dpMoney},
 		</if>
 		<if test="schoolId !=null and schoolId !=''">
-			,schoolId = #{schoolId}
+			schoolId = #{schoolId},
 		</if>
 		<if test="feecategoryMoney !=null and feecategoryMoney !=''">
-			,feecategoryMoney = #{feecategoryMoney}
+			feecategoryMoney = #{feecategoryMoney},
 		</if>
 		<if test="paymentmethodId !=null and paymentmethodId !=''">
-			,paymentmethodId = #{paymentmethodId}
+			paymentmethodId = #{paymentmethodId},
 		</if>
 		<if test="personliable !=null and personliable !=''">
-			,personliable = #{personliable}
+			personliable = #{personliable},
 		</if>
 		<if
 			test="departmentofpediatricsId !=null and departmentofpediatricsId !=''">
-			,departmentofpediatricsId = #{departmentofpediatricsId}
+			departmentofpediatricsId = #{departmentofpediatricsId},
 		</if>
 		<if test="addhour !=null and addhour !=''">
-			,addhour = #{addhour}
+			addhour = #{addhour},
 		</if>
 		<if test="givehour !=null and givehour !=''">
-			,givehour = #{givehour}
+			givehour = #{givehour},
 		</if>
 		<if test="firstdate !=null and firstdate !=''">
-			,firstdate = #{firstdate}
+			firstdate = #{firstdate},
 		</if>
 		<if test="lastdate !=null and lastdate !=''">
-			,lastdate = #{lastdate}
+			lastdate = #{lastdate},
 		</if>
 		<if test="remarks !=null and remarks !=''">
-			,remarks = #{remarks}
+			remarks = #{remarks},
 		</if>
 		<if test="expenditureitemsId !=null and expenditureitemsId !=''">
-			,expenditureitemsId = #{expenditureitemsId}
+			expenditureitemsId = #{expenditureitemsId},
 		</if>
+		</trim>
 		WHERE orderId = #{orderId} ;
 	</update>
 

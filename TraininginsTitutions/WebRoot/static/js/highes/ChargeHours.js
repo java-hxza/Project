@@ -24,20 +24,22 @@ $(function() {
 		$(".paymentmethodId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().attr("class"));
 		$(".feecateId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().attr("class"));
 		$(".customCheckes:checked").parent().parent().next().text();
-		
-		var date = $.trim($(".date").val());
-		var dpMoney = $.trim($(".money").val());
-		var hour = $.trim($(".hour").val());
-		var hours = $.trim($(".hours").val());
-		var stuId = $.trim($(".stuId").val());
-		var departmentofpediatricsId = $.trim($(".departmentofpediatricsId").val());
-		var remarks = $.trim($(".remarks").val());
-		var paymentmethodId = $.trim($(".paymentmethodId").val());
-		var feecateId = $.trim($(".feecateId").val());
-		var orderId = $(".customCheckes:checked").parent().parent().next().text();
+		var orderIds = $(".customCheckes:checked").parent().parent().next().text();
+		var hour2 = $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text();
+		var hours2 = $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text();
+		var hour3 = null;
 		$(".showOrderChildren").remove();
 		$(".addOrderChildren").show();
 		$(".TiJiao").click(function() {
+			var date = $.trim($(".date").val());
+			var dpMoney = $.trim($(".money").val());
+			var hour = $.trim($(".hour").val());
+			var hours = $.trim($(".hours").val());
+			var stuId = $.trim($(".stuId").val());
+			var departmentofpediatricsId = $.trim($(".departmentofpediatricsId").val());
+			var remarks = $.trim($(".remarks").val());
+			var paymentmethodId = $.trim($(".paymentmethodId").val());
+			var feecateId = $.trim($(".feecateId").val());
 			if (dpMoney == "") {
 				alert("请填写收费金额！");
 				return false;
@@ -45,6 +47,11 @@ $(function() {
 			if (hour == "") {
 				alert("请填写本次新增课时！");
 				return false;
+			}
+			if((hour2 + hours2) > (hour + hours)) {
+				hour3 = -((parseFloat(hour2) + parseFloat(hours2)) - (parseFloat(hour) + parseFloat(hours)));
+			}else {
+				hour3 = ((parseFloat(hour) + parseFloat(hours)) - (parseFloat(hour2) + parseFloat(hours2)));
 			}
 			$.ajax({
 				type : "POST",
@@ -59,7 +66,8 @@ $(function() {
 					givehour : hours,
 					remarks : remarks,
 					paymentmethodId : paymentmethodId,
-					orderId:orderId
+					orderId:orderIds,
+					hour : hour3
 				},
 				dataType : "json",
 				success : function(data) {
@@ -94,11 +102,17 @@ $(function() {
 		}
 		if (confirm("确认删除吗？")) {
 			var orderId = $(".customCheckes:checked").parent().parent().next().text();
+			var addhour = $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text();
+			var givehour = $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text();
+			var stuId = $(".customCheckes:checked").parent().parent().next().attr("class");
+			var hour = -(parseFloat(addhour) + parseFloat(givehour));
 			$.ajax({
 				type : "POST",
 				url : "delCharge.html",
 				data : {
-					orderId : orderId
+					orderId : orderId,
+					hour : hour,
+					stuId : stuId
 				},
 				dataType : "json",
 				success : function(data) {

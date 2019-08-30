@@ -15,7 +15,7 @@ public interface DepartmentOfPediatricsMapper {
 	 * 查询所有班级科别
 	 * @return
 	 */
-	public List<DepartmentOfPediatrics> selectDepartmentOfPediatrics();
+	public List<DepartmentOfPediatrics> selectDepartmentOfPediatrics(Integer schoolId);
 	
 	/**
 	 * 添加班级科别
