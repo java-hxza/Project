@@ -52,6 +52,15 @@ public class StudentServiceImpl implements StudentService{
 		// TODO Auto-generated method stub
 		return studentMapper.insertStudnetInfo(stu);
 	}
+
+	/**
+	 * 更新总课时
+	 */
+	@Override
+	public Integer updateStudentOrderHour(Double studentHour, Integer studentId) {
+		return studentMapper.updateStudentOrderHour(studentHour, studentId);
+	}
+	
 	
 	
 }

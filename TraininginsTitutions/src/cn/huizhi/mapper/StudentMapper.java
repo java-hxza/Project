@@ -44,8 +44,10 @@ public interface StudentMapper {
 	 */
 	public int insertStudnetInfo(Student stu);
 	
-	
-	
-	
-	
+	/**
+	 * 更新总课时
+	 * @param studentHour
+	 * @return
+	 */
+	public Integer updateStudentOrderHour(Double studentHour,Integer studentId);
 }

@@ -367,7 +367,11 @@ public class HighesController {
 		order.setClassId(classId);
 		order.setPaymentmethodId(paymentmethodId);
 		if (orderService.addOrder(order) == 1) {
-			map.put("add", "1");
+			if(studentService.updateStudentOrderHour(addhour + givehour, stuId) == 1) {
+				map.put("add", "1");
+			}else {
+				map.put("add", "0");
+			}
 		} else {
 			map.put("add", "0");
 		}
@@ -503,10 +507,14 @@ public class HighesController {
 	 */
 	@RequestMapping("delCharge.html")
 	@ResponseBody
-	public Object delCharge(@RequestParam Integer orderId) {
+	public Object delCharge(@RequestParam Integer orderId,@RequestParam Integer stuId,@RequestParam Double hour) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		if (orderService.delOrder(orderId) == 1) {
-			map.put("del", "1");
+			if(studentService.updateStudentOrderHour(hour, stuId) == 1) {
+				map.put("del", "1");
+			}else {
+				map.put("del", "0");
+			}
 		} else {
 			map.put("del", "0");
 		}
@@ -523,7 +531,7 @@ public class HighesController {
 	public Object updateChargeHour(@RequestParam Integer stuId, @RequestParam Integer feecateId,
 			@RequestParam Double dpMoney,@RequestParam Integer departmentofpediatricsId,
 			@RequestParam Double addhour, @RequestParam Double givehour, @RequestParam String remarks,
-			@RequestParam Integer paymentmethodId,@RequestParam Integer orderId) {
+			@RequestParam Integer paymentmethodId,@RequestParam Integer orderId,@RequestParam Double hour) {
 		Order order = new Order();
 		HashMap<String, String> map = new HashMap<String, String>();
 		order.setStuId(stuId);
@@ -535,10 +543,14 @@ public class HighesController {
 		order.setFeecateId(feecateId);
 		order.setDpMoney(dpMoney);
 		order.setPaymentmethodId(paymentmethodId);
-		if (orderService.updateOrderAll(order) < 0) {
-			map.put("update", "0");
+		if (orderService.updateOrderAll(order) == 1) {
+			if(studentService.updateStudentOrderHour(hour, stuId) < 0 ) {
+				map.put("update", "0");
+			}else {
+				map.put("update", "1");
+			}
 		} else {
-			map.put("update", "1");
+			map.put("update", "0");
 		}
 		return JSONArray.toJSONString(map);
 	}

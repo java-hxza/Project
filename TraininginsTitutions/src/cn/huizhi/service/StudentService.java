@@ -39,4 +39,11 @@ public interface StudentService {
 	 * @return
 	 */
 	public int addStudnetInfo(Student stu);
+	
+	/**
+	 * 更新总课时
+	 * @param studentHour
+	 * @return
+	 */
+	public Integer updateStudentOrderHour(Double studentHour,Integer studentId);
 }
