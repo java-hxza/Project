@@ -14,7 +14,7 @@ public interface FeeCategoryService {
 	 * 查询所有收入项目
 	 * @return
 	 */
-	public List<FeeCategory> selectFeeCategory();
+	public List<FeeCategory> selectFeeCategory(Integer schoolId);
 	
 	/**
 	 * 删除收入项目
@@ -26,5 +26,5 @@ public interface FeeCategoryService {
 	 * 添加收入项目
 	 * @return
 	 */
-	public Integer addFeeCategory(String chargeTypeName,String category);
+	public Integer addFeeCategory(String chargeTypeName,String category,Integer schoolId);
 }

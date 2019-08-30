@@ -5,6 +5,7 @@ public class FeeCategory {
 	private String chargeTypeName;
 	private String category;
 	private double chargeMoney;
+	private Integer schoolId;
 
 	/**
 	 * 
@@ -13,12 +14,14 @@ public class FeeCategory {
 		super();
 	}
 
-	public FeeCategory(Integer chargeTypeId, String chargeTypeName, String category, double chargeMoney) {
+	public FeeCategory(Integer chargeTypeId, String chargeTypeName, String category, double chargeMoney,
+			Integer schoolId) {
 		super();
 		this.chargeTypeId = chargeTypeId;
 		this.chargeTypeName = chargeTypeName;
 		this.category = category;
 		this.chargeMoney = chargeMoney;
+		this.schoolId = schoolId;
 	}
 
 	public double getChargeMoney() {
@@ -31,6 +34,14 @@ public class FeeCategory {
 
 	public Integer getChargeTypeId() {
 		return chargeTypeId;
+	}
+
+	public Integer getSchoolId() {
+		return schoolId;
+	}
+
+	public void setSchoolId(Integer schoolId) {
+		this.schoolId = schoolId;
 	}
 
 	public void setChargeTypeId(Integer chargeTypeId) {

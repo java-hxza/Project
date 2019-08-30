@@ -22,8 +22,8 @@ public class DepartmentOfPediatricsServiceImpl implements DepartmentOfPediatrics
 	/**
 	 * 获取全部科别
 	 */
-	public List<DepartmentOfPediatrics> findDepartmentOfPediatrics() {
-		return departmentOfPediatricsMapper.selectDepartmentOfPediatrics();
+	public List<DepartmentOfPediatrics> findDepartmentOfPediatrics(Integer schoolId) {
+		return departmentOfPediatricsMapper.selectDepartmentOfPediatrics(schoolId);
 	}
 	/**
 	 * 新增班级科别
