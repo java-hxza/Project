@@ -1,5 +1,5 @@
 $(function() {
-	$(".money").val($(".feecateId option:selected").attr("name"));
+	$(".money").val($(".departmentofpediatricsId option:selected").attr("name"));
 	var Time = new Date();
 	var month = null;
 	if ((Time.getMonth() + 1) < 10) {
@@ -8,8 +8,8 @@ $(function() {
 		month = Time.getMonth() + 1;
 	}
 	$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
-	$(".feecateId").click(function() {
-		$(".money").val($(".feecateId option:selected").attr("name"));
+	$(".departmentofpediatricsId").click(function() {
+		$(".money").val($(".departmentofpediatricsId option:selected").attr("name"));
 	});
 	$(".TiJiao").click(function() {
 		var date = $.trim($(".date").val());

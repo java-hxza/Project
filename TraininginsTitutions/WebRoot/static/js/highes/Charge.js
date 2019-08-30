@@ -1,16 +1,73 @@
 $(function() {
-	$(".dpMoney").val($(".feecateId option:selected").attr("name"));
-	var Time = new Date();
-	var month = null;
-	if ((Time.getMonth() + 1) < 10) {
-		month = 0 + (Time.getMonth() + 1).toString();
-	}else {
-		month = Time.getMonth()+1;
-	}
-	$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
-	$(".feecateId").click(function() {
-		$(".dpMoney").val($(".feecateId option:selected").attr("name"));
-	});
+//	$(".dpMoney").val($(".feecateId option:selected").attr("name"));
+//	var Time = new Date();
+//	var month = null;
+//	if ((Time.getMonth() + 1) < 10) {
+//		month = 0 + (Time.getMonth() + 1).toString();
+//	}else {
+//		month = Time.getMonth()+1;
+//	}
+//	$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
+//	$(".feecateId").click(function() {
+//		$(".dpMoney").val($(".feecateId option:selected").attr("name"));
+//	});
+	
+	delOrder = function() {
+		if ($(".customCheckes:checked").length < 1) {
+			if (!$(".customCheckes").prop("checked")) {
+				alert("请选中一条数据！");
+				return false;
+			}
+		} else if ($(".customCheckes:checked").length > 1) {
+				alert("只能选中一条数据！");
+				return false;
+		}
+		if (confirm("确认删除吗？")) {
+			var orderId = $(".customCheckes:checked").parent().parent().next().text();
+			var firstdate = $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text();
+			var lastdate = $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text();
+			var stuId = $(".customCheckes:checked").parent().parent().next().attr("class");
+			var a = "2018-08-30";
+			a = new Date(a.replace(/-/g, "/"));
+			s1 = new Date();
+			var s = s1.getTime() - a.getTime();
+			alert(s);
+			var time = parseInt(s / (1000 * 60 * 60 * 24));
+			alert(time);
+			alert(stuId);
+			alert(orderId);
+			alert(firstdate);
+			alert(lastdate);
+			return false;
+			$.ajax({
+				type : "POST",
+				url : "delCharge.html",
+				data : {
+					orderId : orderId,
+					hour : hour,
+					stuId : stuId
+				},
+				dataType : "json",
+				success : function(data) {
+					data = JSON.parse(data);
+					if (data.del == "1") {
+						alert("删除成功！");
+						location.href = "selectOrderHour.html";
+					} else {
+						alert("删除失败！");
+						location.href = "selectOrderHour.html";
+					}
+				},
+				error : function(data) {
+					alert("系统出错！");
+					location.href = "selectOrderHour.html";
+				}
+			});
+		} else {
+			return false;
+		}
+	};
+	
 	$(".TiJiao").click(function() {
 		var dpMoney = $.trim($(".dpMoney").val());
 		var firstdate = $.trim($(".firstdate").val());
