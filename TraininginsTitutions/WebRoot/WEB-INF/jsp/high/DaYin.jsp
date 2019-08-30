@@ -268,15 +268,16 @@
 									</ol>
 								</div>
 								<h4 class="page-title">全国统一收款收据</h4>
+								<button type="button" id="btn2"  class="btn btn-success btn-sm mt-2" onclick="print()">打印</button>
 							</div>
 						</div>
 					</div>
 					<!-- end page title -->
 
-					<div class="row">
+					<div class="row"  id="dayin"><!--startprint-->
 						<div class="col-12">
 							<div class="card">
-								<div class="card-body">
+								<div class="card-body" >
 								<h4 style="text-align:center">全国统一收款收据</h4>
 									<div class="row mb-2">
 										<table id="ChargePeriod" border="1"  width="1600">
@@ -424,6 +425,7 @@
 								<!-- end card-->
 							</div>
 							<!-- end col -->
+							<!--endprint-->
 						</div>
 						<!-- end row -->
 
@@ -593,7 +595,7 @@
 				</div>
 			</div>
 		</div>
-
+	<iframe id="iframe1" style="display: none"></iframe>
 
 		<div class="rightbar-overlay"></div>
 		<!-- /Right-bar -->
@@ -605,6 +607,7 @@
 		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
 		<script src="${Path }/static/js/highes/leftSidebar.js"></script>
 		<script src="${Path }/static/js/highes/Charge.js"></script>
+		<script src="${Path }/static/js/highes/dayin.js"></script>
 		<!-- third party js ends -->
 </body>
 </html>

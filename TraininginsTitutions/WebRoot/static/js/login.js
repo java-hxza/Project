@@ -57,8 +57,6 @@ $(function() {
 		　               alert(XMLHttpRequest.readyState); 
 　   	           alert(textStatus); 
 	　　		} 
-		
-			
 		});
 	}
 	/**
@@ -192,8 +190,8 @@ $(function() {
 		var loginName = $("#username").val();
 		var loginPassword = $("#password").val();
 		var schoolId = $("#schoolId").val();
-		
-		if (loginName, loginPassword == "") {
+		var departmentId = $("#departmentId").val();
+		if ((loginName, loginPassword,departmentId == "")||(loginName, loginPassword,departmentId == null)) {
 			$.NotificationApp.send("错误!", "你必须输入账户名及密码。", "top-right", "rgba(0,0,0,0.2)", "error")
 			$("#loginBtn span").removeClass("spinner-border spinner-border-sm");
 			$("#loginBtn span").text("立即登录");
@@ -207,7 +205,8 @@ $(function() {
 			data : {
 				loginName : loginName,
 				loginPassword : loginPassword,
-				schoolId : schoolId
+				schoolId : schoolId,
+				departmentId:departmentId
 			},
 			dataType : 'JSON',
 			type : 'post',

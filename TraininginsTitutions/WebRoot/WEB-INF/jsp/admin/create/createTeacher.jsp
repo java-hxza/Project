@@ -72,6 +72,15 @@
 									</select>
 								</div>
 								<div class="form-group">
+									<label for="emailaddress">部门：</label>
+									<select id="departmentId" class="form-control" name="departmentId">
+										<option value="0">请选择部门</option>
+										<c:forEach items="${departMentListAllList }" var="dp">
+											<option value="${dp.departmentId }">${dp.departmentName}</option>
+										</c:forEach>
+									</select>
+								</div>
+								<div class="form-group">
 									<label for="emailaddress">教师名</label> <input
 										class="form-control" type="text" onchange="teacherNameCheck()" id="teacherName" required
 										placeholder="教师登录名  不能重复创建相同的名称">

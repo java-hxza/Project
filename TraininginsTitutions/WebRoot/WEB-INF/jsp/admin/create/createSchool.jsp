@@ -69,6 +69,14 @@
 										placeholder="学校名称">
 								</div>
 								<div class="form-group">
+									<label for="emailaddress">学校级别</label> 
+									<select class="form-control" id="schoolType">
+										<option value="1">少儿</option>
+										<option value="2">高中</option>
+										<option value="3">艺考</option>
+									</select>
+								</div>
+								<div class="form-group">
 									<label for="emailaddress">学校备注</label> <input
 										class="form-control" type="text" id="schoolRemarks" required
 										placeholder="学校备注">

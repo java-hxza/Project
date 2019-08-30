@@ -60,9 +60,11 @@ public interface TeacherMapper {
 	 * @param loginName
 	 * @param loginPassword
 	 * @param schoolId
+	 * @param departmentId
+	 * @param schoolType
 	 * @return
 	 */
-	public Teacher selectTeacherByLogin(@Param("teacherName")String loginName,@Param("loginPassword")String loginPassword,@Param("schoolId")Integer schoolId);
+	public Teacher selectTeacherByLogin(@Param("teacherName")String loginName,@Param("loginPassword")String loginPassword,@Param("schoolId")Integer schoolId,@Param("departmentId")Integer departmentId,@Param("schoolType")Integer schoolType);
 	/**
 	 * 根据教师主键查询教师信息
 	 * @param teacherId

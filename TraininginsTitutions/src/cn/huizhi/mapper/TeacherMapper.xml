@@ -59,7 +59,9 @@
 		select
 		<include refid="teacherByLoginCol" />
 		from teacher t
+		join department dp on dp.departmentId = t.departmentId
 		join teacherdiction td on td.teacherId = t.teacherId
+		join school sc on sc.schoolId = td.schoolId
 		<where>
 			<if test="teacherName!='' and teacherName!=null">
 				t.teacherName = #{teacherName }
@@ -69,6 +71,12 @@
 			</if>
 			<if test="schoolId!=null and schoolId!=''">
 				and td.schoolId =#{schoolId}
+			</if>
+			<if test="departmentId !=null and departmentId!=''">
+				and t.departmentId = #{departmentId}
+			</if>
+			<if test="schoolType !=null and schoolType!=''">
+				and sc.schoolType = #{schoolType}
 			</if>
 		</where>
 	</select>
@@ -89,10 +97,10 @@
 	<insert id="addTeacher" parameterType="Teacher">
 		INSERT INTO
 		traininginstitutions.teacher (teacherName, loginPassword,
-		teacherTypeId, feeCategory,telePhone,remarks)VALUES(#{teacherName},
+		teacherTypeId, feeCategory,telePhone,remarks,departmentId)VALUES(#{teacherName},
 		#{loginPassword},
 		#{teacherTypeId},
-		#{feeCategory},#{telephone},#{remarks});
+		#{feeCategory},#{telephone},#{remarks},#{departmentId});
 	</insert>
 
 
