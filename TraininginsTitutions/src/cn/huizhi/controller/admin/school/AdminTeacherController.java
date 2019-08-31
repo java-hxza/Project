@@ -21,11 +21,13 @@ import cn.huizhi.pojo.TeacherHour;
 import cn.huizhi.pojo.User;
 import cn.huizhi.service.ChildStuReistrationService;
 import cn.huizhi.service.ClassService;
+import cn.huizhi.service.DepartMentService;
 import cn.huizhi.service.StudentService;
 import cn.huizhi.service.TeacherDictionService;
 import cn.huizhi.service.TeacherHourService;
 import cn.huizhi.service.TeacherService;
 import cn.huizhi.pojo.Class;
+import cn.huizhi.pojo.DepartMent;
 import cn.huizhi.pojo.Student;
 @Controller
 public class AdminTeacherController {
@@ -45,6 +47,9 @@ public class AdminTeacherController {
 	
 	@Resource
 	StudentService studentService;
+	
+	@Resource
+	DepartMentService departMentServie;
 	
 	@RequestMapping("schoolTeacherInfo.html")
 	public String schoolTeacherInfo(Integer schoolId,String schoolName,HttpSession session) {
@@ -69,12 +74,15 @@ public class AdminTeacherController {
 	 */
 	@RequestMapping("selectTeacher.html")
 	@ResponseBody
-	public String selectTeacher(Integer teacherId) {
+	public Map<String, String> selectTeacher(Integer teacherId) {
 		Teacher teacher = teacherService.findTeacherByTeacherId(teacherId);
-		if(teacher!=null) {
-			return JSON.toJSONString(teacher);
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		List<DepartMent> departMents = departMentServie.selectDepartMentListAll();
+		if(teacher != null) {
+			jsonMap.put("teacher",JSON.toJSONString(teacher));
+			jsonMap.put("departMents",JSON.toJSONString(departMents));
 		}
- 		return "";
+ 		return jsonMap;
 	}
 	
 	/**
