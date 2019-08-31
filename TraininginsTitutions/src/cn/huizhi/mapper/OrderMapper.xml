@@ -49,14 +49,45 @@
 		</collection>
 	</resultMap>
 
-	<select id="selectOrderPeriod" resultType="Order">
-		SELECT o.*
-		FROM `order`
-		o
-		JOIN student s ON o.stuId=s.studentId
-		WHERE o.identification = 0 AND
-		o.firstdate IS NOT NULL AND o.schoolId=#{0} ORDER BY od
+	<select id="selectOrderPeriod" resultMap="selectOrderPeriods">
+		SELECT o.orderId
+		od,o.firstdate,o.lastdate,o.dpMoney
+		odm,o.remarks,o.personliable,o.startTime,o.orderNumber,o.feecateId
+		ofi,o.stuId osi,o.paymentmethodId opt,s.studentName,
+		p.paymentmethodName,s.school
+		FROM `order` o
+		JOIN student s ON
+		o.stuId=s.studentId
+		JOIN paymentmethod p ON
+		o.paymentmethodId=p.paymentmethodId
+		JOIN feecategory f ON
+		o.feecateId=f.chargeTypeId
+		WHERE o.firstdate IS NOT NULL AND
+		o.schoolId=#{0} ORDER BY od
 	</select>
+
+	<resultMap type="Order" id="selectOrderPeriods">
+		<id column="od" property="orderId" />
+		<result column="odm" property="dpMoney" />
+		<result column="o.remarks" property="remarks" />
+		<result column="o.personliable" property="personliable" />
+		<result column="osi" property="stuId" />
+		<result column="opt" property="paymentmethodId" />
+		<result column="o.startTime" property="startTime" />
+		<result column="ofi" property="feecateId" />
+		<result column="o.firstdate" property="firstdate" />
+		<result column="o.lastdate" property="lastdate" />
+		<result column="o.orderNumber" property="orderNumber" />
+		<collection property="student" javaType="Student">
+			<result column="s.studentName" property="studentName" />
+			<result column="s.school" property="school" />
+		</collection>
+		<collection property="paymentMethod"
+			javaType="PaymentMethod">
+			<result column="p.paymentmethodName"
+				property="paymentmethodName" />
+		</collection>
+	</resultMap>
 
 	<select id="selectOrderOther" resultType="Order">
 		SELECT o.*
@@ -99,49 +130,49 @@
 		UPDATE
 		traininginstitutions.order
 		<trim prefix="set" suffixOverrides=",">
-		<if test="stuId !=null and stuId !=''">
-			stuId = #{stuId},
-		</if>
-		<if test="feecateId !=null and feecateId !=''">
-			feecateId = #{feecateId},
-		</if>
-		<if test="dpMoney !=null and dpMoney !=''">
-			dpMoney = #{dpMoney},
-		</if>
-		<if test="schoolId !=null and schoolId !=''">
-			schoolId = #{schoolId},
-		</if>
-		<if test="feecategoryMoney !=null and feecategoryMoney !=''">
-			feecategoryMoney = #{feecategoryMoney},
-		</if>
-		<if test="paymentmethodId !=null and paymentmethodId !=''">
-			paymentmethodId = #{paymentmethodId},
-		</if>
-		<if test="personliable !=null and personliable !=''">
-			personliable = #{personliable},
-		</if>
-		<if
-			test="departmentofpediatricsId !=null and departmentofpediatricsId !=''">
-			departmentofpediatricsId = #{departmentofpediatricsId},
-		</if>
-		<if test="addhour !=null and addhour !=''">
-			addhour = #{addhour},
-		</if>
-		<if test="givehour !=null and givehour !=''">
-			givehour = #{givehour},
-		</if>
-		<if test="firstdate !=null and firstdate !=''">
-			firstdate = #{firstdate},
-		</if>
-		<if test="lastdate !=null and lastdate !=''">
-			lastdate = #{lastdate},
-		</if>
-		<if test="remarks !=null and remarks !=''">
-			remarks = #{remarks},
-		</if>
-		<if test="expenditureitemsId !=null and expenditureitemsId !=''">
-			expenditureitemsId = #{expenditureitemsId},
-		</if>
+			<if test="stuId !=null and stuId !=''">
+				stuId = #{stuId},
+			</if>
+			<if test="feecateId !=null and feecateId !=''">
+				feecateId = #{feecateId},
+			</if>
+			<if test="dpMoney !=null and dpMoney !=''">
+				dpMoney = #{dpMoney},
+			</if>
+			<if test="schoolId !=null and schoolId !=''">
+				schoolId = #{schoolId},
+			</if>
+			<if test="feecategoryMoney !=null and feecategoryMoney !=''">
+				feecategoryMoney = #{feecategoryMoney},
+			</if>
+			<if test="paymentmethodId !=null and paymentmethodId !=''">
+				paymentmethodId = #{paymentmethodId},
+			</if>
+			<if test="personliable !=null and personliable !=''">
+				personliable = #{personliable},
+			</if>
+			<if
+				test="departmentofpediatricsId !=null and departmentofpediatricsId !=''">
+				departmentofpediatricsId = #{departmentofpediatricsId},
+			</if>
+			<if test="addhour !=null and addhour !=''">
+				addhour = #{addhour},
+			</if>
+			<if test="givehour !=null and givehour !=''">
+				givehour = #{givehour},
+			</if>
+			<if test="firstdate !=null and firstdate !=''">
+				firstdate = #{firstdate},
+			</if>
+			<if test="lastdate !=null and lastdate !=''">
+				lastdate = #{lastdate},
+			</if>
+			<if test="remarks !=null and remarks !=''">
+				remarks = #{remarks},
+			</if>
+			<if test="expenditureitemsId !=null and expenditureitemsId !=''">
+				expenditureitemsId = #{expenditureitemsId},
+			</if>
 		</trim>
 		WHERE orderId = #{orderId} ;
 	</update>

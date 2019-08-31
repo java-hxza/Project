@@ -1,6 +1,6 @@
 $(function() {
-	$(".feecateId").click(function() {
-		$(".money").val($(".feecateId option:selected").attr("name"));
+	$(".departmentofpediatricsId").click(function() {
+		$(".money").val($(".departmentofpediatricsId option:selected").attr("name"));
 	});
 	updateOrder = function() {
 		if ($(".customCheckes:checked").length < 1) {
@@ -22,7 +22,7 @@ $(function() {
 		$(".departmentofpediatricsId").val($(".customCheckes:checked").parent().parent().next().next().next().next().attr("class"));
 		$(".remarks").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().text());
 		$(".paymentmethodId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().attr("class"));
-		$(".feecateId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().attr("class"));
+		$(".feecateId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().attr("class"));
 		$(".customCheckes:checked").parent().parent().next().text();
 		var orderIds = $(".customCheckes:checked").parent().parent().next().text();
 		var hour2 = $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text();
@@ -95,10 +95,8 @@ $(function() {
 				return false;
 			}
 		} else if ($(".customCheckes:checked").length > 1) {
-			if (!$(".customCheckes").prop("checked")) {
 				alert("只能选中一条数据！");
 				return false;
-			}
 		}
 		if (confirm("确认删除吗？")) {
 			var orderId = $(".customCheckes:checked").parent().parent().next().text();

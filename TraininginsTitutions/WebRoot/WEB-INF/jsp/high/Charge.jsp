@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set scope="request" value="${pageContext.request.contextPath }"
 	var="Path" />
 <!DOCTYPE html>
@@ -277,7 +277,91 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 style="text-align:center">按时间段收费单</h4>
-									<div class="row mb-2">
+									<div class="showOrder">
+										<div class="col-12">
+											<div class="card">
+												<div class="card-body">
+													<div class="row mb-2">
+														<div class="col-sm-4">
+															<a href="${Path }/ChargeHours.html" class="btn btn-danger mb-2"><i
+																class="mdi mdi-plus-circle mr-2"></i> 添加</a> <a
+																href="javascript:void(0);"
+																class="btn btn-danger mb-2 del" onclick="updateOrder()"><i
+																class="mdi mdi-plus-circle mr-2"></i> 修改</a> <a
+																href="javascript:void(0);"
+																class="btn btn-danger mb-2 del" onclick="delOrder()"><i
+																class="mdi mdi-plus-circle mr-2"></i> 删除</a>
+														</div>
+
+														<!-- end col-->
+													</div>
+
+													<div class="table-responsive mt-4 Expenditureitemses">
+														<table class="table table-bordered table-centered mb-0">
+															<thead class="thead-light">
+																<tr>
+																	<th style="width: 20px;">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				id="customCheck1" disabled> <label
+																				class="custom-control-label" for="customCheck1">&nbsp;</label>
+																		</div>
+																	</th>
+																	<th>序</th>
+																	<th>校区信息</th>
+																	<th>收款日期</th>
+																	<th>收款项目</th>
+																	<th>学员</th>
+																	<th>资金账户</th>
+																	<th>金额</th>
+																	<th>费用时间起</th>
+																	<th>费用时间止</th>
+																	<th>责任人</th>
+																	<th>备注</th>
+																	<th>单号</th>
+																</tr>
+															</thead>
+															<tbody>
+																<c:forEach items="${order}" var="o">
+																	<tr>
+																		<td>
+																			<div class="custom-control custom-checkbox">
+																				<input type="checkbox"
+																					class="custom-control-input customCheckes">
+																				<label class="custom-control-label customCheck"
+																					for="customCheck2">&nbsp;</label>
+																			</div>
+																		</td>
+																		<td class="${o.stuId }">${o.orderId }</td>
+																		<td>${o.student.school }</td>
+																		<td><fmt:formatDate value="${o.startTime }"
+																				pattern="yyyy-MM-dd" /></td>
+																		<td class="${o.paymentmethodId }">${o.paymentMethod.paymentmethodName }</td>
+																		<td>${o.student.studentName }</td>
+																		<td class="${o.paymentmethodId }">${o.paymentMethod.paymentmethodName }</td>
+																		<td>${o.dpMoney }</td>
+																		<td><fmt:formatDate value="${o.firstdate }"
+																				pattern="yyyy-MM-dd" /></td>
+																		<td><fmt:formatDate value="${o.lastdate }"
+																				pattern="yyyy-MM-dd" /></td>
+																		<td>${o.personliable }</td>
+																		<td>${o.remarks }</td>
+																		<td>${o.orderNumber }</td>
+																	</tr>
+																</c:forEach>
+															</tbody>
+														</table>
+													</div>
+													<!-- end card-body-->
+												</div>
+												<!-- end card-->
+											</div>
+											<!-- end col -->
+										</div>
+										<!-- end row -->
+									</div>
+									
+									<div class="row mb-2 addOrder" style="display: none;">
 										<div class="col-md-12">
 											<form class="needs-validation" novalidate>
 												<div class="row">

@@ -392,7 +392,7 @@
 																class="form-control departmentofpediatricsId"
 																id="example-select">
 																<c:forEach items="${departmentOfPediatric }" var="d">
-																	<option value="${d.dpId }">${d.dpTypeName}</option>
+																	<option value="${d.dpId }"name="${d.dpMoney }">${d.dpTypeName}</option>
 																</c:forEach>
 															</select>
 														</div>

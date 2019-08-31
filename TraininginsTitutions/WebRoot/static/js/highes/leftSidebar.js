@@ -34,13 +34,13 @@ $(function(){
 		location.href="selectOrderHour.html";
 	}
 	ChargePeriod = function(){
-		location.href="ChargePeriod.html";
+		location.href="selectOrderPeriod.html";
 	}
 	ChargeOthers = function(){
-		location.href="ChargeOthers.html";
+		location.href="selectOrderOthers.html";
 	}
 	Expenditure = function(){
-		location.href="OrderExpenditure.html";
+		location.href="selectOrderExpenditure.html";
 	}
 	/**
 	 * 复选框单击选中取消事件
