@@ -1,6 +1,5 @@
 package cn.huizhi.mapper;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -49,5 +48,12 @@ public interface StudentMapper {
 	 * @param studentHour
 	 * @return
 	 */
-	public Integer updateStudentOrderHour(Double studentHour,Integer studentId);
+	public Integer updateStudentOrderHour(Integer studentHour,Integer studentId,Double integral);
+	
+	/**
+	 * 根据班级查找学生
+	 * @param classId
+	 * @return
+	 */
+	public List<Student> selectStudentClass(Integer classId);
 }

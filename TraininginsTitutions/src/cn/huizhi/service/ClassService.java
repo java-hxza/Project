@@ -43,5 +43,10 @@ public interface ClassService {
 	 */
 	public int delChildrenescClass(Integer childrenesClassId);
 	
-	
+	/**
+	 * 查询班级
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Class> selectClass(Integer schoolId);
 }

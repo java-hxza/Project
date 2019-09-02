@@ -42,5 +42,12 @@ public interface ClassMapper {
 	 */
 	public int deleteChildrenescClass(Integer childrenesClassId);
 	
+	/**
+	 * 查询班级
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Class> selectClass(Integer schoolId);
+	
 	
 }

@@ -23,6 +23,8 @@ public class Class {
 	 * 少儿班级类型主键
 	 */
 	private Integer classTypeId;
+
+	private Integer dpId;
 	/**
 	 * 班主任
 	 */
@@ -32,9 +34,8 @@ public class Class {
 	 */
 	private Integer teacherId;
 
-	
 	private Integer classLevel;
-	
+
 	/**
 	 * 少儿班级所属学校主键
 	 */
@@ -52,15 +53,15 @@ public class Class {
 		super();
 	}
 
-
-	public Class(Integer classId, Integer classNumber, String className, Integer classTypeId, String headmaster,
-			Integer teacherId, Integer classLevel, Integer schoolId, School school,
+	public Class(Integer classId, Integer classNumber, String className, Integer classTypeId, Integer dpId,
+			String headmaster, Integer teacherId, Integer classLevel, Integer schoolId, School school,
 			DepartmentOfPediatrics departmentOfPediatrics) {
 		super();
 		this.classId = classId;
 		this.classNumber = classNumber;
 		this.className = className;
 		this.classTypeId = classTypeId;
+		this.dpId = dpId;
 		this.headmaster = headmaster;
 		this.teacherId = teacherId;
 		this.classLevel = classLevel;
@@ -69,6 +70,13 @@ public class Class {
 		this.departmentOfPediatrics = departmentOfPediatrics;
 	}
 
+	public Integer getDpId() {
+		return dpId;
+	}
+
+	public void setDpId(Integer dpId) {
+		this.dpId = dpId;
+	}
 
 	public Integer getClassNumber() {
 		return classNumber;
@@ -90,7 +98,6 @@ public class Class {
 		this.headmaster = headmaster;
 	}
 
-	
 	public Integer getClassId() {
 		return classId;
 	}
@@ -111,39 +118,21 @@ public class Class {
 		this.className = className;
 	}
 
-
 	public Integer getClassTypeId() {
 		return classTypeId;
 	}
-
 
 	public void setClassTypeId(Integer classTypeId) {
 		this.classTypeId = classTypeId;
 	}
 
-
-
-
-
 	public Integer getClassLevel() {
 		return classLevel;
 	}
 
-
-
-
-
-
-
 	public void setClassLevel(Integer classLevel) {
 		this.classLevel = classLevel;
 	}
-
-
-
-
-
-
 
 	public Integer getSchoolId() {
 		return schoolId;

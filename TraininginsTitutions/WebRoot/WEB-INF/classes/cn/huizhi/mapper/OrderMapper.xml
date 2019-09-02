@@ -9,7 +9,7 @@
 		od,o.dpMoney,o.remarks,o.paymentmethodId
 		opi,o.departmentofpediatricsId odf,o.feecateId
 		ofi,o.addhour,o.givehour,o.startTime,o.orderNumber,o.stuId
-		sd,s.studentName,s.school,p.paymentmethodName,d.dpTypeName
+		sd,o.giftNumber,o.giftId,s.studentName,s.school,p.paymentmethodName,d.dpTypeName
 		FROM `order`
 		o
 		JOIN student s ON o.stuId=s.studentId
@@ -119,11 +119,11 @@
 		(feecateId,dpMoney,stuId,startTime,schoolId,identification,
 		feecategoryMoney,paymentmethodId,personliable,departmentofpediatricsId,
 		addhour,givehour,firstdate,lastdate,remarks,orderNumber,expenditureitemsId,
-		classId)VALUES(
+		classId,giftId,giftNumber)VALUES(
 		#{feecateId},#{dpMoney},#{stuId},#{startTime},#{schoolId},
 		#{identification},#{feecategoryMoney},#{paymentmethodId},#{personliable},
 		#{departmentofpediatricsId},#{addhour},#{givehour},#{firstdate},#{lastdate},
-		#{remarks},#{orderNumber},#{expenditureitemsId},#{classId});
+		#{remarks},#{orderNumber},#{expenditureitemsId},#{classId},#{giftId},#{giftNumber});
 	</insert>
 
 	<update id="updateOrderAll">
@@ -172,6 +172,15 @@
 			</if>
 			<if test="expenditureitemsId !=null and expenditureitemsId !=''">
 				expenditureitemsId = #{expenditureitemsId},
+			</if>
+			<if test="classId !=null and classId !=''">
+				classId = #{classId},
+			</if>
+			<if test="giftId !=null">
+				giftId = #{giftId},
+			</if>
+			<if test="giftNumber !=null">
+				giftNumber = #{giftNumber},
 			</if>
 		</trim>
 		WHERE orderId = #{orderId} ;

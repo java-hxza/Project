@@ -76,10 +76,8 @@ $(function(){
 				return false;
 			}
 		} else if($(".customCheckes:checked").length >1) {
-			if(!$(".customCheckes").prop("checked")) {
 				alert("只能选中一条数据！");
 				return false;
-			}
 		}
 		if(confirm("确认删除吗？")) {
 			var teacherId = $(".customCheckes:checked").parent().parent().next().attr("id");
@@ -115,10 +113,8 @@ $(function(){
 				return false;
 			}
 		} else if($(".customCheckes:checked").length >1) {
-			if(!$(".customCheckes").prop("checked")) {
 				alert("只能选中一条数据！");
 				return false;
-			}
 		}
 		$(".addTeacher").show();
 		var uId = $(".customCheckes:checked").parent().parent().next().attr("id");

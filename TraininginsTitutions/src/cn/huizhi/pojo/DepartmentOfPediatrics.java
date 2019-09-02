@@ -6,19 +6,21 @@ public class DepartmentOfPediatrics {
 	private Integer chargeTypeId;
 	private Integer schoolId;
 	private Double dpMoney;
+	private Double dpMoneyVip;
 
 	public DepartmentOfPediatrics() {
 		super();
 	}
 
 	public DepartmentOfPediatrics(Integer dpId, String dpTypeName, Integer chargeTypeId, Integer schoolId,
-			Double dpMoney) {
+			Double dpMoney, Double dpMoneyVip) {
 		super();
 		this.dpId = dpId;
 		this.dpTypeName = dpTypeName;
 		this.chargeTypeId = chargeTypeId;
 		this.schoolId = schoolId;
 		this.dpMoney = dpMoney;
+		this.dpMoneyVip = dpMoneyVip;
 	}
 
 	public Integer getDpId() {
@@ -59,6 +61,14 @@ public class DepartmentOfPediatrics {
 
 	public void setChargeTypeId(Integer chargeTypeId) {
 		this.chargeTypeId = chargeTypeId;
+	}
+
+	public Double getDpMoneyVip() {
+		return dpMoneyVip;
+	}
+
+	public void setDpMoneyVip(Double dpMoneyVip) {
+		this.dpMoneyVip = dpMoneyVip;
 	}
 
 }

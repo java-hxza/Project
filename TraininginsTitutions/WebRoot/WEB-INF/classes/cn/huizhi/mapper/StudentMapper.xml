@@ -192,7 +192,19 @@
 
 	<update id="updateStudentOrderHour">
 		UPDATE traininginstitutions.student
-		SET studentHour = studentHour + #{0} WHERE studentId = #{1} ;
+		SET studentHour =
+		studentHour + #{0},integral = integral + #{2} WHERE studentId = #{1} ;
 	</update>
+
+	<select id="selectStudentClass" resultType="Student">
+		SELECT t.*
+		FROM
+		student t
+		JOIN childrenesclassstudnet c ON t.studentId=c.studentId
+		JOIN
+		class s ON c.classId=s.classId
+		WHERE c.classId=#{0}
+		ORDER BY t.studentId
+	</select>
 
 </mapper>
