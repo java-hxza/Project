@@ -40,6 +40,7 @@
 			</if>
 		</where>
 	</select>
+	
 	<resultMap id="selectChildrenescClassesMap" type="Class">
 		<id column="cc_classId" property="classId" />
 		<result column="cc_classNumber" property="classNumber" />
@@ -65,5 +66,16 @@
 	</insert>
 	
 	
+	<select id="selectClassListByTeacherId" resultMap="selectChildrenescClassesMap" parameterType="java.lang.Integer">
+		select <include refid="selectChildrenescClassesCol"/>
+		from traininginstitutions.class cc
+		join school s on cc.schoolId = s.schoolId
+		join departmentofpediatrics dp on cc.classTypeId = dp.dpId
+		<where>
+			<if test="teacherId !=null and teacherId !=''">
+				cc.teacherId =#{teacherId} 
+			</if>
+		</where> 
+	</select>
 	
 </mapper>

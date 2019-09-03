@@ -2,6 +2,8 @@ package cn.huizhi.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.huizhi.pojo.ChildStuReistration;
 
 public interface ChildStuReistrationService {
@@ -11,4 +13,12 @@ public interface ChildStuReistrationService {
 	 * @return
 	 */
 	public List<ChildStuReistration> findchildStuReistrationListByClass(Integer classId);
+	
+	
+	/**
+	 * 查询教师上课明细
+	 * @param classId
+	 * @return
+	 */
+	public List<ChildStuReistration> selectTeacherDetailed(Integer classId);
 }

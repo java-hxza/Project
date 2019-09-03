@@ -32,6 +32,12 @@ public class ClassServiceImpl implements ClassService{
 		return 0;
 	}
 
+	@Override
+	public List<Class> selectClassListByTeacherId(Integer teacherId) {
+		// TODO Auto-generated method stub
+		return ClassMapper.selectClassListByTeacherId(teacherId);
+	}
+
 
 
 }

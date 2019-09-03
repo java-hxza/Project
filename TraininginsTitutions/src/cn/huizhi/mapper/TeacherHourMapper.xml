@@ -25,10 +25,33 @@
 		<where>
 			<if test="schoolId !=null and schoolId !=''">
 				th.schoolId =#{schoolId} 
-				group by th.teacherId  
 			</if>
-			
+			group by th.teacherId  
 		</where> 
+	</select>
+	
+	<sql id="CurriculumInfoCol">
+		t.classId t_classId,
+		t.dpId t_dpId,
+		t.dpName t_dpName,
+		t.hours t_hours, 
+		t.remarks t_remarks,
+		t.schoolId t_schoolId,
+		t.startTime t_startTime,
+		t.teacherHourId t_teacherHourId,
+		t.teacherId t_teacherId,
+		t.teacherName t_teacherName
+	</sql>
+	
+	<resultMap type="TeacherHour" id="CurriculumInfoMap">
+		
+	</resultMap>
+	
+	<select id="selectCurriculumInfo" parameterType="java.lang.Integer" resultMap="CurriculumInfoMap">
+		select 
+		from teacherHour t
+		where t.classId = 
+	
 	</select>
 	
 

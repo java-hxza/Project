@@ -7,7 +7,7 @@ $(function() {
 		/**
 		 * 获取用户录入的值
 		 */
-		var provinceId = $("#provinceId").val();
+		var cityProperId = $("#provinceId").val();
 		var cityId = $("#cityId").val();
 		var schoolName = $("#schoolName").val();
 		var schoolType = $("#schoolType").val();
@@ -22,7 +22,7 @@ $(function() {
 		$.ajax({
 			url : 'regitSchool.html',
 			data : {
-				provinceId : provinceId,
+				cityProperId : cityProperId,
 				cityId : cityId,
 				schoolName : schoolName,
 				schoolRemarks : schoolRemarks,
@@ -32,7 +32,6 @@ $(function() {
 			type : 'post',
 			success : function(data) {
 				data = eval(data);
-				alert(data);
 				if (data.state == "1") {
 					$.NotificationApp.send("成功！", "创建学校成功！。", "top-right", "rgba(0,0,0,0.2)", "success");
 					setTimeout(function() {

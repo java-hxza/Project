@@ -1,10 +1,52 @@
 $(function(){
-	
+	/**
+	 * 跳转学校账户余额
+	 */
 	rootSchoolInfo = function(){
-		var schoolId = $("#schoolId").val();
-		location.href = "rootSchoolInfo.html?schoolId="+schoolId;
+		location.href = "rootSchoolInfo.html";
 	}
 	
+	/**
+	 * 学校订单跳转
+	 */
+	selectOrderSchoolInfo = function(){
+		location.href = "orderInfo.html";
+	}
+	
+	/**
+	 * 跳转学校账户余额
+	 */
+	schoolListInfo = function(){
+		location.href= "rootSchoolInfo.html";
+	}
+	/**
+	 * 跳转学生课时
+	 */
+	studentHour = function(){
+		location.href="classSchoolInfo.html";
+	}
+	
+	addStudent = function(){
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * 返回操作员信息
+	 */
+	operatorChilk = function(){
+		location.href="schoolOperatorChilk.html";
+	}
+	
+	
+	teacherInto = function(){
+		
+	}
 	
 	/**
 	 * 跳转到账户信息的页面
@@ -42,6 +84,7 @@ $(function(){
 	Expenditure = function(){
 		location.href="selectOrderExpenditure.html";
 	}
+
 	/**
 	 * 复选框单击选中取消事件
 	 */

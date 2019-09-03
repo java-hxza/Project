@@ -15,7 +15,7 @@
 				<!--- Sidemenu -->
 				<ul class="metismenu side-nav">
 
-					<li class="side-nav-title side-nav-item" id="schoolId" name="${user.schoolId }">基础设置</li>
+					<li class="side-nav-title side-nav-item">基础设置</li>
 
 					<li class="side-nav-item"><a href="javascript: void(0);"
 						class="side-nav-link"> <i class="dripicons-meter"></i> <span
@@ -59,11 +59,11 @@
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
 							<li><a href="javascript:void(0)" onclick="rootSchoolInfo()">资金账余额</a></li>
-							<li><a href="javascript:void(0)"onclick="">收支明细报表</a></li>
-							<li><a href="javascript:void(0)"onclick="">收支汇总报表</a></li>
+							<li><a href="javascript:void(0)"onclick="selectOrderSchoolInfo()">收支明细报表</a></li>
+							<li><a href="javascript:void(0)"onclick="schoolListInfo()">收支汇总报表</a></li>
 							<li><a href="javascript:void(0)"onclick="">教师课时总表</a></li>
 							<li><a href="javascript:void(0)"onclick="">学院课时总表</a></li>
-							<li><a href="javascript:void(0)"onclick="">新增学院报表</a></li>
+							<li><a href="javascript:void(0)"onclick="addStudent()">新增学院报表</a></li>
 							<li><a href="javascript:void(0)"onclick="">教师上课明细</a></li>
 						</ul></li>
 
@@ -72,9 +72,9 @@
 								系统维护</span> <span class="menu-arrow"></span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
-							<li><a href="javascript:void(0)"onclick="">操作员</a></li>
-							<li><a href="javascript:void(0)"onclick="">操作员授权</a></li>
-							<li><a href="javascript:void(0)"onclick="">修改密码</a></li>
+							<li><a href="javascript:void(0)"onclick="operatorChilk()">操作员</a></li>
+							<li><a href="javascript:void(0)"onclick="teacherInto()">操作员授权</a></li>
+							<li><a href="javascript:void(0)"onclick="operatorChilk()">修改密码</a></li>
 						</ul></li>
 				</ul>
 

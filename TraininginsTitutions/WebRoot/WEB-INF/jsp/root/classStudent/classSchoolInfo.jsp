@@ -36,7 +36,7 @@
 	<div class="wrapper">
 
 		<!-- ========== Left Sidebar Start ========== -->
-		<%@include file="/WEB-INF/jsp/admin/bar/leftSidebar.jsp" %>		
+		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp" %>	
 		<!-- Left Sidebar End -->
 
 		<!-- ============================================================== -->
@@ -539,7 +539,7 @@
 	<!-- App js -->
 	<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
 	<script src="${Path }/static/js/children/childrenIndex.js"></script>
-	<script src="${Path }/static/js/admin/classStudent/selectClassSchoolInfo.js"></script>
+	<script src="${Path }/static/js/root/classStudent/classInfo.js"></script>
 	
 	<!-- third party js ends -->
 

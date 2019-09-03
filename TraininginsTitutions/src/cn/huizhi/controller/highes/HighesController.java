@@ -257,20 +257,22 @@ public class HighesController {
 	/**
 	 * 修改教师
 	 * 
-	 * @return <<<<<<< HEAD
+	 * @return
 	 */
 	@RequestMapping("updateTeacher.html")
 	@ResponseBody
 	public Object updateTeacher(@RequestParam String teacherName, @RequestParam String telephone,
 			@RequestParam String remarks, @RequestParam String loginPassword, @RequestParam Integer teacherTypeId,
-			@RequestParam Integer teacherId) {
+			@RequestParam Integer teacherId,@RequestParam Integer departmentId) {
 		Teacher teacher = new Teacher();
+		teacher.setTeacherId(teacherId);
 		teacher.setLoginPassword(loginPassword);
 		teacher.setTeacherName(teacherName);
 		teacher.setTeacherTypeId(teacherTypeId);
 		teacher.setRemarks(remarks);
 		teacher.setTelephone(telephone);
 		teacher.setFeeCategory(2);
+		teacher.setDepartmentId(departmentId);
 		HashMap<String, String> map = new HashMap<String, String>();
 		if (teacherService.updateTeacher(teacher) == 1) {
 			map.put("update", "1");

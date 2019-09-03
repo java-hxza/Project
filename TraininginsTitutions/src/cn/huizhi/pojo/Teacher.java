@@ -10,6 +10,8 @@ public class Teacher {
 	private Integer feeCategory;
 	private String remarks;
 	private String telephone;
+	private Integer departmentId;
+	
 	
 	/**
 	 * 教师权限
@@ -32,10 +34,9 @@ public class Teacher {
 		super();
 	}
 
-
 	public Teacher(Integer teacherId, String teacherName, String loginPassword, Integer teacherTypeId,
-			Integer feeCategory, String remarks, String telephone, TeacherDiction teacherDiction, School school,
-			TeacherType teacherType, DepartMent deparMent) {
+			Integer feeCategory, String remarks, String telephone, Integer departmentId, TeacherDiction teacherDiction,
+			School school, TeacherType teacherType, DepartMent deparMent) {
 		super();
 		this.teacherId = teacherId;
 		this.teacherName = teacherName;
@@ -44,6 +45,7 @@ public class Teacher {
 		this.feeCategory = feeCategory;
 		this.remarks = remarks;
 		this.telephone = telephone;
+		this.departmentId = departmentId;
 		this.teacherDiction = teacherDiction;
 		this.school = school;
 		this.teacherType = teacherType;
@@ -51,7 +53,13 @@ public class Teacher {
 	}
 
 
+	public Integer getDepartmentId() {
+		return departmentId;
+	}
 
+	public void setDepartmentId(Integer departmentId) {
+		this.departmentId = departmentId;
+	}
 
 	public DepartMent getDeparMent() {
 		return deparMent;

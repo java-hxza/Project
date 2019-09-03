@@ -2,6 +2,9 @@
 
 package cn.huizhi.mapper;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import cn.huizhi.pojo.Order;
 
 public interface OrderMapper {
@@ -65,4 +68,18 @@ public interface OrderMapper {
 	 * @return
 	 */
 	public List<Order> selectExpenOrderList(Order order);
+	
+	/**
+	 * 查询少儿学生收费情况
+	 * @param classId
+	 * @return
+	 */
+	public List<Order> selectChildrenFeeSituation(@Param("classId")Integer classId);
+	/**
+	 * 查询高中学生收费情况
+	 * @param classId
+	 * @return
+	 */
+	public List<Order> selectHighsFeeSituation(@Param("classId")Integer classId);
+	
 }

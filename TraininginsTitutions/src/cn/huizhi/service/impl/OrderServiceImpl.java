@@ -83,4 +83,16 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderMapper.selectExpenOrderList(order);
 	}
+
+	@Override
+	public List<Order> selectChildrenFeeSituation(Integer classId) {
+		// TODO Auto-generated method stub
+		return orderMapper.selectChildrenFeeSituation(classId);
+	}
+
+	@Override
+	public List<Order> selectHighsFeeSituation(Integer classId) {
+		// TODO Auto-generated method stub
+		return orderMapper.selectHighsFeeSituation(classId);
+	}
 }

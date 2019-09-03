@@ -53,10 +53,8 @@
 		<bean id="sqlSessionFactory"
 			class="org.mybatis.spring.SqlSessionFactoryBean">
 			<property name="dataSource" ref="dataSource" />
-			<property name="configLocation"
-				value="classpath:mybatis-config.xml" />
-			<property name="mapperLocations"
-				value="classpath:*cn/huizhi/mapper/*.xml"></property>
+			<property name="configLocation" value="classpath:mybatis-config.xml" />
+			<property name="mapperLocations" value="classpath:*cn/huizhi/mapper/*.xml"></property>
 		</bean>
 
 		<!-- 事务管理 -->

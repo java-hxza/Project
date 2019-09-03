@@ -54,19 +54,65 @@
 			<result column="o_addhour" property="addhour"/>
 		</association>
 	</resultMap>
-	
+	<!--  查询学生课时总数-->
 	<select id="childStuReistrationListByClass" resultMap="ChildStuReistrationMap">
 		select distinct <include refid="ChildStuReistrationCol"/> 
 		from childsturegistration css
 		join childrenesclassstudnet ccs on ccs.classesStudentId = css.childStuId
 		join traininginstitutions.class  c on c.classId = css.classId
-		join traininginstitutions.order o on o.stuId  =css.childStuId
+		join traininginstitutions.order o on o.classId  =css.classId
 		<where>
 			<if test="classId!=null and classId!=''">
 				c.classId = #{classId}
 			</if>
 		</where> 
 		group by ccs.studentId
+	</select>
+	
+	
+	<sql id="teacherHourDetailedCol">
+		css.childStuId css_childStuId,
+		css.classHour css_classHour,
+		css.classHours css_classHours,
+		css.classId css_classId,
+		css.contentOfCourses css_contentOfCourses,
+		css.dpId css_dpId,
+		css.remarks css_remarks,
+		css.rOCCId css_rOCCId,
+		css.state css_state,
+		css.studentName css_studentName,
+		css.teacherId css_teacherId,
+		css.teacherInClass css_teacherInClass,
+		dp.dpTypeName dp_dpTypeName
+	</sql>
+	
+	<resultMap type="ChildStuReistration" id="teacherHourDetailedMap">
+		<id column="css_rOCCId" property="rOCCId"/>
+		<result column="css_childStuId" property="childStuId"/>
+		<result column="css_classHour" property="classHour"/>
+		<result column="css_classHours" property="classHours"/>
+		<result column="css_contentOfCourses" property="contentOfCourses"/>
+		<result column="css_dpId" property="dpId"/>
+		<result column="css_remarks" property="remarks"/>
+		<result column="css_classId" property="classId"/>
+		<result column="css_teacherId" property="teacherId"/>
+		<result column="css_state" property="state"/>
+		<result column="css_studentName" property="studentName"/>
+		<result column="css_teacherInClass" property="teacherInClass"/>
+		<association property="departmentOfPediatrics" javaType="DepartmentOfPediatrics">
+			<result column="dp_dpTypeName" property="dpTypeName"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectTeacherDetailed" resultMap="teacherHourDetailedMap" parameterType="java.lang.Integer">
+		select <include refid="teacherHourDetailedCol"/>
+		from childsturegistration css
+		join departmentofpediatrics dp on dp.dpId = css.dpId
+		<where>
+			<if test="classId !=null and classId!=''">
+				css.classId = #{classId}
+			</if>
+		</where> 
 	</select>
 	
 </mapper>

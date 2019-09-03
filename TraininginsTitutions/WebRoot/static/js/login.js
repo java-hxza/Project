@@ -214,15 +214,9 @@ $(function() {
 				data = eval(data);
 				if (data.state == "1") {
 					$.NotificationApp.send("成功！", "账户密码校验正确！。", "top-right", "rgba(0,0,0,0.2)", "success")
-					if(data.UsertypeId == "0"){
-						setTimeout(function () { 
-							location.href = "adminIndex.html";
-						}, 2000);
-					}else{
-						setTimeout(function () { 
-							location.href = "selectionModule.html";
-						}, 2000);
-					}
+					setTimeout(function () { 
+						location.href = "teacherIndex.html";
+					}, 2000);
 					
 				} else {
 					$.NotificationApp.send("错误!", "账号密码错误，请检查重试。", "top-right", "rgba(0,0,0,0.2)", "error")
