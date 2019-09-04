@@ -84,7 +84,7 @@
 		FROM class c
 		JOIN departmentofpediatrics d ON c.dpId=d.dpId
 		WHERE
-		c.schoolId=#{0} AND d.schoolId=#{0}
+		c.schoolId=#{0} AND d.schoolId=#{0} AND c.classType=#{1}
 		ORDER BY cd
 	</select>
 

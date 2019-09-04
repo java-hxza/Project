@@ -1,6 +1,6 @@
 $(function() {
-	if($(".giftName option:selected").val() == 0) {
-		$('.giftNumber').attr("disabled",true); 
+	if ($(".giftName option:selected").val() == 0) {
+		$('.giftNumber').attr("disabled", true);
 	}
 	if ($(".classes option:selected").attr("classTypeId") == 1) {
 		$(".money").val($(".classes option:selected").attr("dpMoney"));
@@ -18,31 +18,31 @@ $(function() {
 	$(".integral").val($(".money").val());
 	$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
 	$(".hour").blur(function() {
-		if($(".hour").val() != 0) {
+		if ($(".hour").val() != 0) {
 			if ($(".classes option:selected").attr("classTypeId") == 1) {
 				$(".money").val((parseFloat($(".classes option:selected").attr("dpMoney")) * $(".hour").val()).toFixed(1));
 				$(".integral").val($(".money").val());
-			}else {
+			} else {
 				$(".money").val((parseFloat($(".classes option:selected").attr("dpMoneyVip")) * $(".hour").val()).toFixed(1));
 				$(".integral").val($(".money").val());
 			}
-			
+
 		}
 	});
 	$(".classes").click(function() {
 		if ($(".classes option:selected").attr("classTypeId") == 1) {
-			if($(".hour").val() == 0) {
+			if ($(".hour").val() == 0) {
 				$(".money").val($(".classes option:selected").attr("dpMoney"));
 				$(".integral").val($(".money").val());
-			}else {
+			} else {
 				$(".money").val((parseFloat($(".classes option:selected").attr("dpMoney")) * $(".hour").val()).toFixed(1));
 				$(".integral").val($(".money").val());
 			}
 		} else {
-			if($(".hour").val() == 0) {
+			if ($(".hour").val() == 0) {
 				$(".money").val($(".classes option:selected").attr("dpMoneyVip"));
 				$(".integral").val($(".money").val());
-			}else {
+			} else {
 				$(".money").val(parseFloat($(".classes option:selected").attr("dpMoneyVip")) * $(".hour").val().toFixed(1));
 				$(".integral").val($(".money").val());
 			}
@@ -58,10 +58,10 @@ $(function() {
 			success : function(data) {
 				data = JSON.parse(data);
 				$(".delSt").remove();
-				for(var i=0;i<data.children.length;i++){
-					$(".stuId").append("<option class='delSt' value='"+data.children[i].studentId+"'> "+data.children[i].studentName+"</option>");
+				for (var i = 0; i < data.children.length; i++) {
+					$(".stuId").append("<option class='delSt' value='" + data.children[i].studentId + "'> " + data.children[i].studentName + "</option>");
 				}
-				
+
 			},
 			error : function(data) {
 				alert("系统出错！");
@@ -69,17 +69,20 @@ $(function() {
 			}
 		});
 	});
+	$(".money").blur(function() {
+		$(".integral").val($(".money").val());
+	});
 	$(".giftName").click(function() {
-		if($(".giftName option:selected").val() == 0) {
-			$('.giftNumber').attr("disabled",true); 
+		if ($(".giftName option:selected").val() == 0) {
+			$('.giftNumber').attr("disabled", true);
 			$(".giftNumber").val("");
-		}else {
-			$('.giftNumber').removeAttr("disabled"); 
+		} else {
+			$('.giftNumber').removeAttr("disabled");
 			$(".giftNumber").val(1);
 		}
 	});
 	$(".giftNumber").blur(function() {
-		if(parseInt($.trim($(".giftNumber").val())) > parseInt($.trim($(".giftName option:selected").attr("name")))) {
+		if (parseInt($.trim($(".giftNumber").val())) > parseInt($.trim($(".giftName option:selected").attr("name")))) {
 			alert("赠品数量不足！");
 			$(".giftNumber").val(1);
 		}
@@ -102,14 +105,14 @@ $(function() {
 		if (dpMoney == "") {
 			alert("请填写收费金额！");
 			return false;
-		}else if(dpMoney < 1) {
+		} else if (dpMoney < 1) {
 			alert("请填写正确的收费金额！");
 			return false;
 		}
 		if (hour == "") {
 			alert("请填写本次新增课时！");
 			return false;
-		}else if(hour < 1) {
+		} else if (hour < 1) {
 			alert("请填写正确的新增课时！");
 			return false;
 		}
@@ -132,8 +135,8 @@ $(function() {
 				date : date2,
 				classId : classId,
 				giftId : giftId,
-				giftNumber:giftNumber,
-				integral:integral
+				giftNumber : giftNumber,
+				integral : integral
 			},
 			dataType : "json",
 			success : function(data) {

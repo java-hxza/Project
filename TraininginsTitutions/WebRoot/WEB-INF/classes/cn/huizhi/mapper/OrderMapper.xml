@@ -9,7 +9,7 @@
 		od,o.dpMoney,o.remarks,o.paymentmethodId
 		opi,o.departmentofpediatricsId odf,o.feecateId
 		ofi,o.addhour,o.givehour,o.startTime,o.orderNumber,o.stuId
-		sd,o.giftNumber,o.giftId,s.studentName,s.school,p.paymentmethodName,d.dpTypeName
+		sd,o.giftNumber,o.giftId,s.studentName,s.school,s.integral,p.paymentmethodName,d.dpTypeName
 		FROM `order`
 		o
 		JOIN student s ON o.stuId=s.studentId
@@ -37,6 +37,7 @@
 		<collection property="student" javaType="Student">
 			<result column="s.studentName" property="studentName" />
 			<result column="s.school" property="school" />
+			<result column="s.integral" property="integral" />
 		</collection>
 		<collection property="paymentMethod"
 			javaType="PaymentMethod">
@@ -54,7 +55,7 @@
 		od,o.firstdate,o.lastdate,o.dpMoney
 		odm,o.remarks,o.personliable,o.startTime,o.orderNumber,o.feecateId
 		ofi,o.stuId osi,o.paymentmethodId opt,s.studentName,
-		p.paymentmethodName,s.school
+		p.paymentmethodName,s.school,s.integral
 		FROM `order` o
 		JOIN student s ON
 		o.stuId=s.studentId
@@ -81,6 +82,7 @@
 		<collection property="student" javaType="Student">
 			<result column="s.studentName" property="studentName" />
 			<result column="s.school" property="school" />
+			<result column="s.integral" property="integral" />
 		</collection>
 		<collection property="paymentMethod"
 			javaType="PaymentMethod">

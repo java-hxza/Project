@@ -334,7 +334,7 @@
 															<label for="example-number">本次新增课时</label> <input
 																type="text" class="form-control hour"
 																data-toggle="input-mask"
-																data-mask-format="000.000.000.000.000,00"
+																data-mask-format="00000000000000000"
 																data-reverse="true"
 																value="0">
 														</div>
@@ -354,7 +354,7 @@
 															<label for="example-number">本次赠送课时</label> <input
 																type="text" class="form-control hours"
 																data-toggle="input-mask"
-																data-mask-format="000.000.000.000.000,00"
+																data-mask-format="00000000000000000"
 																data-reverse="true"
 																value="0">
 														</div>
@@ -393,7 +393,7 @@
 															<label for="billing-last-name">赠品数量</label> <input
 																type="text" class="form-control giftNumber"
 																data-toggle="input-mask"
-																data-mask-format="000.000.000.000.000,00"
+																data-mask-format="00000000000000000"
 																data-reverse="true">
 														</div>
 													</div>

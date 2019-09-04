@@ -20,12 +20,13 @@ public class Student {
 	private String remarks;
 	private Integer feeCategory;
 	private Integer studentHour;
+	private Double integral;
 	private ChildrenesClassStudnet childrenesClassStudnet;
 
 	public Student(Integer studentId, String studentName, Integer studentSex, String studentIDCard, String studentBirth,
 			String school, String parentName, String telephone, String familyAddress, String registrationChannels,
 			String registrationConsultant, String startTime, String endTime, String theSurrogate, String remarks,
-			Integer feeCategory, Integer studentHour, ChildrenesClassStudnet childrenesClassStudnet) {
+			Integer feeCategory, Integer studentHour, Double integral, ChildrenesClassStudnet childrenesClassStudnet) {
 		super();
 		this.studentId = studentId;
 		this.studentName = studentName;
@@ -44,6 +45,7 @@ public class Student {
 		this.remarks = remarks;
 		this.feeCategory = feeCategory;
 		this.studentHour = studentHour;
+		this.integral = integral;
 		this.childrenesClassStudnet = childrenesClassStudnet;
 	}
 
@@ -61,6 +63,14 @@ public class Student {
 
 	public Integer getStudentId() {
 		return studentId;
+	}
+
+	public Double getIntegral() {
+		return integral;
+	}
+
+	public void setIntegral(Double integral) {
+		this.integral = integral;
 	}
 
 	public void setStudentId(Integer studentId) {

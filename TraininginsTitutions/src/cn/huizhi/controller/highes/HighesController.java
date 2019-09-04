@@ -328,8 +328,7 @@ public class HighesController {
 	@RequestMapping("ChargeHours.html")
 	public String ChargeHours(Model model) {
 		User user = (User) session.getAttribute("user");
-		List<Class> classes = classService.selectClass(Integer.parseInt(user.getSchoolId()));
-		System.out.println(classes.get(0).getClassId());
+		List<Class> classes = classService.selectClass(Integer.parseInt(user.getSchoolId()), 0);
 		List<Student> children = studentService.selectStudentClass(classes.get(0).getClassId());
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<FeeCategory> feeCategory = feecategoryService.selectFeeCategory(Integer.parseInt(user.getSchoolId()));
@@ -394,9 +393,9 @@ public class HighesController {
 		order.setDpMoney(dpMoney);
 		order.setClassId(classId);
 		order.setGiftId(giftId);
-		if(giftNumber == null) {
+		if (giftNumber == null) {
 			order.setGiftNumber(0);
-		}else {
+		} else {
 			order.setGiftNumber(giftNumber);
 		}
 		order.setPaymentmethodId(paymentmethodId);
@@ -431,15 +430,18 @@ public class HighesController {
 	@RequestMapping("ChargePeriod.html")
 	public String ChargePeriod(Model model) {
 		User user = (User) session.getAttribute("user");
-		List<Student> high = studentService.selectHigh(Integer.parseInt(user.getSchoolId()),
-				new HashMap<Object, Object>());
+		List<Class> classes = classService.selectClass(Integer.parseInt(user.getSchoolId()), 1);
+		List<Student> children = studentService.selectStudentClass(classes.get(0).getClassId());
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<FeeCategory> feeCategory = feecategoryService.selectFeeCategory(Integer.parseInt(user.getSchoolId()));
-		model.addAttribute("high", high);
-		model.addAttribute("school", high.get(0).getSchool());
+		List<Gift> gift = giftService.selectGift(Integer.parseInt(user.getSchoolId()));
+		model.addAttribute("classes", classes);
+		model.addAttribute("children", children);
+		model.addAttribute("gift", gift);
+		model.addAttribute("school", children.get(0).getSchool());
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("feeCategory", feeCategory);
-		return "high/Charge";
+		return "high/AddCharge";
 	}
 
 	/**
@@ -453,7 +455,9 @@ public class HighesController {
 	public Object AddChargePeriod(@RequestParam Integer stuId, @RequestParam String startTime,
 			@RequestParam Integer feecateId, @RequestParam Double dpMoney, @RequestParam String firstdate,
 			@RequestParam String lastdate, @RequestParam String personliable, @RequestParam String remarks,
-			@RequestParam Integer paymentmethodId, @RequestParam String date, @RequestParam Integer classId) {
+			@RequestParam Integer paymentmethodId,@RequestParam Integer classId,
+			@RequestParam Integer giftId, @RequestParam Integer giftNumber, @RequestParam Integer integral,
+			@RequestParam Integer hour) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
 		Order order = new Order();
@@ -475,7 +479,7 @@ public class HighesController {
 		order.setFeecateId(feecateId);
 		order.setDpMoney(dpMoney);
 		order.setClassId(classId);
-		order.setOrderNumber("SJ" + date + stuId + new Random().nextInt(100));
+		order.setOrderNumber("SJ" + startTime + stuId + new Random().nextInt(100));
 		order.setPaymentmethodId(paymentmethodId);
 		order.setIdentification(0);
 		if (orderService.addOrder(order) == 1) {
@@ -559,7 +563,7 @@ public class HighesController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		if (orderService.delOrder(orderId) == 1) {
 			if (studentService.updateStudentOrderHour(hour, stuId, integral) == 1) {
-				if(giftNumber != 0) {
+				if (giftNumber != 0) {
 					if (giftService.updateGift(giftNumber, giftId) == 1) {
 						map.put("del", "1");
 					} else {
@@ -588,8 +592,8 @@ public class HighesController {
 	public Object updateChargeHour(@RequestParam Integer stuId, @RequestParam Integer feecateId,
 			@RequestParam Double dpMoney, @RequestParam Integer addhour, @RequestParam Integer givehour,
 			@RequestParam String remarks, @RequestParam Integer paymentmethodId, @RequestParam Integer orderId,
-			@RequestParam Integer hour, @RequestParam Integer giftId,
-			@RequestParam Integer giftNumber, @RequestParam Integer giftId2, @RequestParam Integer giftNumber2, @RequestParam Double integral) {
+			@RequestParam Integer hour, @RequestParam Integer giftId, @RequestParam Integer giftNumber,
+			@RequestParam Integer giftId2, @RequestParam Integer giftNumber2, @RequestParam Double integral) {
 		Order order = new Order();
 		HashMap<String, String> map = new HashMap<String, String>();
 		order.setStuId(stuId);
@@ -598,19 +602,19 @@ public class HighesController {
 		order.setGivehour(givehour);
 		order.setOrderId(orderId);
 		order.setFeecateId(feecateId);
-		order.setDpMoney(integral);
-		if(giftId != -2 && giftId != -1) {
-		order.setGiftId(giftId);
-		}else if(giftId == -2 && giftNumber == 0) {
+		order.setDpMoney(dpMoney);
+		if (giftId != -2 && giftId != -1) {
+			order.setGiftId(giftId);
+		} else if (giftId == -2 && giftNumber == 0) {
 			order.setGiftId(giftNumber);
-		}else {
+		} else {
 			order.setGiftId(giftId2);
 		}
 		order.setGiftNumber(giftNumber);
 		order.setPaymentmethodId(paymentmethodId);
 		if (orderService.updateOrderAll(order) == 1) {
 			if (dpMoney != 0) {
-				if (studentService.updateStudentOrderHour(hour, stuId, dpMoney) == 1) {
+				if (studentService.updateStudentOrderHour(hour, stuId, integral) == 1) {
 					map.put("update", "1");
 				} else {
 					map.put("update", "0");
@@ -618,7 +622,7 @@ public class HighesController {
 				}
 			} else {
 				if (giftId != -1) {
-					if(giftNumber2 != 0) {
+					if (giftNumber2 != 0) {
 						if (giftService.updateGift(giftNumber2, giftId2) == 1) {
 							map.put("update", "1");
 						} else {
@@ -863,7 +867,9 @@ public class HighesController {
 	public String selectOrderPeriod(Model model) {
 		User user = (User) session.getAttribute("user");
 		List<Order> order = orderService.selectOrderPeriod(Integer.parseInt(user.getSchoolId()));
+		List<Gift> gift = giftService.selectGift(Integer.parseInt(user.getSchoolId()));
 		model.addAttribute("order", order);
+		model.addAttribute("gift", gift);
 		return "high/Charge";
 	}
 
