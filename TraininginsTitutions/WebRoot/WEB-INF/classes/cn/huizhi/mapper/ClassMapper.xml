@@ -22,9 +22,11 @@
 		cc.teacherId as cc_teacherId,
 		cc.schoolId as cc_schoolId,
 		cc.classlevel as cc_classlevel,
-		s.schoolId as s_schoolId,
+		s.schoolId
+		as s_schoolId,
 		s.schoolName as s_schoolName,
-		dp.dpTypeName as dp_dpTypeName,
+		dp.dpTypeName as
+		dp_dpTypeName,
 		dp.dpId as dp_dpId
 	</sql>
 
@@ -33,7 +35,8 @@
 		<include refid="selectChildrenescClassesCol" />
 		from class cc
 		join school s on cc.schoolId = s.schoolId
-		join departmentofpediatrics dp on cc.classTypeId = dp.dpId
+		join
+		departmentofpediatrics dp on cc.classTypeId = dp.dpId
 		<where>
 			<if test="schoolId !=null and schoolId !=''">
 				cc.schoolId =#{schoolId}
@@ -51,19 +54,28 @@
 		<result column="cc_teacherId" property="teacherId" />
 		<result column="cc_classlevel" property="classLevel" />
 		<collection property="school" javaType="School">
-			<id column="s_schoolId" property="schoolId" javaType="java.lang.Integer"/>
-			<result column="s_schoolName" property="schoolName" javaType="java.lang.String"/>
+			<id column="s_schoolId" property="schoolId"
+				javaType="java.lang.Integer" />
+			<result column="s_schoolName" property="schoolName"
+				javaType="java.lang.String" />
 		</collection>
-		<collection property="departmentOfPediatrics" javaType="DepartmentOfPediatrics" >
-			<id column="dp_dpId" property="dpId" javaType="java.lang.Integer"/>
-			<result column="dp_dpTypeName" property="dpTypeName" javaType="java.lang.String"/>
+		<collection property="departmentOfPediatrics"
+			javaType="DepartmentOfPediatrics">
+			<id column="dp_dpId" property="dpId" javaType="java.lang.Integer" />
+			<result column="dp_dpTypeName" property="dpTypeName"
+				javaType="java.lang.String" />
 		</collection>
 	</resultMap>
 
 	<insert id="insertChildrenescClass" parameterType="Class">
-		insert into class ( classNumber, className, classTypeId, schoolId,headmaster, teacherId,classLevel)
-			values (#{classNumber}, #{className}, #{classTypeId}, #{schoolId}, #{headmaster},#{teacherId},#{classLevel})
+		insert into
+		traininginstitutions.class ( classNumber, className, dpId,
+		schoolId,classTypeId, headmaster, teacherId, classLevel)
+		values ( #{classNumber},#{className}, #{dpId}, #{schoolId}, #{classTypeId},
+		#{headmaster}, #{teacherId}, #{classLevel} )
 	</insert>
+	
+	
 	
 	
 	<select id="selectClassListByTeacherId" resultMap="selectChildrenescClassesMap" parameterType="java.lang.Integer">
@@ -78,4 +90,70 @@
 		</where> 
 	</select>
 	
+
+	<select id="selectClass" resultMap="selectClasses"
+		parameterType="java.lang.Integer">
+		SELECT
+		c.classId cd,c.classNumber,c.className,c.schoolId cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,d.dpId,d.dpMoney,d.dpMoneyVip,d.dpTypeName
+		FROM class c
+		JOIN departmentofpediatrics d ON c.dpId=d.dpId
+		WHERE
+		c.schoolId=#{0} AND d.schoolId=#{0}
+		ORDER BY cd
+	</select>
+
+	<resultMap id="selectClasses" type="Class">
+		<id column="cd" property="classId" />
+		<result column="c.classNumber" property="classNumber" />
+		<result column="c.className" property="className" />
+		<result column="c.classTypeId" property="classTypeId" />
+		<result column="cs" property="schoolId" />
+		<result column="c.headmaster" property="headmaster" />
+		<result column="c.teacherId" property="teacherId" />
+		<result column="c.classLevel" property="classLevel" />
+		<collection property="departmentOfPediatrics"
+			javaType="DepartmentOfPediatrics">
+			<id column="d.dpId" property="dpId" javaType="java.lang.Integer" />
+			<result column="d.dpMoney" property="dpMoney" />
+			<result column="d.dpMoneyVip" property="dpMoneyVip" />
+			<result column="d.dpTypeName" property="dpTypeName" />
+		</collection>
+	</resultMap>
+	
+	<resultMap type="Class" id="classByClassIdMap">
+		<id column="c.classId" property="classId"/>
+		<result column="c.classNumber" property="classNumber"/>
+		<result column="c.className" property="className"/>
+		<result column="c.dpId" property="dpId"/>
+		<result column="c.dpId" property="dpId"/>
+		<result column="c.headmaster" property="headmaster"/>
+		<result column="c.schoolId" property="schoolId"/>
+		<result column="c.teacherId" property="teacherId"/>
+		<result column="c.classLevel" property="classLevel"/>
+		<collection property="departmentOfPediatrics" javaType="DepartmentOfPediatrics">
+			<result column="d.dpTypeName" property="dpTypeName" />
+		</collection>
+	</resultMap>
+	
+	<sql id="classByClassIdCol">
+		c.classId,
+		c.classNumber,
+		c.className,
+		c.dpId,
+		c.headmaster,
+		c.schoolId,
+		c.teacherId,
+		c.classLevel,
+		d.dpTypeName
+	</sql>
+	<select id="selectClassByClassId" parameterType="java.lang.Integer" resultMap="classByClassIdMap">
+		select <include refid="classByClassIdCol"/>
+		from class c,departmentofpediatrics d
+		<where>
+			<if test="classId!=null and classId!=''">
+				classId=#{classId}
+			</if>
+		</where>
+	</select>
+
 </mapper>

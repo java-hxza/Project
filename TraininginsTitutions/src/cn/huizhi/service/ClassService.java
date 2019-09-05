@@ -50,5 +50,14 @@ public interface ClassService {
 	 */
 	public List<Class> selectClassListByTeacherId(Integer teacherId);
 	
+	/*
+	 * 查询班级
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Class> selectClass(Integer schoolId);
 	
+	
+	
+	public Class findClassByClassId(Integer classId);
 }

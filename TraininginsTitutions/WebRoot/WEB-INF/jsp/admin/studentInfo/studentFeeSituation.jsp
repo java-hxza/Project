@@ -148,6 +148,5 @@
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
 				<script src="${Path }/static/js/admin/studentInfo/selectStudentFeeInfo.js"></script>
 				<script src="${Path }/static/js/admin/leftSidebar.js"></script>
-				<script src="${Path }/static/js/highes/leftSidebar.js"></script>
 </body>
 </html>

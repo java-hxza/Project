@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 
 import cn.huizhi.pojo.Class;
 import cn.huizhi.pojo.DepartmentOfPediatrics;
@@ -20,6 +21,7 @@ import cn.huizhi.pojo.Expenditureitems;
 import cn.huizhi.pojo.FeeCategory;
 import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.PaymentMethod;
+import cn.huizhi.pojo.TeacherHour;
 import cn.huizhi.pojo.User;
 import cn.huizhi.service.ChildStuReistrationService;
 import cn.huizhi.service.ClassService;
@@ -28,6 +30,7 @@ import cn.huizhi.service.ExpenditureitemsService;
 import cn.huizhi.service.FeeCategoryService;
 import cn.huizhi.service.OrderService;
 import cn.huizhi.service.PaymentMethodService;
+import cn.huizhi.service.TeacherHourService;
 import cn.huizhi.service.UserService;
 
 @Controller
@@ -58,6 +61,8 @@ public class RootSchoolController {
 	@Resource
 	ChildStuReistrationService childStuReistrationService;
 	
+	@Resource
+	TeacherHourService teacherHourService;
 	
 	/**
 	 * 学校账户余额
@@ -225,6 +230,13 @@ public class RootSchoolController {
 		return "root/classStudent/classSchoolInfo";
 	}
 	
+	
+	/**
+	 * 返回学生课时页面
+	 * @param classId
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("schoolStudentHour.html")
 	public String schoolTeacherHour(Integer classId,HttpSession session) {
 		User user = (User) session.getAttribute("user");
@@ -247,6 +259,51 @@ public class RootSchoolController {
 	}
 	
 	
+	
+	/**
+	 * 返回班级学校页面
+	 * @param schoolId
+	 * @param schoolName
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("curriculumClassInfo.html")
+	public String curriculumClassInfo() {
+		return "root/curriculum/classSchoolInfo";
+	}
+	
+	
+	
+	/**
+	 * 返回课程信息
+	 * @param classId
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("curriculumInfo.html")
+	public String curriculumInfo(Integer classId,HttpSession session) {
+		
+		List<TeacherHour> curriculumInfoList = teacherHourService.selectCurriculumInfo(classId,null);
+		session.setAttribute("classId", classId);
+		session.setAttribute("curriculumInfoList", curriculumInfoList);
+		return "root/curriculum/classCurriculumInfo";
+	}
+	
+	/**
+	 * 创建课程信息
+	 * @param classId
+	 * @return
+	 */
+	@RequestMapping("createCurriclum.html")
+	public String createCurriclum(Integer classId,HttpSession session) {
+		
+		Class classInfo = classService.findClassByClassId(classId);
+		
+		session.setAttribute("classInfo", classInfo);
+		return "root/curriculum/create/createClassCurriculumInfo";
+	}
+	
+	
 	/**
 	 * 返回操作员信息
 	 * @param session
@@ -259,6 +316,87 @@ public class RootSchoolController {
 		session.setAttribute("findUserAllByAdmin", findUserAllByAdmin);
 		return "root/basicSettings/operator";
 	}
+	
+	/**
+	 * 添加课程信息
+	 * @param teacherHour
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("insertCurriculum.html")
+	@ResponseBody
+	public Map<String, String> insertCurriculum(TeacherHour teacherHour,HttpSession session){
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		User user = (User) session.getAttribute("user");
+		teacherHour.setSchoolId(Integer.valueOf(user.getSchoolId()));
+		if(teacherHourService.insertTeacherHour(teacherHour)>0) {
+			jsonMap.put("state","1");
+		}else {
+			jsonMap.put("state","0");
+		}
+		return jsonMap;
+	}
+	
+	/**
+	 * 根据课程信息查询课程
+	 * @param teacherHourId
+	 * @return
+	 */
+	@RequestMapping("queryCurriculumInfo.html")
+	@ResponseBody
+	public String queryCurriculumInfo(Integer teacherHourId) {
+		
+		List<TeacherHour> teacherHour = teacherHourService.selectCurriculumInfo(null, teacherHourId);
+		
+		if(teacherHour!=null) {
+			return JSON.toJSONStringWithDateFormat(teacherHour, "yyyy-MM-dd hh:mm:ss", SerializerFeature.WriteDateUseDateFormat);
+		}
+		return "";
+	}
+	
+	/**
+	 * 修改课程信息
+	 * @param teacherHour
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("updateCurriculumInfo.html")
+	@ResponseBody
+	public Map<String, String> updateCurriculumInfo(TeacherHour teacherHour,HttpSession session) {
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		User user = (User) session.getAttribute("user");
+		teacherHour.setSchoolId(Integer.valueOf(user.getSchoolId()));
+		if(teacherHourService.updateTeacherHour(teacherHour)>0) {
+			jsonMap.put("update","1");
+		}else {
+			jsonMap.put("update","0");
+		}
+		
+		return jsonMap;
+		
+	}
+	
+	/**
+	 * 删除课程信息
+	 * @param teacherHourId
+	 * @return
+	 */
+	@RequestMapping("delCurriculumInfo.html")
+	@ResponseBody
+	public Map<String, String> delCurriculumInfo(Integer teacherHourId){
+		
+		Map<String,String> jsonMap = new HashMap<String, String>();
+		
+		if(teacherHourService.delTeacherHour(teacherHourId)>0) {
+			jsonMap.put("state","1");
+		}else {
+			jsonMap.put("state","0");
+		}
+		
+		return jsonMap;
+		
+	}
+	
 	
 	
 	

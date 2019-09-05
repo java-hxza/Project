@@ -42,6 +42,13 @@ public interface ClassMapper {
 	 */
 	public int deleteChildrenescClass(Integer childrenesClassId);
 	
+	/**
+	 * 查询班级
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Class> selectClass(Integer schoolId);
+	
 	
 	/**
 	 * 根据教师主键查询班级
@@ -49,6 +56,13 @@ public interface ClassMapper {
 	 * @return
 	 */
 	public List<Class> selectClassListByTeacherId(@Param("teacherId")Integer teacherId);
+	
+	/**
+	 * 根据班级主键查询班级信息
+	 * @param classId
+	 * @return
+	 */
+	public Class selectClassByClassId(@Param("classId")Integer classId);
 	
 	
 }

@@ -27,8 +27,8 @@
 							<li><a href="javascript:void(0)" onclick="Incomeitems()">收入项目</a></li>
 							<li><a href="javascript:void(0)" onclick="Expenditureitemses()">支出项目</a></li>
 							<li><a href="javascript:void(0)" onclick="Teacher()">教师信息</a></li>
-							<li><a href="javascript:void(0)"onclick="">课程信息</a></li>
-							<li><a href="javascript:void(0)"onclick="">班级信息</a></li>
+							<li><a href="javascript:void(0)"onclick="curriculumClassInfo()">课程信息</a></li>
+							<li><a href="javascript:void(0)"onclick="classInfo()">班级信息</a></li>
 							<li><a href="javascript:void(0)"onclick="">学员信息</a></li>
 						</ul></li>
 					<li class="side-nav-item"><a href="javascript: void(0);"

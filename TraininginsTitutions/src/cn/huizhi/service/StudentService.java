@@ -45,5 +45,12 @@ public interface StudentService {
 	 * @param studentHour
 	 * @return
 	 */
-	public Integer updateStudentOrderHour(Double studentHour,Integer studentId);
+	public Integer updateStudentOrderHour(Integer studentHour,Integer studentId,Double integral);
+	
+	/**
+	 * 根据班级查找学生
+	 * @param classId
+	 * @return
+	 */
+	public List<Student> selectStudentClass(Integer classId);
 }

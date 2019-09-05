@@ -12,6 +12,7 @@ public class TeacherHour {
 	private Date startTime; // date上课时间
 	private Integer schoolId; // int(11)校区主键
 	private String remarks; // varchar(200)备注
+	private Integer classId;
 	private Double sumHours;
 
 	public TeacherHour() {
@@ -19,7 +20,7 @@ public class TeacherHour {
 	}
 
 	public TeacherHour(Integer teacherHourId, String teacherName, Integer teacherId, Double hours, String dpName,
-			Integer dpId, Date startTime, Integer schoolId, String remarks, Double sumHours) {
+			Integer dpId, Date startTime, Integer schoolId, String remarks, Integer classId, Double sumHours) {
 		super();
 		this.teacherHourId = teacherHourId;
 		this.teacherName = teacherName;
@@ -30,8 +31,20 @@ public class TeacherHour {
 		this.startTime = startTime;
 		this.schoolId = schoolId;
 		this.remarks = remarks;
+		this.classId = classId;
 		this.sumHours = sumHours;
 	}
+
+
+	public Integer getClassId() {
+		return classId;
+	}
+
+
+	public void setClassId(Integer classId) {
+		this.classId = classId;
+	}
+
 
 	public Integer getTeacherHourId() {
 		return teacherHourId;

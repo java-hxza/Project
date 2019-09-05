@@ -308,8 +308,7 @@
 														<td>
 															<div class="custom-control custom-checkbox">
 																<input type="checkbox" class="custom-control-input customCheckes"
-																	> <label
-																	class="custom-control-label customCheck" for="customCheck2">&nbsp;</label>
+																	> <label class="custom-control-label customCheck" for="customCheck2">&nbsp;</label>
 															</div>
 														</td>
 														<td>${p.paymentmethodId }</td>
@@ -520,7 +519,6 @@
 
 		<!-- third party js -->
 		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-		<script type="text/javascript" src="${Path }/static/js/highes/leftSidebar.js"></script>
 		<script type="text/javascript" src="${Path }/static/js/highes/Accountinformation.js"></script>
 		<!-- third party js ends -->
 </body>

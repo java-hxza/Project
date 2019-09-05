@@ -9,12 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.huizhi.pojo.City;
+import cn.huizhi.pojo.Class;
 import cn.huizhi.pojo.DepartMent;
 import cn.huizhi.pojo.Province;
 import cn.huizhi.pojo.School;
 import cn.huizhi.pojo.TeacherType;
 import cn.huizhi.pojo.UserType;
 import cn.huizhi.service.CityService;
+import cn.huizhi.service.ClassService;
 import cn.huizhi.service.DepartMentService;
 import cn.huizhi.service.ProvinceService;
 import cn.huizhi.service.SchoolService;
@@ -56,6 +58,9 @@ public class WelcomeController {
 	
 	@Resource
 	DepartMentService deparMentService;
+	
+	@Resource
+	ClassService classService;
 	
 	/**
 	 * 默认进入登陆页面并把查询结果封装到session域
@@ -143,7 +148,12 @@ public class WelcomeController {
 	}
 	
 	@RequestMapping("highIndex.html")
-	public String highIndex() {
+	public String highIndex(HttpSession session) {
+		String schoolId =  (String) session.getAttribute("schoolId");
+		List<Class> classList = classService.findChildrenescClasses(schoolId);
+		
+		session.setAttribute("classList", classList);
+		
 		return "redirect:/Accountinformation.html";
 	}
 	

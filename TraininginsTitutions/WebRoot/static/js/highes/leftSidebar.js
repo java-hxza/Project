@@ -29,10 +29,18 @@ $(function(){
 	addStudent = function(){
 		
 	}
-	
-	
-	
-	
+	/**
+	 * 跳转班级课程页面
+	 */
+	curriculumClassInfo = function(){
+		location.href = "curriculumClassInfo.html";
+	}
+	/**
+	 * 跳转到班级信息
+	 */
+	classInfo = function(){
+		location.href = "classIndex.html";
+	}
 	
 	
 	

@@ -11,17 +11,16 @@ import cn.huizhi.pojo.Class;
 import cn.huizhi.service.ClassService;
 
 @Service
-public class ClassServiceImpl implements ClassService{
+public class ClassServiceImpl implements ClassService {
 	@Resource
-	ClassMapper ClassMapper;
-	
-	
+	ClassMapper classMapper;
+
 	public List<Class> findChildrenescClasses(String schoolId) {
-		return ClassMapper.selectChildrenescClasses(schoolId);
+		return classMapper.selectChildrenescClasses(schoolId);
 	}
 
 	public int addChildrenescClass(Class childrenescClass) {
-		return ClassMapper.insertChildrenescClass(childrenescClass);
+		return classMapper.insertChildrenescClass(childrenescClass);
 	}
 
 	public int modifyChildrenescClass(Class childrenescClass) {
@@ -35,9 +34,22 @@ public class ClassServiceImpl implements ClassService{
 	@Override
 	public List<Class> selectClassListByTeacherId(Integer teacherId) {
 		// TODO Auto-generated method stub
-		return ClassMapper.selectClassListByTeacherId(teacherId);
+		return classMapper.selectClassListByTeacherId(teacherId);
 	}
 
 
+	/**
+	 * 查询班级
+	 */
+	@Override
+	public List<Class> selectClass(Integer schoolId) {
+		return classMapper.selectClass(schoolId);
+	}
+
+	@Override
+	public Class findClassByClassId(Integer classId) {
+		// TODO Auto-generated method stub
+		return classMapper.selectClassByClassId(classId);
+	}
 
 }

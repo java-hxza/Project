@@ -67,10 +67,24 @@
 							</select>
 						</div>
 						<div class="form-group">
-							
 							<label for="emailaddress">班主任</label> <select id="headmaster"
 								class="form-control">
 								<option value="">请选择班主任</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="emailaddress">班级所属分类</label> <select id="classTypeId"
+								class="form-control">
+								<option value="1">普通班</option>
+								<option value="2">vip班</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="emailaddress">班级所属级别</label> <select id="classLevel"
+								class="form-control">
+								<option value="1">少儿</option>
+								<option value="2">高考</option>
+								<option value="3">艺考</option>
 							</select>
 						</div>
 						<div class="form-group mb-0 text-center">

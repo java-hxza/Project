@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 
+import cn.huizhi.pojo.ChildrenesClassStudnet;
 import cn.huizhi.pojo.Class;
 import cn.huizhi.pojo.DepartmentOfPediatrics;
+import cn.huizhi.pojo.HighesClassStudnet;
 import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.User;
+import cn.huizhi.service.ChildrenesClassStudnetService;
 import cn.huizhi.service.ClassService;
 import cn.huizhi.service.DepartmentOfPediatricsService;
+import cn.huizhi.service.HighesClassStudnetService;
 import cn.huizhi.service.TeacherService;
 import cn.huizhi.service.UserService;
 
@@ -44,6 +48,13 @@ public class ChildrenClassesController {
 	 */
 	@Resource
 	TeacherService teacherService;
+	
+	@Resource
+	ChildrenesClassStudnetService childrenesClassStudnetService;
+	
+	@Resource
+	HighesClassStudnetService highesClassStudnetService;
+	
 	@RequestMapping("childrenSchoolLogin.html")
 	public String childrenSchoolLogin(HttpSession session) {
 		session.setAttribute("schoolType", 1);
@@ -55,7 +66,7 @@ public class ChildrenClassesController {
 	 * 返回到少儿首页
 	 * @return
 	 */
-	@RequestMapping("childrenIndex.html")
+	@RequestMapping("classIndex.html")
 	public String childrenIndex(HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		List<Class> childrenClassList = classService.findChildrenescClasses(user.getSchoolId());
@@ -64,12 +75,13 @@ public class ChildrenClassesController {
 		}
 		return "children/childrenIndex";
 	}
+	
 	/**
 	 * 返回创建少儿学生页面
 	 * @return
 	 */
-	@RequestMapping("regitChildrenStudent.html")
-	public String createChildrenStudent() {
+	@RequestMapping("regitStudent.html")
+	public String createChildrenStudent(Integer classId) {
 		return "children/create/createChildrenStudent";
 	}
 	/**
@@ -81,7 +93,12 @@ public class ChildrenClassesController {
 		return "children/studentInfo";
 	}
 	
-	@RequestMapping("regitChildrenClass.html")
+	/**
+	 * 返回注册班级页面
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("regitClass.html")
 	public String createChildrenClass(HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		List<DepartmentOfPediatrics> dpList = departmentOfPediatricsService.findDepartmentOfPediatrics(Integer.parseInt(user.getSchoolId()));
@@ -111,7 +128,7 @@ public class ChildrenClassesController {
 	 * @param childrenescClass
 	 * @return
 	 */
-	@RequestMapping("createChildrenClass.html")
+	@RequestMapping("createClass.html")
 	@ResponseBody
 	public Map<String, String> createChildrenClass(Class classes,HttpSession session) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
@@ -123,6 +140,27 @@ public class ChildrenClassesController {
 			jsonMap.put("state", "0");
 		}
 		return jsonMap;
+	}
+	
+	@RequestMapping("seeStudentInfo.html")
+	public String seeStudentInfo(Integer classId,HttpSession session) {
+		
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		if(schoolType == 1 ) {
+			List<ChildrenesClassStudnet> childrenesClassStudnets = childrenesClassStudnetService.findChildrenesClassStudnetByClassId(classId);
+			session.setAttribute("childrenesClassStudnets", childrenesClassStudnets);
+			return "root/studentInfo/children/seeStudentInfo";
+		}
+		if(schoolType == 2) {
+			List<HighesClassStudnet> highesClassStudnets = highesClassStudnetService.findHighesClassStudnetListByClassId(classId);
+			session.setAttribute("highesClassStudnets", highesClassStudnets);
+			return "root/studentInfo/high/seeStudentInfo";
+		}
+		if(schoolType ==3) {
+			
+		}
+		
+		return "seeStudentInfo";
 	}
 	
 	

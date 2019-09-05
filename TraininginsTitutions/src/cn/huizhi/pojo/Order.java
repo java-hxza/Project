@@ -15,8 +15,8 @@ public class Order {
 	private Integer paymentmethodId;
 	private String personliable;
 	private Integer departmentofpediatricsId;
-	private Double addhour;
-	private Double givehour;
+	private Integer addhour;
+	private Integer givehour;
 	private Date firstdate;
 	private Date lastdate;
 	private String remarks;
@@ -29,6 +29,9 @@ public class Order {
 	 */
 	private Double sumDpMoney;
 	
+	private Integer giftId;
+	private Integer giftNumber;
+
 	private Date endTime;
 	/**
 	 * 学生
@@ -53,13 +56,17 @@ public class Order {
 	 * 支出类型
 	 */
 	private Expenditureitems expenditureitems;
-
+	
+	public Order() {
+		super();
+	}
+	
 	public Order(Integer orderId, Integer feecateId, Double dpMoney, Integer stuId, Date startTime, Integer schoolId,
 			Integer identification, Double feecategoryMoney, Integer paymentmethodId, String personliable,
-			Integer departmentofpediatricsId, Double addhour, Double givehour, Date firstdate, Date lastdate,
+			Integer departmentofpediatricsId, Integer addhour, Integer givehour, Date firstdate, Date lastdate,
 			String remarks, String orderNumber, Integer expenditureitemsId, Integer classId, Double sumDpMoney,
-			Date endTime, Student student, PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics,
-			FeeCategory feeCategory, Expenditureitems expenditureitems) {
+			Integer giftId, Integer giftNumber, Date endTime, Student student, PaymentMethod paymentMethod,
+			DepartmentOfPediatrics departmentOfPediatrics, FeeCategory feeCategory, Expenditureitems expenditureitems) {
 		super();
 		this.orderId = orderId;
 		this.feecateId = feecateId;
@@ -81,6 +88,8 @@ public class Order {
 		this.expenditureitemsId = expenditureitemsId;
 		this.classId = classId;
 		this.sumDpMoney = sumDpMoney;
+		this.giftId = giftId;
+		this.giftNumber = giftNumber;
 		this.endTime = endTime;
 		this.student = student;
 		this.paymentMethod = paymentMethod;
@@ -88,9 +97,8 @@ public class Order {
 		this.feeCategory = feeCategory;
 		this.expenditureitems = expenditureitems;
 	}
-	public Order() {
-		super();
-	}
+
+
 	public Double getSumDpMoney() {
 		return sumDpMoney;
 	}
@@ -186,19 +194,19 @@ public class Order {
 		this.departmentofpediatricsId = departmentofpediatricsId;
 	}
 
-	public Double getAddhour() {
+	public Integer getAddhour() {
 		return addhour;
 	}
 
-	public void setAddhour(Double addhour) {
+	public void setAddhour(Integer addhour) {
 		this.addhour = addhour;
 	}
 
-	public Double getGivehour() {
+	public Integer getGivehour() {
 		return givehour;
 	}
 
-	public void setGivehour(Double givehour) {
+	public void setGivehour(Integer givehour) {
 		this.givehour = givehour;
 	}
 
@@ -297,4 +305,21 @@ public class Order {
 	public void setExpenditureitems(Expenditureitems expenditureitems) {
 		this.expenditureitems = expenditureitems;
 	}
+
+	public Integer getGiftId() {
+		return giftId;
+	}
+
+	public void setGiftId(Integer giftId) {
+		this.giftId = giftId;
+	}
+
+	public Integer getGiftNumber() {
+		return giftNumber;
+	}
+
+	public void setGiftNumber(Integer giftNumber) {
+		this.giftNumber = giftNumber;
+	}
+
 }

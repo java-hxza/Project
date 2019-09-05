@@ -11,12 +11,14 @@ public class ChildrenesClassStudnet {
 	private Integer studentId;
 	private String state;
 
+	private Student student;
+	
 	public ChildrenesClassStudnet() {
 		super();
 	}
 
 	public ChildrenesClassStudnet(Integer classesStudentId, String studentName, String headmaster, Date enrollmentTime,
-			Integer classId, Integer studentId, String state) {
+			Integer classId, Integer studentId, String state, Student student) {
 		super();
 		this.classesStudentId = classesStudentId;
 		this.studentName = studentName;
@@ -25,6 +27,15 @@ public class ChildrenesClassStudnet {
 		this.classId = classId;
 		this.studentId = studentId;
 		this.state = state;
+		this.student = student;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	public Integer getClassesStudentId() {

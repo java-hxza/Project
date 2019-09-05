@@ -1,5 +1,7 @@
 package cn.huizhi.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -17,6 +19,11 @@ public class ChildrenesClassStudnetServiceImpl implements ChildrenesClassStudnet
 	 */
 	public int addChildrenesClassStudnet(ChildrenesClassStudnet childrenesClassStudnet) {
 		return childrenesClassStudnetMapper.insertChildrenesClassStudnet(childrenesClassStudnet);
+	}
+	@Override
+	public List<ChildrenesClassStudnet> findChildrenesClassStudnetByClassId(Integer classId) {
+		// TODO Auto-generated method stub
+		return childrenesClassStudnetMapper.findChildrenesClassStudnetByClassId(classId);
 	}
 
 }

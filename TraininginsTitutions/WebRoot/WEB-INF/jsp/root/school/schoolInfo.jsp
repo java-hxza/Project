@@ -160,6 +160,5 @@
 			<!-- App js -->
 			<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
 			<script src="${Path }/static/js/root/info/schoolInfo.js"></script>
-			<script src="${Path }/static/js/highes/leftSidebar.js"></script>
 </body>
 </html>

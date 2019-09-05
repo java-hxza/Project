@@ -339,8 +339,8 @@
 																				pattern="yyyy-MM-dd" /></td>
 																		<td class="${o.paymentmethodId }">${o.paymentMethod.paymentmethodName }</td>
 																		<td  class="${o.feecateId }">${o.dpMoney }</td>
-																		<td>${o.addhour }</td>
-																		<td>${o.givehour }</td>
+																		<td class="${o.giftId }">${o.addhour }</td>
+																		<td class="${o.giftNumber }">${o.givehour }</td>
 																		<td>${o.remarks }</td>
 																		<td>${o.orderNumber }</td>
 																	</tr>
@@ -362,21 +362,10 @@
 											<form novalidate>
 												<div class="row">
 													<div class="col-md-6">
-														<div class="form-group">
-															<label for="billing-first-name">校区信息</label> <input
-																class="form-control school" type="text" id="billing-first-name"
-																value="${school }" disabled />
-														</div>
-													</div>
-													<div class="col-md-6">
 														<div class="form-group mb-3">
-															<label for="example-select">学员名称</label> <select
-																class="form-control stuId" id="example-select">
-																<c:forEach items="${children }" var="c">
-																	<option value="${c.studentId }"
-																		name="${c.childrenesClassStudnet.classId }">${c.studentName}</option>
-																</c:forEach>
-															</select>
+															<label for="example-select">学员名称</label> <input
+																class="form-control stuId" type="text"
+																id="billing-last-name" disabled/>
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -384,17 +373,6 @@
 															<label for="billing-last-name">收费日期</label> <input
 																class="form-control date" type="text"
 																id="billing-last-name" disabled />
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group mb-3">
-															<label for="example-select">课程名称</label> <select
-																class="form-control departmentofpediatricsId"
-																id="example-select">
-																<c:forEach items="${departmentOfPediatric }" var="d">
-																	<option value="${d.dpId }"name="${d.dpMoney }">${d.dpTypeName}</option>
-																</c:forEach>
-															</select>
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -407,8 +385,11 @@
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-number">本次新增课时</label> <input
-																class="form-control hour" id="example-number"
-																type="number" name="number">
+																type="text" class="form-control hour"
+																data-toggle="input-mask"
+																data-mask-format="000.000.000.000.000,00"
+																data-reverse="true"
+																value="0">
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -424,8 +405,11 @@
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-number">本次赠送课时</label> <input
-																class="form-control hours" id="example-number"
-																type="number" name="number">
+																type="text" class="form-control hours"
+																data-toggle="input-mask"
+																data-mask-format="000.000.000.000.000,00"
+																data-reverse="true"
+																value="0">
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -433,9 +417,44 @@
 															<label for="example-select">核算项目</label> <select
 																class="form-control feecateId" id="example-select">
 																<c:forEach items="${feeCategory }" var="f">
-																	<option value="${f.chargeTypeId }" name="${f.chargeMoney }">${f.chargeTypeName}</option>
+																	<option value="${f.chargeTypeId }"
+																		name="${f.chargeMoney }">${f.chargeTypeName}</option>
 																</c:forEach>
 															</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-select">课程名称</label> <input
+																class="form-control departmentofpediatricsId"
+																type="text" id="billing-last-name" disabled />
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-select">赠品名称</label> <select
+																class="form-control giftName" id="example-select">
+																<option value="0">---请选择---</option>
+																<c:forEach items="${gift }" var="g">
+																	<option value="${g.giftId }" name="${g.giftNumber }">${g.giftName}</option>
+																</c:forEach>
+															</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="billing-last-name">赠品数量</label> <input
+																type="text" class="form-control giftNumber"
+																data-toggle="input-mask"
+																data-mask-format="000.000.000.000.000,00"
+																data-reverse="true">
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-select">积分</label> <input
+																class="form-control integral" id="example-number"
+																type="number" name="number">
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -640,7 +659,6 @@
 
 			<!-- third party js -->
 			<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-			<script type="text/javascript" src="${Path }/static/js/highes/leftSidebar.js"></script>
 			<script type="text/javascript" src="${Path }/static/js/highes/ChargeHours.js"></script>
 			<!-- third party js ends -->
 </body>

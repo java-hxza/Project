@@ -57,9 +57,18 @@ public class StudentServiceImpl implements StudentService{
 	 * 更新总课时
 	 */
 	@Override
-	public Integer updateStudentOrderHour(Double studentHour, Integer studentId) {
-		return studentMapper.updateStudentOrderHour(studentHour, studentId);
+	public Integer updateStudentOrderHour(Integer studentHour, Integer studentId,Double integral) {
+		return studentMapper.updateStudentOrderHour(studentHour, studentId,integral);
 	}
+
+	/**
+	 * 根据班级查找学生
+	 */
+	@Override
+	public List<Student> selectStudentClass(Integer classId) {
+		return studentMapper.selectStudentClass(classId);
+	}
+	
 	
 	
 	

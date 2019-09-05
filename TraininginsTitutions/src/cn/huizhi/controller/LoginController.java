@@ -90,6 +90,7 @@ public class LoginController {
 	@ResponseBody
 	public HashMap<String, String> validateLogin(String loginName,String loginPassword,String schoolId,HttpSession session) {
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		session.setAttribute("schoolId", schoolId);
 		User user = userService.findUserByLogin(loginName, loginPassword, schoolId,schoolType);
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
 		if(user!=null) {

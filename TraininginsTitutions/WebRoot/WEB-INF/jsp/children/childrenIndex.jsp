@@ -278,15 +278,15 @@
 								<div class="card-body">
 									<div class="row mb-2">
 										<div class="col-sm-4">
-											<a href="javascript:void(0);" onclick="createChildrenClass()" class="btn btn-danger mb-2"><i
+											<a href="javascript:void(0);" onclick="createClass()" class="btn btn-danger mb-2"><i
 												class="mdi mdi-plus-circle mr-2" ></i> 添加班级</a>
 										</div>
 										<div class="col-sm-8">
 											<div class="text-sm-right">
-												<button type="button" class="btn btn-success mb-2 mr-1">
-													<i class="mdi mdi-settings"></i>
+												<button type="button" class="btn btn-success mb-2 mr-1" onclick="seeStudentInfo()">
+													<i class="mdi mdi-settings"></i>查看班级学生信息
 												</button>
-												<button type="button" class="btn btn-light mb-2 mr-1" onclick="createChildrenStudent()">添加学生</button>
+												<button type="button" class="btn btn-light mb-2 mr-1" onclick="createStudent()">添加学生</button>
 											</div>
 										</div>
 										<!-- end col-->
@@ -301,7 +301,7 @@
 													<th style="width: 20px;">
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input"
-																id="customCheck1"> <label
+																 disabled="disabled"> <label
 																class="custom-control-label" for="customCheck1">&nbsp;</label>
 														</div>
 													</th>
@@ -317,12 +317,12 @@
 													<tr>
 														<td>
 															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input"
-																	id="customCheck2"> <label class="custom-control-label" for="customCheck2">&nbsp;</label>
+																<input type="checkbox" class="custom-control-input customChecks">
+																 <label class="custom-control-label customCheck" for="customCheck2">&nbsp;</label>
 															</div>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${childrenClass.classNumber }</a>
+															class="text-body font-weight-semibold" name="${childrenClass.classId }">${childrenClass.classNumber }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${childrenClass.className}</a>
@@ -518,7 +518,6 @@
 
 	<div class="rightbar-overlay"></div>
 	<!-- /Right-bar -->
-
 
 	<!-- App js -->
 	<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>

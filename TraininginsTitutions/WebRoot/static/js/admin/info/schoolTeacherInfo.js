@@ -16,7 +16,7 @@ $(function(){
 				return false;
 			}
 		} else if($(".customCheckes:checked").length >1) {
-			if(!$(".customCheckes").prop("checked")) {
+			if($(".customCheckes").prop("checked")) {
 				alert("只能选中一条数据！");
 				return false;
 			}
