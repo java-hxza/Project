@@ -21,8 +21,6 @@ public class Student {
 	private Integer feeCategory;
 	private Integer studentHour;
 	private Double integral;
-	
-	
 	private ChildrenesClassStudnet childrenesClassStudnet;
 
 
@@ -52,13 +50,6 @@ public class Student {
 		this.childrenesClassStudnet = childrenesClassStudnet;
 	}
 
-	public Double getIntegral() {
-		return integral;
-	}
-
-	public void setIntegral(Double integral) {
-		this.integral = integral;
-	}
 
 	public Student() {
 		super();
@@ -74,6 +65,14 @@ public class Student {
 
 	public Integer getStudentId() {
 		return studentId;
+	}
+
+	public Double getIntegral() {
+		return integral;
+	}
+
+	public void setIntegral(Double integral) {
+		this.integral = integral;
 	}
 
 	public void setStudentId(Integer studentId) {

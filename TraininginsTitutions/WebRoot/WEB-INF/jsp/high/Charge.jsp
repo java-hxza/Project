@@ -283,7 +283,7 @@
 												<div class="card-body">
 													<div class="row mb-2">
 														<div class="col-sm-4">
-															<a href="${Path }/ChargeHours.html" class="btn btn-danger mb-2"><i
+															<a href="${Path }/ChargePeriod.html" class="btn btn-danger mb-2"><i
 																class="mdi mdi-plus-circle mr-2"></i> 添加</a> <a
 																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="updateOrder()"><i
@@ -345,7 +345,7 @@
 																		<td><fmt:formatDate value="${o.lastdate }"
 																				pattern="yyyy-MM-dd" /></td>
 																		<td>${o.personliable }</td>
-																		<td>${o.remarks }</td>
+																		<td class="${o.student.integral }">${o.remarks }</td>
 																		<td>${o.orderNumber }</td>
 																	</tr>
 																</c:forEach>

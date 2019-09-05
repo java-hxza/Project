@@ -26,7 +26,7 @@ $(function() {
 		$(".paymentmethodId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().attr("class"));
 		$(".feecateId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().attr("class"));
 		$(".customCheckes:checked").parent().parent().next().text();
-		$(".integral").val($(".money").val());
+		$(".integral").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().attr("class"));
 		$(".giftName").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().attr("class"));
 		$(".departmentofpediatricsId").val($(".customCheckes:checked").parent().parent().next().next().next().next().text());
 		$(".giftNumber").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().attr("class"));
@@ -48,6 +48,9 @@ $(function() {
 				$(".money").val((parseFloat(dpMoneys) * $(".hour").val()).toFixed(1));
 				$(".integral").val($(".money").val());
 			}
+		});
+		$(".money").blur(function() {
+				$(".integral").val($(".money").val());
 		});
 		$(".giftName").click(function() {
 			if($(".giftName option:selected").val() == 0) {

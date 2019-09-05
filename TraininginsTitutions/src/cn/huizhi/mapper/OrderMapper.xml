@@ -10,13 +10,9 @@
 		opi,o.departmentofpediatricsId odf,o.feecateId
 		ofi,o.addhour,o.givehour,o.startTime,o.orderNumber,o.stuId
 		sd,s.studentName,s.school,p.paymentmethodName,d.dpTypeName
-		FROM `order` o
-		JOIN student s ON o.stuId=s.studentId
-		JOIN paymentmethod p ON
-		o.paymentmethodId=p.paymentmethodId
-		JOIN departmentofpediatrics d ON
-		o.departmentofpediatricsId=d.dpId
-		WHERE o.identification = 0 AND
+		FROM `order` o,student s,paymentmethod p,departmentofpediatrics d
+		WHERE o.identification = 0 AND o.stuId=s.studentId and
+		o.paymentmethodId=p.paymentmethodId and departmentofpediatrics d and
 		o.departmentofpediatricsId IS NOT NULL AND
 		o.schoolId=#{0} ORDER BY od
 	</select>
@@ -36,6 +32,7 @@
 		<collection property="student" javaType="Student">
 			<result column="s.studentName" property="studentName" />
 			<result column="s.school" property="school" />
+			<result column="s.integral" property="integral" />
 		</collection>
 		<collection property="paymentMethod"
 			javaType="PaymentMethod">
@@ -53,7 +50,7 @@
 		od,o.firstdate,o.lastdate,o.dpMoney
 		odm,o.remarks,o.personliable,o.startTime,o.orderNumber,o.feecateId
 		ofi,o.stuId osi,o.paymentmethodId opt,s.studentName,
-		p.paymentmethodName,s.school
+		p.paymentmethodName,s.school,s.integral
 		FROM `order` o
 		JOIN student s ON
 		o.stuId=s.studentId
@@ -80,6 +77,7 @@
 		<collection property="student" javaType="Student">
 			<result column="s.studentName" property="studentName" />
 			<result column="s.school" property="school" />
+			<result column="s.integral" property="integral" />
 		</collection>
 		<collection property="paymentMethod"
 			javaType="PaymentMethod">

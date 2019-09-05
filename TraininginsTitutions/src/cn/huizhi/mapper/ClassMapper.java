@@ -47,7 +47,7 @@ public interface ClassMapper {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<Class> selectClass(Integer schoolId);
+	public List<Class> selectClass(Integer schoolId,Integer classType);
 	
 	
 	/**

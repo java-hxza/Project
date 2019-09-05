@@ -42,8 +42,8 @@ public class ClassServiceImpl implements ClassService {
 	 * 查询班级
 	 */
 	@Override
-	public List<Class> selectClass(Integer schoolId) {
-		return classMapper.selectClass(schoolId);
+	public List<Class> selectClass(Integer schoolId,Integer classType) {
+		return classMapper.selectClass(schoolId,classType);
 	}
 
 	@Override

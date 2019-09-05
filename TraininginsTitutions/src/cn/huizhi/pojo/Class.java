@@ -6,6 +6,10 @@ package cn.huizhi.pojo;
  * @author wye
  *
  */
+/**
+ * @author 86175
+ *
+ */
 public class Class {
 	/**
 	 * 少儿班级主键
@@ -35,6 +39,7 @@ public class Class {
 	private Integer teacherId;
 
 	private Integer classLevel;
+	private Integer classType;
 
 	/**
 	 * 少儿班级所属学校主键
@@ -52,10 +57,17 @@ public class Class {
 	public Class() {
 		super();
 	}
+	public Integer getClassType() {
+		return classType;
+	}
+
+	public void setClassType(Integer classType) {
+		this.classType = classType;
+	}
 
 	public Class(Integer classId, String classNumber, String className, Integer classTypeId, Integer dpId,
-			String headmaster, Integer teacherId, Integer classLevel, Integer schoolId, School school,
-			DepartmentOfPediatrics departmentOfPediatrics) {
+			String headmaster, Integer teacherId, Integer classLevel, Integer classType, Integer schoolId,
+			School school, DepartmentOfPediatrics departmentOfPediatrics) {
 		super();
 		this.classId = classId;
 		this.classNumber = classNumber;
@@ -65,6 +77,7 @@ public class Class {
 		this.headmaster = headmaster;
 		this.teacherId = teacherId;
 		this.classLevel = classLevel;
+		this.classType = classType;
 		this.schoolId = schoolId;
 		this.school = school;
 		this.departmentOfPediatrics = departmentOfPediatrics;
