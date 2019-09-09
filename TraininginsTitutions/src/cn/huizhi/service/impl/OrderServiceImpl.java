@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
 	 */
 	@Override
 	public List<Order> selectOrderOther(Integer schoolId) {
-		return selectOrderOther(schoolId);
+		return orderMapper.selectOrderOther(schoolId);
 	}
 
 	/**

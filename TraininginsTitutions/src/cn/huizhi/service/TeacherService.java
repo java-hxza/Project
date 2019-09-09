@@ -87,5 +87,11 @@ public interface TeacherService {
 	 */
 	public Teacher findTeacherByTeacherName(String teacherName);
 	
+	/**
+	 * 查询招生老师
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Teacher> selectTeacherZS(Integer schoolId);
 	
 }

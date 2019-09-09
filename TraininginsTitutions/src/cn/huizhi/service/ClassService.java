@@ -49,4 +49,11 @@ public interface ClassService {
 	 * @return
 	 */
 	public List<Class> selectClass(Integer schoolId,Integer classType);
+	
+	/**
+	 * 查询普通班和vip班
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Class> selectClassAll(Integer schoolId);
 }

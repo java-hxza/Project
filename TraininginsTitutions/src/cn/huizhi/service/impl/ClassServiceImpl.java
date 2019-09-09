@@ -39,4 +39,11 @@ public class ClassServiceImpl implements ClassService {
 		return classMapper.selectClass(schoolId,classType);
 	}
 
+	@Override
+	public List<Class> selectClassAll(Integer schoolId) {
+		return classMapper.selectClassAll(schoolId);
+	}
+	
+	
+
 }

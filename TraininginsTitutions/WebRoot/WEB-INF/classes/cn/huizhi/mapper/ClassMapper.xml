@@ -105,5 +105,34 @@
 			<result column="d.dpTypeName" property="dpTypeName" />
 		</collection>
 	</resultMap>
+	
+	<select id="selectClassAll" resultMap="selectClassesAll"
+		parameterType="java.lang.Integer">
+		SELECT
+		c.classId cd,c.classNumber,c.className,c.schoolId cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,d.dpId,d.dpMoney,d.dpMoneyVip,d.dpTypeName
+		FROM class c
+		JOIN departmentofpediatrics d ON c.dpId=d.dpId
+		WHERE
+		c.schoolId=#{0} AND d.schoolId=#{0}
+		ORDER BY cd
+	</select>
+
+	<resultMap id="selectClassesAll" type="Class">
+		<id column="cd" property="classId" />
+		<result column="c.classNumber" property="classNumber" />
+		<result column="c.className" property="className" />
+		<result column="c.classTypeId" property="classTypeId" />
+		<result column="cs" property="schoolId" />
+		<result column="c.headmaster" property="headmaster" />
+		<result column="c.teacherId" property="teacherId" />
+		<result column="c.classLevel" property="classLevel" />
+		<collection property="departmentOfPediatrics"
+			javaType="DepartmentOfPediatrics">
+			<id column="d.dpId" property="dpId" javaType="java.lang.Integer" />
+			<result column="d.dpMoney" property="dpMoney" />
+			<result column="d.dpMoneyVip" property="dpMoneyVip" />
+			<result column="d.dpTypeName" property="dpTypeName" />
+		</collection>
+	</resultMap>
 
 </mapper>

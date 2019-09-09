@@ -284,10 +284,10 @@
 													<div class="row mb-2">
 														<div class="col-sm-4">
 															<a href="${Path }/ChargePeriod.html" class="btn btn-danger mb-2"><i
-																class="mdi mdi-plus-circle mr-2"></i> 添加</a> <a
+																class="mdi mdi-plus-circle mr-2"></i> 添加</a> <!-- <a
 																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="updateOrder()"><i
-																class="mdi mdi-plus-circle mr-2"></i> 修改</a> <a
+																class="mdi mdi-plus-circle mr-2"></i> 修改</a> --> <a
 																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="delOrder()"><i
 																class="mdi mdi-plus-circle mr-2"></i> 删除</a>
@@ -319,6 +319,10 @@
 																	<th>责任人</th>
 																	<th>备注</th>
 																	<th>单号</th>
+																	<th>积分</th> 
+																	<th>赠品名称</th> 
+																	<th>赠品数量</th> 
+																	<th>打折价格</th>
 																</tr>
 															</thead>
 															<tbody>
@@ -336,17 +340,27 @@
 																		<td>${o.student.school }</td>
 																		<td><fmt:formatDate value="${o.startTime }"
 																				pattern="yyyy-MM-dd" /></td>
-																		<td class="${o.paymentmethodId }">${o.paymentMethod.paymentmethodName }</td>
+																		<td class="feecateIds2" name="${o.feecateId }"></td>
 																		<td>${o.student.studentName }</td>
 																		<td class="${o.paymentmethodId }">${o.paymentMethod.paymentmethodName }</td>
 																		<td>${o.dpMoney }</td>
 																		<td><fmt:formatDate value="${o.firstdate }"
 																				pattern="yyyy-MM-dd" /></td>
-																		<td><fmt:formatDate value="${o.lastdate }"
+																		<td class="${o.giftId }"><fmt:formatDate value="${o.lastdate }"
 																				pattern="yyyy-MM-dd" /></td>
-																		<td>${o.personliable }</td>
-																		<td class="${o.student.integral }">${o.remarks }</td>
-																		<td>${o.orderNumber }</td>
+																		<td  class="${o.giftNumber }">${o.personliable }</td>
+																		<td class="${o.integral }">${o.remarks }</td>
+																		<td class ="${o.teacherId }">${o.orderNumber }</td>
+																		<td>${o.integral }</td>
+																		<td class="giftIdes" name="${o.giftId}"><c:if test="${o.giftId == 0 }">无</c:if>
+																			<c:if test="${o.giftId != 0 }"></c:if></td>
+																		<td><c:if test="${o.giftNumber == 0 }">无</c:if>
+																			<c:if test="${o.giftNumber != 0 }">${o.giftNumber }</c:if>
+																		</td>
+																		<td>
+																			<c:if test="${o.discount != null }">${o.discount }</c:if>
+																			<c:if test="${o.discount == null }">无</c:if>
+																		</td>
 																	</tr>
 																</c:forEach>
 															</tbody>
@@ -360,43 +374,33 @@
 										</div>
 										<!-- end row -->
 									</div>
-									
 									<div class="row mb-2 addOrder" style="display: none;">
 										<div class="col-md-12">
 											<form class="needs-validation" novalidate>
 												<div class="row">
+												 <div class="col-md-6" style="display: none;">
+														<div class="form-group mb-3">
+															<label for="example-select">核算项目</label> <select
+																class="form-control feecateIds" id="example-select">
+																<c:forEach items="${feeCategory }" var="f">
+																	<option value="${f.chargeTypeId }"
+																		name="${f.chargeMoney }">${f.chargeTypeName}</option>
+																</c:forEach>
+															</select>
+														</div>
+													</div> 
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-select">学员</label> <input
+																class="form-control stuId" type="text"
+																id="billing-last-name" disabled/>
+														</div>
+													</div>
 													<div class="col-md-6">
 														<div class="form-group">
-															<label for="billing-first-name">校区信息</label> <input
-																class="form-control" type="text" id="billing-first-name"
-																value="${school }" disabled />
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group mb-3">
-															<label for="example-select">学员</label> <select
-																class="form-control stuId" id="example-select">
-																<c:forEach items="${high }" var="h">
-																	<option value="${h.studentId }" name="${h.childrenesClassStudnet.classId }">${h.studentName}</option>
-																</c:forEach>
-															</select>
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group mb-3">
-															<label for="example-select">收款项目</label> <select
-																class="form-control feecateId " id="example-select">
-																<c:forEach items="${feeCategory }" var="f">
-																	<option value="${f.chargeTypeId }" name="${f.chargeMoney }">${f.chargeTypeName}</option>
-																</c:forEach>
-															</select>
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group mb-3">
-															<label for="example-number">收费金额</label> <input
-																class="form-control dpMoney" id="example-number" type="number"
-																name="number" >
+															<label for="billing-last-name">收款日期</label> <input
+																class="form-control date" type="text"
+																id="billing-last-name" disabled />
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -410,10 +414,10 @@
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="form-group">
-															<label for="billing-last-name">收款日期</label> <input
-																class="form-control date" type="text"
-																id="billing-last-name" disabled />
+														<div class="form-group mb-3">
+															<label for="example-number">收费金额</label> <input
+																class="form-control dpMoney" id="example-number" type="number"
+																name="number" >
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -430,10 +434,63 @@
 																name="date">
 														</div>
 													</div>
+													
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-select">赠品名称</label> <select
+																class="form-control giftName" id="example-select">
+																<option value="0">---请选择---</option>
+																<c:forEach items="${gift }" var="g">
+																	<option value="${g.giftId }" name="${g.giftNumber }">${g.giftName}</option>
+																</c:forEach> 
+															</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="billing-last-name">赠品数量</label> <input
+																type="text" class="form-control giftNumber"
+																data-toggle="input-mask"
+																data-mask-format="00000000000000000"
+																data-reverse="true" >
+														</div>
+													</div>
+													
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-select">积分</label> <input
+																class="form-control integral" id="example-number"
+																type="number" name="number">
+														</div>
+													</div>
 													<div class="col-md-6">
 														<div class="form-group">
 															<label for="billing-first-name">责任人</label> <input
 																class="form-control personliable" type="text" id="billing-first-name" />
+														</div>
+													</div>
+													
+													<!-- <div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-select">活动名称</label> <select
+																class="form-control feecateId " id="example-select">
+																<option value="0">---请选择---</option>
+																<c:forEach items="${activity }" var="a">
+																	<option value="${a.activityId }" activityMoneylast="${a.activityMoneylast }" discount="${a.discount }">
+																		<c:choose>
+																			<c:when test="${a.activityMoneyfirst == null }">${a.discount }折</c:when>
+																			<c:otherwise>满&nbsp;${a.activityMoneyfirst }&nbsp;减&nbsp;${a.activityMoneylast }</c:otherwise>
+																		</c:choose>
+																	</option>
+																</c:forEach>
+															</select>
+														</div>
+													</div> -->
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-number">打折金额</label> <input
+																class="form-control dpMoneyActivity" id="example-number"
+																type="number" name="number" disabled>
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -444,7 +501,18 @@
 													</div>
 													<div class="col-md-12">
 														<div class="form-group">
-															<button type="submit"
+															<select class="form-control teacherId"
+																style="text-align: center; text-align-last: center;"
+																id="example-select">
+																<c:forEach items="${teacher }" var="t">
+																	<option value="${t.teacherId }">${t.teacherName}</option>
+																</c:forEach>
+															</select>
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="form-group">
+															<button type="button"
 																class="btn btn-block btn-primary TiJiao">提交</button>
 														</div>
 													</div>

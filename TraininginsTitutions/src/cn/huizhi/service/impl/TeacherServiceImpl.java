@@ -82,6 +82,16 @@ public class TeacherServiceImpl implements TeacherService{
 		// TODO Auto-generated method stub
 		return teacherMapper.selecTeacherByTeacherName(teacherName);
 	}
+
+
+	/**
+	 * 查找招生老师
+	 */
+	@Override
+	public List<Teacher> selectTeacherZS(Integer schoolId) {
+		return teacherMapper.selectTeacherZS(schoolId);
+	}
+	
 	
 	
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Order {
 
 	private Integer orderId;
-	private Integer feecateId;
+	private String feecateId;
 	private Double dpMoney;
 	private Integer stuId;
 	private Date startTime;
@@ -25,6 +25,9 @@ public class Order {
 	private Integer classId;
 	private Integer giftId;
 	private Integer giftNumber;
+	private Double integral;
+	private Integer teacherId;
+	private Double discount;
 
 	private Date endTime;
 	/**
@@ -51,12 +54,15 @@ public class Order {
 	 */
 	private Expenditureitems expenditureitems;
 
-	public Order(Integer orderId, Integer feecateId, Double dpMoney, Integer stuId, Date startTime, Integer schoolId,
+	private Gift gift;
+
+	public Order(Integer orderId, String feecateId, Double dpMoney, Integer stuId, Date startTime, Integer schoolId,
 			Integer identification, Double feecategoryMoney, Integer paymentmethodId, String personliable,
 			Integer departmentofpediatricsId, Integer addhour, Integer givehour, Date firstdate, Date lastdate,
 			String remarks, String orderNumber, Integer expenditureitemsId, Integer classId, Integer giftId,
-			Integer giftNumber, Date endTime, Student student, PaymentMethod paymentMethod,
-			DepartmentOfPediatrics departmentOfPediatrics, FeeCategory feeCategory, Expenditureitems expenditureitems) {
+			Integer giftNumber, Double integral, Integer teacherId, Double discount, Date endTime, Student student,
+			PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics, FeeCategory feeCategory,
+			Expenditureitems expenditureitems, Gift gift) {
 		super();
 		this.orderId = orderId;
 		this.feecateId = feecateId;
@@ -79,12 +85,16 @@ public class Order {
 		this.classId = classId;
 		this.giftId = giftId;
 		this.giftNumber = giftNumber;
+		this.integral = integral;
+		this.teacherId = teacherId;
+		this.discount = discount;
 		this.endTime = endTime;
 		this.student = student;
 		this.paymentMethod = paymentMethod;
 		this.departmentOfPediatrics = departmentOfPediatrics;
 		this.feeCategory = feeCategory;
 		this.expenditureitems = expenditureitems;
+		this.gift = gift;
 	}
 
 	public Order() {
@@ -99,11 +109,11 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-	public Integer getFeecateId() {
+	public String getFeecateId() {
 		return feecateId;
 	}
 
-	public void setFeecateId(Integer feecateId) {
+	public void setFeecateId(String feecateId) {
 		this.feecateId = feecateId;
 	}
 
@@ -305,6 +315,38 @@ public class Order {
 
 	public void setGiftNumber(Integer giftNumber) {
 		this.giftNumber = giftNumber;
+	}
+
+	public Double getIntegral() {
+		return integral;
+	}
+
+	public void setIntegral(Double integral) {
+		this.integral = integral;
+	}
+
+	public Integer getTeacherId() {
+		return teacherId;
+	}
+
+	public void setTeacherId(Integer teacherId) {
+		this.teacherId = teacherId;
+	}
+
+	public Gift getGift() {
+		return gift;
+	}
+
+	public void setGift(Gift gift) {
+		this.gift = gift;
+	}
+
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
 	}
 
 }

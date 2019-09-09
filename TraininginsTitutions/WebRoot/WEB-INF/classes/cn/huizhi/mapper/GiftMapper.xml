@@ -10,8 +10,20 @@
 	</select>
 
 	<update id="updateGift">
-		UPDATE traininginstitutions.gift SET giftNumber =giftNumber +
+		UPDATE traininginstitutions.gift SET giftNumber
+		=giftNumber +
 		#{0} WHERE giftId = #{1} ;
 	</update>
+	<delete id="delGift">
+		DELETE FROM traininginstitutions.gift
+		WHERE
+		giftId =
+		#{0} ;
+	</delete>
+
+	<insert id="addGift">
+		INSERT INTO traininginstitutions.gift (giftName,
+		schoolId, giftNumber)VALUES(#{giftName}, #{schoolId},#{giftNumber});
+	</insert>
 
 </mapper>

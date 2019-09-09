@@ -284,10 +284,10 @@
 													<div class="row mb-2">
 														<div class="col-sm-4">
 															<a href="${Path }/ChargeHours.html" class="btn btn-danger mb-2"><i
-																class="mdi mdi-plus-circle mr-2"></i> 添加</a> <a
+																class="mdi mdi-plus-circle mr-2"></i> 添加</a> <!-- <a
 																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="updateOrder()"><i
-																class="mdi mdi-plus-circle mr-2"></i> 修改</a> <a
+																class="mdi mdi-plus-circle mr-2"></i> 修改</a> --> <a
 																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="delOrder()"><i
 																class="mdi mdi-plus-circle mr-2"></i> 删除</a>
@@ -318,6 +318,9 @@
 																	<th>赠送课时</th>
 																	<th>备注</th>
 																	<th>单号</th>
+																	<th>积分</th> 
+																	<th>赠品名称</th> 
+																	<th>赠品数量</th> 
 																</tr>
 															</thead>
 															<tbody>
@@ -332,7 +335,7 @@
 																			</div>
 																		</td>
 																		<td class="${o.stuId }">${o.orderId }</td>
-																		<td>${o.student.school }</td>
+																		<td class="${o.integral }">${o.student.school }</td>
 																		<td>${o.student.studentName }</td>
 																		<td class="${o.departmentofpediatricsId }">${o.departmentOfPediatrics.dpTypeName }</td>
 																		<td><fmt:formatDate value="${o.startTime }"
@@ -342,7 +345,13 @@
 																		<td class="${o.giftId }">${o.addhour }</td>
 																		<td class="${o.giftNumber }">${o.givehour }</td>
 																		<td class="${o.student.integral }">${o.remarks }</td>
-																		<td>${o.orderNumber }</td>
+																		<td class ="${o.teacherId }">${o.orderNumber }</td>
+																		<td>${o.integral }</td>
+																		<td class="giftIdes" name="${o.giftId}"><c:if test="${o.giftId == 0 }">无</c:if>
+																			<c:if test="${o.giftId != 0 }"></c:if></td>
+																		<td><c:if test="${o.giftNumber == 0 }">无</c:if>
+																			<c:if test="${o.giftNumber != 0 }">${o.giftNumber }</c:if>
+																		</td>
 																	</tr>
 																</c:forEach>
 															</tbody>
@@ -462,6 +471,17 @@
 															<label for="billing-last-name">备注信息</label> <input
 																class="form-control remarks" type="text"
 																id="billing-last-name" />
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="form-group">
+															<select class="form-control teacherId"
+																style="text-align: center; text-align-last: center;"
+																id="example-select">
+																<c:forEach items="${teacher }" var="t">
+																	<option value="${t.teacherId }">${t.teacherName}</option>
+																</c:forEach>
+															</select>
 														</div>
 													</div>
 													<div class="col-md-12">

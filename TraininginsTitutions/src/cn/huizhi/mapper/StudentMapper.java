@@ -56,4 +56,11 @@ public interface StudentMapper {
 	 * @return
 	 */
 	public List<Student> selectStudentClass(Integer classId);
+	
+	/**
+	 * 查询本校全部学生
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Student> selectStudentUsedIntegral(Integer schoolId);
 }

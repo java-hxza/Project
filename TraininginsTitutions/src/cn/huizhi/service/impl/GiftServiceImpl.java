@@ -32,5 +32,15 @@ public class GiftServiceImpl implements GiftService {
 		return giftMapper.updateGift(giftNumber, giftId);
 	}
 
+	@Override
+	public Integer addGift(Gift gift) {
+		return giftMapper.addGift(gift);
+	}
+
+	@Override
+	public Integer delGift(Integer giftId) {
+		return giftMapper.delGift(giftId);
+	}
+
 	
 }

@@ -42,6 +42,12 @@ $(function(){
 	Expenditure = function(){
 		location.href="selectOrderExpenditure.html";
 	}
+	Activitys = function() {
+		location.href="selectActivitySchools.html";
+	}
+	selectgifts = function() {
+		location.href="selectgifts.html";
+	}
 	/**
 	 * 复选框单击选中取消事件
 	 */

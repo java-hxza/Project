@@ -51,6 +51,8 @@
 							<li><a href="#" onclick="ChargePeriod()">收费--按时间段</a></li>
 							<li><a href="#" onclick="ChargeOthers()">收费其他</a></li>
 							<li><a href="#" onclick="Expenditure()">费用支出</a></li>
+							<li><a href="#" onclick="Activitys()">优惠活动</a></li>
+							<li><a href="#" onclick="selectgifts()">赠送礼品</a></li>
 
 						</ul></li>
 					<li class="side-nav-item"><a href="javascript: void(0);"

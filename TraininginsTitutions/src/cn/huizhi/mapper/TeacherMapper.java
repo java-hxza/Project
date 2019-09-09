@@ -85,4 +85,11 @@ public interface TeacherMapper {
 	 * @return
 	 */
 	public Teacher selecTeacherByTeacherName(@Param("teacherName")String teacherName);
+	
+	/**
+	 * 查询招生老师
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Teacher> selectTeacherZS(Integer schoolId);
 }

@@ -70,6 +70,10 @@ $(function() {
 		});
 	});
 	$(".money").blur(function() {
+		if($(".money").val() == "") {
+			alert("请输入正确的金额");
+			$(".money").val("");
+		}
 		$(".integral").val($(".money").val());
 	});
 	$(".giftName").click(function() {
@@ -102,6 +106,7 @@ $(function() {
 		var integral = $.trim($(".integral").val());
 		var giftNumber = $.trim($(".giftNumber").val());
 		var giftId = $.trim($(".giftName option:selected").val());
+		var teacherId = $.trim($(".teacherId option:selected").val());
 		if (dpMoney == "") {
 			alert("请填写收费金额！");
 			return false;
@@ -118,6 +123,10 @@ $(function() {
 		}
 		if (hours == "") {
 			hours = 0;
+		}
+		if(teacherId == 0) {
+			alert("请选择招生老师！");
+			return false;
 		}
 		$.ajax({
 			type : "POST",
@@ -136,7 +145,8 @@ $(function() {
 				classId : classId,
 				giftId : giftId,
 				giftNumber : giftNumber,
-				integral : integral
+				integral : integral,
+				teacherId : teacherId
 			},
 			dataType : "json",
 			success : function(data) {
