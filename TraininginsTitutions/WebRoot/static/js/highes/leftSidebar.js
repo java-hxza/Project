@@ -94,6 +94,13 @@ $(function(){
 	}
 
 	/**
+	 * 切换账户
+	 */
+	switchingAccounts = function(){
+		location.href="switchingAccounts.html";
+	}
+	
+	/**
 	 * 复选框单击选中取消事件
 	 */
 	$(".customCheck").click(function() {

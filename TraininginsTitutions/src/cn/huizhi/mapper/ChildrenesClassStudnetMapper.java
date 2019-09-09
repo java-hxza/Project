@@ -28,5 +28,12 @@ public interface ChildrenesClassStudnetMapper {
 	 */
 	public List<ChildrenesClassStudnet> findChildrenesClassStudnetByClassId(@Param("classId")Integer classId);
 	
+	/**
+	 * 转班
+	 * @param cStudnet
+	 * @return
+	 */
+	public Integer updateChildrenesClassStudnet(ChildrenesClassStudnet cStudnet);
+	
 	
 }

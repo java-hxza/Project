@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.UserDictionMapper">
+	<sql id="DictionListByUserIdCol">
+		ud.schoolId ud_schoolId,
+		ud.userDictionId ud_userDictionId,
+		ud.userId ud_userId,
+		sc.cityId sc_cityId,
+		sc.cityProperId
+		sc_cityProperId,
+		sc.schoolId sc_schoolId,
+		sc.schoolName sc_schoolName,
+		sc.schoolRemarks sc_schoolRemarks,
+		sc.schoolType sc_schoolType,
+	 	c.cityId c_cityId,
+	 	c.cityName c_cityName,
+	 	p.provinceId p_provinceId,
+	 	p.provinceName p_provinceName
+	</sql>
+
+	<resultMap type="UserDiction" id="DictionListByUserIdMap">
+		<id column="ud_userDictionId" property="userDictionId" />
+		<result column="ud_schoolId" property="schoolId" />
+		<result column="ud_userId" property="userId" />
+		<association property="school" javaType="School">
+			<id column="sc_schoolId" property="schoolId" />
+			<result column="sc_cityId" property="cityId" />
+			<result column="sc_cityProperId" property="cityProperId" />
+			<result column="sc_schoolName" property="schoolName" />
+			<result column="sc_schoolRemarks" property="schoolRemarks" />
+			<result column="sc_schoolType" property="schoolType" />
+			<association property="city" javaType="City">
+				<id column="c_cityId" property="cityId"/>
+				<result column="c_cityName" property="cityName"/>
+			</association>
+			<association property="province" javaType="Province">
+				<id column="p_provinceId" property="provinceId"/>
+				<result column="p_provinceName" property="provinceName"/>
+			</association>
+		</association>
+	</resultMap>
+	<!-- 根据用户主键查询学校权限 -->
+	<select id="findDictionListByUserId" resultMap="DictionListByUserIdMap" parameterType="java.lang.Integer">
+		select
+		<include refid="DictionListByUserIdCol" />
+		from userdiction ud,school sc,city c,province p
+		<where>
+			ud.schoolId = sc.schoolId
+			and c.cityId = sc.cityId and p.provinceId = sc.cityProperId
+			<if test="userId !=null and userId!=''">
+				and ud.userId = #{userId}
+			</if>
+		</where>
+	</select>
+
+</mapper>

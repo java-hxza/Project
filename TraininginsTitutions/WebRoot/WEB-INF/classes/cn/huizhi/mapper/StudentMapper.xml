@@ -180,13 +180,13 @@
 		parentName, telephone, familyAddress,
 		registrationChannels,registrationConsultant,
 		startTime, endTime,
-		theSurrogate, remarks, feeCategory )
+		theSurrogate, remarks, feeCategory,integral )
 		values (#{studentName},
 		#{studentSex}, #{studentIDCard}, #{studentBirth}, #{school},
 		#{parentName}, #{telephone}, #{familyAddress},
 		#{registrationChannels},
 		#{registrationConsultant}, #{startTime},
-		#{endTime}, #{theSurrogate}, #{remarks}, #{feeCategory})
+		#{endTime}, #{theSurrogate}, #{remarks}, #{feeCategory},#{integral})
 		<!--order属性是取数据生成之前(before)or生成之后(after)  -->
 		<selectKey keyProperty="studentId" resultType="Student" order="AFTER">
     		<!--  当前事务最后一个生成的主键id-->
@@ -211,5 +211,42 @@
 		WHERE c.classId=#{0}
 		ORDER BY t.studentId
 	</select>
-
+	<!-- 根据主键查询学生 -->
+	<select id="findStudentById" resultType="Student" parameterType="java.lang.Integer">
+		select <include refid="studentCol"/>
+		from student t
+		<where>
+			<if test="studentId!=null and studentId!=''">
+				t.studentId = #{studentId}
+			</if>
+		</where>
+	</select>
+	<!-- 修改学生 -->
+	<update id="updateStudent" parameterType="Student">
+		update traininginstitutions.student
+		set
+		studentId = #{studentId} ,
+		studentName = #{studentName} ,
+		studentSex = #{studentSex},
+		studentIDCard = #{studentIDCard} ,
+		studentBirth = #{studentBirth},
+		school = #{school} ,
+		parentName = #{parentName} ,
+		telephone = #{telephone} ,
+		familyAddress = #{familyAddress},
+		registrationChannels = #{registrationChannels} ,
+		registrationConsultant = #{registrationConsultant} ,
+		startTime = #{startTime} ,
+		endTime = #{endTime} ,
+		theSurrogate = #{theSurrogate} ,
+		remarks = #{remarks} ,
+		feeCategory = #{feeCategory} ,
+		studentHour = #{studentHour} ,
+		integral = #{integral}
+		<where>
+			<if test="studentId!=null and studentId!=''">
+				studentId = #{studentId}
+			</if>
+		</where>
+	</update>
 </mapper>

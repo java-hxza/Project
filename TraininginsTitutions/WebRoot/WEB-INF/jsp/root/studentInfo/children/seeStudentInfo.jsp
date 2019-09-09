@@ -62,11 +62,11 @@
 							<div class="text-center">
 								<h3 class="">管理学校及城市</h3>
 								<p class="text-muted mt-3">请选择要查看的教师学校</p>
-                                    <button type="button" class="btn btn-success btn-sm mt-2" onclick="createSchool()">修改学生信息</button>
-                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="createUser()">学员转班</button>
-                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="createUser()">学员退学</button>
-                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="createTeacher()"> 学员上课登记</button>
-                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="createTeacher()"> 学员批量登记</button>
+                                     <button type="button" class="btn btn-success btn-sm mt-2" onclick="updateStudnet()">修改学生信息</button>
+                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="shiftWork()">学员转班</button>
+                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="exitSchool()">学员退学</button>
+                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="classRegistration()"> 学员上课登记</button>
+                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="classBatchRegistration()"> 学员批量登记</button>
                                 </div>
                             </div>
 						<!-- end col -->
@@ -104,12 +104,12 @@
 													<tr class="schoolId" >
 														<td>
 															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input customChecks"
+																<input type="checkbox" class="custom-control-input customCheckes"
 																	> <label class="custom-control-label customCheck" for="customCheck2">&nbsp;</label>
 															</div>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${schoolName }</a>
+															class="text-body font-weight-semibold" name="${children.student.studentId }" id_classId="${children.classId }">${schoolName }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${children.student.school }</a>
@@ -173,6 +173,6 @@
 				<!-- App js -->
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
 				<script type="text/javascript" src="${Path }/static/js/admin/leftSidebar.js"></script>
-				<script type="text/javascript" src="${Path }/static/js/admin/info/selectSchoolTeacherInfo.js"></script>
+				<script type="text/javascript" src="${Path }/static/js/root/studentInfo/high/seeStudentInfo.js"></script>
 </body>
 </html>

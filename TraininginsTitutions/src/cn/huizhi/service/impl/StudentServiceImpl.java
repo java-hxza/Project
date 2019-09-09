@@ -68,6 +68,18 @@ public class StudentServiceImpl implements StudentService{
 	public List<Student> selectStudentClass(Integer classId) {
 		return studentMapper.selectStudentClass(classId);
 	}
+
+	@Override
+	public Student findStudentById(Integer studentId) {
+		// TODO Auto-generated method stub
+		return studentMapper.findStudentById(studentId);
+	}
+
+	@Override
+	public Integer updateStudent(Student student) {
+		// TODO Auto-generated method stub
+		return studentMapper.updateStudent(student);
+	}
 	
 	
 	

@@ -6,7 +6,6 @@ public class User {
 	private Integer uId;
 	private String loginName;
 	private String loginPassword;
-	private String schoolId;
 	private String userTypeId;
 	private String telephone;
 	private String remarks;
@@ -15,43 +14,30 @@ public class User {
 	
 	private UserType userType;
 	
+	private UserDiction userDiction;
+	
 	public User() {
 		super();
 	}
 
-	
 
 
-
-	public User(Integer uId, String loginName, String loginPassword, String schoolId, String userTypeId,
-			String telephone, String remarks, School school, UserType userType) {
+	public User(Integer uId, String loginName, String loginPassword, String userTypeId, String telephone,
+			String remarks, School school, UserType userType, UserDiction userDiction) {
 		super();
 		this.uId = uId;
 		this.loginName = loginName;
 		this.loginPassword = loginPassword;
-		this.schoolId = schoolId;
 		this.userTypeId = userTypeId;
 		this.telephone = telephone;
 		this.remarks = remarks;
 		this.school = school;
 		this.userType = userType;
+		this.userDiction = userDiction;
 	}
 
 
 
-
-
-	public User(Integer uId, String loginName, String loginPassword, String schoolId, String userTypeId,
-			String telephone, String remarks) {
-		super();
-		this.uId = uId;
-		this.loginName = loginName;
-		this.loginPassword = loginPassword;
-		this.schoolId = schoolId;
-		this.userTypeId = userTypeId;
-		this.telephone = telephone;
-		this.remarks = remarks;
-	}
 
 
 
@@ -87,21 +73,15 @@ public class User {
 
 
 
-
-
 	public UserType getUserType() {
 		return userType;
 	}
 
 
 
-
-
 	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
-
-
 
 
 
@@ -122,13 +102,6 @@ public class User {
 		this.loginPassword = loginPassword;
 	}
 
-	public String getSchoolId() {
-		return schoolId;
-	}
-
-	public void setSchoolId(String schoolId) {
-		this.schoolId = schoolId;
-	}
 
 	public String getUserTypeId() {
 		return userTypeId;
@@ -156,7 +129,15 @@ public class User {
 
 
 
+	public UserDiction getUserDiction() {
+		return userDiction;
+	}
 
+
+
+	public void setUserDiction(UserDiction userDiction) {
+		this.userDiction = userDiction;
+	}
 
 
 }

@@ -75,4 +75,15 @@
 		</where>
 	</select>
 
+
+	<update id="updateChildrenesClassStudnet"
+		parameterType="ChildrenesClassStudnet">
+
+		update traininginstitutions.childrenesclassstudnet
+		set
+		classId = #{classId}
+		where
+		studentId = #{studentId}
+	</update>
+
 </mapper>

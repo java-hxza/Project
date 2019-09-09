@@ -110,7 +110,7 @@
 															</div>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${schoolName }</a>
+															class="text-body font-weight-semibold" name="${children.student.studentId }" >${schoolName }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${high.student.school }</a>
@@ -144,7 +144,6 @@
 															class="text-body font-weight-semibold">${high.student.familyAddress }</a>
 														</td>
 														
-														
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${high.student.registrationChannels }</a>
 														</td>
@@ -163,8 +162,6 @@
 										</table>
 									</div>
 
-							
-
             <!-- ============================================================== -->
             <!-- End Page content -->
             <!-- ============================================================== -->
@@ -174,6 +171,6 @@
 				<!-- App js -->
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
 				<script type="text/javascript" src="${Path }/static/js/admin/leftSidebar.js"></script>
-				<script type="text/javascript" src="${Path }/static/js/admin/info/selectSchoolTeacherInfo.js"></script>
+				<script type="text/javascript" src="${Path }/static/js/root/studentInfo/high/selectStudentFeeInfo.js"></script>
 </body>
 </html>

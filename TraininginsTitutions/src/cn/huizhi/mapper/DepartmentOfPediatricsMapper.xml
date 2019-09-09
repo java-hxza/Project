@@ -33,5 +33,16 @@
 			</if>
 		</where>
 	</delete>
+
+	<select id="findDepartmentOfByClassId" resultType="DepartmentOfPediatrics" parameterType="java.lang.Integer">
+		select distinct dp.*
+		from class c,departmentofpediatrics dp
+		<where>
+			dp.dpId = c.dpId
+			<if test="classId !=null and classId!=''">
+				and c.classId = #{classId}
+			</if>
+		</where>
+	</select>
 	
 </mapper>

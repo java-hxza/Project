@@ -56,4 +56,19 @@ public interface StudentMapper {
 	 * @return
 	 */
 	public List<Student> selectStudentClass(Integer classId);
+	
+	
+	/**
+	 * 根据主键查询学生
+	 * @param studentId
+	 * @return
+	 */
+	public Student findStudentById(@Param("studentId")Integer studentId);
+	
+	/**
+	 * 更改学生信息
+	 * @param studentId
+	 * @return
+	 */
+	public Integer updateStudent(Student student);
 }

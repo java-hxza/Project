@@ -25,5 +25,10 @@ public class ChildrenesClassStudnetServiceImpl implements ChildrenesClassStudnet
 		// TODO Auto-generated method stub
 		return childrenesClassStudnetMapper.findChildrenesClassStudnetByClassId(classId);
 	}
+	@Override
+	public Integer updateChildrenesClassStudnet(ChildrenesClassStudnet cStudnet) {
+		// TODO Auto-generated method stub
+		return childrenesClassStudnetMapper.updateChildrenesClassStudnet(cStudnet);
+	}
 
 }

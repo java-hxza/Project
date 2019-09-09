@@ -25,4 +25,11 @@ public interface ChildrenesClassStudnetService {
 	 * @return
 	 */
 	public List<ChildrenesClassStudnet> findChildrenesClassStudnetByClassId(Integer classId);
+	
+	/**
+	 * 转班
+	 * @param cStudnet
+	 * @return
+	 */
+	public Integer updateChildrenesClassStudnet(ChildrenesClassStudnet cStudnet);
 }

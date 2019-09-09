@@ -17,9 +17,11 @@ import cn.huizhi.pojo.City;
 import cn.huizhi.pojo.School;
 import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.User;
+import cn.huizhi.pojo.UserDiction;
 import cn.huizhi.service.CityService;
 import cn.huizhi.service.SchoolService;
 import cn.huizhi.service.TeacherService;
+import cn.huizhi.service.UserDictionService;
 import cn.huizhi.service.UserService;
 
 @Controller
@@ -46,6 +48,9 @@ public class LoginController {
 	 */
 	@Resource
 	TeacherService teacherService;
+	
+	@Resource
+	UserDictionService userDictionService;
 	/**
 	 * 根据省份查询城市并返回数据
 	 * @param provinceId
@@ -91,13 +96,16 @@ public class LoginController {
 	public HashMap<String, String> validateLogin(String loginName,String loginPassword,String schoolId,HttpSession session) {
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		session.setAttribute("schoolId", schoolId);
-		User user = userService.findUserByLogin(loginName, loginPassword, schoolId,schoolType);
+		User user = userService.findUserByLogin(loginName, loginPassword);
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
-		if(user!=null) {
+		if (user != null) {
+			List<UserDiction> schoolListByUId = userDictionService.findDictionListByUserId(user.getuId());
+			
+			session.setAttribute("schoolListByUId", schoolListByUId);
 			session.setAttribute("user", user);
 			jsonMap.put("state", "1");
-			jsonMap.put("UsertypeId",user.getUserTypeId());
-		}else {
+			jsonMap.put("UsertypeId", user.getUserTypeId());
+		} else {
 			jsonMap.put("state", "0");
 		}
 		return jsonMap;
@@ -114,7 +122,7 @@ public class LoginController {
 	@RequestMapping("adminLogin.html")
 	@ResponseBody
 	public HashMap<String, String> validateAdminLogin(String loginName,String loginPassword,String schoolId,HttpSession session) {
-		User user = userService.findUserByLogin(loginName, loginPassword, "1",null);
+		User user = userService.findUserByLogin(loginName, loginPassword);
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
 		if(user!=null) {
 			session.setAttribute("user", user);

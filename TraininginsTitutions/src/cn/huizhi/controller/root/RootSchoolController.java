@@ -23,6 +23,7 @@ import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.PaymentMethod;
 import cn.huizhi.pojo.TeacherHour;
 import cn.huizhi.pojo.User;
+import cn.huizhi.pojo.UserDiction;
 import cn.huizhi.service.ChildStuReistrationService;
 import cn.huizhi.service.ClassService;
 import cn.huizhi.service.DepartmentOfPediatricsService;
@@ -64,6 +65,17 @@ public class RootSchoolController {
 	@Resource
 	TeacherHourService teacherHourService;
 	
+	
+	/**
+	 * 	切换账户
+	 * @return
+	 */
+	@RequestMapping("switchingAccounts.html")
+	public String switchingAccounts(HttpSession session) {
+		
+		
+		return "root/switchingAccounts";
+	}
 	/**
 	 * 学校账户余额
 	 * @param session
@@ -71,10 +83,9 @@ public class RootSchoolController {
 	 */
 	@RequestMapping("rootSchoolInfo.html")
 	public String schoolInfo(HttpSession session) {
-		User user = (User) session.getAttribute("user");
 		
 		Order orders = new Order();
-		orders.setSchoolId(Integer.valueOf(user.getSchoolId()));
+		orders.setSchoolId((Integer)session.getAttribute("schoolId"));
 		List<Order> schoolOrderList = orderService.findOrderListBySchool(orders);
 		/**
 		 * 共支出
@@ -124,7 +135,7 @@ public class RootSchoolController {
 		User user = (User) session.getAttribute("user");
 		
 		Order order = new Order();
-		order.setSchoolId(Integer.valueOf(user.getSchoolId()));
+		order.setSchoolId((Integer)session.getAttribute("schoolId"));
 		
 		/**
 		 * 查询数据
@@ -312,7 +323,7 @@ public class RootSchoolController {
 	@RequestMapping("schoolOperatorChilk.html")
 	public String schoolOperatorChilk(HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		List<User> findUserAllByAdmin = userService.findListAll(user.getSchoolId());
+		List<User> findUserAllByAdmin = userService.findListAll((String)session.getAttribute("schoolId"));
 		session.setAttribute("findUserAllByAdmin", findUserAllByAdmin);
 		return "root/basicSettings/operator";
 	}
@@ -328,7 +339,7 @@ public class RootSchoolController {
 	public Map<String, String> insertCurriculum(TeacherHour teacherHour,HttpSession session){
 		Map<String, String> jsonMap = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
-		teacherHour.setSchoolId(Integer.valueOf(user.getSchoolId()));
+		teacherHour.setSchoolId((Integer)session.getAttribute("schoolId"));
 		if(teacherHourService.insertTeacherHour(teacherHour)>0) {
 			jsonMap.put("state","1");
 		}else {
@@ -365,7 +376,7 @@ public class RootSchoolController {
 	public Map<String, String> updateCurriculumInfo(TeacherHour teacherHour,HttpSession session) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
 		User user = (User) session.getAttribute("user");
-		teacherHour.setSchoolId(Integer.valueOf(user.getSchoolId()));
+		teacherHour.setSchoolId((Integer)session.getAttribute("schoolId"));
 		if(teacherHourService.updateTeacherHour(teacherHour)>0) {
 			jsonMap.put("update","1");
 		}else {

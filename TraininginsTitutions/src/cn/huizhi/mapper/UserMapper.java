@@ -18,7 +18,7 @@ public interface UserMapper {
 	 * @param loginPassword
 	 * @return
 	 */
-	public User selectUserByLogin(@Param("loginName")String loginName,@Param("loginPassword")String loginPassword,@Param("schoolId")String schoolId,@Param("schoolType")Integer schoolType);
+	public User selectUserByLogin(@Param("loginName")String loginName,@Param("loginPassword")String loginPassword);
 	
 	/**
 	 * 添加用户方法

@@ -6,7 +6,7 @@
 				<!-- LOGO -->
 				<a href="index.html" class="logo text-center"> <span
 					class="logo-lg"> <img src="${Path }/static/images/logo.png"
-						alt="" height="16">
+						alt="" width="50%" height="30px">
 				</span> <span class="logo-sm"> <img
 						src="${Path }/static/images/logo_sm.png" alt="" height="16">
 				</span>
@@ -15,10 +15,10 @@
 				<!--- Sidemenu -->
 				<ul class="metismenu side-nav">
 
-					<li class="side-nav-title side-nav-item">基础设置</li>
+					<li class="side-nav-title side-nav-item">导航</li>
 
 					<li class="side-nav-item"><a href="javascript: void(0);"
-						class="side-nav-link"> <i class="dripicons-meter"></i> <span
+						class="side-nav-link"> <i class="mdi mdi-zip-box"></i> <span
 							class="badge badge-success float-right">8</span> <span>校区信息
 						</span>
 					</a>
@@ -32,7 +32,7 @@
 							<li><a href="javascript:void(0)"onclick="">学员信息</a></li>
 						</ul></li>
 					<li class="side-nav-item"><a href="javascript: void(0);"
-						class="side-nav-link"> <i class="dripicons-view-apps"></i> <span>
+						class="side-nav-link"> <i class="mdi mdi-xing-box"></i> <span>
 								班级管理</span> <span class="menu-arrow"></span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
@@ -43,7 +43,7 @@
 
 						</ul></li>
 					<li class="side-nav-item"><a href="javascript: void(0);"
-						class="side-nav-link"> <i class="dripicons-view-apps"></i> <span>
+						class="side-nav-link"> <i class=" mdi mdi-yahoo"></i> <span>
 								培训收款 </span> <span class="menu-arrow"></span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
@@ -54,7 +54,7 @@
 
 						</ul></li>
 					<li class="side-nav-item"><a href="javascript: void(0);"
-						class="side-nav-link"> <i class="dripicons-view-apps"></i> <span>
+						class="side-nav-link"> <i class="mdi mdi-yelp"></i> <span>
 								报表统计</span> <span class="menu-arrow"></span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
@@ -68,7 +68,7 @@
 						</ul></li>
 
 					<li class="side-nav-item"><a href="javascript: void(0);"
-						class="side-nav-link"> <i class="dripicons-view-apps"></i> <span>
+						class="side-nav-link"> <i class="mdi mdi-windows"></i> <span>
 								系统维护</span> <span class="menu-arrow"></span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">

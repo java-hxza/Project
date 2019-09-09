@@ -317,7 +317,7 @@
 													<tr>
 														<td>
 															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input customChecks">
+																<input type="checkbox" class="custom-control-input customCheckes">
 																 <label class="custom-control-label customCheck" for="customCheck2">&nbsp;</label>
 															</div>
 														</td>
