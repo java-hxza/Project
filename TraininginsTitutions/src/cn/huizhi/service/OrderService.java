@@ -64,5 +64,12 @@ public interface OrderService {
 	 * @return
 	 */
 	public List<Order> findExpenOrderList(Order order);
+	
+	/**
+	 * 查询学生 赠品 税分
+	 * @param student
+	 * @return
+	 */
+	public List<Order> selectUsedIntegral(String student);
 
 }

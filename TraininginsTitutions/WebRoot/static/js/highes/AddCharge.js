@@ -164,7 +164,6 @@ $(function() {
 		var integral = $.trim($(".integral").val());
 		var giftNumber = $.trim($(".giftNumber").val());
 		var giftId = $.trim($(".giftName option:selected").val());
-		var teacherId =  $.trim($(".teacherId option:selected").val());
 		var date2 = Time.getFullYear().toString() + month.toString() + Time.getDate().toString();
 		var feecateId = "";
 		var number = 0;
@@ -211,10 +210,6 @@ $(function() {
 			alert("请填写积分！");
 			return false;
 		}
-		if(teacherId == 0) {
-			alert("请选择招生老师！");
-			return false;
-		}
 		if($(".dpMoneyActivity").val() != "" && $(".dpMoneyActivity").val() != 0) {
 			dpMoney = parseFloat($.trim($(".dpMoneyActivity").val())).toFixed(1);
 		}
@@ -241,7 +236,6 @@ $(function() {
 				personliable : personliable,
 				hour : time,
 				date : date2,
-				teacherId : teacherId,
 				discount : discount
 			},
 			dataType : "json",

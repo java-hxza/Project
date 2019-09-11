@@ -429,7 +429,7 @@
 																type="number" name="number" disabled>
 														</div>
 													</div>
-													<div class="col-md-12">
+													<!-- <div class="col-md-12">
 														<div class="form-group">
 															<select class="form-control teacherId"
 																style="text-align: center; text-align-last: center;"
@@ -440,7 +440,7 @@
 																</c:forEach>
 															</select>
 														</div>
-													</div>
+													</div> -->
 													<div class="col-md-12">
 														<div class="form-group">
 															<button type="button"

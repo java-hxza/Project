@@ -410,18 +410,6 @@
 													</div>
 													<div class="col-md-12">
 														<div class="form-group">
-															<select class="form-control teacherId"
-																style="text-align: center; text-align-last: center;"
-																id="example-select">
-																<option value="0">招生老师</option>
-																<c:forEach items="${teacher }" var="t">
-																	<option value="${t.teacherId }">${t.teacherName}</option>
-																</c:forEach>
-															</select>
-														</div>
-													</div>
-													<div class="col-md-12">
-														<div class="form-group">
 															<button type="button"
 																class="btn btn-block btn-primary TiJiao">提交</button>
 														</div>

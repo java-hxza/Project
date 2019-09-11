@@ -207,15 +207,33 @@
 		ORDER BY t.studentId
 	</select>
 
-	<select id="selectStudentClass" resultType="Student">
-		SELECT t.*
-		FROM
-		student t
-		JOIN childrenesclassstudnet c ON t.studentId=c.studentId
-		JOIN
-		class s ON c.classId=s.classId
-		WHERE c.classId=#{0}
-		ORDER BY t.studentId
+	<select id="selectStudentUsedIntegral"
+		resultMap="selectStudentUsedIntegrals" statementType="STATEMENT">
+		SELECT
+		t.studentName,t.integral,t.school,t.studentId tsi,t.usedIntegral
+		,ca.className FROM student t
+		JOIN ${table} c ON t.studentId=c.studentId
+		JOIN class ca ON c.classId=ca.classId WHERE ca.schoolId=${schoolId}
+	</select>
+
+	<resultMap type="Student" id="selectStudentUsedIntegrals">
+		<id column="tsi" property="studentId" />
+		<result column="t.studentName" property="studentName" />
+		<result column="t.integral" property="integral" />
+		<result column="t.school" property="school" />
+		<result column="t.usedIntegral" property="usedIntegral" />
+		<collection property="classes" javaType="Class">
+			<result column="ca.className" property="className" />
+		</collection>
+	</resultMap>
+
+	<select id="selectStudentId" resultType="Student">
+		SELECT s.studentId
+		FROM student s
+		WHERE s.studentName LIKE
+		CONCAT('%',#{0},'%') AND s.parentName LIKE
+		CONCAT('%',#{1},'%') AND
+		s.studentSex=#{2}
 	</select>
 
 </mapper>

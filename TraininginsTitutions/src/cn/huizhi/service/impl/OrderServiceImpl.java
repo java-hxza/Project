@@ -83,4 +83,11 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderMapper.selectExpenOrderList(order);
 	}
+
+	@Override
+	public List<Order> selectUsedIntegral(String student) {
+		return orderMapper.selectUsedIntegral(student);
+	}
+	
+	
 }

@@ -53,7 +53,9 @@
 							<li><a href="#" onclick="Expenditure()">费用支出</a></li>
 							<li><a href="#" onclick="Activitys()">优惠活动</a></li>
 							<li><a href="#" onclick="selectgifts()">赠送礼品</a></li>
-
+							<li><a href="#" onclick="selectUsedIntegrals()">赠品税分</a></li>
+							<li><a href="#" onclick="StudentDepartmentofpediatrics()">课程提醒</a></li>
+							<li><a href="#" onclick="StduentRegister()">学生注册</a></li>
 						</ul></li>
 					<li class="side-nav-item"><a href="javascript: void(0);"
 						class="side-nav-link"> <i class="dripicons-view-apps"></i> <span>

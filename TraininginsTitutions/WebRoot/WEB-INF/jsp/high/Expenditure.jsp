@@ -333,7 +333,7 @@
 																			</div>
 																		</td>
 																		<td class="${o.stuId }">${o.orderId }</td>
-																		<td>${o.student.school }</td>
+																		<td>${o.school.schoolName }</td>
 																		<td><fmt:formatDate value="${o.startTime }"
 																				pattern="yyyy-MM-dd" /></td>
 																		<td class="${o.expenditureitemsId }">${o.expenditureitems.expenditureitemsName }</td>

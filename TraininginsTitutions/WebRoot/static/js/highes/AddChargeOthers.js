@@ -86,5 +86,6 @@ $(function() {
 				location.href = "selectOrderOthers.html";
 			}
 		});
+		
 	});
 });

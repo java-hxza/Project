@@ -62,5 +62,14 @@ public interface StudentMapper {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<Student> selectStudentUsedIntegral(Integer schoolId);
+	public List<Student> selectStudentUsedIntegral(@Param("table")String table,@Param("schoolId")Integer schoolId);
+
+	/**
+	 * 查询插入学生的id
+	 * @param studentName
+	 * @param parentName
+	 * @param studentSex
+	 * @return
+	 */
+	public Student selectStudentId(String studentName,String parentName,Integer studentSex);
 }

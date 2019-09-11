@@ -335,7 +335,7 @@
 																			</div>
 																		</td>
 																		<td class="${o.stuId }">${o.orderId }</td>
-																		<td class="${o.integral }">${o.student.school }</td>
+																		<td class="${o.integral }">${o.school.schoolName }</td>
 																		<td>${o.student.studentName }</td>
 																		<td class="${o.departmentofpediatricsId }">${o.departmentOfPediatrics.dpTypeName }</td>
 																		<td><fmt:formatDate value="${o.startTime }"

@@ -56,4 +56,10 @@ public interface ClassService {
 	 * @return
 	 */
 	public List<Class> selectClassAll(Integer schoolId);
+	
+	/**
+	 * 特定条件查询班级
+	 * @return
+	 */
+	public List<Class> selectVIPClass(Integer classTypeId,Integer classType,Integer schoolId);
 }

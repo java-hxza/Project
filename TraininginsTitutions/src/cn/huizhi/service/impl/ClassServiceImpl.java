@@ -43,6 +43,11 @@ public class ClassServiceImpl implements ClassService {
 	public List<Class> selectClassAll(Integer schoolId) {
 		return classMapper.selectClassAll(schoolId);
 	}
+
+	@Override
+	public List<Class> selectVIPClass(Integer classTypeId, Integer classType, Integer schoolId) {
+		return classMapper.selectVIPClass(classTypeId, classType, schoolId);
+	}
 	
 	
 

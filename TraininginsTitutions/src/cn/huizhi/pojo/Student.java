@@ -23,12 +23,13 @@ public class Student {
 	private Double integral;
 	private Double usedIntegral;
 	private ChildrenesClassStudnet childrenesClassStudnet;
+	private Class classes;
 
 	public Student(Integer studentId, String studentName, Integer studentSex, String studentIDCard, String studentBirth,
 			String school, String parentName, String telephone, String familyAddress, String registrationChannels,
 			String registrationConsultant, String startTime, String endTime, String theSurrogate, String remarks,
 			Integer feeCategory, Integer studentHour, Double integral, Double usedIntegral,
-			ChildrenesClassStudnet childrenesClassStudnet) {
+			ChildrenesClassStudnet childrenesClassStudnet, Class classes) {
 		super();
 		this.studentId = studentId;
 		this.studentName = studentName;
@@ -50,6 +51,7 @@ public class Student {
 		this.integral = integral;
 		this.usedIntegral = usedIntegral;
 		this.childrenesClassStudnet = childrenesClassStudnet;
+		this.classes = classes;
 	}
 
 	public Student() {
@@ -215,6 +217,14 @@ public class Student {
 
 	public void setUsedIntegral(Double usedIntegral) {
 		this.usedIntegral = usedIntegral;
+	}
+
+	public Class getClasses() {
+		return classes;
+	}
+
+	public void setClasses(Class classes) {
+		this.classes = classes;
 	}
 
 }

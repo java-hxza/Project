@@ -48,6 +48,15 @@ $(function(){
 	selectgifts = function() {
 		location.href="selectgifts.html";
 	}
+	selectUsedIntegrals = function() {
+		location.href="selectUsedIntegral.html";
+	};
+	StudentDepartmentofpediatrics = function() {
+		location.href="selectStudentDepartmentofpediatrics.html";
+	};
+	StduentRegister = function() {
+		location.href="StduentRegister.html";
+	};
 	/**
 	 * 复选框单击选中取消事件
 	 */

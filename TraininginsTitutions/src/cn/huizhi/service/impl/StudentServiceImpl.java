@@ -12,33 +12,33 @@ import cn.huizhi.pojo.Student;
 import cn.huizhi.service.StudentService;
 
 @Service
-public class StudentServiceImpl implements StudentService{
+public class StudentServiceImpl implements StudentService {
 
 	@Resource
-	private StudentMapper studentMapper;//注入容器
+	private StudentMapper studentMapper;// 注入容器
 
 	/**
 	 * 查询所有高中学生
 	 */
 	@Override
-	public List<Student> selectHigh(Integer schoolId,Map<Object,Object> map) {
-		return studentMapper.selectHigh(schoolId,map);
+	public List<Student> selectHigh(Integer schoolId, Map<Object, Object> map) {
+		return studentMapper.selectHigh(schoolId, map);
 	}
 
 	/**
 	 * 查询所有少儿学生
 	 */
 	@Override
-	public List<Student> selectChildren(Integer schoolId,Map<Object,Object> map) {
-		return studentMapper.selectChildren(schoolId,map);
+	public List<Student> selectChildren(Integer schoolId, Map<Object, Object> map) {
+		return studentMapper.selectChildren(schoolId, map);
 	}
 
 	/**
 	 * 查询所有艺考学生
 	 */
 	@Override
-	public List<Student> selectYiKao(Integer schoolId,Map<Object,Object> map) {
-		return studentMapper.selectYiKao(schoolId,map);
+	public List<Student> selectYiKao(Integer schoolId, Map<Object, Object> map) {
+		return studentMapper.selectYiKao(schoolId, map);
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public class StudentServiceImpl implements StudentService{
 	 * 更新总课时
 	 */
 	@Override
-	public Integer updateStudentOrderHour(Integer studentHour, Integer studentId,Double integral) {
-		return studentMapper.updateStudentOrderHour(studentHour, studentId,integral);
+	public Integer updateStudentOrderHour(Integer studentHour, Integer studentId, Double integral) {
+		return studentMapper.updateStudentOrderHour(studentHour, studentId, integral);
 	}
 
 	/**
@@ -68,8 +68,15 @@ public class StudentServiceImpl implements StudentService{
 	public List<Student> selectStudentClass(Integer classId) {
 		return studentMapper.selectStudentClass(classId);
 	}
-	
-	
-	
-	
+
+	@Override
+	public List<Student> selectStudentUsedIntegral(String table, Integer schoolId) {
+		return studentMapper.selectStudentUsedIntegral(table, schoolId);
+	}
+
+	@Override
+	public Student selectStudentId(String studentName, String parentName, Integer studentSex) {
+		return studentMapper.selectStudentId(studentName, parentName, studentSex);
+	}
+
 }

@@ -106,7 +106,6 @@ $(function() {
 		var integral = $.trim($(".integral").val());
 		var giftNumber = $.trim($(".giftNumber").val());
 		var giftId = $.trim($(".giftName option:selected").val());
-		var teacherId = $.trim($(".teacherId option:selected").val());
 		if (dpMoney == "") {
 			alert("请填写收费金额！");
 			return false;
@@ -123,10 +122,6 @@ $(function() {
 		}
 		if (hours == "") {
 			hours = 0;
-		}
-		if(teacherId == 0) {
-			alert("请选择招生老师！");
-			return false;
 		}
 		$.ajax({
 			type : "POST",
@@ -145,8 +140,7 @@ $(function() {
 				classId : classId,
 				giftId : giftId,
 				giftNumber : giftNumber,
-				integral : integral,
-				teacherId : teacherId
+				integral : integral
 			},
 			dataType : "json",
 			success : function(data) {

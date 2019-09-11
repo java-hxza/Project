@@ -10,7 +10,7 @@
 		opi,o.departmentofpediatricsId odf,o.feecateId
 		ofi,o.addhour,o.givehour,o.startTime,o.orderNumber,o.stuId
 		sd,o.giftNumber,o.giftId,s.studentName,s.school,s.integral,p.paymentmethodName,d.dpTypeName,o.integral
-		oi,o.teacherId ot,o.giftId,o.giftNumber ogm
+		oi,o.teacherId ot,o.giftId,o.giftNumber ogm,sc.schoolName sn
 		FROM `order`
 		o
 		JOIN student s
@@ -19,6 +19,7 @@
 		o.paymentmethodId=p.paymentmethodId
 		JOIN departmentofpediatrics d ON
 		o.departmentofpediatricsId=d.dpId
+		JOIN school sc ON o.schoolId=sc.schoolId
 		WHERE o.identification = 0 AND
 		o.departmentofpediatricsId IS NOT NULL AND
 		o.schoolId=#{0} ORDER BY od
@@ -54,6 +55,10 @@
 			javaType="DepartmentOfPediatrics">
 			<result column="d.dpTypeName" property="dpTypeName" />
 		</collection>
+		<collection property="school"
+			javaType="School">
+			<result column="sn" property="schoolName" />
+		</collection>
 	</resultMap>
 
 	<select id="selectOrderPeriod" resultMap="selectOrderPeriods">
@@ -62,16 +67,17 @@
 		odm,o.remarks,o.personliable,o.startTime,o.orderNumber,o.feecateId
 		ofi,o.stuId osi,o.paymentmethodId opt,s.studentName,o.discount,
 		p.paymentmethodName,s.school,s.integral,o.giftId,o.giftNumber
-		ogm,o.integral oi,o.teacherId ot
+		ogm,o.integral oi,o.teacherId ot,sc.schoolName sn
 		FROM `order` o
 		JOIN
 		student s ON
 		o.stuId=s.studentId
 		JOIN paymentmethod p ON
 		o.paymentmethodId=p.paymentmethodId
+		JOIN school sc ON o.schoolId=sc.schoolId
 		WHERE o.firstdate IS NOT NULL AND
 		o.schoolId=#{0} ORDER BY od
-		
+
 	</select>
 
 	<resultMap type="Order" id="selectOrderPeriods">
@@ -101,21 +107,30 @@
 			<result column="p.paymentmethodName"
 				property="paymentmethodName" />
 		</collection>
+		<collection property="school"
+			javaType="School">
+			<result column="sn" property="schoolName" />
+		</collection>
 	</resultMap>
 
 	<select id="selectOrderOther" resultMap="selectOrderOthers">
 		SELECT o.orderId
 		oo,o.stuId ost,o.feecateId ofi,o.paymentmethodId
-		opt,o.remarks,o.personliable,p.paymentmethodName,f.chargeTypeName,s.school,s.studentName,o.startTime,o.dpMoney odm,o.orderNumber
+		opt,o.remarks,o.personliable,p.paymentmethodName,f.chargeTypeName,s.school,s.studentName,o.startTime,o.dpMoney
+		odm,o.orderNumber,sc.schoolName sn
 		FROM traininginstitutions.order
 		o
-		JOIN student s ON o.stuId=s.studentId
+		JOIN student s ON
+		o.stuId=s.studentId
 		JOIN feecategory f
 		ON o.feecateId=f.chargeTypeId
 		JOIN paymentmethod p ON
 		o.paymentmethodId=p.paymentmethodId
-		WHERE o.identification = 0 AND
-		o.firstdate IS NULL AND o.addhour IS NULL AND o.schoolId=#{0}
+		JOIN school sc ON o.schoolId=sc.schoolId
+		WHERE
+		o.identification = 0 AND
+		o.firstdate IS NULL AND o.addhour IS NULL AND
+		o.schoolId=#{0}
 		ORDER BY oo
 	</select>
 
@@ -141,23 +156,34 @@
 		<collection property="feeCategory" javaType="FeeCategory">
 			<result column="f.chargeTypeName" property="chargeTypeName" />
 		</collection>
+		<collection property="school"
+			javaType="School">
+			<result column="sn" property="schoolName" />
+		</collection>
 	</resultMap>
 
-	<select id="selectOrderExpenditure" resultMap="selectOrderExpenditures">
+	<select id="selectOrderExpenditure"
+		resultMap="selectOrderExpenditures">
 		SELECT o.orderId
-		oo,o.stuId ost,o.expenditureitemsId oei,o.paymentmethodId
-		opt,o.remarks,o.personliable,p.paymentmethodName,e.expenditureitemsName,s.school,s.studentName,o.startTime,o.feecategoryMoney ofm,o.orderNumber
+		oo,o.stuId ost,o.expenditureitemsId
+		oei,o.paymentmethodId
+		opt,o.remarks,o.personliable,p.paymentmethodName,e.expenditureitemsName,s.school,s.studentName,o.startTime,o.feecategoryMoney
+		ofm,o.orderNumber,sc.schoolName sn
 		FROM traininginstitutions.order
 		o
-		JOIN student s ON o.stuId=s.studentId
-		JOIN expenditureitems e ON o.expenditureitemsId=e.expenditureitemsId
+		JOIN student s ON
+		o.stuId=s.studentId
+		JOIN expenditureitems e ON
+		o.expenditureitemsId=e.expenditureitemsId
 		JOIN paymentmethod p ON
 		o.paymentmethodId=p.paymentmethodId
+		JOIN school sc ON o.schoolId=sc.schoolId
 		WHERE o.identification = 1 AND
 		o.firstdate IS NULL AND o.addhour IS NULL AND o.schoolId=#{0}
-		ORDER BY oo
+		ORDER BY
+		oo
 	</select>
-	
+
 	<resultMap type="Order" id="selectOrderExpenditures">
 		<id column="oo" property="orderId" />
 		<result column="ofm" property="feecategoryMoney" />
@@ -177,8 +203,14 @@
 			<result column="p.paymentmethodName"
 				property="paymentmethodName" />
 		</collection>
-		<collection property="expenditureitems" javaType="Expenditureitems">
-			<result column="e.expenditureitemsName" property="expenditureitemsName" />
+		<collection property="expenditureitems"
+			javaType="Expenditureitems">
+			<result column="e.expenditureitemsName"
+				property="expenditureitemsName" />
+		</collection>
+		<collection property="school"
+			javaType="School">
+			<result column="sn" property="schoolName" />
 		</collection>
 	</resultMap>
 
@@ -568,6 +600,25 @@
 			</if>
 		</where>
 	</select>
+
+	<select id="selectUsedIntegral" resultMap="selectUsedIntegrals" statementType="STATEMENT">
+		SELECT o.orderId oi,
+		o.giftId od,g.giftName gn,o.giftNumber ogn,o.stuId
+		FROM `order` o
+		JOIN gift g ON
+		o.giftId=g.giftId
+		WHERE o.stuId=${stuId}
+	</select>
+
+	<resultMap type="Order" id="selectUsedIntegrals">
+		<id column="oi" property="orderId" />
+		<result column="od" property="giftId" />
+		<result column="ogn" property="giftNumber" />
+		<result column="o.stuId" property="stuId" />
+		<collection property="gift" javaType="Gift">
+			<result column="gn" property="giftName" />
+		</collection>
+	</resultMap>
 
 </mapper>   
 
