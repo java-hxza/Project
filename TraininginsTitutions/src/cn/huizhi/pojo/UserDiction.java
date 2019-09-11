@@ -5,19 +5,33 @@ public class UserDiction {
 	private Integer schoolId;
 	private Integer userId;
 
+	private User user;
 	private School school;
 
 	public UserDiction() {
 		super();
 	}
 
-	public UserDiction(Integer userDictionId, Integer schoolId, Integer userId, School school) {
+
+
+	public UserDiction(Integer userDictionId, Integer schoolId, Integer userId, User user, School school) {
 		super();
 		this.userDictionId = userDictionId;
 		this.schoolId = schoolId;
 		this.userId = userId;
+		this.user = user;
 		this.school = school;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
 
 	public Integer getUserDictionId() {
 		return userDictionId;

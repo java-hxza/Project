@@ -48,7 +48,7 @@
 										<li class="breadcrumb-item active">FAQ</li>
 									</ol>
 								</div>
-								<h4 class="page-title">管理员</h4>
+								<h4 class="page-title">学校账户余额</h4>
 							</div>
 						</div>
 					</div>

@@ -88,6 +88,10 @@
 										class="form-control" type="password" required id="loginPassword" name="loginPassword"
 										placeholder="Enter your password">
 								</div>
+								<div class="form-group">
+									<label for="emailaddress">备注：</label> <input
+										class="form-control" type="text" id="remarks" name="remarks" >
+								</div>
 
 								<div class="form-group mb-3">
 									<div class="custom-control custom-checkbox">

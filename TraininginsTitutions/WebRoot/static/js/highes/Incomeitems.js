@@ -10,10 +10,15 @@ $(function(){
 		$(".add").click(function() {
 			var chargeTypeName = $(".chargeTypeName").val();
 			var category = $(".category").val();
+			var chargeMoney = $("#chargeMoney").val();
 			$.ajax({
 				type : "POST",
 				url : "addIncomeitems.html",
-				data :{chargeTypeName : chargeTypeName,category : category},
+				data : {
+					chargeTypeName : chargeTypeName,
+					category : category,
+					chargeMoney : chargeMoney
+				},
 				dataType : "json",
 				success : function(data) {
 					data = JSON.parse(data);

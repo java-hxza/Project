@@ -1,5 +1,6 @@
 package cn.huizhi.controller.children;
 
+import java.awt.Image;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +28,7 @@ import cn.huizhi.pojo.HighesClassStudnet;
 import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.Student;
 import cn.huizhi.pojo.Teacher;
+import cn.huizhi.pojo.TeacherHour;
 import cn.huizhi.pojo.User;
 import cn.huizhi.service.ChildrenesClassStudnetService;
 import cn.huizhi.service.ClassService;
@@ -34,6 +36,7 @@ import cn.huizhi.service.DepartmentOfPediatricsService;
 import cn.huizhi.service.HighesClassStudnetService;
 import cn.huizhi.service.OrderService;
 import cn.huizhi.service.StudentService;
+import cn.huizhi.service.TeacherHourService;
 import cn.huizhi.service.TeacherService;
 import cn.huizhi.service.UserService;
 
@@ -72,6 +75,9 @@ public class ChildrenClassesController {
 	@Resource
 	OrderService orderService;
 	
+	@Resource
+	TeacherHourService teacherHourService;
+	
 	@RequestMapping("childrenSchoolLogin.html")
 	public String childrenSchoolLogin(HttpSession session) {
 		session.setAttribute("schoolType", 1);
@@ -86,8 +92,8 @@ public class ChildrenClassesController {
 	@RequestMapping("classIndex.html")
 	public String childrenIndex(HttpSession session) {
 		
-		String schoolId = (String) session.getAttribute("schoolId");
-		List<Class> childrenClassList = classService.findChildrenescClasses(schoolId);
+		Integer schoolId = (Integer) session.getAttribute("schoolId");
+		List<Class> childrenClassList = classService.findChildrenescClasses(String.valueOf(schoolId));
 		if(childrenClassList !=null) {
 			session.setAttribute("childrenClassList", childrenClassList);
 		}
@@ -170,14 +176,17 @@ public class ChildrenClassesController {
 	public String seeStudentInfo(Integer classId,HttpSession session) {
 		
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
-		if(schoolType == 2 ) {
+		if(schoolType == 1 ) {
 			List<ChildrenesClassStudnet> childrenesClassStudnets = childrenesClassStudnetService.findChildrenesClassStudnetByClassId(classId);
 			session.setAttribute("childrenesClassStudnets", childrenesClassStudnets);
 			return "root/studentInfo/children/seeStudentInfo";
 		}
-		if(schoolType == 1) {
+		if(schoolType == 2) {
 			List<HighesClassStudnet> highesClassStudnets = highesClassStudnetService.findHighesClassStudnetListByClassId(classId);
+
+			List<TeacherHour> teacherHourList = teacherHourService.selectCurriculumInfo(classId, null);
 			session.setAttribute("highesClassStudnets", highesClassStudnets);
+			session.setAttribute("teacherHourList", teacherHourList);
 			return "root/studentInfo/high/seeStudentInfo";
 		}
 		if(schoolType ==3) {

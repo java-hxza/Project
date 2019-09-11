@@ -19,6 +19,8 @@ import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.TeacherDiction;
 import cn.huizhi.pojo.TeacherHour;
 import cn.huizhi.pojo.User;
+import cn.huizhi.pojo.UserDiction;
+import cn.huizhi.service.ArtStuRegistrationService;
 import cn.huizhi.service.ChildStuReistrationService;
 import cn.huizhi.service.ClassService;
 import cn.huizhi.service.DepartMentService;
@@ -28,6 +30,8 @@ import cn.huizhi.service.StudentService;
 import cn.huizhi.service.TeacherDictionService;
 import cn.huizhi.service.TeacherHourService;
 import cn.huizhi.service.TeacherService;
+import cn.huizhi.service.UserDictionService;
+import cn.huizhi.pojo.ArtStuRegistration;
 import cn.huizhi.pojo.ChildStuReistration;
 import cn.huizhi.pojo.Class;
 import cn.huizhi.pojo.DepartMent;
@@ -62,13 +66,16 @@ public class AdminTeacherController {
 	
 	@Resource
 	OrderService orderService;
+	
+	@Resource
+	UserDictionService userDictionService;
+	
+	@Resource
+	ArtStuRegistrationService artStuRegistrationService;
 
 	@RequestMapping("schoolTeacherInfo.html")
 	public String schoolTeacherInfo(Integer schoolId, String schoolName, HttpSession session) {
 		session.setAttribute("schoolName", schoolName);
-		User user = new User();
-		user.setSchoolId(String.valueOf(schoolId));
-		session.setAttribute("user", user);
 		List<Teacher> teacherListBYSchoolId = teacherService.findTeacherListBySchoolId(schoolId);
 		if (teacherListBYSchoolId.size() > 0) {
 			session.setAttribute("teacherListBYSchoolId", teacherListBYSchoolId);
@@ -261,6 +268,15 @@ public class AdminTeacherController {
 		return "admin/classStudent/studentHourInfo";
 	}
 
+	@RequestMapping("artStudentHourInfo.html")
+	public String artStudentHourInfo(Integer classId,HttpSession session) {
+		List<ArtStuRegistration> artStuRegistrationList = artStuRegistrationService.findArtStuRegistrationByClassId(classId);
+		
+		session.setAttribute("stuReistrationList", artStuRegistrationList);
+		
+		return "admin/classStudent/studentHourInfo";
+	}
+	
 	/**
 	 * 返回选择学校页面
 	 * 
@@ -438,6 +454,35 @@ public class AdminTeacherController {
 		session.setAttribute("schoolName", schoolName);
 		session.setAttribute("studentFeeSituationList", studentFeeSituationList);
 		return "admin/studentInfo/studentFeeSituation";
+	}
+	
+	@RequestMapping("operatorAuthorization.html")
+	public String operatorAuthorization(Integer uId,HttpSession session) {
+		List<UserDiction> dictionListByUId =  userDictionService.findDictionListByUserId(uId);
+		
+		session.setAttribute("dictionListByUId", dictionListByUId);
+		
+		return "admin/basicSettings/operatorAuthorization";
+	}
+	
+	/**
+	 * 添加权限
+	 * @param userDiction
+	 * @return
+	 */
+	@RequestMapping("operatorAuthor.html")
+	@ResponseBody
+	public Map<String,String> operatorAuthor(UserDiction userDiction){
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		
+		
+		if(userDictionService.insertUserDiction(userDiction)>0) {
+			jsonMap.put("state","1");
+		}else {
+			jsonMap.put("state","1");
+		}
+		
+		return jsonMap;
 	}
 
 }

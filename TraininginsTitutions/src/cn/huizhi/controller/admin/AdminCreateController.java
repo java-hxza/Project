@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.School;
 import cn.huizhi.pojo.User;
+import cn.huizhi.pojo.UserDiction;
 import cn.huizhi.service.OrderService;
 import cn.huizhi.service.SchoolService;
+import cn.huizhi.service.UserDictionService;
 /**
  * 管理员创建管理controller
  * @author wye
@@ -41,6 +43,8 @@ public class AdminCreateController {
 	@Resource
 	OrderService orderService;
 	
+	@Resource
+	UserDictionService userDictionService;
 	/**
 	 * 创建学校并以json数组形式返回
 	 * 
@@ -63,16 +67,23 @@ public class AdminCreateController {
 
 	@RequestMapping("regitUser.html")
 	@ResponseBody
-	public HashMap<String, String> createUser(String loginName, String loginPassword, Integer schoolId,
-			Integer userTypeId) {
+	public HashMap<String, String> createUser(String loginName, String loginPassword, String remarks,
+			Integer userTypeId,Integer schoolId) {
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
 		User user = new User();
 		user.setLoginPassword(loginPassword);
 		user.setLoginName(loginName);
-		user.setSchoolId(Integer.toString(schoolId));
 		user.setUserTypeId(Integer.toString(userTypeId));
+		UserDiction userDiction = new UserDiction();
+		
+		
 		if (userservice.addtUser(user) > 0) {
-			jsonMap.put("state", "1");
+			userDiction.setSchoolId(schoolId);
+			userDiction.setUserId(user.getuId());
+			
+			if(userDictionService.insertUserDiction(userDiction)>0) {
+				jsonMap.put("state", "1");
+			}
 		} else {
 			jsonMap.put("state", "0");
 		}

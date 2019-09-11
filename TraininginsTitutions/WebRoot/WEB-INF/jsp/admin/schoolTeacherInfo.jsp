@@ -113,8 +113,8 @@
 													<tr class="teacherId" >
 														<td>
 															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input  customCheck" />
-																<label class="custom-control-label  customCheckes" for="customCheck">&nbsp;</label>
+																<input type="checkbox" class="custom-control-input  customCheckes" />
+																<label class="custom-control-label  customCheck" for="customCheck">&nbsp;</label>
 															</div>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
@@ -154,6 +154,5 @@
 				<script type="text/javascript" src="${Path }/static/js/admin/leftSidebar.js"></script>
 				<script type="text/javascript" src="${Path }/static/js/admin/adminIndex.js"></script>
 				<script type="text/javascript" src="${Path }/static/js/admin/info/schoolTeacherInfo.js"></script>
-				<script src="${Path }/static/js/highes/leftSidebar.js"></script>
 </body>
 </html>

@@ -23,4 +23,11 @@ public interface HighesStuRegistrationService {
 	 * @return
 	 */
 	public List<HighesStuRegistration> selectStudentHourDetailed(Integer classId);
+	
+	/**
+	 * 批量登记
+	 * @param list
+	 * @return
+	 */
+	public Integer insertHighesStuRegistration(List<HighesStuRegistration> list);
 }

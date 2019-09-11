@@ -15,6 +15,10 @@ public class HighesStuRegistration {
 	private Integer remarks;
 	private Integer classId;
 	private Integer teacherId;
+
+	private Integer thId;
+
+	private Double sumHour;
 	/**
 	 * 学生订单
 	 */
@@ -29,16 +33,14 @@ public class HighesStuRegistration {
 	 */
 	private HighesClassStudnet highesClassStudnet;
 
-	
-	
 	public HighesStuRegistration() {
 		super();
 	}
 
 	public HighesStuRegistration(Integer highesHourId, String studentName, Date classHours, Integer dpId,
 			String contentOfCourses, Double classHour, Integer teacherInClass, Integer highesStuId, Integer state,
-			Integer remarks, Integer classId, Integer teacherId, Order order, Class class1,
-			HighesClassStudnet highesClassStudnet) {
+			Integer remarks, Integer classId, Integer teacherId, Integer thId, Double sumHour, Order order,
+			Class class1, HighesClassStudnet highesClassStudnet) {
 		super();
 		this.highesHourId = highesHourId;
 		this.studentName = studentName;
@@ -52,9 +54,19 @@ public class HighesStuRegistration {
 		this.remarks = remarks;
 		this.classId = classId;
 		this.teacherId = teacherId;
+		this.thId = thId;
+		this.sumHour = sumHour;
 		this.order = order;
 		this.class1 = class1;
 		this.highesClassStudnet = highesClassStudnet;
+	}
+
+	public Integer getThId() {
+		return thId;
+	}
+
+	public void setThId(Integer thId) {
+		this.thId = thId;
 	}
 
 	public Integer getHighesHourId() {
@@ -175,6 +187,14 @@ public class HighesStuRegistration {
 
 	public void setHighesClassStudnet(HighesClassStudnet highesClassStudnet) {
 		this.highesClassStudnet = highesClassStudnet;
+	}
+
+	public Double getSumHour() {
+		return sumHour;
+	}
+
+	public void setSumHour(Double sumHour) {
+		this.sumHour = sumHour;
 	}
 
 }

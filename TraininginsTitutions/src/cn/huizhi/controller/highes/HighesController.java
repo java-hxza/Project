@@ -128,15 +128,14 @@ public class HighesController {
 	 */
 	@RequestMapping("Incomeitems.html")
 	public String Incomeitems(Model model, HttpSession session) {
-		User user = (User) session.getAttribute("user");
-		List<FeeCategory> list = feecategoryService.selectFeeCategory(Integer.parseInt(user.getSchoolId()));
+		Integer schoolId = (Integer) session.getAttribute("schoolId");
+		List<FeeCategory> list = feecategoryService.selectFeeCategory(schoolId);
 		model.addAttribute("list", list);
 		return "high/Incomeitems";
 	}
 
 	/**
 	 * 删除收入项目
-	 * 
 	 * @param chargeTypeId
 	 * @return
 	 */
@@ -160,10 +159,15 @@ public class HighesController {
 	 */
 	@RequestMapping("addIncomeitems.html")
 	@ResponseBody
-	public Object AddIncomeitems(@RequestParam String chargeTypeName, @RequestParam String category) {
-		User user = (User) session.getAttribute("user");
+	public Object AddIncomeitems(FeeCategory feeCategory,HttpSession session) {
 		HashMap<String, String> map = new HashMap<String, String>();
-		if (feecategoryService.addFeeCategory(chargeTypeName, category, Integer.parseInt(user.getSchoolId())) == 1) {
+		
+		if(feeCategory.getSchoolId() == null ) {
+			feeCategory.setSchoolId((Integer) session.getAttribute("schoolId"));
+		}
+		
+		if (feecategoryService.addFeeCategory(feeCategory)>0) {
+			
 			map.put("add", "1");
 		} else {
 			map.put("add", "0");
@@ -179,8 +183,8 @@ public class HighesController {
 	 */
 	@RequestMapping("Expenditureitemses.html")
 	public String Expenditureitemses(Model model) {
-		User user = (User) session.getAttribute("user");
-		List<Expenditureitems> list = expenditureitemsService.selectExpenditureitems(user.getSchoolId());
+		String schoolId = (String) session.getAttribute("schoolId");
+		List<Expenditureitems> list = expenditureitemsService.selectExpenditureitems(schoolId);
 		model.addAttribute("list", list);
 		return "high/Expenditureitemses";
 	}
@@ -231,8 +235,10 @@ public class HighesController {
 	 */
 	@RequestMapping("Teacher.html")
 	public String Teacher(Model model) {
-		User u = (User) session.getAttribute("user");
-		List<Teacher> teacher = teacherService.selectTeacher(Integer.parseInt(u.getSchoolId()));
+		
+		String schoolId = (String) session.getAttribute("schoolId");
+		
+		List<Teacher> teacher = teacherService.selectTeacher(Integer.parseInt(schoolId));
 		List<TeacherType> teacherType = teacherTypeService.selectTeacherType();
 		model.addAttribute("teacher", teacher);
 		model.addAttribute("teacherType", teacherType);
@@ -247,10 +253,10 @@ public class HighesController {
 	@RequestMapping("delTeacher.html")
 	@ResponseBody
 	public Object delTeacher(@RequestParam Integer teacherId) {
-		User user = (User) session.getAttribute("user");
+		String schoolId = (String) session.getAttribute("schoolId");
 		HashMap<String, String> map = new HashMap<String, String>();
 		if (teacherService.delTeacher(teacherId) == 1) {
-			if (teacherDictionService.delTeacherDiction(Integer.parseInt(user.getSchoolId()), teacherId) == 1) {
+			if (teacherDictionService.delTeacherDiction(Integer.parseInt(schoolId), teacherId) == 1) {
 				map.put("del", "1");
 			} else {
 				map.put("del", "0");
@@ -844,13 +850,13 @@ public class HighesController {
 	 */
 	@RequestMapping("selectOrderHour.html")
 	public String selectOrderHour(Model model) {
-		User user = (User) session.getAttribute("user");
-		List<Student> children = studentService.selectChildren(Integer.parseInt(user.getSchoolId()),
+		Integer schoolId = (Integer) session.getAttribute("schoolId");
+		List<Student> children = studentService.selectChildren(schoolId),
 				new HashMap<Object, Object>());
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
-		List<Order> order = orderService.selectOrderHour(Integer.parseInt(user.getSchoolId()));
-		List<FeeCategory> feeCategory = feecategoryService.selectFeeCategory(Integer.parseInt(user.getSchoolId()));
-		List<Gift> gift = giftService.selectGift(Integer.parseInt(user.getSchoolId()));
+		List<Order> order = orderService.selectOrderHour(schoolId);
+		List<FeeCategory> feeCategory = feecategoryService.selectFeeCategory(schoolId);
+		List<Gift> gift = giftService.selectGift(schoolId);
 		model.addAttribute("children", children);
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("feeCategory", feeCategory);

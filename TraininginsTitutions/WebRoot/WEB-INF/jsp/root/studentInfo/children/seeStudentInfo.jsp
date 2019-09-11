@@ -66,7 +66,7 @@
                                     <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="shiftWork()">学员转班</button>
                                     <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="exitSchool()">学员退学</button>
                                     <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="classRegistration()"> 学员上课登记</button>
-                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="classBatchRegistration()"> 学员批量登记</button>
+                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" data-toggle="modal" data-target="#top-modal"> 学员批量登记</button>
                                 </div>
                             </div>
 						<!-- end col -->
@@ -161,7 +161,65 @@
 											</tbody>
 										</table>
 									</div>
-
+<!-- Top modal content -->
+					<div id="top-modal" class="modal fade" tabindex="-1" role="dialog"
+						aria-hidden="true">
+						<div class="modal-dialog modal-top">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title" id="topModalLabel">请选择课程</h4>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+								</div>
+								<div class="modal-body">
+									<table
+										class="table table-centered table-striped dt-responsive nowrap w-100"
+										id="products-datatable">
+										<thead>
+											<tr>
+												<th style="width: 20px;">
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input"
+															id="customCheck1" disabled="disabled"> <label
+															class="custom-control-label" for="customCheck1">&nbsp;</label>
+													</div>
+												</th>
+												<th>教师名称</th>
+												<th>课时名称</th>
+												<th>上课时间</th>
+												<th>课时</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="${teacherHourList }" var="th">
+												<tr class="thId">
+													<td>
+														<div class="custom-control custom-checkbox">
+															<input type="checkbox" class="custom-control-input"
+																id="customCheck2"><label
+																class="custom-control-label" for="customCheck2">&nbsp;</label>
+														</div>
+													</td>
+													<td class="table-user"><a href="javascript:void(0);"
+														class="text-body font-weight-semibold">${th.teacherName }</a></td>
+													<td class="table-user"><a href="javascript:void(0);"
+														class="text-body font-weight-semibold">${th.teacherName }</a></td>
+													<td class="table-user"><a href="javascript:void(0);"
+														class="text-body font-weight-semibold">${th.dpName }</a></td>
+													<td class="table-user"><a href="javascript:void(0);"
+														class="text-body font-weight-semibold"><fmt:formatDate value="${th.startTime }" pattern="yyyy-MM-dd"/></a></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-light"
+										data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary" onclick="classBatchRegistration()">保存</button>
+								</div>
+							</div>
+							<!-- /.modal-content -->
 							
 
             <!-- ============================================================== -->

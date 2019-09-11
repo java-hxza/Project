@@ -46,18 +46,16 @@
 								<div class="page-title-right">
 									<ol class="breadcrumb m-0">
 										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">Hyper</a></li>
+											href="javascript: void(0);">报表统计</a></li>
 										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">Pages</a></li>
-										<li class="breadcrumb-item active">FAQ</li>
+											href="javascript: void(0);">收支明细报表</a></li>
 									</ol>
 								</div>
-								<h4 class="page-title">管理员</h4>
+								<h4 class="page-title">收支明细报表</h4>
 							</div>
 						</div>
 					</div>
 					<!-- end page title -->
-
 
 					<div class="row">
 						<div class="col-sm-12">

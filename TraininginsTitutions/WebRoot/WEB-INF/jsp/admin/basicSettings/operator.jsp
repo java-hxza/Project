@@ -44,10 +44,9 @@
 								<div class="page-title-right">
 									<ol class="breadcrumb m-0">
 										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">Hyper</a></li>
+											href="javascript: void(0);">系统维护</a></li>
 										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">Pages</a></li>
-										<li class="breadcrumb-item active">FAQ</li>
+											href="javascript: void(0);">操作员</a></li>
 									</ol>
 								</div>
 								<h4 class="page-title">管理员</h4>
@@ -65,6 +64,7 @@
         
                                     <button type="button" class="btn btn-success btn-sm mt-2" onclick="createUser()"> 添加学校操作员</button>
                                     <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="updateUser()"> 修改操作员</button>
+                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="operatorAuthorization()">操作员授权</button>
                                     <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="delUser()"> 删除操作员</button>
                                 </div>
                             </div>

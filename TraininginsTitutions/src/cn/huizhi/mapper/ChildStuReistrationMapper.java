@@ -28,4 +28,11 @@ public interface ChildStuReistrationMapper {
 	 */
 	public List<ChildStuReistration> selectTeacherDetailed(@Param("classId")Integer classId);
 	
+	/**
+	 * 批量登记学生上课
+	 * @param list
+	 * @return
+	 */
+	public Integer insertChilStuRistration(List<ChildStuReistration> list);
+	
 }

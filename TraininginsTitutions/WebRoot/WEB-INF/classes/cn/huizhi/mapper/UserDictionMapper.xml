@@ -17,7 +17,8 @@
 	 	c.cityId c_cityId,
 	 	c.cityName c_cityName,
 	 	p.provinceId p_provinceId,
-	 	p.provinceName p_provinceName
+	 	p.provinceName p_provinceName,
+	 	u.loginName u_loginName
 	</sql>
 
 	<resultMap type="UserDiction" id="DictionListByUserIdMap">
@@ -40,19 +41,27 @@
 				<result column="p_provinceName" property="provinceName"/>
 			</association>
 		</association>
+		<association property="user" javaType="User">
+			<result column="u_loginName" property="loginName"/>
+		</association>
 	</resultMap>
 	<!-- 根据用户主键查询学校权限 -->
 	<select id="findDictionListByUserId" resultMap="DictionListByUserIdMap" parameterType="java.lang.Integer">
 		select
 		<include refid="DictionListByUserIdCol" />
-		from userdiction ud,school sc,city c,province p
+		from userdiction ud,school sc,city c,province p,user u
 		<where>
 			ud.schoolId = sc.schoolId
-			and c.cityId = sc.cityId and p.provinceId = sc.cityProperId
+			and c.cityId = sc.cityId and p.provinceId = sc.cityProperId and u.uId = ud.userId
 			<if test="userId !=null and userId!=''">
 				and ud.userId = #{userId}
 			</if>
 		</where>
 	</select>
+	
+	<insert id="insertUserDiction" parameterType="UserDiction">
+		insert into  userdiction ( schoolId, userId )
+			values (  #{schoolId}, #{userId})
+	</insert>
 
 </mapper>

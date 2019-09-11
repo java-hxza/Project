@@ -79,6 +79,7 @@
 			<if test="teacherHourId!=null and teacherHourId !=''">
 				t.teacherHourId= #{teacherHourId}
 			</if>
+			order by t.startTime desc 
 		</where> 
 	</select>
 	
@@ -117,4 +118,7 @@
 		
 	</delete>
 	
+	<select id="findTheacherHourByClassId">
+		
+	</select>
 </mapper>

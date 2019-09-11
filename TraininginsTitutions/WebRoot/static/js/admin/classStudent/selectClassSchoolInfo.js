@@ -12,10 +12,13 @@ $(function(){
 		var classId = $(this).children().next().children().attr("name");
 		var classLevel = $(this).children("td:last-child").children().attr("name");
 		if(classLevel == 1){
-			location.href="highStudentHourInfo.html?classId="+classId;
+			location.href="childrenStudentHourInfo.html?classId="+classId;
 		}
 		if(classLevel == 2){
-			location.href="childrenStudentHourInfo.html?classId="+classId;
+			location.href="highStudentHourInfo.html?classId="+classId;
+		}
+		if(classLevel ==3){
+			location.href="artStudentHourInfo.html?classId="+classId;
 		}
 		
 	});

@@ -90,6 +90,9 @@
 													<th>学校所属城市</th>
 													<th>学校备注</th>
 													<th>学校所属省份</th>
+													<th>学校支出金额</th>
+													<th>学校收入金额</th>
+													<th>学校账户余额</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -115,6 +118,15 @@
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${school.province.provinceName }</a>
+														</td>
+														<td class="table-user"><a href="javascript:void(0);"
+															class="text-body font-weight-semibold">${school.schoolExPenSum}</a>
+														</td>
+														<td class="table-user"><a href="javascript:void(0);"
+															class="text-body font-weight-semibold">${school.schoolFeeceat}</a>
+														</td>
+														<td class="table-user"><a href="javascript:void(0);"
+															class="text-body font-weight-semibold">${school.schoolFeeceat-schoolExPenSum}</a>
 														</td>
 													</tr>
 												</c:forEach>	

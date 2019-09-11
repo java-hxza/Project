@@ -38,8 +38,8 @@ public class FeeCategoryServiceImpl implements FeeCategoryService {
 	 * 添加收入项目
 	 */
 	@Override
-	public Integer addFeeCategory(String chargeTypeName,String category,Integer schoolId) {
-		return feecategoryMapper.addFeeCategory(chargeTypeName, category,schoolId);
+	public Integer addFeeCategory( FeeCategory feeCategory) {
+		return feecategoryMapper.addFeeCategory(feeCategory);
 	}
 
 }

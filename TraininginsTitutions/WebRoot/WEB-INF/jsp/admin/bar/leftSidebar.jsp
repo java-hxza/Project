@@ -18,18 +18,18 @@
 					<li class="side-nav-title side-nav-item">基础设置</li>
 
 					<li class="side-nav-item"><a href="javascript: void(0);"
-						class="side-nav-link"> <i class="dripicons-meter"></i> <span
+						class="side-nav-link"> <i class="mdi mdi-zip-box"></i> <span
 							class="badge badge-success float-right">8</span> <span>校区信息
 						</span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
 							<li><a href="javascript:void(0)" onclick="AdminSchoolListInfo()">学校账户信息</a></li>
-							<li><a href="javascript:void(0)" onclick="Incomeitems()">学校收入项目</a></li>
-							<li><a href="javascript:void(0)" onclick="Expenditureitemses()">学校支出项目</a></li>
+							<li><a href="javascript:void(0)" onclick="AdminIncomeitems()">学校收入项目</a></li>
+							<li><a href="javascript:void(0)" onclick="AdminExpenditureitemses()">学校支出项目</a></li>
 							<li><a href="javascript:void(0)" onclick="AdminTeacherInto()">教师信息</a></li>
 						</ul></li>
 					<li class="side-nav-item"><a href="javascript: void(0);"
-						class="side-nav-link"> <i class="dripicons-view-apps"></i> <span>
+						class="side-nav-link"> <i class="mdi mdi-yelp"></i> <span>
 								报表统计</span> <span class="menu-arrow"></span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
@@ -44,12 +44,12 @@
 						</ul></li>
 
 					<li class="side-nav-item"><a href="javascript: void(0);"
-						class="side-nav-link"> <i class="dripicons-view-apps"></i> <span>
+						class="side-nav-link"> <i class="mdi mdi-windows"></i> <span>
 								系统维护</span> <span class="menu-arrow"></span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
 							<li><a href="javascript:void(0)" onclick="AdminOperatorChilk()">操作员</a></li>
-							<li><a href="javascript:void(0)" onclick="teacherInto()">教师授权</a></li>
+							<li><a href="javascript:void(0)" onclick="AdminTeacherInto()">教师授权</a></li>
 							<li><a href="javascript:void(0)" onclick="AdminOperatorChilk()">修改密码</a></li>
 						</ul></li>
 				</ul>

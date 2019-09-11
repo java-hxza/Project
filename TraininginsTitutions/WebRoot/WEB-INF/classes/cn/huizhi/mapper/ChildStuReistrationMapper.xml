@@ -17,12 +17,13 @@
 		state,
 		remarks
 	</sql>
-	
+
 	<sql id="ChildStuReistrationCol">
 		css.childStuId ccs_childStuId,
 		css.classHour ccs_classHour,
 		css.classHours ccs_classHours,
-		css.contentOfCourses ccs_contentOfCourses,
+		css.contentOfCourses
+		ccs_contentOfCourses,
 		css.dpId ccs_dpId,
 		css.remarks ccs_remarks,
 		css.rOCCId ccs_rOCCId,
@@ -34,42 +35,49 @@
 		o.givehour o_givehour,
 		o.addhour o_addhour
 	</sql>
-	
-	<resultMap type="ChildStuReistration" id="ChildStuReistrationMap">
-		<id column="ccs_rOCCId" property="rOCCId"/>
-		<result column="ccs_childStuId" property="childStuId"/>
-		<result column="ccs_classHour" property="classHour"/>
-		<result column="ccs_classHours" property="classHours"/>
-		<result column="ccs_contentOfCourses" property="contentOfCourses"/>
-		<result column="ccs_dpId" property="dpId"/>
-		<result column="ccs_remarks" property="remarks"/>
-		<result column="ccs_classId" property="classId"/>
-		<result column="ccs_teacherId" property="teacherId"/>
-		<result column="ccs_state" property="state"/>
-		<result column="sum_Hour" property="sumHour"/>
-		<result column="ccs_studentName" property="studentName"/>
-		<result column="ccs_teacherInClass" property="teacherInClass"/>
+
+	<resultMap type="ChildStuReistration"
+		id="ChildStuReistrationMap">
+		<id column="ccs_rOCCId" property="rOCCId" />
+		<result column="ccs_childStuId" property="childStuId" />
+		<result column="ccs_classHour" property="classHour" />
+		<result column="ccs_classHours" property="classHours" />
+		<result column="ccs_contentOfCourses"
+			property="contentOfCourses" />
+		<result column="ccs_dpId" property="dpId" />
+		<result column="ccs_remarks" property="remarks" />
+		<result column="ccs_classId" property="classId" />
+		<result column="ccs_teacherId" property="teacherId" />
+		<result column="ccs_state" property="state" />
+		<result column="sum_Hour" property="sumHour" />
+		<result column="ccs_studentName" property="studentName" />
+		<result column="ccs_teacherInClass" property="teacherInClass" />
 		<association property="order" javaType="Order">
-			<result column="o_givehour" property="givehour"/>
-			<result column="o_addhour" property="addhour"/>
+			<result column="o_givehour" property="givehour" />
+			<result column="o_addhour" property="addhour" />
 		</association>
 	</resultMap>
-	<!--  查询学生课时总数-->
-	<select id="childStuReistrationListByClass" resultMap="ChildStuReistrationMap">
-		select distinct <include refid="ChildStuReistrationCol"/> 
+	<!-- 查询学生课时总数 -->
+	<select id="childStuReistrationListByClass"
+		resultMap="ChildStuReistrationMap">
+		select distinct
+		<include refid="ChildStuReistrationCol" />
 		from childsturegistration css
-		join childrenesclassstudnet ccs on ccs.classesStudentId = css.childStuId
-		join traininginstitutions.class  c on c.classId = css.classId
-		join traininginstitutions.order o on o.classId  =css.classId
+		join childrenesclassstudnet ccs on
+		ccs.classesStudentId = css.childStuId
+		join traininginstitutions.class c
+		on c.classId = css.classId
+		join traininginstitutions.order o on
+		o.classId =css.classId
 		<where>
 			<if test="classId!=null and classId!=''">
 				c.classId = #{classId}
 			</if>
-		</where> 
+		</where>
 		group by ccs.studentId
 	</select>
-	
-	
+
+
 	<sql id="teacherHourDetailedCol">
 		css.childStuId css_childStuId,
 		css.classHour css_classHour,
@@ -85,34 +93,60 @@
 		css.teacherInClass css_teacherInClass,
 		dp.dpTypeName dp_dpTypeName
 	</sql>
-	
-	<resultMap type="ChildStuReistration" id="teacherHourDetailedMap">
-		<id column="css_rOCCId" property="rOCCId"/>
-		<result column="css_childStuId" property="childStuId"/>
-		<result column="css_classHour" property="classHour"/>
-		<result column="css_classHours" property="classHours"/>
-		<result column="css_contentOfCourses" property="contentOfCourses"/>
-		<result column="css_dpId" property="dpId"/>
-		<result column="css_remarks" property="remarks"/>
-		<result column="css_classId" property="classId"/>
-		<result column="css_teacherId" property="teacherId"/>
-		<result column="css_state" property="state"/>
-		<result column="css_studentName" property="studentName"/>
-		<result column="css_teacherInClass" property="teacherInClass"/>
-		<association property="departmentOfPediatrics" javaType="DepartmentOfPediatrics">
-			<result column="dp_dpTypeName" property="dpTypeName"/>
+
+	<resultMap type="ChildStuReistration"
+		id="teacherHourDetailedMap">
+		<id column="css_rOCCId" property="rOCCId" />
+		<result column="css_childStuId" property="childStuId" />
+		<result column="css_classHour" property="classHour" />
+		<result column="css_classHours" property="classHours" />
+		<result column="css_contentOfCourses"
+			property="contentOfCourses" />
+		<result column="css_dpId" property="dpId" />
+		<result column="css_remarks" property="remarks" />
+		<result column="css_classId" property="classId" />
+		<result column="css_teacherId" property="teacherId" />
+		<result column="css_state" property="state" />
+		<result column="css_studentName" property="studentName" />
+		<result column="css_teacherInClass" property="teacherInClass" />
+		<association property="departmentOfPediatrics"
+			javaType="DepartmentOfPediatrics">
+			<result column="dp_dpTypeName" property="dpTypeName" />
 		</association>
 	</resultMap>
-	
-	<select id="selectTeacherDetailed" resultMap="teacherHourDetailedMap" parameterType="java.lang.Integer">
-		select <include refid="teacherHourDetailedCol"/>
+
+	<select id="selectTeacherDetailed"
+		resultMap="teacherHourDetailedMap" parameterType="java.lang.Integer">
+		select
+		<include refid="teacherHourDetailedCol" />
 		from childsturegistration css
-		join departmentofpediatrics dp on dp.dpId = css.dpId
+		join departmentofpediatrics dp on dp.dpId
+		= css.dpId
 		<where>
 			<if test="classId !=null and classId!=''">
 				css.classId = #{classId}
 			</if>
-		</where> 
+		</where>
 	</select>
-	
+
+	<insert id="insertChilStuRistration" parameterType="ChildStuReistration">
+		insert into traininginstitutions.childsturegistration
+		( studentName,
+		classId, classHours, dpId, contentOfCourses, classHour,
+		teacherId,
+		teacherInClass, childStuId, state, remarks )
+
+		values
+		<foreach collection="list" item="c" separator=",">
+			(
+			#{c.studentName}, #{c.classId}, #{c.classHours},
+			#{c.dpId},#{c.contentOfCourses},
+			#{c.classHour}, #{c.teacherId},
+			#{c.teacherInClass},
+			#{c.childStuId}, #{c.state},#{c.remarks})
+
+		</foreach>
+
+	</insert>
+
 </mapper>

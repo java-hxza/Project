@@ -320,5 +320,12 @@ $(function(){
 			} 
 		});
 	}
+	
+	/**
+	 * 上课登记
+	 */
+	classBatchRegistration = function(){
+		var 
+	}
 
 });
