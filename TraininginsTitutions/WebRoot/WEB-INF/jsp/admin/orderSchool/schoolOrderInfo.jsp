@@ -239,5 +239,4 @@
 				<script src="${Path }/static/js/admin/leftSidebar.js"></script>
 				<script src="${Path }/static/js/admin/orderSchool/selectOrderSchoolInfo.js"></script>
 				<script src="${Path }/static/js/admin/operator.js"></script>
-				<script src="${Path }/static/js/highes/leftSidebar.js"></script></body>
 </html>

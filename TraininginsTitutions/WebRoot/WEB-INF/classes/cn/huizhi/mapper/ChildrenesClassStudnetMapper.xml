@@ -4,18 +4,86 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.ChildrenesClassStudnetMapper">
 	<sql id="childrenesClassStudnetCol">
-		classesStudentId,
-		studentName,
-		headmaster,
-		enrollmentTime,
-		classId,
-		studentId,
-		state
+		ccs.classesStudentId ccs_classesStudentId,
+		ccs.studentName ccs_studentName,
+		ccs.headmaster ccs_headmaster,
+		ccs.enrollmentTime ccs_enrollmentTime,
+		ccs.classId ccs_classId,
+		ccs.studentId ccs_studentId,
+		ccs.state ccs_state,
+		t.endTime t_endTime,
+		t.familyAddress t_familyAddress,
+		t.feeCategory t_feeCategory,
+		t.integral t_integral,
+		t.parentName t_parentName,
+		t.registrationChannels t_registrationChannels,
+		t.registrationConsultant t_registrationConsultant,
+		t.remarks t_remarks,
+		t.school t_school,
+		t.startTime t_startTime,
+		t.studentBirth t_studentBirth,
+		t.studentHour t_studentHour,
+		t.studentId t_studentId,
+		t.studentName t_studentName,
+		t.studentSex t_studentSex,
+		t.telephone t_telephone,
+		t.theSurrogate t_theSurrogate
 	</sql>
 	
+	<resultMap type="ChildrenesClassStudnet" id="studnetByClassIdMap">
+		<id column="ccs_classesStudentId" property="classesStudentId"/>
+		<result column="ccs_studentName" property="studentName"/>
+		<result column="ccs_headmaster" property="headmaster"/>
+		<result column="ccs_enrollmentTime" property="enrollmentTime"/>
+		<result column="ccs_classId" property="classId"/>
+		<result column="ccs_studentId" property="studentId"/>
+		<result column="ccs_state" property="state"/>
+		<association property="student" javaType="Student">
+			<id column="t_studentId" property="studentId"/>
+			<result column="t_endTime" property="endTime"/>
+			<result column="t_familyAddress" property="familyAddress"/>
+			<result column="t_feeCategory" property="feeCategory"/>
+			<result column="t_integral" property="integral"/>
+			<result column="t_parentName" property="parentName"/>
+			<result column="t_registrationChannels" property="registrationChannels"/>
+			<result column="t_registrationConsultant" property="registrationConsultant"/>
+			<result column="t_remarks" property="remarks"/>
+			<result column="t_school" property="school"/>
+			<result column="t_startTime" property="startTime"/>
+			<result column="t_studentBirth" property="studentBirth"/>
+			<result column="t_studentHour" property="studentHour"/>
+			<result column="t_studentName" property="studentName"/>
+			<result column="t_studentSex" property="studentSex"/>
+			<result column="t_telephone" property="telephone"/>
+			<result column="t_theSurrogate" property="theSurrogate"/>
+		</association>
+	</resultMap>
+		
 	<insert id="insertChildrenesClassStudnet" parameterType="ChildrenesClassStudnet">
 		insert into  childrenesclassstudnet  ( studentName,  headmaster, enrollmentTime,  classId,  studentId,  state )
 			values (  #{studentName}, #{headmaster}, #{enrollmentTime}, #{classId}, #{studentId}, #{state})
 	</insert>
+
+	<select id="findChildrenesClassStudnetByClassId" parameterType="java.lang.Integer" resultMap="studnetByClassIdMap">
+		select <include refid="childrenesClassStudnetCol"/>
+		from childrenesclassstudnet ccs,student t
+		<where>
+			ccs.studentId = t.studentId
+			<if test="classId !=null and classId!=''">
+				and classId = #{classId}
+			</if>
+		</where>
+	</select>
+
+
+	<update id="updateChildrenesClassStudnet"
+		parameterType="ChildrenesClassStudnet">
+
+		update traininginstitutions.childrenesclassstudnet
+		set
+		classId = #{classId}
+		where
+		studentId = #{studentId}
+	</update>
 
 </mapper>

@@ -55,6 +55,7 @@ public class SchoolController {
 	
 	@Resource
 	ClassService classService;
+	
 	@Resource
 	ExpenditureitemsService expenditureitemsService;
 	
@@ -62,7 +63,7 @@ public class SchoolController {
 	@ResponseBody
 	public String expenditureOrder(Order order) {
 		
-		List<Order> expenditureOrderList = orderService.findExpenOrderList(order);
+		List<Order> expenditureOrderList = orderService.findOrderListBySchool(order);
 		if(expenditureOrderList.size()>0) {
 			return JSON.toJSONStringWithDateFormat(expenditureOrderList, "yyyy-MM-dd hh:mm:ss", SerializerFeature.WriteDateUseDateFormat);
 		}
@@ -106,6 +107,7 @@ public class SchoolController {
 		}
 		return "";
 	}
+	
 	/**
 	 * 修改操作员信息
 	 * @param user
@@ -164,21 +166,20 @@ public class SchoolController {
 	 */
 	@RequestMapping("schoolOrderInfo.html")
 	public String schoolOrderInfo(Order order,String schoolName,HttpSession session) {
-		User user = (User) session.getAttribute("user");
 		/**
 		 * 查询数据
 		 */
 		List<Order> orderListBySchool = orderService.findOrderListBySchool(order);
 		
 		//课程类型
-		List<DepartmentOfPediatrics> departmentOfPediatricsList = departmentOfPediatricsService.findDepartmentOfPediatrics(Integer.parseInt(user.getSchoolId()));
+		List<DepartmentOfPediatrics> departmentOfPediatricsList = departmentOfPediatricsService.findDepartmentOfPediatrics(order.getSchoolId());
 		
 		List<Expenditureitems> expenditureitemList = expenditureitemsService.selectExpenditureitems(String.valueOf(order.getSchoolId()));
 		
 		//账户类型信息
 		List<PaymentMethod> payMentList = paymentMethodService.selectPaymentMethod();
 		//收入项目类型
-		List<FeeCategory> feeCategoryList = feeCategoryService.selectFeeCategory(Integer.parseInt(user.getSchoolId()));
+		List<FeeCategory> feeCategoryList = feeCategoryService.selectFeeCategory(order.getSchoolId());
 		
 		List<Class> classBySchooList =  classService.findChildrenescClasses(String.valueOf(order.getSchoolId()));
 		/**

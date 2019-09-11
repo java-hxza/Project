@@ -1,5 +1,9 @@
 package cn.huizhi.service;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import cn.huizhi.pojo.ChildrenesClassStudnet;
 /**
  * 少儿班级学生
@@ -13,4 +17,19 @@ public interface ChildrenesClassStudnetService {
 	 * @return
 	 */
 	public int addChildrenesClassStudnet(ChildrenesClassStudnet childrenesClassStudnet);
+	
+	
+	/**
+	 * 根据班级查询班级学生
+	 * @param classId
+	 * @return
+	 */
+	public List<ChildrenesClassStudnet> findChildrenesClassStudnetByClassId(Integer classId);
+	
+	/**
+	 * 转班
+	 * @param cStudnet
+	 * @return
+	 */
+	public Integer updateChildrenesClassStudnet(ChildrenesClassStudnet cStudnet);
 }

@@ -61,4 +61,17 @@ public interface ClassMapper {
 	 * @return
 	 */
 	public List<Class> selectVIPClass(Integer classTypeId,Integer classType,Integer schoolId);
+	/*
+	 * 根据教师主键查询班级
+	 * @param teacherId
+	 * @return
+	 */
+	public List<Class> selectClassListByTeacherId(@Param("teacherId")Integer teacherId);
+	
+	/**
+	 * 根据班级主键查询班级信息
+	 * @param classId
+	 * @return
+	 */
+	public Class selectClassByClassId(@Param("classId")Integer classId);
 }

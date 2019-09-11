@@ -27,6 +27,9 @@ public class ChildStuReistration {
 	 * 班级
 	 */
 	private Class class1;
+	
+	
+	private DepartmentOfPediatrics departmentOfPediatrics;
 	/**
 	 * 少儿班级学生
 	 */
@@ -38,11 +41,10 @@ public class ChildStuReistration {
 		super();
 	}
 
-
 	public ChildStuReistration(Integer rOCCId, String studentName, Date classHours, String contentOfCourses,
 			double classHour, String teacherInClass, Integer childStuId, Integer state, String remarks, Integer classId,
 			Integer teacherId, Integer dpId, Double sumHour, Order order, Class class1,
-			ChildrenesClassStudnet childrenesClassStudnet) {
+			DepartmentOfPediatrics departmentOfPediatrics, ChildrenesClassStudnet childrenesClassStudnet) {
 		super();
 		this.rOCCId = rOCCId;
 		this.studentName = studentName;
@@ -59,8 +61,39 @@ public class ChildStuReistration {
 		this.sumHour = sumHour;
 		this.order = order;
 		this.class1 = class1;
+		this.departmentOfPediatrics = departmentOfPediatrics;
 		this.childrenesClassStudnet = childrenesClassStudnet;
 	}
+
+
+
+
+	public Integer getDpId() {
+		return dpId;
+	}
+
+
+
+
+	public void setDpId(Integer dpId) {
+		this.dpId = dpId;
+	}
+
+
+
+
+	public DepartmentOfPediatrics getDepartmentOfPediatrics() {
+		return departmentOfPediatrics;
+	}
+
+
+
+
+	public void setDepartmentOfPediatrics(DepartmentOfPediatrics departmentOfPediatrics) {
+		this.departmentOfPediatrics = departmentOfPediatrics;
+	}
+
+
 
 
 	public Double getSumHour() {

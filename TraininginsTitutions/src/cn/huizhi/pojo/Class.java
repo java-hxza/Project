@@ -18,7 +18,7 @@ public class Class {
 	/**
 	 * 少儿班级班号
 	 */
-	private Integer classNumber;
+	private String classNumber;
 	/**
 	 * 少儿班级名称
 	 */
@@ -57,7 +57,6 @@ public class Class {
 	public Class() {
 		super();
 	}
-
 	public Integer getClassType() {
 		return classType;
 	}
@@ -66,7 +65,7 @@ public class Class {
 		this.classType = classType;
 	}
 
-	public Class(Integer classId, Integer classNumber, String className, Integer classTypeId, Integer dpId,
+	public Class(Integer classId, String classNumber, String className, Integer classTypeId, Integer dpId,
 			String headmaster, Integer teacherId, Integer classLevel, Integer classType, Integer schoolId,
 			School school, DepartmentOfPediatrics departmentOfPediatrics) {
 		super();
@@ -92,11 +91,11 @@ public class Class {
 		this.dpId = dpId;
 	}
 
-	public Integer getClassNumber() {
+	public String getClassNumber() {
 		return classNumber;
 	}
 
-	public void setClassNumber(Integer classNumber) {
+	public void setClassNumber(String classNumber) {
 		this.classNumber = classNumber;
 	}
 

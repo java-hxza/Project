@@ -2,6 +2,7 @@ $(function(){
 	$(".feecategoryMoney").val($(".expenditureitemsId option:selected").attr("name"));
 	var Time = new Date();
 	var month = null;
+	$(".school").val($(".classes option:selected").attr("schoolIds2"));
 	if ((Time.getMonth() + 1) < 10) {
 		month = 0 + (Time.getMonth() + 1).toString();
 	}else {

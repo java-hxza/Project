@@ -25,6 +25,7 @@ public class Student {
 	private ChildrenesClassStudnet childrenesClassStudnet;
 	private Class classes;
 
+
 	public Student(Integer studentId, String studentName, Integer studentSex, String studentIDCard, String studentBirth,
 			String school, String parentName, String telephone, String familyAddress, String registrationChannels,
 			String registrationConsultant, String startTime, String endTime, String theSurrogate, String remarks,
@@ -53,6 +54,7 @@ public class Student {
 		this.childrenesClassStudnet = childrenesClassStudnet;
 		this.classes = classes;
 	}
+
 
 	public Student() {
 		super();

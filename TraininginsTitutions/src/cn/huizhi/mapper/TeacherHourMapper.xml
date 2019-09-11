@@ -4,6 +4,19 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.TeacherHourMapper">
 	
+	<sql id="teacherHourCol">
+	 	teacherHourId,
+		teacherName,
+		teacherId,
+		classId,
+		hours,
+		dpName,
+		dpId,
+		startTime,
+		schoolId,
+		remarks
+	</sql>
+	
 	<sql id="selecTeacherHourListBySchoolIdCol">
 		th.dpId,
 		th.dpName,
@@ -25,11 +38,83 @@
 		<where>
 			<if test="schoolId !=null and schoolId !=''">
 				th.schoolId =#{schoolId} 
-				group by th.teacherId  
 			</if>
-			
+			group by th.teacherId  
 		</where> 
 	</select>
 	
+	<sql id="CurriculumInfoCol">
+		t.classId t_classId,
+		t.dpId t_dpId,
+		t.dpName t_dpName,
+		t.hours t_hours, 
+		t.remarks t_remarks,
+		t.schoolId t_schoolId,
+		t.startTime t_startTime,
+		t.teacherHourId t_teacherHourId,
+		t.teacherId t_teacherId,
+		t.teacherName t_teacherName
+	</sql>
+	
+	<resultMap type="TeacherHour" id="CurriculumInfoMap">
+		<id column="t_classId" property="classId"/>
+		<result column="t_dpId" property="dpId"/>
+		<result column="t_dpName" property="dpName"/>
+		<result column="t_hours" property="hours"/>
+		<result column="t_remarks" property="remarks"/>
+		<result column="t_schoolId" property="schoolId"/>
+		<result column="t_startTime" property="startTime"/>
+		<result column="t_teacherHourId" property="teacherHourId"/>
+		<result column="t_teacherName" property="teacherName"/>
+		<result column="t_teacherId" property="teacherId"/>
+	</resultMap>
+	
+	<select id="selectCurriculumInfo" parameterType="java.lang.Integer" resultMap="CurriculumInfoMap">
+		select <include refid="CurriculumInfoCol"/>
+		from teacherHour t
+		<where>
+			<if test="classId!=null and classId!=''">
+				t.classId = #{classId}
+			</if>
+			<if test="teacherHourId!=null and teacherHourId !=''">
+				t.teacherHourId= #{teacherHourId}
+			</if>
+		</where> 
+	</select>
+	
+	<insert id="insertTeacherHour" parameterType="TeacherHour">
+		insert into traininginstitutions.teacherhour  ( teacherName, teacherId, classId, hours, dpName, dpId, startTime,  schoolId, remarks)
+		values (#{teacherName},#{teacherId},#{classId},#{hours}, #{dpName},#{dpId},#{startTime},#{schoolId},#{remarks} )
+	</insert>
 
+	<update id="updateTeacherHour" parameterType="TeacherHour">
+		update traininginstitutions.teacherhour
+		set
+		teacherName = #{teacherName},
+		teacherId = #{teacherId},
+		classId = #{classId},
+		hours = #{hours} ,
+		dpName = #{dpName},
+		dpId = #{dpId} ,
+		startTime = #{startTime} ,
+		schoolId = #{schoolId},
+		remarks = #{remarks}
+		<where>
+			<if test="teacherHourId!=null and teacherHourId!=''">
+				teacherHourId = #{teacherHourId}
+			</if>		
+		</where>
+
+	</update>
+	
+	<delete id="delTeacherHour" parameterType="java.lang.Integer">
+		delete from traininginstitutions.teacherhour 
+			<where>
+				<if test="teacherHourId!=null and teacherHourId!=''">
+					teacherHourId = #{teacherHourId}
+				</if>
+			</where>
+		
+	</delete>
+	
 </mapper>

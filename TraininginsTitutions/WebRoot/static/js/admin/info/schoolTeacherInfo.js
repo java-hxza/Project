@@ -16,7 +16,7 @@ $(function(){
 				return false;
 			}
 		} else if($(".customCheckes:checked").length >1) {
-			if(!$(".customCheckes").prop("checked")) {
+			if($(".customCheckes").prop("checked")) {
 				alert("只能选中一条数据！");
 				return false;
 			}
@@ -48,6 +48,8 @@ $(function(){
 					var loginPasswords = $.trim($(".loginPasswords").val());
 					var teacherTypeId = $.trim($(".teacherTypeId").attr("name"));
 					var teacherId = $(".teacherId").val();
+					var departmentId = $(".departmentId").val();
+					alert(departmentId);
 					if(teacherName == "") {
 						alert("请填写姓名！");
 						return false;
@@ -89,7 +91,8 @@ $(function(){
 							remarks : remarks,
 							teacherTypeId : teacherTypeId,
 							loginPassword : loginPassword,
-							teacherId:teacherId
+							teacherId:teacherId,
+							departmentId : departmentId
 						},
 						dataType : "json",
 						success : function(data) {
@@ -120,24 +123,34 @@ $(function(){
 	 * 修改页面
 	 */
 	updateInfo = function(data){
+		teacher = JSON.parse(data.teacher);
+		departMents = JSON.parse(data.departMents);
 		var $html = "<div class='card'>" +
-					" <div class='card-body'>" +
-						"<form class='needs-validation' novalidate>" +
-							"<div class='form-group position-relative mb-3 teacherTypeId' name='"+data.teacherTypeId+"' >" +
-								"<label for='validationTooltip01'>校区</label>" +
-								"<input type='text' class='form-control teacherId' value='"+data.teacherId+"' id='validationTooltip01' disabled required>" +
-								"<label for='validationTooltip01'>姓名</label>" +
-								"<input type='text' class='form-control teacherName' id='validationTooltip01' value='"+data.teacherName+"' placeholder='姓名'  required>" +
-								"<label for='validationTooltip01'>密码</label>" +
-								" <input type='text' class='form-control loginPassword' id='validationTooltip01' value='"+data.loginPassword+"' placeholder='请填写密码'  required>" +
-								"<label for='validationTooltip01'>请再次密码</label>" +
-								" <input type='text' class='form-control loginPasswords' id='validationTooltip01' value='"+data.loginPassword+"' placeholder='请再次填写密码'  required>" +
-								" <label for='validationTooltip01'>电话</label>" +
-								"<input type='text' class='form-control telephone' id='validationTooltip01' value='"+data.telephone+"' placeholder='XXX-XXXX-XXXX'  required>" +
-								"<label for='validationTooltip01'>备注</label>" +
-								"<input type='text' class='form-control remarks' id='validationTooltip01' placeholder='请填写备注' value='"+data.remarks+"'  required>" +
-							"</div>" +
-							"<button class='btn btn-primary' id='update' type='button'>保存</button>" +
+		" <div class='card-body'>" +
+			"<form class='needs-validation' novalidate>" +
+				"<div class='form-group position-relative mb-3 teacherTypeId' name='"+teacher.teacherTypeId+"' >" +
+					"<label for='validationTooltip01'>校区</label>" +
+					"<input type='text' class='form-control teacherId' value='"+teacher.teacherId+"' id='validationTooltip01' disabled required>" +
+					"<label for='validationTooltip01'>姓名</label>" +
+					"<input type='text' class='form-control teacherName' id='validationTooltip01' value='"+teacher.teacherName+"' placeholder='姓名'  required>" +
+					"<label for='validationTooltip01'>部门</label>" +
+					"<select  class='form-control departmentId' id='validationTooltip01'>  selected = '"+teacher.departmentId+"'";
+				
+						for (var i  = 0;  i< departMents.length; i++) {
+							$html += "<option value='"+departMents[i].departmentId+"'>" +
+									""+departMents[i].departmentName+"</option>";
+						}
+					
+						$html += "<select/><label for='validationTooltip01'>密码</label>" +
+						" <input type='text' class='form-control loginPassword' id='validationTooltip01' value='"+teacher.loginPassword+"' placeholder='请填写密码'  required>" +
+						"<label for='validationTooltip01'>请再次密码</label>" +
+						" <input type='text' class='form-control loginPasswords' id='validationTooltip01' value='"+teacher.loginPassword+"' placeholder='请再次填写密码'  required>" +
+						" <label for='validationTooltip01'>电话</label>" +
+						"<input type='text' class='form-control telephone' id='validationTooltip01' value='"+teacher.telephone+"' placeholder='XXX-XXXX-XXXX'  required>" +
+						"<label for='validationTooltip01'>备注</label>" +
+						"<input type='text' class='form-control remarks' id='validationTooltip01' placeholder='请填写备注' value='"+teacher.remarks+"'  required>" +
+					"</div>" +
+					"<button class='btn btn-primary' id='update' type='button'>保存</button>" +
 						"<form>" +
 					"</div>" +
 				"</div>";

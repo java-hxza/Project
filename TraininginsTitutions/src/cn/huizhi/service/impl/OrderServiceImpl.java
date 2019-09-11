@@ -90,4 +90,14 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	
+	public List<Order> selectChildrenFeeSituation(Integer classId) {
+		// TODO Auto-generated method stub
+		return orderMapper.selectChildrenFeeSituation(classId);
+	}
+
+	@Override
+	public List<Order> selectHighsFeeSituation(Integer classId) {
+		// TODO Auto-generated method stub
+		return orderMapper.selectHighsFeeSituation(classId);
+	}
 }

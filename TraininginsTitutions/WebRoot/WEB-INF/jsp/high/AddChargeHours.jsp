@@ -285,7 +285,7 @@
 														<div class="form-group">
 															<label for="billing-first-name">校区信息</label> <input
 																class="form-control school" type="text"
-																id="billing-first-name" value="${school }" disabled />
+																id="billing-first-name" disabled />
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -317,7 +317,8 @@
 																		dpTypeName="${c.departmentOfPediatrics.dpTypeName }"
 																		dpMoney="${c.departmentOfPediatrics.dpMoney }"
 																		dpMoneyVip="${c.departmentOfPediatrics.dpMoneyVip }"
-																		classTypeId="${c.classTypeId }">${c.className}</option>
+																		classTypeId="${c.classTypeId }"
+																		schoolIds2="${c.school.schoolName }">${c.className}</option>
 																</c:forEach>
 															</select>
 														</div>
@@ -603,8 +604,6 @@
 
 			<!-- third party js -->
 			<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-			<script type="text/javascript"
-				src="${Path }/static/js/highes/leftSidebar.js"></script>
 			<script type="text/javascript"
 				src="${Path }/static/js/highes/AddChargeHours.js"></script>
 			<!-- third party js ends -->

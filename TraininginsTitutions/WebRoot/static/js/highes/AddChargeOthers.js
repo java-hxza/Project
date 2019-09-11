@@ -6,6 +6,7 @@ $(function() {
 	} else {
 		month = Time.getMonth() + 1;
 	}
+	$(".school").val($(".classes option:selected").attr("schoolIds2"));
 	$(".dpMoney").val($(".feecateId option").attr("name"));
 	$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
 	$(".feecateId").click(function() {

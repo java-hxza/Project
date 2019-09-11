@@ -23,4 +23,11 @@ public interface DepartmentOfPediatricsService {
 	 * @return
 	 */
 	public int delDepartmentOfPediatrics(Integer dpId);
+	
+	/**
+	 * 根据班级主键查询班级可是单价
+	 * @param classId
+	 * @return
+	 */
+	public DepartmentOfPediatrics findDepartmentOfByClassId(Integer classId); 
 }

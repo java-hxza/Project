@@ -17,19 +17,12 @@
 	<select id="selectUserByLogin" resultType="User">
 		select u.*
 		from user u
-		join school s on s.schoolId = u.schoolId
 		<where>
 			<if test="loginName!=null and  loginName!=''">
 				and u.loginName=#{loginName}
 			</if>
 			<if test="loginPassword!=null and loginPassword!=''">
 				and u.loginPassword=#{loginPassword}
-			</if>
-			<if test="schoolId != null and schoolId!=''">
-				and u.schoolId=#{schoolId}
-			</if>
-			<if test="schoolType !=null and schoolType!=''">
-				and s.schoolType = #{schoolType}
 			</if>
 		</where>
 	</select>

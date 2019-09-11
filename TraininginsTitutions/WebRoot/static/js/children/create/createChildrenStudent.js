@@ -36,7 +36,7 @@ $(function() {
 				startTime : startTime,
 				remarks : remarks,
 				studentClassId : studentClassId,
-				headmaster : headmaster,
+				headmaster : headmaster
 			},
 			dataType : 'JSON',
 			type : 'post',

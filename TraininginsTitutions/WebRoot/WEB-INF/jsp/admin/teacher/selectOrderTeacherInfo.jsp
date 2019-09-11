@@ -133,6 +133,5 @@
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
 				<script type="text/javascript" src="${Path }/static/js/admin/leftSidebar.js"></script>
 				<script type="text/javascript" src="${Path }/static/js/admin/teacher/selectOrderTeacherInfo.js"></script>
-				<script src="${Path }/static/js/highes/leftSidebar.js"></script>
 </body>
 </html>

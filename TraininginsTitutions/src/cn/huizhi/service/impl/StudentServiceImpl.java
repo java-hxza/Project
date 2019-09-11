@@ -79,4 +79,14 @@ public class StudentServiceImpl implements StudentService {
 		return studentMapper.selectStudentId(studentName, parentName, studentSex);
 	}
 
+	public Student findStudentById(Integer studentId) {
+		// TODO Auto-generated method stub
+		return studentMapper.findStudentById(studentId);
+	}
+
+	@Override
+	public Integer updateStudent(Student student) {
+		// TODO Auto-generated method stub
+		return studentMapper.updateStudent(student);
+	}
 }

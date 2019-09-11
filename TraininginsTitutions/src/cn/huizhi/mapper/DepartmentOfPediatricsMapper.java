@@ -7,6 +7,8 @@ package cn.huizhi.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.huizhi.pojo.DepartmentOfPediatrics;
 
 public interface DepartmentOfPediatricsMapper {
@@ -28,4 +30,11 @@ public interface DepartmentOfPediatricsMapper {
 	 * @return
 	 */
 	public int deleteDepartmentOfPediatrics(Integer dpId);
+	
+	/**
+	 * 根据班级主键查询班级可是单价
+	 * @param classId
+	 * @return
+	 */
+	public DepartmentOfPediatrics findDepartmentOfByClassId(@Param("classId")Integer classId); 
 }

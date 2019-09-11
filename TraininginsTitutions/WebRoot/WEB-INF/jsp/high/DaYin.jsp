@@ -605,7 +605,6 @@
 
 		<!-- third party js -->
 		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-		<script src="${Path }/static/js/highes/leftSidebar.js"></script>
 		<script src="${Path }/static/js/highes/Charge.js"></script>
 		<script src="${Path }/static/js/highes/dayin.js"></script>
 		<!-- third party js ends -->

@@ -32,81 +32,30 @@
 						<!-- Logo -->
 						<div class="card-header pt-4 pb-4 text-center bg-primary">
 							<a href="index.html"> <span>
-						<!-- 	<img src="assets/images/logo.png" alt="" height="18"> --></span>
+							<img src="${Path }/static/images/logo.png" alt=""width="50%" height="30px"> </span>
 							</a>
 						</div>
 
 						<div class="card-body p-4">
 
 							<div class="text-center w-75 m-auto">
-								<h4 class="text-dark-50 text-center mt-0 font-weight-bold">Sign
-									In</h4>
-								<p class="text-muted mb-4">请选择您的校区并输入您的账户密码登录：</p>
+								<h4 class="text-dark-50 text-center mt-0 font-weight-bold">登录</h4>
+								<p class="text-muted mb-4">请输入您的账户密码登录：</p>
 							</div>
 								
-								<div class="form-group">
-									<label for="emailaddress">省份：</label> 
-									<select id="provinceId" name="provinceId" class="form-control" onchange="provinceChange()">
-										<c:forEach items="${provinceList }" var="pro">
-											<option value="${pro.provinceId }">${pro.provinceName}</option>
-										</c:forEach>
-									</select>
-									<label for="emailaddress">城市：</label> 
-									<select id="cityId" class="form-control" name="cityId" onchange="cityChange()">
-										<option value=''>请选择城市</option>
-										<c:forEach items="${cityList }" var="city">
-											<option value="${city.cityId }">${city.cityName}</option>
-										</c:forEach>
-									</select>
-									
-								</div>
-								<div class="form-group">
-									<label for="emailaddress">学校：</label>
-									<select id="schoolId" class="form-control" name="schoolId">
-										<option value="0">请选择学校</option>
-										<c:forEach items="${schoolList }" var="school">
-											<option value="${school.schoolId }">${school.schoolName}</option>
-										</c:forEach>
-									</select>
-								</div>
-								<div class="form-group">
-									<label for="emailaddress">部门：</label>
-									<select id="departmentId" class="form-control" name="departmentId">
-										<option value="0">请选择部门</option>
-										<c:forEach items="${departMentListAllList }" var="dp">
-											<option value="${dp.departmentId }">${dp.departmentName}</option>
-										</c:forEach>
-									</select>
-								</div>
 								<div class="form-group">
 									<label for="emailaddress">账户名：</label> <input
 										class="form-control" type="text" id="username" name="username"
 										required placeholder="Enter your username">
 								</div>
-
 								<div class="form-group">
 									<a href="pages-recoverpw.html" class="text-muted float-right"><small>忘记密码?</small></a> <label for="password">Password</label> <input
 										class="form-control" type="password" required id="password" name="password"
 										placeholder="Enter your password">
 								</div>
-								
-								<div class="form-group mb-3">
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input"
-											id="checkbox-signin" checked> <label
-											class="custom-control-label" for="checkbox-signin">记住我</label>
-									</div>
-								</div>
-
 								<div class="form-group mb-0 text-center">
-									<button class="btn btn-primary" id="loginBtn" type="submit" onclick="adminLogin()">
-										<span class="" role="status" aria-hidden="true">超管登录</span>
-									</button>
 									<button class="btn btn-primary" id="loginBtn" type="submit" onclick="UserLogin()">
-										<span class="" role="status" aria-hidden="true">管理员登录</span>
-									</button>
-									<button class="btn btn-primary" id="loginBtn" type="submit" onclick="TeacherLogin()">
-										<span class="" role="status" aria-hidden="true">教师登录</span>
+										<span class="" role="status" aria-hidden="true">登录</span>
 									</button>
 								</div>
 						</div>

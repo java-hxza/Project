@@ -3,6 +3,8 @@ package cn.huizhi.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.huizhi.pojo.Student;
 
 public interface StudentService {
@@ -69,4 +71,19 @@ public interface StudentService {
 	 * @return
 	 */
 	public Student selectStudentId(String studentName,String parentName,Integer studentSex);
+
+
+	/**
+	 * 根据主键查询学生
+	 * @param studentId
+	 * @return
+	 */
+	public Student findStudentById(Integer studentId);
+	
+	/**
+	 * 更改学生信息
+	 * @param studentId
+	 * @return
+	 */
+	public Integer updateStudent(Student student);
 }

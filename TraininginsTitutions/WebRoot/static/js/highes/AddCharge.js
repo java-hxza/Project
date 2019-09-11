@@ -2,6 +2,7 @@ $(function() {
 	var Time = new Date();
 	var month = null;
 	var dpMoneyFeecateIds = 0;
+	$(".school").val($(".classes option:selected").attr("schoolIds2"));
 	for (var i = 0; i < $(".feecateIds").length; i++) {
 		dpMoneyFeecateIds = dpMoneyFeecateIds + parseFloat($.trim($(".feecateIds").eq(i).val()));
 	}

@@ -620,10 +620,14 @@
 
 			<!-- third party js -->
 			<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
+<<<<<<< HEAD
 			<script type="text/javascript"
 				src="${Path }/static/js/highes/leftSidebar.js"></script>
 			<script type="text/javascript"
 				src="${Path }/static/js/highes/ChargeOthers.js"></script>
+=======
+			<script type="text/javascript" src="${Path }/static/js/highes/ChargeOthers.js"></script>
+>>>>>>> branch 'master' of https://github.com/tianmabdqn/Project.git
 			<!-- third party js ends -->
 </body>
 </html>

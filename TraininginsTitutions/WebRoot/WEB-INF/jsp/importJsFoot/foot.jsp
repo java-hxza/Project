@@ -9,3 +9,4 @@
 <script src="${Path }/static/js/js/vendor/dataTables.checkboxes.min.js"></script>
 <script src="${Path }/static/js/js/jquery.min.js"></script>
 <script src="${Path }/static/js/demo.customers.js"></script>
+<script src="${Path }/static/js/highes/leftSidebar.js"></script>

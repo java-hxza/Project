@@ -18,4 +18,10 @@ public class ChildStuReistrationServiceImpl implements ChildStuReistrationServic
 		return childStuReistrationMapper.childStuReistrationListByClass(classId);
 	}
 
+	@Override
+	public List<ChildStuReistration> selectTeacherDetailed(Integer classId) {
+		// TODO Auto-generated method stub
+		return childStuReistrationMapper.selectTeacherDetailed(classId);
+	}
+
 }

@@ -21,4 +21,28 @@ public class TeacherHourServiceImpl implements TeacherHourService {
 		return teacherHourMapper.selecTeacherHourListBySchoolId(schoolId);
 	}
 
+	@Override
+	public List<TeacherHour> selectCurriculumInfo(Integer classId,Integer teacherHourId) {
+		// TODO Auto-generated method stub
+		return teacherHourMapper.selectCurriculumInfo(classId,teacherHourId);
+	}
+
+	@Override
+	public Integer insertTeacherHour(TeacherHour teacherHour) {
+		// TODO Auto-generated method stub
+		return teacherHourMapper.insertTeacherHour(teacherHour);
+	}
+
+	@Override
+	public Integer updateTeacherHour(TeacherHour teacherHour) {
+		// TODO Auto-generated method stub
+		return teacherHourMapper.updateTeacherHour(teacherHour);
+	}
+
+	@Override
+	public Integer delTeacherHour(Integer teacherHourId) {
+		// TODO Auto-generated method stub
+		return teacherHourMapper.delTeacherHour(teacherHourId);
+	}
+
 }

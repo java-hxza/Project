@@ -41,22 +41,24 @@ $(function() {
 	createChildrenClass = function() {
 		var classNumber = $("#classNumber").val();
 		var className = $("#className").val();
-		var classTypeId = $("#dpId").val();
+		var dpId = $("#dpId").val();
 		var headmaster = $("#headmaster option:selected");
+		var classLevel = $("#classLevel").val();
+		var classTypeId = $("#classTypeId").val();
 		headmaster = headmaster.text();
-		alert(headmaster);
 		var teacherId = $("#headmaster").val();
-
 		if (classNumber, className == null || $.trim(classNumber), $.trim(className) == '') {
 			$.NotificationApp.send("错误!", "请认真填写不能为空，请检查重试。", "top-right", "rgba(0,0,0,0.2)", "error");
 			return false;
 		}
 
 		$.ajax({
-			url : 'createChildrenClass.html',
+			url : 'createClass.html',
 			data : {
 				classNumber : classNumber,
 				className : className,
+				dpId : dpId,
+				classLevel : classLevel,
 				classTypeId : classTypeId,
 				headmaster : headmaster,
 				teacherId : teacherId
@@ -67,7 +69,7 @@ $(function() {
 				if(data.state == "1"){
 					$.NotificationApp.send("成功！", "添加班级成功", "top-right", "rgba(0,0,0,0.2)", "success");
 					setTimeout(function () { 
-						location.href="childrenIndex.html";
+						location.href="classIndex.html";
 					}, 2000);
 				}else{
 					location.href="error.html";

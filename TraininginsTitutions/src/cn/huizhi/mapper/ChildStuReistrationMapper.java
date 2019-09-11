@@ -20,4 +20,12 @@ public interface ChildStuReistrationMapper {
 	 */
 	public List<ChildStuReistration> childStuReistrationListByClass(@Param("classId")Integer classId);
 	
+	
+	/**
+	 * 查询教师上课明细
+	 * @param classId
+	 * @return
+	 */
+	public List<ChildStuReistration> selectTeacherDetailed(@Param("classId")Integer classId);
+	
 }

@@ -23,12 +23,17 @@ public class Order {
 	private String orderNumber;
 	private Integer expenditureitemsId;
 	private Integer classId;
+
+	/**
+	 * 学生交钱总数
+	 */
+	private Double sumDpMoney;
+
 	private Integer giftId;
 	private Integer giftNumber;
 	private Double integral;
 	private Integer teacherId;
 	private Double discount;
-
 	private Date endTime;
 	/**
 	 * 学生
@@ -54,16 +59,19 @@ public class Order {
 	 */
 	private Expenditureitems expenditureitems;
 
-	private Gift gift;
 	private School school;
+
+	public Order() {
+		super();
+	}
 
 	public Order(Integer orderId, String feecateId, Double dpMoney, Integer stuId, Date startTime, Integer schoolId,
 			Integer identification, Double feecategoryMoney, Integer paymentmethodId, String personliable,
 			Integer departmentofpediatricsId, Integer addhour, Integer givehour, Date firstdate, Date lastdate,
-			String remarks, String orderNumber, Integer expenditureitemsId, Integer classId, Integer giftId,
-			Integer giftNumber, Double integral, Integer teacherId, Double discount, Date endTime, Student student,
-			PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics, FeeCategory feeCategory,
-			Expenditureitems expenditureitems, Gift gift, School school) {
+			String remarks, String orderNumber, Integer expenditureitemsId, Integer classId, Double sumDpMoney,
+			Integer giftId, Integer giftNumber, Double integral, Integer teacherId, Double discount, Date endTime,
+			Student student, PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics,
+			FeeCategory feeCategory, Expenditureitems expenditureitems, School school) {
 		super();
 		this.orderId = orderId;
 		this.feecateId = feecateId;
@@ -84,6 +92,7 @@ public class Order {
 		this.orderNumber = orderNumber;
 		this.expenditureitemsId = expenditureitemsId;
 		this.classId = classId;
+		this.sumDpMoney = sumDpMoney;
 		this.giftId = giftId;
 		this.giftNumber = giftNumber;
 		this.integral = integral;
@@ -95,12 +104,7 @@ public class Order {
 		this.departmentOfPediatrics = departmentOfPediatrics;
 		this.feeCategory = feeCategory;
 		this.expenditureitems = expenditureitems;
-		this.gift = gift;
 		this.school = school;
-	}
-
-	public Order() {
-		super();
 	}
 
 	public Integer getOrderId() {
@@ -255,6 +259,54 @@ public class Order {
 		this.classId = classId;
 	}
 
+	public Double getSumDpMoney() {
+		return sumDpMoney;
+	}
+
+	public void setSumDpMoney(Double sumDpMoney) {
+		this.sumDpMoney = sumDpMoney;
+	}
+
+	public Integer getGiftId() {
+		return giftId;
+	}
+
+	public void setGiftId(Integer giftId) {
+		this.giftId = giftId;
+	}
+
+	public Integer getGiftNumber() {
+		return giftNumber;
+	}
+
+	public void setGiftNumber(Integer giftNumber) {
+		this.giftNumber = giftNumber;
+	}
+
+	public Double getIntegral() {
+		return integral;
+	}
+
+	public void setIntegral(Double integral) {
+		this.integral = integral;
+	}
+
+	public Integer getTeacherId() {
+		return teacherId;
+	}
+
+	public void setTeacherId(Integer teacherId) {
+		this.teacherId = teacherId;
+	}
+
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+
 	public Date getEndTime() {
 		return endTime;
 	}
@@ -301,54 +353,6 @@ public class Order {
 
 	public void setExpenditureitems(Expenditureitems expenditureitems) {
 		this.expenditureitems = expenditureitems;
-	}
-
-	public Integer getGiftId() {
-		return giftId;
-	}
-
-	public void setGiftId(Integer giftId) {
-		this.giftId = giftId;
-	}
-
-	public Integer getGiftNumber() {
-		return giftNumber;
-	}
-
-	public void setGiftNumber(Integer giftNumber) {
-		this.giftNumber = giftNumber;
-	}
-
-	public Double getIntegral() {
-		return integral;
-	}
-
-	public void setIntegral(Double integral) {
-		this.integral = integral;
-	}
-
-	public Integer getTeacherId() {
-		return teacherId;
-	}
-
-	public void setTeacherId(Integer teacherId) {
-		this.teacherId = teacherId;
-	}
-
-	public Gift getGift() {
-		return gift;
-	}
-
-	public void setGift(Gift gift) {
-		this.gift = gift;
-	}
-
-	public Double getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(Double discount) {
-		this.discount = discount;
 	}
 
 	public School getSchool() {

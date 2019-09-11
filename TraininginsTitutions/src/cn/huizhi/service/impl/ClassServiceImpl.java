@@ -31,6 +31,13 @@ public class ClassServiceImpl implements ClassService {
 		return 0;
 	}
 
+	@Override
+	public List<Class> selectClassListByTeacherId(Integer teacherId) {
+		// TODO Auto-generated method stub
+		return classMapper.selectClassListByTeacherId(teacherId);
+	}
+
+
 	/**
 	 * 查询班级
 	 */
@@ -50,5 +57,9 @@ public class ClassServiceImpl implements ClassService {
 	}
 	
 	
+	public Class findClassByClassId(Integer classId) {
+		// TODO Auto-generated method stub
+		return classMapper.selectClassByClassId(classId);
+	}
 
 }

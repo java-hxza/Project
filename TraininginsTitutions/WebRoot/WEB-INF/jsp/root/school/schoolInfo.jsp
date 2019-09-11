@@ -56,7 +56,7 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="text-center">
-								<h3 class="schoolId" name="${schoolId }">${schoolName }</h3>
+								<h3 class="schoolId" id="schoolId" name="${schoolId}">${schoolName}</h3>
 								<div class="app-search">
                             		<form>
                              		  	<div class="input-group">
@@ -94,8 +94,8 @@
 													<th>收入总额</th>
 													<th>账户余额</th>
 												</tr>
-												<tr>
-														<td>
+												<tr> 
+													<td>
 															<div class="custom-control custom-checkbox">
 																	
 															</div>
@@ -119,7 +119,7 @@
 																class="custom-control-label" for="customCheck1">&nbsp;</label>
 														</div>
 													</th>
-													<th>校区</th>
+													<th>负责人</th>
 													<th>账户</th>
 													<th>收入</th>
 													<th>支出</th>
@@ -135,7 +135,7 @@
 															</div>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${schoolName}</a>
+															class="text-body font-weight-semibold" >${sa.personliable}</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${sa.paymentMethod.paymentmethodName}</a>
@@ -157,12 +157,8 @@
             <!-- ============================================================== -->
 
         </div>
-				<!-- END wrapper -->
-
-				<!-- App js -->
-				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
-				<script src="${Path }/static/js/admin/info/schoolInfo.js"></script>
-				<script src="${Path }/static/js/admin/leftSidebar.js"></script>
-				<script src="${Path }/static/js/highes/leftSidebar.js"></script>
+			<!-- App js -->
+			<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
+			<script src="${Path }/static/js/root/info/schoolInfo.js"></script>
 </body>
 </html>

@@ -1,5 +1,9 @@
 package cn.huizhi.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import cn.huizhi.pojo.ChildrenesClassStudnet;
 
 /**
@@ -15,6 +19,21 @@ public interface ChildrenesClassStudnetMapper {
 	 * @return
 	 */
 	public int insertChildrenesClassStudnet(ChildrenesClassStudnet childrenesClassStudnet);
+	
+	
+	/**
+	 * 根据班级查询班级学生
+	 * @param classId
+	 * @return
+	 */
+	public List<ChildrenesClassStudnet> findChildrenesClassStudnetByClassId(@Param("classId")Integer classId);
+	
+	/**
+	 * 转班
+	 * @param cStudnet
+	 * @return
+	 */
+	public Integer updateChildrenesClassStudnet(ChildrenesClassStudnet cStudnet);
 	
 	
 }

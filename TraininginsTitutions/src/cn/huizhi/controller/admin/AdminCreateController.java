@@ -69,7 +69,6 @@ public class AdminCreateController {
 		User user = new User();
 		user.setLoginPassword(loginPassword);
 		user.setLoginName(loginName);
-		user.setSchoolId(Integer.toString(schoolId));
 		user.setUserTypeId(Integer.toString(userTypeId));
 		if (userservice.addtUser(user) > 0) {
 			jsonMap.put("state", "1");

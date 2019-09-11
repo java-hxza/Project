@@ -37,6 +37,11 @@ public class DepartmentOfPediatricsServiceImpl implements DepartmentOfPediatrics
 	public int delDepartmentOfPediatrics(Integer dpId) {
 		return departmentOfPediatricsMapper.deleteDepartmentOfPediatrics(dpId);
 	}
+	@Override
+	public DepartmentOfPediatrics findDepartmentOfByClassId(Integer classId) {
+		// TODO Auto-generated method stub
+		return departmentOfPediatricsMapper.findDepartmentOfByClassId(classId);
+	}
 	
 	
 	

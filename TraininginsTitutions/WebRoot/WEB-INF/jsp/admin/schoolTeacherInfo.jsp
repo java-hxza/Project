@@ -113,8 +113,8 @@
 													<tr class="teacherId" >
 														<td>
 															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input customCheckes" />
-																<label class="custom-control-label  customCheck" for="customCheck">&nbsp;</label>
+																<input type="checkbox" class="custom-control-input  customCheck" />
+																<label class="custom-control-label  customCheckes" for="customCheck">&nbsp;</label>
 															</div>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"

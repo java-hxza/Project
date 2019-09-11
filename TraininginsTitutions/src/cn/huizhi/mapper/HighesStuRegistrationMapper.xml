@@ -5,34 +5,99 @@
 <mapper namespace="cn.huizhi.mapper.HighesStuRegistrationMapper">
 
 	<sql id="selectHighesStuRegistrationListByClassIdCol">
-		hss.classHour,
-		hss.classHours,
-		hss.classId,
-		hss.contentOfCourses,
-		hss.dpId,
-		hss.highesHourId,
-		hss.highesStuId,
-		hss.remarks,
-		hss.studentName,
-		hss.teacherId,
-		hss.state,
-		hss.teacherInClass,
-		o.addhour,
-		o.givehour			
+		hss.classHour hss_classHour,
+		hss.classHours hss_classHours,
+		hss.classId hss_classId,
+		hss.contentOfCourses hss_contentOfCourses,
+		hss.dpId hss_dpId,
+		SUM(hss.classHour) sum_Hour,
+		hss.highesHourId hss_highesHourId,
+		hss.highesStuId hss_highesStuId,
+		hss.remarks hss_remarks,
+		hss.studentName hss_studentName,
+		hss.teacherId hss_teacherId,
+		hss.state hss_state,
+		hss.teacherInClass hss_teacherInClass,
+		o.addhour o_addhour,
+		o.givehour	o_givehour		
 	</sql>
 	<resultMap type="HighesStuRegistration" id="HighesStuRegistrationMap">
-	
-		
+		<id column="hss_highesHourId" property="highesHourId"/>
+		<result column="hss_classHour" property="classHour"/>
+		<result column="hss_classHours" property="classHours"/>
+		<result column="hss_classId" property="classId"/>
+		<result column="hss_contentOfCourses" property="contentOfCourses"/>
+		<result column="hss_dpId" property="dpId"/>
+		<result column="sum_Hour" property="sumHour"/>
+		<result column="hss_highesStuId" property="highesStuId"/>
+		<result column="hss_remarks" property="remarks"/>
+		<result column="hss_studentName" property="studentName"/>
+		<result column="hss_teacherId" property="teacherId"/>
+		<result column="hss_state" property="state"/>
+		<result column="hss_teacherInClass" property="teacherInClass"/>
+		<association property="order" javaType="Order">
+			<result column="o_addhour" property="addhour"/>
+			<result column="o_givehour" property="givehour"/>
+		</association>
 	</resultMap>
-	
+	<!--查询学生课时总数-->
 	<select id="selectHighesStuRegistrationListByClassId" resultMap="HighesStuRegistrationMap" parameterType="java.lang.Integer">
-		select 
-		from highesclassstudnet hss
+		select <include refid="selectHighesStuRegistrationListByClassIdCol"/>
+		from highessturegistration hss
 		join traininginstitutions.class  c on c.classId = hss.classId
-		join traininginstitutions.order o on o.stuId  =hss.studentId
+		join traininginstitutions.order o on o.classId  =hss.classId
 		<where>
 			c.classId = #{classId}
 		</where> 
+		group by hss.highesStuId
+	</select>
+	
+	
+	<sql id="selectStudentHourDetailedCol">
+		hss.highesHourId hss_highesHourId,
+		hss.classHour hss_classHour,
+		hss.classHours hss_classHours,
+		hss.classId hss_classId,
+		hss.contentOfCourses hss_contentOfCourses,
+		hss.dpId hss_dpId,
+		hss.highesStuId hss_highesStuId, 
+		hss.remarks hss_remarks,
+		hss.state hss_state,
+		hss.studentName hss_studentName,
+		hss.teacherId hss_teacherId,
+		hss.teacherInClass hss_teacherInClass,
+		dp.dpTypeName dp_dpTypeName
+	</sql>
+	<resultMap type="HighesStuRegistration" id="selectStudentHourDetailedMap">
+		<id column="hss_highesHourId" property="highesHourId"/>
+		<result column="hss_classHour" property="classHour"/>
+		<result column="hss_classHours" property="classHours"/>
+		<result column="hss_classId" property="classId"/>
+		<result column="hss_contentOfCourses" property="contentOfCourses"/>
+		<result column="hss_dpId" property="dpId"/>
+		<result column="hss_highesStuId" property="highesStuId"/>
+		<result column="hss_remarks" property="remarks"/>
+		<result column="hss_studentName" property="studentName"/>
+		<result column="hss_teacherId" property="teacherId"/>
+		<result column="hss_state" property="state"/>
+		<result column="hss_teacherInClass" property="teacherInClass"/>
+		<association property="departmentOfPediatrics" javaType="DepartmentOfPediatrics">
+			<result column="dp_dpTypeName" property="dpTypeName"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectStudentHourDetailed" resultMap="selectStudentHourDetailedMap" parameterType="java.lang.Integer">
+		select <include refid="selectStudentHourDetailedCol"/>
+		from highessturegistration hss,departmentofpediatrics dp
+		<where>
+				hss.dpId = dp.dpId
+			<if test="classId!=null and classId!=''">
+				and hss.classId = #{classId}
+			</if>
+		</where> 
+		
+		
+	
 	</select>
 	
 </mapper>
