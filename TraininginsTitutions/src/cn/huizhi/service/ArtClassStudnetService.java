@@ -6,6 +6,13 @@ import cn.huizhi.pojo.ArtClassStudnet;
 
 public interface ArtClassStudnetService {
 	/**
+	 * 根据班级主键查询班级学生
+	 * @param classId
+	 * @return
+	 */
+	public List<ArtClassStudnet> findArtClassStudnetListByClassId(Integer classId);
+	
+	/**
 	 * 批量插入学生
 	 * @param list
 	 * @return

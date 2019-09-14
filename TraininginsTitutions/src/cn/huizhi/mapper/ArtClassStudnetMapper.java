@@ -5,7 +5,14 @@ import java.util.List;
 import cn.huizhi.pojo.ArtClassStudnet;
 
 public interface ArtClassStudnetMapper {
-
+	
+	/**
+	 * 根据班级主键查询班级学生
+	 * @param classId
+	 * @return
+	 */
+	public List<ArtClassStudnet> findArtClassStudnetListByClassId(Integer classId);
+	
 	/**
 	 * 批量插入学生
 	 * @param list

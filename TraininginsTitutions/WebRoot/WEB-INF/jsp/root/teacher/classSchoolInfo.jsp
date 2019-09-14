@@ -37,13 +37,10 @@
 	<div class="wrapper">
 
 		<!-- ========== Left Sidebar Start ========== -->
-		<%@include file="/WEB-INF/jsp/admin/bar/leftSidebar.jsp"%>
-		<!-- Left Sidebar End -->
+		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
 		<div class="content-page">
 			<div class="content">
-				<!-- ============================================================== -->
-				<!-- Start Page Content here -->
-				<!-- ============================================================== -->
+			
 				<div class="container-fluid">
 					<div class="navbar-custom">
 						<ul class="list-unstyled topbar-right-menu float-right mb-0">
@@ -103,29 +100,23 @@
 						</div>
 					</div>
 					<!-- end Topbar -->
-					<!-- Start Content-->
-					<div class="container-fluid">
-
-						<!-- start page title -->
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="text-center">
-									<h3 class="">管理学校及城市</h3>
-									<p class="text-muted mt-3">请选择要查看的班级学生</p>
-									<button type="button" class="btn btn-success btn-sm mt-2"
-										onclick="createSchool()">创建学校</button>
-									<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-										onclick="createUser()">创建账号</button>
-									<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-										onclick="createTeacher()">创建教师账号</button>
+					<!-- start page title -->
+					<div class="row">
+						<div class="col-12">
+							<div class="page-title-box">
+								<div class="page-title-right">
+									<ol class="breadcrumb m-0">
+										<li class="breadcrumb-item"><a
+											href="javascript: void(0);">Hyper</a></li>
+										<li class="breadcrumb-item"><a
+											href="javascript: void(0);">Pages</a></li>
+										<li class="breadcrumb-item active">FAQ</li>
+									</ol>
 								</div>
+								<h4 class="page-title">学生信息管理</h4>
 							</div>
-
-							<!-- end col -->
 						</div>
-
-						<!-- end page title -->
-
+					</div>
 						<div class="row">
 							<div class="col-12">
 								<div class="card">

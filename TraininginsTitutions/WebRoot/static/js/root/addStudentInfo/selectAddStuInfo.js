@@ -46,10 +46,6 @@ $(function(){
 	query = function(){
 		var startTime = $("#startTime").val();
 		var endTime = $("#endTime").val();
-		var schoolId = $("#schoolId").attr("name");
-		var schoolType = $("#schoolId").attr("id_type");
-		var schoolName = $("#schoolName").html();
-		alert(startTime);
 		//判断时间是都空值
 		if(startTime == '' || startTime == null){
 			startTime = new Date();
@@ -63,16 +59,8 @@ $(function(){
 		if(endTime != '' || endTime != null){
 			endTime = new Date(endTime);
 		}
-		if(schoolType == 1){
-			location.href="childrenAddStudentInfo.html?schoolId="+schoolId+"&schoolName="+schoolName+"&startTime="+startTime+"&endTime="+endTime+"&schoolType="+schoolType;
-		}
-		if(schoolType == 2){
-			location.href="highAddStudentInfo.html?schoolId="+schoolId+"&schoolName="+schoolName+"&startTime="+startTime+"&endTime="+endTime+"&schoolType="+schoolType;
-		}
-		if(schoolType == 3){
-			location.href="yiKaoAddStudentInfo.html?schoolId="+schoolId+"&schoolName="+schoolName+"&startTime="+startTime+"&endTime="+endTime+"&schoolType="+schoolType;
-		}
 		
-		
+		location.href = "schoolAddStudentInfo.html?startTime="+startTime+"&endTime="+endTime;
+	
 	}
 });

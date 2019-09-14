@@ -281,6 +281,17 @@ public class ChildrenClassesController {
 			}
 			return "root/studentInfo/high/studentShiftWork";
 		}
+		if(schoolType == 3) {
+			//查询
+			List<ArtClassStudnet> highesClassStudnets = artClassStudnetService.findArtClassStudnetListByClassId(classId);
+			for (ArtClassStudnet highesClassStudnet : highesClassStudnets) {
+				if (highesClassStudnet.getStudentId().equals(studentId)) {
+					session.setAttribute("childrenesClassStudnet", highesClassStudnet);
+					break;
+				}
+			}
+			return "root/studentInfo/art/studentShiftWork";
+		}
 		return "root/studentInfo/children/studentShiftWork";
 		 
 	}
@@ -316,10 +327,11 @@ public class ChildrenClassesController {
 		if(student.getStudentHour() == null) {
 			student.setStudentHour(0.0);
 		}
-		
+		//获取学生总课时
 		jsonMap.put("studentHour",student.getStudentHour());
+		
 		if(classesType ==1) {
-			
+			//获取非vip的价钱
 			price = student.getStudentHour()*departmentOfPediatrics.getDpMoney(); 
 			
 			money = student.getStudentHour()*depa.getDpMoney();
@@ -327,7 +339,7 @@ public class ChildrenClassesController {
 				jsonMap.put("money",money - price);
 		}
 		if(classesType ==2 && classesType == 2) {
-			
+			//获取vip的价钱
 			vipPrice = student.getStudentHour()*departmentOfPediatrics.getDpMoneyVip();
 			
 			vipMoney = student.getStudentHour()*depa.getDpMoneyVip();
@@ -339,7 +351,15 @@ public class ChildrenClassesController {
 	
 	}
 	
-	
+	/**
+	 * 学生专班
+	 * @param classId
+	 * @param studentId
+	 * @param remarks
+	 * @param money
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("updateStudentShiftWork.html")
 	@ResponseBody
 	public Map<String, String> updateStudentShiftWork(Integer classId, Integer  studentId, String  remarks, Double  money,HttpSession session){

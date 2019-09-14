@@ -1,5 +1,7 @@
 package cn.huizhi.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -17,6 +19,18 @@ public class ReserveschoolServiceImpl implements ReserveschoolService{
 	@Override
 	public Integer addReserve(Reserveschool reserveschool) {
 		return reserveschoolMapper.addReserve(reserveschool);
+	}
+
+	@Override
+	public List<Reserveschool> findReserveSchoolBySchoolId(Integer schoolId) {
+		// TODO Auto-generated method stub
+		return reserveschoolMapper.findReserveSchoolBySchoolId(schoolId);
+	}
+
+	@Override
+	public Integer updateReserveState(List<Reserveschool> list) {
+		// TODO Auto-generated method stub
+		return reserveschoolMapper.updateReserveState(list);
 	}
 	
 	

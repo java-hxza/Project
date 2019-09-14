@@ -34,4 +34,10 @@ public class ArtClassStudnetServiceImpl implements ArtClassStudnetService {
 		return artClassStudnetMapper.updateHighStudentState(art);
 	}
 
+	@Override
+	public List<ArtClassStudnet> findArtClassStudnetListByClassId(Integer classId) {
+		// TODO Auto-generated method stub
+		return artClassStudnetMapper.findArtClassStudnetListByClassId(classId);
+	}
+
 }

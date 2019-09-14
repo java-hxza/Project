@@ -119,6 +119,12 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> selectOrderPeriods(Integer schoolId) {
 		return orderMapper.selectOrderPeriods(schoolId);
 	}
+
+	@Override
+	public List<Order> selectArtFeeSituation(Integer classId) {
+		// TODO Auto-generated method stub
+		return orderMapper.selectArtFeeSituation(classId);
+	}
 	
 	
 }

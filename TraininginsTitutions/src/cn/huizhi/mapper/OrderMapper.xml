@@ -229,20 +229,13 @@
 		</collection>
 	</resultMap>
 
-<<<<<<< HEAD
 	<select id="selectOrderExpenditure" resultMap="selectOrderExpenditures">
-=======
-
-	<select id="selectOrderExpenditure"
-		resultMap="selectOrderExpenditures">
->>>>>>> branch 'master' of https://github.com/tianmabdqn/TraininginsTitutions.git
 		SELECT o.orderId
 		oo,o.stuId ost,o.expenditureitemsId
 		oei,o.paymentmethodId
 		opt,o.remarks,o.personliable,p.paymentmethodName,e.expenditureitemsName,s.school,s.studentName,o.startTime,o.feecategoryMoney
 		ofm,o.orderNumber,sc.schoolName sn,s.studentBirth,c.dpId cdp
-		FROM traininginstitutions.order
-		o
+		FROM traininginstitutions.order o
 		JOIN student s ON
 		o.stuId=s.studentId
 		JOIN expenditureitems e ON
@@ -255,8 +248,7 @@
 		WHERE o.identification = 1 AND
 		o.firstdate IS
 		NULL AND o.addhour IS NULL AND o.schoolId=#{0}
-		ORDER BY
-		oo
+		ORDER BY oo
 	</select>
 
 	<resultMap type="Order" id="selectOrderExpenditures">
@@ -796,8 +788,22 @@
 		</where>
 		group by o.stuId
 	</select>
+	<!-- 查询高中学生收费情况 -->
+	<select id="selectArtFeeSituation" parameterType="java.lang.Integer" resultMap="feeSituationMap">
+		select
+		<include refid="feeSituationMap" />
+		from traininginstitutions.order o,departmentofpediatrics
+		dp,artclassstudnet hss,student t
+		<where>
+			o.classId = hss.classId
+			and dp.dpId = o.departmentofpediatricsId
+			<if test="classId!=null and classId!=''">
+				and o.classId=#{classId}
+			</if>
+		</where>
+		group by o.stuId
+	</select>
 
-<<<<<<< HEAD
 	<select id="selectOrderListByStudentId" resultType="Order" parameterType="java.lang.Integer">
 		select <include refid="orderCol"/>
 		from traininginstitutions.order 
@@ -808,7 +814,6 @@
 		</where> 
 	</select>
 	
-=======
 	<select id="selectStduentHour" resultMap="selectStduentHours">
 		SELECT o.orderId ooi,
 		o.stuId
@@ -894,6 +899,5 @@
 		</collection>
 	</resultMap>
 
->>>>>>> branch 'master' of https://github.com/tianmabdqn/TraininginsTitutions.git
 </mapper>   
 

@@ -49,14 +49,14 @@
 								
 								<div class="form-group">
 									<label for="emailaddress">学生姓名</label> <input
-										class="form-control" type="text"  id="studentId" name="${highesClassStudnet.studentId }" value="${highesClassStudnet.studentName }"  disabled="disabled">
+										class="form-control" type="text"  id="studentId" name="${childrenesClassStudnet.studentId }" value="${childrenesClassStudnet.studentName }"  disabled="disabled">
 								</div>
 								<div class="form-group">
 									<label for="emailaddress">学生现所在班级</label>
 										<select class="form-control"   id="classId" disabled="disabled">
 										<c:forEach items="${classListAll }" var="cc">
 											<c:choose>
-												<c:when test="${highesClassStudnet.classId  == cc.classId}">
+												<c:when test="${childrenesClassStudnet.classId  == cc.classId}">
 													<option value="${cc.classId }_${cc.classTypeId }">${cc.className }</option>
 												</c:when>
 											</c:choose>
