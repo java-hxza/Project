@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.metadata.Table;
 
 import cn.huizhi.pojo.Student;
 
@@ -55,7 +56,7 @@ public interface StudentMapper {
 	 * @param classId
 	 * @return
 	 */
-	public List<Student> selectStudentClass(Integer classId);
+	public List<Student> selectStudentClass(@Param("table") String table ,@Param("classId")Integer classId);
 	
 	/**
 	 * 查询本校全部学生
@@ -87,10 +88,15 @@ public interface StudentMapper {
 	 */
 	public Integer updateStudent(Student student);
 	
+<<<<<<< HEAD
 	/**
 	 * 批量修改学生课时
 	 * @param list
 	 * @return
 	 */
 	public Integer updateStuHour(List<Student> list);
+=======
+
+	
+>>>>>>> branch 'master' of https://github.com/tianmabdqn/TraininginsTitutions.git
 }

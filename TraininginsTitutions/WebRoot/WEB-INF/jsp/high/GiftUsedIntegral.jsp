@@ -308,7 +308,7 @@
 
 										<div class="col-md-6" style="display: none;">
 											<div class="form-group mb-3">
-												<label for="example-select">交费方式</label> <select
+												<label for="example-select">赠品</label> <select
 													class="form-control order" id="example-select">
 													<c:forEach items="${order }" var="o">
 														<option value="${o.stuId }" class="${o.giftNumber }">${o.gift.giftName}</option>

@@ -60,6 +60,7 @@ public class Order {
 	private Expenditureitems expenditureitems;
 
 	private School school;
+	private Gift gift;
 
 	public Order() {
 		super();
@@ -71,7 +72,7 @@ public class Order {
 			String remarks, String orderNumber, Integer expenditureitemsId, Integer classId, Double sumDpMoney,
 			Integer giftId, Integer giftNumber, Double integral, Integer teacherId, Double discount, Date endTime,
 			Student student, PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics,
-			FeeCategory feeCategory, Expenditureitems expenditureitems, School school) {
+			FeeCategory feeCategory, Expenditureitems expenditureitems, School school, Gift gift) {
 		super();
 		this.orderId = orderId;
 		this.feecateId = feecateId;
@@ -105,6 +106,7 @@ public class Order {
 		this.feeCategory = feeCategory;
 		this.expenditureitems = expenditureitems;
 		this.school = school;
+		this.gift = gift;
 	}
 
 	public Integer getOrderId() {
@@ -361,6 +363,14 @@ public class Order {
 
 	public void setSchool(School school) {
 		this.school = school;
+	}
+
+	public Gift getGift() {
+		return gift;
+	}
+
+	public void setGift(Gift gift) {
+		this.gift = gift;
 	}
 
 }

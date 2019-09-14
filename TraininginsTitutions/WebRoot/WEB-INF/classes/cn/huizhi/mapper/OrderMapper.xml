@@ -10,7 +10,7 @@
 		opi,o.departmentofpediatricsId odf,o.feecateId
 		ofi,o.addhour,o.givehour,o.startTime,o.orderNumber,o.stuId
 		sd,o.giftNumber,o.giftId,s.studentName,s.school,s.integral,p.paymentmethodName,d.dpTypeName,o.integral
-		oi,o.teacherId ot,o.giftId,o.giftNumber ogm,sc.schoolName sn
+		oi,o.teacherId ot,o.giftId,o.giftNumber ogm,sc.schoolName sn,s.studentBirth
 		FROM
 		`order`
 		o
@@ -24,7 +24,8 @@
 		o.schoolId=sc.schoolId
 		WHERE o.identification = 0 AND
 		o.stuId=s.studentId and
-		o.paymentmethodId=p.paymentmethodId and o.departmentofpediatricsId IS NOT NULL
+		o.paymentmethodId=p.paymentmethodId and
+		o.departmentofpediatricsId IS NOT NULL
 		AND
 		o.schoolId=#{0} ORDER BY od
 	</select>
@@ -49,6 +50,7 @@
 			<result column="s.studentName" property="studentName" />
 			<result column="s.school" property="school" />
 			<result column="s.integral" property="integral" />
+			<result column="s.studentBirth" property="studentBirth" />
 		</collection>
 		<collection property="paymentMethod"
 			javaType="PaymentMethod">
@@ -64,19 +66,20 @@
 		</collection>
 	</resultMap>
 
-	<select id="selectOrderPeriod" resultMap="selectOrderPeriods">
+	<select id="selectOrderPeriod" resultMap="selectOrderPeriodes">
 		SELECT o.orderId
 		od,o.firstdate,o.lastdate,o.dpMoney
 		odm,o.remarks,o.personliable,o.startTime,o.orderNumber,o.feecateId
 		ofi,o.stuId osi,o.paymentmethodId opt,s.studentName,o.discount,
 		p.paymentmethodName,s.school,s.integral,o.giftId,o.giftNumber
-		ogm,o.integral oi,o.teacherId ot,sc.schoolName sn
+		ogm,o.integral oi,o.teacherId ot,sc.schoolName sn,s.studentBirth,c.dpId cdp
 		FROM `order` o
 		JOIN
 		student s ON
 		o.stuId=s.studentId
 		JOIN paymentmethod p ON
 		o.paymentmethodId=p.paymentmethodId
+		JOIN class c ON o.classId=c.classId
 		JOIN school sc ON
 		o.schoolId=sc.schoolId
 		WHERE o.firstdate IS NOT NULL AND
@@ -84,7 +87,62 @@
 
 	</select>
 
-	<resultMap type="Order" id="selectOrderPeriods">
+	<resultMap type="Order" id="selectOrderPeriodes">
+		<id column="od" property="orderId" />
+		<result column="odm" property="dpMoney" />
+		<result column="o.remarks" property="remarks" />
+		<result column="o.personliable" property="personliable" />
+		<result column="osi" property="stuId" />
+		<result column="opt" property="paymentmethodId" />
+		<result column="o.startTime" property="startTime" />
+		<result column="ofi" property="feecateId" />
+		<result column="oi" property="integral" />
+		<result column="o.firstdate" property="firstdate" />
+		<result column="o.lastdate" property="lastdate" />
+		<result column="o.discount" property="discount" />
+		<result column="ot" property="teacherId" />
+		<result column="o.orderNumber" property="orderNumber" />
+		<result column="o.giftId" property="giftId" />
+		<result column="cdp" property="classId" />
+		<result column="ogm" property="giftNumber" />
+		<collection property="student" javaType="Student">
+			<result column="s.studentName" property="studentName" />
+			<result column="s.school" property="school" />
+			<result column="s.integral" property="integral" />
+			<result column="s.studentBirth" property="studentBirth" />
+		</collection>
+		<collection property="paymentMethod"
+			javaType="PaymentMethod">
+			<result column="p.paymentmethodName"
+				property="paymentmethodName" />
+		</collection>
+		<collection property="school" javaType="School">
+			<result column="sn" property="schoolName" />
+		</collection>
+	</resultMap>
+
+	<select id="selectOrderPeriods" resultMap="selectOrderPeriods2">
+		SELECT o.orderId
+		od,o.firstdate,o.lastdate,o.dpMoney
+		odm,o.remarks,o.personliable,o.startTime,o.orderNumber,o.feecateId
+		ofi,o.stuId osi,o.paymentmethodId opt,s.studentName,o.discount,
+		p.paymentmethodName,s.school,s.integral,o.giftId,o.giftNumber
+		ogm,o.integral oi,o.teacherId ot,sc.schoolName sn,s.studentBirth
+		FROM `order` o
+		JOIN
+		student s ON
+		o.stuId=s.studentId
+		JOIN paymentmethod p ON
+		o.paymentmethodId=p.paymentmethodId
+		JOIN class c ON o.classId=c.classId
+		JOIN school sc ON
+		o.schoolId=sc.schoolId
+		WHERE o.firstdate IS NOT NULL AND
+		o.schoolId=#{0} ORDER BY od
+
+	</select>
+
+	<resultMap type="Order" id="selectOrderPeriods2">
 		<id column="od" property="orderId" />
 		<result column="odm" property="dpMoney" />
 		<result column="o.remarks" property="remarks" />
@@ -105,6 +163,7 @@
 			<result column="s.studentName" property="studentName" />
 			<result column="s.school" property="school" />
 			<result column="s.integral" property="integral" />
+			<result column="s.studentBirth" property="studentBirth" />
 		</collection>
 		<collection property="paymentMethod"
 			javaType="PaymentMethod">
@@ -116,11 +175,11 @@
 		</collection>
 	</resultMap>
 
-	<select id="selectOrderOther" resultMap="selectOrderOthers">
+	<select id="selectOrderOther" resultMap="selectOrderOtheres">
 		SELECT o.orderId
 		oo,o.stuId ost,o.feecateId ofi,o.paymentmethodId
 		opt,o.remarks,o.personliable,p.paymentmethodName,f.chargeTypeName,s.school,s.studentName,o.startTime,o.dpMoney
-		odm,o.orderNumber,sc.schoolName sn
+		odm,o.orderNumber,sc.schoolName sn,s.studentBirth,c.dpId cdp
 		FROM traininginstitutions.order
 		o
 		JOIN student s ON
@@ -130,6 +189,7 @@
 		o.feecateId=f.chargeTypeId
 		JOIN paymentmethod p ON
 		o.paymentmethodId=p.paymentmethodId
+		JOIN class c ON o.classId=c.classId
 		JOIN school sc ON
 		o.schoolId=sc.schoolId
 		WHERE
@@ -140,7 +200,7 @@
 		ORDER BY oo
 	</select>
 
-	<resultMap type="Order" id="selectOrderOthers">
+	<resultMap type="Order" id="selectOrderOtheres">
 		<id column="oo" property="orderId" />
 		<result column="odm" property="dpMoney" />
 		<result column="o.remarks" property="remarks" />
@@ -149,10 +209,12 @@
 		<result column="opt" property="paymentmethodId" />
 		<result column="o.startTime" property="startTime" />
 		<result column="ofi" property="feecateId" />
+		<result column="cdp" property="classId" />
 		<result column="o.orderNumber" property="orderNumber" />
 		<collection property="student" javaType="Student">
 			<result column="s.studentName" property="studentName" />
 			<result column="s.school" property="school" />
+			<result column="s.studentBirth" property="studentBirth" />
 		</collection>
 		<collection property="paymentMethod"
 			javaType="PaymentMethod">
@@ -167,12 +229,18 @@
 		</collection>
 	</resultMap>
 
+<<<<<<< HEAD
 	<select id="selectOrderExpenditure" resultMap="selectOrderExpenditures">
+=======
+
+	<select id="selectOrderExpenditure"
+		resultMap="selectOrderExpenditures">
+>>>>>>> branch 'master' of https://github.com/tianmabdqn/TraininginsTitutions.git
 		SELECT o.orderId
 		oo,o.stuId ost,o.expenditureitemsId
 		oei,o.paymentmethodId
 		opt,o.remarks,o.personliable,p.paymentmethodName,e.expenditureitemsName,s.school,s.studentName,o.startTime,o.feecategoryMoney
-		ofm,o.orderNumber,sc.schoolName sn
+		ofm,o.orderNumber,sc.schoolName sn,s.studentBirth,c.dpId cdp
 		FROM traininginstitutions.order
 		o
 		JOIN student s ON
@@ -181,6 +249,7 @@
 		o.expenditureitemsId=e.expenditureitemsId
 		JOIN paymentmethod p ON
 		o.paymentmethodId=p.paymentmethodId
+		JOIN class c ON o.classId=c.classId
 		JOIN school sc ON
 		o.schoolId=sc.schoolId
 		WHERE o.identification = 1 AND
@@ -200,9 +269,11 @@
 		<result column="o.startTime" property="startTime" />
 		<result column="oei" property="expenditureitemsId" />
 		<result column="o.orderNumber" property="orderNumber" />
+		<result column="cdp" property="classId" />
 		<collection property="student" javaType="Student">
 			<result column="s.studentName" property="studentName" />
 			<result column="s.school" property="school" />
+			<result column="s.studentBirth" property="studentBirth" />
 		</collection>
 		<collection property="paymentMethod"
 			javaType="PaymentMethod">
@@ -726,6 +797,7 @@
 		group by o.stuId
 	</select>
 
+<<<<<<< HEAD
 	<select id="selectOrderListByStudentId" resultType="Order" parameterType="java.lang.Integer">
 		select <include refid="orderCol"/>
 		from traininginstitutions.order 
@@ -736,5 +808,92 @@
 		</where> 
 	</select>
 	
+=======
+	<select id="selectStduentHour" resultMap="selectStduentHours">
+		SELECT o.orderId ooi,
+		o.stuId
+		ssi,sc.schoolName scn,s.studentName stn,d.dpTypeName
+		dtn,s.telephone stp,s.school sch,s.studentHour sth
+		,o.dpMoney
+		odm,o.addhour+o.givehour oag,o.startTime ost,o.orderNumber oon
+		FROM
+		`order` o
+		JOIN student s ON
+		o.stuId=s.studentId
+		JOIN school sc ON
+		o.schoolId=sc.schoolId
+		JOIN
+		departmentofpediatrics d ON
+		o.departmentofpediatricsId=d.dpId
+		WHERE
+		s.studentHour &lt; #{0} AND
+		o.addhour IS NOT NULL AND o.schoolId=#{1}
+		ORDER BY o.stuId DESC
+	</select>
+
+	<resultMap type="Order" id="selectStduentHours">
+		<id column="ooi" property="orderId" />
+		<result column="ssi" property="stuId" />
+		<result column="odm" property="dpMoney" />
+		<result column="oag" property="addhour" />
+		<result column="ost" property="startTime" />
+		<result column="oon" property="orderNumber" />
+		<collection property="school" javaType="School">
+			<result column="scn" property="schoolName" />
+		</collection>
+		<collection property="departmentOfPediatrics"
+			javaType="DepartmentOfPediatrics">
+			<result column="dtn" property="dpTypeName" />
+		</collection>
+		<collection property="student" javaType="Student">
+			<result column="stp" property="telephone" />
+			<result column="sch" property="school" />
+			<result column="stn" property="studentName" />
+			<result column="sth" property="studentHour" />
+		</collection>
+	</resultMap>
+	<select id="selectStduentDay" resultMap="selectStduentDays">
+		SELECT o.orderId ooi,
+		o.stuId
+		ssi,sc.schoolName scn,s.studentName stn,s.telephone
+		stp,s.school
+		sch,s.studentHour sth,o.feecateId ofi,p.paymentmethodName
+		ppn,o.firstdate ofd,o.lastdate olds,o.startTime ost,o.orderNumber
+		oon,o.dpMoney odm
+		FROM `order` o
+		JOIN student s ON o.stuId=s.studentId
+		JOIN school sc ON o.schoolId=sc.schoolId
+		JOIN paymentmethod p ON
+		o.paymentmethodId=p.paymentmethodId
+		WHERE s.studentHour &lt; #{0} AND
+		o.firstdate IS NOT NULL AND o.schoolId=#{1}
+		ORDER BY o.stuId DESC
+	</select>
+
+	<resultMap type="Order" id="selectStduentDays">
+		<id column="ooi" property="orderId" />
+		<result column="ssi" property="stuId" />
+		<result column="odm" property="dpMoney" />
+		<result column="ost" property="startTime" />
+		<result column="oon" property="orderNumber" />
+		<result column="ofi" property="feecateId" />
+		<result column="ofd" property="firstdate" />
+		<result column="olds" property="lastdate" />
+		<collection property="school" javaType="School">
+			<result column="scn" property="schoolName" />
+		</collection>
+		<collection property="paymentMethod"
+			javaType="PaymentMethod">
+			<result column="ppn" property="paymentmethodName" />
+		</collection>
+		<collection property="student" javaType="Student">
+			<result column="stn" property="studentName" />
+			<result column="stp" property="telephone" />
+			<result column="sch" property="school" />
+			<result column="sth" property="studentHour" />
+		</collection>
+	</resultMap>
+
+>>>>>>> branch 'master' of https://github.com/tianmabdqn/TraininginsTitutions.git
 </mapper>   
 

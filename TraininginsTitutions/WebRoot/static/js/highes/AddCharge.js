@@ -1,4 +1,5 @@
 $(function() {
+	$(".departmentofpediatricsIds").val($(".classes option:selected").attr("departmentOfPediatrics"));
 	var Time = new Date();
 	var month = null;
 	var dpMoneyFeecateIds = 0;
@@ -33,6 +34,7 @@ $(function() {
 		}
 	});
 	$(".classes").click(function() {
+		$(".departmentofpediatricsIds").val($(".classes option:selected").attr("departmentOfPediatrics"));
 		var classIds = $(".classes option:selected").val();
 		$.ajax({
 			type : "POST",
@@ -175,6 +177,10 @@ $(function() {
 			}
 		}
 		feecateId = feecateId.substring(1);
+		if(stuId == "") {
+			alert("请选择学生！");
+			return flase;
+		}
 		if(number == 0) {
 			alert("请填写至少一个收费项目！");
 			return false;

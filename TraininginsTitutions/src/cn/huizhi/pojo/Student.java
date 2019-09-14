@@ -24,13 +24,20 @@ public class Student {
 	private Double usedIntegral;
 	private ChildrenesClassStudnet childrenesClassStudnet;
 	private Class classes;
-
+	private School schools;
+	private DepartmentOfPediatrics departmentOfPediatrics;
+	private Order order;
+	private PaymentMethod paymentMethod;
+	private FeeCategory feeCategorys;
+	
 
 	public Student(Integer studentId, String studentName, Integer studentSex, String studentIDCard, String studentBirth,
 			String school, String parentName, String telephone, String familyAddress, String registrationChannels,
 			String registrationConsultant, String startTime, String endTime, String theSurrogate, String remarks,
 			Integer feeCategory, Double studentHour, Double integral, Double usedIntegral,
-			ChildrenesClassStudnet childrenesClassStudnet, Class classes) {
+			ChildrenesClassStudnet childrenesClassStudnet, Class classes, School schools,
+			DepartmentOfPediatrics departmentOfPediatrics, Order order, PaymentMethod paymentMethod,
+			FeeCategory feeCategorys) {
 		super();
 		this.studentId = studentId;
 		this.studentName = studentName;
@@ -53,8 +60,12 @@ public class Student {
 		this.usedIntegral = usedIntegral;
 		this.childrenesClassStudnet = childrenesClassStudnet;
 		this.classes = classes;
+		this.schools = schools;
+		this.departmentOfPediatrics = departmentOfPediatrics;
+		this.order = order;
+		this.paymentMethod = paymentMethod;
+		this.feeCategorys = feeCategorys;
 	}
-
 
 	public Student() {
 		super();
@@ -227,6 +238,46 @@ public class Student {
 
 	public void setClasses(Class classes) {
 		this.classes = classes;
+	}
+
+	public School getSchools() {
+		return schools;
+	}
+
+	public void setSchools(School schools) {
+		this.schools = schools;
+	}
+
+	public DepartmentOfPediatrics getDepartmentOfPediatrics() {
+		return departmentOfPediatrics;
+	}
+
+	public void setDepartmentOfPediatrics(DepartmentOfPediatrics departmentOfPediatrics) {
+		this.departmentOfPediatrics = departmentOfPediatrics;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public FeeCategory getFeeCategorys() {
+		return feeCategorys;
+	}
+
+	public void setFeeCategorys(FeeCategory feeCategorys) {
+		this.feeCategorys = feeCategorys;
 	}
 
 }

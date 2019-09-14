@@ -1,4 +1,5 @@
 $(function() {
+
 	if ($(".giftName option:selected").val() == 0) {
 		$('.giftNumber').attr("disabled", true);
 	}
@@ -31,6 +32,7 @@ $(function() {
 		}
 	});
 	$(".classes").click(function() {
+		$(".departmentofpediatricsId").val($(".classes option:selected").attr("dpTypeName"));
 		if ($(".classes option:selected").attr("classTypeId") == 1) {
 			if ($(".hour").val() == 0) {
 				$(".money").val($(".classes option:selected").attr("dpMoney"));

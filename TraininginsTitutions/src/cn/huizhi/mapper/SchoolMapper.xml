@@ -65,4 +65,5 @@
 		insert into school  (schoolName,  cityId,  schoolRemarks,cityProperId,schoolType )
 			values (#{schoolName},#{cityId},#{schoolRemarks},#{cityProperId},#{schoolType})
 	</insert>
+	
 </mapper>

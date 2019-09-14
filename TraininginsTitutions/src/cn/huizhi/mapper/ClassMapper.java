@@ -74,4 +74,12 @@ public interface ClassMapper {
 	 * @return
 	 */
 	public Class selectClassByClassId(@Param("classId")Integer classId);
+	
+	/**
+	 * 少儿高中艺考班级
+	 * @param schoolId
+	 * @param classType
+	 * @return
+	 */
+	public List<Class> selectClass2(Integer schoolId,Integer classType);
 }

@@ -35,5 +35,11 @@ public interface ChildrenesClassStudnetMapper {
 	 */
 	public Integer updateChildrenesClassStudnet(ChildrenesClassStudnet cStudnet);
 	
+	/**
+	 * 新增高中班级学生
+	 * @param childrenesClassStudnet
+	 * @return
+	 */
+	public int insertChildrenesClassStudnets(ChildrenesClassStudnet childrenesClassStudnet);
 	
 }

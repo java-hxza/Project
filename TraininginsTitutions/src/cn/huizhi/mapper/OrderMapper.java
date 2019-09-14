@@ -22,6 +22,12 @@ public interface OrderMapper {
 	public List<Order> selectOrderPeriod(Integer schoolId);
 	
 	/**
+	 * 查询艺考时间段订单
+	 * @return
+	 */
+	public List<Order> selectOrderPeriods(Integer schoolId);
+	
+	/**
 	 * 查询其他订单
 	 * @return
 	 */
@@ -95,5 +101,17 @@ public interface OrderMapper {
 	 * @return
 	 */
 	public List<Order> selectOrderListByStudentId(@Param("studentId")Integer studentId);
+	/*
+	* @param time
+	 * @return
+	 */
+	public List<Order> selectStduentHour(Integer time,Integer schoolId);
+	
+	/**
+	 * 时间段提醒
+	 * @param time
+	 * @return
+	 */
+	public List<Order> selectStduentDay(Integer time,Integer schoolId);
 	
 }
