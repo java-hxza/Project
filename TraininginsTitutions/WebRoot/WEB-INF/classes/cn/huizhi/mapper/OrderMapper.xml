@@ -27,7 +27,7 @@
 		o.paymentmethodId=p.paymentmethodId and
 		o.departmentofpediatricsId IS NOT NULL
 		AND
-		o.schoolId=#{0} ORDER BY od
+		o.schoolId=#{0} ORDER BY od desc
 	</select>
 
 	<resultMap type="Order" id="selectOrderHours">
@@ -83,7 +83,7 @@
 		JOIN school sc ON
 		o.schoolId=sc.schoolId
 		WHERE o.firstdate IS NOT NULL AND
-		o.schoolId=#{0} ORDER BY od
+		o.schoolId=#{0} ORDER BY od desc
 
 	</select>
 
@@ -138,7 +138,7 @@
 		JOIN school sc ON
 		o.schoolId=sc.schoolId
 		WHERE o.firstdate IS NOT NULL AND
-		o.schoolId=#{0} ORDER BY od
+		o.schoolId=#{0} ORDER BY od desc
 
 	</select>
 
@@ -197,7 +197,7 @@
 		o.firstdate IS NULL
 		AND o.addhour IS NULL AND
 		o.schoolId=#{0}
-		ORDER BY oo
+		ORDER BY oo desc
 	</select>
 
 	<resultMap type="Order" id="selectOrderOtheres">
@@ -229,6 +229,8 @@
 		</collection>
 	</resultMap>
 
+
+
 	<select id="selectOrderExpenditure" resultMap="selectOrderExpenditures">
 		SELECT o.orderId
 		oo,o.stuId ost,o.expenditureitemsId
@@ -248,7 +250,8 @@
 		WHERE o.identification = 1 AND
 		o.firstdate IS
 		NULL AND o.addhour IS NULL AND o.schoolId=#{0}
-		ORDER BY oo
+		ORDER BY
+		oo desc
 	</select>
 
 	<resultMap type="Order" id="selectOrderExpenditures">
@@ -788,6 +791,7 @@
 		</where>
 		group by o.stuId
 	</select>
+
 	<!-- 查询高中学生收费情况 -->
 	<select id="selectArtFeeSituation" parameterType="java.lang.Integer" resultMap="feeSituationMap">
 		select

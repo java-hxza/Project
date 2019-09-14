@@ -577,6 +577,7 @@
 											</tr>
 										</table>
 									</div>
+
 									<!-- end card-body-->
 								</div>
 								<!-- end card-->
@@ -584,7 +585,16 @@
 							<!-- end col -->
 							<!--endprint-->
 							<iframe id="iframe1" style="display: none"></iframe>
-
+							<div class="col-md-12">
+								<div class="form-group">
+									<button type="button" class="btn btn-block btn-primary DaYins">打印</button>
+								</div>
+							</div>
+							<div class="col-md-12" style="display: none;">
+								<div class="form-group">
+									<button type="button" class="btn btn-block btn-primary DaYins2">导出</button>
+								</div>
+							</div>
 						</div>
 						<!-- end row -->
 
@@ -774,6 +784,7 @@
 					$(".Exports").click(function() {
 						$(".dels").remove();
 						$(".dels").next().remove();
+						$("#dayin").hide();
 						if ($(".customCheckes:checked").length < 1) {
 							if (!$(".customCheckes").prop("checked")) {
 								alert("请选中一条数据！");
@@ -783,6 +794,9 @@
 							alert("只能选中一条数据！");
 							return false;
 						}
+						$("#dayin").show();
+						$(".DaYins").hide();
+						$(".DaYins2").parent().parent().show();
 						var Time = new Date();
 						var gender = new Date($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text());
 						var year = Time.getTime() - gender.getTime();
@@ -797,6 +811,20 @@
 						$(".KS").text("课时：" + (parseInt($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text()) + parseInt($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text())) + "时");
 						$(".YXQ").text("课程有效期：");
 						$(".MONEY").text("￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+						$("#ChargePeriod td").click(function() {
+							if ($(".WBK").val() == ".") {
+								$(".WBK").parent().remove();
+							} else {
+								$(".WBK").parent().text($(".WBK").val());
+							}
+							$(".WBK").remove();
+							$(this).append("<input type='text' class='WBK' value='" + $(this).text() + "'/>");
+							$(".WBK").focus();
+			
+						});
+					});
+					$(".DaYins2").click(function() {
+						$(".WBK").remove();
 						$("#ChargePeriod").tableExport({
 							formats : [ "xlsx" ],
 							fileName : "时间段收费单-" + $(".customCheckes:checked").parent().parent().next().next().next().text(),
