@@ -191,12 +191,16 @@
 
 	<select id="selectVIPClass" resultMap="selectVIPClasses">
 		SELECT
-		c.classId cd,c.classNumber,c.className,c.schoolId
-		cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,d.dpId,d.dpMoney,d.dpMoneyVip,d.dpTypeName,s.schoolName ssi
+		c.classId
+		cd,c.classNumber,c.className,c.schoolId
+		cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,d.dpId,d.dpMoney,d.dpMoneyVip,d.dpTypeName,s.schoolName
+		ssi
 		FROM class c
 		JOIN departmentofpediatrics d ON c.dpId=d.dpId
-		JOIN school s ON c.schoolId=s.schoolId
-		WHERE c.classTypeId=#{0} AND c.classType=#{1} AND c.schoolId=#{2}
+		JOIN
+		school s ON c.schoolId=s.schoolId
+		WHERE c.classTypeId=#{0} AND
+		c.classType=#{1} AND c.schoolId=#{2}
 	</select>
 
 	<resultMap id="selectVIPClasses" type="Class">
@@ -233,6 +237,8 @@
 		<result column="c.classLevel" property="classLevel"/>
 		<collection property="departmentOfPediatrics" javaType="DepartmentOfPediatrics">
 			<result column="d.dpTypeName" property="dpTypeName" />
+			<result column="d.dpMoney" property="dpMoney" />
+			<result column="d.dpMoneyVip" property="dpMoneyVip" />
 		</collection>
 	</resultMap>
 	
@@ -245,7 +251,9 @@
 		c.schoolId,
 		c.teacherId,
 		c.classLevel,
-		d.dpTypeName
+		d.dpTypeName,
+		d.dpMoney,
+		d.dpMoneyVip
 	</sql>
 	<select id="selectClassByClassId" parameterType="java.lang.Integer" resultMap="classByClassIdMap">
 		select <include refid="classByClassIdCol"/>

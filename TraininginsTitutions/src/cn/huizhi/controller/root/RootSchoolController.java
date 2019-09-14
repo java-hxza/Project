@@ -795,12 +795,32 @@ public class RootSchoolController {
 	@SuppressWarnings("unlikely-arg-type")
 	@RequestMapping("exitSchool.html")
 	public String highExitSchool(Integer studentId, String studentName, Integer classId, HttpSession session) {
-		
+		String[] feeId;
+
+		String feeIds = "";
+
+		String feeIdName = "";
+
+		Double price = 0.0;
+
+		Double nowPrice = 0.0;
+
+		Double sumMoney = 0.0;
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		
 		if(schoolType == 1) {
 			Student student = studentService.findStudentById(studentId);
 			
+			Class class1 = classService.findClassByClassId(classId);
+			
+			
+			if(class1.getClassTypeId() == 1) {
+				sumMoney = student.getStudentHour() * class1.getDepartmentOfPediatrics().getDpMoney();
+			}
+			if(class1.getClassTypeId() == 2) {
+				sumMoney = student.getStudentHour() * class1.getDepartmentOfPediatrics().getDpMoneyVip();
+			}
+		
 			
 		}
 		
@@ -816,17 +836,7 @@ public class RootSchoolController {
 		// 查询学校下的所有收费项目
 		List<FeeCategory> list1 = feeCategoryService.selectFeeCategory(Integer.valueOf((Integer) session.getAttribute("schoolId")));
 		FeeCategory feeCategory = null;
-		String[] feeId;
-
-		String feeIds = "";
-
-		String feeIdName = "";
-
-		Double price = 0.0;
-
-		Double nowPrice = 0.0;
-
-		Double sumMoney = 0.0;
+		
 		// 循环读取订单的收费项目并添加到集合
 		for (Order order : stuOrders) {
 			feeId = order.getFeecateId().split(",");
