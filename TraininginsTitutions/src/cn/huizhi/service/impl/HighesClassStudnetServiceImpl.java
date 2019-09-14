@@ -21,4 +21,16 @@ public class HighesClassStudnetServiceImpl implements HighesClassStudnetService{
 		return highesClassStudnetMapper.findHighesClassStudnetListByClassId(classId);
 	}
 
+	@Override
+	public Integer updateHighStudentState(HighesClassStudnet cStudnet) {
+		// TODO Auto-generated method stub
+		return highesClassStudnetMapper.updateHighStudentState(cStudnet);
+	}
+
+	@Override
+	public Integer updateHighStudentClass(HighesClassStudnet cStudnet) {
+		// TODO Auto-generated method stub
+		return highesClassStudnetMapper.updateHighStudentClass(cStudnet);
+	}
+
 }

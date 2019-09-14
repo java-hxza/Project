@@ -305,7 +305,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${ list}" var="e">
+												<c:forEach items="${list}" var="e">
 													<tr>
 														<td>
 															<div class="custom-control custom-checkbox">
@@ -332,7 +332,7 @@
                                                 <label for="validationTooltip01">支出项目名称</label>
                                                 <input type="text" class="form-control expenditureitemsName" id="validationTooltip01" placeholder="请填写支出项目名称"  required>
                                             </div>
-                                            <button class="btn btn-primary add" type="submit">提交</button>
+                                            <button class="btn btn-primary add"  type="submit">提交</button>
                                             <button class="btn btn-primary back" type="reset" style="float: right;">重置</button>
                                         </form>
                                         

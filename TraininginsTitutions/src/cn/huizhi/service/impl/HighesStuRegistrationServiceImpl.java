@@ -26,4 +26,10 @@ public class HighesStuRegistrationServiceImpl implements HighesStuRegistrationSe
 		return highesStuRegistrationMapper.selectStudentHourDetailed(classId);
 	}
 
+	@Override
+	public Integer insertHighesStuRegistration(List<HighesStuRegistration> list) {
+		// TODO Auto-generated method stub
+		return highesStuRegistrationMapper.insertHighesStuRegistration(list);
+	}
+
 }

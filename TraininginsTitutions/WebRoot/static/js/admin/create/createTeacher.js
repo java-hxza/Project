@@ -51,9 +51,9 @@ $(function() {
 		var telephone = $("#telephone").val();
 		var loginPassword = $("#loginPassword").val();
 		var teacherName = $("#teacherName").val();
-		var schoolId = $("#schoolId").val();
 		var feeCategory = $("#feeCategory").val();
-		var departmentId = $("#departmentId").val();
+		var teacherTypeId = $("#departmentId").val();
+		var schoolId = $("#schoolId").val();
 		
 		if (telephone, loginPassword == null) {
 			$.NotificationApp.send("错误！", "信息不能为空！。", "top-right", "rgba(0,0,0,0.2)", "error");
@@ -61,16 +61,16 @@ $(function() {
 		}
 
 		$.ajax({
-			url : 'createTeacher.html',
+			url : 'regitTeacher.html',
 			data : {
 				remarks : remarks,
 				teacherTypeId : teacherTypeId,
 				telephone : telephone,
 				loginPassword : loginPassword,
 				teacherName : teacherName,
-				schoolId : schoolId,
 				feeCategory : feeCategory,
-				departmentId : departmentId
+				teacherTypeId : teacherTypeId,
+				schoolId : schoolId
 			},
 			dataType : 'JSON',
 			type : 'post',

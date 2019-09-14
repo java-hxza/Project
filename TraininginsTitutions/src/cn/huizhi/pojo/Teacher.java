@@ -12,7 +12,6 @@ public class Teacher {
 	private String telephone;
 	private Integer departmentId;
 	
-	
 	/**
 	 * 教师权限
 	 */
@@ -33,6 +32,7 @@ public class Teacher {
 	public Teacher() {
 		super();
 	}
+
 
 	public Teacher(Integer teacherId, String teacherName, String loginPassword, Integer teacherTypeId,
 			Integer feeCategory, String remarks, String telephone, Integer departmentId, TeacherDiction teacherDiction,
@@ -57,9 +57,11 @@ public class Teacher {
 		return departmentId;
 	}
 
+
 	public void setDepartmentId(Integer departmentId) {
 		this.departmentId = departmentId;
 	}
+
 
 	public DepartMent getDeparMent() {
 		return deparMent;

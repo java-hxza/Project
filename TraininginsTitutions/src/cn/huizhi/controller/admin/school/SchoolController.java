@@ -59,17 +59,58 @@ public class SchoolController {
 	@Resource
 	ExpenditureitemsService expenditureitemsService;
 	
+
+	
 	@RequestMapping("expenditureOrder.html")
 	@ResponseBody
 	public String expenditureOrder(Order order) {
 		
-		List<Order> expenditureOrderList = orderService.findOrderListBySchool(order);
+		List<Order> expenditureOrderList = orderService.findExpenOrderList(order);
 		if(expenditureOrderList.size()>0) {
 			return JSON.toJSONStringWithDateFormat(expenditureOrderList, "yyyy-MM-dd hh:mm:ss", SerializerFeature.WriteDateUseDateFormat);
 		}
 		return "";
 	}
 	
+	/**
+	 * 支出项目
+	 * @return
+	 */
+	@RequestMapping("AdminIncomeitems.html")
+	public String AdminIncomeitems() {
+		return "admin/income/selectSchoolIncomeInfo";
+	}
+	/**
+	 * 收入项目
+	 * @return
+	 */
+	@RequestMapping("AdminExpenditureitemses.html")
+	public String AdminExpenditureitemses() {
+		return "admin/expen/selectSchoolExpenInfo";
+	}
+	
+	@RequestMapping("selectSchoolIncomeInfo.html")
+	public String selectSchoolIncomeInfo(Integer schoolId,String schoolName,HttpSession session) {
+		
+		List<FeeCategory> feeCategorieList = feeCategoryService.selectFeeCategory(schoolId);
+		
+		session.setAttribute("feeCategorieList", feeCategorieList);
+		session.setAttribute("schoolName", schoolName);
+		session.setAttribute("schoolId", schoolId);
+		
+		return "admin/income/Incomeitems";
+	}
+	
+	@RequestMapping("selectSchoolExpenInfo.html")
+	public String selectSchoolExpenInfo(String schoolId,String schoolName,HttpSession session) {
+		
+		session.setAttribute("schoolName", schoolName);
+		session.setAttribute("schoolId", schoolId);
+		List<Expenditureitems> expenditureitemList = expenditureitemsService.selectExpenditureitems(schoolId);
+		session.setAttribute("expenditureitemList", expenditureitemList);
+		
+		return "admin/expen/Expenditureitemses";
+	}
 	
 	/**
 	 * 选择学校查看教师信息

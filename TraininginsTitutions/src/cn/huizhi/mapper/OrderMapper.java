@@ -87,7 +87,7 @@ public interface OrderMapper {
 	 * @param classId
 	 * @return
 	 */
-	public List<Order> selectChildrenFeeSituation(@Param("classId")Integer classId);
+	public List<Order> selectChildrenFeeSituation(@Param("classId")Integer classId,@Param("studentId")Integer studentId);
 	/**
 	 * 查询高中学生收费情况
 	 * @param classId
@@ -96,8 +96,13 @@ public interface OrderMapper {
 	public List<Order> selectHighsFeeSituation(@Param("classId")Integer classId);
 	
 	/**
-	 * 课程提醒
-	 * @param time
+	 * 查询学生收费
+	 * @param studentId
+	 * @return
+	 */
+	public List<Order> selectOrderListByStudentId(@Param("studentId")Integer studentId);
+	/*
+	* @param time
 	 * @return
 	 */
 	public List<Order> selectStduentHour(Integer time,Integer schoolId);

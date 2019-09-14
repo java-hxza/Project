@@ -11,6 +11,7 @@ $(function(){
 		var loginPassword = $("#loginPassword").val();
 		var schoolId = $("#schoolId").val();
 		var userTypeId = $("#userTypeId").val();
+		var remarks = $("#remarks").val();
 		if((loginName,loginPassword,schoolId== null) || (userTypeId =="0")){
 			$.NotificationApp.send("错误!", "你必须输入账户名及密码。", "top-right", "rgba(0,0,0,0.2)", "error")
 			$("#loginBtn span").removeClass("spinner-border spinner-border-sm");
@@ -26,8 +27,9 @@ $(function(){
 			data : {
 				loginName : loginName,
 				loginPassword : loginPassword,
-				schoolId : schoolId,
-				userTypeId : userTypeId
+				remarks : remarks,
+				userTypeId : userTypeId,
+				schoolId : schoolId
 			},
 			dataType: "JSON",
 			success: function(data){

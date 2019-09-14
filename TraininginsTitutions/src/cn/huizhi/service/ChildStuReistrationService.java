@@ -21,4 +21,11 @@ public interface ChildStuReistrationService {
 	 * @return
 	 */
 	public List<ChildStuReistration> selectTeacherDetailed(Integer classId);
+	
+	/**
+	 * 批量登记学生上课
+	 * @param list
+	 * @return
+	 */
+	public Integer insertChilStuRistration(List<ChildStuReistration> list);
 }

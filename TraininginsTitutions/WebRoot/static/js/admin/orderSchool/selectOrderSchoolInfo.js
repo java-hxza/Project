@@ -198,7 +198,7 @@ $(function(){
 	expenditureOrderforeach=  function(data) {
 		var $html = "<tbody>";
 		for (var i = 0; i < data.length; i++) {
-			if(data[i].feecategoryMoney == 0){
+			if(data[i].identification == 0){
 				continue;
 			}
 				$html +="<tr>" +

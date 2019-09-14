@@ -1,5 +1,6 @@
 package cn.huizhi.controller.admin;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.School;
 import cn.huizhi.pojo.User;
+import cn.huizhi.pojo.UserDiction;
 import cn.huizhi.service.OrderService;
 import cn.huizhi.service.SchoolService;
+import cn.huizhi.service.UserDictionService;
 /**
  * 管理员创建管理controller
  * @author wye
@@ -41,6 +44,8 @@ public class AdminCreateController {
 	@Resource
 	OrderService orderService;
 	
+	@Resource
+	UserDictionService userDictionService;
 	/**
 	 * 创建学校并以json数组形式返回
 	 * 
@@ -63,15 +68,23 @@ public class AdminCreateController {
 
 	@RequestMapping("regitUser.html")
 	@ResponseBody
-	public HashMap<String, String> createUser(String loginName, String loginPassword, Integer schoolId,
-			Integer userTypeId) {
+	public HashMap<String, String> createUser(String loginName, String loginPassword, String remarks,
+			Integer userTypeId,Integer schoolId) {
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
 		User user = new User();
 		user.setLoginPassword(loginPassword);
 		user.setLoginName(loginName);
 		user.setUserTypeId(Integer.toString(userTypeId));
+		UserDiction userDiction = new UserDiction();
+		
+		
 		if (userservice.addtUser(user) > 0) {
-			jsonMap.put("state", "1");
+			userDiction.setSchoolId(schoolId);
+			userDiction.setUserId(user.getuId());
+			
+			if(userDictionService.insertUserDiction(userDiction)>0) {
+				jsonMap.put("state", "1");
+			}
 		} else {
 			jsonMap.put("state", "0");
 		}
@@ -110,6 +123,10 @@ public class AdminCreateController {
 		Order orders = new Order();
 		orders.setSchoolId(schoolId);
 		List<Order> schoolOrderList = orderService.findOrderListBySchool(orders);
+		
+		//学校支出订单
+		List<Order> schoolExpenList = orderService.findExpenOrderList(orders);
+		
 		/**
 		 * 共支出
 		 */
@@ -122,12 +139,22 @@ public class AdminCreateController {
 			for (Order order : schoolOrderList) {
 				if(order.getIdentification()==0) {
 					schoolFeeceat += order.getDpMoney();
-				}else if(order.getIdentification() == 1) {
-					schoolExPenSum +=order.getFeecategoryMoney();
 				}
 			}
 		}
-		session.setAttribute("schoolExPenSum", schoolExPenSum);
+		
+		/**
+		 * 共支出
+		 */
+		for (Order order : schoolExpenList) {
+			if(order.getIdentification() == 1) {
+				schoolExPenSum +=order.getFeecategoryMoney();
+			}
+		}
+		BigDecimal bd = new BigDecimal(schoolExPenSum);
+
+		bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
+		session.setAttribute("schoolExPenSum", bd);
 		session.setAttribute("schoolFeeceat", schoolFeeceat);
 		session.setAttribute("schoolName", schoolName);
 		session.setAttribute("schoolId", schoolId);

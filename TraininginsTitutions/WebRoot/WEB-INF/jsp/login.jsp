@@ -19,6 +19,7 @@
 <link href="${Path }/static/css/icons.min.css" rel="stylesheet" type="text/css" />
 <link href="${Path }/static/css/app.min.css" rel="stylesheet" type="text/css" />
 
+
 </head>
 
 <body class="authentication-bg">
@@ -32,7 +33,7 @@
 						<!-- Logo -->
 						<div class="card-header pt-4 pb-4 text-center bg-primary">
 							<a href="index.html"> <span>
-							<img src="${Path }/static/images/logo.png" alt=""width="50%" height="30px"> </span>
+							<img src="${Path }/static/images/login.png" alt=""width="50%" height="30px"> </span>
 							</a>
 						</div>
 

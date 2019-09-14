@@ -11,9 +11,12 @@
 	<delete id="delFeeCategory" parameterType="java.lang.Integer">
 		DELETE FROM feecategory WHERE chargeTypeId =#{0}
 	</delete>
-	
-	<insert id="addFeeCategory" parameterType="java.lang.Integer">
-		INSERT INTO feecategory (chargeTypeName,category,schoolId)VALUES(#{0}, #{1},#{2});
+
+	<insert id="addFeeCategory" parameterType="FeeCategory">
+		insert into traininginstitutions.feecategory ( chargeTypeName, chargeMoney,
+		category, schoolId )
+		values ( #{chargeTypeName}, #{chargeMoney},
+		#{category}, #{schoolId} )
 	</insert>
 
 </mapper>

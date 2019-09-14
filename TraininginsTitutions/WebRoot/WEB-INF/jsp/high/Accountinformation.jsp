@@ -22,12 +22,11 @@
 <link href="${Path }/static/css/vendor/responsive.bootstrap4.css"
 	rel="stylesheet" type="text/css" />
 <!-- third party css end -->
-
+<link href="${Path }/static/css/style.css" rel="stylesheet" type="text/css" />
 <!-- App css -->
 <link href="${Path }/static/css/icons.min.css" rel="stylesheet" type="text/css" />
 <link href="${Path }/static/css/app.min.css" rel="stylesheet"
 	type="text/css" />
-
 </head>
 
 <body>

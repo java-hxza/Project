@@ -5,6 +5,16 @@ $(function(){
 	AdminSchoolListInfo = function(){
 		location.href ="adminIndex.html";
 	}
+	
+	AdminIncomeitems = function(){
+		
+		location.href = "AdminIncomeitems.html";
+	}
+	
+	AdminExpenditureitemses = function(){
+		location.href = "AdminExpenditureitemses.html";
+	}
+	
 	/**
 	 * 教师信息页面跳转
 	 */
@@ -55,5 +65,8 @@ $(function(){
 	AdminStudentFeeInfo = function(){
 		location.href ="selectStudentFeeInfo.html";
 	}
+	
+
+
 	
 });

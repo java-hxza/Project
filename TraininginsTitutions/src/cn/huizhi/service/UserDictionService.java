@@ -12,4 +12,12 @@ public interface UserDictionService {
 	 * @return
 	 */
 	public List<UserDiction> findDictionListByUserId(Integer userId);
+	
+
+	/**
+	 * 操作员授权
+	 * @param userDiction
+	 * @return
+	 */
+	public Integer insertUserDiction(UserDiction userDiction);
 }

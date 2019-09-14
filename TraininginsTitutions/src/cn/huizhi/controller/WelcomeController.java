@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.huizhi.pojo.City;
 import cn.huizhi.pojo.Class;
 import cn.huizhi.pojo.DepartMent;
+import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.Province;
 import cn.huizhi.pojo.School;
 import cn.huizhi.pojo.TeacherType;
@@ -19,6 +20,7 @@ import cn.huizhi.pojo.UserType;
 import cn.huizhi.service.CityService;
 import cn.huizhi.service.ClassService;
 import cn.huizhi.service.DepartMentService;
+import cn.huizhi.service.OrderService;
 import cn.huizhi.service.ProvinceService;
 import cn.huizhi.service.SchoolService;
 import cn.huizhi.service.TeacherTypeService;
@@ -63,6 +65,9 @@ public class WelcomeController {
 	@Resource
 	ClassService classService;
 	
+	@Resource
+	OrderService orderService;
+	
 	/**
 	 * 默认进入登陆页面并把查询结果封装到session域
 	 * @param session
@@ -106,6 +111,28 @@ public class WelcomeController {
 	@RequestMapping("adminIndex.html")
 	public String adminIndex(HttpSession session) {
 		List<School> schoolListAll = schoolService.findSchools();
+		Order order;
+		for (School school : schoolListAll) {
+			order = new Order();
+			order.setSchoolId(school.getSchoolId());
+			
+			//学校收入订单
+			List<Order> orderListBySchool = orderService.findOrderListBySchool(order);
+			
+			//学校支出订单
+			List<Order> schoolExpenList = orderService.findExpenOrderList(order);
+			for (Order order2 : orderListBySchool) {
+				if(order2.getIdentification()==0) {
+					school.schoolFeeceat += order2.getDpMoney();
+				}
+			}
+			for (Order order3 : schoolExpenList) {
+				if(order3.getIdentification() == 1) {
+					school.schoolExPenSum +=order3.getFeecategoryMoney();
+				}
+			}
+		}
+		
 		session.setAttribute("schoolListAll", schoolListAll);
 		return	"admin/adminIndex";
 	}
@@ -166,13 +193,13 @@ public class WelcomeController {
 	
 	
 	@RequestMapping("switchHighIndex.html")
-	public String switchHighIndex(String schoolId,String schoolName,Integer schoolType,HttpSession session) {
+	public String switchHighIndex(Integer schoolId,String schoolName,Integer schoolType,HttpSession session) {
 		
 		
 		session.setAttribute("schoolId", schoolId);
 		session.setAttribute("schoolType", schoolType);
 		
-		List<Class> classList = classService.findChildrenescClasses(schoolId);
+		List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
 		
 		session.setAttribute("classList", classList);
 		

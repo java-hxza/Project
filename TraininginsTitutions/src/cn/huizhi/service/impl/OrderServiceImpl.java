@@ -90,9 +90,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	
-	public List<Order> selectChildrenFeeSituation(Integer classId) {
+	public List<Order> selectChildrenFeeSituation(Integer classId,Integer studentId) {
 		// TODO Auto-generated method stub
-		return orderMapper.selectChildrenFeeSituation(classId);
+		return orderMapper.selectChildrenFeeSituation(classId,studentId);
 	}
 
 	@Override
@@ -102,6 +102,10 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public List<Order> selectOrderListByStudentId(Integer studentId) {
+		// TODO Auto-generated method stub
+		return orderMapper.selectOrderListByStudentId(studentId);
+	}
 	public List<Order> selectStduentHour(Integer time, Integer schoolId) {
 		return orderMapper.selectStduentHour(time, schoolId);
 	}

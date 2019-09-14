@@ -31,7 +31,7 @@
 		t.theSurrogate t_theSurrogate
 	</sql>
 	
-		<resultMap type="ChildrenesClassStudnet" id="studnetByClassIdMap">
+		<resultMap type="HighesClassStudnet" id="studnetByClassIdMap">
 		<id column="hcs_classesStudentId" property="classesStudentId"/>
 		<result column="hcs_studentName" property="studentName"/>
 		<result column="hcs_headmaster" property="headmaster"/>
@@ -64,12 +64,44 @@
 		select <include refid="highesCol"/>
 		from highesclassstudnet hcs,student t
 		<where>
-			t.studentId = hcs.studentId
+			t.studentId = hcs.studentId and hcs.state !=  2
 			<if test="classId!=null and classId!=''">
 				and classId = #{classId}
 			</if>
+			
 		</where>
 	</select>
+	
+	<!-- 退学 -->
+	<update id="updateHighStudentState" parameterType="HighesClassStudnet">
+		update traininginstitutions.highesclassstudnet
+		set
+		state = #{state}
+
+		<where>
+			<if test="studentId!=null and studentId!=''">
+				studentId = #{studentId}
+			</if>
+		</where>
+	</update>
+	
+	<!-- 转班 -->
+	<update id="updateHighStudentClass" parameterType="HighesClassStudnet">
+		update traininginstitutions.highesclassstudnet
+		<set>
+			<if test="classId!=null and classId!=''">
+				classId = #{classId}
+			</if>		
+		</set>
+
+		<where>
+			<if test="studentId!=null and studentId!=''">
+				studentId = #{studentId}
+			</if>
+		</where>
+	</update>
+	
+	
 </mapper>  
     
   

@@ -9,12 +9,16 @@ public class HighesStuRegistration {
 	private Integer dpId;
 	private String contentOfCourses;
 	private Double classHour;
-	private Integer teacherInClass;
+	private String teacherInClass;
 	private Integer highesStuId;
 	private Integer state;
 	private Integer remarks;
 	private Integer classId;
 	private Integer teacherId;
+
+	private Integer thId;
+
+	private Double sumHour;
 	/**
 	 * 学生订单
 	 */
@@ -29,16 +33,14 @@ public class HighesStuRegistration {
 	 */
 	private HighesClassStudnet highesClassStudnet;
 
-	
-	
 	public HighesStuRegistration() {
 		super();
 	}
 
 	public HighesStuRegistration(Integer highesHourId, String studentName, Date classHours, Integer dpId,
-			String contentOfCourses, Double classHour, Integer teacherInClass, Integer highesStuId, Integer state,
-			Integer remarks, Integer classId, Integer teacherId, Order order, Class class1,
-			HighesClassStudnet highesClassStudnet) {
+			String contentOfCourses, Double classHour, String teacherInClass, Integer highesStuId, Integer state,
+			Integer remarks, Integer classId, Integer teacherId, Integer thId, Double sumHour, Order order,
+			Class class1, HighesClassStudnet highesClassStudnet) {
 		super();
 		this.highesHourId = highesHourId;
 		this.studentName = studentName;
@@ -52,9 +54,19 @@ public class HighesStuRegistration {
 		this.remarks = remarks;
 		this.classId = classId;
 		this.teacherId = teacherId;
+		this.thId = thId;
+		this.sumHour = sumHour;
 		this.order = order;
 		this.class1 = class1;
 		this.highesClassStudnet = highesClassStudnet;
+	}
+
+	public Integer getThId() {
+		return thId;
+	}
+
+	public void setThId(Integer thId) {
+		this.thId = thId;
 	}
 
 	public Integer getHighesHourId() {
@@ -105,11 +117,11 @@ public class HighesStuRegistration {
 		this.classHour = classHour;
 	}
 
-	public Integer getTeacherInClass() {
+	public String getTeacherInClass() {
 		return teacherInClass;
 	}
 
-	public void setTeacherInClass(Integer teacherInClass) {
+	public void setTeacherInClass(String teacherInClass) {
 		this.teacherInClass = teacherInClass;
 	}
 
@@ -175,6 +187,14 @@ public class HighesStuRegistration {
 
 	public void setHighesClassStudnet(HighesClassStudnet highesClassStudnet) {
 		this.highesClassStudnet = highesClassStudnet;
+	}
+
+	public Double getSumHour() {
+		return sumHour;
+	}
+
+	public void setSumHour(Double sumHour) {
+		this.sumHour = sumHour;
 	}
 
 }

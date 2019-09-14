@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.ArtClassStudnetMapper">
+
+	<!--批量分班-->
+	<insert id="insertArtClassStudnetList"
+		parameterType="ArtClassStudnet">
+		insert into traininginstitutions.artclassstudnet
+		( studentName,
+		headmaster, enrollmentTime, classId, studentId, state )
+		values
+		<foreach collection="list" item="c" separator=",">
+			(
+			#{c.studentName}, #{c.headmaster}, #{c.enrollmentTime},
+			#{c.classId},
+			#{c.studentId}, #{c.state} )
+		</foreach>
+
+	</insert>
+	<!-- 转班 -->
+	<update id="updateArtClassStudentByClass"
+		parameterType="ArtStuRegistration">
+
+		update traininginstitutions.artclassstudnet
+		<set>
+			<if test="classId!=null and classId!=''">
+				classId = #{classId}
+			</if>
+		</set>
+
+		<where>
+			<if test="studentId !=null and studentId!=''">
+				studentId = #{studentId}
+			</if>
+		</where>
+
+	</update>
+	<!-- 退学 -->
+	<update id="updateHighStudentState" parameterType="HighesClassStudnet">
+		update traininginstitutions.highesclassstudnet
+		set
+		state = #{state}
+
+		<where>
+			<if test="studentId!=null and studentId!=''">
+				studentId = #{studentId}
+			</if>
+		</where>
+	</update>
+</mapper>

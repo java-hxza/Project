@@ -35,7 +35,6 @@
 					var remarks = $.trim($(".remarks").val());
 					var loginPassword = $.trim($(".loginPassword").val());
 					var loginPasswords = $.trim($(".loginPasswords").val());
-					var schoolId = $.trim($(".schoolId").attr("name"));
 					var userTypeId = $.trim($(".userTypeId").attr("name"));
 					var uId = $(".uId").attr("name");
 					if(loginName == "") {
@@ -77,7 +76,6 @@
 							loginName : loginName,
 							telephone : telephone,
 							remarks : remarks,
-							schoolId : schoolId,
 							loginPassword : loginPassword,
 							userTypeId : userTypeId,
 							uId:uId
@@ -182,5 +180,23 @@
 				location.href = "adminIndex.html";
 			}
 		})
+		
 	}
 	
+	operatorAuthorization = function(){
+		if($(".customChecks:checked").length <1) {
+			if(!$(".customChecks").prop("checked")) {
+				alert("请选中一条数据！");
+				return false;
+			}
+		} else if($(".customChecks:checked").length >1) {
+			if(!$(".customChecks").prop("checked")) {
+				alert("只能选中一条数据！");
+				return false;
+			}
+		}
+		
+		var uId = $(".customChecks:checked").parent().parent().next().children().html();
+		
+		location.href ="operatorAuthorization.html?uId="+uId;
+	}

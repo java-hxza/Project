@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
- <div class="left-side-menu">
+ <div class="left-side-menu"  style="background: #344451;">
 
 			<div class="slimscroll-menu" id="left-side-menu-container">
 
@@ -29,17 +29,18 @@
 							<li><a href="javascript:void(0)" onclick="Teacher()">教师信息</a></li>
 							<li><a href="javascript:void(0)"onclick="curriculumClassInfo()">课程信息</a></li>
 							<li><a href="javascript:void(0)"onclick="classInfo()">班级信息</a></li>
-							<li><a href="javascript:void(0)"onclick="">学员信息</a></li>
+							<li><a href="javascript:void(0)"onclick="classInfo()">学员信息</a></li>
 						</ul></li>
 					<li class="side-nav-item"><a href="javascript: void(0);"
 						class="side-nav-link"> <i class="mdi mdi-xing-box"></i> <span>
 								班级管理</span> <span class="menu-arrow"></span>
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
-							<li><a href="javascript:void(0)"onclick="">学员信息管理 </a></li>
-							<li><a href="javascript:void(0)"onclick="">学员班级管理 -->分班</a></li>
-							<li><a href="ajavascript:void(0)"onclick="">上课登记</a></li>
-							<li><a href="javascript:void(0)"onclick="">上课批量登记</a></li>
+							<li><a href="javascript:void(0)"onclick="classInfo()">学员信息管理 </a></li>
+							<li><a href="javascript:void(0)"onclick="classTypeInfo()">学员科别管理 </a></li>
+							<li><a href="javascript:void(0)"onclick="assignment()">学员班级管理 -->分班</a></li>
+							<li><a href="javascript:void(0)" onclick="classInfo()">上课登记</a></li>
+							<li><a href="javascript:void(0)" onclick="classInfo()">上课批量登记</a></li>
 
 						</ul></li>
 					<li class="side-nav-item"><a href="javascript: void(0);"
@@ -65,8 +66,8 @@
 							<li><a href="javascript:void(0)" onclick="rootSchoolInfo()">资金账余额</a></li>
 							<li><a href="javascript:void(0)"onclick="selectOrderSchoolInfo()">收支明细报表</a></li>
 							<li><a href="javascript:void(0)"onclick="schoolListInfo()">收支汇总报表</a></li>
-							<li><a href="javascript:void(0)"onclick="">教师课时总表</a></li>
-							<li><a href="javascript:void(0)"onclick="">学院课时总表</a></li>
+							<li><a href="javascript:void(0)"onclick="teacherHourSum()">教师课时总表</a></li>
+							<li><a href="javascript:void(0)"onclick="studentHourInfo()">学员课时总表</a></li>
 							<li><a href="javascript:void(0)"onclick="addStudent()">新增学院报表</a></li>
 							<li><a href="javascript:void(0)"onclick="">教师上课明细</a></li>
 						</ul></li>

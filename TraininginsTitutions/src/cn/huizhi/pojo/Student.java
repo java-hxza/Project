@@ -19,7 +19,7 @@ public class Student {
 	private String theSurrogate;
 	private String remarks;
 	private Integer feeCategory;
-	private Integer studentHour;
+	private Double studentHour;
 	private Double integral;
 	private Double usedIntegral;
 	private ChildrenesClassStudnet childrenesClassStudnet;
@@ -29,11 +29,12 @@ public class Student {
 	private Order order;
 	private PaymentMethod paymentMethod;
 	private FeeCategory feeCategorys;
+	
 
 	public Student(Integer studentId, String studentName, Integer studentSex, String studentIDCard, String studentBirth,
 			String school, String parentName, String telephone, String familyAddress, String registrationChannels,
 			String registrationConsultant, String startTime, String endTime, String theSurrogate, String remarks,
-			Integer feeCategory, Integer studentHour, Double integral, Double usedIntegral,
+			Integer feeCategory, Double studentHour, Double integral, Double usedIntegral,
 			ChildrenesClassStudnet childrenesClassStudnet, Class classes, School schools,
 			DepartmentOfPediatrics departmentOfPediatrics, Order order, PaymentMethod paymentMethod,
 			FeeCategory feeCategorys) {
@@ -94,11 +95,11 @@ public class Student {
 		this.studentId = studentId;
 	}
 
-	public Integer getStudentHour() {
+	public Double getStudentHour() {
 		return studentHour;
 	}
 
-	public void setStudentHour(Integer studentHour) {
+	public void setStudentHour(Double studentHour) {
 		this.studentHour = studentHour;
 	}
 

@@ -79,12 +79,13 @@
 			<if test="teacherHourId!=null and teacherHourId !=''">
 				t.teacherHourId= #{teacherHourId}
 			</if>
+			order by t.startTime desc 
 		</where> 
 	</select>
 	
 	<insert id="insertTeacherHour" parameterType="TeacherHour">
 		insert into traininginstitutions.teacherhour  ( teacherName, teacherId, classId, hours, dpName, dpId, startTime,  schoolId, remarks)
-		values (#{teacherName},#{teacherId},#{classId},#{hours}, #{dpName},#{dpId},#{startTime},#{schoolId},#{remarks} )
+		values (#{teacherName},#{teacherId},#{classId},#{hours}, #{dpName},#{dpId},#{startTime},#{schoolId},#{remarks})
 	</insert>
 
 	<update id="updateTeacherHour" parameterType="TeacherHour">
@@ -117,4 +118,6 @@
 		
 	</delete>
 	
+	
+	<!--查询教室上课明细  -->
 </mapper>

@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -25,6 +26,7 @@ import cn.huizhi.pojo.Gift;
 import cn.huizhi.pojo.Activity;
 import cn.huizhi.pojo.ChildrenesClassStudnet;
 import cn.huizhi.pojo.Class;
+import cn.huizhi.pojo.DepartMent;
 import cn.huizhi.pojo.Student;
 import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.PaymentMethod;
@@ -33,6 +35,7 @@ import cn.huizhi.pojo.User;
 import cn.huizhi.service.ActivityService;
 import cn.huizhi.service.ChildrenesClassStudnetService;
 import cn.huizhi.service.ClassService;
+import cn.huizhi.service.DepartMentService;
 import cn.huizhi.service.DepartmentOfPediatricsService;
 import cn.huizhi.service.ExpenditureitemsService;
 import cn.huizhi.service.FeeCategoryService;
@@ -83,6 +86,9 @@ public class HighesController {
 	private ChildrenesClassStudnetService childrenesClassStudnetService;
 	@Resource
 	private ReserveschoolService reserveschoolService;
+
+	@Resource
+	DepartMentService departMentService;
 
 	/**
 	 * 查询所有账户信息
@@ -172,11 +178,15 @@ public class HighesController {
 	 */
 	@RequestMapping("addIncomeitems.html")
 	@ResponseBody
-	public Object AddIncomeitems(@RequestParam String chargeTypeName, @RequestParam String category) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		if (feecategoryService.addFeeCategory(chargeTypeName, category,
-				(Integer) session.getAttribute("schoolId")) == 1) {
-			map.put("add", "1");
+	public Object AddIncomeitems(FeeCategory feeCategory, HttpSession session) {
+
+		Map<String, String> map = new HashMap<String, String>();
+		if (feeCategory.getSchoolId() == null) {
+			feeCategory.setSchoolId((Integer) session.getAttribute("schoolId"));
+		}
+
+		if (feecategoryService.addFeeCategory(feeCategory) > 0) {
+
 		} else {
 			map.put("add", "0");
 		}
@@ -192,7 +202,7 @@ public class HighesController {
 	@RequestMapping("Expenditureitemses.html")
 	public String Expenditureitemses(Model model) {
 		List<Expenditureitems> list = expenditureitemsService
-				.selectExpenditureitems((String) session.getAttribute("schoolId"));
+				.selectExpenditureitems(String.valueOf((Integer) session.getAttribute("schoolId")));
 		model.addAttribute("list", list);
 		return "high/Expenditureitemses";
 	}
@@ -243,10 +253,11 @@ public class HighesController {
 	 */
 	@RequestMapping("Teacher.html")
 	public String Teacher(Model model) {
-		User u = (User) session.getAttribute("user");
-		List<Teacher> teacher = teacherService.selectTeacher((Integer) session.getAttribute("schoolId"));
+		List<Teacher> teacher = teacherService.findTeacherListBySchoolId((Integer) session.getAttribute("schoolId"));
 		List<TeacherType> teacherType = teacherTypeService.selectTeacherType();
+		List<DepartMent> departMents = departMentService.selectDepartMentListAll();
 		model.addAttribute("teacher", teacher);
+		model.addAttribute("departMents", departMents);
 		model.addAttribute("teacherType", teacherType);
 		return "high/Teacher";
 	}
@@ -279,18 +290,8 @@ public class HighesController {
 	 */
 	@RequestMapping("updateTeacher.html")
 	@ResponseBody
-	public Object updateTeacher(@RequestParam String teacherName, @RequestParam String telephone,
-			@RequestParam String remarks, @RequestParam String loginPassword, @RequestParam Integer teacherTypeId,
-			@RequestParam Integer teacherId, @RequestParam Integer departmentId) {
-		Teacher teacher = new Teacher();
-		teacher.setTeacherId(teacherId);
-		teacher.setLoginPassword(loginPassword);
-		teacher.setTeacherName(teacherName);
-		teacher.setTeacherTypeId(teacherTypeId);
-		teacher.setRemarks(remarks);
-		teacher.setTelephone(telephone);
-		teacher.setFeeCategory(2);
-		teacher.setDepartmentId(departmentId);
+	public Object updateTeacher(Teacher teacher,HttpSession session) {
+		teacher.setFeeCategory((Integer) session.getAttribute("schoolType"));
 		HashMap<String, String> map = new HashMap<String, String>();
 		if (teacherService.updateTeacher(teacher) == 1) {
 			map.put("update", "1");
@@ -307,25 +308,13 @@ public class HighesController {
 	 */
 	@RequestMapping("addTeacher.html")
 	@ResponseBody
-	public Object addTeacher(@RequestParam String teacherName, @RequestParam String telephone,
-			@RequestParam String remarks, @RequestParam Integer teacherTypeId, @RequestParam String loginPassword) {
-		Teacher teacher = new Teacher();
-		teacher.setFeeCategory(2);
-		teacher.setTeacherName(teacherName);
-		teacher.setLoginPassword(loginPassword);
-		teacher.setRemarks(remarks);
-		teacher.setTelephone(telephone);
-		teacher.setTeacherTypeId(teacherTypeId);
+	public Object addTeacher(Teacher teacher, HttpSession session) {
+		teacher.setFeeCategory((Integer) session.getAttribute("schoolType"));
 		HashMap<String, String> map = new HashMap<String, String>();
-		if (teacherService.addTeacher(teacher) == 1) {
-			Teacher teachers = teacherService.selectTeachers(teacher);
-			if (teacherDictionService.addTeacherDiction((Integer) session.getAttribute("schoolId"),
-					teachers.getTeacherId()) == 1) {
-				map.put("add", "1");
-			} else {
-				map.put("add", "0");
-			}
+		if (teacherService.addTeacher(teacher) == 1 && teacherDictionService.addTeacherDiction((Integer) session.getAttribute("schoolId"), teacher.getTeacherId()) == 1) {
+			map.put("add", "1");
 		} else {
+			map.put("add", "0");
 			map.put("add", "0");
 		}
 		return JSONArray.toJSONString(map);
@@ -461,6 +450,7 @@ public class HighesController {
 			List<Student> children = studentService.selectStudentClass("childrenesclassstudnet",
 					classes.get(0).getClassId());
 			model.addAttribute("children", children);
+
 		} else if (schoolType == 2) {
 			List<Student> children = studentService.selectStudentClass("highesclassstudnet",
 					classes.get(0).getClassId());
@@ -469,6 +459,7 @@ public class HighesController {
 			List<Student> children = studentService.selectStudentClass("artclassstudnet", classes.get(0).getClassId());
 			model.addAttribute("children", children);
 		}
+
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<FeeCategory> feeCategory = feecategoryService
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
@@ -1305,7 +1296,7 @@ public class HighesController {
 		student.setIntegral(0.0);
 		student.setFeeCategory(1);
 		student.setUsedIntegral(0.0);
-		student.setStudentHour(0);
+		student.setStudentHour(0.0);
 		if (studentService.addStudnetInfo(student) == 1) {
 			childrenesClassStudnet.setState("1");
 			childrenesClassStudnet.setStudentName(student.getStudentName());
@@ -1412,7 +1403,7 @@ public class HighesController {
 		student.setIntegral(0.0);
 		student.setFeeCategory(1);
 		student.setUsedIntegral(0.0);
-		student.setStudentHour(0);
+		student.setStudentHour(0.0);
 		if (studentService.addStudnetInfo(student) == 1) {
 			childrenesClassStudnet.setState("1");
 			childrenesClassStudnet.setStudentName(student.getStudentName());
@@ -1519,7 +1510,7 @@ public class HighesController {
 		student.setIntegral(0.0);
 		student.setFeeCategory(1);
 		student.setUsedIntegral(0.0);
-		student.setStudentHour(0);
+		student.setStudentHour(0.0);
 		if (studentService.addStudnetInfo(student) == 1) {
 			childrenesClassStudnet.setState("1");
 			childrenesClassStudnet.setStudentName(student.getStudentName());
@@ -1622,7 +1613,7 @@ public class HighesController {
 		student.setIntegral(0.0);
 		student.setFeeCategory(1);
 		student.setUsedIntegral(0.0);
-		student.setStudentHour(0);
+		student.setStudentHour(0.0);
 		if (studentService.addStudnetInfo(student) == 1) {
 			Student s = studentService.selectStudentId(student.getStudentName(), student.getParentName(),
 					student.getStudentSex());

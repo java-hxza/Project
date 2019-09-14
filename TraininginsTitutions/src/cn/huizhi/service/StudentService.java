@@ -87,4 +87,10 @@ public interface StudentService {
 	 */
 	public Integer updateStudent(Student student);
 	
+	/**
+	 * 批量修改学生课时
+	 * @param list
+	 * @return
+	 */
+	public Integer updateStuHour(List<Student> list);
 }

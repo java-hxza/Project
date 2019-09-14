@@ -7,6 +7,16 @@ public class School {
 	private Integer cityProperId;
 	private String schoolRemarks;
 	private Integer schoolType;
+	
+	/**
+	 * 共支出
+	 */
+	public Double schoolExPenSum =0.0;
+	/**
+	 * 共收入
+	 */
+	public Double schoolFeeceat = 0.0;
+
 	private City city;
 
 	private Province province;
@@ -14,9 +24,10 @@ public class School {
 	public School() {
 		super();
 	}
+	
 
 	public School(Integer schoolId, String schoolName, Integer cityId, Integer cityProperId, String schoolRemarks,
-			Integer schoolType, City city, Province province) {
+			Integer schoolType, Double schoolExPenSum, Double schoolFeeceat, City city, Province province) {
 		super();
 		this.schoolId = schoolId;
 		this.schoolName = schoolName;
@@ -24,9 +35,37 @@ public class School {
 		this.cityProperId = cityProperId;
 		this.schoolRemarks = schoolRemarks;
 		this.schoolType = schoolType;
+		this.schoolExPenSum = schoolExPenSum;
+		this.schoolFeeceat = schoolFeeceat;
 		this.city = city;
 		this.province = province;
 	}
+
+
+
+	public Double getSchoolExPenSum() {
+		return schoolExPenSum;
+	}
+
+
+
+	public void setSchoolExPenSum(Double schoolExPenSum) {
+		this.schoolExPenSum = schoolExPenSum;
+	}
+
+
+
+	public Double getSchoolFeeceat() {
+		return schoolFeeceat;
+	}
+
+
+
+	public void setSchoolFeeceat(Double schoolFeeceat) {
+		this.schoolFeeceat = schoolFeeceat;
+	}
+
+
 
 	public City getCity() {
 		return city;

@@ -95,9 +95,20 @@
 				and hss.classId = #{classId}
 			</if>
 		</where> 
-		
-		
 	
 	</select>
+
+	<insert id="insertHighesStuRegistration" parameterType="HighesStuRegistration">
+
+		insert into traininginstitutions.highessturegistration ( studentName,
+		classId, classHours, dpId, contentOfCourses,
+		classHour, teacherId, teacherInClass, highesStuId, state, remarks,thId )
+		values 
+		<foreach collection="list" item="c" separator=",">
+			( #{c.studentName},#{c.classId}, #{c.classHours}, #{c.dpId}, #{c.contentOfCourses},
+			#{c.classHour}, #{c.teacherId},
+			#{c.teacherInClass},#{c.highesStuId}, #{c.state}, #{c.remarks},#{c.thId})
+		</foreach>
+	</insert>
 	
 </mapper>

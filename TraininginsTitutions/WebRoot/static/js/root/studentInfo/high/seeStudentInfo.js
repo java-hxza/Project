@@ -320,5 +320,120 @@ $(function(){
 			} 
 		});
 	}
+	
+	/**
+	 * 全选
+	 */
+	allElection = function(){
+		$(".customCheckes").prop("checked",true);
+	}
+	
+	/**
+	 * 反选
+	 */
+	reverseElection = function(){
+		$(".customCheckes").prop("checked", false);
+	}
+	/**
+	 * 上课登记
+	 */
+	classBatchRegistration = function(){
+		if ($(".customCheckes:checked").length < 1) {
+			if (!$(".customCheckes").prop("checked")) {
+				alert("请选中一条数据！");
+				return false;
+			}
+		}
+		if ($(".checkes:checked").length < 1) {
+			if (!$(".checkes").prop("checked")) {
+				alert("请选中一条课程数据！");
+				return false;
+			}
+		}
+		var studentName = [];
+		var studentId = [];
+		var classId = [];
+		/**
+		 * 读取学生信息
+		 */
+		for (var i = 0; i < $(".customCheckes:checked").length; i++) {
+			studentName.push($(".customCheckes:checked").eq(i).parent().parent().next().next().next().children().html());
+			classId.push($(".customCheckes:checked").eq(i).parent().parent().next().next().next().children().attr("name"));
+			studentId.push($(".customCheckes:checked").eq(i).parent().parent().parent().children("td:eq(1)").children().attr("name"));
+		}
+
+		/**
+		 * 读取课程信息
+		 */
+			var classHour = $(".checkes:checked").parent().parent().parent().children("td:last-child").children().html();
+			var dpId = $(".checkes:checked").parent().parent().parent().children("td:eq(2)").children().attr("name");
+			var classHours = $(".checkes:checked").parent().parent().parent().children("td:eq(3)").children().html();
+			var teacherId = $(".checkes:checked").parent().parent().parent().children("td:eq(1)").children().attr("name");
+			var teacherInClass = $(".checkes:checked").parent().parent().parent().children("td:eq(1)").children().html();
+			var thId = $(".checkes:checked").parent().parent().parent().children("td:eq(1)").children().attr("th_id");
+			var contentOfCourses = $("#contentOfCourses").val();
+		
+
+		$.ajax({
+			url : 'highClassBatchRegistration.html',
+			data : {map : JSON.stringify({
+				classId : classId,
+				studentId : studentId,
+				studentName : studentName,
+				classHours : classHours,
+				dpId : dpId,
+				teacherId : teacherId,
+				classHour : classHour,
+				teacherInClass : teacherInClass,
+				thId : thId,
+				contentOfCourses : contentOfCourses
+				}
+			)} ,
+			dataType : 'JSON',
+			type : 'post',
+			success : function(data){
+				if(data.state == "1"){
+					alert("登记成功！");
+					location.href ="seeStudentInfo.html?classId="+classId[0];
+				}
+			}
+		});
+	}
+	
+	
+	/**
+	 * 学生退学
+	 */
+	exitSchool = function(){
+		if ($(".customCheckes:checked").length < 1) {
+			if (!$(".customCheckes").prop("checked")) {
+				alert("请选中一条数据！");
+				return false;
+			}
+		} else if ($(".customCheckes:checked").length > 1) {
+			if ($(".customCheckes").prop("checked")) {
+				alert("只能选中一条数据！");
+				return false;
+			}
+		}
+		
+		var studentId = $(".customCheckes:checked").parent().parent().parent().children("td:eq(1)").children().attr("name")
+		var studentName= $(".customCheckes:checked").parent().parent().next().next().next().children().html();
+		var classId = $(".customCheckes:checked").parent().parent().next().next().next().children().attr("name");
+		location.href = "exitSchool.html?studentId="+studentId+"&studentName="+studentName+"&classId="+classId;
+	}
+	
+	
+	
+	/**
+	 * 复选框单击选中取消事件
+	 */
+	$(".check").click(function() {
+		if($(this).prev().prop("checked")) {
+			$(this).prev().prop("checked", false);
+		}else {
+			$(this).prev().prop("checked", true);
+		}
+	});
 
 });

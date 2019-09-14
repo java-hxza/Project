@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.ArtStuRegistrationMapper">
+	
+	<sql id="findArtStuRegistrationByClassIdCol">
+		art.classHour art_classHour,
+		art.classHours art_classHours,
+		art.classId art_classId,
+		art.contentOfCourses art_contentOfCourses,
+		art.dpId art_dpId,
+		SUM(hss.classHour) sum_Hour,
+		art.artHourId art_artHourId,
+		art.highesStuId art_highesStuId,
+		art.remarks art_remarks,
+		art.studentName art_studentName,
+		art.teacherId art_teacherId,
+		art.state art_state,
+		art.teacherInClass art_teacherInClass,
+	</sql>
+	
+	<resultMap type="ArtStuRegistration" id="findArtStuRegistrationByClassIdMap">
+		<id column="art_artHourId" property="artHourId"/>
+		<result column="art_classHour" property="classHour"/>
+		<result column="art_classHours" property="classHours"/>
+		<result column="art_classId" property="classId"/>
+		<result column="art_contentOfCourses" property="contentOfCourses"/>
+		<result column="art_dpId" property="dpId"/>
+		<result column="art_Hour" property="sumHour"/>
+		<result column="art_highesStuId" property="highesStuId"/>
+		<result column="art_remarks" property="remarks"/>
+		<result column="art_studentName" property="studentName"/>
+		<result column="art_teacherId" property="teacherId"/>
+		<result column="art_state" property="state"/>
+		<result column="art_teacherInClass" property="teacherInClass"/>
+		<association property="order" javaType="Order">
+			<result column="o_addhour" property="addhour"/>
+			<result column="o_givehour" property="givehour"/>
+		</association>
+	</resultMap>
+	 
+	<select id="findArtStuRegistrationByClassId" resultMap="findArtStuRegistrationByClassIdMap" parameterType="java.lang.Integer">
+		select <include refid="findArtStuRegistrationByClassIdCol"/>
+		from artsturegistration art,traininginstitutions.class c,traininginstitutions.order o
+		<where>
+			c.classId = art.classId and o.classId = art.classId
+			<if test="classId!=null and classId!=''">
+				art.classId = #{classId}
+			</if>
+		</where>
+	</select>
+
+	<!-- 批量登记 -->
+	<insert id="insertArtStuRegistration" parameterType="ArtStuRegistration">
+		insert into traininginstitutions.artsturegistration
+		( studentName, classId, classHours, dpId, contentOfCourses,
+		classHour, teacherId, teacherInClass, highesStuId, state, remarks,thId )
+		values
+		<foreach collection="list" item="c" separator=",">
+			 ( #{c.studentName}, #{c.classId}, #{c.classHours}, #{c.dpId},#{c.ontentOfCourses},
+			#{c.classHour}, #{c.teacherId}, #{c.teacherInClass}, #{c.highesStuId}, #{c.state},
+			#{c.remarks} ,#{c.thId})
+		</foreach>
+	</insert>
+
+</mapper>

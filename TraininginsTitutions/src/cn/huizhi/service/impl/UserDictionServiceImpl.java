@@ -21,4 +21,10 @@ public class UserDictionServiceImpl implements UserDictionService{
 		return userDictionMapper.findDictionListByUserId(userId);
 	}
 
+	@Override
+	public Integer insertUserDiction(UserDiction userDiction) {
+		// TODO Auto-generated method stub
+		return userDictionMapper.insertUserDiction(userDiction);
+	}
+
 }

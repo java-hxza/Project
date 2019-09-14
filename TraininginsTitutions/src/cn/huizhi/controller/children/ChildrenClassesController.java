@@ -1,5 +1,6 @@
 package cn.huizhi.controller.children;
 
+import java.awt.Image;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
+import cn.huizhi.pojo.ArtClassStudnet;
 import cn.huizhi.pojo.ChildrenesClassStudnet;
 import cn.huizhi.pojo.Class;
 import cn.huizhi.pojo.DepartmentOfPediatrics;
@@ -27,13 +29,16 @@ import cn.huizhi.pojo.HighesClassStudnet;
 import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.Student;
 import cn.huizhi.pojo.Teacher;
+import cn.huizhi.pojo.TeacherHour;
 import cn.huizhi.pojo.User;
+import cn.huizhi.service.ArtClassStudnetService;
 import cn.huizhi.service.ChildrenesClassStudnetService;
 import cn.huizhi.service.ClassService;
 import cn.huizhi.service.DepartmentOfPediatricsService;
 import cn.huizhi.service.HighesClassStudnetService;
 import cn.huizhi.service.OrderService;
 import cn.huizhi.service.StudentService;
+import cn.huizhi.service.TeacherHourService;
 import cn.huizhi.service.TeacherService;
 import cn.huizhi.service.UserService;
 
@@ -72,6 +77,12 @@ public class ChildrenClassesController {
 	@Resource
 	OrderService orderService;
 	
+	@Resource
+	TeacherHourService teacherHourService;
+	
+	@Resource
+	ArtClassStudnetService artClassStudnetService;
+	
 	@RequestMapping("childrenSchoolLogin.html")
 	public String childrenSchoolLogin(HttpSession session) {
 		session.setAttribute("schoolType", 1);
@@ -86,8 +97,8 @@ public class ChildrenClassesController {
 	@RequestMapping("classIndex.html")
 	public String childrenIndex(HttpSession session) {
 		
-		String schoolId = (String) session.getAttribute("schoolId");
-		List<Class> childrenClassList = classService.findChildrenescClasses(schoolId);
+		Integer schoolId = (Integer) session.getAttribute("schoolId");
+		List<Class> childrenClassList = classService.findChildrenescClasses(String.valueOf(schoolId));
 		if(childrenClassList !=null) {
 			session.setAttribute("childrenClassList", childrenClassList);
 		}
@@ -151,6 +162,12 @@ public class ChildrenClassesController {
 		Map<String, String> jsonMap = new HashMap<String, String>();
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		classes.setSchoolId(schoolId);
+		Integer schoolType = (Integer) session.getAttribute("schoolType"); 
+		if(schoolType ==1) {
+			classes.setClassType(0);
+		}else {
+			classes.setClassType(1);
+		}
 		if(classService.addChildrenescClass(classes)>0) {
 			jsonMap.put("state", "1");
 		}else {
@@ -169,15 +186,18 @@ public class ChildrenClassesController {
 	@RequestMapping("seeStudentInfo.html")
 	public String seeStudentInfo(Integer classId,HttpSession session) {
 		
-		Integer schoolType = (Integer) session.getAttribute("schoolType");
-		if(schoolType == 2 ) {
+ 		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		if(schoolType == 1 ) {
 			List<ChildrenesClassStudnet> childrenesClassStudnets = childrenesClassStudnetService.findChildrenesClassStudnetByClassId(classId);
 			session.setAttribute("childrenesClassStudnets", childrenesClassStudnets);
 			return "root/studentInfo/children/seeStudentInfo";
 		}
-		if(schoolType == 1) {
+		if(schoolType == 2) {
 			List<HighesClassStudnet> highesClassStudnets = highesClassStudnetService.findHighesClassStudnetListByClassId(classId);
+
+			List<TeacherHour> teacherHourList = teacherHourService.selectCurriculumInfo(classId, null);
 			session.setAttribute("highesClassStudnets", highesClassStudnets);
+			session.setAttribute("teacherHourList", teacherHourList);
 			return "root/studentInfo/high/seeStudentInfo";
 		}
 		if(schoolType ==3) {
@@ -236,22 +256,33 @@ public class ChildrenClassesController {
 	@RequestMapping("studentShiftWork.html")
 	public String studentShiftWork(Integer studentId, Integer classId, HttpSession session) {
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
-		String schoolId = (String) session.getAttribute("schoolId");
-		List<Class> classListAll = classService.findChildrenescClasses(schoolId);
+		Integer schoolId = (Integer) session.getAttribute("schoolId");
+		List<Class> classListAll = classService.findChildrenescClasses(String.valueOf(schoolId));
 		session.setAttribute("classListAll", classListAll);
-			List<ChildrenesClassStudnet> childrenesClassStudnets = childrenesClassStudnetService
-					.findChildrenesClassStudnetByClassId(classId);
-
+		if(schoolType == 1) {
+			//查询
+			List<ChildrenesClassStudnet> childrenesClassStudnets = childrenesClassStudnetService.findChildrenesClassStudnetByClassId(classId);
 			for (ChildrenesClassStudnet childrenesClassStudnet : childrenesClassStudnets) {
 				if (childrenesClassStudnet.getStudentId().equals(studentId)) {
 					session.setAttribute("childrenesClassStudnet", childrenesClassStudnet);
 					break;
 				}
-
-		}
+			}
 			return "root/studentInfo/children/studentShiftWork";
-	
-
+		}
+		if(schoolType == 2) {
+			//查询
+			List<HighesClassStudnet> highesClassStudnets = highesClassStudnetService.findHighesClassStudnetListByClassId(classId);
+			for (HighesClassStudnet highesClassStudnet : highesClassStudnets) {
+				if (highesClassStudnet.getStudentId().equals(studentId)) {
+					session.setAttribute("childrenesClassStudnet", highesClassStudnet);
+					break;
+				}
+			}
+			return "root/studentInfo/high/studentShiftWork";
+		}
+		return "root/studentInfo/children/studentShiftWork";
+		 
 	}
 
 
@@ -283,7 +314,7 @@ public class ChildrenClassesController {
 		 */
 		Double vipMoney = null;
 		if(student.getStudentHour() == null) {
-			student.setStudentHour(0);
+			student.setStudentHour(0.0);
 		}
 		
 		jsonMap.put("studentHour",student.getStudentHour());
@@ -339,12 +370,36 @@ public class ChildrenClassesController {
 			e.printStackTrace();
 		}
 		
-		ChildrenesClassStudnet cStudnet = new ChildrenesClassStudnet();
-		cStudnet.setStudentId(studentId);
-		cStudnet.setClassId(classId);		
+		//获取学校类别
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+				
 		if(orderService.addOrder(order)>0) {
-			if(childrenesClassStudnetService.updateChildrenesClassStudnet(cStudnet)>0) {
-				jsonMap.put("state","1");
+			//如果学校是少儿修改少儿班级学生
+			if(schoolType == 1) {
+				ChildrenesClassStudnet cStudnet = new ChildrenesClassStudnet();
+				cStudnet.setStudentId(studentId);
+				cStudnet.setClassId(classId);
+				if(childrenesClassStudnetService.updateChildrenesClassStudnet(cStudnet)>0) {
+					jsonMap.put("state","1");
+				}
+			}
+			//如果学校类别是高中，修改高中班级
+			if(schoolType == 2) {
+				HighesClassStudnet cStudnet = new HighesClassStudnet();
+				cStudnet.setStudentId(studentId);
+				cStudnet.setClassId(classId);
+				if(highesClassStudnetService.updateHighStudentClass(cStudnet)>0) {
+					jsonMap.put("state","1");
+				}
+			}
+			//如果是艺考，修改艺考
+			if(schoolType == 3) {
+				ArtClassStudnet cStudnet = new ArtClassStudnet();
+				cStudnet.setStudentId(studentId);
+				cStudnet.setClassId(classId);
+				if(artClassStudnetService.updateArtClassStudentByClass(cStudnet)>0) {
+					jsonMap.put("state","1");
+				}
 			}
 		}else {
 			jsonMap.put("state","0");

@@ -13,4 +13,19 @@ public interface HighesClassStudnetService {
 	 * @return
 	 */
 	public List<HighesClassStudnet> findHighesClassStudnetListByClassId(Integer classId);
+	
+	/**
+	 * 修改学生状态
+	 * @param state
+	 * @param studentId
+	 * @return
+	 */
+	public Integer updateHighStudentState(HighesClassStudnet cStudnet);
+	
+	/**
+	 * 高中学生转班
+	 * @param cStudnet
+	 * @return
+	 */
+	public Integer updateHighStudentClass(HighesClassStudnet cStudnet);
 }

@@ -90,6 +90,9 @@ public class StudentServiceImpl implements StudentService {
 		return studentMapper.updateStudent(student);
 	}
 
-	
-	
+	@Override
+	public Integer updateStuHour(List<Student> list) {
+		// TODO Auto-generated method stub
+		return studentMapper.updateStuHour(list);
+	}
 }

@@ -26,5 +26,5 @@ public interface FeeCategoryService {
 	 * 添加收入项目
 	 * @return
 	 */
-	public Integer addFeeCategory(String chargeTypeName,String category,Integer schoolId);
+	public Integer addFeeCategory(FeeCategory feeCategory);
 }

@@ -29,7 +29,7 @@ public interface DepartmentOfPediatricsMapper {
 	 * @param dpId
 	 * @return
 	 */
-	public int deleteDepartmentOfPediatrics(Integer dpId);
+	public int deleteDepartmentOfPediatrics(@Param("dpId")Integer dpId);
 	
 	/**
 	 * 根据班级主键查询班级可是单价
@@ -37,4 +37,5 @@ public interface DepartmentOfPediatricsMapper {
 	 * @return
 	 */
 	public DepartmentOfPediatrics findDepartmentOfByClassId(@Param("classId")Integer classId); 
+	
 }

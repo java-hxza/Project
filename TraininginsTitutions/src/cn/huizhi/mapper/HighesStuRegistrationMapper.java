@@ -21,4 +21,11 @@ public interface HighesStuRegistrationMapper {
 	 * @return
 	 */
 	public List<HighesStuRegistration> selectStudentHourDetailed(@Param("classId")Integer classId);
+	
+	/**
+	 * 批量登记
+	 * @param list
+	 * @return
+	 */
+	public Integer insertHighesStuRegistration(List<HighesStuRegistration> list);
 }

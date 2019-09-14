@@ -9,7 +9,7 @@ $(function(){
 	
 	$(".classId").unbind("click").click(function(){
 		var classId = $(this).children().next().children().attr("name");
-			location.href="schoolStudentHour.html?classId="+classId;
+			location.href="studentHourInfo.html?classId="+classId;
 	});
 	
 })
