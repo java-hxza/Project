@@ -265,15 +265,15 @@ $(function() {
 		$(".YXQ").text("课程有效期：");
 		$(".MONEY").text("￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
 		$("#ChargePeriod td").click(function() {
-			if($(".WBK").val() == ".") {
-				$(".WBK").parent().remove();
-			}else {
-				$(".WBK").parent().text($(".WBK").val());
-			}
+			$(".WBK").parent().text($(".WBK").val());
 			$(".WBK").remove();
-			$(this).append("<input type='text' class='WBK' value='"+$(this).text()+"'/>");
+			$(this).append("<input type='text' class='WBK'/>");
 			$(".WBK").focus();
-			
+			$(".WBK").val($(this).text());
+			if (!$(".WBK").is(":focus")) {
+				alert();
+				$(".WBK").focus();
+			}
 		});
 	}
 	$(".DaYins").click(function() {
