@@ -87,7 +87,6 @@ public interface StudentMapper {
 	 * @return
 	 */
 	public Integer updateStudent(Student student);
-	
 	/**
 	 * 批量修改学生课时
 	 * @param list
@@ -95,5 +94,4 @@ public interface StudentMapper {
 	 */
 	public Integer updateStuHour(List<Student> list);
 
-	
 }

@@ -69,7 +69,8 @@
 							<li><a href="javascript:void(0)"onclick="teacherHourSum()">教师课时总表</a></li>
 							<li><a href="javascript:void(0)"onclick="studentHourInfo()">学员课时总表</a></li>
 							<li><a href="javascript:void(0)"onclick="addStudent()">新增学院报表</a></li>
-							<li><a href="javascript:void(0)"onclick="">教师上课明细</a></li>
+							<li><a href="javascript:void(0)"onclick="teacherClassHour()">教师上课明细</a></li>
+							<li><a href="javascript:void(0)"onclick="feeSituation()">收费情况报表</a></li>
 						</ul></li>
 
 					<li class="side-nav-item"><a href="javascript: void(0);"
@@ -78,7 +79,7 @@
 					</a>
 						<ul class="side-nav-second-level" aria-expanded="false">
 							<li><a href="javascript:void(0)"onclick="operatorChilk()">操作员</a></li>
-							<li><a href="javascript:void(0)"onclick="teacherInto()">操作员授权</a></li>
+							<li><a href="javascript:void(0)"onclick="rootTeacherInto()">操作员授权</a></li>
 							<li><a href="javascript:void(0)"onclick="operatorChilk()">修改密码</a></li>
 						</ul></li>
 				</ul>

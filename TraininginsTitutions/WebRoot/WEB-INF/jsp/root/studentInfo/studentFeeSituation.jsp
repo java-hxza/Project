@@ -30,10 +30,14 @@
 	<div class="wrapper">
 
 		<!-- ========== Left Sidebar Start ========== -->
-		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
+		<%@include file="/WEB-INF/jsp/admin/bar/leftSidebar.jsp"%>
 		<div class="content-page">
 			<div class="content">
-			
+
+
+				<!-- ============================================================== -->
+				<!-- Start Page Content here -->
+				<!-- ============================================================== -->
 				<div class="container-fluid">
 					<div class="navbar-custom">
 						<ul class="list-unstyled topbar-right-menu float-right mb-0">
@@ -93,104 +97,100 @@
 						</div>
 					</div>
 					<!-- end Topbar -->
-					<!-- start page title -->
-					<div class="row">
-						<div class="col-12">
-							<div class="page-title-box">
-								<div class="page-title-right">
-									<ol class="breadcrumb m-0">
-										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">Hyper</a></li>
-										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">Pages</a></li>
-										<li class="breadcrumb-item active">FAQ</li>
-									</ol>
-								</div>
-								<h4 class="page-title">学生信息管理</h4>
-							</div>
-						</div>
-					</div>
-					<!-- end row -->
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-body">
 									<div class="row mb-2">
 										<div class="col-sm-4">
-											<a href="javascript:void(0);" onclick="query()"
-												class="btn btn-danger mb-2"><i
-												class="mdi mdi-plus-circle mr-2"></i> 查询</a>
+											<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+												onclick="exportExsal()">导出exsal</button>
 										</div>
 										<div class="col-sm-8">
 											<div class="text-sm-right">
+												<button type="button" class="btn btn-success btn-sm mt-2"
+													onclick="printOrders()">打印订单</button>
+
+												</button>
 											</div>
 										</div>
 										<!-- end col-->
 									</div>
-									<!-- end row -->
-
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label for="billing-first-name">开始日期</label> <input
-													class="form-control" type="date" id="startTime" />
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label for="billing-first-name">截至日期</label> <input
-													class="form-control" type="date" id="endTime" />
-											</div>
-										</div>
-									</div>
-									<!-- Question/Answer -->
-									<div class="table-responsive">
-										<table
-											class="table table-centered table-striped dt-responsive nowrap w-100"
-											id="products-datatable">
-											<thead>
-												<tr>
-													<th style="width: 20px;">
-														<div class="custom-control custom-checkbox"></div>
-													</th>
-													<th id="schoolId" name="${schoolId }"
-														id_type="${schoolType }">校区</th>
-													<th>学员分类</th>
-													<th>新增学员</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="customCheck2"> <label
-																class="custom-control-label" for="customCheck2">&nbsp;</label>
-														</div>
-													</td>
-													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold" id="schoolName">${schoolName }</a>
-													</td>
-													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${stuClassification}</a>
-													</td>
-													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${stuCount }</a></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-
-									<!-- ============================================================== -->
-									<!-- End Page content -->
-									<!-- ============================================================== -->
-
 								</div>
-								<!-- END wrapper -->
+							</div>
 
-								<!-- App js -->
-								<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-								<script
-									src="${Path }/static/js/root/addStudentInfo/selectAddStuInfo.js"></script>
+
+							<!-- Question/Answer -->
+							<div class="table-responsive">
+								<table
+									class="table table-centered table-striped dt-responsive nowrap w-100"
+									id="products-datatable">
+									<thead>
+										<tr>
+											<th style="width: 20px;">
+												<div class="custom-control custom-checkbox"></div>
+											</th>
+											<th>序</th>
+											<th>校区</th>
+											<th>单号</th>
+											<th>学员名称</th>
+											<th>课程</th>
+											<th>应收费用</th>
+											<th>实收金额</th>
+											<th>未收金额</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${studentFeeSituationList }" var="ts"
+											varStatus="status">
+											<tr>
+												<td>
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input"
+															id="customCheck2"> <label
+															class="custom-control-label" for="customCheck2">&nbsp;</label>
+													</div>
+												</td>
+												<td class="table-user"><a href="javascript:void(0);"
+													class="text-body font-weight-semibold">${status.index }</a>
+												</td>
+												<td class="table-user"><a href="javascript:void(0);"
+													class="text-body font-weight-semibold">${schoolName}</a></td>
+												<td class="table-user"><a href="javascript:void(0);"
+													class="text-body font-weight-semibold">${ts.orderNumber}</a>
+												</td>
+												<td class="table-user"><a href="javascript:void(0);"
+													class="text-body font-weight-semibold">${ts.student.studentName }</a>
+												</td>
+												<td class="table-user"><a href="javascript:void(0);"
+													class="text-body font-weight-semibold">${ts.departmentOfPediatrics.dpTypeName }</a>
+												</td>
+												<td class="table-user"><a href="javascript:void(0);"
+													class="text-body font-weight-semibold">${ts.departmentOfPediatrics.dpMoney }</a>
+												</td>
+												<td class="table-user"><a href="javascript:void(0);"
+													class="text-body font-weight-semibold">${ts.sumDpMoney }</a>
+												</td>
+												<td class="table-user"><a href="javascript:void(0);"
+													class="text-body font-weight-semibold">${ts.departmentOfPediatrics.dpMoney-ts.sumDpMoney }</a>
+												</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+
+							<!-- ============================================================== -->
+							<!-- End Page content -->
+							<!-- ============================================================== -->
+
+						</div>
+						<!-- END wrapper -->
+
+						<!-- App js -->
+						<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
+						<script
+							src="${Path }/static/js/admin/studentInfo/selectStudentFeeInfo.js"></script>
+						<script src="${Path }/static/js/admin/leftSidebar.js"></script>
 </body>
 </html>

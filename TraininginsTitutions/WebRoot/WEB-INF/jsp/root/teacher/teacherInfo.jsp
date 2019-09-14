@@ -28,13 +28,70 @@
 	<div class="wrapper">
 
 		<!-- ========== Left Sidebar Start ========== -->
-		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp" %>	
+			<!-- ========== Left Sidebar Start ========== -->
+		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
 		<div class="content-page">
 			<div class="content">
-
-				<!-- Start Content-->
+			
 				<div class="container-fluid">
+					<div class="navbar-custom">
+						<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
+
+							<li class="dropdown notification-list"><a
+								class="nav-link dropdown-toggle nav-user arrow-none mr-0"
+								data-toggle="dropdown" href="#" role="button"
+								aria-haspopup="false" aria-expanded="false"> <span
+									class="account-user-avatar"> <img
+										src="${Path }/static/images/avatar-1.jpg" alt="user-image"
+										class="rounded-circle">
+								</span> <span> <span class="account-user-name">${user.loginName }
+									</span> <span class="account-position">管理员</span>
+								</span>
+							</a>
+								<div
+									class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+									<!-- item-->
+									<div class=" dropdown-header noti-title">
+										<h6 class="text-overflow m-0">欢迎 !</h6>
+									</div>
+
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item">
+										<i class="mdi mdi-account-circle mr-1"></i> <span>我的账户</span>
+									</a>
+
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item"
+										onclick="switchingAccounts()"> <i
+										class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
+									</a>
+
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item">
+										<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
+									</a>
+
+
+								</div></li>
+
+						</ul>
+						<button class="button-menu-mobile open-left disable-btn">
+							<i class="mdi mdi-menu"></i>
+						</button>
+						<div class="app-search">
+							<form>
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Search...">
+									<span class="mdi mdi-magnify"></span>
+									<div class="input-group-append">
+										<button class="btn btn-primary" type="submit">Search</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- end Topbar -->
 					<!-- start page title -->
 					<div class="row">
 						<div class="col-12">
@@ -48,11 +105,10 @@
 										<li class="breadcrumb-item active">FAQ</li>
 									</ol>
 								</div>
-								<h4 class="page-title">管理员</h4>
+								<h4 class="page-title">学生信息管理</h4>
 							</div>
 						</div>
 					</div>
-					<!-- end page title -->
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="text-center">

@@ -96,6 +96,12 @@ public interface OrderMapper {
 	public List<Order> selectHighsFeeSituation(@Param("classId")Integer classId);
 	
 	/**
+	 * 查询高中学生收费情况
+	 * @param classId
+	 * @return
+	 */
+	public List<Order> selectArtFeeSituation(@Param("classId")Integer classId);
+	/**
 	 * 查询学生收费
 	 * @param studentId
 	 * @return
@@ -113,5 +119,7 @@ public interface OrderMapper {
 	 * @return
 	 */
 	public List<Order> selectStduentDay(Integer time,Integer schoolId);
+	
+	
 	
 }

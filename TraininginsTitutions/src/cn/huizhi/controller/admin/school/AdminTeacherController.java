@@ -431,7 +431,14 @@ public class AdminTeacherController {
 	public String selectStudentFeeInfo() {
 		return "admin/studentInfo/selectStudentFeeInfo";
 	}
-
+	/**
+	 * 学生收费情况
+	 * @param schoolId
+	 * @param schoolName
+	 * @param schoolType
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("classStudentFeeInfo.html")
 	public String classStudentFeeInfo(Integer schoolId, String schoolName, Integer schoolType, HttpSession session) {
 		List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
