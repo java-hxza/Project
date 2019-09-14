@@ -9,7 +9,7 @@ public class HighesStuRegistration {
 	private Integer dpId;
 	private String contentOfCourses;
 	private Double classHour;
-	private Integer teacherInClass;
+	private String teacherInClass;
 	private Integer highesStuId;
 	private Integer state;
 	private Integer remarks;
@@ -38,7 +38,7 @@ public class HighesStuRegistration {
 	}
 
 	public HighesStuRegistration(Integer highesHourId, String studentName, Date classHours, Integer dpId,
-			String contentOfCourses, Double classHour, Integer teacherInClass, Integer highesStuId, Integer state,
+			String contentOfCourses, Double classHour, String teacherInClass, Integer highesStuId, Integer state,
 			Integer remarks, Integer classId, Integer teacherId, Integer thId, Double sumHour, Order order,
 			Class class1, HighesClassStudnet highesClassStudnet) {
 		super();
@@ -117,11 +117,11 @@ public class HighesStuRegistration {
 		this.classHour = classHour;
 	}
 
-	public Integer getTeacherInClass() {
+	public String getTeacherInClass() {
 		return teacherInClass;
 	}
 
-	public void setTeacherInClass(Integer teacherInClass) {
+	public void setTeacherInClass(String teacherInClass) {
 		this.teacherInClass = teacherInClass;
 	}
 

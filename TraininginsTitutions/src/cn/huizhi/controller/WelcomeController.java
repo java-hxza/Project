@@ -115,12 +115,20 @@ public class WelcomeController {
 		for (School school : schoolListAll) {
 			order = new Order();
 			order.setSchoolId(school.getSchoolId());
+			
+			//学校收入订单
 			List<Order> orderListBySchool = orderService.findOrderListBySchool(order);
+			
+			//学校支出订单
+			List<Order> schoolExpenList = orderService.findExpenOrderList(order);
 			for (Order order2 : orderListBySchool) {
 				if(order2.getIdentification()==0) {
 					school.schoolFeeceat += order2.getDpMoney();
-				}else if(order2.getIdentification() == 1) {
-					school.schoolExPenSum +=order2.getFeecategoryMoney();
+				}
+			}
+			for (Order order3 : schoolExpenList) {
+				if(order3.getIdentification() == 1) {
+					school.schoolExPenSum +=order3.getFeecategoryMoney();
 				}
 			}
 		}
@@ -185,13 +193,13 @@ public class WelcomeController {
 	
 	
 	@RequestMapping("switchHighIndex.html")
-	public String switchHighIndex(String schoolId,String schoolName,Integer schoolType,HttpSession session) {
+	public String switchHighIndex(Integer schoolId,String schoolName,Integer schoolType,HttpSession session) {
 		
 		
 		session.setAttribute("schoolId", schoolId);
 		session.setAttribute("schoolType", schoolType);
 		
-		List<Class> classList = classService.findChildrenescClasses(schoolId);
+		List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
 		
 		session.setAttribute("classList", classList);
 		

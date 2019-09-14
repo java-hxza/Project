@@ -49,8 +49,19 @@ public interface ClassMapper {
 	 */
 	public List<Class> selectClass(Integer schoolId,Integer classType);
 	
+	/**
+	 * 查询普通班和vip班
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Class> selectClassAll(Integer schoolId);
 	
 	/**
+	 * 特定条件查询班级
+	 * @return
+	 */
+	public List<Class> selectVIPClass(Integer classTypeId,Integer classType,Integer schoolId);
+	/*
 	 * 根据教师主键查询班级
 	 * @param teacherId
 	 * @return
@@ -63,6 +74,4 @@ public interface ClassMapper {
 	 * @return
 	 */
 	public Class selectClassByClassId(@Param("classId")Integer classId);
-	
-	
 }

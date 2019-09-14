@@ -34,7 +34,44 @@
 				<!-- Start Content-->
 				<div class="container-fluid">
 
-					<!-- start page title -->
+					<div class="content">
+
+				<!-- Start Content-->
+				<div class="container-fluid">
+					<div class="navbar-custom">
+					<ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+
+						<li class="dropdown notification-list"><a
+							class="nav-link dropdown-toggle nav-user arrow-none mr-0"
+							data-toggle="dropdown" href="#" role="button"
+							aria-haspopup="false" aria-expanded="false"> <span
+								class="account-user-avatar"> <img
+									src="${Path }/static/images/avatar-1.jpg" alt="user-image"
+									class="rounded-circle">
+							</span> <span> <span class="account-user-name">${user.loginName }
+										</span> <span class="account-position">管理员</span>
+							</span>
+						</a>
+
+					</ul>
+					<button class="button-menu-mobile open-left disable-btn">
+						<i class="mdi mdi-menu"></i>
+					</button>
+					<div class="app-search">
+						<form>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Search...">
+								<span class="mdi mdi-magnify"></span>
+								<div class="input-group-append">
+									<button class="btn btn-primary" type="submit">Search</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- end Topbar -->
+						<!-- start page title -->
 					<div class="row">
 						<div class="col-12">
 							<div class="page-title-box">
@@ -47,34 +84,28 @@
 										<li class="breadcrumb-item active">FAQ</li>
 									</ol>
 								</div>
-								<h4 class="page-title">管理员</h4>
+								<h3 class="schoolId" name="${schoolId }">${schoolName }</h3>
 							</div>
 						</div>
 					</div>
 					<!-- end page title -->
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="text-center">
-								<h3 class="schoolId" name="${schoolId }">${schoolName }</h3>
-								<div class="app-search">
-                            		<form>
-                             		  	<div class="input-group">
-                                 		   <input type="text" class="form-control" placeholder="Search...">
-                                   		   <span class="mdi mdi-magnify"></span>
-                                   	 	   <div class="input-group-append">
-                                       		 <button class="btn btn-primary" type="button">搜索</button>
-                                    	   </div>
-                              		  	</div>
-                           			 </form>	
-                        		</div>
-								<p class="text-muted mt-3"></p>
-                                     <button type="button" class="btn btn-success btn-sm mt-2" onclick="printOrders()"> 打印订单</button>
-                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="exportExsal()">导出exsal</button>
-                                </div>
-                            </div>
-						<!-- end col -->
-                        </div>
-					<!-- end row -->
+					<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row mb-2">
+											<div class="col-sm-4">
+												<button type="button" class="btn btn-success btn-sm mt-2" onclick="printOrders()"> 打印订单</button>
+											</div>
+											<div class="col-sm-8">
+												<div class="text-sm-right">
+													 
+                                    				<button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="exportExsal()">导出exsal</button>
+												</div>
+											</div>
+											<!-- end col-->
+										</div>
+		
+					
                                 <!-- Question/Answer -->
                                 	<div class="table-responsive">
 										<table
@@ -93,12 +124,11 @@
 													<th>课时名称</th>
 													<th>课时</th>
 													<th>上课日期</th>
-													<th>学员</th>
 													<th>备注</th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${childStuHourDetailedList}" var="ch" varStatus="status">
+												<c:forEach items="${teacherHourList}" var="ch" varStatus="status">
 													<tr>
 														<td>
 															<div class="custom-control custom-checkbox">
@@ -113,19 +143,16 @@
 															class="text-body font-weight-semibold" >${schoolName}</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${ch.teacherInClass}</a>
+															class="text-body font-weight-semibold">${ch.teacherName}</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${ch.departmentOfPediatrics.dpTypeName }</a>
+															class="text-body font-weight-semibold" >${ch.dpName }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${ch.classHour}</a>
+															class="text-body font-weight-semibold" >${ch.hours}</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" ><fmt:formatDate value="${ch.classHours}" pattern="yyyy-MM-dd HH:MM"/> </a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${ch.studentName }</a>
+															class="text-body font-weight-semibold" ><fmt:formatDate value="${ch.startTime}" pattern="yyyy-MM-dd HH:MM"/> </a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold" >${ch.remarks }</a>

@@ -130,14 +130,13 @@ public class AdminTeacherController {
 	 * @param schoolId
 	 * @return
 	 */
-	@RequestMapping("createTeacher.html")
+	@RequestMapping("regitTeacher.html")
 	@ResponseBody
 	public Map<String, String> createTeacher(Teacher teacher, Integer schoolId) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
 		// 如果添加成功返回1不成功返回0
 		if (teacherService.addTeacher(teacher) > 0) {
-			Teacher teachers = teacherService.selectTeachers(teacher);
-			if (teacherDictionService.addTeacherDiction(schoolId, teachers.getTeacherId()) > 0) {
+			if (teacherDictionService.addTeacherDiction(schoolId, teacher.getTeacherId()) > 0) {
 				jsonMap.put("state", "1");
 			} else {
 				jsonMap.put("state", "0");
@@ -262,12 +261,18 @@ public class AdminTeacherController {
 	@RequestMapping("highStudentHourInfo.html")
 	public String HighStudentHourInfo(Integer classId, HttpSession session) {
 		List stuReistrationList = highesStuRegistrationService.selectHighesStuRegistrationListByClassId(classId);
-
+		
 		session.setAttribute("stuReistrationList", stuReistrationList);
 
 		return "admin/classStudent/studentHourInfo";
 	}
-
+	
+	/**
+	 * 返回艺考班级课时
+	 * @param classId
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("artStudentHourInfo.html")
 	public String artStudentHourInfo(Integer classId,HttpSession session) {
 		List<ArtStuRegistration> artStuRegistrationList = artStuRegistrationService.findArtStuRegistrationByClassId(classId);
@@ -396,7 +401,10 @@ public class AdminTeacherController {
 	public String teacherClassHourInfo(Integer classId, String schoolName, Integer schoolType, HttpSession session) {
 		// 判断学校类型
 		session.setAttribute("schoolName", schoolName);
-		if (schoolType == 1) {
+		
+		List<TeacherHour> teacherHourList = teacherHourService.selectCurriculumInfo(classId, null);
+		
+		/*if (schoolType == 1) {
 			List<ChildStuReistration> childStuHourDetailedList = childStuReistrationService
 					.selectTeacherDetailed(classId);
 
@@ -413,9 +421,10 @@ public class AdminTeacherController {
 		}
 		if (schoolType == 3) {
 
-		}
-
-		return "admin/teacher/teacherClassHourInfo";
+		}*/
+		
+		session.setAttribute("teacherHourList", teacherHourList);
+		return "admin/teacher/childrenFeeInfo";
 	}
 
 	@RequestMapping("selectStudentFeeInfo.html")
@@ -443,7 +452,7 @@ public class AdminTeacherController {
 		List<Order> studentFeeSituationList = null;
 		
 		if (schoolType == 1) {
-			studentFeeSituationList = orderService.selectChildrenFeeSituation(classId);
+			studentFeeSituationList = orderService.selectChildrenFeeSituation(classId,null);
 		}
 		if (schoolType == 2) {
 			studentFeeSituationList = orderService.selectHighsFeeSituation(classId);

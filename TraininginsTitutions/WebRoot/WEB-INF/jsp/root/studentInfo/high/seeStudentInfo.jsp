@@ -22,6 +22,7 @@
 	type="text/css" />
 <link href="${Path }/static/css/app.min.css" rel="stylesheet"
 	type="text/css" />
+	<link href="${Path }/static/css/style.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -37,7 +38,65 @@
 
 				<!-- Start Content-->
 				<div class="container-fluid">
+<div class="navbar-custom">
+					<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
+
+						<li class="dropdown notification-list"><a
+							class="nav-link dropdown-toggle nav-user arrow-none mr-0"
+							data-toggle="dropdown" href="#" role="button"
+							aria-haspopup="false" aria-expanded="false"> <span
+								class="account-user-avatar"> <img
+									src="${Path }/static/images/avatar-1.jpg" alt="user-image"
+									class="rounded-circle">
+							</span> <span> <span class="account-user-name">${user.loginName }
+										</span> <span class="account-position">管理员</span>
+							</span>
+						</a>
+							<div
+								class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+								<!-- item-->
+								<div class=" dropdown-header noti-title">
+									<h6 class="text-overflow m-0">欢迎 !</h6>
+								</div>
+
+								<!-- item-->
+								<a href="javascript:void(0);" class="dropdown-item notify-item">
+									<i class="mdi mdi-account-circle mr-1"></i> <span>我的账户</span>
+								</a>
+
+								<!-- item-->
+								<a href="javascript:void(0);" class="dropdown-item notify-item" onclick="switchingAccounts()">
+									<i class="mdi mdi-account-edit mr-1"></i> <span>切换账号
+									</span> 
+								</a>
+
+								<!-- item-->
+								<a href="javascript:void(0);" class="dropdown-item notify-item">
+									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置
+									</span>
+								</a>
+
+
+							</div></li>
+
+					</ul>
+					<button class="button-menu-mobile open-left disable-btn">
+						<i class="mdi mdi-menu"></i>
+					</button>
+					<div class="app-search">
+						<form>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Search...">
+								<span class="mdi mdi-magnify"></span>
+								<div class="input-group-append">
+									<button class="btn btn-primary" type="submit">Search</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- end Topbar -->
 					<!-- start page title -->
 					<div class="row">
 						<div class="col-12">
@@ -51,46 +110,56 @@
 										<li class="breadcrumb-item active">FAQ</li>
 									</ol>
 								</div>
-								<h4 class="page-title">管理员</h4>
+								<h4 class="page-title">学生信息管理</h4>
 							</div>
 						</div>
 					</div>
 					<!-- end page title -->
-
-
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="text-center">
-								<h3 class="">管理学校及城市</h3>
-								<p class="text-muted mt-3">请选择要查看的教师学校</p>
-								<button type="button" class="btn btn-success btn-sm mt-2"
-									onclick="updateStudnet()">修改学生信息</button>
-								<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-									onclick="shiftWork()">学员转班</button>
-								<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-									onclick="exitSchool()">学员退学</button>
-								<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-									onclick="classRegistration()">学员上课登记</button>
-								<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-									data-toggle="modal" data-target="#top-modal" >学员批量登记</button>
-							</div>
-						</div>
-						<!-- end col -->
 					</div>
 					<!-- end row -->
-					<!-- Question/Answer -->
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="row mb-2">
+										<div class="col-sm-4">
+											<a href="javascript:void(0);" onclick="updateStudnet()"
+												class="btn btn-danger mb-2"><i
+												class="mdi mdi-plus-circle mr-2"></i> 修改学生信息</a>
+										</div>
+										<div class="col-sm-8">
+											<div class="text-sm-right">
+												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+													onclick="shiftWork()">学员转班</button>
+												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+													onclick="exitSchool()">学员退学</button>
+												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+													data-toggle="modal" data-target="#top-modal">学员上课登记</button>
+												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+													data-toggle="modal" data-target="#top-modal">学员批量登记</button>
+											</div>
+										</div>
+										<!-- end col-->
+									</div>
+									<!-- Question/Answer -->
 					<div class="table-responsive">
-						<table
-							class="table table-centered table-striped dt-responsive nowrap w-100"
-							id="products-datatable">
+						<table class="table table-centered table-striped dt-responsive nowrap w-100"
+							id="products-datatable" style="border: 1px  solid #E3EAEF" >
 							<thead>
 								<tr>
 									<th style="width: 20px;">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input"
-												id="customCheck1" disabled="disabled"> <label
-												class="custom-control-label" for="customCheck1">&nbsp;</label>
-										</div>
+										<div class="dropdown float-right">
+												<a href="#" class="dropdown-toggle arrow-none card-drop"
+													data-toggle="dropdown" aria-expanded="false"> <i
+													class="mdi mdi-dots-vertical"></i>
+												</a>
+												<div class="dropdown-menu dropdown-menu-right">
+													<!-- item-->
+													<a href="javascript:void(0);" class="dropdown-item" onclick="allElection()">全选</a>
+													<!-- item-->
+													<a href="javascript:void(0);" class="dropdown-item" onclick="reverseElection()">反选</a>
+												</div>
+											</div>
 									</th>
 									<th>所属校区</th>
 									<th>就读学校</th>
@@ -111,19 +180,18 @@
 									<tr class="schoolId">
 										<td>
 											<div class="custom-control custom-checkbox">
-												<input type="checkbox"
-													class="custom-control-input customChecks"> <label
+												<input type="checkbox" class="custom-control-input customCheckes"> <label
 													class="custom-control-label customCheck" for="customCheck2">&nbsp;</label>
 											</div>
 										</td>
 										<td class="table-user"><a href="javascript:void(0);"
 											class="text-body font-weight-semibold"
-											name="${high.student.studentId}">${schoolName }</a></td>
+											name="${high.student.studentId}" id_classId="${high.classId }">${schoolName}</a></td>
 										<td class="table-user"><a href="javascript:void(0);"
 											class="text-body font-weight-semibold">${high.student.school }</a>
 										</td>
 										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${high.student.studentName}</a>
+											class="text-body font-weight-semibold" >${high.student.studentName}</a>
 										</td>
 										<c:choose>
 											<c:when test="${high.student.studentSex == 0 }">
@@ -201,25 +269,26 @@
 												<tr class="thId">
 													<td>
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="customCheck2"><label
-																class="custom-control-label" for="customCheck2">&nbsp;</label>
+															<input type="checkbox" class="custom-control-input checkes" >
+															<label class="custom-control-label check" for="customCheck2">&nbsp;</label>
 														</div>
 													</td>
 													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${th.teacherName }</a></td>
+														class="text-body font-weight-semibold" name="${th.teacherId }" th_id ="${th.teacherHourId }">${th.teacherName }</a></td>
 													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${th.teacherName }</a></td>
+														class="text-body font-weight-semibold" name="${th.dpId }">${th.dpName }</a></td>
 													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${th.dpName }</a></td>
+														class="text-body font-weight-semibold"><fmt:formatDate value="${th.startTime }" pattern="yyyy-MM-dd hh:mm:ss"/></a></td>
 													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold"><fmt:formatDate value="${th.startTime }" pattern="yyyy-MM-dd"/></a></td>
+														class="text-body font-weight-semibold">${th.hours }</a></td>
 												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
 								</div>
 								<div class="modal-footer">
+									<label for="billing-address">教学内容</label>
+									<input type="text" class="form-control"  id="contentOfCourses">
 									<button type="button" class="btn btn-light"
 										data-dismiss="modal">关闭</button>
 									<button type="button" class="btn btn-primary" onclick="classBatchRegistration()">保存</button>
@@ -239,9 +308,7 @@
 				</div>
 				<!-- App js -->
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-				<script type="text/javascript"
-					src="${Path }/static/js/admin/leftSidebar.js"></script>
-				<script type="text/javascript"
-					src="${Path }/static/js/root/studentInfo/high/selectStudentFeeInfo.js"></script>
+				<script type="text/javascript" src="${Path }/static/js/admin/leftSidebar.js"></script>
+				<script type="text/javascript" src="${Path }/static/js/root/studentInfo/high/seeStudentInfo.js"></script>
 </body>
 </html>

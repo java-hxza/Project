@@ -1,7 +1,5 @@
 package cn.huizhi.pojo;
 
-import java.util.List;
-
 public class User {
 	private Integer uId;
 	private String loginName;

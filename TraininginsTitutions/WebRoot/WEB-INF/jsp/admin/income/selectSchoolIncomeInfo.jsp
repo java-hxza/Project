@@ -20,7 +20,7 @@
 	type="text/css" />
 <link href="${Path }/static/css/app.min.css" rel="stylesheet"
 	type="text/css" />
-
+<link href="${Path }/static/css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -33,9 +33,47 @@
 		<div class="content-page">
 			<div class="content">
 
+				
 				<!-- Start Content-->
 				<div class="container-fluid">
 
+					<div class="content">
+
+				<!-- Start Content-->
+				<div class="container-fluid">
+					<div class="navbar-custom">
+					<ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+
+						<li class="dropdown notification-list"><a
+							class="nav-link dropdown-toggle nav-user arrow-none mr-0"
+							data-toggle="dropdown" href="#" role="button"
+							aria-haspopup="false" aria-expanded="false"> <span
+								class="account-user-avatar"> <img
+									src="${Path }/static/images/avatar-1.jpg" alt="user-image"
+									class="rounded-circle">
+							</span> <span> <span class="account-user-name">${user.loginName }
+										</span> <span class="account-position">管理员</span>
+							</span>
+						</a>
+
+					</ul>
+					<button class="button-menu-mobile open-left disable-btn">
+						<i class="mdi mdi-menu"></i>
+					</button>
+					<div class="app-search">
+						<form>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Search...">
+								<span class="mdi mdi-magnify"></span>
+								<div class="input-group-append">
+									<button class="btn btn-primary" type="submit">Search</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- end Topbar -->
 					<!-- start page title -->
 					<div class="row">
 						<div class="col-12">
@@ -49,25 +87,42 @@
 										<li class="breadcrumb-item active">FAQ</li>
 									</ol>
 								</div>
-								<h4 class="page-title">管理员</h4>
+								<h4 class="page-title">学校信息</h4>
 							</div>
 						</div>
 					</div>
 					<!-- end page title -->
 
+					<!-- end row -->
 
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="text-center">
-								<h3 class="">管理学校及城市</h3>
-								<p class="text-muted mt-3">请选择要查看的教师学校</p>
-                                    <button type="button" class="btn btn-success btn-sm mt-2" onclick="createSchool()"> 创建学校</button>
-                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="createUser()"> 创建账号</button>
-                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="createTeacher()"> 创建教师账号</button>
-                                </div>
-                            </div>
-						<!-- end col -->
-                        </div>
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row mb-2">
+											<div class="col-sm-4">
+												<button type="button" class="btn btn-success btn-sm mt-2"
+													onclick="createSchool()">创建学校</button>
+											</div>
+											<div class="col-sm-8">
+												<div class="text-sm-right">
+													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+														onclick="createUser()">创建账号</button>
+													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+														onclick="createTeacher()">创建教师账号</button>
+												</div>
+											</div>
+											<!-- end col-->
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<div class="text-center">
+													<h3 class="">管理学校及城市</h3>
+													<p class="text-muted mt-3">需要先添加 省份--->城市--->学校--->创建账号
+														步骤</p>
+												</div>
+											</div>
+											<!-- end col -->
+										</div>
 					<!-- end row -->
                                 <!-- Question/Answer -->
                                 	<div class="table-responsive">

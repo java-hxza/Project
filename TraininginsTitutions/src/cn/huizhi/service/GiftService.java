@@ -17,4 +17,18 @@ public interface GiftService {
 	 * 更新赠品数量
 	 */
 	public Integer updateGift(Integer giftNumber,Integer giftId);
+	
+	/**
+	 * 添加赠品
+	 * @param gift
+	 * @return
+	 */
+	public Integer addGift(Gift gift);
+	
+	/**
+	 * 删除赠品
+	 * @param giftId
+	 * @return
+	 */
+	public Integer delGift(Integer giftId);
 }

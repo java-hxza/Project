@@ -47,6 +47,16 @@ public class ClassServiceImpl implements ClassService {
 	}
 
 	@Override
+	public List<Class> selectClassAll(Integer schoolId) {
+		return classMapper.selectClassAll(schoolId);
+	}
+
+	@Override
+	public List<Class> selectVIPClass(Integer classTypeId, Integer classType, Integer schoolId) {
+		return classMapper.selectVIPClass(classTypeId, classType, schoolId);
+	}
+	
+	
 	public Class findClassByClassId(Integer classId) {
 		// TODO Auto-generated method stub
 		return classMapper.selectClassByClassId(classId);

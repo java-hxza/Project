@@ -55,6 +55,22 @@ public interface StudentService {
 	 * @return
 	 */
 	public List<Student> selectStudentClass(Integer classId);
+	
+	/**
+	 * 查询本校全部学生
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Student> selectStudentUsedIntegral(String table,Integer schoolId);
+	
+	/**
+	 * 查询插入学生的id
+	 * @param studentName
+	 * @param parentName
+	 * @param studentSex
+	 * @return
+	 */
+	public Student selectStudentId(String studentName,String parentName,Integer studentSex);
 
 
 	/**
@@ -70,4 +86,11 @@ public interface StudentService {
 	 * @return
 	 */
 	public Integer updateStudent(Student student);
+	
+	/**
+	 * 批量修改学生课时
+	 * @param list
+	 * @return
+	 */
+	public Integer updateStuHour(List<Student> list);
 }

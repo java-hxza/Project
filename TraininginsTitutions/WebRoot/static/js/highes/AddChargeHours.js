@@ -2,6 +2,7 @@ $(function() {
 	if ($(".giftName option:selected").val() == 0) {
 		$('.giftNumber').attr("disabled", true);
 	}
+	$(".school").val($(".classes option:selected").attr("schoolIds2"));
 	if ($(".classes option:selected").attr("classTypeId") == 1) {
 		$(".money").val($(".classes option:selected").attr("dpMoney"));
 	} else {
@@ -70,6 +71,10 @@ $(function() {
 		});
 	});
 	$(".money").blur(function() {
+		if($(".money").val() == "") {
+			alert("请输入正确的金额");
+			$(".money").val("");
+		}
 		$(".integral").val($(".money").val());
 	});
 	$(".giftName").click(function() {
@@ -102,6 +107,10 @@ $(function() {
 		var integral = $.trim($(".integral").val());
 		var giftNumber = $.trim($(".giftNumber").val());
 		var giftId = $.trim($(".giftName option:selected").val());
+		if(stuId == "") {
+			alert("请选择学生！");
+			return flase;
+		}
 		if (dpMoney == "") {
 			alert("请填写收费金额！");
 			return false;
@@ -119,6 +128,7 @@ $(function() {
 		if (hours == "") {
 			hours = 0;
 		}
+		
 		$.ajax({
 			type : "POST",
 			url : "addChargeHours.html",

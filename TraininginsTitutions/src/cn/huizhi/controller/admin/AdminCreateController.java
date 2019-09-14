@@ -1,5 +1,6 @@
 package cn.huizhi.controller.admin;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,6 +123,10 @@ public class AdminCreateController {
 		Order orders = new Order();
 		orders.setSchoolId(schoolId);
 		List<Order> schoolOrderList = orderService.findOrderListBySchool(orders);
+		
+		//学校支出订单
+		List<Order> schoolExpenList = orderService.findExpenOrderList(orders);
+		
 		/**
 		 * 共支出
 		 */
@@ -134,12 +139,22 @@ public class AdminCreateController {
 			for (Order order : schoolOrderList) {
 				if(order.getIdentification()==0) {
 					schoolFeeceat += order.getDpMoney();
-				}else if(order.getIdentification() == 1) {
-					schoolExPenSum +=order.getFeecategoryMoney();
 				}
 			}
 		}
-		session.setAttribute("schoolExPenSum", schoolExPenSum);
+		
+		/**
+		 * 共支出
+		 */
+		for (Order order : schoolExpenList) {
+			if(order.getIdentification() == 1) {
+				schoolExPenSum +=order.getFeecategoryMoney();
+			}
+		}
+		BigDecimal bd = new BigDecimal(schoolExPenSum);
+
+		bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
+		session.setAttribute("schoolExPenSum", bd);
 		session.setAttribute("schoolFeeceat", schoolFeeceat);
 		session.setAttribute("schoolName", schoolName);
 		session.setAttribute("schoolId", schoolId);

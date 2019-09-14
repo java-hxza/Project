@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
 	 */
 	@Override
 	public List<Order> selectOrderOther(Integer schoolId) {
-		return selectOrderOther(schoolId);
+		return orderMapper.selectOrderOther(schoolId);
 	}
 
 	/**
@@ -85,14 +85,25 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> selectChildrenFeeSituation(Integer classId) {
+	public List<Order> selectUsedIntegral(String student) {
+		return orderMapper.selectUsedIntegral(student);
+	}
+	
+	
+	public List<Order> selectChildrenFeeSituation(Integer classId,Integer studentId) {
 		// TODO Auto-generated method stub
-		return orderMapper.selectChildrenFeeSituation(classId);
+		return orderMapper.selectChildrenFeeSituation(classId,studentId);
 	}
 
 	@Override
 	public List<Order> selectHighsFeeSituation(Integer classId) {
 		// TODO Auto-generated method stub
 		return orderMapper.selectHighsFeeSituation(classId);
+	}
+
+	@Override
+	public List<Order> selectOrderListByStudentId(Integer studentId) {
+		// TODO Auto-generated method stub
+		return orderMapper.selectOrderListByStudentId(studentId);
 	}
 }

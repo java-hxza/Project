@@ -173,8 +173,7 @@
 
 
 	<insert id="insertStudnetInfo" parameterType="Student">
-		insert into
-		traininginstitutions.student
+		insert into traininginstitutions.student
 		(studentName,studentSex,studentIDCard,
 		studentBirth, school,
 		parentName, telephone, familyAddress,
@@ -188,7 +187,7 @@
 		#{registrationConsultant}, #{startTime},
 		#{endTime}, #{theSurrogate}, #{remarks}, #{feeCategory},#{integral})
 		<!--order属性是取数据生成之前(before)or生成之后(after)  -->
-		<selectKey keyProperty="studentId" resultType="Student" order="AFTER">
+		<selectKey keyProperty="studentId" resultType="java.lang.Integer" order="AFTER">
     		<!--  当前事务最后一个生成的主键id-->
     		select last_insert_id()
     	</selectKey>
@@ -211,6 +210,36 @@
 		WHERE c.classId=#{0}
 		ORDER BY t.studentId
 	</select>
+
+	<select id="selectStudentUsedIntegral"
+		resultMap="selectStudentUsedIntegrals" statementType="STATEMENT">
+		SELECT
+		t.studentName,t.integral,t.school,t.studentId tsi,t.usedIntegral
+		,ca.className FROM student t
+		JOIN ${table} c ON t.studentId=c.studentId
+		JOIN class ca ON c.classId=ca.classId WHERE ca.schoolId=${schoolId}
+	</select>
+
+	<resultMap type="Student" id="selectStudentUsedIntegrals">
+		<id column="tsi" property="studentId" />
+		<result column="t.studentName" property="studentName" />
+		<result column="t.integral" property="integral" />
+		<result column="t.school" property="school" />
+		<result column="t.usedIntegral" property="usedIntegral" />
+		<collection property="classes" javaType="Class">
+			<result column="ca.className" property="className" />
+		</collection>
+	</resultMap>
+
+	<select id="selectStudentId" resultType="Student">
+		SELECT s.studentId
+		FROM student s
+		WHERE s.studentName LIKE
+		CONCAT('%',#{0},'%') AND s.parentName LIKE
+		CONCAT('%',#{1},'%') AND
+		s.studentSex=#{2}
+	</select>
+
 	<!-- 根据主键查询学生 -->
 	<select id="findStudentById" resultType="Student" parameterType="java.lang.Integer">
 		select <include refid="studentCol"/>
@@ -248,5 +277,20 @@
 				studentId = #{studentId}
 			</if>
 		</where>
+	</update>
+	
+	<!--批量修改学生课时  -->
+	<update id="updateStuHour" parameterType="Student">
+		<foreach collection="list" item="s" index="index" open="" close="" separator=";"></foreach>
+			update traininginstitutions.student 
+			<set>
+				<if test="s.studentHour !=null and s.studentHour!=''">
+					studentHour = studentHour-#{s.studentHour}  
+				</if>
+			</set>
+			
+			<where>
+				studentId = #{studentId} 
+			</where>
 	</update>
 </mapper>

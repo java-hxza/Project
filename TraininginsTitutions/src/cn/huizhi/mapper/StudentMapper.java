@@ -57,6 +57,21 @@ public interface StudentMapper {
 	 */
 	public List<Student> selectStudentClass(Integer classId);
 	
+	/**
+	 * 查询本校全部学生
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Student> selectStudentUsedIntegral(@Param("table")String table,@Param("schoolId")Integer schoolId);
+
+	/**
+	 * 查询插入学生的id
+	 * @param studentName
+	 * @param parentName
+	 * @param studentSex
+	 * @return
+	 */
+	public Student selectStudentId(String studentName,String parentName,Integer studentSex);
 	
 	/**
 	 * 根据主键查询学生
@@ -71,4 +86,11 @@ public interface StudentMapper {
 	 * @return
 	 */
 	public Integer updateStudent(Student student);
+	
+	/**
+	 * 批量修改学生课时
+	 * @param list
+	 * @return
+	 */
+	public Integer updateStuHour(List<Student> list);
 }

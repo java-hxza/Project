@@ -21,6 +21,7 @@
 	type="text/css" />
 <link href="${Path }/static/css/app.min.css" rel="stylesheet"
 	type="text/css" />
+	<link href="${Path }/static/css/style.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -33,10 +34,46 @@
 		<%@include file="/WEB-INF/jsp/admin/bar/leftSidebar.jsp" %>		
 		<div class="content-page">
 			<div class="content">
+	<!-- Start Content-->
+				<div class="container-fluid">
+
+					<div class="content">
 
 				<!-- Start Content-->
 				<div class="container-fluid">
+					<div class="navbar-custom">
+					<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
+
+						<li class="dropdown notification-list"><a
+							class="nav-link dropdown-toggle nav-user arrow-none mr-0"
+							data-toggle="dropdown" href="#" role="button"
+							aria-haspopup="false" aria-expanded="false"> <span
+								class="account-user-avatar"> <img
+									src="${Path }/static/images/avatar-1.jpg" alt="user-image"
+									class="rounded-circle">
+							</span> <span> <span class="account-user-name">${user.loginName }
+										</span> <span class="account-position">管理员</span>
+							</span>
+						</a>
+
+					</ul>
+					<button class="button-menu-mobile open-left disable-btn">
+						<i class="mdi mdi-menu"></i>
+					</button>
+					<div class="app-search">
+						<form>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Search...">
+								<span class="mdi mdi-magnify"></span>
+								<div class="input-group-append">
+									<button class="btn btn-primary" type="submit">Search</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- end Topbar -->
 					<!-- start page title -->
 					<div class="row">
 						<div class="col-12">
@@ -50,109 +87,114 @@
 										<li class="breadcrumb-item active">FAQ</li>
 									</ol>
 								</div>
-								<h4 class="page-title">管理员</h4>
+								<h4 class="page-title">教师信息</h4>
 							</div>
 						</div>
 					</div>
 					<!-- end page title -->
+							<div class="row">
+								<div class="col-12">
+									<div class="card">
+										<div class="card-body">
+											<div class="row mb-2">
+												<div class="col-sm-4">
+													<a href="javascript:void(0);" class="btn btn-danger mb-2 adds"
+														onclick="createTeacher()"><i
+														class="mdi mdi-plus-circle mr-2"></i>添加教师</a> 
+														<a href="javascript:void(0);" class="btn btn-danger mb-2 update"
+														onclick="updateTeacher()">
+														<i class="mdi mdi-plus-circle mr-2"></i>修改教师密码</a> 
+												</div>
+												<div class="col-sm-8">
+													<div class="text-sm-right">
+														<a href="javascript:void(0);" class="btn btn-danger mb-2 del" onclick="delTeacher()"><i
+															class="mdi mdi-plus-circle mr-2"></i>删除教师</a>
+														 <a href="javascript:void(0);" class="btn btn-danger mb-2 del"
+															onclick="teacherAuthorization()"> 
+														<i class="mdi mdi-plus-circle mr-2"></i>教师授权 </a>
+													</div>
+												</div>
+												<!-- end col-->
+											</div>
 
-
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="text-center">
-								<h3 class="">管理学校及城市</h3>
-								<p class="text-muted mt-3">教师信息</p>
-								<div class="row mb-2">
-									<div class="col-sm-8">
-										<a href="javascript:void(0);" class="btn btn-danger mb-2 adds"
-											onclick="createTeacher()"><i
-											class="mdi mdi-plus-circle mr-2"></i>添加教师</a> <a
-											href="javascript:void(0);" class="btn btn-danger mb-2 update"
-											onclick="updateTeacher()"><i
-											class="mdi mdi-plus-circle mr-2"></i>修改教师密码</a> <a
-											href="javascript:void(0);" class="btn btn-danger mb-2 del"
-											onclick="delTeacher()"><i
-											class="mdi mdi-plus-circle mr-2"></i>删除教师</a> <a
-											href="javascript:void(0);" class="btn btn-danger mb-2 del"
-											onclick="teacherAuthorization()"> <i
-											class="mdi mdi-plus-circle mr-2"></i>教师授权
-										</a>
-									</div>
-									<!-- end col-->
-								</div>
-							</div>
-						</div>
-						<!-- end col -->
-                        </div>
-					<!-- end row -->
-                                <!-- Question/Answer -->
-                                	<div class="table-responsive">
-										<table
-											class="table table-centered table-striped dt-responsive nowrap w-100"
-											id="products-datatable">
-											<thead>
-												<tr>
-													<th style="width: 20px;">
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" disabled
-																id="customCheck1"> <label
-																class="custom-control-label" for="customCheck1">&nbsp;</label>
-														</div>
-													</th>
-													<th>教师编号</th>
-													<th>教师名称</th>
-													<th>教学名称</th>
-													<th>教师所属分类</th>
-													<th>教师电话</th>
-													<th>备注</th>
-												</tr>
-											</thead>
-											<tbody>
 											
-												<c:forEach items="${teacherListBYSchoolId }" var="teacher">
-													<tr class="teacherId" >
-														<td>
-															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input  customCheckes" />
-																<label class="custom-control-label  customCheck" for="customCheck">&nbsp;</label>
-															</div>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${teacher.teacherId }</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${teacher.teacherName }</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${teacher.teacherType.teacherTypeName }</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >
-																<c:choose>
-																	<c:when test="${teacher.feeCategory ==1} ">少儿</c:when>
-																	<c:when test="${teacher.feeCategory ==1} ">高中</c:when>
-																	<c:otherwise>艺考</c:otherwise>
-																</c:choose>
-															</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${teacher.telephone }</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${teacher.remarks }</a>
-														</td>
-													</tr>
-												</c:forEach>	
-											</tbody>
-										</table>
-									</div>
-       				 </div>	
-       				 	
-                          
-					<!-- App js -->
-				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
-				<script type="text/javascript" src="${Path }/static/js/admin/leftSidebar.js"></script>
-				<script type="text/javascript" src="${Path }/static/js/admin/adminIndex.js"></script>
-				<script type="text/javascript" src="${Path }/static/js/admin/info/schoolTeacherInfo.js"></script>
-</body>
+											<!-- end row -->
+											<!-- Question/Answer -->
+											<div class="table-responsive">
+												<table
+													class="table table-centered table-striped dt-responsive nowrap w-100"
+													id="products-datatable">
+													<thead>
+														<tr>
+															<th style="width: 20px;">
+																<div class="custom-control custom-checkbox">
+																	<input type="checkbox" class="custom-control-input"
+																		disabled id="customCheck1"> <label
+																		class="custom-control-label" for="customCheck1">&nbsp;</label>
+																</div>
+															</th>
+															<th>教师编号</th>
+															<th>教师名称</th>
+															<th>教学名称</th>
+															<th>教师所属分类</th>
+															<th>教师电话</th>
+															<th>备注</th>
+														</tr>
+													</thead>
+													<tbody>
+
+														<c:forEach items="${teacherListBYSchoolId }" var="teacher">
+															<tr class="teacherId">
+																<td>
+																	<div class="custom-control custom-checkbox">
+																		<input type="checkbox"
+																			class="custom-control-input  customCheckes" /> <label
+																			class="custom-control-label  customCheck"
+																			for="customCheck">&nbsp;</label>
+																	</div>
+																</td>
+																<td class="table-user"><a
+																	href="javascript:void(0);"
+																	class="text-body font-weight-semibold">${teacher.teacherId }</a>
+																</td>
+																<td class="table-user"><a
+																	href="javascript:void(0);"
+																	class="text-body font-weight-semibold">${teacher.teacherName }</a>
+																</td>
+																<td class="table-user"><a
+																	href="javascript:void(0);"
+																	class="text-body font-weight-semibold">${teacher.teacherType.teacherTypeName }</a>
+																</td>
+																<td class="table-user"><a
+																	href="javascript:void(0);"
+																	class="text-body font-weight-semibold"> <c:choose>
+																			<c:when test="${teacher.feeCategory ==1} ">少儿</c:when>
+																			<c:when test="${teacher.feeCategory ==1} ">高中</c:when>
+																			<c:otherwise>艺考</c:otherwise>
+																		</c:choose>
+																</a></td>
+																<td class="table-user"><a
+																	href="javascript:void(0);"
+																	class="text-body font-weight-semibold">${teacher.telephone }</a>
+																</td>
+																<td class="table-user"><a
+																	href="javascript:void(0);"
+																	class="text-body font-weight-semibold">${teacher.remarks }</a>
+																</td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</div>
+										</div>
+
+
+										<!-- App js -->
+										<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
+										<script type="text/javascript"
+											src="${Path }/static/js/admin/leftSidebar.js"></script>
+										<script type="text/javascript"
+											src="${Path }/static/js/admin/adminIndex.js"></script>
+										<script type="text/javascript"
+											src="${Path }/static/js/admin/info/schoolTeacherInfo.js"></script></body>
 </html>

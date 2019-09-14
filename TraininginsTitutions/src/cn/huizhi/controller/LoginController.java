@@ -95,6 +95,7 @@ public class LoginController {
 	@ResponseBody
 	public HashMap<String, String> validateLogin(String loginName,String loginPassword,HttpSession session) {
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
+
 		User user = userService.findUserByLogin(loginName, loginPassword,schoolType);
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
 		if (user != null) {
@@ -116,11 +117,11 @@ public class LoginController {
 	 * @param schoolId
 	 * @param session
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("adminLogin.html")
 	@ResponseBody
 	public HashMap<String, String> validateAdminLogin(String loginName,String loginPassword,String schoolId,HttpSession session) {
-		User user = userService.findUserByLogin(loginName, loginPassword);
+		User user = userService.findUserByLogin(loginName, loginPassword,);
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
 		if(user!=null) {
 			session.setAttribute("user", user);
@@ -130,7 +131,7 @@ public class LoginController {
 			jsonMap.put("state", "0");
 		}
 		return jsonMap;
-	}
+	}*/
 	
 	/**
 	 * 返回主页面

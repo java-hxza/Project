@@ -32,8 +32,8 @@
 		css.studentName ccs_studentName,
 		css.teacherInClass ccs_teacherInClass,
 		ccs.classId ccs_classId,
-		o.givehour o_givehour,
-		o.addhour o_addhour
+		o.addhour o_addhour,
+		o.givehour	o_givehour		
 	</sql>
 
 	<resultMap type="ChildStuReistration"
@@ -53,8 +53,8 @@
 		<result column="ccs_studentName" property="studentName" />
 		<result column="ccs_teacherInClass" property="teacherInClass" />
 		<association property="order" javaType="Order">
-			<result column="o_givehour" property="givehour" />
-			<result column="o_addhour" property="addhour" />
+			<result column="o_addhour" property="addhour"/>
+			<result column="o_givehour" property="givehour"/>
 		</association>
 	</resultMap>
 	<!-- 查询学生课时总数 -->
@@ -62,16 +62,13 @@
 		resultMap="ChildStuReistrationMap">
 		select distinct
 		<include refid="ChildStuReistrationCol" />
-		from childsturegistration css
-		join childrenesclassstudnet ccs on
-		ccs.classesStudentId = css.childStuId
-		join traininginstitutions.class c
-		on c.classId = css.classId
-		join traininginstitutions.order o on
-		o.classId =css.classId
+		from childsturegistration css ,childrenesclassstudnet ccs, traininginstitutions.class c 
+		,traininginstitutions.order o
 		<where>
+			and ccs.classesStudentId = css.childStuId and c.classId = css.classId
+			and o.classId = css.classId
 			<if test="classId!=null and classId!=''">
-				c.classId = #{classId}
+				c.classId = #{classId} 
 			</if>
 		</where>
 		group by ccs.studentId
@@ -134,7 +131,7 @@
 		( studentName,
 		classId, classHours, dpId, contentOfCourses, classHour,
 		teacherId,
-		teacherInClass, childStuId, state, remarks )
+		teacherInClass, childStuId, state, remarks,thId)
 
 		values
 		<foreach collection="list" item="c" separator=",">
@@ -143,7 +140,7 @@
 			#{c.dpId},#{c.contentOfCourses},
 			#{c.classHour}, #{c.teacherId},
 			#{c.teacherInClass},
-			#{c.childStuId}, #{c.state},#{c.remarks})
+			#{c.childStuId}, #{c.state},#{c.remarks},#{c.thId})
 
 		</foreach>
 

@@ -68,7 +68,7 @@
 		select <include refid="childrenesClassStudnetCol"/>
 		from childrenesclassstudnet ccs,student t
 		<where>
-			ccs.studentId = t.studentId
+			ccs.studentId = t.studentId and ccs.state != 2
 			<if test="classId !=null and classId!=''">
 				and classId = #{classId}
 			</if>

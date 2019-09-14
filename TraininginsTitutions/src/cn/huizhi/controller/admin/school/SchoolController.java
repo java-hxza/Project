@@ -65,18 +65,29 @@ public class SchoolController {
 	@ResponseBody
 	public String expenditureOrder(Order order) {
 		
-		List<Order> expenditureOrderList = orderService.findOrderListBySchool(order);
+		List<Order> expenditureOrderList = orderService.findExpenOrderList(order);
 		if(expenditureOrderList.size()>0) {
 			return JSON.toJSONStringWithDateFormat(expenditureOrderList, "yyyy-MM-dd hh:mm:ss", SerializerFeature.WriteDateUseDateFormat);
 		}
 		return "";
 	}
 	
+	/**
+	 * 支出项目
+	 * @return
+	 */
 	@RequestMapping("AdminIncomeitems.html")
 	public String AdminIncomeitems() {
 		return "admin/income/selectSchoolIncomeInfo";
 	}
-	
+	/**
+	 * 收入项目
+	 * @return
+	 */
+	@RequestMapping("AdminExpenditureitemses.html")
+	public String AdminExpenditureitemses() {
+		return "admin/expen/selectSchoolExpenInfo";
+	}
 	
 	@RequestMapping("selectSchoolIncomeInfo.html")
 	public String selectSchoolIncomeInfo(Integer schoolId,String schoolName,HttpSession session) {
@@ -98,7 +109,7 @@ public class SchoolController {
 		List<Expenditureitems> expenditureitemList = expenditureitemsService.selectExpenditureitems(schoolId);
 		session.setAttribute("expenditureitemList", expenditureitemList);
 		
-		return "admin/expen/selectSchoolExpenInfo";
+		return "admin/expen/Expenditureitemses";
 	}
 	
 	/**

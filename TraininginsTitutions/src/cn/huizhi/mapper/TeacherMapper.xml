@@ -4,19 +4,6 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.TeacherMapper">
 
-	<!--查询所有教师 -->
-	<select id="selectTeacher" resultMap="selectTeacherCol">
-		SELECT
-		t.teacherId
-		tid,t.teacherName
-		tname,t.telePhone,t.remarks,t.loginPassword,tt.teacherTypeName
-		ttname,s.schoolName sname
-		FROM teacher t
-		JOIN teacherdiction td ON t.teacherId = td.teacherId
-		JOIN teachertype tt ON t.teacherTypeId = tt.teacherTypeId
-		JOIN school s ON td.schoolId=s.schoolId
-		WHERE t.feeCategory=2 AND s.schoolId=#{0}
-	</select>
 
 	<resultMap type="Teacher" id="selectTeacherCol">
 		<id column="tid" property="teacherId" />
@@ -57,11 +44,12 @@
 	<!--教师登录 -->
 	<select id="selectTeacherByLogin" resultMap="teacherByLogin">
 		select
-		<include refid="teacherByLoginCol" />
+		<include refid="teacherByLoginCol"/>
 		from teacher t
 		join department dp on dp.departmentId = t.departmentId
 		join teacherdiction td on td.teacherId = t.teacherId
-		join school sc on sc.schoolId = td.schoolId
+		join school sc on
+		sc.schoolId = td.schoolId
 		<where>
 			<if test="teacherName!='' and teacherName!=null">
 				t.teacherName = #{teacherName }
@@ -80,12 +68,34 @@
 			</if>
 		</where>
 	</select>
+	
 	<update id="updateTeacher" parameterType="Teacher">
 		UPDATE
-		traininginstitutions.teacher SET teacherName = #{teacherName} ,
-		loginPassword = #{loginPassword} , teacherTypeId = #{teacherTypeId} ,
-		telePhone = #{telephone} , remarks = #{remarks} WHERE teacherId =
-		#{teacherId} ;
+		traininginstitutions.teacher 
+		<set>
+			<if test="teacherName != null and teacherName != '' ">
+				teacherName = #{teacherName},
+			</if>
+			<if test="loginPassword != null and loginPassword != '' ">
+				loginPassword = #{loginPassword}, 
+			</if>
+			<if test="teacherTypeId != null and teacherTypeId !='' ">
+				 teacherTypeId = #{teacherTypeId}, 
+			</if>
+			<if test="telephone != null and telephone !='' ">
+				telePhone = #{telephone}, 
+			</if>
+			<if test="remarks != null and remarks !='' ">
+				remarks = #{remarks} 
+			</if>
+		
+		</set> 
+		 <where>
+		 	<if test="teacherId !=null and teacherId != '' ">
+		 		teacherId = #{teacherId} 
+		 	</if>	
+		 </where> 
+		 
 	</update>
 
 	<delete id="delTeacher">
@@ -95,12 +105,15 @@
 	</delete>
 
 	<insert id="addTeacher" parameterType="Teacher">
-		INSERT INTO
-		traininginstitutions.teacher (teacherName, loginPassword,
-		teacherTypeId, feeCategory,telePhone,remarks,departmentId)VALUES(#{teacherName},
-		#{loginPassword},
-		#{teacherTypeId},
-		#{feeCategory},#{telephone},#{remarks},#{departmentId});
+		insert into traininginstitutions.teacher ( teacherName, loginPassword,
+		teacherTypeId, feeCategory, telePhone, remarks,departmentId )
+		values ( #{teacherName}, #{loginPassword}, #{teacherTypeId}, #{feeCategory},
+		#{telephone}, #{remarks} ,#{departmentId})
+			<!--order属性是取数据生成之前(before)or生成之后(after)  -->
+		<selectKey keyProperty="teacherId" resultType="java.lang.Integer" order="AFTER">
+    		<!--  当前事务最后一个生成的主键id-->
+    		select last_insert_id()
+    	</selectKey>
 	</insert>
 
 
@@ -108,21 +121,22 @@
 	<!--根据学校逐渐和教师类别查询教师 -->
 	<select id="selecTeachersByTeacherTypeId" resultType="Teacher">
 		select t.*
-		from teacher t 
+		from teacher t
 		join teacherdiction td on td.teacherId = t.teacherId
-		join school sc on sc.schoolId = td.schoolId
+		join school sc on
+		sc.schoolId = td.schoolId
 		<where>
 			<if test="schoolId !=null and schoolId!=''">
 				sc.schoolId = #{schoolId }
 			</if>
 			<if test="teacherTypeId !=null and teacherTypeId !=''">
-				and t.teacherTypeId  = #{teacherTypeId }
+				and t.teacherTypeId = #{teacherTypeId }
 			</if>
-		</where> 
-		
+		</where>
+
 	</select>
-	
-	<!--  根据学校主键查询学校下所有老师以及教师类别-->
+
+	<!-- 根据学校主键查询学校下所有老师以及教师类别 -->
 	<sql id="selectTeacherListBySchoolIdCol">
 		t.teacherId as t_teacherId,
 		t.teacherName t_teacherName,
@@ -134,36 +148,51 @@
 		ty.teacherTypeName ty_teacherTypeName,
 		td.schoolId td_schoolId,
 		td.teacherDictionId td_teacherDictionId,
-		td.teacherId td_teacherId
-	</sql> 
-	<!--  根据学校主键查询学校下所有老师以及教师类别-->
-	<select id="selectTeacherListBySchoolId" resultMap="selectTeacherListBySchoolIdMap" parameterType="java.lang.Integer">
-		select <include refid="selectTeacherListBySchoolIdCol"/>
-		from teacher t
-		join teacherDiction td on td.teacherId = t.teacherId
-		join teacherType ty on ty.teacherTypeId= t.teacherTypeId
+		td.teacherId td_teacherId,
+		d.departmentId d_departmentId,
+		d.departmentName d_departmentName,
+		sc.schoolName sc_schoolName
+	</sql>
+	<!-- 根据学校主键查询学校下所有老师以及教师类别 -->
+	<select id="selectTeacherListBySchoolId" resultMap="selectTeacherListBySchoolIdMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="selectTeacherListBySchoolIdCol" />
+		from teacher t,teacherDiction td, teacherType ty ,department d,school sc
 		<where>
+			td.teacherId = t.teacherId and ty.teacherTypeId= t.teacherTypeId 
+			and d.departmentId = t.departmentId and sc.schoolId = td.schoolId
 			<if test="schoolId !=null and schoolId!=''">
-				td.schoolId = #{schoolId}
+				and td.schoolId = #{schoolId}
 			</if>
-		</where> 
+		</where>
 	</select>
-	<!--  根据学校主键查询学校下所有老师以及教师类别-->
+	<!-- 根据学校主键查询学校下所有老师以及教师类别 -->
 	<resultMap type="Teacher" id="selectTeacherListBySchoolIdMap">
-		<id column="t_teacherId" property="teacherId"/>
-		<result column="t_teacherName" property="teacherName"/>
-		<result column="t_feeCategory" property="feeCategory"/>
-		<result column="t_loginPassword" property="loginPassword"/>
-		<result column="t_remarks" property="remarks"/>
-		<result column="t_teacherTypeId" property="teacherTypeId"/>
-		<result column="t_telePhone" property="telephone" javaType="java.lang.String"/>
+		<id column="t_teacherId" property="teacherId" />
+		<result column="t_teacherName" property="teacherName" />
+		<result column="t_feeCategory" property="feeCategory" />
+		<result column="t_loginPassword" property="loginPassword" />
+		<result column="t_remarks" property="remarks" />
+		<result column="t_teacherTypeId" property="teacherTypeId" />
+		<result column="t_telePhone" property="telephone"
+			javaType="java.lang.String" />
 		<association property="teacherType" javaType="TeacherType">
-			<result column="ty_teacherTypeName" property="teacherTypeName"/>
+			<result column="ty_teacherTypeName" property="teacherTypeName" />
 		</association>
-		<association property="teacherDiction" javaType="TeacherDiction">
-			<result column="td_schoolId" property="schoolId"/>
-			<result column="td_teacherDictionId" property="teacherDictionId"/>
-			<result column="td_teacherId" property="teacherId"/>
+		<association property="teacherDiction"
+			javaType="TeacherDiction">
+			<result column="td_schoolId" property="schoolId" />
+			<result column="td_teacherDictionId"
+				property="teacherDictionId" />
+			<result column="td_teacherId" property="teacherId" />
+		</association>
+		<association property="deparMent" javaType="DepartMent">
+			<id column="d_departmentId" property="departmentId"/>
+			<result column="d_departmentName" property="departmentName"/>
+		</association>
+		<association property="school" javaType="School">
+			<result column="sc_schoolName" property="schoolName"/>
 		</association>
 	</resultMap>
 
@@ -173,9 +202,10 @@
 		loginPassword=#{loginPassword} AND teacherTypeId=#{teacherTypeId} AND
 		feeCategory=#{feeCategory}
 	</select>
-	<!--根据教师主键查询教师是否存在-->
-	<select id="selectTeacherByTeacherId" resultType="Teacher" parameterType="java.lang.Integer">
-		select * 
+	<!--根据教师主键查询教师是否存在 -->
+	<select id="selectTeacherByTeacherId" resultType="Teacher"
+		parameterType="java.lang.Integer">
+		select *
 		from teacher
 		<where>
 			<if test="teacherId !=null and teacherId!=''">
@@ -183,16 +213,26 @@
 			</if>
 		</where>
 	</select>
-	
-	
- 	<select id="selecTeacherByTeacherName" resultType="Teacher" parameterType="java.lang.String">
- 		select * 
- 		from teacher
- 		<where>
- 			<if test="teacherName !=null and teacherName!=''">
- 				teacherName =#{teacherName}
- 			</if>
- 		</where>
- 	</select>
+
+
+	<select id="selecTeacherByTeacherName" resultType="Teacher"
+		parameterType="java.lang.String">
+		select *
+		from teacher
+		<where>
+			<if test="teacherName !=null and teacherName!=''">
+				teacherName =#{teacherName}
+			</if>
+		</where>
+	</select>
+
+	<!--查询招生教师 -->
+	<select id="selectTeacherZS" resultType="Teacher">
+		SELECT t.*
+		FROM teacher t
+		JOIN teachertype tt ON t.teacherTypeId=tt.teacherTypeId
+		JOIN teacherdiction td ON t.teacherId=td.teacherId
+		WHERE tt.teacherTypeName LIKE CONCAT('%', '招生','%') AND td.schoolId=#{0}
+	</select>
 
 </mapper>

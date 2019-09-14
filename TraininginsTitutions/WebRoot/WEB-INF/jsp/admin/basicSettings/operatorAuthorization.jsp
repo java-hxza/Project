@@ -146,7 +146,7 @@
 			}
 			
 			$.ajax({
-				url : 'operatorAuthor.html',
+				url : 'rootOperatorAuthor.html',
 				data : {
 					userId : userId,
 					schoolId : schoolId
@@ -156,18 +156,18 @@
 				success : function(data) {
 					if (data.state == "1") {
 						alert("授权成功！");
-						location.href = "adminIndex.html";
+						location.href = "Teacher.html";
 					} else if (data.state == "2") {
 						alert("教师已授权");
-						location.href = "adminIndex.html";
+						location.href = "Teacher.html";
 					} else {
 						alert("教师授权失败，请重试！");
-						location.href = "adminIndex.html";
+						location.href = "Teacher.html";
 					}
 				},
 				error : function(){
 					alert("请刷新重试！");
-					location.href = "adminIndex.html";
+					location.href = "Teacher.html";
 				} 
 			})
 

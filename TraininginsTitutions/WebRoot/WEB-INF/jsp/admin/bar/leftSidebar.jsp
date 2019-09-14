@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
- <div class="left-side-menu">
+ <div class="left-side-menu" style="background: #344451;">
 
 			<div class="slimscroll-menu" id="left-side-menu-container">
 

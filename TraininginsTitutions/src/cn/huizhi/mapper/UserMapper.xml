@@ -24,8 +24,8 @@
 			<if test="loginPassword!=null and loginPassword!=''">
 				and u.loginPassword=#{loginPassword}
 			</if>
-			<if test="schoolType and schoolType''">
-				and sc.schoolType=#{schoolType}
+			<if test="schoolType !=null and schoolType!=''">
+				and sc.schoolType = #{schoolType}
 			</if>
 		</where>
 	</select>

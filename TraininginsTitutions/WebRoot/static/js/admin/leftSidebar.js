@@ -11,6 +11,10 @@ $(function(){
 		location.href = "AdminIncomeitems.html";
 	}
 	
+	AdminExpenditureitemses = function(){
+		location.href = "AdminExpenditureitemses.html";
+	}
+	
 	/**
 	 * 教师信息页面跳转
 	 */

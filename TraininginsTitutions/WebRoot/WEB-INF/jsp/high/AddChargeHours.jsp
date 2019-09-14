@@ -285,7 +285,7 @@
 														<div class="form-group">
 															<label for="billing-first-name">校区信息</label> <input
 																class="form-control school" type="text"
-																id="billing-first-name" value="${school }" disabled />
+																id="billing-first-name" disabled />
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -294,7 +294,8 @@
 																class="form-control stuId" id="example-select">
 																<c:forEach items="${children }" var="c">
 																	<option value="${c.studentId }"
-																		name="${c.childrenesClassStudnet.classId }" class="delSt">${c.studentName}</option>
+																		name="${c.childrenesClassStudnet.classId }"
+																		class="delSt">${c.studentName}</option>
 																</c:forEach>
 															</select>
 														</div>
@@ -317,7 +318,7 @@
 																		dpMoney="${c.departmentOfPediatrics.dpMoney }"
 																		dpMoneyVip="${c.departmentOfPediatrics.dpMoneyVip }"
 																		classTypeId="${c.classTypeId }"
-																		>${c.className}</option>
+																		schoolIds2="${c.school.schoolName }">${c.className}</option>
 																</c:forEach>
 															</select>
 														</div>
@@ -334,8 +335,7 @@
 															<label for="example-number">本次新增课时</label> <input
 																type="text" class="form-control hour"
 																data-toggle="input-mask"
-																data-mask-format="00000000000000000"
-																data-reverse="true"
+																data-mask-format="00000000000000000" data-reverse="true"
 																value="0">
 														</div>
 													</div>
@@ -354,8 +354,7 @@
 															<label for="example-number">本次赠送课时</label> <input
 																type="text" class="form-control hours"
 																data-toggle="input-mask"
-																data-mask-format="00000000000000000"
-																data-reverse="true"
+																data-mask-format="00000000000000000" data-reverse="true"
 																value="0">
 														</div>
 													</div>
@@ -393,8 +392,7 @@
 															<label for="billing-last-name">赠品数量</label> <input
 																type="text" class="form-control giftNumber"
 																data-toggle="input-mask"
-																data-mask-format="00000000000000000"
-																data-reverse="true">
+																data-mask-format="00000000000000000" data-reverse="true">
 														</div>
 													</div>
 													<div class="col-md-6">

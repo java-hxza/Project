@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.ReserveSchoolMapper">
+
+	<sql id="reserCol">
+		r.reserveSchoolId r_reserveSchoolId,
+		r.schoolId r_schoolId,
+		r.studentId r_studentId,
+		r.state r_state,
+		s.endTime s_endTime,
+		s.familyAddress s_familyAddress,
+		s.feeCategory s_feeCategory,
+		s.integral s_integral,
+		s.parentName s_parentName,
+		s.registrationChannels s_registrationChannels,
+		s.registrationConsultant s_registrationConsultant,
+		s.remarks s_remarks, 
+		s.school s_school,
+		s.startTime s_startTime,
+		s.studentBirth s_studentBirth,
+		s.studentHour s_studentHour,
+		s.studentId s_studentId,
+		s.studentIDCard s_studentIDCard,
+		s.studentName s_studentName,
+		s.studentSex s_studentSex,
+		s.telephone s_telephone,
+		s.theSurrogate s_theSurrogate,
+		s.usedIntegral s_usedIntegral
+	</sql>
+	
+	<resultMap type="ReserveSchool" id="reserveSchoolBySchoolIdMap">
+		<id column="r_reserveSchoolId" property="reserveSchoolId"/>
+		<result column="r_schoolId" property="schoolId"/>
+		<result column="r_studentId" property="studentId"/>
+		<result column="r_state" property="state"/>
+		<association property="student" javaType="Student">
+			<result column="s_endTime" property="endTime"/>
+			<result column="s_familyAddress" property="familyAddress"/>
+			<result column="s_feeCategory" property="feeCategory"/>
+			<result column="s_integral" property="integral"/>
+			<result column="s_parentName" property="parentName"/>
+			<result column="s_registrationChannels" property="registrationChannels"/>
+			<result column="s_registrationConsultant" property="registrationConsultant"/>
+			<result column="s_remarks" property="remarks"/>
+			<result column="s_school" property="school"/>
+			<result column="s_startTime" property="startTime"/>
+			<result column="s_studentBirth" property="studentBirth"/>
+			<result column="s_studentHour" property="studentHour"/>
+			<result column="s_studentId" property="studentId"/>
+			<result column="s_studentIDCard" property="studentIDCard"/>
+			<result column="s_studentName" property="studentName"/>
+			<result column="s_studentSex" property="studentSex"/>
+			<result column="s_telephone" property="telephone"/>
+			<result column="s_theSurrogate" property="theSurrogate"/>
+			<result column="s_usedIntegral" property="usedIntegral"/>
+		</association>
+	</resultMap>
+	<select id="findReserveSchoolBySchoolId" resultMap="reserveSchoolBySchoolIdMap">
+		select <include refid="reserCol"/>
+		from reserveschool r,student s
+		<where>
+			r.studentId = s.studentId and r.state = 0
+			<if test="schoolId != null and schoolId != ''">
+				and r.schoolId = #{schoolId}
+			</if>
+		</where> 
+	</select>
+	
+	<!--批量分班-->
+	<update id="updateReserveState" parameterType="ReserveSchool">
+		<foreach collection="list" index="index" item="c" close="" open="" separator=";">
+			update traininginstitutions.reserveschool 
+				<set>
+					<if test="c.state!=null and c.state!=''">
+						state = #{c.state}
+					</if>
+				</set>				
+				<where>
+					<if test="c.reserveSchoolId !=null and c.reserveSchoolId!=''">
+						studentId = #{c.studentId}
+					</if>				
+				</where>
+		</foreach>
+	</update>
+</mapper>

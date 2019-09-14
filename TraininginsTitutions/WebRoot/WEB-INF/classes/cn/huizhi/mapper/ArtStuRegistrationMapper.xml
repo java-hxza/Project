@@ -18,8 +18,6 @@
 		art.teacherId art_teacherId,
 		art.state art_state,
 		art.teacherInClass art_teacherInClass,
-		o.addhour o_addhour,
-		o.givehour	o_givehour
 	</sql>
 	
 	<resultMap type="ArtStuRegistration" id="findArtStuRegistrationByClassIdMap">
@@ -41,23 +39,29 @@
 			<result column="o_givehour" property="givehour"/>
 		</association>
 	</resultMap>
-	
-	<select id="findArtStuRegistrationByClassId" resultMap="findArtStuRegistrationByClassIdMap">
-		
+	 
+	<select id="findArtStuRegistrationByClassId" resultMap="findArtStuRegistrationByClassIdMap" parameterType="java.lang.Integer">
+		select <include refid="findArtStuRegistrationByClassIdCol"/>
+		from artsturegistration art,traininginstitutions.class c,traininginstitutions.order o
+		<where>
+			c.classId = art.classId and o.classId = art.classId
+			<if test="classId!=null and classId!=''">
+				art.classId = #{classId}
+			</if>
+		</where>
 	</select>
 
-
+	<!-- 批量登记 -->
 	<insert id="insertArtStuRegistration" parameterType="ArtStuRegistration">
 		insert into traininginstitutions.artsturegistration
 		( studentName, classId, classHours, dpId, contentOfCourses,
-		classHour, teacherId, teacherInClass, highesStuId, state, remarks )
+		classHour, teacherId, teacherInClass, highesStuId, state, remarks,thId )
 		values
 		<foreach collection="list" item="c" separator=",">
 			 ( #{c.studentName}, #{c.classId}, #{c.classHours}, #{c.dpId},#{c.ontentOfCourses},
 			#{c.classHour}, #{c.teacherId}, #{c.teacherInClass}, #{c.highesStuId}, #{c.state},
-			#{c.remarks} )
+			#{c.remarks} ,#{c.thId})
 		</foreach>
 	</insert>
-	
 
 </mapper>

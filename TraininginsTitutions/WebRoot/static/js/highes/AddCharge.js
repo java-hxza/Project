@@ -1,16 +1,19 @@
 $(function() {
-	$(".money").val($(".departmentofpediatricsId option:selected").attr("name"));
 	var Time = new Date();
 	var month = null;
+	var dpMoneyFeecateIds = 0;
+	$(".school").val($(".classes option:selected").attr("schoolIds2"));
+	for (var i = 0; i < $(".feecateIds").length; i++) {
+		dpMoneyFeecateIds = dpMoneyFeecateIds + parseFloat($.trim($(".feecateIds").eq(i).val()));
+	}
+	$(".dpMoney").val(dpMoneyFeecateIds.toFixed(1));
+	$(".integral").val($(".dpMoney").val());
 	if ((Time.getMonth() + 1) < 10) {
 		month = 0 + (Time.getMonth() + 1).toString();
 	} else {
 		month = Time.getMonth() + 1;
 	}
 	$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
-	$(".departmentofpediatricsId").click(function() {
-		$(".money").val($(".departmentofpediatricsId option:selected").attr("name"));
-	});
 	$(".giftName").click(function() {
 		if ($(".giftName option:selected").val() == 0) {
 			$('.giftNumber').attr("disabled", true);
@@ -18,6 +21,15 @@ $(function() {
 		} else {
 			$('.giftNumber').removeAttr("disabled");
 			$(".giftNumber").val(1);
+		}
+	});
+	$(".feecateId").click(function() {
+		if ($(".feecateId option:selected").val() == 0) {
+			$('.dpMoneyActivity').attr("disabled", true);
+			$(".dpMoneyActivity").val("");
+		} else {
+			$('.dpMoneyActivity').removeAttr("disabled");
+			$(".dpMoneyActivity").val($(".dpMoney").val());
 		}
 	});
 	$(".classes").click(function() {
@@ -50,7 +62,60 @@ $(function() {
 		}
 	});
 	$(".dpMoney").blur(function() {
-		$(".integral").val($(".dpMoney").val());
+		if($(".dpMoney").val() == "") {
+			alert("请输入正确的金额");
+			$(".dpMoney").val("");
+			if($(".feecateId").val() == 0) {
+				$(".integral").val("");
+			}else {
+				$(".dpMoneyActivity").val("");
+				$(".integral").val("");
+			}
+		}else {
+			if($(".feecateId").val() == 0) {
+				$(".integral").val($(".dpMoney").val());
+			}else {
+				if($(".feecateId option:selected").attr("discount") == "") {
+					$(".dpMoneyActivity").val((parseFloat($.trim($(".dpMoney").val())) - $(".feecateId option:selected").attr("activityMoneylast")).toFixed(1));
+				}else {
+					$(".dpMoneyActivity").val((parseFloat($.trim($(".dpMoney").val())) * ($(".feecateId option:selected").attr("activityMoneylast")/100)).toFixed(1));
+				}
+				$(".integral").val($(".dpMoneyActivity").val());
+			}
+		}
+	});
+	$(".feecateIds").blur(function() {
+		dpMoneyFeecateIds = 0;
+		for (var i = 0; i < $(".feecateIds").length; i++) {
+			if($.trim($(".feecateIds").eq(i).val()) != "") {
+				dpMoneyFeecateIds = dpMoneyFeecateIds + parseFloat($.trim($(".feecateIds").eq(i).val()));
+			}
+		}
+		$(".dpMoney").val(dpMoneyFeecateIds.toFixed(1));
+		if($(".feecateId").val() == 0) {
+			$(".integral").val($(".dpMoney").val());
+		}else {
+			if($(".feecateId option:selected").attr("discount") == "") {
+				$(".dpMoneyActivity").val((parseFloat($.trim($(".dpMoney").val())) - $(".feecateId option:selected").attr("activityMoneylast"))).toFixed(1);
+			}else {
+				$(".dpMoneyActivity").val((parseFloat($.trim($(".dpMoney").val())) * ($(".feecateId option:selected").attr("activityMoneylast")/100)).toFixed(1));
+			}
+			$(".integral").val($(".dpMoneyActivity").val());
+		}
+	});
+	$(".feecateId").blur(function() {
+		if($(".feecateId").val() != 0) {
+			if($(".feecateId option:selected").attr("discount") == "") {
+				$(".dpMoneyActivity").val((parseFloat($.trim($(".dpMoney").val())) - $(".feecateId option:selected").attr("activityMoneylast")).toFixed(1));
+				$(".integral").val($(".dpMoneyActivity").val());
+			}else {
+				$(".dpMoneyActivity").val((parseFloat($.trim($(".dpMoney").val())) * ($(".feecateId option:selected").attr("discount")/100)).toFixed(1));
+				$(".integral").val($(".dpMoneyActivity").val());
+			}
+		}else {
+			$(".dpMoneyActivity").val("");
+			$(".integral").val($(".dpMoney").val());
+		}
 	});
 	var time = null;
 	$(".firstdate").blur(function() {
@@ -94,15 +159,37 @@ $(function() {
 		var lastdate = $.trim($(".lastdate").val());
 		var stuId = $.trim($(".stuId").val());
 		var classId = $.trim($(".classes option:selected").val());
-		var feecateId = $.trim($(".feecateId").val());
 		var personliable = $.trim($(".personliable").val());
 		var remarks = $.trim($(".remarks").val());
 		var paymentmethodId = $.trim($(".paymentmethodId").val());
 		var integral = $.trim($(".integral").val());
 		var giftNumber = $.trim($(".giftNumber").val());
 		var giftId = $.trim($(".giftName option:selected").val());
+		var date2 = Time.getFullYear().toString() + month.toString() + Time.getDate().toString();
+		var feecateId = "";
+		var number = 0;
+		for (var i = 0; i < $(".feecateIds").length; i++) {
+			if($.trim($(".feecateIds").eq(i).val()) != "" && $.trim($(".feecateIds").eq(i).val()) != 0) {
+				number++;
+				feecateId = $.trim(feecateId + "," +  $(".feecateIds").eq(i).attr("chargeTypeId").toString());
+			}
+		}
+		feecateId = feecateId.substring(1);
+		if(number == 0) {
+			alert("请填写至少一个收费项目！");
+			return false;
+		}
+		if($(".feecateId").val() != 0) {
+			if($(".dpMoneyActivity").val() == "" || $(".dpMoneyActivity").val() == 0) {
+				alert("请填写打折后金额！");
+				return false;
+			}
+		}
 		if (dpMoney == "") {
 			alert("请填写收费金额！");
+			return false;
+		} else if (dpMoney < 1) {
+			alert("请填写正确的收费金额！");
 			return false;
 		}
 		if (firstdate == "") {
@@ -119,6 +206,17 @@ $(function() {
 		}
 		if(giftNumber == "") {
 			giftNumber = 0;
+		}
+		if(integral == "") {
+			alert("请填写积分！");
+			return false;
+		}
+		if($(".dpMoneyActivity").val() != "" && $(".dpMoneyActivity").val() != 0) {
+			dpMoney = parseFloat($.trim($(".dpMoneyActivity").val())).toFixed(1);
+		}
+		var discount = null;
+		if($.trim($(".dpMoneyActivity").val()) != "" && $.trim($(".dpMoneyActivity").val()) != 0) {
+			discount = (parseFloat($.trim($(".dpMoney").val())).toFixed(1) - dpMoney).toFixed(1);
 		}
 		$.ajax({
 			type : "POST",
@@ -137,7 +235,9 @@ $(function() {
 				giftNumber : giftNumber,
 				integral : integral,
 				personliable : personliable,
-				hour : time
+				hour : time,
+				date : date2,
+				discount : discount
 			},
 			dataType : "json",
 			success : function(data) {

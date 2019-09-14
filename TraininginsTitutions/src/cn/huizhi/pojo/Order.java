@@ -5,7 +5,7 @@ import java.util.Date;
 public class Order {
 
 	private Integer orderId;
-	private Integer feecateId;
+	private String feecateId;
 	private Double dpMoney;
 	private Integer stuId;
 	private Date startTime;
@@ -23,16 +23,17 @@ public class Order {
 	private String orderNumber;
 	private Integer expenditureitemsId;
 	private Integer classId;
-	
+
 	/**
 	 * 学生交钱总数
 	 */
 	private Double sumDpMoney;
-	
+
 	private Integer giftId;
 	private Integer giftNumber;
-	
-	private Integer integral;
+	private Double integral;
+	private Integer teacherId;
+	private Double discount;
 	private Date endTime;
 	/**
 	 * 学生
@@ -57,20 +58,20 @@ public class Order {
 	 * 支出类型
 	 */
 	private Expenditureitems expenditureitems;
-	
+
+	private School school;
+
 	public Order() {
 		super();
 	}
 
-
-
-	public Order(Integer orderId, Integer feecateId, Double dpMoney, Integer stuId, Date startTime, Integer schoolId,
+	public Order(Integer orderId, String feecateId, Double dpMoney, Integer stuId, Date startTime, Integer schoolId,
 			Integer identification, Double feecategoryMoney, Integer paymentmethodId, String personliable,
 			Integer departmentofpediatricsId, Integer addhour, Integer givehour, Date firstdate, Date lastdate,
 			String remarks, String orderNumber, Integer expenditureitemsId, Integer classId, Double sumDpMoney,
-			Integer giftId, Integer giftNumber, Integer integral, Date endTime, Student student,
-			PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics, FeeCategory feeCategory,
-			Expenditureitems expenditureitems) {
+			Integer giftId, Integer giftNumber, Double integral, Integer teacherId, Double discount, Date endTime,
+			Student student, PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics,
+			FeeCategory feeCategory, Expenditureitems expenditureitems, School school) {
 		super();
 		this.orderId = orderId;
 		this.feecateId = feecateId;
@@ -95,35 +96,17 @@ public class Order {
 		this.giftId = giftId;
 		this.giftNumber = giftNumber;
 		this.integral = integral;
+		this.teacherId = teacherId;
+		this.discount = discount;
 		this.endTime = endTime;
 		this.student = student;
 		this.paymentMethod = paymentMethod;
 		this.departmentOfPediatrics = departmentOfPediatrics;
 		this.feeCategory = feeCategory;
 		this.expenditureitems = expenditureitems;
+		this.school = school;
 	}
 
-
-
-	public Integer getIntegral() {
-		return integral;
-	}
-
-
-
-	public void setIntegral(Integer integral) {
-		this.integral = integral;
-	}
-
-
-
-	public Double getSumDpMoney() {
-		return sumDpMoney;
-	}
-
-	public void setSumDpMoney(Double sumDpMoney) {
-		this.sumDpMoney = sumDpMoney;
-	}
 	public Integer getOrderId() {
 		return orderId;
 	}
@@ -132,11 +115,11 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-	public Integer getFeecateId() {
+	public String getFeecateId() {
 		return feecateId;
 	}
 
-	public void setFeecateId(Integer feecateId) {
+	public void setFeecateId(String feecateId) {
 		this.feecateId = feecateId;
 	}
 
@@ -276,6 +259,54 @@ public class Order {
 		this.classId = classId;
 	}
 
+	public Double getSumDpMoney() {
+		return sumDpMoney;
+	}
+
+	public void setSumDpMoney(Double sumDpMoney) {
+		this.sumDpMoney = sumDpMoney;
+	}
+
+	public Integer getGiftId() {
+		return giftId;
+	}
+
+	public void setGiftId(Integer giftId) {
+		this.giftId = giftId;
+	}
+
+	public Integer getGiftNumber() {
+		return giftNumber;
+	}
+
+	public void setGiftNumber(Integer giftNumber) {
+		this.giftNumber = giftNumber;
+	}
+
+	public Double getIntegral() {
+		return integral;
+	}
+
+	public void setIntegral(Double integral) {
+		this.integral = integral;
+	}
+
+	public Integer getTeacherId() {
+		return teacherId;
+	}
+
+	public void setTeacherId(Integer teacherId) {
+		this.teacherId = teacherId;
+	}
+
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+
 	public Date getEndTime() {
 		return endTime;
 	}
@@ -324,20 +355,12 @@ public class Order {
 		this.expenditureitems = expenditureitems;
 	}
 
-	public Integer getGiftId() {
-		return giftId;
+	public School getSchool() {
+		return school;
 	}
 
-	public void setGiftId(Integer giftId) {
-		this.giftId = giftId;
-	}
-
-	public Integer getGiftNumber() {
-		return giftNumber;
-	}
-
-	public void setGiftNumber(Integer giftNumber) {
-		this.giftNumber = giftNumber;
+	public void setSchool(School school) {
+		this.school = school;
 	}
 
 }

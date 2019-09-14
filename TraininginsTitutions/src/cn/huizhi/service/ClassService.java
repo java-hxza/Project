@@ -57,8 +57,20 @@ public interface ClassService {
 	 */
 	public List<Class> selectClass(Integer schoolId,Integer classType);
 	
+	/**
+	 * 查询普通班和vip班
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Class> selectClassAll(Integer schoolId);
+	
+	/**
+	 * 特定条件查询班级
+	 * @return
+	 */
+	public List<Class> selectVIPClass(Integer classTypeId,Integer classType,Integer schoolId);
+	
 	
 	public Class findClassByClassId(Integer classId);
-	
 	
 }
