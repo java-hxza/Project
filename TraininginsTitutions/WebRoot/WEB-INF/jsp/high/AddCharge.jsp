@@ -304,11 +304,11 @@
 														<div class="col-md-6">
 															<div class="form-group mb-3">
 																<label for="example-select">${f.chargeTypeName}</label>
-																<input
-																class="form-control feecateIds" id="example-number"
-																type="number" name="number"
-																	 chargeTypeId = "${f.chargeTypeId }" value="${f.chargeMoney }">
-											
+																<input class="form-control feecateIds"
+																	id="example-number" type="number" name="number"
+																	chargeTypeId="${f.chargeTypeId }"
+																	value="${f.chargeMoney }">
+
 															</div>
 														</div>
 													</c:forEach>
@@ -319,13 +319,17 @@
 																<c:forEach items="${classes }" var="c">
 																	<option value="${c.classId }"
 																		name="${c.departmentOfPediatrics.dpId }"
-																		dpTypeName="${c.departmentOfPediatrics.dpTypeName }"
-																		dpMoney="${c.departmentOfPediatrics.dpMoney }"
-																		dpMoneyVip="${c.departmentOfPediatrics.dpMoneyVip }"
-																		classTypeId="${c.classTypeId }"
+																		departmentOfPediatrics="${c.departmentOfPediatrics.dpTypeName }"
 																		schoolIds2="${c.school.schoolName }">${c.className}</option>
 																</c:forEach>
 															</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-select">课程名称</label> <input
+																class="form-control departmentofpediatricsIds"
+																type="text" id="billing-last-name" disabled />
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -413,7 +417,9 @@
 																class="form-control feecateId " id="example-select">
 																<option value="0">---请选择---</option>
 																<c:forEach items="${activity }" var="a">
-																	<option value="${a.activityId }" activityMoneylast="${a.activityMoneylast }" discount="${a.discount }">
+																	<option value="${a.activityId }"
+																		activityMoneylast="${a.activityMoneylast }"
+																		discount="${a.discount }">
 																		<c:choose>
 																			<c:when test="${a.activityMoneyfirst == null }">${a.discount }折</c:when>
 																			<c:otherwise>满&nbsp;${a.activityMoneyfirst }&nbsp;减&nbsp;${a.activityMoneylast }</c:otherwise>

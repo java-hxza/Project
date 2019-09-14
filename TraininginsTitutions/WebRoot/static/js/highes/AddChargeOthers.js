@@ -1,4 +1,5 @@
 $(function() {
+	$(".departmentofpediatricsIds").val($(".classes option:selected").attr("departmentOfPediatrics"));
 	var Time = new Date();
 	var month = null;
 	if ((Time.getMonth() + 1) < 10) {
@@ -13,6 +14,7 @@ $(function() {
 		$(".dpMoney").val($(".feecateId option:selected").attr("name"));
 	});
 	$(".classes").click(function() {
+		$(".departmentofpediatricsIds").val($(".classes option:selected").attr("departmentOfPediatrics"));
 		var classIds = $(".classes option:selected").val();
 		$.ajax({
 			type : "POST",
@@ -46,6 +48,10 @@ $(function() {
 		var remarks = $.trim($(".remarks").val());
 		var paymentmethodId = $.trim($(".paymentmethodId").val());
 		var personliable = $.trim($(".personliable").val());
+		if(stuId == "") {
+			alert("请选择学生！");
+			return flase;
+		}
 		if (dpMoney == "") {
 			alert("请填写收费金额！");
 			return false;
@@ -89,4 +95,6 @@ $(function() {
 		});
 		
 	});
+	
+	
 });

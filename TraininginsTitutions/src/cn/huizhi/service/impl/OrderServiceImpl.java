@@ -100,4 +100,21 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderMapper.selectHighsFeeSituation(classId);
 	}
+
+	@Override
+	public List<Order> selectStduentHour(Integer time, Integer schoolId) {
+		return orderMapper.selectStduentHour(time, schoolId);
+	}
+
+	@Override
+	public List<Order> selectStduentDay(Integer time, Integer schoolId) {
+		return orderMapper.selectStduentDay(time, schoolId);
+	}
+
+	@Override
+	public List<Order> selectOrderPeriods(Integer schoolId) {
+		return orderMapper.selectOrderPeriods(schoolId);
+	}
+	
+	
 }

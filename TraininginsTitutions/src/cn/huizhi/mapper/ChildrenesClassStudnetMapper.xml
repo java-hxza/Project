@@ -59,10 +59,16 @@
 		</association>
 	</resultMap>
 		
-	<insert id="insertChildrenesClassStudnet" parameterType="ChildrenesClassStudnet">
+	<insert id="insertChildrenesClassStudnet" parameterType="ChildrenesClassStudnet" >
 		insert into  childrenesclassstudnet  ( studentName,  headmaster, enrollmentTime,  classId,  studentId,  state )
 			values (  #{studentName}, #{headmaster}, #{enrollmentTime}, #{classId}, #{studentId}, #{state})
 	</insert>
+	
+	<insert id="insertChildrenesClassStudnets" parameterType="ChildrenesClassStudnet" >
+		insert into  highesclassstudnet  ( studentName,  headmaster, enrollmentTime,  classId,  studentId,  state )
+			values (  #{studentName}, #{headmaster}, #{enrollmentTime}, #{classId}, #{studentId}, #{state})
+	</insert>
+	
 
 	<select id="findChildrenesClassStudnetByClassId" parameterType="java.lang.Integer" resultMap="studnetByClassIdMap">
 		select <include refid="childrenesClassStudnetCol"/>

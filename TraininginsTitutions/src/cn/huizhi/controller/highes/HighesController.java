@@ -28,6 +28,7 @@ import cn.huizhi.pojo.Class;
 import cn.huizhi.pojo.Student;
 import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.PaymentMethod;
+import cn.huizhi.pojo.Reserveschool;
 import cn.huizhi.pojo.User;
 import cn.huizhi.service.ActivityService;
 import cn.huizhi.service.ChildrenesClassStudnetService;
@@ -39,6 +40,7 @@ import cn.huizhi.service.GiftService;
 import cn.huizhi.service.StudentService;
 import cn.huizhi.service.OrderService;
 import cn.huizhi.service.PaymentMethodService;
+import cn.huizhi.service.ReserveschoolService;
 import cn.huizhi.service.TeacherDictionService;
 import cn.huizhi.service.TeacherService;
 import cn.huizhi.service.TeacherTypeService;
@@ -79,6 +81,8 @@ public class HighesController {
 	private ActivityService activityService;
 	@Resource
 	private ChildrenesClassStudnetService childrenesClassStudnetService;
+	@Resource
+	private ReserveschoolService reserveschoolService;
 
 	/**
 	 * 查询所有账户信息
@@ -337,7 +341,8 @@ public class HighesController {
 	public String ChargeHours(Model model) {
 		List<Class> classes = classService.selectClass((Integer) session.getAttribute("schoolId"), 0);
 		if (classes.size() > 0) {
-			List<Student> children = studentService.selectStudentClass(classes.get(0).getClassId());
+			List<Student> children = studentService.selectStudentClass("childrenesclassstudnet",
+					classes.get(0).getClassId());
 			model.addAttribute("children", children);
 		}
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
@@ -362,9 +367,18 @@ public class HighesController {
 	@RequestMapping("selectClassStudent.html")
 	@ResponseBody
 	public Object selectClassStudent(@RequestParam Integer classId) {
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		List<Student> children = studentService.selectStudentClass(classId);
-		map.put("children", children);
+		if (schoolType == 1) {
+			List<Student> children = studentService.selectStudentClass("childrenesclassstudnet", classId);
+			map.put("children", children);
+		} else if (schoolType == 2) {
+			List<Student> children = studentService.selectStudentClass("highesclassstudnet", classId);
+			map.put("children", children);
+		} else if (schoolType == 3) {
+			List<Student> children = studentService.selectStudentClass("artclassstudnet", classId);
+			map.put("children", children);
+		}
 		return JSONArray.toJSONString(map);
 	}
 
@@ -441,26 +455,27 @@ public class HighesController {
 	@RequestMapping("ChargePeriod.html")
 	public String ChargePeriod(Model model) {
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
-		if(schoolType == 1) {
-			List<Class> classes = classService.selectClass((Integer) session.getAttribute("schoolId"), 1);
-			List<Student> children = studentService.selectStudentClass(classes.get(0).getClassId());
+		List<Class> classes = classService.selectClass2((Integer) session.getAttribute("schoolId"), 1);
+		model.addAttribute("classes", classes);
+		if (schoolType == 1) {
+			List<Student> children = studentService.selectStudentClass("childrenesclassstudnet",
+					classes.get(0).getClassId());
 			model.addAttribute("children", children);
-			model.addAttribute("classes", classes);
-		}else if(schoolType == 2) {
-			
-		}else if(schoolType == 3) {
-			
+		} else if (schoolType == 2) {
+			List<Student> children = studentService.selectStudentClass("highesclassstudnet",
+					classes.get(0).getClassId());
+			model.addAttribute("children", children);
+		} else if (schoolType == 3) {
+			List<Student> children = studentService.selectStudentClass("artclassstudnet", classes.get(0).getClassId());
+			model.addAttribute("children", children);
 		}
-		
-		
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<FeeCategory> feeCategory = feecategoryService
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
 		List<Gift> gift = giftService.selectGift((Integer) session.getAttribute("schoolId"));
 		List<Teacher> teacher = teacherService.selectTeacherZS((Integer) session.getAttribute("schoolId"));
 		List<Activity> activity = activityService.selectActivitySchool((Integer) session.getAttribute("schoolId"));
-		
-		
+
 		model.addAttribute("gift", gift);
 		model.addAttribute("activity", activity);
 		model.addAttribute("paymentMethod", paymentMethod);
@@ -540,12 +555,23 @@ public class HighesController {
 	 */
 	@RequestMapping("ChargeOthers.html")
 	public String ChargeOthers(Model model) {
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		List<Class> classes = classService.selectClassAll((Integer) session.getAttribute("schoolId"));
-		List<Student> high = studentService.selectStudentClass(classes.get(0).getClassId());
+		model.addAttribute("classes", classes);
+		if (schoolType == 1) {
+			List<Student> high = studentService.selectStudentClass("childrenesclassstudnet",
+					classes.get(0).getClassId());
+			model.addAttribute("high", high);
+		} else if (schoolType == 2) {
+			List<Student> high = studentService.selectStudentClass("highesclassstudnet", classes.get(0).getClassId());
+			model.addAttribute("high", high);
+		} else if (schoolType == 3) {
+			List<Student> high = studentService.selectStudentClass("artclassstudnet", classes.get(0).getClassId());
+			model.addAttribute("high", high);
+		}
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<FeeCategory> feeCategory = feecategoryService
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
-		model.addAttribute("high", high);
 		model.addAttribute("classes", classes);
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("feeCategory", feeCategory);
@@ -970,16 +996,25 @@ public class HighesController {
 	 */
 	@RequestMapping("selectOrderPeriod.html")
 	public String selectOrderPeriod(Model model) {
-		List<Order> order = orderService.selectOrderPeriod((Integer) session.getAttribute("schoolId"));
+		if((Integer) session.getAttribute("schoolType") == 3) {
+			List<Order> order = orderService.selectOrderPeriods((Integer) session.getAttribute("schoolId"));
+			model.addAttribute("order", order);
+		}else {
+			List<Order> order = orderService.selectOrderPeriod((Integer) session.getAttribute("schoolId"));
+			model.addAttribute("order", order);
+		}
+		
 		List<Gift> gift = giftService.selectGift((Integer) session.getAttribute("schoolId"));
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<FeeCategory> feeCategory = feecategoryService
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
 		List<Teacher> teacher = teacherService.selectTeacherZS((Integer) session.getAttribute("schoolId"));
+		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("departmentOfPediatrics", departmentOfPediatrics);
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("feeCategory", feeCategory);
 		model.addAttribute("teacher", teacher);
-		model.addAttribute("order", order);
+		
 		model.addAttribute("gift", gift);
 		return "high/Charge";
 	}
@@ -995,7 +1030,9 @@ public class HighesController {
 		List<FeeCategory> feeCategory = feecategoryService
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
 		List<Order> order = orderService.selectOrderOther((Integer) session.getAttribute("schoolId"));
+		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
+		model.addAttribute("departmentOfPediatrics", departmentOfPediatrics);
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("feeCategory", feeCategory);
 		model.addAttribute("order", order);
@@ -1010,15 +1047,28 @@ public class HighesController {
 	 */
 	@RequestMapping("selectOrderExpenditure.html")
 	public String selectOrderExpenditure(Model model) {
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		List<Class> classes = classService.selectClassAll((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("classes", classes);
+		if (schoolType == 1) {
+			List<Student> student = studentService.selectStudentClass("childrenesclassstudnet",
+					classes.get(0).getClassId());
+			model.addAttribute("student", student);
+		} else if (schoolType == 2) {
+			List<Student> student = studentService.selectStudentClass("highesclassstudnet",
+					classes.get(0).getClassId());
+			model.addAttribute("student", student);
+		} else if (schoolType == 3) {
+			List<Student> student = studentService.selectStudentClass("artclassstudnet", classes.get(0).getClassId());
+			model.addAttribute("student", student);
+		}
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		List<Order> order = orderService.selectOrderExpenditure(schoolId);
 		List<Expenditureitems> expenditureitems = expenditureitemsService.selectExpenditureitems(schoolId.toString());
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
-		List<Class> classes = classService.selectClassAll(schoolId);
-		List<Student> student = studentService.selectStudentClass(classes.get(0).getClassId());
+		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("departmentOfPediatrics", departmentOfPediatrics);
 		model.addAttribute("expenditureitems", expenditureitems);
-		model.addAttribute("classes", classes);
-		model.addAttribute("student", student);
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("order", order);
 		return "high/Expenditure";
@@ -1151,7 +1201,16 @@ public class HighesController {
 	 */
 	@RequestMapping("selectUsedIntegral.html")
 	public String selectUsedIntegral(Model model) {
-		List<Student> student = studentService.selectStudentUsedIntegral("childrenesclassstudnet",
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		String table = null;
+		if (schoolType == 1) {
+			table = "childrenesclassstudnet";
+		} else if (schoolType == 2) {
+			table = "highesclassstudnet";
+		} else if (schoolType == 3) {
+			table = "artclassstudnet";
+		}
+		List<Student> student = studentService.selectStudentUsedIntegral(table,
 				(Integer) session.getAttribute("schoolId"));
 		String sql = "";
 		for (int i = 0; i < student.size(); i++) {
@@ -1173,8 +1232,10 @@ public class HighesController {
 	 */
 	@RequestMapping("selectStudentDepartmentofpediatrics.html")
 	public String selectStudentDepartmentofpediatrics(Model model) {
-
-		return "high/GiftUsedIntegral";
+		List<FeeCategory> feeCategory = feecategoryService
+				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("feeCategory", feeCategory);
+		return "high/CourseReminder";
 	}
 
 	/**
@@ -1185,6 +1246,14 @@ public class HighesController {
 	 */
 	@RequestMapping("StduentRegister.html")
 	public String StduentRegister(Model model) {
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		if (schoolType == 1) {
+			model.addAttribute("schoolTypes", 1);
+		} else if (schoolType == 2) {
+			model.addAttribute("schoolTypes", 2);
+		} else if (schoolType == 3) {
+			model.addAttribute("schoolTypes", 3);
+		}
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<FeeCategory> feeCategory = feecategoryService
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
@@ -1310,7 +1379,7 @@ public class HighesController {
 	}
 
 	/**
-	 * 注册学生时间段
+	 * 注册少儿学生时间段
 	 * 
 	 * @param classId
 	 * @param headmaster
@@ -1413,6 +1482,255 @@ public class HighesController {
 			map.put("add", "0");
 		}
 
+		return JSONArray.toJSONString(map);
+	}
+
+	/**
+	 * 注册高中学生时间段
+	 * 
+	 * @param classId
+	 * @param headmaster
+	 * @param student
+	 * @param feecateId
+	 * @param dpMoney
+	 * @param firstdate
+	 * @param lastdate
+	 * @param personliable
+	 * @param remarks3
+	 * @param paymentmethodId
+	 * @param giftId
+	 * @param giftNumber
+	 * @param integral
+	 * @param hour
+	 * @param date
+	 * @param discount
+	 * @return
+	 */
+	@RequestMapping("RegisterStudentsCharges.html")
+	@ResponseBody
+	public Object RegisterStudentsCharges(@RequestParam Integer classId, @RequestParam String headmaster,
+			Student student, @RequestParam String feecateId, @RequestParam Double dpMoney,
+			@RequestParam String firstdate, @RequestParam String lastdate, @RequestParam String personliable,
+			@RequestParam String remarks3, @RequestParam Integer paymentmethodId, @RequestParam Integer giftId,
+			@RequestParam Integer giftNumber, @RequestParam Double integral, @RequestParam Integer hour,
+			@RequestParam String date, @RequestParam Double discount) {
+		ChildrenesClassStudnet childrenesClassStudnet = new ChildrenesClassStudnet();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		student.setIntegral(0.0);
+		student.setFeeCategory(1);
+		student.setUsedIntegral(0.0);
+		student.setStudentHour(0);
+		if (studentService.addStudnetInfo(student) == 1) {
+			childrenesClassStudnet.setState("1");
+			childrenesClassStudnet.setStudentName(student.getStudentName());
+			childrenesClassStudnet.setHeadmaster(headmaster);
+			Student s = studentService.selectStudentId(student.getStudentName(), student.getParentName(),
+					student.getStudentSex());
+			childrenesClassStudnet.setStudentId(s.getStudentId());
+			childrenesClassStudnet.setClassId(classId);
+			try {
+				Date startTimes = new SimpleDateFormat("yyyy-MM-dd").parse(student.getStartTime());
+				childrenesClassStudnet.setEnrollmentTime(startTimes);
+			} catch (ParseException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+
+			if (childrenesClassStudnetService.insertChildrenesClassStudnets(childrenesClassStudnet) == 1) {
+				map.put("add", "1");
+				Order order = new Order();
+				try {
+					Date firstdate1 = new SimpleDateFormat("yyyy-MM-dd").parse(firstdate);
+					Date lastdate1 = new SimpleDateFormat("yyyy-MM-dd").parse(lastdate);
+					order.setStartTime(childrenesClassStudnet.getEnrollmentTime());
+					order.setFirstdate(firstdate1);
+					order.setLastdate(lastdate1);
+				} catch (ParseException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+				order.setSchoolId((Integer) session.getAttribute("schoolId"));
+				order.setStuId(childrenesClassStudnet.getStudentId());
+				order.setPersonliable(personliable);
+				order.setRemarks(remarks3);
+				order.setGiftNumber(giftNumber);
+				order.setFeecateId(feecateId);
+				order.setDpMoney(dpMoney);
+				order.setGiftId(giftId);
+				order.setClassId(classId);
+				order.setIntegral(integral);
+				order.setDiscount(discount);
+				order.setOrderNumber("SJ" + date + childrenesClassStudnet.getStudentId() + new Random().nextInt(100));
+				order.setPaymentmethodId(paymentmethodId);
+				order.setIdentification(0);
+				if (orderService.addOrder(order) == 1) {
+					if (studentService.updateStudentOrderHour(hour, childrenesClassStudnet.getStudentId(),
+							integral) == 1) {
+						if (giftNumber != 0) {
+							if (giftService.updateGift(-giftNumber, giftId) == 1) {
+								map.put("add", "1");
+							} else {
+								map.put("add", "0");
+								return JSONArray.toJSONString(map);
+							}
+						} else {
+							map.put("add", "1");
+						}
+					} else {
+						map.put("add", "0");
+						return JSONArray.toJSONString(map);
+					}
+				} else {
+					map.put("add", "0");
+					return JSONArray.toJSONString(map);
+				}
+			}
+		} else {
+			map.put("add", "0");
+		}
+
+		return JSONArray.toJSONString(map);
+	}
+
+	/**
+	 * 注册学生艺考
+	 * 
+	 * @param student
+	 * @param feecateId
+	 * @param dpMoney
+	 * @param firstdate
+	 * @param lastdate
+	 * @param personliable
+	 * @param remarks3
+	 * @param paymentmethodId
+	 * @param giftId
+	 * @param giftNumber
+	 * @param integral
+	 * @param hour
+	 * @param date
+	 * @param discount
+	 * @return
+	 */
+	@RequestMapping("RegisterStudentsYiKao.html")
+	@ResponseBody
+	public Object RegisterStudentsYiKao(Student student, @RequestParam String feecateId, @RequestParam Double dpMoney,
+			@RequestParam String firstdate, @RequestParam String lastdate, @RequestParam String personliable,
+			@RequestParam String remarks3, @RequestParam Integer paymentmethodId, @RequestParam Integer giftId,
+			@RequestParam Integer giftNumber, @RequestParam Double integral, @RequestParam Integer hour,
+			@RequestParam String date, @RequestParam Double discount) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		student.setIntegral(0.0);
+		student.setFeeCategory(1);
+		student.setUsedIntegral(0.0);
+		student.setStudentHour(0);
+		if (studentService.addStudnetInfo(student) == 1) {
+			Student s = studentService.selectStudentId(student.getStudentName(), student.getParentName(),
+					student.getStudentSex());
+			Reserveschool reserveschool = new Reserveschool();
+			reserveschool.setSchoolId((Integer) session.getAttribute("schoolId"));
+			reserveschool.setState(0);
+			reserveschool.setStudentId(s.getStudentId());
+			if (reserveschoolService.addReserve(reserveschool) == 1) {
+				Order order = new Order();
+				try {
+					Date firstdate1 = new SimpleDateFormat("yyyy-MM-dd").parse(firstdate);
+					Date lastdate1 = new SimpleDateFormat("yyyy-MM-dd").parse(lastdate);
+					Date startTime = new SimpleDateFormat("yyyy-MM-dd").parse(student.getStartTime());
+					order.setStartTime(startTime);
+					order.setFirstdate(firstdate1);
+					order.setLastdate(lastdate1);
+				} catch (ParseException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+				order.setSchoolId((Integer) session.getAttribute("schoolId"));
+				order.setStuId(s.getStudentId());
+				order.setPersonliable(personliable);
+				order.setRemarks(remarks3);
+				order.setGiftNumber(giftNumber);
+				order.setFeecateId(feecateId);
+				order.setDpMoney(dpMoney);
+				order.setGiftId(giftId);
+				order.setClassId(0);
+				order.setIntegral(integral);
+				order.setDiscount(discount);
+				order.setOrderNumber("SJ" + date + s.getStudentId() + new Random().nextInt(100));
+				order.setPaymentmethodId(paymentmethodId);
+				order.setIdentification(0);
+				if (orderService.addOrder(order) == 1) {
+					if (studentService.updateStudentOrderHour(hour, s.getStudentId(), integral) == 1) {
+						if (giftNumber != 0) {
+							if (giftService.updateGift(-giftNumber, giftId) == 1) {
+								map.put("add", "1");
+							} else {
+								map.put("add", "0");
+								return JSONArray.toJSONString(map);
+							}
+						} else {
+							map.put("add", "1");
+						}
+					} else {
+						map.put("add", "0");
+						return JSONArray.toJSONString(map);
+					}
+				} else {
+					map.put("add", "0");
+					return JSONArray.toJSONString(map);
+				}
+			} else {
+				map.put("add", "0");
+				return JSONArray.toJSONString(map);
+			}
+
+		} else {
+			map.put("add", "0");
+		}
+
+		return JSONArray.toJSONString(map);
+	}
+
+	/**
+	 * 课程提醒
+	 * 
+	 * @param time
+	 * @param Choice
+	 * @return
+	 */
+	@RequestMapping("selectHour.html")
+	@ResponseBody
+	public Object selectHour(@RequestParam Integer time, @RequestParam Integer Choice) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if (Choice == 1) {
+			List<Order> order = orderService.selectStduentHour(time, (Integer) session.getAttribute("schoolId"));
+			System.out.println(order.size());
+			for (int i = 0; i < order.size(); i++) {
+				if (i != order.size() - 1) {
+					if (order.get(i).getStuId() == order.get(i + 1).getStuId()) {
+						order.get(i + 1).setDpMoney(order.get(i).getDpMoney() + order.get(i + 1).getDpMoney());
+						order.get(i + 1).setAddhour(order.get(i).getAddhour() + order.get(i + 1).getAddhour());
+						order.remove(i);
+						i = i - 1;
+					}
+				}
+			}
+			map.put("order", order);
+
+		} else if (Choice == 2) {
+			List<Order> order = orderService.selectStduentDay(time, (Integer) session.getAttribute("schoolId"));
+			for (int i = 0; i < order.size(); i++) {
+				if (i != order.size() - 1) {
+					if (order.get(i).getStuId() == order.get(i + 1).getStuId()) {
+						if (order.get(i).getOrderId() > order.get(i + 1).getOrderId()) {
+							order.remove(i + 1);
+						} else if (order.get(i).getOrderId() < order.get(i + 1).getOrderId()) {
+							order.remove(i);
+						}
+						i = i - 1;
+					}
+				}
+			}
+			map.put("order", order);
+		}
 		return JSONArray.toJSONString(map);
 	}
 }

@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+<title>全国统一收费单</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta
 	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
@@ -283,14 +283,20 @@
 												<div class="card-body">
 													<div class="row mb-2">
 														<div class="col-sm-4">
-															<a href="${Path }/ChargePeriod.html" class="btn btn-danger mb-2"><i
-																class="mdi mdi-plus-circle mr-2"></i> 添加</a> <!-- <a
+															<a href="${Path }/ChargePeriod.html"
+																class="btn btn-danger mb-2"><i
+																class="mdi mdi-plus-circle mr-2"></i> 添加</a>
+															<!-- <a
 																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="updateOrder()"><i
-																class="mdi mdi-plus-circle mr-2"></i> 修改</a> --> <a
-																href="javascript:void(0);"
+																class="mdi mdi-plus-circle mr-2"></i> 修改</a> -->
+															<a href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="delOrder()"><i
 																class="mdi mdi-plus-circle mr-2"></i> 删除</a>
+															<button type="button" id="btn2"
+																class="btn btn-danger mb-2" onclick="Printing()">打印</button>
+															<button type="button" id="btn2"
+																class="btn btn-danger mb-2 Exports">导出Excel</button>
 														</div>
 
 														<!-- end col-->
@@ -319,9 +325,9 @@
 																	<th>责任人</th>
 																	<th>备注</th>
 																	<th>单号</th>
-																	<th>积分</th> 
-																	<th>赠品名称</th> 
-																	<th>赠品数量</th> 
+																	<th>积分</th>
+																	<th>赠品名称</th>
+																	<th>赠品数量</th>
 																	<th>打折价格</th>
 																</tr>
 															</thead>
@@ -346,21 +352,23 @@
 																		<td>${o.dpMoney }</td>
 																		<td><fmt:formatDate value="${o.firstdate }"
 																				pattern="yyyy-MM-dd" /></td>
-																		<td class="${o.giftId }"><fmt:formatDate value="${o.lastdate }"
-																				pattern="yyyy-MM-dd" /></td>
-																		<td  class="${o.giftNumber }">${o.personliable }</td>
+																		<td class="${o.giftId }"><fmt:formatDate
+																				value="${o.lastdate }" pattern="yyyy-MM-dd" /></td>
+																		<td class="${o.giftNumber }">${o.personliable }</td>
 																		<td class="${o.integral }">${o.remarks }</td>
-																		<td class ="${o.teacherId }">${o.orderNumber }</td>
+																		<td class="${o.teacherId }">${o.orderNumber }</td>
 																		<td>${o.integral }</td>
-																		<td class="giftIdes" name="${o.giftId}"><c:if test="${o.giftId == 0 }">无</c:if>
-																			<c:if test="${o.giftId != 0 }"></c:if></td>
-																		<td><c:if test="${o.giftNumber == 0 }">无</c:if>
-																			<c:if test="${o.giftNumber != 0 }">${o.giftNumber }</c:if>
+																		<td class="giftIdes" name="${o.giftId}"><c:if
+																				test="${o.giftId == 0 }">无</c:if> <c:if
+																				test="${o.giftId != 0 }"></c:if></td>
+																		<td><c:if test="${o.giftNumber == 0 }">无</c:if> <c:if
+																				test="${o.giftNumber != 0 }">${o.giftNumber }</c:if>
 																		</td>
-																		<td>
-																			<c:if test="${o.discount != null }">${o.discount }</c:if>
-																			<c:if test="${o.discount == null }">无</c:if>
-																		</td>
+																		<td><c:if test="${o.discount != null }">${o.discount }</c:if>
+																			<c:if test="${o.discount == null }">无</c:if></td>
+																		<!--  -->
+																		<td style="display: none;">${o.student.studentBirth }</td>
+																		<td class="ids">${o.classId }</td>
 																	</tr>
 																</c:forEach>
 															</tbody>
@@ -374,11 +382,22 @@
 										</div>
 										<!-- end row -->
 									</div>
+
+									<div class="form-group mb-3" style="display: none;">
+										<label for="example-select">课程类型</label> <select
+											class="form-control departmentOfPediatrics"
+											id="example-select">
+											<c:forEach items="${departmentOfPediatrics }" var="d">
+												<option value="${d.dpId }">${d.dpTypeName}</option>
+											</c:forEach>
+										</select>
+									</div>
+
 									<div class="row mb-2 addOrder" style="display: none;">
 										<div class="col-md-12">
 											<form class="needs-validation" novalidate>
 												<div class="row">
-												 <div class="col-md-6" style="display: none;">
+													<div class="col-md-6" style="display: none;">
 														<div class="form-group mb-3">
 															<label for="example-select">核算项目</label> <select
 																class="form-control feecateIds" id="example-select">
@@ -388,12 +407,12 @@
 																</c:forEach>
 															</select>
 														</div>
-													</div> 
+													</div>
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-select">学员</label> <input
 																class="form-control stuId" type="text"
-																id="billing-last-name" disabled/>
+																id="billing-last-name" disabled />
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -416,25 +435,25 @@
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-number">收费金额</label> <input
-																class="form-control dpMoney" id="example-number" type="number"
-																name="number" >
+																class="form-control dpMoney" id="example-number"
+																type="number" name="number">
 														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-date">起始日期</label> <input
-																class="form-control firstdate" id="example-date" type="date"
-																name="date">
+																class="form-control firstdate" id="example-date"
+																type="date" name="date">
 														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-date">截止日期</label> <input
-																class="form-control lastdate" id="example-date" type="date"
-																name="date">
+																class="form-control lastdate" id="example-date"
+																type="date" name="date">
 														</div>
 													</div>
-													
+
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-select">赠品名称</label> <select
@@ -442,7 +461,7 @@
 																<option value="0">---请选择---</option>
 																<c:forEach items="${gift }" var="g">
 																	<option value="${g.giftId }" name="${g.giftNumber }">${g.giftName}</option>
-																</c:forEach> 
+																</c:forEach>
 															</select>
 														</div>
 													</div>
@@ -451,11 +470,10 @@
 															<label for="billing-last-name">赠品数量</label> <input
 																type="text" class="form-control giftNumber"
 																data-toggle="input-mask"
-																data-mask-format="00000000000000000"
-																data-reverse="true" >
+																data-mask-format="00000000000000000" data-reverse="true">
 														</div>
 													</div>
-													
+
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-select">积分</label> <input
@@ -466,10 +484,11 @@
 													<div class="col-md-6">
 														<div class="form-group">
 															<label for="billing-first-name">责任人</label> <input
-																class="form-control personliable" type="text" id="billing-first-name" />
+																class="form-control personliable" type="text"
+																id="billing-first-name" />
 														</div>
 													</div>
-													
+
 													<!-- <div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-select">活动名称</label> <select
@@ -496,7 +515,8 @@
 													<div class="col-md-6">
 														<div class="form-group">
 															<label for="billing-last-name">备注</label> <input
-																class="form-control remarks" type="text" id="billing-last-name" />
+																class="form-control remarks" type="text"
+																id="billing-last-name" />
 														</div>
 													</div>
 													<div class="col-md-12">
@@ -529,9 +549,82 @@
 
 						</div>
 						<!-- container -->
-
 					</div>
 					<!-- content -->
+
+					<div class="row" id="dayin" style="display: none;">
+						<!--startprint-->
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<h4 style="text-align:center">全国统一收款收据</h4>
+									<div class="row mb-2">
+										<table id="ChargePeriods" border="1" width="1600">
+											<tr>
+												<th width="400" height="20px" class="RiQi"
+													style="text-align: left;"></th>
+												<th width="400" colspan="2" height="20px"></th>
+												<th width="100" height="20px"></th>
+												<th width="300" height="20px" class="BDKC"></th>
+												<th width="400" height="20px" class="DJBH"></th>
+											</tr>
+											<tr>
+												<td width="400" height="40px" class="XSXM"></td>
+												<td width="100" height="40px"></td>
+												<td width="300" height="40px" class="NL"></td>
+												<td width="400" height="40px" colspan="2"></td>
+												<td width="400" height="40px" class="JDXX"></td>
+											</tr>
+											<tr>
+												<td width="400" height="40px" class="KS"></td>
+												<td width="100" height="40px"></td>
+												<td width="300" height="40px" class="YXQ"></td>
+												<td width="800" colspan="4" style="text-align:center;color: red;"
+													height="40px" class="FLYQX"></td>
+											</tr>
+											<tr class="apps">
+												<td width="800" colspan="3" style="text-align:center"
+													height="40px">货物或劳务、服务名称：</td>
+												<td width="800" colspan="3" style="text-align:center"
+													height="40px">金额</td>
+											</tr>
+
+
+											<tr>
+												<td width="800" colspan="3" height="40px"></td>
+												<td width="800" colspan="3" style="text-align:center"
+													height="40px"></td>
+											</tr>
+											<tr>
+												<td width="800" colspan="3" height="40px"></td>
+												<td width="800" colspan="3" style="text-align:center"
+													height="40px"></td>
+											</tr>
+											<tr>
+												<td width="400" height="40px"
+													style="text-align:center;border-right: 0px;">人民币大写：</td>
+												<td width="800" height="40px" colspan="4"
+													style="border-left: 0px;"></td>
+												<td width="400" height="40px" class="MONEY"></td>
+											</tr>
+											<tr>
+												<td width="500" height="80px" colspan="2">收款单位盖章：</td>
+												<td width="400" height="80px" colspan="2">收款人：</td>
+												<td width="700" height="80px" colspan="2">备注：</td>
+											</tr>
+										</table>
+									</div>
+									<!-- end card-body-->
+								</div>
+								<!-- end card-->
+							</div>
+							<!-- end col -->
+							<!--endprint-->
+							<iframe id="iframe1" style="display: none"></iframe>
+						</div>
+						<!-- end row -->
+
+					</div>
 
 					<!-- Footer Start -->
 					<footer class="footer">
@@ -696,7 +789,6 @@
 				</div>
 			</div>
 
-
 			<div class="rightbar-overlay"></div>
 			<!-- /Right-bar -->
 
@@ -705,7 +797,66 @@
 
 			<!-- third party js -->
 			<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-			<script type="text/javascript" src="${Path }/static/js/highes/Charge.js"></script>
+			<script type="text/javascript"
+				src="${Path }/static/js/highes/Charge.js"></script>
+
+			<script type="text/javascript"
+				src="${Path }/static/js/Excel/base64.js"></script>
+			<script type="text/javascript"
+				src="${Path }/static/js/Excel/tableExport.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$(".Exports").click(function() {
+						$(".dels").remove();
+						$(".dels").next().remove();
+						if ($(".customCheckes:checked").length < 1) {
+							if (!$(".customCheckes").prop("checked")) {
+								alert("请选中一条数据！");
+								return false;
+							}
+						} else if ($(".customCheckes:checked").length > 1) {
+							alert("只能选中一条数据！");
+							return false;
+						}
+						var Time = new Date();
+						var gender = new Date($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text());
+						var year = Time.getTime() - gender.getTime();
+						var month = Math.ceil(year / 1000 / 60 / 60 / 24 / 365);
+						$(".NL").text("年龄： " + (month).toString());
+						$(".RiQi").text("日期：" + $(".customCheckes:checked").parent().parent().next().next().next().text() + "                   ");
+						$(".DJBH").text("单据编号：" + "(" + $(".customCheckes:checked").parent().parent().next().next().text() + ")" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().text());
+						$(".BDKC").text("报读课程：" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text());
+						$(".XSXM").text("学生姓名: " + $(".customCheckes:checked").parent().parent().next().next().next().next().next().text());
+						$(".JDXX").text("就读学校：" + $(".customCheckes:checked").parent().parent().next().next().text());
+						var start = $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text();
+						var end = $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text();
+						start = start.replace(/-/g, "/");
+						var startdate = new Date(start);
+						end = end.replace(/-/g, "/");
+						var enddate = new Date(end);
+						time = parseInt((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24));
+						$(".KS").text("课时：" + time + "天");
+						$(".YXQ").text("课程有效期：" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text());
+						$(".FLYQX").text($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text() + "   至   " + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text());
+						$(".MONEY").text("￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+						for (var i = 0; i < $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/").length; i++) {
+							var RMB = 0;
+							for (var j = 0; j < $(".feecateIds option").length; j++) {
+								if ($(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] == $(".feecateIds option").eq(j).text()) {
+									RMB = $(".feecateIds option").eq(j).attr("name");
+								}
+							}
+							$(".apps").after("<tr class='dels'><td width='800' colspan='3' height='40px'>" + $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] + "</td><td width='800' colspan='3' style='text-align:center'height='40px'>￥" + RMB + "</td></tr>");
+						}
+						$("#ChargePeriods").tableExport({
+							formats : [ "xlsx" ],
+							fileName : "时间段收费单-" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().text(),
+							bootstrap : false
+						});
+					});
+				});
+			</script>
+
 			<!-- third party js ends -->
 </body>
 </html>

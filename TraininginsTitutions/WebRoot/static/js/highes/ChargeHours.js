@@ -1,186 +1,187 @@
 $(function() {
 	for (var i = 0; i < $(".giftIdes").length; i++) {
-		if(($.trim($(".giftIdes").eq(i).text())) != "无") {
+		if (($.trim($(".giftIdes").eq(i).text())) != "无") {
 			for (var is = 0; is < $(".giftName option").length; is++) {
-				if(parseInt($.trim($(".giftIdes").eq(i).attr("name"))) ==($.trim($(".giftName option").eq(is).val()))) {
+				if (parseInt($.trim($(".giftIdes").eq(i).attr("name"))) == ($.trim($(".giftName option").eq(is).val()))) {
 					$(".giftIdes").eq(i).text($.trim($(".giftName option").eq(is).text()));
 				}
 			}
 		}
 	}
+
 	$(".departmentofpediatricsId").click(function() {
 		$(".money").val($(".departmentofpediatricsId option:selected").attr("name"));
 	});
-//	updateOrder = function() {
-//		if ($(".giftName option:selected").val() == 0) {
-//			$('.giftNumber').attr("disabled", true);
-//			$(".giftNumber").val("");
-//		}
-//		if ($(".customCheckes:checked").length < 1) {
-//			if (!$(".customCheckes").prop("checked")) {
-//				alert("请选中一条数据！");
-//				return false;
-//			}
-//		} else if ($(".customCheckes:checked").length > 1) {
-//			alert("只能选中一条数据！");
-//			return false;
-//		}
-//		$(".date").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().text());
-//		$(".money").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
-//		$(".hour").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text());
-//		$(".hours").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text());
-//		$(".stuId").val($(".customCheckes:checked").parent().parent().next().next().next().text());
-//		$(".departmentofpediatricsId").val($(".customCheckes:checked").parent().parent().next().next().next().next().attr("class"));
-//		$(".remarks").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().text());
-//		$(".paymentmethodId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().attr("class"));
-//		$(".feecateId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().attr("class"));
-//		$(".integral").val($(".customCheckes:checked").parent().parent().next().next().attr("class"));
-//		$(".giftName").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().attr("class"));
-//		$(".departmentofpediatricsId").val($(".customCheckes:checked").parent().parent().next().next().next().next().text());
-//		$(".giftNumber").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().attr("class"));
-//		$(".teacherId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().attr("class"));
-//		var orderIds = $(".customCheckes:checked").parent().parent().next().text();
-//		var hour2 = $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text();
-//		var hours2 = $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text();
-//		var hour3 = null;
-//		var integrals = parseInt($(".integral").val());
-//		var dpMoney2 = parseInt($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
-//		var stuId = $(".customCheckes:checked").parent().parent().next().attr("class");
-//		var giftNumber3 = parseInt($(".giftNumber").val());
-//		var giftNumber2 = parseInt($(".giftNumber").val());
-//		var giftId2 = parseInt($(".giftName").val());
-//		$(".showOrderChildren").remove();
-//		$(".addOrderChildren").show();
-//		var dpMoneys = parseFloat($(".money").val()) / parseInt($(".hour").val());
-//		$(".hour").blur(function() {
-//			if ($(".hour").val() != 0) {
-//				$(".money").val((parseFloat(dpMoneys) * $(".hour").val()).toFixed(1));
-//				$(".integral").val($(".money").val());
-//			}
-//		});
-//		$(".money").blur(function() {
-//			$(".integral").val($(".money").val());
-//		});
-//		$(".giftName").click(function() {
-//			if ($(".giftName option:selected").val() == 0) {
-//				$('.giftNumber').attr("disabled", true);
-//				$(".giftNumber").val("");
-//			} else {
-//				$('.giftNumber').removeAttr("disabled");
-//				$(".giftNumber").val(1);
-//			}
-//		});
-//		$(".giftNumber").blur(function() {
-//			if (parseInt($.trim($(".giftNumber").val())) > parseInt($.trim($(".giftName option:selected").attr("name")))) {
-//				alert("赠品数量不足！");
-//				$(".giftNumber").val(1);
-//			}
-//		});
-//		$(".TiJiao").click(function() {
-//			var date = $.trim($(".date").val());
-//			var dpMoney = parseFloat($.trim($(".money").val()));
-//			var hour = parseInt($.trim($(".hour").val()));
-//			var hours = parseInt($.trim($(".hours").val()));
-//			var remarks = $.trim($(".remarks").val());
-//			var paymentmethodId = $.trim($(".paymentmethodId").val());
-//			var feecateId = $.trim($(".feecateId").val());
-//			var giftNumber = parseInt($.trim($(".giftNumber").val()));
-//			var giftId = parseInt($.trim($(".giftName option:selected").val()));
-//			var integral = parseInt($.trim($(".integral").val()));
-//			var teacherId = $.trim($(".teacherId option:selected").val());
-//			if (dpMoney == "") {
-//				alert("请填写收费金额！");
-//				return false;
-//			} else if (dpMoney < 1) {
-//				alert("请填写正确的收费金额！");
-//				return false;
-//			}
-//			if (hour == "") {
-//				alert("请填写本次新增课时！");
-//				return false;
-//			} else if (hour < 1) {
-//				alert("请填写正确的新增课时！");
-//				return false;
-//			}
-//			if (hours == "") {
-//				hours = 0;
-//			}
-//			if (hour > hour2) {
-//				dpMoney = (dpMoneys * hour) - (dpMoneys * hour2);
-//			} else if (hour2 > hour) {
-//				dpMoney = -(((dpMoneys * hour2) - (dpMoney * hour)));
-//			}
-//			if (hour2 - hour == 1) {
-//				dpMoney = -dpMoneys;
-//			}
-//			if (giftId == giftId2 && giftNumber2 == giftNumber) {
-//				giftId = -1;
-//			} else if (giftId == giftId2 && giftNumber2 != giftNumber) {
-//				giftId = -2;
-//				if (giftNumber > giftNumber2) {
-//					giftNumber2 = -(parseInt(giftNumber) - parseInt(giftNumber2));
-//				} else {
-//					giftNumber2 = (parseInt(giftNumber2) - parseInt(giftNumber));
-//				}
-//			}
-//			if ((hour2 + hours2) > (hour + hours)) {
-//				hour3 = -((parseInt(hour2) + parseInt(hours2)) - (parseInt(hour) + parseInt(hours)));
-//			} else if ((hour2 + hours2) < (hour + hours)) {
-//				hour3 = ((parseInt(hour) + parseInt(hours)) - (parseInt(hour2) + parseInt(hours2)));
-//			} else {
-//				hour3 = 0;
-//			}
-//			if (dpMoney2 == dpMoney && integral == integrals && hour3 == 0) {
-//				dpMoney = 0;
-//			}
-//			if ($(".giftNumber").val() == "") {
-//				giftNumber = 0;
-//				giftId = -2;
-//			}
-//			if (integral > integrals) {
-//				integrals = integral - integrals;
-//			} else if (integral < integrals) {
-//				integrals = -(integrals - integral);
-//			}
-//			$.ajax({
-//				type : "POST",
-//				url : "updateChargeHour.html",
-//				data : {
-//					stuId : stuId,
-//					feecateId : feecateId,
-//					dpMoney : dpMoney,
-//					addhour : hour,
-//					givehour : hours,
-//					remarks : remarks,
-//					paymentmethodId : paymentmethodId,
-//					orderId : orderIds,
-//					hour : hour3,
-//					giftNumber : giftNumber,
-//					giftId : giftId,
-//					giftNumber2 : giftNumber2,
-//					giftId2 : giftId2,
-//					integral : integral,
-//					teacherId : teacherId,
-//					integrals : integrals
-//				},
-//				dataType : "json",
-//				success : function(data) {
-//					data = JSON.parse(data);
-//					if (data.update == "1") {
-//						alert("修改成功！");
-//						location.href = "selectOrderHour.html";
-//					} else {
-//						alert("修改失败！");
-//						location.href = "selectOrderHour.html";
-//					}
-//				},
-//				error : function(data) {
-//					alert("系统出错！");
-//					location.href = "selectOrderHour.html";
-//				}
-//			});
-//		});
-//	};
+	//	updateOrder = function() {
+	//		if ($(".giftName option:selected").val() == 0) {
+	//			$('.giftNumber').attr("disabled", true);
+	//			$(".giftNumber").val("");
+	//		}
+	//		if ($(".customCheckes:checked").length < 1) {
+	//			if (!$(".customCheckes").prop("checked")) {
+	//				alert("请选中一条数据！");
+	//				return false;
+	//			}
+	//		} else if ($(".customCheckes:checked").length > 1) {
+	//			alert("只能选中一条数据！");
+	//			return false;
+	//		}
+	//		$(".date").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().text());
+	//		$(".money").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+	//		$(".hour").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text());
+	//		$(".hours").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text());
+	//		$(".stuId").val($(".customCheckes:checked").parent().parent().next().next().next().text());
+	//		$(".departmentofpediatricsId").val($(".customCheckes:checked").parent().parent().next().next().next().next().attr("class"));
+	//		$(".remarks").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().text());
+	//		$(".paymentmethodId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().attr("class"));
+	//		$(".feecateId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().attr("class"));
+	//		$(".integral").val($(".customCheckes:checked").parent().parent().next().next().attr("class"));
+	//		$(".giftName").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().attr("class"));
+	//		$(".departmentofpediatricsId").val($(".customCheckes:checked").parent().parent().next().next().next().next().text());
+	//		$(".giftNumber").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().attr("class"));
+	//		$(".teacherId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().attr("class"));
+	//		var orderIds = $(".customCheckes:checked").parent().parent().next().text();
+	//		var hour2 = $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text();
+	//		var hours2 = $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text();
+	//		var hour3 = null;
+	//		var integrals = parseInt($(".integral").val());
+	//		var dpMoney2 = parseInt($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+	//		var stuId = $(".customCheckes:checked").parent().parent().next().attr("class");
+	//		var giftNumber3 = parseInt($(".giftNumber").val());
+	//		var giftNumber2 = parseInt($(".giftNumber").val());
+	//		var giftId2 = parseInt($(".giftName").val());
+	//		$(".showOrderChildren").remove();
+	//		$(".addOrderChildren").show();
+	//		var dpMoneys = parseFloat($(".money").val()) / parseInt($(".hour").val());
+	//		$(".hour").blur(function() {
+	//			if ($(".hour").val() != 0) {
+	//				$(".money").val((parseFloat(dpMoneys) * $(".hour").val()).toFixed(1));
+	//				$(".integral").val($(".money").val());
+	//			}
+	//		});
+	//		$(".money").blur(function() {
+	//			$(".integral").val($(".money").val());
+	//		});
+	//		$(".giftName").click(function() {
+	//			if ($(".giftName option:selected").val() == 0) {
+	//				$('.giftNumber').attr("disabled", true);
+	//				$(".giftNumber").val("");
+	//			} else {
+	//				$('.giftNumber').removeAttr("disabled");
+	//				$(".giftNumber").val(1);
+	//			}
+	//		});
+	//		$(".giftNumber").blur(function() {
+	//			if (parseInt($.trim($(".giftNumber").val())) > parseInt($.trim($(".giftName option:selected").attr("name")))) {
+	//				alert("赠品数量不足！");
+	//				$(".giftNumber").val(1);
+	//			}
+	//		});
+	//		$(".TiJiao").click(function() {
+	//			var date = $.trim($(".date").val());
+	//			var dpMoney = parseFloat($.trim($(".money").val()));
+	//			var hour = parseInt($.trim($(".hour").val()));
+	//			var hours = parseInt($.trim($(".hours").val()));
+	//			var remarks = $.trim($(".remarks").val());
+	//			var paymentmethodId = $.trim($(".paymentmethodId").val());
+	//			var feecateId = $.trim($(".feecateId").val());
+	//			var giftNumber = parseInt($.trim($(".giftNumber").val()));
+	//			var giftId = parseInt($.trim($(".giftName option:selected").val()));
+	//			var integral = parseInt($.trim($(".integral").val()));
+	//			var teacherId = $.trim($(".teacherId option:selected").val());
+	//			if (dpMoney == "") {
+	//				alert("请填写收费金额！");
+	//				return false;
+	//			} else if (dpMoney < 1) {
+	//				alert("请填写正确的收费金额！");
+	//				return false;
+	//			}
+	//			if (hour == "") {
+	//				alert("请填写本次新增课时！");
+	//				return false;
+	//			} else if (hour < 1) {
+	//				alert("请填写正确的新增课时！");
+	//				return false;
+	//			}
+	//			if (hours == "") {
+	//				hours = 0;
+	//			}
+	//			if (hour > hour2) {
+	//				dpMoney = (dpMoneys * hour) - (dpMoneys * hour2);
+	//			} else if (hour2 > hour) {
+	//				dpMoney = -(((dpMoneys * hour2) - (dpMoney * hour)));
+	//			}
+	//			if (hour2 - hour == 1) {
+	//				dpMoney = -dpMoneys;
+	//			}
+	//			if (giftId == giftId2 && giftNumber2 == giftNumber) {
+	//				giftId = -1;
+	//			} else if (giftId == giftId2 && giftNumber2 != giftNumber) {
+	//				giftId = -2;
+	//				if (giftNumber > giftNumber2) {
+	//					giftNumber2 = -(parseInt(giftNumber) - parseInt(giftNumber2));
+	//				} else {
+	//					giftNumber2 = (parseInt(giftNumber2) - parseInt(giftNumber));
+	//				}
+	//			}
+	//			if ((hour2 + hours2) > (hour + hours)) {
+	//				hour3 = -((parseInt(hour2) + parseInt(hours2)) - (parseInt(hour) + parseInt(hours)));
+	//			} else if ((hour2 + hours2) < (hour + hours)) {
+	//				hour3 = ((parseInt(hour) + parseInt(hours)) - (parseInt(hour2) + parseInt(hours2)));
+	//			} else {
+	//				hour3 = 0;
+	//			}
+	//			if (dpMoney2 == dpMoney && integral == integrals && hour3 == 0) {
+	//				dpMoney = 0;
+	//			}
+	//			if ($(".giftNumber").val() == "") {
+	//				giftNumber = 0;
+	//				giftId = -2;
+	//			}
+	//			if (integral > integrals) {
+	//				integrals = integral - integrals;
+	//			} else if (integral < integrals) {
+	//				integrals = -(integrals - integral);
+	//			}
+	//			$.ajax({
+	//				type : "POST",
+	//				url : "updateChargeHour.html",
+	//				data : {
+	//					stuId : stuId,
+	//					feecateId : feecateId,
+	//					dpMoney : dpMoney,
+	//					addhour : hour,
+	//					givehour : hours,
+	//					remarks : remarks,
+	//					paymentmethodId : paymentmethodId,
+	//					orderId : orderIds,
+	//					hour : hour3,
+	//					giftNumber : giftNumber,
+	//					giftId : giftId,
+	//					giftNumber2 : giftNumber2,
+	//					giftId2 : giftId2,
+	//					integral : integral,
+	//					teacherId : teacherId,
+	//					integrals : integrals
+	//				},
+	//				dataType : "json",
+	//				success : function(data) {
+	//					data = JSON.parse(data);
+	//					if (data.update == "1") {
+	//						alert("修改成功！");
+	//						location.href = "selectOrderHour.html";
+	//					} else {
+	//						alert("修改失败！");
+	//						location.href = "selectOrderHour.html";
+	//					}
+	//				},
+	//				error : function(data) {
+	//					alert("系统出错！");
+	//					location.href = "selectOrderHour.html";
+	//				}
+	//			});
+	//		});
+	//	};
 
 	delOrder = function() {
 		if ($(".customCheckes:checked").length < 1) {
@@ -232,4 +233,46 @@ $(function() {
 			return false;
 		}
 	};
+
+	Printing = function() {
+		if ($(".customCheckes:checked").length < 1) {
+			if (!$(".customCheckes").prop("checked")) {
+				alert("请选中一条数据！");
+				return false;
+			}
+		} else if ($(".customCheckes:checked").length > 1) {
+			alert("只能选中一条数据！");
+			return false;
+		}
+		$(".dels").remove();
+		$(".dels").next().remove();
+		var Time = new Date();
+		var gender = new Date($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text());
+		var year = Time.getTime() - gender.getTime();
+		var month = Math.ceil(year / 1000 / 60 / 60 / 24 / 365);
+		$(".NL").text("年龄： " + (month).toString());
+		$(".RiQi").text("日期：" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().text() + "                   ");
+		$(".DJBH").text("单据编号：" + "(" + $(".customCheckes:checked").parent().parent().next().next().text() + ")" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().text());
+		$(".BDKC").text("报读课程：" + $(".customCheckes:checked").parent().parent().next().next().next().next().text());
+		$(".XSXM").text("学生姓名: " + $(".customCheckes:checked").parent().parent().next().next().next().text());
+		$(".JDXX").text("缴费方式：" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().text());
+		$(".Moneys").text($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().text());
+		$(".KS").text("课时：" + (parseInt($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text()) + parseInt($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text())) + "时");
+		$(".YXQ").text("课程有效期：");
+		$(".MONEY").text("￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+				bdhtml=$("#dayin").html();
+				//alert(bdhtml);
+				sprnstr="<!--startprint-->";   //开始打印标识字符串有17个字符
+				eprnstr="<!--endprint-->";        //结束打印标识字符串
+				prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17); //从开始打印标识之后的内容
+				prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//截取开始标识和结束标识之间的内容
+				var iframe = null;
+				iframe = document.getElementById("iframe1")
+				
+				var iwindow = null;
+				var iwindow = iframe.contentWindow;//获取iframe的window对象
+				iwindow.document.close();
+				iwindow.document.write(prnhtml);
+				iwindow.print(); //调用浏览器的打印功能打印指定区域
+	}
 });

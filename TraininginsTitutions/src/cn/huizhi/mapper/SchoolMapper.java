@@ -32,5 +32,5 @@ public interface SchoolMapper {
 	 */
 	public int insertSchool(School school);
 	
-	
+
 }

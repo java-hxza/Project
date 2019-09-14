@@ -284,7 +284,8 @@
 												<div class="card-body">
 													<div class="row mb-2">
 														<div class="col-sm-4">
-															<a href="javascript:void(0);" class="btn btn-danger mb-2" onclick="addOrders()"><i
+															<a href="javascript:void(0);" class="btn btn-danger mb-2"
+																onclick="addOrders()"><i
 																class="mdi mdi-plus-circle mr-2"></i> 添加</a>
 															<!-- <a
 																href="javascript:void(0);"
@@ -293,6 +294,10 @@
 															<a href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="delOrder()"><i
 																class="mdi mdi-plus-circle mr-2"></i> 删除</a>
+															<button type="button" id="btn2"
+																class="btn btn-danger mb-2" onclick="Printing()">打印</button>
+															<button type="button" id="btn2"
+																class="btn btn-danger mb-2 Exports">导出Excel</button>
 														</div>
 
 														<!-- end col-->
@@ -343,6 +348,8 @@
 																		<td>${o.personliable }</td>
 																		<td>${o.remarks }</td>
 																		<td>${o.orderNumber }</td>
+																		<td class="ids" style="display: none;">${o.classId }</td>
+																		<td style="display: none;">${o.student.studentBirth }</td>
 																	</tr>
 																</c:forEach>
 															</tbody>
@@ -357,6 +364,16 @@
 										<!-- end row -->
 									</div>
 
+									<div class="form-group mb-3" style="display: none;">
+										<label for="example-select">课程类型</label> <select
+											class="form-control departmentOfPediatrics"
+											id="example-select">
+											<c:forEach items="${departmentOfPediatrics }" var="d">
+												<option value="${d.dpId }">${d.dpTypeName}</option>
+											</c:forEach>
+										</select>
+									</div>
+
 									<div class="row mb-2 addOrder" style="display: none;">
 										<div class="col-md-12">
 											<form>
@@ -364,8 +381,8 @@
 													<div class="col-md-6">
 														<div class="form-group">
 															<label for="billing-first-name">校区信息</label> <input
-																class="form-control school" type="text" id="billing-first-name"
-																 disabled />
+																class="form-control school" type="text"
+																id="billing-first-name" disabled />
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -397,13 +414,14 @@
 																		dpTypeName="${c.departmentOfPediatrics.dpTypeName }"
 																		dpMoney="${c.departmentOfPediatrics.dpMoney }"
 																		dpMoneyVip="${c.departmentOfPediatrics.dpMoneyVip }"
+																		departmentOfPediatrics="${c.departmentOfPediatrics.dpTypeName }"
 																		classTypeId="${c.classTypeId }"
 																		schoolIds2="${c.school.schoolName }">${c.className}</option>
 																</c:forEach>
 															</select>
 														</div>
 													</div>
-													
+
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-select">资金账户</label> <select
@@ -412,6 +430,13 @@
 																	<option value="${p.paymentmethodId }">${p.paymentmethodName}</option>
 																</c:forEach>
 															</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-select">课程名称</label> <input
+																class="form-control departmentofpediatricsIds"
+																type="text" id="billing-last-name" disabled />
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -470,6 +495,81 @@
 
 					</div>
 					<!-- content -->
+
+					<div class="row" id="dayin" style="display: none;">
+						<!--startprint-->
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<h4 style="text-align:center">全国统一收款收据</h4>
+									<div class="row mb-2">
+										<table id="ChargePeriod" border="1" width="1600">
+											<tr>
+												<th width="400" height="20px" class="RiQi"
+													style="text-align: left;"></th>
+												<th width="400" colspan="2" height="20px"></th>
+												<th width="100" height="20px"></th>
+												<th width="300" height="20px" class="BDKC"></th>
+												<th width="400" height="20px" class="DJBH"></th>
+											</tr>
+											<tr>
+												<td width="400" height="40px" class="XSXM"></td>
+												<td width="100" height="40px"></td>
+												<td width="300" height="40px" class="NL"></td>
+												<td width="400" height="40px" colspan="2"></td>
+												<td width="400" height="40px" class="JDXX"></td>
+											</tr>
+											<tr>
+												<td width="400" height="40px" class="KS"></td>
+												<td width="100" height="40px"></td>
+												<td width="300" height="40px" class="YXQ"></td>
+												<td width="800" colspan="4" style="text-align:center"
+													height="40px" class="FLYQX">&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;
+												</td>
+											</tr>
+											<tr class="apps">
+												<td width="800" colspan="3" style="text-align:center"
+													height="40px">货物或劳务、服务名称：</td>
+												<td width="800" colspan="3" style="text-align:center"
+													height="40px">金额</td>
+											</tr>
+
+
+											<tr>
+												<td width="800" colspan="3" height="40px"></td>
+												<td width="800" colspan="3" style="text-align:center"
+													height="40px"></td>
+											</tr>
+											<tr>
+												<td width="800" colspan="3" height="40px"></td>
+												<td width="800" colspan="3" style="text-align:center"
+													height="40px"></td>
+											</tr>
+											<tr>
+												<td width="400" height="40px"
+													style="text-align:center;border-right: 0px;">人民币大写：</td>
+												<td width="800" height="40px" colspan="4"
+													style="border-left: 0px;"></td>
+												<td width="400" height="40px" class="MONEY"></td>
+											</tr>
+											<tr>
+												<td width="500" height="80px" colspan="2">收款单位盖章：</td>
+												<td width="400" height="80px" colspan="2">收款人：</td>
+												<td width="700" height="80px" colspan="2">备注：</td>
+											</tr>
+										</table>
+									</div>
+									<!-- end card-body-->
+								</div>
+								<!-- end card-->
+							</div>
+							<!-- end col -->
+							<!--endprint-->
+							<iframe id="iframe1" style="display: none"></iframe>
+						</div>
+						<!-- end row -->
+
+					</div>
 
 					<!-- Footer Start -->
 					<footer class="footer">
@@ -647,6 +747,53 @@
 				src="${Path }/static/js/highes/leftSidebar.js"></script>
 			<script type="text/javascript"
 				src="${Path }/static/js/highes/Expenditure.js"></script>
+			<script type="text/javascript"
+				src="${Path }/static/js/Excel/base64.js"></script>
+			<script type="text/javascript"
+				src="${Path }/static/js/Excel/tableExport.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$(".Exports").click(function() {
+						$(".dels").remove();
+						$(".dels").next().remove();
+						if ($(".customCheckes:checked").length < 1) {
+							if (!$(".customCheckes").prop("checked")) {
+								alert("请选中一条数据！");
+								return false;
+							}
+						} else if ($(".customCheckes:checked").length > 1) {
+							alert("只能选中一条数据！");
+							return false;
+						}
+						var Time = new Date();
+		var gender = new Date($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().text());
+		var year = Time.getTime() - gender.getTime();
+		var month = Math.ceil(year / 1000 / 60 / 60 / 24 / 365);
+		$(".NL").text("年龄： " + (month).toString());
+		$(".RiQi").text("日期：" + $(".customCheckes:checked").parent().parent().next().next().next().text() + "                   ");
+		$(".DJBH").text("单据编号：" + "(" + $(".customCheckes:checked").parent().parent().next().next().text() + ")" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().text());
+		$(".BDKC").text("报读课程：" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().text());
+		$(".XSXM").text("学生姓名: " + $(".customCheckes:checked").parent().parent().next().next().next().next().next().text());
+		$(".JDXX").text("就读学校：" + $(".customCheckes:checked").parent().parent().next().next().text());
+		$(".KS").text("课时：");
+		$(".YXQ").text("课程有效期：");
+		$(".MONEY").text("￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+		for (var i = 0; i < $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/").length; i++) {
+			for (var j = 0; j < $(".feecateIds option").length; j++) {
+				if ($(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] == $(".feecateIds option").eq(j).text()) {
+					RMB = $(".feecateIds option").eq(j).attr("name");
+				}
+			}
+			$(".apps").after("<tr class='dels'><td width='800' colspan='3' height='40px'>" + $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] + "</td><td width='800' colspan='3' style='text-align:center'height='40px'>￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text() + "</td></tr>");
+		}
+						$("#ChargePeriod").tableExport({
+							formats : [ "xlsx" ],
+							fileName : "费用支出单-" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().text(),
+							bootstrap : false
+						});
+					});
+				});
+			</script>
 			<!-- third party js ends -->
 </body>
 </html>

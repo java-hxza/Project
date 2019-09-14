@@ -284,8 +284,8 @@
 													<div class="col-md-6">
 														<div class="form-group">
 															<label for="billing-first-name">校区信息</label> <input
-																class="form-control school" type="text" id="billing-first-name"
-																 disabled />
+																class="form-control school" type="text"
+																id="billing-first-name" disabled />
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -301,17 +301,20 @@
 																class="form-control classes" id="example-select">
 																<c:forEach items="${classes }" var="c">
 																	<option value="${c.classId }"
-																		name="${c.departmentOfPediatrics.dpId }"
-																		dpTypeName="${c.departmentOfPediatrics.dpTypeName }"
-																		dpMoney="${c.departmentOfPediatrics.dpMoney }"
-																		dpMoneyVip="${c.departmentOfPediatrics.dpMoneyVip }"
 																		classTypeId="${c.classTypeId }"
+																		departmentOfPediatrics="${c.departmentOfPediatrics.dpTypeName }"
 																		schoolIds2="${c.school.schoolName }">${c.className}</option>
 																</c:forEach>
 															</select>
 														</div>
 													</div>
-													
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-select">课程名称</label> <input
+																class="form-control departmentofpediatricsIds"
+																type="text" id="billing-last-name" disabled />
+														</div>
+													</div>
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-select">收款项目</label> <select

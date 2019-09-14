@@ -123,5 +123,6 @@ $(function(){
 		}else {
 			$(this).prev().prop("checked", true);
 		}
+		e.stopPropagation();
 	});
 });

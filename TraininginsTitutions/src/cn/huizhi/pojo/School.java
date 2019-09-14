@@ -7,7 +7,6 @@ public class School {
 	private Integer cityProperId;
 	private String schoolRemarks;
 	private Integer schoolType;
-
 	private City city;
 
 	private Province province;

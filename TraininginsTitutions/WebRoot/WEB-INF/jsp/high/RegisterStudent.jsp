@@ -297,6 +297,7 @@
 																	<label for="billing-first-name">姓名</label> <input
 																		class="form-control studentName" type="text"
 																		placeholder="学员姓名" id="studentName" />
+																		<span class="${schoolTypes }" id="LX" style="display: none;"></span>
 																</div>
 															</div>
 															<div class="col-md-6">
@@ -395,19 +396,19 @@
 																		placeholder="默认是当前时间" id=startTime />
 																</div>
 															</div>
-															<div class="col-md-6">
+															<div class="col-md-6 classType1">
 																<div class="form-group">
 																	<label for="billing-zip-postal">班级类别</label> <select
 																		class="form-control classType">
 																		<option value="0">---请选择---</option>
-																		<option value="1">普通课时</option>
-																		<option value="2">VIP课时</option>
-																		<option value="3">普通速成</option>
-																		<option value="4">VIP速成</option>
+																		<option value="1">课时班</option>
+																		<option value="2">VIP课时班</option>
+																		<option value="3">速成班</option>
+																		<option value="4">VIP速成班</option>
 																	</select>
 																</div>
 															</div>
-															<div class="col-md-6">
+															<div class="col-md-6 classes1">
 																<div class="form-group">
 																	<label for="billing-zip-postal">班级选择</label> <select
 																		class="form-control classes">
@@ -581,6 +582,13 @@
 																			<option value="${p.paymentmethodId }">${p.paymentmethodName}</option>
 																		</c:forEach>
 																	</select>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group mb-3">
+																	<label for="example-select">课程名称</label> <input
+																		class="form-control departmentofpediatricsIds2"
+																		type="text" id="billing-last-name" disabled />
 																</div>
 															</div>
 															<div class="col-md-6">

@@ -187,12 +187,13 @@
 		#{registrationChannels},
 		#{registrationConsultant}, #{startTime},
 		#{endTime}, #{theSurrogate}, #{remarks}, #{feeCategory},#{integral})
-		<!--order属性是取数据生成之前(before)or生成之后(after)  -->
-		<selectKey keyProperty="studentId" resultType="Student" order="AFTER">
-    		<!--  当前事务最后一个生成的主键id-->
-    		select last_insert_id()
-    	</selectKey>
-		
+		<!--order属性是取数据生成之前(before)or生成之后(after) -->
+		<selectKey keyProperty="studentId" resultType="Student"
+			order="AFTER">
+			<!-- 当前事务最后一个生成的主键id -->
+			select last_insert_id()
+		</selectKey>
+
 	</insert>
 
 	<update id="updateStudentOrderHour">
@@ -201,17 +202,19 @@
 		studentHour + #{0},integral = integral + #{2} WHERE studentId = #{1} ;
 	</update>
 
-	<select id="selectStudentClass" resultType="Student">
+	<select id="selectStudentClass" resultType="Student"
+		statementType="STATEMENT">
 		SELECT t.*
 		FROM
 		student t
-		JOIN childrenesclassstudnet c ON t.studentId=c.studentId
+		JOIN ${table} c ON
+		t.studentId=c.studentId
 		JOIN
 		class s ON c.classId=s.classId
-		WHERE c.classId=#{0}
+		WHERE
+		c.classId=${classId}
 		ORDER BY t.studentId
 	</select>
-
 	<select id="selectStudentUsedIntegral"
 		resultMap="selectStudentUsedIntegrals" statementType="STATEMENT">
 		SELECT
@@ -234,16 +237,24 @@
 
 	<select id="selectStudentId" resultType="Student">
 		SELECT s.studentId
-		FROM student s
+		FROM
+		student s
 		WHERE s.studentName LIKE
-		CONCAT('%',#{0},'%') AND s.parentName LIKE
+		CONCAT('%',#{0},'%') AND s.parentName
+		LIKE
 		CONCAT('%',#{1},'%') AND
 		s.studentSex=#{2}
 	</select>
 
+	 
+		
+
+
 	<!-- 根据主键查询学生 -->
-	<select id="findStudentById" resultType="Student" parameterType="java.lang.Integer">
-		select <include refid="studentCol"/>
+	<select id="findStudentById" resultType="Student"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="studentCol" />
 		from student t
 		<where>
 			<if test="studentId!=null and studentId!=''">
@@ -262,17 +273,22 @@
 		studentBirth = #{studentBirth},
 		school = #{school} ,
 		parentName = #{parentName} ,
-		telephone = #{telephone} ,
+		telephone =
+		#{telephone} ,
 		familyAddress = #{familyAddress},
-		registrationChannels = #{registrationChannels} ,
-		registrationConsultant = #{registrationConsultant} ,
+		registrationChannels =
+		#{registrationChannels} ,
+		registrationConsultant =
+		#{registrationConsultant} ,
 		startTime = #{startTime} ,
-		endTime = #{endTime} ,
+		endTime =
+		#{endTime} ,
 		theSurrogate = #{theSurrogate} ,
 		remarks = #{remarks} ,
 		feeCategory = #{feeCategory} ,
 		studentHour = #{studentHour} ,
-		integral = #{integral}
+		integral =
+		#{integral}
 		<where>
 			<if test="studentId!=null and studentId!=''">
 				studentId = #{studentId}
