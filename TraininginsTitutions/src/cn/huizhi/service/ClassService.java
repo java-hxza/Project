@@ -71,6 +71,11 @@ public interface ClassService {
 	public List<Class> selectVIPClass(Integer classTypeId,Integer classType,Integer schoolId);
 	
 	
+	/**
+	 * 根据班级主键查询班级信息
+	 * @param classId
+	 * @return
+	 */
 	public Class findClassByClassId(Integer classId);
 	
 	/**
