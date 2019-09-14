@@ -282,6 +282,7 @@ $(function() {
 	Printing = function() {
 		$(".dels").remove();
 		$(".dels").next().remove();
+		$("#dayin").hide();
 		if ($(".customCheckes:checked").length < 1) {
 			if (!$(".customCheckes").prop("checked")) {
 				alert("请选中一条数据！");
@@ -291,11 +292,14 @@ $(function() {
 			alert("只能选中一条数据！");
 			return false;
 		}
+		$("#dayin").show();
+		$(".DaYins").show();
+		$(".DaYins2").parent().parent().hide();
 		var Time = new Date();
 		var gender = new Date($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text());
 		var year = Time.getTime() - gender.getTime();
-		var month = Math.ceil(year / 1000 / 60 / 60 / 24 /365);
-			$(".NL").text("年龄： " + (month).toString());
+		var month = Math.ceil(year / 1000 / 60 / 60 / 24 / 365);
+		$(".NL").text("年龄： " + (month).toString());
 		$(".RiQi").text("日期：" + $(".customCheckes:checked").parent().parent().next().next().next().text() + "                   ");
 		$(".DJBH").text("单据编号：" + "(" + $(".customCheckes:checked").parent().parent().next().next().text() + ")" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().text());
 		$(".BDKC").text("报读课程：" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text());
@@ -315,25 +319,41 @@ $(function() {
 		for (var i = 0; i < $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/").length; i++) {
 			var RMB = 0;
 			for (var j = 0; j < $(".feecateIds option").length; j++) {
-				if($(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] == $(".feecateIds option").eq(j).text()) {
+				if ($(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] == $(".feecateIds option").eq(j).text()) {
 					RMB = $(".feecateIds option").eq(j).attr("name");
 				}
 			}
-			$(".apps").after("<tr class='dels'><td width='800' colspan='3' height='40px'>"+$(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i]+"</td><td width='800' colspan='3' style='text-align:center'height='40px'>￥"+RMB+"</td></tr>");
+			$(".apps").after("<tr class='dels'><td width='800' colspan='3' height='40px'>" + $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] + "</td><td width='800' colspan='3' style='text-align:center'height='40px'>￥" + RMB + "</td></tr>");
 		}
-			bdhtml=$("#dayin").html();
-			//alert(bdhtml);
-			sprnstr="<!--startprint-->";   //开始打印标识字符串有17个字符
-			eprnstr="<!--endprint-->";        //结束打印标识字符串
-			prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17); //从开始打印标识之后的内容
-			prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//截取开始标识和结束标识之间的内容
-			var iframe = null;
-			iframe = document.getElementById("iframe1")
-			
-			var iwindow = null;
-			var iwindow = iframe.contentWindow;//获取iframe的window对象
-			iwindow.document.close();
-			iwindow.document.write(prnhtml);
-			iwindow.print(); //调用浏览器的打印功能打印指定区域
+		$("#ChargePeriods td").click(function() {
+			if ($(".WBK").val() == ".") {
+				$(".WBK").parent().remove();
+			} else {
+				$(".WBK").parent().text($(".WBK").val());
+			}
+			$(".WBK").remove();
+			$(this).append("<input type='text' class='WBK' value='" + $(this).text() + "'/>");
+			$(".WBK").focus();
+
+		});
 	}
+	
+	
+	$(".DaYins").click(function() {
+		$(".WBK").remove();
+		bdhtml = $("#dayin").html();
+		//alert(bdhtml);
+		sprnstr = "<!--startprint-->"; //开始打印标识字符串有17个字符
+		eprnstr = "<!--endprint-->"; //结束打印标识字符串
+		prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17); //从开始打印标识之后的内容
+		prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr)); //截取开始标识和结束标识之间的内容
+		var iframe = null;
+		iframe = document.getElementById("iframe1")
+
+		var iwindow = null;
+		var iwindow = iframe.contentWindow; //获取iframe的window对象
+		iwindow.document.close();
+		iwindow.document.write(prnhtml);
+		iwindow.print(); //调用浏览器的打印功能打印指定区域
+	});
 });

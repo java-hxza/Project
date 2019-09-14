@@ -1,7 +1,142 @@
 $(function() {
+	connect = function()
+	{
+		clearForm();
+		
+		var CertCtl = document.getElementById("CertCtl");
+		try {
+			var result = CertCtl.connect();
+			document.getElementById("result").value = result;
+	    } catch (e) 
+		{
+		}
+	}
+	
+	readCert = function() 
+	{
+		clearForm();
+		
+		var CertCtl = document.getElementById("CertCtl");
+		
+		try {
+			var startDt = new Date();
+			var result = CertCtl.readCert();
+			var endDt = new Date();
+			document.getElementById("result").value = result;
+			
+			var resultObj = toJson(result);
+			if (resultObj.resultFlag == 0) 
+			{
+				$(".studentName").val(resultObj.resultContent.partyName);
+				if(resultObj.resultContent.gender == 0) {
+					$(".studentSex").val(0);
+				}else {
+					$(".studentSex").val(1);
+				}
+				$(".studentBirth").val(resultObj.resultContent.bornDay);
+				$(".familyAddress").val(value = resultObj.resultContent.certAddress);
+				$(".studentIDCard").val(resultObj.resultContent.certNumber);
+			}
+		} catch(e) 
+		{
+	            alert(e);
+		}
+	}
+	
+	disconnect = function()
+	{
+		clearForm();
+		
+		var CertCtl = document.getElementById("CertCtl");
+		try 
+		{
+			var result = CertCtl.disconnect();
+			document.getElementById("result").value = result;
+	    } catch (e) 
+		{
+		}
+	}
+	getVerSion = function ()
+	{
+		clearForm();
+		
+		var CertCtl = document.getElementById("CertCtl");
+		try 
+		{
+			var result = CertCtl.getVersion();
+			document.getElementById("result").value = result;
+	    } catch (e) 
+		{
+		}
+	}
+	getSamId = function ()
+	{
+		clearForm();
+		
+		var CertCtl = document.getElementById("CertCtl");
+		try 
+		{
+			var result = CertCtl.getSAMID();
+			document.getElementById("result").value = result;
+	    } catch (e) 
+		{
+		}
+	}
+	toJson = function (str)
+	{
+		//var obj = JSON.parse(str);
+		//return obj;
+		return eval('('+str+')');  	
+	}
+	clearForm = function ()
+	{
+		$(".studentName").val("");
+		$(".studentSex").val(1);
+		$(".studentBirth").val("");
+		$(".familyAddress").val("");
+		$(".studentIDCard").val("");
+	}
+	getStatus = function ()
+	{
+		clearForm();
+		
+		var CertCtl = document.getElementById("CertCtl");
+		try {
+			var result = CertCtl.getStatus();
+			document.getElementById("result").value = result;
+		} catch(e) {
+		}
+	}
+	conv2base64 = function () 
+	{
+	    var CertCtl = document.getElementById("CertCtl");
+	    try 
+	    {
+	        var jpgPath = document.getElementById("inputJpgPath").value;
+	        var result;
+	        result = CertCtl.ConvJpgToBase64File(jpgPath);
+	        document.getElementById("outputBase64File").value = result;
+	    } catch (e) 
+	    {
+	    }
+	}
+
+	convBase64ToJpg = function () 
+	{
+	    var CertCtl = document.getElementById("CertCtl");
+	    try 
+	    {
+	        var jpgPath = document.getElementById("decodeJpgPath").value;
+	        var base64Data = document.getElementById("base64Input").value;
+	        var result;
+	        result = CertCtl.ConvBase64ToJpg(base64Data, jpgPath);
+	        alert(result);
+	    } catch (e) {
+	    }
+	}
 	if ($("#LX").attr("class") == 2) {
-//		$(".classType").empty();
-//		$(".classType").append("<option value='0'>---请选择---</option><option value='3'>普通班</option>");
+		$(".classType").empty();
+		$(".classType").append("<option value='0'>---请选择---</option><option value='3'>普通班</option>");
 		
 	} else if ($("#LX").attr("class") == 3) {
 		$(".classType1").remove();

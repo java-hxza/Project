@@ -116,6 +116,7 @@ $(function() {
 	Printing = function() {
 		$(".dels").remove();
 		$(".dels").next().remove();
+		$("#dayin").hide();
 		if ($(".customCheckes:checked").length < 1) {
 			if (!$(".customCheckes").prop("checked")) {
 				alert("请选中一条数据！");
@@ -125,6 +126,9 @@ $(function() {
 			alert("只能选中一条数据！");
 			return false;
 		}
+		$("#dayin").show();
+		$(".DaYins").show();
+		$(".DaYins2").parent().parent().hide();
 		var Time = new Date();
 		var gender = new Date($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().text());
 		var year = Time.getTime() - gender.getTime();
@@ -146,21 +150,33 @@ $(function() {
 			}
 			$(".apps").after("<tr class='dels'><td width='800' colspan='3' height='40px'>" + $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] + "</td><td width='800' colspan='3' style='text-align:center'height='40px'>￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().text() + "</td></tr>");
 		}
-
-
-		bdhtml = $("#dayin").html();
+		$("#ChargePeriod td").click(function() {
+			if($(".WBK").val() == ".") {
+				$(".WBK").parent().remove();
+			}else {
+				$(".WBK").parent().text($(".WBK").val());
+			}
+			$(".WBK").remove();
+			$(this).append("<input type='text' class='WBK' value='"+$(this).text()+"'/>");
+			$(".WBK").focus();
+			
+		});
+	}
+	$(".DaYins").click(function() {
+		$(".WBK").remove();
+		bdhtml=$("#dayin").html();
 		//alert(bdhtml);
-		sprnstr = "<!--startprint-->"; //开始打印标识字符串有17个字符
-		eprnstr = "<!--endprint-->"; //结束打印标识字符串
-		prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17); //从开始打印标识之后的内容
-		prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr)); //截取开始标识和结束标识之间的内容
+		sprnstr="<!--startprint-->";   //开始打印标识字符串有17个字符
+		eprnstr="<!--endprint-->";        //结束打印标识字符串
+		prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17); //从开始打印标识之后的内容
+		prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//截取开始标识和结束标识之间的内容
 		var iframe = null;
 		iframe = document.getElementById("iframe1")
-
+		
 		var iwindow = null;
-		var iwindow = iframe.contentWindow; //获取iframe的window对象
+		var iwindow = iframe.contentWindow;//获取iframe的window对象
 		iwindow.document.close();
 		iwindow.document.write(prnhtml);
 		iwindow.print(); //调用浏览器的打印功能打印指定区域
-	};
+	});
 });

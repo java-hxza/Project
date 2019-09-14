@@ -533,7 +533,13 @@
 													<div class="col-md-12">
 														<div class="form-group">
 															<button type="button"
-																class="btn btn-block btn-primary TiJiao">提交</button>
+																class="btn btn-block btn-primary DaYins">打印</button>
+														</div>
+													</div>
+													<div class="col-md-12" style="display: none;">
+														<div class="form-group">
+															<button type="button"
+																class="btn btn-block btn-primary DaYins2">导出</button>
 														</div>
 													</div>
 												</div>
@@ -579,7 +585,7 @@
 												<td width="400" height="40px" class="KS"></td>
 												<td width="100" height="40px"></td>
 												<td width="300" height="40px" class="YXQ"></td>
-												<td width="800" colspan="4" style="text-align:center;color: red;"
+												<td width="800" colspan="4" style="text-align:center;"
 													height="40px" class="FLYQX"></td>
 											</tr>
 											<tr class="apps">
@@ -610,10 +616,11 @@
 											<tr>
 												<td width="500" height="80px" colspan="2">收款单位盖章：</td>
 												<td width="400" height="80px" colspan="2">收款人：</td>
-												<td width="700" height="80px" colspan="2">备注：</td>
+												<td width="700" height="80px" colspan="2" readonly>备注：</td>
 											</tr>
 										</table>
 									</div>
+									
 									<!-- end card-body-->
 								</div>
 								<!-- end card-->
@@ -621,6 +628,18 @@
 							<!-- end col -->
 							<!--endprint-->
 							<iframe id="iframe1" style="display: none"></iframe>
+							<div class="col-md-12">
+										<div class="form-group">
+											<button type="button"
+												class="btn btn-block btn-primary DaYins">打印</button>
+										</div>
+									</div>
+									<div class="col-md-12" style="display: none;">
+										<div class="form-group">
+											<button type="button"
+												class="btn btn-block btn-primary DaYins2">导出</button>
+										</div>
+									</div>
 						</div>
 						<!-- end row -->
 
@@ -809,6 +828,7 @@
 					$(".Exports").click(function() {
 						$(".dels").remove();
 						$(".dels").next().remove();
+						$("#dayin").hide();
 						if ($(".customCheckes:checked").length < 1) {
 							if (!$(".customCheckes").prop("checked")) {
 								alert("请选中一条数据！");
@@ -818,6 +838,9 @@
 							alert("只能选中一条数据！");
 							return false;
 						}
+						$("#dayin").show();
+						$(".DaYins").hide();
+						$(".DaYins2").parent().parent().show();
 						var Time = new Date();
 						var gender = new Date($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text());
 						var year = Time.getTime() - gender.getTime();
@@ -848,6 +871,20 @@
 							}
 							$(".apps").after("<tr class='dels'><td width='800' colspan='3' height='40px'>" + $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] + "</td><td width='800' colspan='3' style='text-align:center'height='40px'>￥" + RMB + "</td></tr>");
 						}
+						$("#ChargePeriods td").click(function() {
+							if ($(".WBK").val() == ".") {
+								$(".WBK").parent().remove();
+							} else {
+								$(".WBK").parent().text($(".WBK").val());
+							}
+							$(".WBK").remove();
+							$(this).append("<input type='text' class='WBK' value='" + $(this).text() + "'/>");
+							$(".WBK").focus();
+			
+						});
+					});
+					$(".DaYins2").click(function() {
+						$(".WBK").remove();
 						$("#ChargePeriods").tableExport({
 							formats : [ "xlsx" ],
 							fileName : "时间段收费单-" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().text(),

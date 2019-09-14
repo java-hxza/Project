@@ -289,6 +289,12 @@
 										<div class="tab-pane show active" id="billing-information">
 											<div class="row">
 												<div class="col-lg-8">
+													<input type="button" class="btn btn-danger mb-2" value="连接"
+														onclick="connect()"> <input type="button"
+														class="btn btn-danger mb-2" value="读卡"
+														onclick="readCert()"> <input type="button"
+														class="btn btn-danger mb-2" value="断开"
+														onclick="disconnect()">
 													<h4 class="mt-2" style="text-align: center;">少儿学员信息录入</h4>
 													<form novalidate>
 														<div class="row">
@@ -296,8 +302,8 @@
 																<div class="form-group">
 																	<label for="billing-first-name">姓名</label> <input
 																		class="form-control studentName" type="text"
-																		placeholder="学员姓名" id="studentName" />
-																		<span class="${schoolTypes }" id="LX" style="display: none;"></span>
+																		placeholder="学员姓名" id="studentName"/> <span
+																		class="${schoolTypes }" id="LX" style="display: none;"></span>
 																</div>
 															</div>
 															<div class="col-md-6">
@@ -349,14 +355,14 @@
 																</div>
 															</div>
 															<div class="col-md-6">
-														<div class="form-group">
-															<label for="billing-last-name">身份证号</label> <input
-																type="text" class="form-control studentIDCard"
-																data-toggle="input-mask"
-																data-mask-format="00000000000000000" data-reverse="true"
-																>
-														</div>
-													</div>
+																<div class="form-group">
+																	<label for="billing-last-name">身份证号</label> <input
+																		type="text" class="form-control studentIDCard"
+																		data-toggle="input-mask"
+																		data-mask-format="00000000000000000"
+																		data-reverse="true">
+																</div>
+															</div>
 														</div>
 														<!-- end row -->
 														<div class="row">
@@ -733,6 +739,124 @@
 			</div>
 			<!-- content -->
 
+			<table border="0" width="50%" cellpadding="0" cellspacing="0"
+				style="padding-left:100px;display: none;">
+				<tr>
+					<td><input type="button" value="连接aaa" onclick="connect()"></td>
+					<td><input type="button" value="状态" onclick="getStatus()"></td>
+					<td><input type="button" value="版本" onclick="getVerSion()"></td>
+					<td><input type="button" value="SamID" onclick="getSamId()"></td>
+					<td><input type="button" value="读卡" onclick="readCert()"></td>
+					<td><input type="button" value="断开" onclick="disconnect()"></td>
+				</tr>
+			</table>
+			<br />
+			<table border="0" width="100%" cellpadding="0" cellspacing="10" style="display: none;">
+				<tr>
+					<td align="right">读卡时间：</td>
+					<td><input type="text" id="timeElapsed" size="49"
+						style="width:400px;" readonly="readonly"></td>
+				</tr>
+
+				<tr>
+					<td align="right">姓名：</td>
+					<td><input type="text" id="partyName" size="49"
+						style="width:400px;" readonly="readonly">(要求中间，两头都没有空格)</td>
+					<td><img id="PhotoStr" src="" alt="Base64 image" /></td>
+				</tr>
+				<tr>
+					<td align="right">中文姓名：</td>
+					<td><input type="text" id="chineseName" size="49"
+						style="width:400px;" readonly="readonly">(外国人居留证专有项)</td>
+					<td><img id="Img1" src="" alt="Base64 image" /></td>
+				</tr>
+				<tr>
+					<td align="right">性别：</td>
+					<td><input type="text" id="gender" size="49"
+						style="width:400px;" readonly="readonly">(取值为“1”（表示“男”）或“0”（表示“女”）)</td>
+				</tr>
+				<tr>
+					<td align="right">民族/国籍：</td>
+					<td><input type="text" id="nation" size="49"
+						style="width:400px;" readonly="readonly">(居民民族或外国人居留证国籍，港澳台无此项)</td>
+				</tr>
+				<tr>
+					<td align="right">出生日期：</td>
+					<td><input type="text" id="bornDay" size="49"
+						style="width:400px;" readonly="readonly">(要求格式为:yyyyMMdd，长度为8)</td>
+				</tr>
+				<tr>
+					<td align="right">住址：</td>
+					<td><input type="text" id="certAddress" size="49"
+						style="width:400px;" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td align="right">证件类型：</td>
+					<td><input type="text" id="certType" size="49"
+						style="color:#FF0000;width:400px;" readonly="readonly">(证件类型)</td>
+				</tr>
+				<tr>
+					<td align="right">证件号码：</td>
+					<td><input type="text" id="certNumber" size="49"
+						style="color:#FF0000;width:400px;" readonly="readonly">(证件号码)</td>
+				</tr>
+				<td align="right">港澳台通行证号码：</td>
+				<td><input type="text" id="passportNo" size="49"
+					style="color:#FF0000;width:400px;" readonly="readonly">(港澳台通行证号码)</td>
+				</tr>
+				<td align="right">港澳台签注次数：</td>
+				<td><input type="text" id="signNum" size="49"
+					style="color:#FF0000;width:400px;" readonly="readonly">(港澳台签注次数)</td>
+				</tr>
+				<tr>
+					<td align="right">签发机关：</td>
+					<td><input type="text" id="certOrg" size="49"
+						style="width:400px;" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td align="right">开始期限：</td>
+					<td><input type="text" id="effDate" size="49"
+						style="width:400px;" readonly="readonly">(要求格式为:yyyyMMdd，长度为8)</td>
+				</tr>
+				<tr>
+					<td align="right">结束期限：</td>
+					<td><input type="text" id="expDate" size="49"
+						style="width:400px;" readonly="readonly">(要求格式为:yyyyMMdd，长度为8，或者是“长期”)</td>
+				</tr>
+				<tr>
+					<td align="right">结果：</td>
+					<td><textarea id="result" rows="8" cols="47"
+							style="width:400px;" readonly="readonly"></textarea></td>
+				</tr>
+
+				<tr>
+					<td align="right">jpg路径：</td>
+					<td><input type="text" id="inputJpgPath" size="49"
+						style="width:400px;"></td>
+				</tr>
+
+				<tr>
+					<td align="right">base64数据：</td>
+					<td><textarea id="outputBase64File" rows="8" cols="47"
+							style="width:400px;"></textarea><input type="button" value="转码"
+						onclick="conv2base64()"></td>
+				</tr>
+
+				<td align="right">base64数据：</td>
+				<td><textarea id="base64Input" rows="8" cols="47"
+						style="width:400px;"></textarea></td>
+				</tr>
+
+				<tr>
+					<td align="right">解码jpg路径：</td>
+					<td><input type="text" id="decodeJpgPath" size="49"
+						style="width:400px;"><input type="button" value="解码"
+						onclick="convBase64ToJpg()"></td>
+				</tr>
+
+
+			</table>
+
 			<!-- Footer Start -->
 			<footer class="footer">
 				<div class="container-fluid">
@@ -775,5 +899,9 @@
 	<script type="text/javascript"
 		src="${Path }/static/js/highes/RegisterStudent.js"></script>
 	<!-- third party js ends -->
+	<object id="CertCtl" type="application/cert-reader" width="0"
+		height="0">
+		<p style="color:#FF0000;">控件不可用，可能未正确安装控件及驱动，或者控件未启用。</p>
+	</object>
 </body>
 </html>
