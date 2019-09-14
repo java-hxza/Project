@@ -229,13 +229,9 @@
 		</collection>
 	</resultMap>
 
-<<<<<<< HEAD
-	<select id="selectOrderExpenditure" resultMap="selectOrderExpenditures">
-=======
 
 	<select id="selectOrderExpenditure"
 		resultMap="selectOrderExpenditures">
->>>>>>> branch 'master' of https://github.com/tianmabdqn/TraininginsTitutions.git
 		SELECT o.orderId
 		oo,o.stuId ost,o.expenditureitemsId
 		oei,o.paymentmethodId
@@ -797,7 +793,6 @@
 		group by o.stuId
 	</select>
 
-<<<<<<< HEAD
 	<select id="selectOrderListByStudentId" resultType="Order" parameterType="java.lang.Integer">
 		select <include refid="orderCol"/>
 		from traininginstitutions.order 
@@ -808,7 +803,6 @@
 		</where> 
 	</select>
 	
-=======
 	<select id="selectStduentHour" resultMap="selectStduentHours">
 		SELECT o.orderId ooi,
 		o.stuId
@@ -894,6 +888,5 @@
 		</collection>
 	</resultMap>
 
->>>>>>> branch 'master' of https://github.com/tianmabdqn/TraininginsTitutions.git
 </mapper>   
 

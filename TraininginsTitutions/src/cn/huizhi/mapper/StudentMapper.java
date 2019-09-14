@@ -88,15 +88,12 @@ public interface StudentMapper {
 	 */
 	public Integer updateStudent(Student student);
 	
-<<<<<<< HEAD
 	/**
 	 * 批量修改学生课时
 	 * @param list
 	 * @return
 	 */
 	public Integer updateStuHour(List<Student> list);
-=======
 
 	
->>>>>>> branch 'master' of https://github.com/tianmabdqn/TraininginsTitutions.git
 }
