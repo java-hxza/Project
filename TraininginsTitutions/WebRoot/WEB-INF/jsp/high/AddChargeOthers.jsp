@@ -43,8 +43,9 @@
 		<!-- ============================================================== -->
 		<!-- Start Page Content here -->
 		<!-- ============================================================== -->
-
-		<!-- Topbar Start -->
+		<div class="content-page">
+			<div class="content">
+				<!-- Topbar Start -->
 				<div class="navbar-custom">
 					<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
@@ -57,7 +58,7 @@
 									src="${Path }/static/images/avatar-1.jpg" alt="user-image"
 									class="rounded-circle">
 							</span> <span> <span class="account-user-name">${user.loginName }
-										</span> <span class="account-position">管理员</span>
+								</span> <span class="account-position">管理员</span>
 							</span>
 						</a>
 							<div
@@ -73,15 +74,14 @@
 								</a>
 
 								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item" onclick="switchingAccounts()">
-									<i class="mdi mdi-account-edit mr-1"></i> <span>切换账号
-									</span> 
+								<a href="javascript:void(0);" class="dropdown-item notify-item"
+									onclick="switchingAccounts()"> <i
+									class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
 								</a>
 
 								<!-- item-->
 								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置
-									</span>
+									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
 								</a>
 
 

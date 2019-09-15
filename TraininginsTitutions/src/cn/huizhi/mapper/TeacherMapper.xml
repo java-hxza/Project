@@ -45,27 +45,20 @@
 	<select id="selectTeacherByLogin" resultMap="teacherByLogin">
 		select
 		<include refid="teacherByLoginCol"/>
-		from teacher t
-		join department dp on dp.departmentId = t.departmentId
-		join teacherdiction td on td.teacherId = t.teacherId
-		join school sc on
-		sc.schoolId = td.schoolId
+		from teacher t, teacherdiction td ,school sc 
+		
 		<where>
+			td.teacherId = t.teacherId and sc.schoolId = td.schoolId
 			<if test="teacherName!='' and teacherName!=null">
-				t.teacherName = #{teacherName }
+				and t.teacherName = #{teacherName }
 			</if>
 			<if test="loginPassword !='' and loginPassword!=null">
 				and t.loginPassword = #{loginPassword}
 			</if>
-			<if test="schoolId!=null and schoolId!=''">
-				and td.schoolId =#{schoolId}
+			<if test="schoolType != null and schoolType !=''">
+				and sc.schoolType =#{schoolType}
 			</if>
-			<if test="departmentId !=null and departmentId!=''">
-				and t.departmentId = #{departmentId}
-			</if>
-			<if test="schoolType !=null and schoolType!=''">
-				and sc.schoolType = #{schoolType}
-			</if>
+			
 		</where>
 	</select>
 	

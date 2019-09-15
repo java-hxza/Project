@@ -32,8 +32,9 @@
 		<!-- ========== Left Sidebar Start ========== -->
 		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
 		<!-- Left Sidebar End -->
-
-		<!-- Topbar Start -->
+		<div class="content-page">
+			<div class="content">
+				<!-- Topbar Start -->
 				<div class="navbar-custom">
 					<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
@@ -46,7 +47,7 @@
 									src="${Path }/static/images/avatar-1.jpg" alt="user-image"
 									class="rounded-circle">
 							</span> <span> <span class="account-user-name">${user.loginName }
-										</span> <span class="account-position">管理员</span>
+								</span> <span class="account-position">管理员</span>
 							</span>
 						</a>
 							<div
@@ -62,15 +63,14 @@
 								</a>
 
 								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item" onclick="switchingAccounts()">
-									<i class="mdi mdi-account-edit mr-1"></i> <span>切换账号
-									</span> 
+								<a href="javascript:void(0);" class="dropdown-item notify-item"
+									onclick="switchingAccounts()"> <i
+									class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
 								</a>
 
 								<!-- item-->
 								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置
-									</span>
+									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
 								</a>
 
 
@@ -150,7 +150,7 @@
 																<div class="form-group">
 																	<label for="billing-first-name">姓名</label> <input
 																		class="form-control studentName" type="text"
-																		placeholder="学员姓名" id="studentName"/> <span
+																		placeholder="学员姓名" id="studentName" /> <span
 																		class="${schoolTypes }" id="LX" style="display: none;"></span>
 																</div>
 															</div>
@@ -599,7 +599,8 @@
 				</tr>
 			</table>
 			<br />
-			<table border="0" width="100%" cellpadding="0" cellspacing="10" style="display: none;">
+			<table border="0" width="100%" cellpadding="0" cellspacing="10"
+				style="display: none;">
 				<tr>
 					<td align="right">读卡时间：</td>
 					<td><input type="text" id="timeElapsed" size="49"

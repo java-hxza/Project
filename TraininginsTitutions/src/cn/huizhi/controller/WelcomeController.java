@@ -14,6 +14,7 @@ import cn.huizhi.pojo.DepartMent;
 import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.Province;
 import cn.huizhi.pojo.School;
+import cn.huizhi.pojo.TeacherDiction;
 import cn.huizhi.pojo.TeacherType;
 import cn.huizhi.pojo.UserDiction;
 import cn.huizhi.pojo.UserType;
@@ -177,15 +178,28 @@ public class WelcomeController {
 	
 	@RequestMapping("highIndex.html")
 	public String highIndex(HttpSession session) {
+		Integer loginType = (Integer) session.getAttribute("loginType");
+		if(loginType == 1) {
+			
+			List<UserDiction> userListDiction = (List<UserDiction>) session.getAttribute("schoolListByUId");
+			Integer schoolId = userListDiction.get(0).getSchoolId();
+			session.setAttribute("schoolId", schoolId);
+			
+			List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
+			
+			session.setAttribute("classList", classList);
+		}
+		if(loginType == 2) {
+			
+			List<TeacherDiction> userListDiction = (List<TeacherDiction>) session.getAttribute("schoolListByUId");
+			Integer schoolId = userListDiction.get(0).getSchoolId();
+			session.setAttribute("schoolId", schoolId);
+			
+			List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
+			
+			session.setAttribute("classList", classList);
+		}
 		
-		List<UserDiction> userListDiction = (List<UserDiction>) session.getAttribute("schoolListByUId");
-		
-		Integer schoolId = userListDiction.get(0).getSchoolId();
-		session.setAttribute("schoolId", schoolId);
-		
-		List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
-		
-		session.setAttribute("classList", classList);
 		
 		return "redirect:/Accountinformation.html";
 	}

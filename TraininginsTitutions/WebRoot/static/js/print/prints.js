@@ -17,7 +17,6 @@ $(function() {
 	}
 
 	exportExsal = function() {
-
 		excel = new ExcelGen({
 			"src_id" : "products-datatable",
 			"show_header" : true

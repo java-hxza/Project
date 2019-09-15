@@ -64,8 +64,7 @@ public interface TeacherMapper {
 	 * @param schoolType
 	 * @return
 	 */
-	public Teacher selectTeacherByLogin(@Param("teacherName")String loginName,@Param("loginPassword")String loginPassword,@Param("schoolId")Integer schoolId,@Param("departmentId")Integer departmentId,@Param("schoolType")Integer schoolType);
-	/**
+	public Teacher selectTeacherByLogin(@Param("teacherName")String loginName,@Param("loginPassword")String loginPassword,@Param("schoolType")Integer schoolType);	/**
 	 * 根据教师主键查询教师信息
 	 * @param teacherId
 	 * @return

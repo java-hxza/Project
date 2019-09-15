@@ -39,7 +39,8 @@
 		<!-- ========== Left Sidebar Start ========== -->
 		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
 		<!-- Left Sidebar End -->
-
+		<div class="content-page">
+			<div class="content">
 		<!-- Topbar Start -->
 				<div class="navbar-custom">
 					<ul class="list-unstyled topbar-right-menu float-right mb-0">

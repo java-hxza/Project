@@ -307,14 +307,12 @@ public class RootSchoolController {
 
 	/**
 	 * 返回学生课时页面
-	 * 
 	 * @param classId
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("schoolStudentHour.html")
 	public String schoolTeacherHour(Integer classId, HttpSession session) {
-		User user = (User) session.getAttribute("user");
 
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
 
@@ -323,14 +321,8 @@ public class RootSchoolController {
 			session.setAttribute("stuReistrationList", stuReistrationList);
 			return "admin/classStudent/studentHourInfo";
 		}
-		if (schoolType == 2) {
 
-		}
-		if (schoolType == 3) {
-
-		}
-
-		return "";
+		return "redirect:highIndex.html";
 	}
 
 	/**

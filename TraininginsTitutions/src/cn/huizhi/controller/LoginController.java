@@ -16,10 +16,12 @@ import com.alibaba.fastjson.JSON;
 import cn.huizhi.pojo.City;
 import cn.huizhi.pojo.School;
 import cn.huizhi.pojo.Teacher;
+import cn.huizhi.pojo.TeacherDiction;
 import cn.huizhi.pojo.User;
 import cn.huizhi.pojo.UserDiction;
 import cn.huizhi.service.CityService;
 import cn.huizhi.service.SchoolService;
+import cn.huizhi.service.TeacherDictionService;
 import cn.huizhi.service.TeacherService;
 import cn.huizhi.service.UserDictionService;
 import cn.huizhi.service.UserService;
@@ -51,6 +53,8 @@ public class LoginController {
 	
 	@Resource
 	UserDictionService userDictionService;
+	@Resource
+	TeacherDictionService teacherDictionService;
 	/**
 	 * 根据省份查询城市并返回数据
 	 * @param provinceId
@@ -95,18 +99,32 @@ public class LoginController {
 	@ResponseBody
 	public HashMap<String, String> validateLogin(String loginName,String loginPassword,HttpSession session) {
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
-
+		
 		User user = userService.findUserByLogin(loginName, loginPassword,schoolType);
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
 		if (user != null) {
 			List<UserDiction> schoolListByUId = userDictionService.findDictionListByUserId(user.getuId());
 			session.setAttribute("schoolListByUId", schoolListByUId);
 			session.setAttribute("user", user);
+			session.setAttribute("loginType", 1);
 			jsonMap.put("state", "1");
 			jsonMap.put("UsertypeId", user.getUserTypeId());
-		} else {
-			jsonMap.put("state", "0");
+			
+		} 
+		if(user == null) {
+			Teacher teacher = teacherService.findTeacherByLogin(loginName, loginPassword, schoolType);
+			if(teacher !=null) {
+				teacher.setLoginName(teacher.getTeacherName());
+				List<TeacherDiction> schoolListByUId = teacherDictionService.findTeacherDictionListByTeacherId(teacher.getTeacherId());
+				session.setAttribute("loginType", 2);
+				session.setAttribute("schoolListByUId", schoolListByUId);
+				session.setAttribute("user", teacher);
+				jsonMap.put("state", "1");
+			}else {
+				jsonMap.put("state", "0");
+			}
 		}
+ 
 		return jsonMap;
 	}
 	
@@ -141,22 +159,12 @@ public class LoginController {
 	public String toIndex() {
 		return"selectionModule";
 	}
-	
-	/**
-	 *教师登录 
-	 * @param loginName
-	 * @param loginPassword
-	 * @param schoolId
-	 * @param departmentId
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping("teacherLogin.html")
+
+/*	@RequestMapping("teacherLogin.html")
 	@ResponseBody
 	public Map<String, String> teacherLogin(String loginName,String loginPassword,Integer schoolId,Integer departmentId,HttpSession session){
 		Map< String, String> jsonMap = new HashMap<String, String>();
-		Integer schoolType = (Integer) session.getAttribute("schoolType");
-		Teacher teacher = teacherService.findTeacherByLogin(loginName, loginPassword, schoolId,departmentId,schoolType);
+		
 		if(teacher!=null) {
 			session.setAttribute("teacher", teacher);
 			jsonMap.put("state","1");
@@ -164,5 +172,5 @@ public class LoginController {
 			jsonMap.put("state","0");
 		}
 		return jsonMap;
-	}
+	}*/
 }
