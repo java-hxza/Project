@@ -186,7 +186,7 @@ public class HighesController {
 		}
 
 		if (feecategoryService.addFeeCategory(feeCategory) > 0) {
-
+			map.put("add", "1");
 		} else {
 			map.put("add", "0");
 		}
@@ -1041,17 +1041,19 @@ public class HighesController {
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		List<Class> classes = classService.selectClassAll((Integer) session.getAttribute("schoolId"));
 		model.addAttribute("classes", classes);
-		if (schoolType == 1) {
-			List<Student> student = studentService.selectStudentClass("childrenesclassstudnet",
-					classes.get(0).getClassId());
-			model.addAttribute("student", student);
-		} else if (schoolType == 2) {
-			List<Student> student = studentService.selectStudentClass("highesclassstudnet",
-					classes.get(0).getClassId());
-			model.addAttribute("student", student);
-		} else if (schoolType == 3) {
-			List<Student> student = studentService.selectStudentClass("artclassstudnet", classes.get(0).getClassId());
-			model.addAttribute("student", student);
+		if(classes.size() > 0 ) {
+			if (schoolType == 1) {
+				List<Student> student = studentService.selectStudentClass("childrenesclassstudnet",
+						classes.get(0).getClassId());
+				model.addAttribute("student", student);
+			} else if (schoolType == 2) {
+				List<Student> student = studentService.selectStudentClass("highesclassstudnet",
+						classes.get(0).getClassId());
+				model.addAttribute("student", student);
+			} else if (schoolType == 3) {
+				List<Student> student = studentService.selectStudentClass("artclassstudnet", classes.get(0).getClassId());
+				model.addAttribute("student", student);
+			}
 		}
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		List<Order> order = orderService.selectOrderExpenditure(schoolId);
@@ -1203,15 +1205,18 @@ public class HighesController {
 		}
 		List<Student> student = studentService.selectStudentUsedIntegral(table,
 				(Integer) session.getAttribute("schoolId"));
-		String sql = "";
-		for (int i = 0; i < student.size(); i++) {
-			sql = sql + student.get(i).getStudentId() + " or ";
+		if(student.size() > 0) {
+			String sql = "";
+			for (int i = 0; i < student.size(); i++) {
+				sql = sql + student.get(i).getStudentId() + " or ";
+			}
+			sql = sql.substring(0, sql.length() - 3);
+			System.out.println();
+			List<Order> order = orderService.selectUsedIntegral(sql);
+			model.addAttribute("order", order);
 		}
-		sql = sql.substring(0, sql.length() - 3);
-		System.out.println();
-		List<Order> order = orderService.selectUsedIntegral(sql);
 		model.addAttribute("student", student);
-		model.addAttribute("order", order);
+		
 		return "high/GiftUsedIntegral";
 	}
 
