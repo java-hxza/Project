@@ -91,5 +91,15 @@
 		where
 		studentId = #{studentId}
 	</update>
-
+<!-- 退学 -->
+	<update id="updateChildrenStudentState" parameterType="ChildrenesClassStudnet">
+		update traininginstitutions.childrenesclassstudnet
+		set
+		state = #{state}
+		<where>
+			<if test="studentId !=null and studentId !='' ">
+				studentId = #{studentId}
+			</if>
+		</where>
+	</update>
 </mapper>

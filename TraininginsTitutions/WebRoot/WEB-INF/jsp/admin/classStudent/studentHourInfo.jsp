@@ -90,7 +90,7 @@
 									<div class="card-body">
 										<div class="row mb-2">
 											<div class="col-sm-4">
-												<button type="button" class="btn btn-success btn-sm mt-2" onclick="printOrders()"> 打印订单</button>
+												<button type="button" class="btn btn-success btn-sm mt-2" onclick="print()"> 打印订单</button>
 											</div>
 											<div class="col-sm-8">
 												<div class="text-sm-right">
@@ -100,25 +100,25 @@
 											<!-- end col-->
 										</div>
                                 <!-- Question/Answer -->
-                                	<div class="table-responsive">
+                                	<div class="table-responsive"><!--startprint-->
 										<table
 											class="table table-centered table-striped dt-responsive nowrap w-100"
-											id="products-datatable">
-											<thead>
+											id="products-datatable" width="100%">
+											<tbody>
 												<tr>
-													<th style="width: 20px;">
+													<td style="width: 20px;">
 														<div class="custom-control custom-checkbox">
 															
 														</div>
-													</th>
-													<th>序</th>
-													<th>校区</th>
-													<th>学员名称</th>
-													<th>新增课时</th>
-													<th>赠送课时</th>
-													<th>已上课时</th>
+													</td>
+													<td>序</td>
+													<td>校区</td>
+													<td>学员名称</td>
+													<td>新增课时</td>
+													<td>赠送课时</td>
+													<td>已上课时</td>
 												</tr>
-											</thead>
+											</tbody>
 											<tbody>
 												<c:forEach items="${stuReistrationList}" var="stu" varStatus="status">
 													<tr>
@@ -149,7 +149,7 @@
 													</tr>
 												</c:forEach>	
 											</tbody>
-										</table>
+										</table><!--endprint-->
 									</div>
 
             <!-- ============================================================== -->
@@ -158,7 +158,7 @@
 
         </div>
 				<!-- END wrapper -->
-
+<iframe id="iframe1" style="display: none"></iframe>
 				<!-- App js -->
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
 				<script src="${Path }/static/js/admin/info/schoolInfo.js"></script>

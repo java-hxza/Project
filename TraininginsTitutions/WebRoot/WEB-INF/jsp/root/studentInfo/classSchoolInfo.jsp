@@ -1,7 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set scope="request" value="${pageContext.request.contextPath }" var="Path" />
+<c:set scope="request" value="${pageContext.request.contextPath }"
+	var="Path" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,211 +37,214 @@
 	<div class="wrapper">
 
 		<!-- ========== Left Sidebar Start ========== -->
-		<%@include file="/WEB-INF/jsp/admin/bar/leftSidebar.jsp" %>		
+		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
 		<!-- Left Sidebar End -->
 
 		<!-- ============================================================== -->
-				<!-- Start Page Content here -->
-				<!-- ============================================================== -->
-				<div class="container-fluid">
-					<div class="navbar-custom">
-						<ul class="list-unstyled topbar-right-menu float-right mb-0">
+		<!-- Start Page Content here -->
+		<!-- ============================================================== -->
+		<div class="container-fluid">
+			<div class="navbar-custom">
+				<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
 
-							<li class="dropdown notification-list"><a
-								class="nav-link dropdown-toggle nav-user arrow-none mr-0"
-								data-toggle="dropdown" href="#" role="button"
-								aria-haspopup="false" aria-expanded="false"> <span
-									class="account-user-avatar"> <img
-										src="${Path }/static/images/avatar-1.jpg" alt="user-image"
-										class="rounded-circle">
-								</span> <span> <span class="account-user-name">${user.loginName }
-									</span> <span class="account-position">管理员</span>
-								</span>
+					<li class="dropdown notification-list"><a
+						class="nav-link dropdown-toggle nav-user arrow-none mr-0"
+						data-toggle="dropdown" href="#" role="button"
+						aria-haspopup="false" aria-expanded="false"> <span
+							class="account-user-avatar"> <img
+								src="${Path }/static/images/avatar-1.jpg" alt="user-image"
+								class="rounded-circle">
+						</span> <span> <span class="account-user-name">${user.loginName }
+							</span> <span class="account-position">管理员</span>
+						</span>
+					</a>
+						<div
+							class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+							<!-- item-->
+							<div class=" dropdown-header noti-title">
+								<h6 class="text-overflow m-0">欢迎 !</h6>
+							</div>
+
+							<!-- item-->
+							<a href="javascript:void(0);" class="dropdown-item notify-item">
+								<i class="mdi mdi-account-circle mr-1"></i> <span>我的账户</span>
 							</a>
-								<div
-									class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-									<!-- item-->
-									<div class=" dropdown-header noti-title">
-										<h6 class="text-overflow m-0">欢迎 !</h6>
-									</div>
 
-									<!-- item-->
-									<a href="javascript:void(0);" class="dropdown-item notify-item">
-										<i class="mdi mdi-account-circle mr-1"></i> <span>我的账户</span>
-									</a>
+							<!-- item-->
+							<a href="javascript:void(0);" class="dropdown-item notify-item"
+								onclick="switchingAccounts()"> <i
+								class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
+							</a>
 
-									<!-- item-->
-									<a href="javascript:void(0);" class="dropdown-item notify-item"
-										onclick="switchingAccounts()"> <i
-										class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
-									</a>
-
-									<!-- item-->
-									<a href="javascript:void(0);" class="dropdown-item notify-item">
-										<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
-									</a>
+							<!-- item-->
+							<a href="javascript:void(0);" class="dropdown-item notify-item">
+								<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
+							</a>
 
 
-								</div></li>
+						</div></li>
 
-						</ul>
-						<button class="button-menu-mobile open-left disable-btn">
-							<i class="mdi mdi-menu"></i>
-						</button>
-						<div class="app-search">
-							<form>
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search...">
-									<span class="mdi mdi-magnify"></span>
-									<div class="input-group-append">
-										<button class="btn btn-primary" type="submit">Search</button>
-									</div>
-								</div>
-							</form>
+				</ul>
+				<button class="button-menu-mobile open-left disable-btn">
+					<i class="mdi mdi-menu"></i>
+				</button>
+				<div class="app-search">
+					<form>
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search...">
+							<span class="mdi mdi-magnify"></span>
+							<div class="input-group-append">
+								<button class="btn btn-primary" type="submit">Search</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- end Topbar -->
+			<!-- Start Content-->
+			<div class="container-fluid">
+
+				<!-- start page title -->
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="text-center">
+							<h3 class="">选择班级</h3>
+							<p class="text-muted mt-3">请选择要查看的班级学生</p>
 						</div>
 					</div>
-					<!-- end Topbar -->
-				<!-- Start Content-->
-				<div class="container-fluid">
 
-					<!-- start page title -->
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="text-center">
-								<h3 class="">选择班级</h3>
-								<p class="text-muted mt-3">请选择要查看的班级学生</p>
-                                </div>
-                            </div>
-                            
-						<!-- end col -->
-                        </div>
-                       
-					<!-- end page title -->
+					<!-- end col -->
+				</div>
 
-					<div class="row">
-						<div class="col-12">
-							<div class="card">
-								<div class="card-body">
-									<div class="row mb-2">
-										<div class="col-sm-4">
+				<!-- end page title -->
+
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row mb-2">
+									<div class="col-sm-4"></div>
+									<div class="col-sm-8">
+										<div class="text-sm-right">
+											<button type="button" class="btn btn-success mb-2 mr-1">
+												<i class="mdi mdi-settings"></i>
+											</button>
 										</div>
-										<div class="col-sm-8">
-											<div class="text-sm-right">
-												<button type="button" class="btn btn-success mb-2 mr-1">
-													<i class="mdi mdi-settings"></i>
-												</button>
-											</div>
-										</div>
-										<!-- end col-->
 									</div>
+									<!-- end col-->
+								</div>
 
-									<div class="table-responsive">
-										<table
-											class="table table-centered table-striped dt-responsive nowrap w-100"
-											id="products-datatable">
-											<thead>
-												<tr>
-													<th style="width: 20px;">
+								<div class="table-responsive">
+									<!--startprint-->
+									<table
+										class="table table-centered table-striped dt-responsive nowrap w-100"
+										id="products-datatable">
+										<thead>
+											<tr>
+												<th style="width: 20px;">
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input"
+															id="customCheck1"> <label
+															class="custom-control-label" for="customCheck1">&nbsp;</label>
+													</div>
+												</th>
+												<th>班级班号</th>
+												<th>班级名称</th>
+												<th>班级类型</th>
+												<th>任课老师</th>
+												<th>班级所属学校</th>
+												<th>班级所属级别</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="${classList}" var="childrenClass">
+												<tr class="classId">
+													<td>
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input"
-																id="customCheck1"> <label
-																class="custom-control-label" for="customCheck1">&nbsp;</label>
+																id="customCheck2"> <label
+																class="custom-control-label" for="customCheck2">&nbsp;</label>
 														</div>
-													</th>
-													<th>班级班号</th>
-													<th>班级名称</th>
-													<th>班级类型</th>
-													<th>任课老师</th>
-													<th>班级所属学校</th>
-													<th>班级所属级别</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${classList}" var="childrenClass">
-													<tr class="classId">
-														<td>
-															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input"
-																	id="customCheck2"> <label class="custom-control-label" for="customCheck2">&nbsp;</label>
-															</div>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" name = "${childrenClass.classId }">${childrenClass.classNumber }</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${childrenClass.className}</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${childrenClass.departmentOfPediatrics.dpTypeName}</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${childrenClass.headmaster}</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${childrenClass.school.schoolName}</a>
-														</td>
-														<c:choose>
-															<c:when test="${childrenClass.classLevel == 1}">
-																<td class="table-user"><a href="javascript:void(0);"
-																	class="text-body font-weight-semibold" name="${childrenClass.classLevel}">少儿</a>
-																</td>
-															</c:when>
-															<c:when test="${childrenClass.classLevel == 2}">
-																<td class="table-user"><a href="javascript:void(0);"
-																	class="text-body font-weight-semibold" name="${childrenClass.classLevel}">高中</a>
-																</td>
-															</c:when>
-															<c:otherwise>
-																<td class="table-user"><a href="javascript:void(0);"
-																	class="text-body font-weight-semibold" name="${childrenClass.classLevel}">艺考</a>
-																</td>
-															</c:otherwise>
-														</c:choose>
-														
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								<!-- end card-body-->
-							</div>
-							<!-- end card-->
-						</div>
-						<!-- end col -->
-					</div>
-					<!-- end row -->
+													</td>
+													<td class="table-user"><a href="javascript:void(0);"
+														class="text-body font-weight-semibold"
+														name="${childrenClass.classId }">${childrenClass.classNumber }</a>
+													</td>
+													<td class="table-user"><a href="javascript:void(0);"
+														class="text-body font-weight-semibold">${childrenClass.className}</a>
+													</td>
+													<td class="table-user"><a href="javascript:void(0);"
+														class="text-body font-weight-semibold">${childrenClass.departmentOfPediatrics.dpTypeName}</a>
+													</td>
+													<td class="table-user"><a href="javascript:void(0);"
+														class="text-body font-weight-semibold">${childrenClass.headmaster}</a>
+													</td>
+													<td class="table-user"><a href="javascript:void(0);"
+														class="text-body font-weight-semibold">${childrenClass.school.schoolName}</a>
+													</td>
+													<c:choose>
+														<c:when test="${childrenClass.classLevel == 1}">
+															<td class="table-user"><a href="javascript:void(0);"
+																class="text-body font-weight-semibold"
+																name="${childrenClass.classLevel}">少儿</a></td>
+														</c:when>
+														<c:when test="${childrenClass.classLevel == 2}">
+															<td class="table-user"><a href="javascript:void(0);"
+																class="text-body font-weight-semibold"
+																name="${childrenClass.classLevel}">高中</a></td>
+														</c:when>
+														<c:otherwise>
+															<td class="table-user"><a href="javascript:void(0);"
+																class="text-body font-weight-semibold"
+																name="${childrenClass.classLevel}">艺考</a></td>
+														</c:otherwise>
+													</c:choose>
 
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									<!--endprint-->
+								</div>
+							</div>
+							<!-- end card-body-->
+						</div>
+						<!-- end card-->
+					</div>
+					<!-- end col -->
 				</div>
-				<!-- container -->
+				<!-- end row -->
 
 			</div>
-			<!-- content -->
+			<!-- container -->
 
-			<!-- Footer Start -->
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-6">2018 - 2019 Â© Hyper - Coderthemes.com
-						</div>
-						<div class="col-md-6">
-							<div class="text-md-right footer-links d-none d-md-block">
-								<a href="javascript: void(0);">About</a> <a
-									href="javascript: void(0);">Support</a> <a
-									href="javascript: void(0);">Contact Us</a>
-							</div>
+		</div>
+		<!-- content -->
+		<iframe id="iframe1" style="display: none"></iframe>
+		<!-- Footer Start -->
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">2018 - 2019 Â© Hyper - Coderthemes.com
+					</div>
+					<div class="col-md-6">
+						<div class="text-md-right footer-links d-none d-md-block">
+							<a href="javascript: void(0);">About</a> <a
+								href="javascript: void(0);">Support</a> <a
+								href="javascript: void(0);">Contact Us</a>
 						</div>
 					</div>
 				</div>
-			</footer>
-			<!-- end Footer -->
+			</div>
+		</footer>
+		<!-- end Footer -->
 
-		</div>
+	</div>
 
-		<!-- ============================================================== -->
-		<!-- End Page content -->
-		<!-- ============================================================== -->
+	<!-- ============================================================== -->
+	<!-- End Page content -->
+	<!-- ============================================================== -->
 
 
 	</div>
@@ -382,10 +386,11 @@
 	<!-- /Right-bar -->
 
 	<!-- App js -->
-	<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
+	<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
 	<script src="${Path }/static/js/children/childrenIndex.js"></script>
-	<script src="${Path }/static/js/root/studentInfo/selectStudentFeeInfo.js"></script>
-	
+	<script
+		src="${Path }/static/js/root/studentInfo/selectStudentFeeInfo.js"></script>
+
 	<!-- third party js ends -->
 
 	<!-- demo app -->

@@ -106,8 +106,8 @@
 
 	</update>
 	<!-- 退学 -->
-	<update id="updateHighStudentState" parameterType="HighesClassStudnet">
-		update traininginstitutions.highesclassstudnet
+	<update id="updateArtStudentState" parameterType="ArtStuRegistration">
+		update traininginstitutions.artclassstudnet
 		set
 		state = #{state}
 

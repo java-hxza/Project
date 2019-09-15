@@ -187,6 +187,9 @@ public class ChildrenClassesController {
 	public String seeStudentInfo(Integer classId,HttpSession session) {
 		
  		Integer schoolType = (Integer) session.getAttribute("schoolType");
+ 		session.setAttribute("classId", classId);
+ 		List<TeacherHour> teacherHourList = teacherHourService.selectCurriculumInfo(classId, null);
+ 		session.setAttribute("teacherHourList", teacherHourList);
 		if(schoolType == 1 ) {
 			List<ChildrenesClassStudnet> childrenesClassStudnets = childrenesClassStudnetService.findChildrenesClassStudnetByClassId(classId);
 			session.setAttribute("childrenesClassStudnets", childrenesClassStudnets);
@@ -195,9 +198,7 @@ public class ChildrenClassesController {
 		if(schoolType == 2) {
 			List<HighesClassStudnet> highesClassStudnets = highesClassStudnetService.findHighesClassStudnetListByClassId(classId);
 
-			List<TeacherHour> teacherHourList = teacherHourService.selectCurriculumInfo(classId, null);
 			session.setAttribute("highesClassStudnets", highesClassStudnets);
-			session.setAttribute("teacherHourList", teacherHourList);
 			return "root/studentInfo/high/seeStudentInfo";
 		}
 		if(schoolType ==3) {

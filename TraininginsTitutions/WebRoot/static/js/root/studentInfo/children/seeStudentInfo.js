@@ -402,6 +402,28 @@ $(function(){
 	
 	
 	
+
+	/**
+	 * 学生退学
+	 */
+	exitSchool = function(){
+		if ($(".customCheckes:checked").length < 1) {
+			if (!$(".customCheckes").prop("checked")) {
+				alert("请选中一条数据！");
+				return false;
+			}
+		} else if ($(".customCheckes:checked").length > 1) {
+			if ($(".customCheckes").prop("checked")) {
+				alert("只能选中一条数据！");
+				return false;
+			}
+		}
+		
+		var studentId = $(".customCheckes:checked").parent().parent().parent().children("td:eq(1)").children().attr("name")
+		var classId = $(".customCheckes:checked").parent().parent().parent().children("td:eq(1)").children().attr("id_classId")
+		var studentName= $(".customCheckes:checked").parent().parent().next().next().next().children().html();
+		location.href = "exitSchool.html?studentId="+studentId+"&studentName="+studentName+"&classId="+classId;
+	}
 	
 	
 	/**

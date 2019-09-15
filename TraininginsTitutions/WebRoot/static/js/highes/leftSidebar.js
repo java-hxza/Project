@@ -162,13 +162,12 @@ $(function() {
 	/**
 	 * 复选框单击选中取消事件
 	 */
-	$(".customCheck").click(function() {
+	$(".customCheck").unbind("click").click(function() {
 		if ($(this).prev().prop("checked")) {
 			$(this).prev().prop("checked", false);
 		} else {
 			$(this).prev().prop("checked", true);
 		}
-		e.stopPropagation();
 	});
 	
 	// 格式化日期，如月、日、时、分、秒保证为2位数

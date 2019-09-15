@@ -34,6 +34,11 @@ public class ChildrenesClassStudnetServiceImpl implements ChildrenesClassStudnet
 	public int insertChildrenesClassStudnets(ChildrenesClassStudnet childrenesClassStudnet) {
 		return childrenesClassStudnetMapper.insertChildrenesClassStudnets(childrenesClassStudnet);
 	}
+	@Override
+	public Integer updateChildrenStudentState(ChildrenesClassStudnet childrenesClassStudnet) {
+		// TODO Auto-generated method stub
+		return childrenesClassStudnetMapper.updateChildrenStudentState(childrenesClassStudnet);
+	}
 
 	
 }

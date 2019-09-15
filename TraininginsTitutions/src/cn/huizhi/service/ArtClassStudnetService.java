@@ -27,10 +27,11 @@ public interface ArtClassStudnetService {
 	public Integer updateArtClassStudentByClass(ArtClassStudnet art);
 	
 
+
 	/**
 	 * 艺考学生退学
 	 * @param art
 	 * @return
 	 */
-	public Integer updateHighStudentState(ArtClassStudnet art);
+	public Integer updateArtStudentState(ArtClassStudnet art);
 }

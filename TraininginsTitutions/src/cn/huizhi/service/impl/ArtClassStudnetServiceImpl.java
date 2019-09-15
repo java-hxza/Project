@@ -29,9 +29,9 @@ public class ArtClassStudnetServiceImpl implements ArtClassStudnetService {
 	}
 
 	@Override
-	public Integer updateHighStudentState(ArtClassStudnet art) {
+	public Integer updateArtStudentState(ArtClassStudnet art) {
 		// TODO Auto-generated method stub
-		return artClassStudnetMapper.updateHighStudentState(art);
+		return artClassStudnetMapper.updateArtStudentState(art);
 	}
 
 	@Override

@@ -42,4 +42,11 @@ public interface ChildrenesClassStudnetMapper {
 	 */
 	public int insertChildrenesClassStudnets(ChildrenesClassStudnet childrenesClassStudnet);
 	
+	/**
+	 * 少儿退学
+	 * @param childrenesClassStudnet
+	 * @return
+	 */
+	public Integer updateChildrenStudentState(ChildrenesClassStudnet childrenesClassStudnet);
+	
 }

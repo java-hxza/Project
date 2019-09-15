@@ -29,6 +29,7 @@ import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 import cn.huizhi.pojo.ArtClassStudnet;
 import cn.huizhi.pojo.ArtStuRegistration;
 import cn.huizhi.pojo.ChildStuReistration;
+import cn.huizhi.pojo.ChildrenesClassStudnet;
 import cn.huizhi.pojo.Class;
 import cn.huizhi.pojo.DepartmentOfPediatrics;
 import cn.huizhi.pojo.Expenditureitems;
@@ -46,6 +47,7 @@ import cn.huizhi.pojo.UserDiction;
 import cn.huizhi.service.ArtClassStudnetService;
 import cn.huizhi.service.ArtStuRegistrationService;
 import cn.huizhi.service.ChildStuReistrationService;
+import cn.huizhi.service.ChildrenesClassStudnetService;
 import cn.huizhi.service.ClassService;
 import cn.huizhi.service.DepartmentOfPediatricsService;
 import cn.huizhi.service.ExpenditureitemsService;
@@ -109,13 +111,16 @@ public class RootSchoolController {
 
 	@Resource
 	ArtClassStudnetService artClassStudnetService;
-	
+
 	@Resource
 	UserDictionService userDictionService;
-	
+
 	@Resource
 	TeacherDictionService teacherDictionService;
-	
+
+	@Resource
+	ChildrenesClassStudnetService childrenesClassStudnetService;
+
 	/**
 	 * 切换账户
 	 * 
@@ -162,8 +167,7 @@ public class RootSchoolController {
 		session.setAttribute("schoolOrderList", schoolOrderList);
 		return "root/school/schoolInfo";
 	}
-	
-	
+
 	@RequestMapping("schoolExpen.html")
 	@ResponseBody
 	public String expenditureOrder(Order order) {
@@ -242,6 +246,7 @@ public class RootSchoolController {
 
 	/**
 	 * 支出项目
+	 * 
 	 * @param order
 	 * @param schoolName
 	 * @param session
@@ -385,38 +390,36 @@ public class RootSchoolController {
 		session.setAttribute("findUserAllByAdmin", findUserAllByAdmin);
 		return "root/basicSettings/operator";
 	}
-	
-	
+
 	@RequestMapping("rootOperatorAuthorization.html")
-	public String operatorAuthorization(Integer uId,HttpSession session) {
-		
-		List<TeacherDiction> dictionListByUId =  teacherDictionService.findTeacherDictionListByTeacherId(uId);
-		
+	public String operatorAuthorization(Integer uId, HttpSession session) {
+
+		List<TeacherDiction> dictionListByUId = teacherDictionService.findTeacherDictionListByTeacherId(uId);
+
 		session.setAttribute("dictionListByUId", dictionListByUId);
-		
+
 		return "root/basicSettings/operatorAuthorization";
 	}
-	
+
 	/**
 	 * 添加权限
+	 * 
 	 * @param userDiction
 	 * @return
 	 */
 	@RequestMapping("rootOperatorAuthor.html")
 	@ResponseBody
-	public Map<String,String> operatorAuthor(TeacherDiction teacherDiction){
+	public Map<String, String> operatorAuthor(TeacherDiction teacherDiction) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
-		
-		
-		if(teacherDictionService.addTeacherDiction(teacherDiction.getSchoolId(), teacherDiction.getTeacherId())>0) {
-			jsonMap.put("state","1");
-		}else {
-			jsonMap.put("state","1");
+
+		if (teacherDictionService.addTeacherDiction(teacherDiction.getSchoolId(), teacherDiction.getTeacherId()) > 0) {
+			jsonMap.put("state", "1");
+		} else {
+			jsonMap.put("state", "1");
 		}
-		
+
 		return jsonMap;
 	}
-
 
 	/**
 	 * 添加课程信息
@@ -807,40 +810,43 @@ public class RootSchoolController {
 
 		Double sumMoney = 0.0;
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
-		
-		if(schoolType == 1) {
+
+		if (schoolType == 1) {
 			Student student = studentService.findStudentById(studentId);
-			
+
 			Class class1 = classService.findClassByClassId(classId);
-			
-			
-			if(class1.getClassTypeId() == 1) {
-				sumMoney = student.getStudentHour() * class1.getDepartmentOfPediatrics().getDpMoney();
+
+			if (class1.getClassTypeId() == 1) {
+				nowPrice = student.getStudentHour() * class1.getDepartmentOfPediatrics().getDpMoney();
 			}
-			if(class1.getClassTypeId() == 2) {
-				sumMoney = student.getStudentHour() * class1.getDepartmentOfPediatrics().getDpMoneyVip();
+			if (class1.getClassTypeId() == 2) {
+				nowPrice = student.getStudentHour() * class1.getDepartmentOfPediatrics().getDpMoneyVip();
 			}
-		
-			
+
 		}
-		
+
 		// 查询学生的订单信息
- 		List<Order> stuOrders = orderService.selectOrderListByStudentId(studentId);
+		List<Order> stuOrders = orderService.selectOrderListByStudentId(studentId);
 		// 存放学生的收费项目
 		List<FeeCategory> feeCategories = new ArrayList<FeeCategory>();
 		// 支出项目
-		List<Expenditureitems> expenditureitems = expenditureitemsService.selectExpenditureitems(String.valueOf((Integer) session.getAttribute("schoolId")));
+		List<Expenditureitems> expenditureitems = expenditureitemsService
+				.selectExpenditureitems(String.valueOf((Integer) session.getAttribute("schoolId")));
 
 		// 退费方式
 		List<PaymentMethod> paymentMethods = paymentMethodService.selectPaymentMethod();
 		// 查询学校下的所有收费项目
-		List<FeeCategory> list1 = feeCategoryService.selectFeeCategory(Integer.valueOf((Integer) session.getAttribute("schoolId")));
+		List<FeeCategory> list1 = feeCategoryService
+				.selectFeeCategory(Integer.valueOf((Integer) session.getAttribute("schoolId")));
 		FeeCategory feeCategory = null;
-		
+
 		// 循环读取订单的收费项目并添加到集合
 		for (Order order : stuOrders) {
 			feeId = order.getFeecateId().split(",");
 			feeIds = order.getFeecateId();
+			if(feeId.length >0) {
+				continue;
+			}
 			for (int i = 0; i < feeId.length; i++) {
 				for (int j = 0; j < list1.size(); j++) {
 					if (list1.get(j).getChargeTypeId() == Integer.valueOf(feeId[i])) {
@@ -912,16 +918,43 @@ public class RootSchoolController {
 		order.setClassId((Integer) session.getAttribute("classId"));
 		order.setOrderNumber("KS" + new Date() + order.getStuId() + new Random().nextInt(100));
 		order.setIntegral(0.0);
-		
-		HighesClassStudnet highesClassStudnet = new HighesClassStudnet();
-		highesClassStudnet.setClassesStudentId(order.getStuId());
-		highesClassStudnet.setState(2);
-		if (orderService.addOrder(order) > 0
-				&& highesClassStudnetService.updateHighStudentState(highesClassStudnet) > 0) {
-			jsonMap.put("state", "1");
-		} else {
-			jsonMap.put("state", "0");
+
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+
+		if (schoolType == 1) {
+			ChildrenesClassStudnet cStudnet = new ChildrenesClassStudnet();
+			cStudnet.setStudentId(order.getStuId());
+			cStudnet.setState("2");
+			if (orderService.addOrder(order) > 0
+					&& childrenesClassStudnetService.updateChildrenStudentState(cStudnet) > 0) {
+				jsonMap.put("state", "1");
+			} else {
+				jsonMap.put("state", "0");
+			}
 		}
+
+		if (schoolType == 2) {
+			HighesClassStudnet highesClassStudnet = new HighesClassStudnet();
+			highesClassStudnet.setClassesStudentId(order.getStuId());
+			highesClassStudnet.setState(2);
+			if (orderService.addOrder(order) > 0
+					&& highesClassStudnetService.updateHighStudentState(highesClassStudnet) > 0) {
+				jsonMap.put("state", "1");
+			} else {
+				jsonMap.put("state", "0");
+			}
+		}
+		if (schoolType == 3) {
+			ArtClassStudnet artClassStudnet = new ArtClassStudnet();
+			artClassStudnet.setClassesStudentId(order.getStuId());
+			artClassStudnet.setState(2);
+			if (orderService.addOrder(order) > 0 && artClassStudnetService.updateArtStudentState(artClassStudnet) > 0) {
+				jsonMap.put("state", "1");
+			} else {
+				jsonMap.put("state", "0");
+			}
+		}
+
 		return jsonMap;
 	}
 
@@ -1026,142 +1059,150 @@ public class RootSchoolController {
 
 		return jsonMap;
 	}
-	
-	
+
 	/**
 	 * 返回班级科别主页
+	 * 
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("classTypeInfo.html")
-	public String classTypeInfo(HttpSession session){
+	public String classTypeInfo(HttpSession session) {
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
-		List<DepartmentOfPediatrics> classDepartmentOfPediatrics = departmentOfPediatricsService.findDepartmentOfPediatrics(schoolId);
+		List<DepartmentOfPediatrics> classDepartmentOfPediatrics = departmentOfPediatricsService
+				.findDepartmentOfPediatrics(schoolId);
 		session.setAttribute("classDepartmentOfPediatrics", classDepartmentOfPediatrics);
-		
+
 		List<FeeCategory> feeCategorieList = feeCategoryService.selectFeeCategory(schoolId);
 		session.setAttribute("feeCategorieList", feeCategorieList);
-		
+
 		return "root/classTypeInfo/classType";
 	}
-	
+
 	/**
 	 * 添加班级科别
+	 * 
 	 * @param departmentOfPediatrics
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("addDepartmentOfPediatrics.html")
 	@ResponseBody
-	public Map<String,String> addDepartmentOfPediatrics(DepartmentOfPediatrics departmentOfPediatrics,HttpSession session){
+	public Map<String, String> addDepartmentOfPediatrics(DepartmentOfPediatrics departmentOfPediatrics,
+			HttpSession session) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
 		departmentOfPediatrics.setSchoolId((Integer) session.getAttribute("schoolId"));
-		if(departmentOfPediatricsService.addDepartmentOfPediatrics(departmentOfPediatrics)>0) {
+		if (departmentOfPediatricsService.addDepartmentOfPediatrics(departmentOfPediatrics) > 0) {
 			jsonMap.put("state", "1");
-		}else {
+		} else {
 			jsonMap.put("state", "0");
 		}
 		return jsonMap;
 	}
-	
+
 	/**
 	 * 删除班级类型
+	 * 
 	 * @param dpId
 	 * @return
 	 */
 	@RequestMapping("deleteDepartmentOfPediatrics.html")
 	@ResponseBody
-	public Map<String, String> deleteDepartmentOfPediatrics(Integer dpId){
-		
-		Map<String,String> jsonMap = new HashMap<String, String>();
-		
-		if(departmentOfPediatricsService.delDepartmentOfPediatrics(dpId)>0) {
+	public Map<String, String> deleteDepartmentOfPediatrics(Integer dpId) {
+
+		Map<String, String> jsonMap = new HashMap<String, String>();
+
+		if (departmentOfPediatricsService.delDepartmentOfPediatrics(dpId) > 0) {
 			jsonMap.put("state", "1");
-		}else {
+		} else {
 			jsonMap.put("state", "0");
 		}
 		return jsonMap;
-		
+
 	}
-	
+
 	/**
 	 * 教师课时总表
+	 * 
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("teacherHourSum.html")
 	public String teacherHourSum(HttpSession session) {
-		
-		List<TeacherHour> teacherHourList = teacherHourService.findTeacherHourListBySchoolId((Integer) session.getAttribute("schoolId"));
+
+		List<TeacherHour> teacherHourList = teacherHourService
+				.findTeacherHourListBySchoolId((Integer) session.getAttribute("schoolId"));
 		session.setAttribute("teacherHourList", teacherHourList);
-		
+
 		return "root/teacher/teacherInfo";
 	}
-	
+
 	/**
 	 * 跳转学生课时选择班级页面
+	 * 
 	 * @return
 	 */
 	@RequestMapping("classStudentHourInfo.html")
 	public String classStudentHourInfo() {
 		return "root/classStudent/classSchoolInfo";
 	}
-	
+
 	/**
 	 * 返回学生课时页面
+	 * 
 	 * @param classId
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("studentHourInfo.html")
-	public String studentHourInfo(Integer classId,HttpSession session) {
-		Integer  schoolType = (Integer) session.getAttribute("schoolType");
+	public String studentHourInfo(Integer classId, HttpSession session) {
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		List stuReistrationList = null;
-		if(schoolType == 1) {
+		if (schoolType == 1) {
 			stuReistrationList = childStuReistrationService.findchildStuReistrationListByClass(classId);
 		}
-		if(schoolType == 2) {
+		if (schoolType == 2) {
 			stuReistrationList = highesStuRegistrationService.selectHighesStuRegistrationListByClassId(classId);
 		}
-		if(schoolType == 3) {
+		if (schoolType == 3) {
 			stuReistrationList = artStuRegistrationService.findArtStuRegistrationByClassId(classId);
 		}
-		
+
 		session.setAttribute("stuReistrationList", stuReistrationList);
-		
+
 		return "root/classStudent/studentHourInfo";
 	}
-	
+
 	/**
 	 * 返回新增学员报表
+	 * 
 	 * @param startTime
 	 * @param endTime
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("schoolAddStudentInfo.html")
-	public String schoolAddStudentInfo( String startTime, String endTime , HttpSession session) {
-		
+	public String schoolAddStudentInfo(String startTime, String endTime, HttpSession session) {
+
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put("startTime", startTime);
 		map.put("endTime", endTime);
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		List<Student> addstudentList = null;
-		if(schoolType == 1) {
-			addstudentList = studentService.selectChildren((Integer)session.getAttribute("schoolId"), map);
-		}else if(schoolType == 2){
-			addstudentList = studentService.selectHigh((Integer)session.getAttribute("schoolId"), map);
+		if (schoolType == 1) {
+			addstudentList = studentService.selectChildren((Integer) session.getAttribute("schoolId"), map);
+		} else if (schoolType == 2) {
+			addstudentList = studentService.selectHigh((Integer) session.getAttribute("schoolId"), map);
 			session.setAttribute("stuClassification", "艺考");
-		}else {
-			addstudentList = studentService.selectHigh((Integer)session.getAttribute("schoolId"), map);
+		} else {
+			addstudentList = studentService.selectHigh((Integer) session.getAttribute("schoolId"), map);
 			session.setAttribute("stuClassification", "艺考");
 		}
 		session.setAttribute("stuCount", addstudentList.size());
-		
+
 		return "root/addStudentInfo/addStudentInfo";
 	}
-	
-	
+
 	/**
 	 * 返回班级学校页面
 	 * 
@@ -1173,12 +1214,14 @@ public class RootSchoolController {
 	@RequestMapping("teacherClassInfo.html")
 	public String teacherClassInfo(HttpSession session) {
 
-		List<Class> classList = classService.findChildrenescClasses(String.valueOf((Integer) session.getAttribute("schoolId")));
+		List<Class> classList = classService
+				.findChildrenescClasses(String.valueOf((Integer) session.getAttribute("schoolId")));
 
 		session.setAttribute("classList", classList);
 
 		return "root/teacher/classSchoolInfo";
 	}
+
 	/**
 	 * 返回教师上课明细页面
 	 * 
@@ -1187,34 +1230,31 @@ public class RootSchoolController {
 	 * @return
 	 */
 	@RequestMapping("teacherHourInfo.html")
-	public String teacherHourInfo(Integer classId,HttpSession session) {
-		
+	public String teacherHourInfo(Integer classId, HttpSession session) {
+
 		List<TeacherHour> teacherHourList = teacherHourService.selectCurriculumInfo(classId, null);
-		
-		/*if (schoolType == 1) {
-			List<ChildStuReistration> childStuHourDetailedList = childStuReistrationService
-					.selectTeacherDetailed(classId);
 
-			session.setAttribute("childStuHourDetailedList", childStuHourDetailedList);
-			return "admin/teacher/childrenFeeInfo";
-		}
-		if (schoolType == 2) {
-			List<HighesStuRegistration> highesStuRegistrations = highesStuRegistrationService
-					.selectStudentHourDetailed(classId);
+		/*
+		 * if (schoolType == 1) { List<ChildStuReistration> childStuHourDetailedList =
+		 * childStuReistrationService .selectTeacherDetailed(classId);
+		 * 
+		 * session.setAttribute("childStuHourDetailedList", childStuHourDetailedList);
+		 * return "admin/teacher/childrenFeeInfo"; } if (schoolType == 2) {
+		 * List<HighesStuRegistration> highesStuRegistrations =
+		 * highesStuRegistrationService .selectStudentHourDetailed(classId);
+		 * 
+		 * session.setAttribute("highesStuRegistrations", highesStuRegistrations);
+		 * return "admin/teacher/highFeeInfo";
+		 * 
+		 * } if (schoolType == 3) {
+		 * 
+		 * }
+		 */
 
-			session.setAttribute("highesStuRegistrations", highesStuRegistrations);
-			return "admin/teacher/highFeeInfo";
-
-		}
-		if (schoolType == 3) {
-
-		}*/
-		
 		session.setAttribute("teacherHourList", teacherHourList);
 		return "root/teacher/childrenFeeInfo";
 	}
 
-	
 	/**
 	 * 学生收费情况
 	 * 
@@ -1224,13 +1264,14 @@ public class RootSchoolController {
 	@RequestMapping("feeSituation.html")
 	public String feeSituation(HttpSession session) {
 
-		List<Class> classList = classService.findChildrenescClasses(String.valueOf((Integer) session.getAttribute("schoolId")));
+		List<Class> classList = classService
+				.findChildrenescClasses(String.valueOf((Integer) session.getAttribute("schoolId")));
 
 		session.setAttribute("classList", classList);
 
 		return "root/studentInfo/classSchoolInfo";
 	}
-	
+
 	/**
 	 * 学生收费情况报表
 	 * 
@@ -1238,56 +1279,57 @@ public class RootSchoolController {
 	 * @return
 	 */
 	@RequestMapping("studentSituation.html")
-	public String studentSituation(Integer classId,HttpSession session) {
-		
+	public String studentSituation(Integer classId, HttpSession session) {
 
 		List<Order> studentFeeSituationList = null;
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		if (schoolType == 1) {
-			studentFeeSituationList = orderService.selectChildrenFeeSituation(classId,null);
+			studentFeeSituationList = orderService.selectChildrenFeeSituation(classId, null);
 		}
 		if (schoolType == 2) {
 			studentFeeSituationList = orderService.selectHighsFeeSituation(classId);
 		}
 		if (schoolType == 3) {
 			studentFeeSituationList = orderService.selectArtFeeSituation(classId);
-			
+
 		}
 		session.setAttribute("studentFeeSituationList", studentFeeSituationList);
 		return "root/studentInfo/studentFeeSituation";
 	}
-	
+
 	/**
 	 * 操作员授权页面
+	 * 
 	 * @return
 	 */
 	@RequestMapping("rootOperatorAuthorize.html")
 	public String rootOperatorAuthorize(HttpSession session) {
-		
+
 		User user = (User) session.getAttribute("user");
-		List<UserDiction> dictionListByUId =  userDictionService.findDictionListByUserId(user.getuId());
-		
+		List<UserDiction> dictionListByUId = userDictionService.findDictionListByUserId(user.getuId());
+
 		session.setAttribute("dictionListByUId", dictionListByUId);
-		
+
 		return "root/basicSettings/operatorRootAuthorization";
 	}
+
 	/**
 	 * 添加权限
+	 * 
 	 * @param userDiction
 	 * @return
 	 */
 	@RequestMapping("operatorAuthorSave.html")
 	@ResponseBody
-	public Map<String,String> operatorAuthor(UserDiction userDiction){
+	public Map<String, String> operatorAuthor(UserDiction userDiction) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
-		
-		
-		if(userDictionService.insertUserDiction(userDiction)>0) {
-			jsonMap.put("state","1");
-		}else {
-			jsonMap.put("state","1");
+
+		if (userDictionService.insertUserDiction(userDiction) > 0) {
+			jsonMap.put("state", "1");
+		} else {
+			jsonMap.put("state", "1");
 		}
-		
+
 		return jsonMap;
 	}
 }

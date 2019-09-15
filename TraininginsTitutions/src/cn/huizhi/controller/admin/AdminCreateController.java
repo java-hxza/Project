@@ -154,8 +154,12 @@ public class AdminCreateController {
 		BigDecimal bd = new BigDecimal(schoolExPenSum);
 
 		bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
+		
+		BigDecimal bc = new BigDecimal(schoolFeeceat);
+		bc = bc.setScale(2, BigDecimal.ROUND_HALF_UP);
+
 		session.setAttribute("schoolExPenSum", bd);
-		session.setAttribute("schoolFeeceat", schoolFeeceat);
+		session.setAttribute("schoolFeeceat", bc);
 		session.setAttribute("schoolName", schoolName);
 		session.setAttribute("schoolId", schoolId);
 		session.setAttribute("schoolOrderList", schoolOrderList);

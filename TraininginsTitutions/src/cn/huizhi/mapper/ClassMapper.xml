@@ -235,6 +235,7 @@
 		<result column="c.schoolId" property="schoolId"/>
 		<result column="c.teacherId" property="teacherId"/>
 		<result column="c.classLevel" property="classLevel"/>
+		<result column="c_classTypeId" property="classTypeId"/>
 		<collection property="departmentOfPediatrics" javaType="DepartmentOfPediatrics">
 			<result column="d.dpTypeName" property="dpTypeName" />
 			<result column="d.dpMoney" property="dpMoney" />
@@ -251,6 +252,7 @@
 		c.schoolId,
 		c.teacherId,
 		c.classLevel,
+		c.classTypeId c_classTypeId,
 		d.dpTypeName,
 		d.dpMoney,
 		d.dpMoneyVip

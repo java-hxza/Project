@@ -32,5 +32,5 @@ public interface ArtClassStudnetMapper {
 	 * @param art
 	 * @return
 	 */
-	public Integer updateHighStudentState(ArtClassStudnet art);
+	public Integer updateArtStudentState(ArtClassStudnet art);
 }

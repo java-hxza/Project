@@ -20,7 +20,10 @@
 		t.endTime,
 		t.theSurrogate,
 		t.remarks,
-		t.feeCategory
+		t.feeCategory,
+		t.studentHour,
+		t.integral,
+		t.usedIntegral
 	</sql>
 
 	<select id="selectHigh" resultType="Student">

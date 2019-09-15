@@ -134,7 +134,7 @@
 											<div class="text-sm-right">
 												
 			                                    <button type="button" id="btn2"  class="btn btn-success btn-sm mt-2" onclick="print()">打印</button>
-			                                    <button type="button" id="btn2"  class="btn btn-success btn-sm mt-2" onclick="importOut()">导出</button>
+			                                    <button type="button" id="btn2"  class="btn btn-success btn-sm mt-2" onclick="exportExsal()">导出</button>
 			                                    <button type="button" id="btn2"  class="btn btn-success btn-sm mt-2" onclick="query()">收入查询</button>
 											</div>
 										</div>
@@ -219,33 +219,34 @@
                 </div>
 						<!-- end col -->
                                 <!-- Question/Answer -->
+                                
                                 	<div class="table-responsive" id="dayin"><!--startprint-->
 										<table
 											class="table table-centered table-striped dt-responsive nowrap w-100"
-											id="products-datatable">
-											<thead>
+											id="products-datatable" width="100%">
+											<tbody>
 												<tr>
-													<th style="width: 20px;">
+													<td style="width: 20px;">
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input"
 																id="customCheck1" disabled> <label
 																class="custom-control-label" for="customCheck1">&nbsp;</label>
 														</div>
-													</th>
-													<th>订单编号</th>
-													<th>收款人</th>
-													<th>日期</th>
-													<th>项目名称</th>
-													<th>收款金额</th>
-													<th>收款方式</th>
-													<th>责任人</th>
-													<th>课程</th>
-													<th>新增课时</th>
-													<th>赠送课时</th>
-													<th>费用起始日</th>
-													<th>费用截至日</th>
+													</td>
+													<td>订单编号</td>
+													<td>收款人</td>
+													<td>日期</td>
+													<td>项目名称</td>
+													<td>收款金额</td>
+													<td>收款方式</td>
+													<td>责任人</td>
+													<td>课程</td>
+													<td>新增课时</td>
+													<td>赠送课时</td>
+													<td>费用起始日</td>
+													<td>费用截至日</td>
 												</tr>
-											</thead>
+											</tbody>
 											<tbody id="info">
 												<c:forEach items="${orderListBySchool }" var="order">
 													<tr class="userId" >
@@ -286,10 +287,10 @@
 															class="text-body font-weight-semibold" >${order.givehour }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" ><fmt:formatDate value="${order.firstdate }" pattern="yyyy-MM-dd HH:mm:ss"/> </a>
+															class="text-body font-weight-semibold" ><fmt:formatDate value="${order.firstdate }" pattern="yyyy-MM-dd"/> </a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" ><fmt:formatDate value="${order.lastdate }" pattern="yyyy-MM-dd HH:mm:ss"/></a>
+															class="text-body font-weight-semibold" ><fmt:formatDate value="${order.lastdate }" pattern="yyyy-MM-dd"/></a>
 														</td>
 													</tr>
 												</c:forEach>	

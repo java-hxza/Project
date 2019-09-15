@@ -123,20 +123,20 @@
 
 									<div class="table-responsive mt-4 Expenditureitemses">
 										<table class="table table-bordered table-centered mb-0">
-											<thead class="thead-light">
+											<tbody class="thead-light">
 												<tr>
-													<th style="width: 20px;">
+													<td style="width: 20px;">
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input"
 																id="customCheck1" disabled> <label
 																class="custom-control-label" for="customCheck1">&nbsp;</label>
 														</div>
-													</th>
-													<th>编码</th>
-													<th>类别</th>
-													<th>支出项目名称</th>
+													</td>
+													<td>编码</td>
+													<td>类别</td>
+													<td>支出项目名称</td>
 												</tr>
-											</thead>
+											</tbody>
 											<tbody>
 												<c:forEach items="${expenditureitemList}" var="e">
 													<tr>

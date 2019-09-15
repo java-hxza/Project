@@ -10,3 +10,7 @@
 <script src="${Path }/static/js/js/jquery.min.js"></script>
 <script src="${Path }/static/js/demo.customers.js"></script>
 <script src="${Path }/static/js/highes/leftSidebar.js"></script>
+<script src="${Path }/static/js/print/prints.js"></script>
+<script src="${Path }/static/js/Excel/jszip.js"></script>
+<script src="${Path }/static/js/Excel/FileSaver.js"></script>
+<script src="${Path }/static/js/Excel/excel-gen.js"></script>

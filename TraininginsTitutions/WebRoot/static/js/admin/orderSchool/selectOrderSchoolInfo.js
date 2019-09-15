@@ -231,7 +231,7 @@ $(function(){
 	
 	
 	
-	print = function(){
+	/*print = function(){
 		bdhtml=$("#dayin").html();
         //alert(bdhtml);
         sprnstr="<!--startprint-->";   //开始打印标识字符串有17个字符
@@ -246,6 +246,6 @@ $(function(){
         iwindow.document.close();
         iwindow.document.write(prnhtml);
         iwindow.print(); //调用浏览器的打印功能打印指定区域
-	}
+	}*/
 	
 });

@@ -96,19 +96,19 @@
                                 	<div class="table-responsive">
 										<table
 											class="table table-centered table-striped dt-responsive nowrap w-100"
-											id="products-datatable">
-											<thead>
+											id="products-datatable" width="100%">
+											<tbody>
 												<tr>
-													<th style="width: 20px;">
+													<td style="width: 20px;">
 														<div class="custom-control custom-checkbox">
 															
 														</div>
-													</th>
-													<th id="schoolId" name = "${schoolId }" id_type="${schoolType }">校区</th>
-													<th>学员分类</th>
-													<th>新增学员</th>
+													</td>
+													<td id="schoolId" name = "${schoolId }" id_type="${schoolType }">校区</th>
+													<td>学员分类</td>
+													<td>新增学员</td>
 												</tr>
-											</thead>
+											</tbody>
 											<tbody>
 													<tr>
 														<td>
