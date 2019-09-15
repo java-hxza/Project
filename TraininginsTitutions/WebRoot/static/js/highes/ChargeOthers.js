@@ -151,15 +151,15 @@ $(function() {
 			$(".apps").after("<tr class='dels'><td width='800' colspan='3' height='40px'>" + $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] + "</td><td width='800' colspan='3' style='text-align:center'height='40px'>￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().text() + "</td></tr>");
 		}
 		$("#ChargePeriod td").click(function() {
-			if($(".WBK").val() == ".") {
-				$(".WBK").parent().remove();
-			}else {
-				$(".WBK").parent().text($(".WBK").val());
-			}
+			$(".WBK").parent().text($(".WBK").val());
 			$(".WBK").remove();
-			$(this).append("<input type='text' class='WBK' value='"+$(this).text()+"'/>");
+			$(this).append("<input type='text' class='WBK'/>");
 			$(".WBK").focus();
-			
+			$(".WBK").val($(this).text());
+			if (!$(".WBK").is(":focus")) {
+				alert();
+				$(".WBK").focus();
+			}
 		});
 	}
 	$(".DaYins").click(function() {
