@@ -309,7 +309,7 @@
 			</set>
 			
 			<where>
-				studentId = #{studentId} 
+				studentId = #{s.studentId} 
 			</where>
 	</update>
 </mapper>

@@ -41,8 +41,6 @@
 		<!-- ========== Left Sidebar Start ========== -->
 		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
 		<!-- Left Sidebar End -->
-		<div class="content-page">
-			<div class="content">
 				<!-- ============================================================== -->
 				<!-- Start Page Content here -->
 				<!-- ============================================================== -->

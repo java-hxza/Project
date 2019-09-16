@@ -205,7 +205,14 @@ public class WelcomeController {
 	}
 	
 	
-	
+	/**
+	 * 切换账号
+	 * @param schoolId
+	 * @param schoolName
+	 * @param schoolType
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("switchHighIndex.html")
 	public String switchHighIndex(Integer schoolId,String schoolName,Integer schoolType,HttpSession session) {
 		

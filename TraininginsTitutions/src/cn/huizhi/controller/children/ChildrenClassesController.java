@@ -202,7 +202,9 @@ public class ChildrenClassesController {
 			return "root/studentInfo/high/seeStudentInfo";
 		}
 		if(schoolType ==3) {
-			
+			List<ArtClassStudnet> artClassStudnets = artClassStudnetService.findArtClassStudnetListByClassId(classId);
+			session.setAttribute("artClassStudnets", artClassStudnets);
+			return "root/studentInfo/art/seeStudentInfo";
 		}
 		
 		return "seeStudentInfo";

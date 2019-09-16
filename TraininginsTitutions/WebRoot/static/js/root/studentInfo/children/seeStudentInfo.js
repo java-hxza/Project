@@ -294,6 +294,10 @@ $(function(){
 			alert("请输入正确的金额");
 			return false;
 		}
+		if(classId == ""){
+			alert("请选择正确的班级！");
+			return false;
+		}
 		$.ajax({
 			url : 'updateStudentShiftWork.html',
 			data : {
@@ -358,8 +362,8 @@ $(function(){
 		 */
 		for (var i = 0; i < $(".customCheckes:checked").length; i++) {
 			studentName.push($(".customCheckes:checked").eq(i).parent().parent().next().next().next().children().html());
-			classId.push($(".customCheckes:checked").eq(i).parent().parent().next().next().next().children().attr("name"));
 			studentId.push($(".customCheckes:checked").eq(i).parent().parent().parent().children("td:eq(1)").children().attr("name"));
+			classId.push($(".customCheckes:checked").eq(i).parent().parent().parent().children("td:eq(1)").children().attr("id_classId"));
 		}
 
 		/**
@@ -372,7 +376,8 @@ $(function(){
 			var teacherInClass = $(".checkes:checked").parent().parent().parent().children("td:eq(1)").children().html();
 			var thId = $(".checkes:checked").parent().parent().parent().children("td:eq(1)").children().attr("th_id");
 			var contentOfCourses = $("#contentOfCourses").val();
-		
+			
+			alert(classHours);
 
 		$.ajax({
 			url : 'childrenClassBatchRegistration.html',

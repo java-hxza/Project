@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set scope="request" value="${pageContext.request.contextPath }"
 	var="Path" />
 <!DOCTYPE html>
@@ -275,34 +275,31 @@
 												<tr class="thId">
 													<td>
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="customCheck2"><label
-																class="custom-control-label" for="customCheck2">&nbsp;</label>
+															<input type="checkbox" class="custom-control-input checkes" >
+															<label class="custom-control-label check" for="customCheck2">&nbsp;</label>
 														</div>
 													</td>
 													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${th.teacherName }</a></td>
+														class="text-body font-weight-semibold" name="${th.teacherId }" th_id ="${th.teacherHourId }">${th.teacherName }</a></td>
 													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${th.teacherName }</a></td>
+														class="text-body font-weight-semibold" name="${th.dpId }">${th.dpName }</a></td>
 													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${th.dpName }</a></td>
+														class="text-body font-weight-semibold"><fmt:formatDate value="${th.startTime }" pattern="yyyy-MM-dd hh:mm:ss"/></a></td>
 													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold"><fmt:formatDate
-																value="${th.startTime }" pattern="yyyy-MM-dd" /></a></td>
+														class="text-body font-weight-semibold">${th.hours }</a></td>
 												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
 								</div>
 								<div class="modal-footer">
+									<label for="billing-address">教学内容</label>
+									<input type="text" class="form-control"  id="contentOfCourses">
 									<button type="button" class="btn btn-light"
 										data-dismiss="modal">关闭</button>
-									<button type="button" class="btn btn-primary"
-										onclick="classBatchRegistration()">保存</button>
+									<button type="button" class="btn btn-primary" onclick="classBatchRegistration()">保存</button>
 								</div>
 							</div>
-							<!-- /.modal-content -->
-
 
 							<!-- ============================================================== -->
 							<!-- End Page content -->
