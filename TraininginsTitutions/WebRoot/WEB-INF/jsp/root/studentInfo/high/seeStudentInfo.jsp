@@ -126,6 +126,9 @@
 											<a href="javascript:void(0);" onclick="updateStudnet()"
 												class="btn btn-danger mb-2"><i
 												class="mdi mdi-plus-circle mr-2"></i> 修改学生信息</a>
+											<a href="javascript:void(0);" onclick="studnetLeave()"
+												class="btn btn-danger mb-2"><i
+												class="mdi mdi-plus-circle mr-2"></i>学生请假</a>
 										</div>
 										<div class="col-sm-8">
 											<div class="text-sm-right">

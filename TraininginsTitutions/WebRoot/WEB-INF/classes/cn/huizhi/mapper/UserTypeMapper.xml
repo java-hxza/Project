@@ -11,7 +11,7 @@
 	<!--查询所有用户类型-->
 	<select id="selectUserTypes" resultType="UserType">
 		select <include refid="userTypeCol"/>
-		from userType
+		from usertype
 	</select>	
 	
 </mapper>

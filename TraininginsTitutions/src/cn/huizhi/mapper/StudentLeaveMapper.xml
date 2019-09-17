@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.StudentLeaveMapper">
+	<sql id="studentLeaveCol">
+		sl.slId,
+		sl.studentId,
+		sl.studentName,
+		sl.classId,
+		sl.remarks,
+		sl.startTime,
+		sl.endTime
+	</sql>
+
+	<!-- 根据班级查询请假学生 -->
+	<select id="findStudentLeavesByClassId" parameterType="java.lang.Integer">
+		select
+		<include refid="studentLeaveCol" />
+		from studentLeave sl
+		<where>
+			<if test="classId != null and classId != ''">
+				sl.classId = #{classId}
+			</if>
+		</where>
+	</select>
+
+	<insert id="insertStudentLeave" parameterType="StudentLeave">
+		insert into
+		traininginstitutions.studentleave
+		( studentId, studentName, classId, remarks, startTime, endTime )
+		values
+		( #{studentId}, #{studentName}, #{classId}, #{remarks}, #{startTime},
+		#{endTime} )
+	</insert>
+
+</mapper>

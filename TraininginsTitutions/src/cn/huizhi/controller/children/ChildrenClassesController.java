@@ -87,7 +87,7 @@ public class ChildrenClassesController {
 	public String childrenSchoolLogin(HttpSession session) {
 		session.setAttribute("schoolType", 1);
 		
-		return "login";
+		return "/login";
 	}
 	
 	/**

@@ -35,17 +35,13 @@ $(function() {
 					$.NotificationApp.send("提醒！", "该账户可以使用！。", "top-right", "rgba(0,0,0,0.2)", "success");
 				}
 			},
-			error : function(XMLHttpRequest, textStatus, errorThrown) {
-				alert(XMLHttpRequest.status);
-				alert(XMLHttpRequest.readyState);
-				alert(textStatus);
-			}
+			error : function(XMLHttpRequest, textStatus, errorThrown) {}
 		})
 	}
 
 
 	regitTeacher = function() {
-		
+
 		var remarks = $("#remarks").val();
 		var teacherTypeId = $("#teacherTypeId").val();
 		var telephone = $("#telephone").val();
@@ -54,7 +50,7 @@ $(function() {
 		var feeCategory = $("#feeCategory").val();
 		var teacherTypeId = $("#departmentId").val();
 		var schoolId = $("#schoolId").val();
-		
+
 		if (telephone, loginPassword == null) {
 			$.NotificationApp.send("错误！", "信息不能为空！。", "top-right", "rgba(0,0,0,0.2)", "error");
 			return false;
@@ -88,9 +84,10 @@ $(function() {
 				}
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
-				alert(XMLHttpRequest.status);
-				alert(XMLHttpRequest.readyState);
-				alert(textStatus);
+				$.NotificationApp.send("失败！", "创建教师失败请重新创建！。", "top-right", "rgba(0,0,0,0.2)", "error");
+				setTimeout(function() {
+					location.href = "erro.html";
+				}, 2000);
 			}
 		});
 

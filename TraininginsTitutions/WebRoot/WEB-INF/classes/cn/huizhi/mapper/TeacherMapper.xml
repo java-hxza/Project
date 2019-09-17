@@ -151,7 +151,7 @@
 		parameterType="java.lang.Integer">
 		select
 		<include refid="selectTeacherListBySchoolIdCol" />
-		from teacher t,teacherDiction td, teacherType ty ,department d,school sc
+		from teacher t,teacherdiction td, teachertype ty ,department d,school sc
 		<where>
 			td.teacherId = t.teacherId and ty.teacherTypeId= t.teacherTypeId 
 			and d.departmentId = t.departmentId and sc.schoolId = td.schoolId

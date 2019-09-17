@@ -1324,4 +1324,11 @@ public class RootSchoolController {
 
 		return jsonMap;
 	}
+	
+	@RequestMapping("dbbackup.html")
+	public String dbbackup() {
+		
+		
+		return "";
+	}
 }

@@ -178,7 +178,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${childrenesClassStudnets }"
+												<c:forEach items="${artClassStudnets }"
 													var="children">
 													<tr class="schoolId">
 														<td>

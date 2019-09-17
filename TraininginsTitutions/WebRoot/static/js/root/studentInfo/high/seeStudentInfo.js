@@ -292,7 +292,7 @@ $(function() {
 			alert("请输入正确的金额");
 			return false;
 		}
-		if(classId == ""){
+		if (classId == "") {
 			alert("请选择正确的班级！");
 			return false;
 		}
@@ -426,6 +426,27 @@ $(function() {
 		location.href = "exitSchool.html?studentId=" + studentId + "&studentName=" + studentName + "&classId=" + classId;
 	}
 
+
+	/**
+	 * 学生请假
+	 */
+	studnetLeave = function() {
+		if ($(".customCheckes:checked").length < 1) {
+			if (!$(".customCheckes").prop("checked")) {
+				alert("请选中一条数据！");
+				return false;
+			}
+		} else if ($(".customCheckes:checked").length > 1) {
+			if ($(".customCheckes").prop("checked")) {
+				alert("只能选中一条数据！");
+				return false;
+			}
+		}
+		
+		var studentId = $(".customCheckes:checked").parent().parent().parent().children("td:eq(1)").children().attr("name")
+		var studentName = $(".customCheckes:checked").parent().parent().next().next().next().children().html();
+		var classId = $(".customCheckes:checked").parent().parent().next().next().next().children().attr("name");
+	}
 
 
 	/**

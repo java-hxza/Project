@@ -173,7 +173,13 @@ public class WelcomeController {
 	public String highSchoolLogin(HttpSession session) {
 		session.setAttribute("schoolType", 2);
 		
-		return "login";
+		return "/login";
+	}
+	@RequestMapping("artSchoolLogin.html")
+	public String artSchoolLogin(HttpSession session) {
+		session.setAttribute("schoolType", 3);
+		
+		return "/login";
 	}
 	
 	@RequestMapping("highIndex.html")

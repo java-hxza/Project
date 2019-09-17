@@ -47,9 +47,6 @@ $(function(){
 				}
 			},
 			 error: function (XMLHttpRequest, textStatus, errorThrown) { 
-		 　　             alert(XMLHttpRequest.status); 
-		　　               alert(XMLHttpRequest.readyState); 
-		　　               alert(textStatus); 
 		　　               $.NotificationApp.send("失败！", "创建学校失败请重新创建！。", "top-right", "rgba(0,0,0,0.2)", "error");
 					setTimeout(function() {
 						location.href = "erro.html";
@@ -81,9 +78,6 @@ $(function(){
 					$("#loginName").focus();
 				}
 			},error: function (XMLHttpRequest, textStatus, errorThrown) { 
-		 　　          alert(XMLHttpRequest.status); 
-		　               alert(XMLHttpRequest.readyState); 
-		　               alert(textStatus); 
 		　               $.NotificationApp.send("失败！", "创建学校失败请重新创建！。", "top-right", "rgba(0,0,0,0.2)", "error");
 		　               setTimeout(function() {
 		　            	   location.href = "erro.html";

@@ -10,4 +10,8 @@ $(function(){
 	highJump = function(){
 		location.href="highSchoolLogin.html";
 	}
+	
+	artJump =function(){
+		location.href = "artSchoolLogin.html";
+	}
 });

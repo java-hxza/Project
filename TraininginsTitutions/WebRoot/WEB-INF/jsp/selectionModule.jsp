@@ -52,7 +52,7 @@
                                     </div>
                                 </div> <!-- end col-->
                                 <div class="col-md-4">
-                                    <div class="text-center mt-3 pl-1 pr-1">
+                                    <div class="text-center mt-3 pl-1 pr-1" onclick="artJump()">
                                   	  <img alt="" style="border-radius:50%" src="${Path }/static/images/maintenance.jpg" width="180" height="200">
                                        <h5 class="text-uppercase">艺考版</h5>
                                     </div>

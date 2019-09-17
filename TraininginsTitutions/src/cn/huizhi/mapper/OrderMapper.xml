@@ -471,7 +471,7 @@
 		resultMap="selectOrderExpenListBySchoolMap" parameterType="Order">
 		select
 		<include refid="selectOrderExpenListBySchoolCol" />
-		from Order
+		from traininginstitutions.order
 		join expenditureitems ed on ed.expenditureitemsId =
 		o.expenditureitemsId
 		<where>

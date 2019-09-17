@@ -123,7 +123,7 @@
 	
 	<select id="selectListAll" resultMap="selectListAllMap">
 		select<include refid="selectListAllCol"/>
-		from user u,school sc ,userdiction ud,userType ut
+		from user u,school sc ,userdiction ud,usertype ut
 		<where>
 		 	u.uId = ud.userId and ut.userTypeId = u.userTypeId and sc.schoolId = ud.schoolId
 			<if test="uId !=null and uId!=''">

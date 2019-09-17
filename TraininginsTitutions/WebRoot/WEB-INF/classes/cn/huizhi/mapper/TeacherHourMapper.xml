@@ -71,7 +71,7 @@
 	
 	<select id="selectCurriculumInfo" parameterType="java.lang.Integer" resultMap="CurriculumInfoMap">
 		select <include refid="CurriculumInfoCol"/>
-		from teacherHour t
+		from teacherhour t
 		<where>
 			<if test="classId!=null and classId!=''">
 				t.classId = #{classId}

@@ -143,16 +143,18 @@
 															class="text-body font-weight-semibold">${sc.school.province.provinceName }</a>
 														</td>
 														<c:choose>
-															<c:when test="${sc.school.schoolType ==1} ">
+															<c:when test="${sc.school.schoolType == 1}">
 																<td class="table-user"><a href="javascript:void(0);"
 																	class="text-body font-weight-semibold"name="${sc.school.schoolType}">少儿</a>
 																</td>
 															</c:when>
-															<c:when test="${sc.school.schoolType ==2} ">
+															
+															<c:when test="${sc.school.schoolType == 2}">
 																<td class="table-user"><a href="javascript:void(0);"
 																	class="text-body font-weight-semibold" name="${sc.school.schoolType}">高中</a>
 																</td>
 															</c:when>
+															
 															<c:otherwise>
 																<td class="table-user"><a href="javascript:void(0);"
 																	class="text-body font-weight-semibold"name="${sc.school.schoolType}">艺考</a>
