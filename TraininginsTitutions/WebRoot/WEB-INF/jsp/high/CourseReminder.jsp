@@ -420,7 +420,7 @@
 					"src_id" : "delSts",
 					"show_header" : true
 				});
-				excel.generate();
+				excel.generate("课程到期");
 			});
 		});
 	</script>

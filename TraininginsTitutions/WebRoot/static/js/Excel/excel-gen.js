@@ -380,14 +380,19 @@ function ExcelGen(options) {
     }else {
     	day = times.getDate();
     }
-    this.generate = function () {
+    this.generate = function (TollSheet,name) {
         var workbook = this.__blank__();
         workbook.worksheets.file("sheet1.xml", this.sheet.to_xml());
         workbook.xl.file("sharedStrings.xml", this.sharedStrings.to_xml());
         workbook.tables.file("table1.xml", this.table.to_xml());
         workbook.base.generateAsync({ type: "blob" })
             .then(function (content) {
-                saveAs(content, "同心同慧" + times.getFullYear() + "-" + month  + "-" + day + ".xlsx");
+            	if(name != undefined) {
+            		saveAs(content, TollSheet + "-" + name + ".xlsx");
+            	}else {
+            		saveAs(content, TollSheet + ".xlsx");
+            	}
+                
             });
     };
 

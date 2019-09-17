@@ -673,7 +673,7 @@
 							"src_id" : "ChargePeriod",
 							"show_header" : true
 						});
-						excel.generate();
+						excel.generate("费用支出单" ,$(".customCheckes:checked").parent().parent().next().next().next().next().next().text());
 					});
 				});
 			</script>
