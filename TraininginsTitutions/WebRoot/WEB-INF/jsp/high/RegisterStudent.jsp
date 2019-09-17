@@ -143,7 +143,7 @@
 														onclick="readCert()"> <input type="button"
 														class="btn btn-danger mb-2" value="断开"
 														onclick="disconnect()">
-													<h4 class="mt-2" style="text-align: center;">少儿学员信息录入</h4>
+													<h4 class="mt-2" style="text-align: center;">学员信息录入</h4>
 													<form novalidate>
 														<div class="row">
 															<div class="col-md-6">
@@ -207,7 +207,7 @@
 																	<label for="billing-last-name">身份证号</label> <input
 																		type="text" class="form-control studentIDCard"
 																		data-toggle="input-mask"
-																		data-mask-format="00000000000000000"
+																		data-mask-format="000000000000000000"
 																		data-reverse="true">
 																</div>
 															</div>

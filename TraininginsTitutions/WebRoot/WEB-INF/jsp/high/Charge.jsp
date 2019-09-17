@@ -671,10 +671,6 @@
 			<script type="text/javascript"
 				src="${Path }/static/js/highes/Charge.js"></script>
 
-			<script type="text/javascript"
-				src="${Path }/static/js/Excel/base64.js"></script>
-			<script type="text/javascript"
-				src="${Path }/static/js/Excel/tableExport.js"></script>
 			<script type="text/javascript">
 				$(document).ready(function() {
 					$(".Exports").click(function() {
@@ -737,11 +733,11 @@
 					});
 					$(".DaYins2").click(function() {
 						$(".WBK").remove();
-						$("#ChargePeriods").tableExport({
-							formats : [ "xlsx" ],
-							fileName : "时间段收费单-" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().text(),
-							bootstrap : false
+						excel = new ExcelGen({
+							"src_id" : "ChargePeriods",
+							"show_header" : true
 						});
+						excel.generate();
 					});
 				});
 			</script>

@@ -677,11 +677,11 @@
 					});
 					$(".DaYins2").click(function() {
 						$(".WBK").remove();
-						$("#ChargePeriod").tableExport({
-							formats : [ "xlsx" ],
-							fileName : "时间段收费单-" + $(".customCheckes:checked").parent().parent().next().next().next().text(),
-							bootstrap : false
+						excel = new ExcelGen({
+							"src_id" : "ChargePeriod",
+							"show_header" : true
 						});
+						excel.generate();
 					});
 				});
 			</script>

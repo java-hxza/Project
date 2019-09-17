@@ -247,7 +247,6 @@ $(function() {
 			alert("只能选中一条数据！");
 			return false;
 		}
-		alert("aaa");
 		$("#dayin").show();
 		$(".DaYins").show();
 		$(".DaYins2").parent().parent().hide();
