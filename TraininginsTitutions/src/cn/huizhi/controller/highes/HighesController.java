@@ -1230,7 +1230,9 @@ public class HighesController {
 	public String selectStudentDepartmentofpediatrics(Model model) {
 		List<FeeCategory> feeCategory = feecategoryService
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
+		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
 		model.addAttribute("feeCategory", feeCategory);
+		model.addAttribute("departmentOfPediatrics", departmentOfPediatrics);
 		return "high/CourseReminder";
 	}
 
@@ -1694,10 +1696,13 @@ public class HighesController {
 	 */
 	@RequestMapping("selectHour.html")
 	@ResponseBody
-	public Object selectHour(@RequestParam Integer time, @RequestParam Integer Choice) {
+	public Object selectHour(@RequestParam Integer time, @RequestParam Integer Choice,@RequestParam String studentName,@RequestParam Integer number) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(number == 0) {
+			number = null;
+		}
 		if (Choice == 1) {
-			List<Order> order = orderService.selectStduentHour(time, (Integer) session.getAttribute("schoolId"));
+			List<Order> order = orderService.selectStduentHour(time, (Integer) session.getAttribute("schoolId"),studentName,number);
 			System.out.println(order.size());
 			for (int i = 0; i < order.size(); i++) {
 				if (i != order.size() - 1) {
@@ -1712,7 +1717,7 @@ public class HighesController {
 			map.put("order", order);
 
 		} else if (Choice == 2) {
-			List<Order> order = orderService.selectStduentDay(time, (Integer) session.getAttribute("schoolId"));
+			List<Order> order = orderService.selectStduentDay(time, (Integer) session.getAttribute("schoolId"),studentName,number);
 			for (int i = 0; i < order.size(); i++) {
 				if (i != order.size() - 1) {
 					if (order.get(i).getStuId() == order.get(i + 1).getStuId()) {

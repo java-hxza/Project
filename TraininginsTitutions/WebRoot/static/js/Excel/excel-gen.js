@@ -367,7 +367,19 @@ function ExcelGen(options) {
         };
 
     }
-
+    var times = new Date();
+    var month = null;
+    var day = null;
+    if ((times.getMonth() + 1) < 10) {
+		month = 0 + (times.getMonth() + 1).toString();
+	} else {
+		month = times.getMonth() + 1;
+	}
+    if(times.getDate() < 10) {
+    	day = 0 + times.getDate().toString();
+    }else {
+    	day = times.getDate();
+    }
     this.generate = function () {
         var workbook = this.__blank__();
         workbook.worksheets.file("sheet1.xml", this.sheet.to_xml());
@@ -375,7 +387,7 @@ function ExcelGen(options) {
         workbook.tables.file("table1.xml", this.table.to_xml());
         workbook.base.generateAsync({ type: "blob" })
             .then(function (content) {
-                saveAs(content, "同心同慧收费单.xlsx");
+                saveAs(content, "同心同慧" + times.getFullYear() + "-" + month  + "-" + day + ".xlsx");
             });
     };
 

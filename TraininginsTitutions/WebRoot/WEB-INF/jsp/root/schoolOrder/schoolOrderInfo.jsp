@@ -23,7 +23,7 @@
 	type="text/css" />
 <link href="${Path }/static/css/style.css" rel="stylesheet"
 	type="text/css" />
-<style type="text/css">
+<style type="text/css">z
 </style>
 </head>
 

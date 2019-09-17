@@ -10,24 +10,29 @@
 		opi,o.departmentofpediatricsId odf,o.feecateId
 		ofi,o.addhour,o.givehour,o.startTime,o.orderNumber,o.stuId
 		sd,o.giftNumber,o.giftId,s.studentName,s.school,s.integral,p.paymentmethodName,d.dpTypeName,o.integral
-		oi,o.teacherId ot,o.giftId,o.giftNumber ogm,sc.schoolName sn,s.studentBirth
+		oi,o.teacherId ot,o.giftId,o.giftNumber ogm,sc.schoolName
+		sn,s.studentBirth
 		FROM
 		`order`
 		o
 		JOIN student s
 		ON o.stuId=s.studentId
-		JOIN paymentmethod p ON
+		JOIN
+		paymentmethod p ON
 		o.paymentmethodId=p.paymentmethodId
-		JOIN departmentofpediatrics d ON
+		JOIN
+		departmentofpediatrics d ON
 		o.departmentofpediatricsId=d.dpId
-		JOIN school sc ON
+		JOIN
+		school sc ON
 		o.schoolId=sc.schoolId
 		WHERE o.identification = 0 AND
 		o.stuId=s.studentId and
 		o.paymentmethodId=p.paymentmethodId and
 		o.departmentofpediatricsId IS NOT NULL
 		AND
-		o.schoolId=#{0} ORDER BY od desc
+		o.schoolId=#{0} ORDER BY od
+		desc
 	</select>
 
 	<resultMap type="Order" id="selectOrderHours">
@@ -72,7 +77,8 @@
 		odm,o.remarks,o.personliable,o.startTime,o.orderNumber,o.feecateId
 		ofi,o.stuId osi,o.paymentmethodId opt,s.studentName,o.discount,
 		p.paymentmethodName,s.school,s.integral,o.giftId,o.giftNumber
-		ogm,o.integral oi,o.teacherId ot,sc.schoolName sn,s.studentBirth,c.dpId cdp
+		ogm,o.integral oi,o.teacherId ot,sc.schoolName
+		sn,s.studentBirth,c.dpId cdp
 		FROM `order` o
 		JOIN
 		student s ON
@@ -82,7 +88,8 @@
 		JOIN class c ON o.classId=c.classId
 		JOIN school sc ON
 		o.schoolId=sc.schoolId
-		WHERE o.firstdate IS NOT NULL AND
+		WHERE o.firstdate IS NOT NULL
+		AND
 		o.schoolId=#{0} ORDER BY od desc
 
 	</select>
@@ -128,7 +135,8 @@
 		ofi,o.stuId osi,o.paymentmethodId opt,s.studentName,o.discount,
 		p.paymentmethodName,s.school,s.integral,o.giftId,o.giftNumber
 		ogm,o.integral oi,o.teacherId ot,sc.schoolName sn,s.studentBirth
-		FROM `order` o
+		FROM
+		`order` o
 		JOIN
 		student s ON
 		o.stuId=s.studentId
@@ -137,7 +145,8 @@
 		JOIN class c ON o.classId=c.classId
 		JOIN school sc ON
 		o.schoolId=sc.schoolId
-		WHERE o.firstdate IS NOT NULL AND
+		WHERE o.firstdate IS NOT NULL
+		AND
 		o.schoolId=#{0} ORDER BY od desc
 
 	</select>
@@ -180,11 +189,13 @@
 		oo,o.stuId ost,o.feecateId ofi,o.paymentmethodId
 		opt,o.remarks,o.personliable,p.paymentmethodName,f.chargeTypeName,s.school,s.studentName,o.startTime,o.dpMoney
 		odm,o.orderNumber,sc.schoolName sn,s.studentBirth,c.dpId cdp
-		FROM traininginstitutions.order
+		FROM
+		traininginstitutions.order
 		o
 		JOIN student s ON
 		o.stuId=s.studentId
-		JOIN feecategory f
+		JOIN
+		feecategory f
 		ON
 		o.feecateId=f.chargeTypeId
 		JOIN paymentmethod p ON
@@ -197,7 +208,8 @@
 		o.firstdate IS NULL
 		AND o.addhour IS NULL AND
 		o.schoolId=#{0}
-		ORDER BY oo desc
+		ORDER BY oo
+		desc
 	</select>
 
 	<resultMap type="Order" id="selectOrderOtheres">
@@ -230,26 +242,32 @@
 	</resultMap>
 
 
-
-	<select id="selectOrderExpenditure" resultMap="selectOrderExpenditures">
+	<select id="selectOrderExpenditure"
+		resultMap="selectOrderExpenditures">
 		SELECT o.orderId
 		oo,o.stuId ost,o.expenditureitemsId
 		oei,o.paymentmethodId
 		opt,o.remarks,o.personliable,p.paymentmethodName,e.expenditureitemsName,s.school,s.studentName,o.startTime,o.feecategoryMoney
 		ofm,o.orderNumber,sc.schoolName sn,s.studentBirth,c.dpId cdp
-		FROM traininginstitutions.order o
+		FROM
+		traininginstitutions.order o
 		JOIN student s ON
 		o.stuId=s.studentId
-		JOIN expenditureitems e ON
+		JOIN
+		expenditureitems e ON
 		o.expenditureitemsId=e.expenditureitemsId
-		JOIN paymentmethod p ON
+		JOIN
+		paymentmethod p ON
 		o.paymentmethodId=p.paymentmethodId
-		JOIN class c ON o.classId=c.classId
+		JOIN class c ON
+		o.classId=c.classId
 		JOIN school sc ON
 		o.schoolId=sc.schoolId
-		WHERE o.identification = 1 AND
+		WHERE
+		o.identification = 1 AND
 		o.firstdate IS
-		NULL AND o.addhour IS NULL AND o.schoolId=#{0}
+		NULL AND o.addhour IS NULL AND
+		o.schoolId=#{0}
 		ORDER BY
 		oo desc
 	</select>
@@ -472,7 +490,8 @@
 		select
 		<include refid="selectOrderExpenListBySchoolCol" />
 		from traininginstitutions.order
-		join expenditureitems ed on ed.expenditureitemsId =
+		join expenditureitems ed on
+		ed.expenditureitemsId =
 		o.expenditureitemsId
 		<where>
 			<if test="expenditureitemsId !=null and expenditureitemsId!=''">
@@ -572,13 +591,17 @@
 		select
 		<include refid="selectOrderListBySchoolCol" />
 		from traininginstitutions.order o
-		, paymentmethod p  ,departmentofpediatrics dp 
-		, feecategory fc  , student stu 
+		, paymentmethod p
+		,departmentofpediatrics dp
+		, feecategory fc , student stu
 		<where>
-			p.paymentmethodId = o.paymentmethodId 
-			and dp.dpId = o.departmentofpediatricsId
-			and fc.chargeTypeId = o.feecateId
-			and stu.studentId = o.stuId
+			p.paymentmethodId = o.paymentmethodId
+			and dp.dpId =
+			o.departmentofpediatricsId
+			and fc.chargeTypeId =
+			o.feecateId
+			and
+			stu.studentId = o.stuId
 			<if test="schoolId !=null and schoolId != ''">
 				and o.schoolId =#{schoolId}
 			</if>
@@ -758,7 +781,8 @@
 		</association>
 	</resultMap>
 	<!-- 查询少儿学生收费情况 -->
-	<select id="selectChildrenFeeSituation" parameterType="java.lang.Integer" resultMap="feeSituationMap">
+	<select id="selectChildrenFeeSituation"
+		parameterType="java.lang.Integer" resultMap="feeSituationMap">
 		select
 		<include refid="feeSituationMap" />
 		from traininginstitutions.order o,departmentofpediatrics
@@ -777,7 +801,8 @@
 	</select>
 
 	<!-- 查询高中学生收费情况 -->
-	<select id="selectHighsFeeSituation" parameterType="java.lang.Integer" resultMap="feeSituationMap">
+	<select id="selectHighsFeeSituation"
+		parameterType="java.lang.Integer" resultMap="feeSituationMap">
 		select
 		<include refid="feeSituationMap" />
 		from traininginstitutions.order o,departmentofpediatrics
@@ -793,7 +818,8 @@
 	</select>
 
 	<!-- 查询高中学生收费情况 -->
-	<select id="selectArtFeeSituation" parameterType="java.lang.Integer" resultMap="feeSituationMap">
+	<select id="selectArtFeeSituation"
+		parameterType="java.lang.Integer" resultMap="feeSituationMap">
 		select
 		<include refid="feeSituationMap" />
 		from traininginstitutions.order o,departmentofpediatrics
@@ -808,23 +834,27 @@
 		group by o.stuId
 	</select>
 
-	<select id="selectOrderListByStudentId" resultType="Order" parameterType="java.lang.Integer">
-		select <include refid="orderCol"/>
-		from traininginstitutions.order 
+	<select id="selectOrderListByStudentId" resultType="Order"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="orderCol" />
+		from traininginstitutions.order
 		<where>
 			<if test="studentId !=null and studentId!=''">
 				stuId = #{studentId}
 			</if>
-		</where> 
+		</where>
 	</select>
-	
+
 	<select id="selectStduentHour" resultMap="selectStduentHours">
 		SELECT o.orderId ooi,
 		o.stuId
-		ssi,sc.schoolName scn,s.studentName stn,d.dpTypeName
+		ssi,sc.schoolName scn,s.studentName
+		stn,d.dpTypeName
 		dtn,s.telephone stp,s.school sch,s.studentHour sth
 		,o.dpMoney
-		odm,o.addhour+o.givehour oag,o.startTime ost,o.orderNumber oon
+		odm,o.addhour+o.givehour oag,o.startTime ost,o.orderNumber
+		oon
 		FROM
 		`order` o
 		JOIN student s ON
@@ -834,9 +864,16 @@
 		JOIN
 		departmentofpediatrics d ON
 		o.departmentofpediatricsId=d.dpId
-		WHERE
-		s.studentHour &lt; #{0} AND
-		o.addhour IS NOT NULL AND o.schoolId=#{1}
+		<where>
+			s.studentHour &lt; #{time} AND
+			o.addhour IS NOT NULL AND o.schoolId=#{schoolId}
+			<if test="studentName !=null and studentName !=''">
+				AND s.studentName LIKE CONCAT('%',#{studentName},'%')
+			</if>
+			<if test="number !=null and number !=''">
+				AND d.dpId=#{number}
+			</if>
+		</where>
 		ORDER BY o.stuId DESC
 	</select>
 
@@ -864,18 +901,31 @@
 	<select id="selectStduentDay" resultMap="selectStduentDays">
 		SELECT o.orderId ooi,
 		o.stuId
-		ssi,sc.schoolName scn,s.studentName stn,s.telephone
+		ssi,sc.schoolName scn,s.studentName
+		stn,s.telephone
 		stp,s.school
-		sch,s.studentHour sth,o.feecateId ofi,p.paymentmethodName
-		ppn,o.firstdate ofd,o.lastdate olds,o.startTime ost,o.orderNumber
+		sch,s.studentHour sth,o.feecateId
+		ofi,p.paymentmethodName
+		ppn,o.firstdate ofd,o.lastdate olds,o.startTime
+		ost,o.orderNumber
 		oon,o.dpMoney odm
 		FROM `order` o
-		JOIN student s ON o.stuId=s.studentId
+		JOIN student s ON
+		o.stuId=s.studentId
 		JOIN school sc ON o.schoolId=sc.schoolId
-		JOIN paymentmethod p ON
+		JOIN
+		paymentmethod p ON
 		o.paymentmethodId=p.paymentmethodId
-		WHERE s.studentHour &lt; #{0} AND
-		o.firstdate IS NOT NULL AND o.schoolId=#{1}
+		<where>
+			s.studentHour &lt; #{time} AND
+			o.firstdate IS NOT NULL AND o.schoolId=#{schoolId}
+			<if test="studentName !=null and studentName !=''">
+				AND s.studentName LIKE CONCAT('%',#{studentName},'%')
+			</if>
+			<if test="number !=null and number !=''">
+				 AND o.feecateId LIKE CONCAT('%',#{number},'%')
+			</if>
+		</where>
 		ORDER BY o.stuId DESC
 	</select>
 

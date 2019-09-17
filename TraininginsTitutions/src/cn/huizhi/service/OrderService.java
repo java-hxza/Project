@@ -123,7 +123,7 @@ public interface OrderService {
 	 * 
 	 * @return
 	 */
-	public List<Order> selectStduentHour(Integer time, Integer schoolId);
+	public List<Order> selectStduentHour(Integer time, Integer schoolId,String studentName,Integer number);
 
 	/**
 	 * 时间段提醒
@@ -131,7 +131,7 @@ public interface OrderService {
 	 * @param time
 	 * @return
 	 */
-	public List<Order> selectStduentDay(Integer time, Integer schoolId);
+	public List<Order> selectStduentDay(Integer time, Integer schoolId,String studentName,Integer number);
 	
 	/**
 	 * 查询高中学生收费情况
