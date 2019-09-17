@@ -160,9 +160,10 @@
 									<!-- Question/Answer -->
 									<div class="table-responsive">
 										<!--startprint-->
+										<h3 style="display: none;text-align: center;" id="tables">学校账户报表</h3>
 										<table
 											class="table table-centered table-striped dt-responsive nowrap w-100"
-											id="products-datatable" width="100%">
+											id="products-datatable" border="1px solid" width="100%">
 											<tbody>
 												<tr>
 													<td style="width: 20px;">
@@ -176,14 +177,11 @@
 													<td>
 														<div class="custom-control custom-checkbox"></div>
 													</td>
-													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${schoolExPenSum }</a>
+													<td class="table-user">${schoolExPenSum }
 													</td>
-													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${schoolFeeceat }</a>
+													<td class="table-user">${schoolFeeceat }
 													</td>
-													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${schoolFeeceat-schoolExPenSum }</a>
+													<td class="table-user">${schoolFeeceat-schoolExPenSum }
 													</td>
 
 												</tr>
@@ -211,17 +209,13 @@
 																	class="custom-control-label" for="customCheck2">&nbsp;</label>
 															</div>
 														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${sa.personliable}</a>
+														<td class="table-user">${sa.personliable}
 														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${sa.paymentMethod.paymentmethodName}</a>
+														<td class="table-user">${sa.paymentMethod.paymentmethodName}
 														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${sa.dpMoney }</a>
+														<td class="table-user">${sa.dpMoney }
 														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${sa.feecategoryMoney }</a>
+														<td class="table-user">${sa.feecategoryMoney }
 														</td>
 													</tr>
 												</c:forEach>

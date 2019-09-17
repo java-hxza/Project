@@ -206,7 +206,6 @@ public class WelcomeController {
 			session.setAttribute("classList", classList);
 		}
 		
-		
 		return "redirect:/Accountinformation.html";
 	}
 	

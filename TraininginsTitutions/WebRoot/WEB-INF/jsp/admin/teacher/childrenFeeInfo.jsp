@@ -114,17 +114,16 @@
 										<!-- Question/Answer -->
 										<div class="table-responsive">
 											<!--startprint-->
+											<h3 style="display: none;text-align: center;" id="tables">教师课时总报表</h3>
 											<table
 												class="table table-centered table-striped dt-responsive nowrap w-100"
-												id="products-datatable"  width="100%">
+												id="products-datatable" width="100%">
 												<tbody>
 													<tr>
-														<td style="width: 20px;">
-															<div class="custom-control custom-checkbox"></div>
-														</td>
+
 														<td>序</td>
 														<td>校区</td>
-														<td> 教师名称</td>
+														<td>教师名称</td>
 														<td>课时名称</td>
 														<td>课时</td>
 														<td>上课日期</td>
@@ -135,35 +134,16 @@
 													<c:forEach items="${teacherHourList}" var="ch"
 														varStatus="status">
 														<tr>
-															<td>
-																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input"
-																		id="customCheck2"> <label
-																		class="custom-control-label" for="customCheck2">&nbsp;</label>
-																</div>
+
+															<td class="table-user">${status.index }</td>
+															<td class="table-user">${schoolName}</td>
+															<td class="table-user">${ch.teacherName}</td>
+															<td class="table-user">${ch.dpName }</td>
+															<td class="table-user">${ch.hours}</td>
+															<td class="table-user"><fmt:formatDate
+																	value="${ch.startTime}" pattern="yyyy-MM-dd HH:MM" />
 															</td>
-															<td class="table-user"><a href="javascript:void(0);"
-																class="text-body font-weight-semibold">${status.index }</a>
-															</td>
-															<td class="table-user"><a href="javascript:void(0);"
-																class="text-body font-weight-semibold">${schoolName}</a>
-															</td>
-															<td class="table-user"><a href="javascript:void(0);"
-																class="text-body font-weight-semibold">${ch.teacherName}</a>
-															</td>
-															<td class="table-user"><a href="javascript:void(0);"
-																class="text-body font-weight-semibold">${ch.dpName }</a>
-															</td>
-															<td class="table-user"><a href="javascript:void(0);"
-																class="text-body font-weight-semibold">${ch.hours}</a>
-															</td>
-															<td class="table-user"><a href="javascript:void(0);"
-																class="text-body font-weight-semibold"><fmt:formatDate
-																		value="${ch.startTime}" pattern="yyyy-MM-dd HH:MM" />
-															</a></td>
-															<td class="table-user"><a href="javascript:void(0);"
-																class="text-body font-weight-semibold">${ch.remarks }</a>
-															</td>
+															<td class="table-user">${ch.remarks }</td>
 														</tr>
 													</c:forEach>
 												</tbody>

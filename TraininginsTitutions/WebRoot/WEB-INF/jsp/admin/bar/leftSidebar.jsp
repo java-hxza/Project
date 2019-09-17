@@ -51,6 +51,7 @@
 							<li><a href="javascript:void(0)" onclick="AdminOperatorChilk()">操作员</a></li>
 							<li><a href="javascript:void(0)" onclick="AdminTeacherInto()">教师授权</a></li>
 							<li><a href="javascript:void(0)" onclick="AdminOperatorChilk()">修改密码</a></li>
+							<li><a href="javascript:void(0)" onclick="dbbackup()">数据备份</a></li>
 						</ul></li>
 				</ul>
 

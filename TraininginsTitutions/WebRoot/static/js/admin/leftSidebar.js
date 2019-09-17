@@ -65,8 +65,12 @@ $(function(){
 	AdminStudentFeeInfo = function(){
 		location.href ="selectStudentFeeInfo.html";
 	}
-	
-
+	/**
+	 * 数据备份
+	 */
+	dbbackup = function(){
+		location.href = "dbbackup.html";
+	}
 
 	
 });

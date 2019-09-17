@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set scope="request" value="${pageContext.request.contextPath }"
 	var="Path" />
 <!DOCTYPE html>
@@ -17,8 +17,10 @@
 <link rel="shortcut icon" href="assets/images/favicon.ico">
 
 <!-- App css -->
-<link href="${Path }/static/css/icons.min.css" rel="stylesheet" type="text/css" />
-<link href="${Path }/static/css/app.min.css" rel="stylesheet" type="text/css" />
+<link href="${Path }/static/css/icons.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="${Path }/static/css/app.min.css" rel="stylesheet"
+	type="text/css" />
 
 </head>
 
@@ -28,45 +30,44 @@
 	<div class="wrapper">
 
 		<!-- ========== Left Sidebar Start ========== -->
-		<%@include file="/WEB-INF/jsp/admin/bar/leftSidebar.jsp" %>		
+		<%@include file="/WEB-INF/jsp/admin/bar/leftSidebar.jsp"%>
 		<div class="content-page">
 			<div class="content">
 
-		<!-- Start Content-->
+				<!-- Start Content-->
 				<div class="container-fluid">
 					<div class="navbar-custom">
-					<ul class="list-unstyled topbar-right-menu float-right mb-0">
+						<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
 
-						<li class="dropdown notification-list"><a
-							class="nav-link dropdown-toggle nav-user arrow-none mr-0"
-							data-toggle="dropdown" href="#" role="button"
-							aria-haspopup="false" aria-expanded="false"> <span
-								class="account-user-avatar"> <img
-									src="${Path }/static/images/avatar-1.jpg" alt="user-image"
-									class="rounded-circle">
-							</span> <span> <span class="account-user-name">${user.loginName }
-										</span> <span class="account-position">管理员</span>
-							</span>
-						</a>
-
-					</ul>
-					<button class="button-menu-mobile open-left disable-btn">
-						<i class="mdi mdi-menu"></i>
-					</button>
-					<div class="app-search">
-						<form>
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search...">
-								<span class="mdi mdi-magnify"></span>
-								<div class="input-group-append">
-									<button class="btn btn-primary" type="submit">Search</button>
+							<li class="dropdown notification-list"><a
+								class="nav-link dropdown-toggle nav-user arrow-none mr-0"
+								data-toggle="dropdown" href="#" role="button"
+								aria-haspopup="false" aria-expanded="false"> <span
+									class="account-user-avatar"> <img
+										src="${Path }/static/images/avatar-1.jpg" alt="user-image"
+										class="rounded-circle">
+								</span> <span> <span class="account-user-name">${user.loginName }
+									</span> <span class="account-position">管理员</span>
+								</span>
+							</a>
+						</ul>
+						<button class="button-menu-mobile open-left disable-btn">
+							<i class="mdi mdi-menu"></i>
+						</button>
+						<div class="app-search">
+							<form>
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Search...">
+									<span class="mdi mdi-magnify"></span>
+									<div class="input-group-append">
+										<button class="btn btn-primary" type="submit">Search</button>
+									</div>
 								</div>
-							</div>
-						</form>
+							</form>
+						</div>
 					</div>
-				</div>
-				<!-- end Topbar -->
+					<!-- end Topbar -->
 					<!-- start page title -->
 					<div class="row">
 						<div class="col-12">
@@ -83,85 +84,68 @@
 								<h4 class="page-title">学校信息</h4>
 							</div>
 						</div>
-					</div>	
-					
+					</div>
+
 					<div class="col-12">
-								<div class="card">
-									<div class="card-body">
-										<div class="row mb-2">
-											<div class="col-sm-4">
-												<button type="button" class="btn btn-success btn-sm mt-2" onclick="print()"> 打印订单</button>
-											</div>
-											<div class="col-sm-8">
-												<div class="text-sm-right">
-													<button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="exportExsal()">导出exsal</button>
-												</div>
-											</div>
-											<!-- end col-->
-										</div>
-                                <!-- Question/Answer -->
-                                	<div class="table-responsive"><!--startprint-->
-										<table
-											class="table table-centered table-striped dt-responsive nowrap w-100"
-											id="products-datatable" width="100%">
-											<tbody>
-												<tr>
-													<td style="width: 20px;">
-														<div class="custom-control custom-checkbox">
-															
-														</div>
-													</td>
-													<td>序</td>
-													<td>校区</td>
-													<td>学员名称</td>
-													<td>新增课时</td>
-													<td>赠送课时</td>
-													<td>已上课时</td>
-												</tr>
-											</tbody>
-											<tbody>
-												<c:forEach items="${stuReistrationList}" var="stu" varStatus="status">
-													<tr>
-														<td>
-															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input"
-																	id="customCheck2"> <label class="custom-control-label" for="customCheck2">&nbsp;</label>
-															</div>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${status.index }</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${schoolName}</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${stu.studentName}</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${stu.order.addhour }</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${stu.order.givehour }</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold" >${stu.sumHour }</a>
-														</td>
-													</tr>
-												</c:forEach>	
-											</tbody>
-										</table><!--endprint-->
+						<div class="card">
+							<div class="card-body">
+								<div class="row mb-2">
+									<div class="col-sm-4">
+										<button type="button" class="btn btn-success btn-sm mt-2"
+											onclick="print()">打印订单</button>
 									</div>
+									<div class="col-sm-8">
+										<div class="text-sm-right">
+											<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+												onclick="exportExsal()">导出exsal</button>
+										</div>
+									</div>
+									<!-- end col-->
+								</div>
+								<!-- Question/Answer -->
+								<div class="table-responsive">
+									<!--startprint-->
+									<h3 style="display: none;text-align: center;" id="tables">学员课时总报表</h3>
+									<table
+										class="table table-centered table-striped dt-responsive nowrap w-100"
+										id="products-datatable" border="1px solid" width="100%">
+										<tbody>
+											<tr>
+												<td>序</td>
+												<td>校区</td>
+												<td>学员名称</td>
+												<td>新增课时</td>
+												<td>赠送课时</td>
+												<td>已上课时</td>
+											</tr>
+										</tbody>
+										<tbody>
+											<c:forEach items="${stuReistrationList}" var="stu"
+												varStatus="status">
+												<tr>
+													<td class="table-user">${status.index }</td>
+													<td class="table-user">${schoolName}</td>
+													<td class="table-user">${stu.studentName}</td>
+													<td class="table-user">${stu.order.addhour }</td>
+													<td class="table-user">${stu.order.givehour }</td>
+													<td class="table-user">${stu.sumHour }</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									<!--endprint-->
+								</div>
 
-            <!-- ============================================================== -->
-            <!-- End Page content -->
-            <!-- ============================================================== -->
+								<!-- ============================================================== -->
+								<!-- End Page content -->
+								<!-- ============================================================== -->
 
-        </div>
-				<!-- END wrapper -->
-<iframe id="iframe1" style="display: none"></iframe>
-				<!-- App js -->
-				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
-				<script src="${Path }/static/js/admin/info/schoolInfo.js"></script>
-				<script src="${Path }/static/js/admin/leftSidebar.js"></script>
+							</div>
+							<!-- END wrapper -->
+							<iframe id="iframe1" style="display: none"></iframe>
+							<!-- App js -->
+							<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
+							<script src="${Path }/static/js/admin/info/schoolInfo.js"></script>
+							<script src="${Path }/static/js/admin/leftSidebar.js"></script>
 </body>
 </html>

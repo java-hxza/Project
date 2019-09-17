@@ -24,6 +24,10 @@
 <link href="${Path }/static/css/style.css" rel="stylesheet"
 	type="text/css" />
 <style type="text/css">
+.text-body {
+	text-decoration: none;
+	color: black;
+}
 </style>
 </head>
 
@@ -41,8 +45,6 @@
 				<div class="container-fluid">
 					<div class="navbar-custom">
 						<ul class="list-unstyled topbar-right-menu float-right mb-0">
-
-
 							<li class="dropdown notification-list"><a
 								class="nav-link dropdown-toggle nav-user arrow-none mr-0"
 								data-toggle="dropdown" href="#" role="button"
@@ -225,18 +227,12 @@
 							<!-- Question/Answer -->
 							<div class="table-responsive">
 								<!--startprint-->
+									<h3 style="display: none;text-align: center;" id="tables">收入明细报表</h3>
 								<table
 									class="table table-centered table-striped dt-responsive nowrap w-100"
-									id="products-datatable" width="100%">
+									id="products-datatable" border="1px solid" width="100%">
 									<tbody>
 										<tr>
-											<td style="width: 20px;">
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input"
-														id="customCheck1" disabled> <label
-														class="custom-control-label" for="customCheck1">&nbsp;</label>
-												</div>
-											</td>
 											<td>订单编号</td>
 											<td>收款人</td>
 											<td>日期</td>
@@ -252,54 +248,28 @@
 										</tr>
 									</tbody>
 									<tbody id="info">
-										<c:forEach items="${orderListBySchool }" var="order">
+										<c:forEach items="${orderListBySchool}" var="order">
 											<tr class="userId">
-												<td>
-													<div class="custom-control custom-checkbox">
-														<input type="checkbox"
-															class="customChecks custom-control-input"> <label
-															class="custom-control-label  customCheck"
-															for="customCheck2">&nbsp;</label>
-													</div>
+												<td class="table-user">${order.orderNumber }</td>
+												<td class="table-user">${order.student.studentName }</td>
+												<td class="table-user"><fmt:formatDate
+														value="${order.startTime }" pattern="yyyy-MM-dd hh:mm:ss"></fmt:formatDate>
 												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${order.orderNumber }</a>
+												<td class="table-user">
+													${order.feeCategory.chargeTypeName }</td>
+												<td class="table-user">${order.dpMoney }</td>
+												<td class="table-user">${order.paymentMethod.paymentmethodName }
 												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${order.student.studentName }</a>
+												<td class="table-user">${order.personliable }</td>
+												<td class="table-user">${order.departmentOfPediatrics.dpTypeName }
 												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold"><fmt:formatDate
-															value="${order.startTime }" pattern="yyyy-MM-dd hh:mm:ss"></fmt:formatDate></a>
+												<td class="table-user">${order.addhour }</td>
+												<td class="table-user">${order.givehour }</td>
+												<td class="table-user"><fmt:formatDate
+														value="${order.firstdate }" pattern="yyyy-MM-dd HH:mm:ss" />
 												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">
-														${order.feeCategory.chargeTypeName }</a></td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${order.dpMoney }</a>
-												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${order.paymentMethod.paymentmethodName }</a>
-												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${order.personliable }</a>
-												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${order.departmentOfPediatrics.dpTypeName }</a>
-												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${order.addhour }</a>
-												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${order.givehour }</a>
-												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold"><fmt:formatDate
-															value="${order.firstdate }" pattern="yyyy-MM-dd HH:mm:ss" />
-												</a></td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold"><fmt:formatDate
-															value="${order.lastdate }" pattern="yyyy-MM-dd HH:mm:ss" /></a>
+												<td class="table-user"><fmt:formatDate
+														value="${order.lastdate }" pattern="yyyy-MM-dd HH:mm:ss" />
 												</td>
 											</tr>
 										</c:forEach>
@@ -307,7 +277,9 @@
 								</table>
 								<!--endprint-->
 							</div>
-							<iframe id="iframe1" style="display: none"></iframe>
+							<iframe id="iframe1" style="display: none;">
+								
+							 </iframe>
 							<!-- ============================================================== -->
 							<!-- End Page content -->
 							<!-- ============================================================== -->

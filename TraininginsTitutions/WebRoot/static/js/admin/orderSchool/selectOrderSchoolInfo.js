@@ -125,8 +125,6 @@ $(function(){
 		var expenditureitemsId = $("#expenditureitemsId").val();
 		var startTime = $("#startTime").val();
 		var endTime =$("#endTime").val();
-		$("#btn1").addClass("spinner-border spinner-border-sm");
-		$("#btn2").addClass("spinner-border spinner-border-sm");
 		
 		//判断时间是都空值
 		if(startTime != null && startTime !=''){
@@ -159,8 +157,6 @@ $(function(){
 					$("#products-datatable").append(expenditureOrderforeach(data));
 					/*$(".text-center").append("<button type='button' id='btn1' class='btn btn-success btn-sm mt-2' onclick='expen()'>支出查询</button>" +
 							"<button type='button'	id='btn2' class='btn btn-success btn-sm mt-2' onclick='query()'>收入查询</button>);**/
-					$("#btn1").removeClass("spinner-border spinner-border-sm");
-					$("#btn2").removeClass("spinner-border spinner-border-sm");
                     
 				}
 				

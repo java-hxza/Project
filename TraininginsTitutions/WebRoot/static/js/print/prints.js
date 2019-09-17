@@ -1,5 +1,6 @@
 $(function() {
 	print = function() {
+		$("#tables").show();
 		bdhtml = $(".table-responsive").html();
 		//alert(bdhtml);
 		sprnstr = "<!--startprint-->"; //开始打印标识字符串有17个字符

@@ -140,14 +140,13 @@
 					<!-- Question/Answer -->
 					<div class="table-responsive">
 						<!--startprint-->
+						<h3 style="display: none;text-align: center;" id="tables">教师课时总报表</h3>
 						<table
 							class="table table-centered table-striped dt-responsive nowrap w-100"
-							id="products-datatable" width="100%">
+							id="products-datatable" border="1px solid" width="100%">
 							<tbody>
 								<tr>
-									<td style="width: 20px;">
-										<div class="custom-control custom-checkbox"></div>
-									</td>
+
 									<td>序</td>
 									<td>校区</td>
 									<td>教师名称</td>
@@ -160,24 +159,12 @@
 								<c:forEach items="${teacherHourList }" var="th"
 									varStatus="status">
 									<tr>
-										<td>
-											<div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input"
-													id="customCheck2"> <label
-													class="custom-control-label" for="customCheck2">&nbsp;</label>
-											</div>
-										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${status.index }</a></td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${schoolName}</a></td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${th.teacherName}</a>
-										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${th.dpName }</a></td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${th.sumHours }</a></td>
+
+										<td class="table-user">${status.index }</td>
+										<td class="table-user">${schoolName}</td>
+										<td class="table-user">${th.teacherName}</td>
+										<td class="table-user">${th.dpName }</td>
+										<td class="table-user">${th.sumHours }</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -195,6 +182,6 @@
 				<!-- App js -->
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
 				<script src="${Path }/static/js/admin/info/schoolInfo.js"></script>
-				<script src="${Path }/static/js/admin/leftSidebar.js"></script>
+				
 </body>
 </html>

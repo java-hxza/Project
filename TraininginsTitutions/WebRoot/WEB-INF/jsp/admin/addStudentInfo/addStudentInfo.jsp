@@ -69,7 +69,7 @@
                            			 </form>	
                         		</div>
 								<p class="text-muted mt-3"></p>
-                                     <button type="button" class="btn btn-success btn-sm mt-2" onclick="printOrders()"> 打印订单</button>
+                                     <button type="button" class="btn btn-success btn-sm mt-2" onclick="print()"> 打印订单</button>
                                     <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="exportExsal()">导出exsal</button>
                                     <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="query()">查询</button>
                                 </div>
@@ -96,7 +96,7 @@
                                 	<div class="table-responsive">
 										<table
 											class="table table-centered table-striped dt-responsive nowrap w-100"
-											id="products-datatable" width="100%">
+											id="products-datatable"  width="100%">
 											<tbody>
 												<tr>
 													<td style="width: 20px;">

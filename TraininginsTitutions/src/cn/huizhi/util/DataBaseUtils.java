@@ -18,28 +18,22 @@ import java.io.OutputStream;
 
 import java.io.OutputStreamWriter;
 
-import java.nio.channels.FileChannel;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 
-public  class DataBaseUtils {
+public class DataBaseUtils {
 	Log loger = LogFactory.getLog(this.getClass());
 	 
-    @Value("${host_ip}")
-    private String HOSTIP;//数据库服务器IP
-    @Value("${user_name}")
-    private String USERNAME;//数据库用户
-    @Value("${password}")
-    private String PASSWORD;//数据库密码
-    @Value("${save_path}")
-    private String SAVEPATH;//备份文件路径
- 
+    private String HOSTIP = "152.136.46.217";//数据库服务器IP
+    private String USERNAME = "root";//数据库用户
+    private String PASSWORD = "root";//数据库密码
+    private String SAVEPATH = "/root/stup/mysqlbase/";//备份文件路径
     /**
      * 每隔xxx时间就执行，暂定每天0点
      */
-    public  final void dbbackup() {
+    public  void dbbackup() {
         loger.debug("数据库备份开始");
         String[] databaseName = {"traininginstitutions"};
         String dates = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());

@@ -62,6 +62,7 @@ import cn.huizhi.service.TeacherDictionService;
 import cn.huizhi.service.TeacherHourService;
 import cn.huizhi.service.UserDictionService;
 import cn.huizhi.service.UserService;
+import cn.huizhi.util.DataBaseUtils;
 
 @Controller
 public class RootSchoolController {
@@ -1326,7 +1327,9 @@ public class RootSchoolController {
 	}
 	
 	@RequestMapping("dbbackup.html")
-	public String dbbackup() {
+	public String dbbackup(HttpSession session) {
+		DataBaseUtils dataBaseUtils = new DataBaseUtils();
+		dataBaseUtils.dbbackup();
 		
 		
 		return "";

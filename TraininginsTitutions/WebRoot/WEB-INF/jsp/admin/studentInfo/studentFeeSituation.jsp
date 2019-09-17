@@ -84,14 +84,13 @@
 					<!-- Question/Answer -->
 					<div class="table-responsive">
 						<!--startprint-->
+						<h3 style="display: none;text-align: center;" id="tables">学生收费情况报表</h3>
 						<table
 							class="table table-centered table-striped dt-responsive nowrap w-100"
 							id="products-datatable" width="100%">
 							<tbody>
 								<tr>
-									<td style="width: 20px;">
-										<div class="custom-control custom-checkbox"></div>
-									</td>
+
 									<td>序</td>
 									<td>校区</td>
 									<td>单号</td>
@@ -106,35 +105,17 @@
 								<c:forEach items="${studentFeeSituationList }" var="ts"
 									varStatus="status">
 									<tr>
-										<td>
-											<div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input"
-													id="customCheck2"> <label
-													class="custom-control-label" for="customCheck2">&nbsp;</label>
-											</div>
+
+										<td class="table-user">${status.index }</td>
+										<td class="table-user">${schoolName}</td>
+										<td class="table-user">${ts.orderNumber}</td>
+										<td class="table-user">${ts.student.studentName }</td>
+										<td class="table-user">${ts.departmentOfPediatrics.dpTypeName }
 										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${status.index }</a>
+										<td class="table-user">${ts.departmentOfPediatrics.dpMoney }
 										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${schoolName}</a></td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${ts.orderNumber}</a>
-										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${ts.student.studentName }</a>
-										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${ts.departmentOfPediatrics.dpTypeName }</a>
-										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${ts.departmentOfPediatrics.dpMoney }</a>
-										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${ts.sumDpMoney }</a>
-										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${ts.departmentOfPediatrics.dpMoney-ts.sumDpMoney }</a>
+										<td class="table-user">${ts.sumDpMoney }</td>
+										<td class="table-user">${ts.departmentOfPediatrics.dpMoney-ts.sumDpMoney }
 										</td>
 									</tr>
 								</c:forEach>
