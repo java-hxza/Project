@@ -641,7 +641,7 @@
 							"src_id" : "ChargePeriod",
 							"show_header" : true
 						});
-						excel.generate();
+						excel.generate("其它收费单",$(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
 					});
 				});
 			</script>

@@ -25,7 +25,7 @@ $(function() {
 			success : function(data) {
 				data = JSON.parse(data);
 				$(".delSt").remove();
-				$(".appends").after("<div class='dayin'><!--startprint--><table class='table table-bordered table-centered mb-0 delSt' border='1px' cellspacing='0'><thead class='thead-light'><tr><th>校区信息</th><th>学员名称</th><th>课程名称</th><th>总课时</th><th>已用课时</th><th>剩余课时</th><th>交费总额</th><th>手机</th><th>就读学校</th><th>单号</th></tr></thead><tbody class='adds'></tbody></table><!--endprint--><iframe id='iframe1' style='display: none'></iframe></div>");
+				$(".appends").after("<div class='dayin'><!--startprint--><table class='table table-bordered table-centered mb-0 delSt' id='delSts' border='1px' cellspacing='0'><thead class='thead-light'><tr><th>校区信息</th><th>学员名称</th><th>课程名称</th><th>总课时</th><th>已用课时</th><th>剩余课时</th><th>交费总额</th><th>手机</th><th>就读学校</th><th>单号</th></tr></thead><tbody class='adds'></tbody></table><!--endprint--><iframe id='iframe1' style='display: none'></iframe></div>");
 				for (var i = 0; i < data.order.length; i++) {
 					$(".adds").append("<tr><td>" + data.order[i].school.schoolName + "</td><td>" + data.order[i].student.studentName + "</td><td>" + data.order[i].departmentOfPediatrics.dpTypeName + "</td><td>" + data.order[i].addhour + "</td><td>" + (data.order[i].addhour - data.order[i].student.studentHour) + "</td><td>" + data.order[i].student.studentHour + "</td><td>" + data.order[i].dpMoney + "</td><td>" + data.order[i].student.telephone + "</td><td>" + data.order[i].student.school + "</td><td>" + data.order[i].orderNumber + "</td></tr>");
 				}
