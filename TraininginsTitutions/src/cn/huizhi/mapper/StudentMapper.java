@@ -93,5 +93,11 @@ public interface StudentMapper {
 	 * @return
 	 */
 	public Integer updateStuHour(List<Student> list);
+	
+	/**
+	 * 清空表数据
+	 * @return
+	 */
+	public Integer delStudentTable();
 
 }

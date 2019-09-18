@@ -82,4 +82,10 @@ public interface ClassMapper {
 	 * @return
 	 */
 	public List<Class> selectClass2(Integer schoolId,Integer classType);
+	
+	/**
+	 * 删除表数据
+	 * @return
+	 */
+	public Integer delClassTable();
 }

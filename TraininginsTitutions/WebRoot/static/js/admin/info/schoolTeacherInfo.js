@@ -49,7 +49,6 @@ $(function(){
 					var teacherTypeId = $.trim($(".teacherTypeId").attr("name"));
 					var teacherId = $(".teacherId").val();
 					var departmentId = $(".departmentId").val();
-					alert(departmentId);
 					if(teacherName == "") {
 						alert("请填写姓名！");
 						return false;
@@ -183,7 +182,7 @@ $(function(){
 		}
 
 		$.ajax({
-			url : 'delTeacher.html',
+			url : 'delAdminTeacher.html',
 			data : {
 				teacherId : teacherId
 			},

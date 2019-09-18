@@ -125,31 +125,69 @@
 						<div class="card">
 							<h3 style="text-align:center">学生课程提醒</h3>
 							<div class="card-body ">
-								<div class="table-responsive mt-4">
-									<div class="row appends">
-										<div class="col-md-1"></div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>课时</label>
-												<div class="input-group">
-													<input type="text" class="form-control Hours"
-														data-toggle="input-mask"
-														data-mask-format="00000000000000000" data-reverse="true">
-													<button class="btn btn-dark  " type="button" onclick=Hour()>查找</button>
-												</div>
-											</div>
+								<div class="row">
+									<button type="button" id="btn2" class="btn btn-danger mb-2"
+										onclick="Printing()">打印</button>
+
+									<div class="col-md-4" style="margin:auto;">
+										<label>学员姓名</label>
+										<div class="input-group">
+											<input class="form-control studentName" type="text"
+												id="billing-first-name" placeholder="可填可不填" />
 										</div>
-										<div class="col-md-1"></div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>时间段</label>
-												<div class="input-group">
-													<input type="text" class="form-control Times"
-														data-toggle="input-mask"
-														data-mask-format="00000000000000000" data-reverse="true">
-													<button class="btn btn-dark  " type="button" onclick=Time()>查找</button>
-												</div>
-											</div>
+									</div>
+									<button type="button" id="btn2"
+										class="btn btn-danger mb-2 Exports">导出Excel</button>
+								</div>
+								<div class="row">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<label>课时</label>
+										<div class="input-group">
+											<input type="text" class="form-control Hours"
+												data-toggle="input-mask"
+												data-mask-format="00000000000000000" data-reverse="true"
+												placeholder="剩余XXX课时提醒">
+											<button class="btn btn-dark  " type="button" onclick=Hour()>查找</button>
+										</div>
+									</div>
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<label>时间段</label>
+										<div class="input-group">
+											<input type="text" class="form-control Times"
+												data-toggle="input-mask"
+												data-mask-format="00000000000000000" data-reverse="true"
+												placeholder="剩余XXX天数提醒">
+											<button class="btn btn-dark  " type="button" onclick=Time()>查找</button>
+										</div>
+									</div>
+
+								</div>
+								<div class="row appends">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<label>选择课程</label>
+										<div class="input-group">
+											<select class="form-control departmentOfPediatrics"
+												id="example-select">
+												<option value="0">---请选择---</option>
+												<c:forEach items="${departmentOfPediatrics }" var="d">
+													<option value="${d.dpId }">${d.dpTypeName}</option>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<label for="example-select">收款项目</label>
+										<div class="input-group">
+											<select class="form-control feecateId" id="example-select">
+												<option value="0">---请选择---</option>
+												<c:forEach items="${feeCategory }" var="f">
+													<option value="${f.chargeTypeId }" name="${f.chargeMoney }">${f.chargeTypeName}</option>
+												</c:forEach>
+											</select>
 										</div>
 									</div>
 								</div>
@@ -178,16 +216,6 @@
 											class="form-control order" id="example-select">
 											<c:forEach items="${order }" var="o">
 												<option value="${o.stuId }" class="${o.giftNumber }">${o.gift.giftName}</option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-6" style="display: none;">
-									<div class="form-group mb-3">
-										<label for="example-select">收款项目</label> <select
-											class="form-control feecateId" id="example-select">
-											<c:forEach items="${feeCategory }" var="f">
-												<option value="${f.chargeTypeId }" name="${f.chargeMoney }">${f.chargeTypeName}</option>
 											</c:forEach>
 										</select>
 									</div>
@@ -381,5 +409,20 @@
 	<script type="text/javascript"
 		src="${Path }/static/js/highes/CourseReminder.js"></script>
 	<!-- third party js ends -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".Exports").click(function() {
+				if ($(".adds td").val() != "") {
+					alert("没有可以打印的数据！")
+					return false;
+				}
+				excel = new ExcelGen({
+					"src_id" : "delSts",
+					"show_header" : true
+				});
+				excel.generate();
+			});
+		});
+	</script>
 </body>
 </html>

@@ -18,5 +18,8 @@
 		values ( #{chargeTypeName}, #{chargeMoney},
 		#{category}, #{schoolId} )
 	</insert>
-
+	
+	<update id="delFeeCategoryTable">
+		truncate feecategory
+	</update>
 </mapper>

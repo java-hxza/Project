@@ -64,9 +64,9 @@
 								</div>
 								<div class="form-group">
 								<label for="emailaddress">学校：</label>
-									<select id="schoolId" name="schoolId">
+									<select id="schoolId" name="schoolId" class="form-control" >
 										<option value="0">请选择学校</option>
-										<c:forEach items="${schoolList }" class="form-control" var="school">
+										<c:forEach items="${schoolList}" var="school">
 											<option value="${school.schoolId }">${school.schoolName}</option>
 										</c:forEach>
 									</select>

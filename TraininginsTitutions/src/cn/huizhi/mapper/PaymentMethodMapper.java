@@ -30,4 +30,10 @@ public interface PaymentMethodMapper {
 	 * @return
 	 */
 	public Integer addPaymentMethod(String paymentmethodName);
+	
+	/**
+	 * 清空表数据
+	 * @return
+	 */
+	public Integer delPaymentMethodTable();
 }

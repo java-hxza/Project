@@ -385,9 +385,9 @@ public class RootSchoolController {
 	}
 
 	@RequestMapping("rootOperatorAuthorization.html")
-	public String operatorAuthorization(Integer uId, HttpSession session) {
+	public String operatorAuthorization(Integer teacherId, HttpSession session) {
 
-		List<TeacherDiction> dictionListByUId = teacherDictionService.findTeacherDictionListByTeacherId(uId);
+		List<TeacherDiction> dictionListByUId = teacherDictionService.findTeacherDictionListByTeacherId(teacherId);
 
 		session.setAttribute("dictionListByUId", dictionListByUId);
 
@@ -1327,11 +1327,18 @@ public class RootSchoolController {
 	}
 	
 	@RequestMapping("dbbackup.html")
-	public String dbbackup(HttpSession session) {
+	@ResponseBody
+	public Map<String,String> dbbackup(HttpSession session) {
+		Map<String, String> jsonMap = new HashMap<String, String>();
 		DataBaseUtils dataBaseUtils = new DataBaseUtils();
-		dataBaseUtils.dbbackup();
+		if(dataBaseUtils.dbbackup()) {
+			jsonMap.put("state","1");
+		}else {
+			jsonMap.put("state","0");
+		}
 		
-		
-		return "";
+		return jsonMap;
 	}
+	
+	
 }

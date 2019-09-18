@@ -42,4 +42,10 @@ public class FeeCategoryServiceImpl implements FeeCategoryService {
 		return feecategoryMapper.addFeeCategory(feeCategory);
 	}
 
+	@Override
+	public Integer delFeeCategoryTable() {
+		// TODO Auto-generated method stub
+		return feecategoryMapper.delFeeCategoryTable();
+	}
+
 }

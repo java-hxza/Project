@@ -142,7 +142,7 @@
 			var userId = $("#uId").attr("name");
 			var schoolId = $("#schoolId").val();
 			
-			if (userId, schoolId == null || schoolId>0) {
+			if (userId, schoolId == null ) {
 				alert("请选择数据");
 				return false;
 			}

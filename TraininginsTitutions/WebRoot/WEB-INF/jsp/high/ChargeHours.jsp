@@ -670,8 +670,9 @@
 								$(".WBK").parent().text($(".WBK").val());
 							}
 							$(".WBK").remove();
-							$(this).append("<input type='text' class='WBK' value='" + $(this).text() + "'/>");
+							$(this).append("<input type='text' class='WBK'/>");
 							$(".WBK").focus();
+							$(".WBK").val($(this).text());
 			
 						});
 					});

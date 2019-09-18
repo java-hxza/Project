@@ -225,7 +225,7 @@
 															<div class="col-md-12">
 																<div class="form-group">
 																	<button type="button"
-																		class="btn btn-block btn-primary DaYins">打印</button>
+																		class="btn btn-block btn-primary DaYins" onclick="DaYins()">打印</button>
 																</div>
 															</div>
 															<div class="col-md-12" style="display: none;">
@@ -670,7 +670,6 @@
 			<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
 			<script type="text/javascript"
 				src="${Path }/static/js/highes/Charge.js"></script>
-
 			<script type="text/javascript">
 				$(document).ready(function() {
 					$(".Exports").click(function() {
@@ -726,8 +725,9 @@
 								$(".WBK").parent().text($(".WBK").val());
 							}
 							$(".WBK").remove();
-							$(this).append("<input type='text' class='WBK' value='" + $(this).text() + "'/>");
+							$(this).append("<input type='text' class='WBK'/>");
 							$(".WBK").focus();
+							$(".WBK").val($(this).text());
 			
 						});
 					});

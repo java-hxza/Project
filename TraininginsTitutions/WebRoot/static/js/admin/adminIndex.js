@@ -25,5 +25,17 @@ $(function(){
 		location.href="creageTeacher.html";
 	}
 	
+	/**
+	 * 查询
+	 */
+	query = function(){
+		var endTime = $("#endTime").val();
+		var startTime = $("#startTime").val();
+		
+		
+		location.href = "querySchoolOrderByTime.html?endTime="+endTime+"&startTime="+startTime;
+		
+	}
+	
 
 });

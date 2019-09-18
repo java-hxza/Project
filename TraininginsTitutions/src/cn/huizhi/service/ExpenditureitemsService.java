@@ -24,4 +24,10 @@ public interface ExpenditureitemsService {
 	 * @return
 	 */
 	public Integer addExpenditureitems(String expenditureitemsName,String category,String schoolId);
+	
+	/**
+	 * 清空表数据
+	 * @return
+	 */
+	public Integer delExpenditureitemsTable();
 }

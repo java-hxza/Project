@@ -11,9 +11,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 
 import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.TeacherDiction;
@@ -77,6 +80,7 @@ public class AdminTeacherController {
 	public String schoolTeacherInfo(Integer schoolId, String schoolName, HttpSession session) {
 		session.setAttribute("schoolName", schoolName);
 		List<Teacher> teacherListBYSchoolId = teacherService.findTeacherListBySchoolId(schoolId);
+		session.setAttribute("schoolId", schoolId);
 		if (teacherListBYSchoolId.size() > 0) {
 			session.setAttribute("teacherListBYSchoolId", teacherListBYSchoolId);
 		} else {
@@ -147,6 +151,27 @@ public class AdminTeacherController {
 		return jsonMap;
 	}
 
+	
+	/**
+	 * 删除教师
+	 * @return
+	 */
+	@RequestMapping("delAdminTeacher.html")
+	@ResponseBody
+	public Object delTeacher(@RequestParam Integer teacherId,Integer schoolId,HttpSession session) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		if (teacherService.delTeacher(teacherId) == 1) {
+			if (teacherDictionService.delTeacherDiction((Integer)session.getAttribute("schoolId") ,teacherId) == 1) {
+				map.put("del", "1");
+			} else {
+				map.put("del", "0");
+			}
+		} else {
+			map.put("del", "0");
+		}
+		return JSONArray.toJSONString(map);
+	}
+	
 	/**
 	 * 根据教师主键查询教书所存在的学校
 	 * 
@@ -486,11 +511,10 @@ public class AdminTeacherController {
 	 * @param userDiction
 	 * @return
 	 */
-	@RequestMapping("operatorAuthor.html")
 	@ResponseBody
+	@RequestMapping("operatorAuthor.html")
 	public Map<String,String> operatorAuthor(UserDiction userDiction){
 		Map<String, String> jsonMap = new HashMap<String, String>();
-		
 		
 		if(userDictionService.insertUserDiction(userDiction)>0) {
 			jsonMap.put("state","1");

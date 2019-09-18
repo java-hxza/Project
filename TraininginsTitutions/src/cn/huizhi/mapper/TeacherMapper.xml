@@ -227,5 +227,9 @@
 		JOIN teacherdiction td ON t.teacherId=td.teacherId
 		WHERE tt.teacherTypeName LIKE CONCAT('%', '招生','%') AND td.schoolId=#{0}
 	</select>
+	
+	<update id="delTeacherTable">
+		truncate teacher
+	</update>
 
 </mapper>

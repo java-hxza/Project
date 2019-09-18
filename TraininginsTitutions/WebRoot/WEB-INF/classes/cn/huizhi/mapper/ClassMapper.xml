@@ -259,12 +259,16 @@
 	</sql>
 	<select id="selectClassByClassId" parameterType="java.lang.Integer" resultMap="classByClassIdMap">
 		select <include refid="classByClassIdCol"/>
-		from class c,departmentofpediatrics d
+		from traininginstitutions.class c,departmentofpediatrics d
 		<where>
 			<if test="classId!=null and classId!=''">
 				classId=#{classId}
 			</if>
 		</where>
 	</select>
+	<!-- 清空表数据 -->
+	<update id="delClassTable" >
+		truncate traininginstitutions.class
+	</update>
 
 </mapper>

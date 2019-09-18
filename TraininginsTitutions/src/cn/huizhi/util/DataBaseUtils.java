@@ -33,7 +33,7 @@ public class DataBaseUtils {
     /**
      * 每隔xxx时间就执行，暂定每天0点
      */
-    public  void dbbackup() {
+    public  boolean dbbackup() {
         loger.debug("数据库备份开始");
         String[] databaseName = {"traininginstitutions"};
         String dates = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
@@ -44,12 +44,13 @@ public class DataBaseUtils {
             String savePath=SAVEPATH + "/" + dated;
             String fileName =  o.toString() + dates+".sql";
             System.out.println(SAVEPATH + "/" + dated + "/" + o.toString() + dates+".sql");
-            exportDatabaseTool(HOSTIP, USERNAME, PASSWORD, savePath,fileName, o.toString());
+           return exportDatabaseTool(HOSTIP, USERNAME, PASSWORD, savePath,fileName, o.toString());
         }
+        return false;
     }
  
  
-    public void exportDatabaseTool(String hostIP, String userName, String password, String savePath,String fileName, String databaseName) {
+    public boolean exportDatabaseTool(String hostIP, String userName, String password, String savePath,String fileName, String databaseName) {
         File saveFile = new File(savePath);
         if (!saveFile.exists()) {// 如果目录不存在
             saveFile.mkdirs();// 创建文件夹
@@ -65,6 +66,7 @@ public class DataBaseUtils {
             Process process = Runtime.getRuntime().exec(stringBuilder.toString());
             if (process.waitFor() == 0) {// 0 表示线程正常终止。
                 loger.info("数据库备份成功");
+                return true;
             }
         } catch (IOException e) {
             loger.info("数据库备份异常");
@@ -73,6 +75,8 @@ public class DataBaseUtils {
             loger.info("数据库备份异常");
             e.printStackTrace();
         }
+        
+        return false;
     }
 
 	

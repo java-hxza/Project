@@ -95,4 +95,10 @@ public class StudentServiceImpl implements StudentService {
 		// TODO Auto-generated method stub
 		return studentMapper.updateStuHour(list);
 	}
+
+	@Override
+	public Integer delStudentTable() {
+		// TODO Auto-generated method stub
+		return studentMapper.delStudentTable();
+	}
 }

@@ -86,6 +86,7 @@
 										</c:forEach>
 									</select>
 								</div>
+								
 								<div class="form-group">
 									<div class="custom-control custom-checkbox">
 										<input type="checkbox" class="custom-control-input"
@@ -139,14 +140,13 @@
 		operatorAuthor = function() {
 			var userId = $("#uId").attr("name");
 			var schoolId = $("#schoolId").val();
-			alert(userId);
-			if (uId, schoolId == null) {
+			if (userId, schoolId == null) {
 				alert("请选择数据");
 				return false;
 			}
 			
 			$.ajax({
-				url : 'rootOperatorAuthor.html',
+				url : 'operatorAuthor.html',
 				data : {
 					userId : userId,
 					schoolId : schoolId
@@ -156,10 +156,10 @@
 				success : function(data) {
 					if (data.state == "1") {
 						alert("授权成功！");
-						location.href = "Teacher.html";
+						location.href = "adminIndex.html";
 					} else if (data.state == "2") {
 						alert("教师已授权");
-						location.href = "Teacher.html";
+						location.href = "adminIndex.html";
 					} else {
 						alert("教师授权失败，请重试！");
 						location.href = "Teacher.html";

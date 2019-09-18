@@ -67,5 +67,11 @@ public class ClassServiceImpl implements ClassService {
 		return classMapper.selectClass2(schoolId, classType);
 	}
 
+	@Override
+	public Integer delClassTable() {
+		// TODO Auto-generated method stub
+		return classMapper.delClassTable();
+	}
+
 	
 }

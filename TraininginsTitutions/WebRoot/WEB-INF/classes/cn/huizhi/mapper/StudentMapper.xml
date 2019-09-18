@@ -189,12 +189,13 @@
 		#{registrationChannels},
 		#{registrationConsultant}, #{startTime},
 		#{endTime}, #{theSurrogate}, #{remarks}, #{feeCategory},#{integral})
-		<!--order属性是取数据生成之前(before)or生成之后(after)  -->
-		<selectKey keyProperty="studentId" resultType="java.lang.Integer" order="AFTER">
-    		<!--  当前事务最后一个生成的主键id-->
-    		select last_insert_id()
-    	</selectKey>
-		
+		<!--order属性是取数据生成之前(before)or生成之后(after) -->
+		<selectKey keyProperty="studentId"
+			resultType="java.lang.Integer" order="AFTER">
+			<!-- 当前事务最后一个生成的主键id -->
+			select last_insert_id()
+		</selectKey>
+
 
 	</insert>
 
@@ -248,8 +249,8 @@
 		s.studentSex=#{2}
 	</select>
 
-	 
-		
+
+
 
 
 	<!-- 根据主键查询学生 -->
@@ -297,19 +298,24 @@
 			</if>
 		</where>
 	</update>
-	
-	<!--批量修改学生课时  -->
+
+	<!--批量修改学生课时 -->
 	<update id="updateStuHour" parameterType="Student">
-		<foreach collection="list" item="s" index="index" open="" close="" separator=";"></foreach>
-			update traininginstitutions.student 
-			<set>
-				<if test="s.studentHour !=null and s.studentHour!=''">
-					studentHour = studentHour-#{s.studentHour}  
-				</if>
-			</set>
-			
-			<where>
-				studentId = #{s.studentId} 
-			</where>
+		<foreach collection="list" item="s" index="index" open=""
+			close="" separator=";"></foreach>
+		update traininginstitutions.student
+		<set>
+			<if test="s.studentHour !=null and s.studentHour!=''">
+				studentHour = studentHour-#{s.studentHour}
+			</if>
+		</set>
+
+		<where>
+			studentId = #{s.studentId}
+		</where>
+	</update>
+	
+	<update id="delStudentTable">
+		truncate student
 	</update>
 </mapper>

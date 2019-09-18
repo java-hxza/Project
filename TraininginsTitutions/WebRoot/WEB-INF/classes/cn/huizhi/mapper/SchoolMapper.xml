@@ -66,4 +66,6 @@
 			values (#{schoolName},#{cityId},#{schoolRemarks},#{cityProperId},#{schoolType})
 	</insert>
 	
+
+	
 </mapper>
