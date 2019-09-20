@@ -174,7 +174,7 @@
 																class="form-control feecateId" id="example-select">
 																<c:forEach items="${feeCategory }" var="f">
 																	<option value="${f.chargeTypeId }"
-																		name="${f.chargeMoney }">${f.chargeTypeName}</option>
+																		>${f.chargeTypeName}</option>
 																</c:forEach>
 															</select>
 														</div>

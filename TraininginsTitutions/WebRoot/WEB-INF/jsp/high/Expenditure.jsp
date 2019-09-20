@@ -127,6 +127,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 style="text-align:center">费用支出收款单</h4>
+									<span style="display: none;" class="QX">${state }</span>
 									<div class="showOrder">
 										<div class="col-12">
 											<div class="card">
@@ -277,7 +278,7 @@
 																		<td class="${o.stuId }">${o.orderId }</td>
 																		<td>${o.school.schoolName }</td>
 																		<td><fmt:formatDate value="${o.startTime }"
-																				pattern="yyyy-MM-dd" /></td>
+																				pattern="yyyy-MM-dd HH:mm" /></td>
 																		<td class="${o.expenditureitemsId }">${o.expenditureitems.expenditureitemsName }</td>
 																		<td>${o.student.studentName }</td>
 																		<td class="${o.paymentmethodId }">${o.paymentMethod.paymentmethodName }</td>
@@ -336,7 +337,7 @@
 																id="example-select">
 																<c:forEach items="${expenditureitems }" var="e">
 																	<option value="${e.expenditureitemsId }"
-																		name="${e.expenditureitemsMoney }">${e.expenditureitemsName}</option>
+																		>${e.expenditureitemsName}</option>
 																</c:forEach>
 															</select>
 														</div>
@@ -349,8 +350,6 @@
 																	<option value="${c.classId }"
 																		name="${c.departmentOfPediatrics.dpId }"
 																		dpTypeName="${c.departmentOfPediatrics.dpTypeName }"
-																		dpMoney="${c.departmentOfPediatrics.dpMoney }"
-																		dpMoneyVip="${c.departmentOfPediatrics.dpMoneyVip }"
 																		departmentOfPediatrics="${c.departmentOfPediatrics.dpTypeName }"
 																		classTypeId="${c.classTypeId }"
 																		schoolIds2="${c.school.schoolName }">${c.className}</option>

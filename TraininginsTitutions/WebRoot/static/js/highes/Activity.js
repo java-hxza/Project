@@ -42,35 +42,30 @@ $(function() {
 		$(".showActivitySchooles").remove();
 		$(".addActivitySchooles").show();
 		$(".TiJiao").click(function() {
-			var activityMoneyfirst = $.trim($(".activityMoneyfirst").val());
-			var activityMoneylast = $.trim($(".activityMoneylast").val());
+			var content = $.trim($(".contents").val());
+			var ActivityName = $.trim($(".ActivityName").val());
 			var discount = $.trim($(".discount").val());
-			if (activityMoneyfirst == "" && activityMoneylast == "" && discount == "") {
-				alert("请填写至少一项：1.满减 2.折扣！");
+			var activityMoney = $.trim($(".activityMoney").val());
+			if(ActivityName == "") {
+				alert("活动名称不能为空！");
 				return false;
-			}else if(activityMoneyfirst != "" && activityMoneylast != "" && discount != "") {
-				alert("请填写至多一项：1.满减 2.折扣！");
+			}else if(((discount == "" || discount == 0) && (activityMoney == "" || activityMoney == 0)) || ((discount != "" || discount != 0) && (activityMoney != "" || activityMoney != 0))) {
+				alert("至(少/多)填入一项优惠！");
 				return false;
-			}else if(activityMoneyfirst != "" && activityMoneylast == "" && discount == "") {
-				alert("请填写至少一项：1.满减 2.折扣！");
-				return false;
-			}else if(activityMoneyfirst == "" && activityMoneylast != "" && discount == "") {
-				alert("请填写至少一项：1.满减 2.折扣！");
-				return false;
-			}else if(activityMoneyfirst != "" && activityMoneylast == "" && discount != "") {
-				alert("请填写至少一项：1.满减 2.折扣！");
-				return false;
-			}else if(activityMoneyfirst == "" && activityMoneylast != "" && discount != "") {
-				alert("请填写至少一项：1.满减 2.折扣！");
-				return false;
+			}else if(discount != "" || discount != 0) {
+				if(discount > 100 || discount < 10) {
+					alert("请填入1~10折！");
+					return false;
+				}
 			}
 			$.ajax({
 				type : "POST",
 				url : "addActivitySchools.html",
 				data : {
-					activityMoneyfirst : activityMoneyfirst,
-					activityMoneylast : activityMoneylast,
-					discount : discount
+					ActivityName : ActivityName,
+					activityMoney : activityMoney,
+					discount : discount,
+					content : content
 				},
 				dataType : "json",
 				success : function(data) {

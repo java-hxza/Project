@@ -8,11 +8,7 @@ $(function() {
 		month = Time.getMonth() + 1;
 	}
 	$(".school").val($(".classes option:selected").attr("schoolIds2"));
-	$(".dpMoney").val($(".feecateId option").attr("name"));
 	$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
-	$(".feecateId").click(function() {
-		$(".dpMoney").val($(".feecateId option:selected").attr("name"));
-	});
 	$(".classes").click(function() {
 		$(".departmentofpediatricsIds").val($(".classes option:selected").attr("departmentOfPediatrics"));
 		var classIds = $(".classes option:selected").val();
@@ -40,7 +36,7 @@ $(function() {
 	
 	$(".TiJiao").click(function() {
 		var date = $.trim($(".date").val());
-		var dpMoney = parseFloat($.trim($(".dpMoney").val()));
+		var dpMoney = $.trim($(".dpMoney").val());
 		var stuId = $.trim($(".stuId").val());
 		var classId = $.trim($(".classes option:selected").val());
 		var feecateId = $.trim($(".feecateId").val());
@@ -48,6 +44,7 @@ $(function() {
 		var remarks = $.trim($(".remarks").val());
 		var paymentmethodId = $.trim($(".paymentmethodId").val());
 		var personliable = $.trim($(".personliable").val());
+		var startTimes = " " + Time.getHours() + ":" + Time.getMinutes().toString();
 		if(stuId == "") {
 			alert("请选择学生！");
 			return flase;
@@ -75,7 +72,8 @@ $(function() {
 				paymentmethodId : paymentmethodId,
 				date : date2,
 				classId : classId,
-				personliable : personliable
+				personliable : personliable,
+				startTimes : startTimes
 			},
 			dataType : "json",
 			success : function(data) {

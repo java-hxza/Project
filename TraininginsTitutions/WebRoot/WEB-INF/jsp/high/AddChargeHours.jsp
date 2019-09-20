@@ -130,8 +130,6 @@
 																<option value="${c.classId }"
 																	name="${c.departmentOfPediatrics.dpId }"
 																	dpTypeName="${c.departmentOfPediatrics.dpTypeName }"
-																	dpMoney="${c.departmentOfPediatrics.dpMoney }"
-																	dpMoneyVip="${c.departmentOfPediatrics.dpMoneyVip }"
 																	classTypeId="${c.classTypeId }"
 																	schoolIds2="${c.school.schoolName }">${c.className}</option>
 															</c:forEach>
@@ -140,7 +138,7 @@
 												</div>
 												<div class="col-md-6">
 													<div class="form-group mb-3">
-														<label for="example-number">收费金额</label> <input
+														<label for="example-number">应收金额</label> <input
 															class="form-control money" id="example-number"
 															type="number" name="number">
 													</div>
@@ -179,7 +177,7 @@
 															class="form-control feecateId" id="example-select">
 															<c:forEach items="${feeCategory }" var="f">
 																<option value="${f.chargeTypeId }"
-																	name="${f.chargeMoney }">${f.chargeTypeName}</option>
+																	>${f.chargeTypeName}</option>
 															</c:forEach>
 														</select>
 													</div>
@@ -210,6 +208,29 @@
 															data-mask-format="00000000000000000" data-reverse="true">
 													</div>
 												</div>
+												<div class="col-md-6">
+																<div class="form-group mb-3">
+																	<label for="example-select">活动名称</label> <select
+																		class="form-control feecateId4 " id="example-select">
+																		<option value="0">---请选择---</option>
+																		<c:forEach items="${activity }" var="a">
+																			<option value="${a.activityId }"
+																				activityMoney="${a.activityMoney }"
+																				discount="${a.discount }">
+																				${a.activityName }
+																			</option>
+																		</c:forEach>
+																	</select>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group mb-3">
+																	<label for="example-number">实收金额</label> <input
+																		class="form-control dpMoneyActivity4"
+																		id="example-number" type="number" name="number"
+																		>
+																</div>
+															</div>
 												<div class="col-md-6">
 													<div class="form-group mb-3">
 														<label for="example-select">积分</label> <input

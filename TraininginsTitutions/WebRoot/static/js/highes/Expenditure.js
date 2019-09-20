@@ -7,7 +7,6 @@ $(function() {
 		}
 	}
 	$(".departmentofpediatricsIds").val($(".classes option:selected").attr("departmentOfPediatrics"));
-	$(".feecategoryMoney").val($(".expenditureitemsId option:selected").attr("name"));
 	var Time = new Date();
 	var month = null;
 	$(".school").val($(".classes option:selected").attr("schoolIds2"));
@@ -16,9 +15,6 @@ $(function() {
 	} else {
 		month = Time.getMonth() + 1;
 	}
-	$(".expenditureitemsId").click(function() {
-		$(".feecategoryMoney").val($(".expenditureitemsId option:selected").attr("name"));
-	});
 	$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
 
 	delOrder = function() {
@@ -29,6 +25,10 @@ $(function() {
 			}
 		} else if ($(".customCheckes:checked").length > 1) {
 			alert("只能选中一条数据！");
+			return false;
+		}
+		if($(".QX").val() == 0 ) {
+			alert("对不起，您没有权限删除！");
 			return false;
 		}
 		if (confirm("确认删除吗？")) {
@@ -97,6 +97,7 @@ $(function() {
 			var expenditureitemsId = $(".expenditureitemsId option:selected").val();
 			var startTime = $.trim($(".date").val());
 			var date = Time.getFullYear().toString() + month.toString() + Time.getDate().toString();
+			var startTimes = " " + Time.getHours() + ":" + Time.getMinutes().toString();
 			if (stuId == "") {
 				alert("请选择学生！");
 				return flase;
@@ -120,7 +121,8 @@ $(function() {
 					paymentmethodId : paymentmethodId,
 					date : date,
 					classId : classId,
-					personliable : personliable
+					personliable : personliable,
+					startTimes : startTimes
 				},
 				dataType : "json",
 				success : function(data) {

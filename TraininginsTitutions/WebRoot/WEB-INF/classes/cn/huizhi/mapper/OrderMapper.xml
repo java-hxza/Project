@@ -11,7 +11,7 @@
 		ofi,o.addhour,o.givehour,o.startTime,o.orderNumber,o.stuId
 		sd,o.giftNumber,o.giftId,s.studentName,s.school,s.integral,p.paymentmethodName,d.dpTypeName,o.integral
 		oi,o.teacherId ot,o.giftId,o.giftNumber ogm,sc.schoolName
-		sn,s.studentBirth
+		sn,s.studentBirth,o.discount odi
 		FROM
 		`order`
 		o
@@ -49,6 +49,7 @@
 		<result column="ot" property="teacherId" />
 		<result column="o.giftId" property="giftId" />
 		<result column="ogm" property="giftNumber" />
+		<result column="odi" property="discount" />
 		<result column="o.startTime" property="startTime" />
 		<result column="o.orderNumber" property="orderNumber" />
 		<collection property="student" javaType="Student">
@@ -78,7 +79,7 @@
 		ofi,o.stuId osi,o.paymentmethodId opt,s.studentName,o.discount,
 		p.paymentmethodName,s.school,s.integral,o.giftId,o.giftNumber
 		ogm,o.integral oi,o.teacherId ot,sc.schoolName
-		sn,s.studentBirth,c.dpId cdp
+		sn,s.studentBirth,c.dpId cdp,o.discount odi,o.feecateMoney ofmy
 		FROM `order` o
 		JOIN
 		student s ON
@@ -108,6 +109,8 @@
 		<result column="o.lastdate" property="lastdate" />
 		<result column="o.discount" property="discount" />
 		<result column="ot" property="teacherId" />
+		<result column="odi" property="discount" />
+		<result column="ofmy" property="feecateMoney" />
 		<result column="o.orderNumber" property="orderNumber" />
 		<result column="o.giftId" property="giftId" />
 		<result column="cdp" property="classId" />
@@ -314,11 +317,11 @@
 		(feecateId,dpMoney,stuId,startTime,schoolId,identification,
 		feecategoryMoney,paymentmethodId,personliable,departmentofpediatricsId,
 		addhour,givehour,firstdate,lastdate,remarks,orderNumber,expenditureitemsId,
-		classId,giftId,giftNumber,integral,teacherId,discount)VALUES(
+		classId,giftId,giftNumber,integral,teacherId,discount,feecateMoney,feecateMoneyYiKao,activityId)VALUES(
 		#{feecateId},#{dpMoney},#{stuId},#{startTime},#{schoolId},
 		#{identification},#{feecategoryMoney},#{paymentmethodId},#{personliable},
 		#{departmentofpediatricsId},#{addhour},#{givehour},#{firstdate},#{lastdate},
-		#{remarks},#{orderNumber},#{expenditureitemsId},#{classId},#{giftId},#{giftNumber},#{integral},#{teacherId},#{discount});
+		#{remarks},#{orderNumber},#{expenditureitemsId},#{classId},#{giftId},#{giftNumber},#{integral},#{teacherId},#{discount},#{feecateMoney},#{feecateMoneyYiKao},#{activityId});
 	</insert>
 
 	<update id="updateOrderAll">

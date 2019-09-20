@@ -23,6 +23,9 @@ public class Order {
 	private String orderNumber;
 	private Integer expenditureitemsId;
 	private Integer classId;
+	private String feecateMoney;
+	private String feecateMoneyYiKao;
+	private Integer activityId;
 
 	/**
 	 * 学生交钱总数
@@ -69,10 +72,11 @@ public class Order {
 	public Order(Integer orderId, String feecateId, Double dpMoney, Integer stuId, Date startTime, Integer schoolId,
 			Integer identification, Double feecategoryMoney, Integer paymentmethodId, String personliable,
 			Integer departmentofpediatricsId, Integer addhour, Integer givehour, Date firstdate, Date lastdate,
-			String remarks, String orderNumber, Integer expenditureitemsId, Integer classId, Double sumDpMoney,
-			Integer giftId, Integer giftNumber, Double integral, Integer teacherId, Double discount, Date endTime,
-			Student student, PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics,
-			FeeCategory feeCategory, Expenditureitems expenditureitems, School school, Gift gift) {
+			String remarks, String orderNumber, Integer expenditureitemsId, Integer classId, String feecateMoney,
+			String feecateMoneyYiKao, Integer activityId, Double sumDpMoney, Integer giftId, Integer giftNumber,
+			Double integral, Integer teacherId, Double discount, Date endTime, Student student,
+			PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics, FeeCategory feeCategory,
+			Expenditureitems expenditureitems, School school, Gift gift) {
 		super();
 		this.orderId = orderId;
 		this.feecateId = feecateId;
@@ -93,6 +97,9 @@ public class Order {
 		this.orderNumber = orderNumber;
 		this.expenditureitemsId = expenditureitemsId;
 		this.classId = classId;
+		this.feecateMoney = feecateMoney;
+		this.feecateMoneyYiKao = feecateMoneyYiKao;
+		this.activityId = activityId;
 		this.sumDpMoney = sumDpMoney;
 		this.giftId = giftId;
 		this.giftNumber = giftNumber;
@@ -107,6 +114,14 @@ public class Order {
 		this.expenditureitems = expenditureitems;
 		this.school = school;
 		this.gift = gift;
+	}
+
+	public Integer getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(Integer activityId) {
+		this.activityId = activityId;
 	}
 
 	public Integer getOrderId() {
@@ -371,6 +386,22 @@ public class Order {
 
 	public void setGift(Gift gift) {
 		this.gift = gift;
+	}
+
+	public String getFeecateMoney() {
+		return feecateMoney;
+	}
+
+	public void setFeecateMoney(String feecateMoney) {
+		this.feecateMoney = feecateMoney;
+	}
+
+	public String getFeecateMoneyYiKao() {
+		return feecateMoneyYiKao;
+	}
+
+	public void setFeecateMoneyYiKao(String feecateMoneyYiKao) {
+		this.feecateMoneyYiKao = feecateMoneyYiKao;
 	}
 
 }
