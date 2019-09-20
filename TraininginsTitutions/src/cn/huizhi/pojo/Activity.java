@@ -3,23 +3,33 @@ package cn.huizhi.pojo;
 public class Activity {
 
 	private Integer activityId;
-	private Integer activityMoneyfirst;
-	private Integer activityMoneylast;
+	private Integer activityMoney;
 	private Integer discount;
 	private Integer schoolId;
+	private String content;
+	private String activityName;
 
 	public Activity() {
 		super();
 	}
 
-	public Activity(Integer activityId, Integer activityMoneyfirst, Integer activityMoneylast, Integer discount,
-			Integer schoolId) {
+	public Activity(Integer activityId, Integer activityMoney, Integer discount, Integer schoolId, String content,
+			String activityName) {
 		super();
 		this.activityId = activityId;
-		this.activityMoneyfirst = activityMoneyfirst;
-		this.activityMoneylast = activityMoneylast;
+		this.activityMoney = activityMoney;
 		this.discount = discount;
 		this.schoolId = schoolId;
+		this.content = content;
+		this.activityName = activityName;
+	}
+
+	public String getActivityName() {
+		return activityName;
+	}
+
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
 	}
 
 	public Integer getActivityId() {
@@ -30,20 +40,20 @@ public class Activity {
 		this.activityId = activityId;
 	}
 
-	public Integer getActivityMoneyfirst() {
-		return activityMoneyfirst;
+	public Integer getActivityMoney() {
+		return activityMoney;
 	}
 
-	public void setActivityMoneyfirst(Integer activityMoneyfirst) {
-		this.activityMoneyfirst = activityMoneyfirst;
+	public void setActivityMoney(Integer activityMoney) {
+		this.activityMoney = activityMoney;
 	}
 
-	public Integer getActivityMoneylast() {
-		return activityMoneylast;
+	public String getContent() {
+		return content;
 	}
 
-	public void setActivityMoneylast(Integer activityMoneylast) {
-		this.activityMoneylast = activityMoneylast;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public Integer getDiscount() {

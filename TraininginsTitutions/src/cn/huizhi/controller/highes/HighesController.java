@@ -99,6 +99,7 @@ public class HighesController {
 	@RequestMapping("Accountinformation.html")
 	public String Accountinformation(Model model) {
 		List<PaymentMethod> list = paymentMethodService.selectPaymentMethod();
+		model.addAttribute("schoolType", (Integer) session.getAttribute("schoolType"));
 		model.addAttribute("list", list);
 		return "high/Accountinformation";
 	}
@@ -236,8 +237,9 @@ public class HighesController {
 	@ResponseBody
 	public Object AddExpenditureitemses(@RequestParam String expenditureitemsName, @RequestParam String category) {
 		HashMap<String, String> map = new HashMap<String, String>();
+		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		if (expenditureitemsService.addExpenditureitems(expenditureitemsName, category,
-				(String) session.getAttribute("schoolId")) == 1) {
+				schoolId.toString()) == 1) {
 			map.put("add", "1");
 		} else {
 			map.put("add", "0");
@@ -290,7 +292,7 @@ public class HighesController {
 	 */
 	@RequestMapping("updateTeacher.html")
 	@ResponseBody
-	public Object updateTeacher(Teacher teacher,HttpSession session) {
+	public Object updateTeacher(Teacher teacher, HttpSession session) {
 		teacher.setFeeCategory((Integer) session.getAttribute("schoolType"));
 		HashMap<String, String> map = new HashMap<String, String>();
 		if (teacherService.updateTeacher(teacher) == 1) {
@@ -311,7 +313,8 @@ public class HighesController {
 	public Object addTeacher(Teacher teacher, HttpSession session) {
 		teacher.setFeeCategory((Integer) session.getAttribute("schoolType"));
 		HashMap<String, String> map = new HashMap<String, String>();
-		if (teacherService.addTeacher(teacher) == 1 && teacherDictionService.addTeacherDiction((Integer) session.getAttribute("schoolId"), teacher.getTeacherId()) == 1) {
+		if (teacherService.addTeacher(teacher) == 1 && teacherDictionService
+				.addTeacherDiction((Integer) session.getAttribute("schoolId"), teacher.getTeacherId()) == 1) {
 			map.put("add", "1");
 		} else {
 			map.put("add", "0");
@@ -339,6 +342,8 @@ public class HighesController {
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
 		List<Gift> gift = giftService.selectGift((Integer) session.getAttribute("schoolId"));
 		List<Teacher> teacher = teacherService.selectTeacherZS((Integer) session.getAttribute("schoolId"));
+		List<Activity> activity = activityService.selectActivitySchool((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("activity", activity);
 		model.addAttribute("gift", gift);
 		model.addAttribute("classes", classes);
 		model.addAttribute("paymentMethod", paymentMethod);
@@ -384,14 +389,14 @@ public class HighesController {
 			@RequestParam Integer departmentofpediatricsId, @RequestParam Integer addhour,
 			@RequestParam Integer givehour, @RequestParam String remarks, @RequestParam Integer paymentmethodId,
 			@RequestParam String date, @RequestParam Integer classId, @RequestParam Double integral,
-			@RequestParam Integer giftId, @RequestParam Integer giftNumber) {
+			@RequestParam Integer giftId, @RequestParam Integer giftNumber,@RequestParam Integer activityId,@RequestParam Double discount,@RequestParam String startTimes) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		Order order = new Order();
 		order.setStuId(stuId);
 		order.setSchoolId((Integer) session.getAttribute("schoolId"));
 		order.setRemarks(remarks);
 		try {
-			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd").parse(startTime);
+			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(startTime + startTimes);
 			order.setStartTime(startTime1);
 		} catch (ParseException e) {
 			// TODO: handle exception
@@ -404,6 +409,8 @@ public class HighesController {
 		order.setDepartmentofpediatricsId(departmentofpediatricsId);
 		order.setFeecateId(feecateId);
 		order.setDpMoney(dpMoney);
+		order.setActivityId(activityId);
+		order.setDiscount(discount);
 		order.setClassId(classId);
 		order.setIntegral(integral);
 		order.setGiftId(giftId);
@@ -466,9 +473,9 @@ public class HighesController {
 		List<Gift> gift = giftService.selectGift((Integer) session.getAttribute("schoolId"));
 		List<Teacher> teacher = teacherService.selectTeacherZS((Integer) session.getAttribute("schoolId"));
 		List<Activity> activity = activityService.selectActivitySchool((Integer) session.getAttribute("schoolId"));
-
 		model.addAttribute("gift", gift);
 		model.addAttribute("activity", activity);
+		model.addAttribute("schoolType", (Integer) session.getAttribute("schoolType"));
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("feeCategory", feeCategory);
 		model.addAttribute("teacher", teacher);
@@ -488,11 +495,11 @@ public class HighesController {
 			@RequestParam String lastdate, @RequestParam String personliable, @RequestParam String remarks,
 			@RequestParam Integer paymentmethodId, @RequestParam Integer classId, @RequestParam Integer giftId,
 			@RequestParam Integer giftNumber, @RequestParam Double integral, @RequestParam Integer hour,
-			@RequestParam String date, @RequestParam Double discount) {
+			@RequestParam String date, @RequestParam Double discount,@RequestParam Integer activityId,@RequestParam String startTimes,@RequestParam String feecateMoney) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		Order order = new Order();
 		try {
-			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd").parse(startTime);
+			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(startTime + startTimes);
 			Date firstdate1 = new SimpleDateFormat("yyyy-MM-dd").parse(firstdate);
 			Date lastdate1 = new SimpleDateFormat("yyyy-MM-dd").parse(lastdate);
 			order.setStartTime(startTime1);
@@ -511,7 +518,9 @@ public class HighesController {
 		order.setDpMoney(dpMoney);
 		order.setGiftId(giftId);
 		order.setClassId(classId);
+		order.setFeecateMoney(feecateMoney);
 		order.setIntegral(integral);
+		order.setActivityId(activityId);
 		order.setDiscount(discount);
 		order.setOrderNumber("SJ" + date + stuId + new Random().nextInt(100));
 		order.setPaymentmethodId(paymentmethodId);
@@ -580,13 +589,13 @@ public class HighesController {
 	public Object AddChargeOthers(@RequestParam Integer stuId, @RequestParam String startTime,
 			@RequestParam String feecateId, @RequestParam Double dpMoney, @RequestParam String personliable,
 			@RequestParam String remarks, @RequestParam Integer paymentmethodId, @RequestParam String date,
-			@RequestParam Integer classId) {
+			@RequestParam Integer classId,@RequestParam String startTimes) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		Order order = new Order();
 		order.setIdentification(0);
 		order.setSchoolId((Integer) session.getAttribute("schoolId"));
 		try {
-			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd").parse(startTime);
+			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(startTime + startTimes);
 			order.setStartTime(startTime1);
 		} catch (ParseException e) {
 			// TODO: handle exception
@@ -884,7 +893,7 @@ public class HighesController {
 	public Object AddOrderExpenditure(@RequestParam Integer stuId, @RequestParam String startTime,
 			@RequestParam Double feecategoryMoney, @RequestParam Integer expenditureitemsId,
 			@RequestParam Integer paymentmethodId, @RequestParam String personliable, @RequestParam String remarks,
-			@RequestParam String date, @RequestParam Integer classId) {
+			@RequestParam String date, @RequestParam Integer classId,@RequestParam String startTimes) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		Order order = new Order();
 		order.setIdentification(1);
@@ -899,7 +908,7 @@ public class HighesController {
 		order.setIntegral(0.0);
 		order.setOrderNumber("ZC" + date + stuId + new Random().nextInt(100));
 		try {
-			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd").parse(startTime);
+			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(startTime + startTimes);
 			order.setStartTime(startTime1);
 		} catch (ParseException e) {
 			// TODO: handle exception
@@ -975,6 +984,7 @@ public class HighesController {
 		model.addAttribute("feeCategory", feeCategory);
 		model.addAttribute("teacher", teacher);
 		model.addAttribute("order", order);
+		model.addAttribute("state", (Integer) session.getAttribute("state"));
 		model.addAttribute("gift", gift);
 		return "high/ChargeHours";
 	}
@@ -987,25 +997,26 @@ public class HighesController {
 	 */
 	@RequestMapping("selectOrderPeriod.html")
 	public String selectOrderPeriod(Model model) {
-		if((Integer) session.getAttribute("schoolType") == 3) {
+		if ((Integer) session.getAttribute("schoolType") == 3) {
 			List<Order> order = orderService.selectOrderPeriods((Integer) session.getAttribute("schoolId"));
 			model.addAttribute("order", order);
-		}else {
+		} else {
 			List<Order> order = orderService.selectOrderPeriod((Integer) session.getAttribute("schoolId"));
 			model.addAttribute("order", order);
 		}
-		
+
 		List<Gift> gift = giftService.selectGift((Integer) session.getAttribute("schoolId"));
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<FeeCategory> feeCategory = feecategoryService
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
 		List<Teacher> teacher = teacherService.selectTeacherZS((Integer) session.getAttribute("schoolId"));
-		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
+		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService
+				.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
 		model.addAttribute("departmentOfPediatrics", departmentOfPediatrics);
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("feeCategory", feeCategory);
 		model.addAttribute("teacher", teacher);
-		
+		model.addAttribute("state", (Integer) session.getAttribute("state"));
 		model.addAttribute("gift", gift);
 		return "high/Charge";
 	}
@@ -1021,12 +1032,14 @@ public class HighesController {
 		List<FeeCategory> feeCategory = feecategoryService
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
 		List<Order> order = orderService.selectOrderOther((Integer) session.getAttribute("schoolId"));
-		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
+		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService
+				.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		model.addAttribute("departmentOfPediatrics", departmentOfPediatrics);
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("feeCategory", feeCategory);
 		model.addAttribute("order", order);
+		model.addAttribute("state", (Integer) session.getAttribute("state"));
 		return "high/ChargeOthers";
 	}
 
@@ -1041,7 +1054,7 @@ public class HighesController {
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		List<Class> classes = classService.selectClassAll((Integer) session.getAttribute("schoolId"));
 		model.addAttribute("classes", classes);
-		if(classes.size() > 0 ) {
+		if (classes.size() > 0) {
 			if (schoolType == 1) {
 				List<Student> student = studentService.selectStudentClass("childrenesclassstudnet",
 						classes.get(0).getClassId());
@@ -1051,7 +1064,8 @@ public class HighesController {
 						classes.get(0).getClassId());
 				model.addAttribute("student", student);
 			} else if (schoolType == 3) {
-				List<Student> student = studentService.selectStudentClass("artclassstudnet", classes.get(0).getClassId());
+				List<Student> student = studentService.selectStudentClass("artclassstudnet",
+						classes.get(0).getClassId());
 				model.addAttribute("student", student);
 			}
 		}
@@ -1059,11 +1073,13 @@ public class HighesController {
 		List<Order> order = orderService.selectOrderExpenditure(schoolId);
 		List<Expenditureitems> expenditureitems = expenditureitemsService.selectExpenditureitems(schoolId.toString());
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
-		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
+		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService
+				.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
 		model.addAttribute("departmentOfPediatrics", departmentOfPediatrics);
 		model.addAttribute("expenditureitems", expenditureitems);
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("order", order);
+		model.addAttribute("state", (Integer) session.getAttribute("state"));
 		return "high/Expenditure";
 	}
 
@@ -1205,7 +1221,7 @@ public class HighesController {
 		}
 		List<Student> student = studentService.selectStudentUsedIntegral(table,
 				(Integer) session.getAttribute("schoolId"));
-		if(student.size() > 0) {
+		if (student.size() > 0) {
 			String sql = "";
 			for (int i = 0; i < student.size(); i++) {
 				sql = sql + student.get(i).getStudentId() + " or ";
@@ -1216,7 +1232,7 @@ public class HighesController {
 			model.addAttribute("order", order);
 		}
 		model.addAttribute("student", student);
-		
+
 		return "high/GiftUsedIntegral";
 	}
 
@@ -1230,7 +1246,8 @@ public class HighesController {
 	public String selectStudentDepartmentofpediatrics(Model model) {
 		List<FeeCategory> feeCategory = feecategoryService
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
-		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
+		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService
+				.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
 		model.addAttribute("feeCategory", feeCategory);
 		model.addAttribute("departmentOfPediatrics", departmentOfPediatrics);
 		return "high/CourseReminder";
@@ -1297,7 +1314,8 @@ public class HighesController {
 			@RequestParam Integer departmentofpediatricsId, @RequestParam Integer addhour,
 			@RequestParam Integer givehour, @RequestParam String remarks2, @RequestParam Integer paymentmethodId,
 			@RequestParam String date, @RequestParam Double integral, @RequestParam Integer giftId,
-			@RequestParam Integer giftNumber, @RequestParam Integer teacherId) {
+			@RequestParam Integer giftNumber, @RequestParam Integer teacherId, @RequestParam Double discount,
+			@RequestParam Integer activityId) {
 		ChildrenesClassStudnet childrenesClassStudnet = new ChildrenesClassStudnet();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		student.setIntegral(0.0);
@@ -1313,7 +1331,7 @@ public class HighesController {
 			childrenesClassStudnet.setStudentId(s.getStudentId());
 			childrenesClassStudnet.setClassId(classId);
 			try {
-				Date startTimes = new SimpleDateFormat("yyyy-MM-dd").parse(student.getStartTime());
+				Date startTimes = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(student.getStartTime());
 				childrenesClassStudnet.setEnrollmentTime(startTimes);
 			} catch (ParseException e) {
 				// TODO: handle exception
@@ -1334,7 +1352,9 @@ public class HighesController {
 				order.setTeacherId(teacherId);
 				order.setDepartmentofpediatricsId(departmentofpediatricsId);
 				order.setFeecateId(feecateId);
-				order.setDpMoney(dpMoney);
+				order.setDpMoney(discount);
+				order.setDiscount(dpMoney);
+				order.setActivityId(activityId);
 				order.setClassId(classId);
 				order.setIntegral(integral);
 				order.setGiftId(giftId);
@@ -1404,7 +1424,8 @@ public class HighesController {
 			@RequestParam String firstdate, @RequestParam String lastdate, @RequestParam String personliable,
 			@RequestParam String remarks3, @RequestParam Integer paymentmethodId, @RequestParam Integer giftId,
 			@RequestParam Integer giftNumber, @RequestParam Double integral, @RequestParam Integer hour,
-			@RequestParam String date, @RequestParam Double discount) {
+			@RequestParam String date, @RequestParam Double discount, @RequestParam String startTimes,
+			@RequestParam String feecateMoney, @RequestParam Integer activityId) {
 		ChildrenesClassStudnet childrenesClassStudnet = new ChildrenesClassStudnet();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		student.setIntegral(0.0);
@@ -1420,8 +1441,8 @@ public class HighesController {
 			childrenesClassStudnet.setStudentId(s.getStudentId());
 			childrenesClassStudnet.setClassId(classId);
 			try {
-				Date startTimes = new SimpleDateFormat("yyyy-MM-dd").parse(student.getStartTime());
-				childrenesClassStudnet.setEnrollmentTime(startTimes);
+				Date startTimes2 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(student.getStartTime() + startTimes);
+				childrenesClassStudnet.setEnrollmentTime(startTimes2);
 			} catch (ParseException e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -1449,7 +1470,9 @@ public class HighesController {
 				order.setDpMoney(dpMoney);
 				order.setGiftId(giftId);
 				order.setClassId(classId);
+				order.setActivityId(activityId);
 				order.setIntegral(integral);
+				order.setFeecateMoney(feecateMoney);
 				order.setDiscount(discount);
 				order.setOrderNumber("SJ" + date + childrenesClassStudnet.getStudentId() + new Random().nextInt(100));
 				order.setPaymentmethodId(paymentmethodId);
@@ -1509,9 +1532,9 @@ public class HighesController {
 	public Object RegisterStudentsCharges(@RequestParam Integer classId, @RequestParam String headmaster,
 			Student student, @RequestParam String feecateId, @RequestParam Double dpMoney,
 			@RequestParam String firstdate, @RequestParam String lastdate, @RequestParam String personliable,
-			@RequestParam String remarks3, @RequestParam Integer paymentmethodId, @RequestParam Integer giftId,
-			@RequestParam Integer giftNumber, @RequestParam Double integral, @RequestParam Integer hour,
-			@RequestParam String date, @RequestParam Double discount) {
+			@RequestParam String remarks3, @RequestParam Integer paymentmethodId, @RequestParam Integer hour,
+			@RequestParam String startTimes, @RequestParam String date, @RequestParam Double discount,
+			@RequestParam String feecateMoney) {
 		ChildrenesClassStudnet childrenesClassStudnet = new ChildrenesClassStudnet();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		student.setIntegral(0.0);
@@ -1527,8 +1550,8 @@ public class HighesController {
 			childrenesClassStudnet.setStudentId(s.getStudentId());
 			childrenesClassStudnet.setClassId(classId);
 			try {
-				Date startTimes = new SimpleDateFormat("yyyy-MM-dd").parse(student.getStartTime());
-				childrenesClassStudnet.setEnrollmentTime(startTimes);
+				Date startTimes2 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(student.getStartTime() + startTimes);
+				childrenesClassStudnet.setEnrollmentTime(startTimes2);
 			} catch (ParseException e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -1551,29 +1574,20 @@ public class HighesController {
 				order.setStuId(childrenesClassStudnet.getStudentId());
 				order.setPersonliable(personliable);
 				order.setRemarks(remarks3);
-				order.setGiftNumber(giftNumber);
+				order.setGiftNumber(0);
 				order.setFeecateId(feecateId);
-				order.setDpMoney(dpMoney);
-				order.setGiftId(giftId);
+				order.setDpMoney(discount);
+				order.setGiftId(0);
 				order.setClassId(classId);
-				order.setIntegral(integral);
-				order.setDiscount(discount);
+				order.setIntegral(0.0);
+				order.setFeecateMoney(feecateMoney);
+				order.setDiscount(dpMoney);
 				order.setOrderNumber("SJ" + date + childrenesClassStudnet.getStudentId() + new Random().nextInt(100));
 				order.setPaymentmethodId(paymentmethodId);
 				order.setIdentification(0);
 				if (orderService.addOrder(order) == 1) {
-					if (studentService.updateStudentOrderHour(hour, childrenesClassStudnet.getStudentId(),
-							integral) == 1) {
-						if (giftNumber != 0) {
-							if (giftService.updateGift(-giftNumber, giftId) == 1) {
-								map.put("add", "1");
-							} else {
-								map.put("add", "0");
-								return JSONArray.toJSONString(map);
-							}
-						} else {
-							map.put("add", "1");
-						}
+					if (studentService.updateStudentOrderHour(hour, childrenesClassStudnet.getStudentId(), 0.0) == 1) {
+						map.put("add", "1");
 					} else {
 						map.put("add", "0");
 						return JSONArray.toJSONString(map);
@@ -1582,7 +1596,11 @@ public class HighesController {
 					map.put("add", "0");
 					return JSONArray.toJSONString(map);
 				}
+			} else {
+				map.put("add", "0");
+				return JSONArray.toJSONString(map);
 			}
+
 		} else {
 			map.put("add", "0");
 		}
@@ -1615,11 +1633,13 @@ public class HighesController {
 			@RequestParam String firstdate, @RequestParam String lastdate, @RequestParam String personliable,
 			@RequestParam String remarks3, @RequestParam Integer paymentmethodId, @RequestParam Integer giftId,
 			@RequestParam Integer giftNumber, @RequestParam Double integral, @RequestParam Integer hour,
-			@RequestParam String date, @RequestParam Double discount) {
+			@RequestParam String date, @RequestParam Double discount, @RequestParam String feecateMoney,
+			@RequestParam String feecateMoneyYiKao, @RequestParam String startTimes, @RequestParam Integer activityId) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		student.setIntegral(0.0);
 		student.setFeeCategory(1);
 		student.setUsedIntegral(0.0);
+		student.setStartTime(student.getStartTime() + startTimes);
 		student.setStudentHour(0.0);
 		if (studentService.addStudnetInfo(student) == 1) {
 			Student s = studentService.selectStudentId(student.getStudentName(), student.getParentName(),
@@ -1633,7 +1653,7 @@ public class HighesController {
 				try {
 					Date firstdate1 = new SimpleDateFormat("yyyy-MM-dd").parse(firstdate);
 					Date lastdate1 = new SimpleDateFormat("yyyy-MM-dd").parse(lastdate);
-					Date startTime = new SimpleDateFormat("yyyy-MM-dd").parse(student.getStartTime());
+					Date startTime = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(student.getStartTime());
 					order.setStartTime(startTime);
 					order.setFirstdate(firstdate1);
 					order.setLastdate(lastdate1);
@@ -1651,6 +1671,9 @@ public class HighesController {
 				order.setGiftId(giftId);
 				order.setClassId(0);
 				order.setIntegral(integral);
+				order.setActivityId(activityId);
+				order.setFeecateMoney(feecateMoney);
+				order.setFeecateMoneyYiKao(feecateMoneyYiKao);
 				order.setDiscount(discount);
 				order.setOrderNumber("SJ" + date + s.getStudentId() + new Random().nextInt(100));
 				order.setPaymentmethodId(paymentmethodId);
@@ -1696,13 +1719,15 @@ public class HighesController {
 	 */
 	@RequestMapping("selectHour.html")
 	@ResponseBody
-	public Object selectHour(@RequestParam Integer time, @RequestParam Integer Choice,@RequestParam String studentName,@RequestParam Integer number) {
+	public Object selectHour(@RequestParam Integer time, @RequestParam Integer Choice, @RequestParam String studentName,
+			@RequestParam Integer number) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		if(number == 0) {
+		if (number == 0) {
 			number = null;
 		}
 		if (Choice == 1) {
-			List<Order> order = orderService.selectStduentHour(time, (Integer) session.getAttribute("schoolId"),studentName,number);
+			List<Order> order = orderService.selectStduentHour(time, (Integer) session.getAttribute("schoolId"),
+					studentName, number);
 			System.out.println(order.size());
 			for (int i = 0; i < order.size(); i++) {
 				if (i != order.size() - 1) {
@@ -1717,7 +1742,8 @@ public class HighesController {
 			map.put("order", order);
 
 		} else if (Choice == 2) {
-			List<Order> order = orderService.selectStduentDay(time, (Integer) session.getAttribute("schoolId"),studentName,number);
+			List<Order> order = orderService.selectStduentDay(time, (Integer) session.getAttribute("schoolId"),
+					studentName, number);
 			for (int i = 0; i < order.size(); i++) {
 				if (i != order.size() - 1) {
 					if (order.get(i).getStuId() == order.get(i + 1).getStuId()) {

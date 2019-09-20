@@ -13,9 +13,9 @@
 	</delete>
 
 	<insert id="addFeeCategory" parameterType="FeeCategory">
-		insert into traininginstitutions.feecategory ( chargeTypeName, chargeMoney,
+		insert into traininginstitutions.feecategory ( chargeTypeName,
 		category, schoolId )
-		values ( #{chargeTypeName}, #{chargeMoney},
+		values ( #{chargeTypeName},
 		#{category}, #{schoolId} )
 	</insert>
 	

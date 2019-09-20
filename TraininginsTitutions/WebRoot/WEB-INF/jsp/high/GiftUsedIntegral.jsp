@@ -132,6 +132,7 @@
 												<tr>
 													<th>校区信息</th>
 													<th>班级名称</th>
+													<th>日期</th>
 													<th>学员姓名</th>
 													<th>赠品名称</th>
 													<th>赠品数量</th>
@@ -144,6 +145,7 @@
 													<tr>
 														<td>${s.school }</td>
 														<td>${s.classes.className }</td>
+														<td></td>
 														<td>${s.studentName }</td>
 														<td class="studentId" name="${s.studentId }"></td>
 														<td></td>

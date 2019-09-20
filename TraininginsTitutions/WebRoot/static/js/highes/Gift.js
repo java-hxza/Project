@@ -1,6 +1,15 @@
 $(function() {
-	
+
 	updategiftes = function() {
+		if ($(".customCheckes:checked").length < 1) {
+			if (!$(".customCheckes").prop("checked")) {
+				alert("请选中一条数据！");
+				return false;
+			}
+		} else if ($(".customCheckes:checked").length > 1) {
+			alert("只能选中一条数据！");
+			return false;
+		}
 		var giftId = $(".customCheckes:checked").parent().parent().next().text();
 		$(".giftName").val($(".customCheckes:checked").parent().parent().next().next().text());
 		$(".giftNumber").val($(".customCheckes:checked").parent().parent().next().next().next().text());
@@ -10,16 +19,16 @@ $(function() {
 		$(".TiJiao").click(function() {
 			var giftName = $.trim($(".giftName").val());
 			var giftNumber = parseInt($.trim($(".giftNumber").val()));
-			if(giftName == "") {
+			if (giftName == "") {
 				alert("赠品名称不能为空！");
 				return false;
-			}else if(giftNumber == "" || giftNumber < 0) {
+			} else if (giftNumber == "" || giftNumber < 0) {
 				alert("赠品数量不能为空！");
 				return false;
 			}
-			if(giftNumber > giftNumbers) {
+			if (giftNumber > giftNumbers) {
 				giftNumber = giftNumber - giftNumbers;
-			}else if(giftNumber < giftNumbers) {
+			} else if (giftNumber < giftNumbers) {
 				giftNumber = -(giftNumbers - giftNumber);
 			}
 			$.ajax({
@@ -48,7 +57,7 @@ $(function() {
 			});
 		});
 	};
-	
+
 	delgiftes = function() {
 		if ($(".customCheckes:checked").length < 1) {
 			if (!$(".customCheckes").prop("checked")) {
@@ -94,10 +103,10 @@ $(function() {
 		$(".TiJiao").click(function() {
 			var giftName = $.trim($(".giftName").val());
 			var giftNumber = parseInt($.trim($(".giftNumber").val()));
-			if(giftName == "") {
+			if (giftName == "") {
 				alert("赠品名称不能为空！");
 				return false;
-			}else if(giftNumber == "" || giftNumber < 0) {
+			} else if (giftNumber == "" || giftNumber < 0) {
 				alert("赠品数量不能为空！");
 				return false;
 			}

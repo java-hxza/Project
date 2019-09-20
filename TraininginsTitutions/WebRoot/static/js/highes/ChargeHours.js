@@ -1,4 +1,9 @@
 $(function() {
+	for (var i = 0; i < $(".discounts").length; i++) {
+		if($(".discounts").eq(i).text() == "0.0") {
+			$(".discounts").eq(i).text("无");
+		}
+	}
 	for (var i = 0; i < $(".giftIdes").length; i++) {
 		if (($.trim($(".giftIdes").eq(i).text())) != "无") {
 			for (var is = 0; is < $(".giftName option").length; is++) {
@@ -193,6 +198,10 @@ $(function() {
 			alert("只能选中一条数据！");
 			return false;
 		}
+		if($(".QX").val() == 0 ) {
+			alert("对不起，您没有权限删除！");
+			return false;
+		}
 		if (confirm("确认删除吗？")) {
 			var orderId = $(".customCheckes:checked").parent().parent().next().text();
 			var stuId = $(".customCheckes:checked").parent().parent().next().attr("class");
@@ -263,7 +272,11 @@ $(function() {
 		$(".Moneys").text($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().text());
 		$(".KS").text("课时：" + (parseInt($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text()) + parseInt($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text())) + "时");
 		$(".YXQ").text("课程有效期：");
-		$(".MONEY").text("￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+		if ($.trim($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text()) != "无") {
+			$(".MONEY").text("应收￥" + (parseFloat($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text()) + parseFloat($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text())) + "/实收￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+		} else {
+			$(".MONEY").text("应收￥" + (+parseFloat($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text())) + "/实收￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+		}
 		$("#ChargePeriod td").click(function() {
 			$(".WBK").parent().text($(".WBK").val());
 			$(".WBK").remove();

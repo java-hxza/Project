@@ -95,7 +95,7 @@
 		parameterType="java.lang.Integer">
 		SELECT
 		c.classId cd,c.classNumber,c.className,c.schoolId
-		cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,d.dpId,d.dpMoney,d.dpMoneyVip,d.dpTypeName,s.schoolName ssi
+		cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,d.dpId,d.dpTypeName,s.schoolName ssi
 		FROM class c
 		JOIN departmentofpediatrics d ON c.dpId=d.dpId
 		JOIN school s ON c.schoolId=s.schoolId
@@ -116,8 +116,6 @@
 		<collection property="departmentOfPediatrics"
 			javaType="DepartmentOfPediatrics">
 			<id column="d.dpId" property="dpId" javaType="java.lang.Integer" />
-			<result column="d.dpMoney" property="dpMoney" />
-			<result column="d.dpMoneyVip" property="dpMoneyVip" />
 			<result column="d.dpTypeName" property="dpTypeName" />
 		</collection>
 		<collection property="school"
@@ -193,7 +191,7 @@
 		SELECT
 		c.classId
 		cd,c.classNumber,c.className,c.schoolId
-		cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,d.dpId,d.dpMoney,d.dpMoneyVip,d.dpTypeName,s.schoolName
+		cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,d.dpId,d.dpTypeName,s.schoolName
 		ssi
 		FROM class c
 		JOIN departmentofpediatrics d ON c.dpId=d.dpId
@@ -215,8 +213,6 @@
 		<collection property="departmentOfPediatrics"
 			javaType="DepartmentOfPediatrics">
 			<id column="d.dpId" property="dpId" javaType="java.lang.Integer" />
-			<result column="d.dpMoney" property="dpMoney" />
-			<result column="d.dpMoneyVip" property="dpMoneyVip" />
 			<result column="d.dpTypeName" property="dpTypeName" />
 		</collection>
 		<collection property="school"

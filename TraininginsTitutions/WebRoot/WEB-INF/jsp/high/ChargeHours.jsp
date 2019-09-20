@@ -41,7 +41,7 @@
 		<!-- Left Sidebar End -->
 		<div class="content-page">
 			<div class="content">
-		<!-- Topbar Start -->
+				<!-- Topbar Start -->
 				<div class="navbar-custom">
 					<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
@@ -54,7 +54,7 @@
 									src="${Path }/static/images/avatar-1.jpg" alt="user-image"
 									class="rounded-circle">
 							</span> <span> <span class="account-user-name">${user.loginName }
-										</span> <span class="account-position">管理员</span>
+								</span> <span class="account-position">管理员</span>
 							</span>
 						</a>
 							<div
@@ -70,15 +70,14 @@
 								</a>
 
 								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item" onclick="switchingAccounts()">
-									<i class="mdi mdi-account-edit mr-1"></i> <span>切换账号
-									</span> 
+								<a href="javascript:void(0);" class="dropdown-item notify-item"
+									onclick="switchingAccounts()"> <i
+									class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
 								</a>
 
 								<!-- item-->
 								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置
-									</span>
+									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
 								</a>
 
 
@@ -127,6 +126,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 style="text-align:center">按课时收费单</h4>
+									<span style="display: none;" class="QX">${state }</span>
 									<div class="showOrderChildren">
 										<div class="col-12">
 											<div class="card">
@@ -153,92 +153,95 @@
 													</div>
 
 													<div class="row" id="dayin" style="display: none;">
-						<!--startprint-->
-						<div class="col-12">
-							<div class="card">
-								<div class="card-body">
-									<h4 style="text-align:center">全国统一收款收据</h4>
-									<div class="row mb-2">
-										<table id="ChargePeriod" border="1" width="1600">
-											<tr>
-												<th width="400" height="20px" class="RiQi"
-													style="text-align: left;"></th>
-												<th width="400" colspan="2" height="20px"
-													style="text-align: center;">（&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⃞ 老&nbsp;生&nbsp;&nbsp;&nbsp;&nbsp;⃞ &nbsp;&nbsp;新&nbsp;生）</th>
-												<th width="100" height="20px"></th>
-												<th width="300" height="20px" class="BDKC"></th>
-												<th width="400" height="20px" class="DJBH"></th>
-											</tr>
-											<tr>
-												<td width="400" height="40px" class="XSXM"></td>
-												<td width="100" height="40px"></td>
-												<td width="300" height="40px" class="NL"></td>
-												<td width="400" height="40px" colspan="2"></td>
-												<td width="400" height="40px" class="JDXX"></td>
-											</tr>
-											<tr>
-												<td width="400" height="40px" class="KS"></td>
-												<td width="100" height="40px"></td>
-												<td width="300" height="40px" class="YXQ"></td>
-												<td width="800" colspan="4" style="text-align:center"
-													height="40px" class="FLYQX">&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;
-												</td>
-											</tr>
-											<tr class="apps">
-												<td width="800" colspan="3" style="text-align:center"
-													height="40px">货物或劳务、服务名称：</td>
-												<td width="800" colspan="3" style="text-align:center"
-													height="40px">金额</td>
-											</tr>
-											<td width="800" colspan="3" height="40px">培训费</td>
-											<td width="800" colspan="3" style="text-align:center"
-												height="40px" class="Moneys"></td>
-											<tr>
-												<td width="800" colspan="3" height="40px"></td>
-												<td width="800" colspan="3" style="text-align:center"
-													height="40px"></td>
-											</tr>
-											<tr>
-												<td width="800" colspan="3" height="40px"></td>
-												<td width="800" colspan="3" style="text-align:center"
-													height="40px"></td>
-											</tr>
-											<tr>
-												<td width="400" height="40px"
-													style="text-align:center;border-right: 0px;">人民币大写：</td>
-												<td width="800" height="40px" colspan="4"
-													style="border-left: 0px;"></td>
-												<td width="400" height="40px" class="MONEY"></td>
-											</tr>
-											<tr>
-												<td width="500" height="80px" colspan="2">收款单位盖章：</td>
-												<td width="400" height="80px" colspan="2">收款人：</td>
-												<td width="700" height="80px" colspan="2">备注：</td>
-											</tr>
-										</table>
-									</div>
+														<!--startprint-->
+														<div class="col-12">
+															<div class="card">
+																<div class="card-body">
+																	<h4 style="text-align:center">全国统一收款收据</h4>
+																	<div class="row mb-2">
+																		<table id="ChargePeriod" border="1" width="1600">
+																			<tr>
+																				<th width="400" height="20px" class="RiQi"
+																					style="text-align: left;"></th>
+																				<th width="400" colspan="2" height="20px"
+																					style="text-align: center;">（&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⃞ 老&nbsp;生&nbsp;&nbsp;&nbsp;&nbsp;⃞ &nbsp;&nbsp;新&nbsp;生）</th>
+																				<th width="100" height="20px"></th>
+																				<th width="300" height="20px" class="BDKC"></th>
+																				<th width="400" height="20px" class="DJBH"></th>
+																			</tr>
+																			<tr>
+																				<td width="400" height="40px" class="XSXM"></td>
+																				<td width="100" height="40px"></td>
+																				<td width="300" height="40px" class="NL"></td>
+																				<td width="400" height="40px" colspan="2"></td>
+																				<td width="400" height="40px" class="JDXX"></td>
+																			</tr>
+																			<tr>
+																				<td width="400" height="40px" class="KS"></td>
+																				<td width="100" height="40px"></td>
+																				<td width="300" height="40px" class="YXQ"></td>
+																				<td width="800" colspan="4"
+																					style="text-align:center" height="40px"
+																					class="FLYQX">&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;
+																				</td>
+																			</tr>
+																			<tr class="apps">
+																				<td width="800" colspan="3"
+																					style="text-align:center" height="40px">货物或劳务、服务名称：</td>
+																				<td width="800" colspan="3"
+																					style="text-align:center" height="40px">金额</td>
+																			</tr>
+																			<td width="800" colspan="3" height="40px">培训费</td>
+																			<td width="800" colspan="3" style="text-align:center"
+																				height="40px" class="Moneys"></td>
+																			<tr>
+																				<td width="800" colspan="3" height="40px"></td>
+																				<td width="800" colspan="3"
+																					style="text-align:center" height="40px"></td>
+																			</tr>
+																			<tr>
+																				<td width="800" colspan="3" height="40px"></td>
+																				<td width="800" colspan="3"
+																					style="text-align:center" height="40px"></td>
+																			</tr>
+																			<tr>
+																				<td width="400" height="40px"
+																					style="text-align:center;border-right: 0px;">人民币大写：</td>
+																				<td width="800" height="40px" colspan="4"
+																					style="border-left: 0px;"></td>
+																				<td width="400" height="40px" class="MONEY"></td>
+																			</tr>
+																			<tr>
+																				<td width="500" height="80px" colspan="2">收款单位盖章：</td>
+																				<td width="400" height="80px" colspan="2">收款人：</td>
+																				<td width="700" height="80px" colspan="2">备注：</td>
+																			</tr>
+																		</table>
+																	</div>
 
-									<!-- end card-body-->
-								</div>
-								<!-- end card-->
-							</div>
-							<!-- end col -->
-							<!--endprint-->
-							<iframe id="iframe1" style="display: none"></iframe>
-							<div class="col-md-12">
-								<div class="form-group">
-									<button type="button" class="btn btn-block btn-primary DaYins">打印</button>
-								</div>
-							</div>
-							<div class="col-md-12" style="display: none;">
-								<div class="form-group">
-									<button type="button" class="btn btn-block btn-primary DaYins2">导出</button>
-								</div>
-							</div>
-						</div>
-						<!-- end row -->
+																	<!-- end card-body-->
+																</div>
+																<!-- end card-->
+															</div>
+															<!-- end col -->
+															<!--endprint-->
+															<iframe id="iframe1" style="display: none"></iframe>
+															<div class="col-md-12">
+																<div class="form-group">
+																	<button type="button"
+																		class="btn btn-block btn-primary DaYins">打印</button>
+																</div>
+															</div>
+															<div class="col-md-12" style="display: none;">
+																<div class="form-group">
+																	<button type="button"
+																		class="btn btn-block btn-primary DaYins2">导出</button>
+																</div>
+															</div>
+														</div>
+														<!-- end row -->
 
-					</div>
+													</div>
 
 													<div class="table-responsive mt-4 Expenditureitemses">
 														<table class="table table-bordered table-centered mb-0">
@@ -257,7 +260,7 @@
 																	<th>课程</th>
 																	<th>收款日期</th>
 																	<th>收款方式</th>
-																	<th>收款金额</th>
+																	<th>实收金额</th>
 																	<th>新增课时</th>
 																	<th>赠送课时</th>
 																	<th>备注</th>
@@ -265,6 +268,7 @@
 																	<th>积分</th>
 																	<th>赠品名称</th>
 																	<th>赠品数量</th>
+																	<th>打折金额</th>
 																</tr>
 															</thead>
 															<tbody>
@@ -283,7 +287,7 @@
 																		<td>${o.student.studentName }</td>
 																		<td class="${o.departmentofpediatricsId }">${o.departmentOfPediatrics.dpTypeName }</td>
 																		<td><fmt:formatDate value="${o.startTime }"
-																				pattern="yyyy-MM-dd" /></td>
+																				pattern="yyyy-MM-dd HH:mm" /></td>
 																		<td class="${o.paymentmethodId }">${o.paymentMethod.paymentmethodName }</td>
 																		<td class="${o.feecateId }">${o.dpMoney }</td>
 																		<td class="${o.giftId }">${o.addhour }</td>
@@ -297,6 +301,7 @@
 																		<td><c:if test="${o.giftNumber == 0 }">无</c:if> <c:if
 																				test="${o.giftNumber != 0 }">${o.giftNumber }</c:if>
 																		</td>
+																		<td class="discounts">${o.discount }</td>
 																		<td style="display: none;">${o.student.studentBirth }</td>
 																	</tr>
 																</c:forEach>
@@ -370,8 +375,7 @@
 															<label for="example-select">核算项目</label> <select
 																class="form-control feecateId" id="example-select">
 																<c:forEach items="${feeCategory }" var="f">
-																	<option value="${f.chargeTypeId }"
-																		name="${f.chargeMoney }">${f.chargeTypeName}</option>
+																	<option value="${f.chargeTypeId }">${f.chargeTypeName}</option>
 																</c:forEach>
 															</select>
 														</div>
@@ -450,7 +454,7 @@
 					</div>
 					<!-- content -->
 
-					
+
 
 
 					<!-- Footer Start -->
@@ -661,8 +665,14 @@
 						$(".JDXX").text("缴费方式：" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().text());
 						$(".Moneys").text($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().text());
 						$(".KS").text("课时：" + (parseInt($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text()) + parseInt($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text())) + "时");
+						if ($.trim($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text()) != "无") {
+							$(".MONEY").text("应收￥" + (parseFloat($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text()) + parseFloat($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text())) + "/实收￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+			
+						} else {
+							$(".MONEY").text("应收￥" + (+parseFloat($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text())) + "/实收￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+						}
 						$(".YXQ").text("课程有效期：");
-						$(".MONEY").text("￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+			
 						$("#ChargePeriod td").click(function() {
 							if ($(".WBK").val() == ".") {
 								$(".WBK").parent().remove();
@@ -682,7 +692,7 @@
 							"src_id" : "ChargePeriod",
 							"show_header" : true
 						});
-						excel.generate("课时收费单",$(".customCheckes:checked").parent().parent().next().next().next().text());
+						excel.generate("课时收费单", $(".customCheckes:checked").parent().parent().next().next().next().text());
 					});
 				});
 			</script>

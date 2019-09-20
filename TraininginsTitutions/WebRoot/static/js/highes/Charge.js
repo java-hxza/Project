@@ -51,6 +51,10 @@ $(function() {
 			alert("只能选中一条数据！");
 			return false;
 		}
+		if($(".QX").val() == 0 ) {
+			alert("对不起，您没有权限删除！");
+			return false;
+		}
 		if (confirm("确认删除吗？")) {
 			var orderId = $(".customCheckes:checked").parent().parent().next().text();
 			var stuId = $(".customCheckes:checked").parent().parent().next().attr("class");
@@ -316,15 +320,14 @@ $(function() {
 		$(".KS").text("课时：" + time + "天");
 		$(".YXQ").text("课程有效期：" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text());
 		$(".FLYQX").text($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text() + "   至   " + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text());
-		$(".MONEY").text("￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+		if ($.trim($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text()) != "无") {
+			$(".MONEY").text("应收￥" + (parseFloat($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text()) + parseFloat($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text())) + "/实收￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+		} else {
+			$(".MONEY").text("应收￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text() + "/实收￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+		}
+		
 		for (var i = 0; i < $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/").length; i++) {
-			var RMB = 0;
-			for (var j = 0; j < $(".feecateIds option").length; j++) {
-				if ($(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] == $(".feecateIds option").eq(j).text()) {
-					RMB = $(".feecateIds option").eq(j).attr("name");
-				}
-			}
-			$(".apps").after("<tr class='dels'><td width='800' colspan='3' height='40px'>" + $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] + "</td><td width='800' colspan='3' style='text-align:center'height='40px'>￥" + RMB + "</td></tr>");
+			$(".apps").after("<tr class='dels'><td width='800' colspan='3' height='40px'>" + $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] + "</td><td width='800' colspan='3' style='text-align:center'height='40px'>￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text().split(",")[i] + "</td></tr>");
 		}
 		$("#ChargePeriods td").click(function() {
 			$(".WBK").parent().text($(".WBK").val());

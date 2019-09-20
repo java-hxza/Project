@@ -16,6 +16,10 @@ $(function() {
 			alert("只能选中一条数据！");
 			return false;
 		}
+		if($(".QX").val() == 0 ) {
+			alert("对不起，您没有权限删除！");
+			return false;
+		}
 		if (confirm("确认删除吗？")) {
 			var orderId = $(".customCheckes:checked").parent().parent().next().text();
 			$.ajax({

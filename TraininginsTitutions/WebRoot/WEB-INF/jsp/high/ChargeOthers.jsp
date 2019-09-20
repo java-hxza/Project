@@ -125,6 +125,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 style="text-align:center">其他费用收款单</h4>
+									<span style="display: none;" class="QX">${state }</span>
 									<div class="showOrder">
 										<div class="col-12">
 											<div class="card">
@@ -276,7 +277,7 @@
 																		<td class="${o.stuId }">${o.orderId }</td>
 																		<td>${o.school.schoolName }</td>
 																		<td><fmt:formatDate value="${o.startTime }"
-																				pattern="yyyy-MM-dd" /></td>
+																				pattern="yyyy-MM-dd HH:mm" /></td>
 																		<td class="${o.feecateId }">${o.feeCategory.chargeTypeName }</td>
 																		<td class="${o.paymentmethodId }">${o.paymentMethod.paymentmethodName }</td>
 																		<td>${o.dpMoney }</td>
@@ -334,7 +335,7 @@
 																class="form-control feecateId" id="example-select">
 																<c:forEach items="${feeCategory }" var="f">
 																	<option value="${f.chargeTypeId }"
-																		name="${f.chargeMoney }">${f.chargeTypeName}</option>
+																		>${f.chargeTypeName}</option>
 																</c:forEach>
 															</select>
 														</div>

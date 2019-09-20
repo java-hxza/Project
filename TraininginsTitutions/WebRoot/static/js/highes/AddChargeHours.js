@@ -4,11 +4,11 @@ $(function() {
 		$('.giftNumber').attr("disabled", true);
 	}
 	$(".school").val($(".classes option:selected").attr("schoolIds2"));
-	if ($(".classes option:selected").attr("classTypeId") == 1) {
-		$(".money").val($(".classes option:selected").attr("dpMoney"));
-	} else {
-		$(".money").val($(".classes option:selected").attr("dpMoneyVip"));
-	}
+//	if ($(".classes option:selected").attr("classTypeId") == 1) {
+//		$(".money").val($(".classes option:selected").attr("dpMoney"));
+//	} else {
+//		$(".money").val($(".classes option:selected").attr("dpMoneyVip"));
+//	}
 	$(".departmentofpediatricsId").val($(".classes option:selected").attr("dpTypeName"));
 	var Time = new Date();
 	var month = null;
@@ -19,36 +19,36 @@ $(function() {
 	}
 	$(".integral").val($(".money").val());
 	$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
-	$(".hour").blur(function() {
-		if ($(".hour").val() != 0) {
-			if ($(".classes option:selected").attr("classTypeId") == 1) {
-				$(".money").val((parseFloat($(".classes option:selected").attr("dpMoney")) * $(".hour").val()).toFixed(1));
-				$(".integral").val($(".money").val());
-			} else {
-				$(".money").val((parseFloat($(".classes option:selected").attr("dpMoneyVip")) * $(".hour").val()).toFixed(1));
-				$(".integral").val($(".money").val());
-			}
-
-		}
-	});
+//	$(".hour").blur(function() {
+//		if ($(".hour").val() != 0) {
+//			if ($(".classes option:selected").attr("classTypeId") == 1) {
+//				$(".money").val((parseFloat($(".classes option:selected").attr("dpMoney")) * $(".hour").val()).toFixed(1));
+//				$(".integral").val($(".money").val());
+//			} else {
+//				$(".money").val((parseFloat($(".classes option:selected").attr("dpMoneyVip")) * $(".hour").val()).toFixed(1));
+//				$(".integral").val($(".money").val());
+//			}
+//
+//		}
+//	});
 	$(".classes").click(function() {
 		$(".departmentofpediatricsId").val($(".classes option:selected").attr("dpTypeName"));
 		if ($(".classes option:selected").attr("classTypeId") == 1) {
-			if ($(".hour").val() == 0) {
-				$(".money").val($(".classes option:selected").attr("dpMoney"));
-				$(".integral").val($(".money").val());
-			} else {
-				$(".money").val((parseFloat($(".classes option:selected").attr("dpMoney")) * $(".hour").val()).toFixed(1));
-				$(".integral").val($(".money").val());
-			}
-		} else {
-			if ($(".hour").val() == 0) {
-				$(".money").val($(".classes option:selected").attr("dpMoneyVip"));
-				$(".integral").val($(".money").val());
-			} else {
-				$(".money").val(parseFloat($(".classes option:selected").attr("dpMoneyVip")) * $(".hour").val().toFixed(1));
-				$(".integral").val($(".money").val());
-			}
+//			if ($(".hour").val() == 0) {
+//				$(".money").val($(".classes option:selected").attr("dpMoney"));
+//				$(".integral").val($(".money").val());
+//			} else {
+//				$(".money").val((parseFloat($(".classes option:selected").attr("dpMoney")) * $(".hour").val()).toFixed(1));
+//				$(".integral").val($(".money").val());
+//			}
+//		} else {
+//			if ($(".hour").val() == 0) {
+//				$(".money").val($(".classes option:selected").attr("dpMoneyVip"));
+//				$(".integral").val($(".money").val());
+//			} else {
+//				$(".money").val(parseFloat($(".classes option:selected").attr("dpMoneyVip")) * $(".hour").val().toFixed(1));
+//				$(".integral").val($(".money").val());
+//			}
 		}
 		var classIds = $(".classes option:selected").val();
 		$.ajax({
@@ -73,11 +73,44 @@ $(function() {
 		});
 	});
 	$(".money").blur(function() {
-		if($(".money").val() == "") {
+		if ($(".money").val() == "" || $(".money").val() < 1) {
 			alert("请输入正确的金额");
 			$(".money").val("");
+			$(".dpMoneyActivity4").val("");
+			$(".integral").val("");
+			if ($(".feecateId4").val() == 0) {
+				$(".integral").val("");
+			} else {
+				$(".dpMoneyActivity4").val("");
+				$(".integral").val($(".dpMoneyActivity4").val());
+			}
+		} else {
+			if ($(".feecateId4").val() == 0) {
+				$(".integral").val($(".money").val());
+				$(".dpMoneyActivity4").val($(".money").val());
+			} else {
+				if ($(".feecateId4 option:selected").attr("discount") == "") {
+					$(".dpMoneyActivity4").val((parseFloat($.trim($(".money").val())) - $(".feecateId4 option:selected").attr("activityMoney")).toFixed(1));
+				} else {
+					$(".dpMoneyActivity4").val((parseFloat($.trim($(".money").val())) * ($(".feecateId4 option:selected").attr("discount") / 100)).toFixed(1));
+				}
+				$(".integral").val($(".dpMoneyActivity4").val());
+			}
 		}
-		$(".integral").val($(".money").val());
+	});
+	$(".feecateId4").blur(function() {
+		if ($(".feecateId4").val() != 0) {
+			if ($(".feecateId4 option:selected").attr("discount") == "") {
+				$(".dpMoneyActivity4").val((parseFloat($.trim($(".money").val())) - $(".feecateId4 option:selected").attr("activityMoney")).toFixed(1));
+				$(".integral").val($(".dpMoneyActivity4").val());
+			} else {
+				$(".dpMoneyActivity4").val((parseFloat($.trim($(".money").val())) * ($(".feecateId4 option:selected").attr("discount") / 100)).toFixed(1));
+				$(".integral").val($(".dpMoneyActivity4").val());
+			}
+		} else {
+			$(".dpMoneyActivity4").val($(".money").val());
+			$(".integral").val($(".money").val());
+		}
 	});
 	$(".giftName").click(function() {
 		if ($(".giftName option:selected").val() == 0) {
@@ -96,7 +129,7 @@ $(function() {
 	});
 	$(".TiJiao").click(function() {
 		var date = $.trim($(".date").val());
-		var dpMoney = $.trim($(".money").val());
+		var dpMoney = $.trim($(".dpMoneyActivity4").val());
 		var hour = $.trim($(".hour").val());
 		var hours = $.trim($(".hours").val());
 		var stuId = $.trim($(".stuId").val());
@@ -109,6 +142,12 @@ $(function() {
 		var integral = $.trim($(".integral").val());
 		var giftNumber = $.trim($(".giftNumber").val());
 		var giftId = $.trim($(".giftName option:selected").val());
+		var feecateId4 = $(".feecateId4 option:selected").val();
+		var startTimes = " " + Time.getHours() + ":" + Time.getMinutes().toString();
+		var discount = 0;
+		if($(".dpMoneyActivity4").val() != "" && $(".dpMoneyActivity4").val() != 0) {
+			discount = $.trim($(".money").val()) - dpMoney; 
+		}
 		if(stuId == "") {
 			alert("请选择学生！");
 			return flase;
@@ -148,7 +187,10 @@ $(function() {
 				classId : classId,
 				giftId : giftId,
 				giftNumber : giftNumber,
-				integral : integral
+				integral : integral,
+				activityId : feecateId4,
+				discount : discount,
+				startTimes : startTimes
 			},
 			dataType : "json",
 			success : function(data) {

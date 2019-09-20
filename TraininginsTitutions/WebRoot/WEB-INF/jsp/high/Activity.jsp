@@ -28,7 +28,8 @@
 	type="text/css" />
 <link href="${Path }/static/css/app.min.css" rel="stylesheet"
 	type="text/css" />
-	<link href="${Path }/static/css/style.css" rel="stylesheet" type="text/css" />
+<link href="${Path }/static/css/style.css" rel="stylesheet"
+	type="text/css" />
 
 </head>
 
@@ -48,7 +49,7 @@
 		<div class="content-page">
 			<div class="content">
 
-					<!-- Topbar Start -->
+				<!-- Topbar Start -->
 				<div class="navbar-custom">
 					<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
@@ -61,7 +62,7 @@
 									src="${Path }/static/images/avatar-1.jpg" alt="user-image"
 									class="rounded-circle">
 							</span> <span> <span class="account-user-name">${user.loginName }
-										</span> <span class="account-position">管理员</span>
+								</span> <span class="account-position">管理员</span>
 							</span>
 						</a>
 							<div
@@ -77,15 +78,14 @@
 								</a>
 
 								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item" onclick="switchingAccounts()">
-									<i class="mdi mdi-account-edit mr-1"></i> <span>切换账号
-									</span> 
+								<a href="javascript:void(0);" class="dropdown-item notify-item"
+									onclick="switchingAccounts()"> <i
+									class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
 								</a>
 
 								<!-- item-->
 								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置
-									</span>
+									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
 								</a>
 
 
@@ -160,6 +160,8 @@
 													</th>
 													<th>编码</th>
 													<th>活动名称</th>
+													<th>活动内容</th>
+													<th>优惠价格</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -174,9 +176,11 @@
 															</div>
 														</td>
 														<td>${a.activityId }</td>
+														<td>${a.activityName }</td>
+														<td>${a.content }</td>
 														<td><c:choose>
-																<c:when test="${a.activityMoneyfirst == null }">${a.discount }折</c:when>
-																<c:otherwise>满&nbsp;${a.activityMoneyfirst }&nbsp;减&nbsp;${a.activityMoneylast }</c:otherwise>
+																<c:when test="${a.activityMoney == null }">${a.discount }折</c:when>
+																<c:otherwise>${a.activityMoney }</c:otherwise>
 															</c:choose></td>
 													</tr>
 												</c:forEach>
@@ -192,29 +196,31 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group mb-3">
-														<label for="example-select">满多少</label> <input
-																type="text" class="form-control activityMoneyfirst"
-																data-toggle="input-mask"
-																data-mask-format="00000000000000000"
-																data-reverse="true" >
+														<label for="example-select">活动名称</label> <input
+															class="form-control ActivityName" type="text"
+															id="billing-last-name" />
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group mb-3">
-														<label for="example-select">减多少</label> <input
-																type="text" class="form-control activityMoneylast"
-																data-toggle="input-mask"
-																data-mask-format="00000000000000000"
-																data-reverse="true" >
+														<label for="example-select">活动内容</label> <input
+															class="form-control contents" type="text"
+															id="billing-last-name" />
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group mb-3">
-														<label for="example-select">折扣</label> <input
-																type="text" class="form-control discount"
-																data-toggle="input-mask"
-																data-mask-format="00000000000000000"
-																data-reverse="true" >
+														<label for="example-select">优惠价格</label> <input
+															type="text" class="form-control activityMoney"
+															data-toggle="input-mask"
+															data-mask-format="00000000000000000" data-reverse="true">
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group mb-3">
+														<label for="example-select">折扣</label> <input type="text"
+															class="form-control discount" data-toggle="input-mask"
+															data-mask-format="00000000000000000" data-reverse="true">
 													</div>
 												</div>
 												<div class="col-md-12">

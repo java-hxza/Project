@@ -4,20 +4,19 @@ $(function(){
 	 * 添加收入项目
 	 */
 	addIncomeitems = function() {
+		$(".adds").remove();
 		$(".Incomeitems").remove();
 		$(".addIncomeitemses").show();
 		$(".del").remove();
 		$(".add").click(function() {
 			var chargeTypeName = $(".chargeTypeName").val();
 			var category = $(".category").val();
-			var chargeMoney = $(".chargeMoney").val();
 			$.ajax({
 				type : "POST",
 				url : "addIncomeitems.html",
 				data : {
 					chargeTypeName : chargeTypeName,
 					category : category,
-					chargeMoney : chargeMoney
 				},
 				dataType : "json",
 				success : function(data) {

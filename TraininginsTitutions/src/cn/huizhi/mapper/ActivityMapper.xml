@@ -18,9 +18,10 @@
 
 	<insert id="addActivitySchool" parameterType="java.lang.Integer">
 		INSERT INTO
-		traininginstitutions.activity (activityMoneyfirst,activityMoneylast,
-		discount, schoolId)VALUES(#{activityMoneyfirst}, #{activityMoneylast},
-		#{discount}, #{schoolId});
+		traininginstitutions.activity (activityMoney,
+		discount,
+		schoolId,content,activityName)VALUES(#{activityMoney},
+		#{discount}, #{schoolId},#{content},#{activityName});
 	</insert>
 
 </mapper>

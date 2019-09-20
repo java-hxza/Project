@@ -125,7 +125,17 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-body">
-									<h4 style="text-align:center">按时间段收费单</h4>
+									<c:choose>
+										<c:when test="${schoolType == 2}">
+											<h4 style="text-align:center" class="Type"
+												name="${schoolType }">收费单</h4>
+										</c:when>
+										<c:otherwise>
+											<h4 style="text-align:center" class="Type"
+												name="${schoolType }">按时间段收费单</h4>
+										</c:otherwise>
+									</c:choose>
+									<span style="display: none;" class="QX">${state }</span>
 									<div class="showOrder">
 										<div class="col-12">
 											<div class="card">
@@ -225,7 +235,8 @@
 															<div class="col-md-12">
 																<div class="form-group">
 																	<button type="button"
-																		class="btn btn-block btn-primary DaYins" onclick="DaYins()">打印</button>
+																		class="btn btn-block btn-primary DaYins"
+																		onclick="DaYins()">打印</button>
 																</div>
 															</div>
 															<div class="col-md-12" style="display: none;">
@@ -256,7 +267,7 @@
 																	<th>收款项目</th>
 																	<th>学员</th>
 																	<th>资金账户</th>
-																	<th>金额</th>
+																	<th>实收金额</th>
 																	<th>费用时间起</th>
 																	<th>费用时间止</th>
 																	<th>责任人</th>
@@ -265,7 +276,7 @@
 																	<th>积分</th>
 																	<th>赠品名称</th>
 																	<th>赠品数量</th>
-																	<th>打折价格</th>
+																	<th>打折金额</th>
 																</tr>
 															</thead>
 															<tbody>
@@ -282,7 +293,7 @@
 																		<td class="${o.stuId }">${o.orderId }</td>
 																		<td>${o.school.schoolName }</td>
 																		<td><fmt:formatDate value="${o.startTime }"
-																				pattern="yyyy-MM-dd" /></td>
+																				pattern="yyyy-MM-dd HH:mm" /></td>
 																		<td class="feecateIds2" name="${o.feecateId }"></td>
 																		<td>${o.student.studentName }</td>
 																		<td class="${o.paymentmethodId }">${o.paymentMethod.paymentmethodName }</td>
@@ -305,7 +316,8 @@
 																			<c:if test="${o.discount == null }">无</c:if></td>
 																		<!--  -->
 																		<td style="display: none;">${o.student.studentBirth }</td>
-																		<td class="ids">${o.classId }</td>
+																		<td class="ids" style="display: none;">${o.classId }</td>
+																		<td class="feecateMoneysx" style="display: none;">${o.feecateMoney }</td>
 																	</tr>
 																</c:forEach>
 															</tbody>
@@ -339,8 +351,7 @@
 															<label for="example-select">核算项目</label> <select
 																class="form-control feecateIds" id="example-select">
 																<c:forEach items="${feeCategory }" var="f">
-																	<option value="${f.chargeTypeId }"
-																		name="${f.chargeMoney }">${f.chargeTypeName}</option>
+																	<option value="${f.chargeTypeId }">${f.chargeTypeName}</option>
 																</c:forEach>
 															</select>
 														</div>
@@ -708,7 +719,11 @@
 						$(".KS").text("课时：" + time + "天");
 						$(".YXQ").text("课程有效期：" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text());
 						$(".FLYQX").text($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text() + "   至   " + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text());
-						$(".MONEY").text("￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+						if ($.trim($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text()) != "无") {
+							$(".MONEY").text("应收￥" + (parseFloat($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text()) + parseFloat($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text())) + "/实收￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+						} else {
+							$(".MONEY").text("应收￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text() + "/实收￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+						}
 						for (var i = 0; i < $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/").length; i++) {
 							var RMB = 0;
 							for (var j = 0; j < $(".feecateIds option").length; j++) {
@@ -716,7 +731,7 @@
 									RMB = $(".feecateIds option").eq(j).attr("name");
 								}
 							}
-							$(".apps").after("<tr class='dels'><td width='800' colspan='3' height='40px'>" + $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] + "</td><td width='800' colspan='3' style='text-align:center'height='40px'>￥" + RMB + "</td></tr>");
+							$(".apps").after("<tr class='dels'><td width='800' colspan='3' height='40px'>" + $(".customCheckes:checked").parent().parent().next().next().next().next().text().split("/")[i] + "</td><td width='800' colspan='3' style='text-align:center'height='40px'>￥" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().text().split(",")[i] + "</td></tr>");
 						}
 						$("#ChargePeriods td").click(function() {
 							if ($(".WBK").val() == ".") {
@@ -737,7 +752,7 @@
 							"src_id" : "ChargePeriods",
 							"show_header" : true
 						});
-						excel.generate("时间段收费单",$(".customCheckes:checked").parent().parent().next().next().next().next().next().text());
+						excel.generate("时间段收费单", $(".customCheckes:checked").parent().parent().next().next().next().next().next().text());
 					});
 				});
 			</script>

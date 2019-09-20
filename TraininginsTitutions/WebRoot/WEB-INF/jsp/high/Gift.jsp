@@ -155,7 +155,7 @@
 													</th>
 													<th>编码</th>
 													<th>赠品名称</th>
-													<th>赠品数量</th>
+													<th>赠品库存</th>
 												</tr>
 											</thead>
 											<tbody>
