@@ -81,6 +81,9 @@
 			<if test="remarks != null and remarks !='' ">
 				remarks = #{remarks} 
 			</if>
+			<if test="state != null and state !='' ">
+				state = #{state} 
+			</if>
 		
 		</set> 
 		 <where>

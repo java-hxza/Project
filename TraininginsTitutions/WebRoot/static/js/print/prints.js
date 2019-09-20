@@ -22,6 +22,6 @@ $(function() {
 			"src_id" : "products-datatable",
 			"show_header" : true
 		});
-		excel.generate();
+		excel.generate("同心同慧报表");
 	}
 });

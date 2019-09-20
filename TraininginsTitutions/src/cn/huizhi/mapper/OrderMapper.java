@@ -101,7 +101,7 @@ public interface OrderMapper {
 	 * @return
 	 */
 	public List<Order> selectChildrenFeeSituation(@Param("classId") Integer classId,
-			@Param("studentId") Integer studentId);
+			@Param("studentId") Integer studentId,@Param("startTime")String startTime,@Param("endTime")String endTime);
 
 	/**
 	 * 查询高中学生收费情况
@@ -109,7 +109,7 @@ public interface OrderMapper {
 	 * @param classId
 	 * @return
 	 */
-	public List<Order> selectHighsFeeSituation(@Param("classId") Integer classId);
+	public List<Order> selectHighsFeeSituation(@Param("classId") Integer classId,@Param("startTime")String startTime,@Param("endTime")String endTime);
 
 	/**
 	 * 查询高中学生收费情况
@@ -117,7 +117,7 @@ public interface OrderMapper {
 	 * @param classId
 	 * @return
 	 */
-	public List<Order> selectArtFeeSituation(@Param("classId") Integer classId);
+	public List<Order> selectArtFeeSituation(@Param("classId") Integer classId,@Param("startTime")String startTime,@Param("endTime")String endTime);
 
 	/**
 	 * 查询学生收费

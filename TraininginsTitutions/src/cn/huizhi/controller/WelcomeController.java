@@ -192,12 +192,10 @@ public class WelcomeController {
 
 			for (Order order3 : schoolExpenList) {
 				if (order3.getIdentification() == 1) {
-					
 					school.setSchoolExPenSum( school.getSchoolExPenSum() + order3.getFeecategoryMoney());
 				}
 			}
 		}
-
 		session.setAttribute("schoolListAll", schoolListAll);
 		return "admin/adminIndex";
 	}

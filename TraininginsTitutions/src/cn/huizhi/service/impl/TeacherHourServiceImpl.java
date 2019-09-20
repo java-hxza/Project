@@ -16,9 +16,9 @@ public class TeacherHourServiceImpl implements TeacherHourService {
 	TeacherHourMapper teacherHourMapper;
 	
 	@Override
-	public List<TeacherHour> findTeacherHourListBySchoolId(Integer schoolId) {
+	public List<TeacherHour> findTeacherHourListBySchoolId(TeacherHour teacherHour ) {
 		// TODO Auto-generated method stub
-		return teacherHourMapper.selecTeacherHourListBySchoolId(schoolId);
+		return teacherHourMapper.selecTeacherHourListBySchoolId( teacherHour );
 	}
 
 	@Override

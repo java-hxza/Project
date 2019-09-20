@@ -122,9 +122,9 @@
 							<div class="card-body">
 								<div class="row mb-2">
 									<div class="col-sm-4">
-										<a href="javascript:void(0);" onclick="expen()"
+										<a href="javascript:void(0);" onclick="queryArtStudentFee()"
 											class="btn btn-danger mb-2"><i
-											class="mdi mdi-plus-circle mr-2"></i> 支出查询</a>
+											class="mdi mdi-plus-circle mr-2"></i> 查询</a>
 									</div>
 									<div class="col-sm-8">
 										<div class="text-sm-right">
@@ -133,8 +133,6 @@
 												class="btn btn-success btn-sm mt-2" onclick="print()">打印</button>
 											<button type="button" id="btn2"
 												class="btn btn-success btn-sm mt-2" onclick="exportExsal()">导出</button>
-											<button type="button" id="btn2"
-												class="btn btn-success btn-sm mt-2" onclick="query()">收入查询</button>
 										</div>
 									</div>
 									<!-- end col-->
@@ -142,24 +140,13 @@
 
 
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<div class="form-group">
 											<label for="billing-first-name">开始日期</label> <input
 												class="form-control" type="date" id="startTime" />
 										</div>
 									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label for="billing-first-name">支出项目</label> <select
-												id="expenditureitemsId" class="form-control">
-												<option value="">请选择</option>
-												<c:forEach items="${expenditureitemList}" var="expen">
-													<option value="${expen.expenditureitemsId }">${expen.expenditureitemsName }</option>
-												</c:forEach>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<div class="form-group">
 											<label for="billing-first-name">结束日期</label> <input
 												class="form-control" type="date" id="endTime" />
@@ -168,32 +155,32 @@
 								</div>
 
 								<div class="row">
-									<div class="col-md-3">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label for="billing-first-name">账户</label> <select
-												id="paymentmethodId" class="form-control col-sm-8">
+												id="paymentmethodId" class="form-control">
 												<option value="">请选择</option>
-												<c:forEach items="${payMentList}" var="pay">
+												<c:forEach items="${paymentMethods}" var="pay">
 													<option value="${pay.paymentmethodId }">${pay.paymentmethodName }</option>
 												</c:forEach>
 											</select>
 										</div>
 									</div>
-									<div class="col-md-3">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label for="billing-first-name">收入类型:</label> <select
-												id="feecateId" class="form-control col-sm-8">
+												id="feecateId" class="form-control">
 												<option value="">请选择</option>
-												<c:forEach items="${feeCategoryList}" var="fee">
+												<c:forEach items="${feeCategories }" var="fee">
 													<option value="${fee.chargeTypeId}">${fee.chargeTypeName }</option>
 												</c:forEach>
 											</select>
 										</div>
 									</div>
-									<div class="col-md-3">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label for="billing-first-name">班级:</label> <select
-												id="classId" class="form-control col-sm-8">
+												id="classId" class="form-control">
 												<option value="">请选择</option>
 												<c:forEach items="${classBySchooList}" var="c">
 													<option value="${c.classId}">${c.className}</option>
@@ -201,18 +188,6 @@
 											</select>
 										</div>
 									</div>
-									<div class="col-md-3">
-										<div class="form-group">
-											<label for="billing-first-name">课程:</label> <select
-												id="departmentofpediatricsId" class="form-control col-sm-8">
-												<option value="">请选择</option>
-												<c:forEach items="${departmentOfPediatricsList}" var="dp">
-													<option value="${dp.dpId}">${dp.dpTypeName }</option>
-												</c:forEach>
-											</select>
-										</div>
-									</div>
-
 								</div>
 
 							</div>
@@ -221,59 +196,89 @@
 
 							<div class="table-responsive" id="dayin">
 								<!--startprint-->
-								<h3 style="text-align: center;" id="tables">收支明细报表</h3>
+								<h3 style="text-align: center;" id="tables">高中明细报表</h3>
 								<table
 									class="table table-centered table-striped dt-responsive nowrap w-100"
 									id="products-datatable" border="1px solid" width="100%">
 									<tbody>
 										<tr>
 											<td>订单编号</td>
-											<td>收款人</td>
-											<td>日期</td>
-											<td>项目名称</td>
-											<td>收款金额</td>
-											<td>收款方式</td>
-											<td>责任人</td>
-											<td>课程</td>
-											<td>新增课时</td>
-											<td>赠送课时</td>
-											<td>费用起始日</td>
-											<td>费用截至日</td>
+											<td>入学日期</td>
+											<td>学生姓名</td>
+											<td>身份证号</td>
+											<td>联系电话</td>
+											<td>家长姓名</td>
+											<td>接待人员</td>
+											<td>高中学校</td>
+											<td>备注</td>
+											<%
+												int num = 0;
+												int index = 0;
+											%>
+
+											<c:forEach items="${feeCategories }" var="fee">
+												<%
+													num = num + 1;
+												%>
+												<td>${fee.chargeTypeName}</td>
+											</c:forEach>
+											<td>实付金额</td>
+											<td>应收金额</td>
+											<td>分班情况</td>
 										</tr>
 									</tbody>
+
 									<tbody id="info">
-										<c:forEach items="${orderListBySchool}" var="order">
+										<c:forEach items="${artStudentInfoList}" var="art"
+											varStatus="status">
 											<tr class="userId">
-												<td class="table-user">${order.orderNumber }</td>
-												<td class="table-user">${order.student.studentName }</td>
+												<td class="table-user">${art.order.orderNumber }</td>
 												<td class="table-user"><fmt:formatDate
-														value="${order.startTime }" pattern="yyyy-MM-dd hh:mm"></fmt:formatDate>
+														value="${art.order.startTime }" pattern="yyyy-MM-dd hh:mm"></fmt:formatDate>
 												</td>
-												<td class="table-user">
-													${order.feeCategory.chargeTypeName }</td>
-												<td class="table-user">${order.dpMoney }</td>
-												<td class="table-user">${order.paymentMethod.paymentmethodName }
-												</td>
-												<td class="table-user">${order.personliable }</td>
-												<td class="table-user">${order.departmentOfPediatrics.dpTypeName }
-												</td>
-												<td class="table-user">${order.addhour }</td>
-												<td class="table-user">${order.givehour }</td>
-												<td class="table-user"><fmt:formatDate
-														value="${order.firstdate }" pattern="yyyy-MM-dd" /></td>
-												<td class="table-user"><fmt:formatDate
-														value="${order.lastdate }" pattern="yyyy-MM-dd" /></td>
+												<td class="table-user">${art.studentName }</td>
+												<td class="table-user">${art.studentIDCard }</td>
+												<td class="table-user">${art.telephone }</td>
+												<td class="table-user">${art.parentName}</td>
+												<td class="table-user">${art.registrationConsultant }</td>
+												<td class="table-user">${art.school}</td>
+												<td class="table-user">${schoolName }</td>
+												<td class="table-user">${art.remarks }</td>
+												<c:forEach items="${feeCategories }" var="fee"
+													begin="<%=index %>" end="<%=index %>">
+													<c:forEach items="${feeIdArray }" var="feeId">
+														<c:forEach items="${feeId }" var="fId">
+															<c:if test="${fee.chargeTypeId == fId}">
+																<c:forEach items="${feeMoneyArray }" var="moneyArray">
+																	<c:forEach items="${moneyArray }" var="m">
+																		<td class="table-user">${m }</td>
+																	</c:forEach>
+																</c:forEach>
+															</c:if>
+														</c:forEach>
+													</c:forEach>
+												</c:forEach>
+												<td class="table-user">${art.order.dpMoney }</td>
+												<c:set var="dpMoneySum"
+													value="${art.order.dpMoney + dpMoneySum}" />
+												<c:set var="sumMoney"
+													value="${art.order.dpMoney+art.order.discount + sumMoney}" />
+												<td class="table-user">${art.order.dpMoney+art.order.discount }</td>
 											</tr>
+											<%
+												index = index + 1;
+											%>
 										</c:forEach>
+
 									</tbody>
-									<tbody id = "expen" style='text-align: center;'>
+									<tbody id="expen" style='text-align: center;'>
 										<tr>
-											<td colspan='6' >支出总额</td>
-											<td colspan='6' >收入总额</td>
+											<td colspan='<%=num / 2 + 8%>'>实收总额</td>
+											<td colspan='<%=num / 2 + 9%>'>应收总额</td>
 										</tr>
 										<tr>
-											<td colspan='6' >${schoolExPenSum }</td>
-											<td colspan='6' >${schoolFeeceat }</td>
+											<td colspan='<%=num / 2 + 8%>'>${ dpMoneySum}</td>
+											<td colspan='<%=num / 2 + 9%>'>${sumMoney }</td>
 										</tr>
 									</tbody>
 								</table>
@@ -291,6 +296,5 @@
 							src="${Path }/static/js/admin/adminIndex.js"></script>
 						<script src="${Path }/static/js/admin/leftSidebar.js"></script>
 						<script
-							src="${Path }/static/js/admin/orderSchool/selectOrderSchoolInfo.js"></script>
-						<script src="${Path }/static/js/admin/operator.js"></script>
+							src="${Path }/static/js/admin/highStudentFee/adminArtStudentFeeInfo.js"></script>
 </html>

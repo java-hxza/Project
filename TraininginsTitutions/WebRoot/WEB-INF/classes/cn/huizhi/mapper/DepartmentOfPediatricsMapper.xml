@@ -7,9 +7,7 @@
 		dpId,
 		dpTypeName,
 		chargeTypeId,
-		schoolId,
-		dpMoney,
-		dpMoneyVip
+		schoolId
 	</sql>
 	<!--查询所有班级科别 -->
 	<select id="selectDepartmentOfPediatrics" resultType="DepartmentOfPediatrics">
@@ -21,7 +19,7 @@
 	<!--新增班级科别-->
 	<insert id="insertDepartmentOfPediatrics" parameterType="DepartmentOfPediatrics" >
 		insert into departmentofpediatrics ( dpTypeName, chargeTypeId,schoolId,dpMoney,dpMoneyVip )
-		values ( #{dpTypeName}, #{chargeTypeId} ,#{schoolId} ,#{dpMoney} ,#{dpMoneyVip})
+		values ( #{dpTypeName}, #{chargeTypeId} ,#{schoolId})
 	</insert>
 	
 	<!--删除班级科别-->

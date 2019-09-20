@@ -175,4 +175,15 @@ $(function() {
 		}
 	}
 	createCode(4);
+	
+	/**
+	 * 艺考收费情况报表
+	 */
+	AdminArtStudentFeeInfo = function(){
+		location.href = "adminArtStudentFeeInfo.html";
+	}
+	
+	AdminHighStudentFeeInfo = function(){
+		location.href = "adminHighStudentFeeInfo.html";
+	}
 });

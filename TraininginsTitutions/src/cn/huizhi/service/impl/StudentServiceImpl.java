@@ -101,4 +101,16 @@ public class StudentServiceImpl implements StudentService {
 		// TODO Auto-generated method stub
 		return studentMapper.delStudentTable();
 	}
+
+	@Override
+	public List<Student> findArtStudentResverSchoolInfo(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return studentMapper.findArtStudentResverSchoolInfo(map);
+	}
+
+	@Override
+	public List<Student> findHighStudentResverSchoolInfo(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return studentMapper.findHighStudentResverSchoolInfo(map);
+	}
 }

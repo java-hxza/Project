@@ -32,5 +32,11 @@ public interface SchoolMapper {
 	 */
 	public int insertSchool(School school);
 	
+	/**
+	 * 根据学校主键查询学校信息
+	 * @return
+	 */
+	public School selectSchoolById(@Param("schoolId")Integer schoolId);
+	
 
 }

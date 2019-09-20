@@ -41,13 +41,17 @@
 						onclick="AdminSelectOrderSchoolInfo()">收支明细报表</a></li>
 					<li><a href="javascript:void(0)"
 						onclick="AdminSchoolListInfo()">收支汇总报表</a></li>
-					<li><a href="javascript:void(0)" onclick="AdminTeacherHour()">教师课时总表</a></li>
-					<li><a href="javascript:void(0)" onclick="AdminStudentHour()">学员课时总表</a></li>
+					<li><a href="javascript:void(0)" onclick="AdminTeacherHour()">教师课时总表(少儿)</a></li>
+					<li><a href="javascript:void(0)" onclick="AdminStudentHour()">学员课时总表(少儿)</a></li>
 					<li><a href="javascript:void(0)" onclick="AdminAddStudent()">新增学员报表</a></li>
 					<li><a href="javascript:void(0)"
-						onclick="AdminTeacherClassHour()">教师上课明细</a></li>
+						onclick="AdminTeacherClassHour()">教师上课明细(少儿)</a></li>
 					<li><a href="javascript:void(0)"
 						onclick="AdminStudentFeeInfo()">学员收费情况表</a></li>
+					<li><a href="javascript:void(0)"
+						onclick="AdminHighStudentFeeInfo()">高中收费情况表</a></li>
+					<li><a href="javascript:void(0)"
+						onclick="AdminArtStudentFeeInfo()">艺考收费情况表</a></li>
 				</ul></li>
 
 			<li class="side-nav-item"><a href="javascript: void(0);"
@@ -88,8 +92,7 @@
 			<div class="modal-body">
 				<p style="color: red; font-size: 12px;">数据清除后切不可恢复，请备份好数据，谨慎操作</p>
 				<table
-					class="table table-centered table-striped dt-responsive nowrap w-100"
-					id="products-datatable">
+					class="table table-centered table-striped dt-responsive nowrap w-100" >
 					<thead>
 						<tr>
 							<th style="width: 20px;">

@@ -33,7 +33,8 @@
 					<div class="card">
 						<!-- Logo-->
 						<div class="card-header pt-4 pb-4 text-center bg-primary">
-							<a href="adminIndex.html"> <span><img src="${Paht }/static/images/logo.jpg"></span>
+							<a href="adminIndex.html"> <span><img
+									src="${Path }/static/images/login.png"></span>
 							</a>
 						</div>
 
@@ -45,16 +46,16 @@
 							</div>
 
 							<form action="javascript:void(0)">
-								
+
 								<div class="form-group">
-									<label for="emailaddress">省份：</label> 
-									<select id="provinceId" name="provinceId" onchange="provinceChange()">
+									<label for="emailaddress">省份：</label> <select id="provinceId"
+										name="provinceId" class="form-control"
+										onchange="provinceChange()">
 										<c:forEach items="${provinceList }" var="pro">
 											<option value="${pro.provinceId }">${pro.provinceName}</option>
 										</c:forEach>
-									</select>
-									<label for="emailaddress">城市：</label> 
-									<select id="cityId" name="cityId" onchange="cityChange()">
+									</select> <label for="emailaddress">城市：</label> <select id="cityId"
+										name="cityId" class="form-control" onchange="cityChange()">
 										<option value="0">请选择城市</option>
 										<c:forEach items="${cityList }" var="city">
 											<option value="${city.cityId}">${city.cityName}</option>
@@ -62,25 +63,34 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="emailaddress">学校：</label>
-									<select id="schoolId" name="schoolId">
+									<label for="emailaddress">学校：</label> <select id="schoolId"
+										name="schoolId" class="form-control">
 										<option value="0">请选择要添加权限的学校</option>
 										<c:forEach items="${schoolList }" var="school">
 											<option value="${school.schoolId }">${school.schoolName}</option>
 										</c:forEach>
 									</select>
 								</div>
-								
 								<div class="form-group">
-									<label for="emailaddress">教师名</label> 
-									<c:forEach items="${teacherDictionListByTeacherId }" begin="0" end="0" var="t">
-										<input class="form-control" type="text" id="teacherId" name="${t.teacher.teacherId }" value="${t.teacher.teacherName }" disabled>
+									<label for="emailaddress">删除信息权限：</label> <select id="state"
+										name="state" class="form-control">
+										<option>请选择</option>
+										<option value="1">删除信息权限</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="emailaddress">教师名</label>
+									<c:forEach items="${teacherDictionListByTeacherId }" begin="0"
+										end="0" var="t">
+										<input class="form-control" type="text" id="teacherId"
+											name="${t.teacher.teacherId }"
+											value="${t.teacher.teacherName }" disabled>
 									</c:forEach>
 								</div>
-								
+
 								<div class="form-group">
-									<label for="emailaddress">已授权的学校</label> 
-									<select id="ss">
+									<label for="emailaddress">已授权的学校</label> <select id="ss"
+										class="form-control">
 										<c:forEach items="${teacherDictionListByTeacherId }" var="ta">
 											<option value="${ta.school.schoolId }">${ta.school.schoolName }</option>
 										</c:forEach>
@@ -97,7 +107,8 @@
 								</div>
 
 								<div class="form-group mb-0 text-center">
-									<button class="btn btn-primary" type="button" onclick="authorization()" >授权</button>
+									<button class="btn btn-primary" type="button"
+										onclick="authorization()">授权</button>
 								</div>
 
 							</form>

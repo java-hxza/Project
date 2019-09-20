@@ -15,12 +15,15 @@ public class TeacherHour {
 	private Integer classId;
 	private Double sumHours;
 
+	private Date endTime;
+
 	public TeacherHour() {
 		super();
 	}
 
 	public TeacherHour(Integer teacherHourId, String teacherName, Integer teacherId, Double hours, String dpName,
-			Integer dpId, Date startTime, Integer schoolId, String remarks, Integer classId, Double sumHours) {
+			Integer dpId, Date startTime, Integer schoolId, String remarks, Integer classId, Double sumHours,
+			Date endTime) {
 		super();
 		this.teacherHourId = teacherHourId;
 		this.teacherName = teacherName;
@@ -33,18 +36,24 @@ public class TeacherHour {
 		this.remarks = remarks;
 		this.classId = classId;
 		this.sumHours = sumHours;
+		this.endTime = endTime;
 	}
 
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
 
 	public Integer getClassId() {
 		return classId;
 	}
 
-
 	public void setClassId(Integer classId) {
 		this.classId = classId;
 	}
-
 
 	public Integer getTeacherHourId() {
 		return teacherHourId;

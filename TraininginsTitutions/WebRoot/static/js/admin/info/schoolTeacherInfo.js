@@ -222,6 +222,7 @@ $(function(){
 				return false;
 			}
 		}
+		
 		var teacherId = $(".customCheckes:checked").parent().parent().next().children().html();
 		
 		location.href="teacherAuthorization.html?teacherId="+teacherId;
@@ -234,6 +235,7 @@ $(function(){
 		var teacherId = $("#teacherId").attr("name");
 		var schoolId = $("#schoolId").val();
 		
+		var state = $("#state").val();
 		if(teacherId,schoolId == null){
 			alert("请选择数据");
 			return false;
@@ -244,7 +246,8 @@ $(function(){
 			url : 'authorization.html',
 			data : {
 				teacherId : teacherId,
-				schoolId : schoolId
+				schoolId : schoolId,
+				state : state
 			},
 			dataType: 'JSON',
 			type : 'post',

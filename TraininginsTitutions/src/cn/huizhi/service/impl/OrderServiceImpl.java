@@ -89,15 +89,15 @@ public class OrderServiceImpl implements OrderService {
 		return orderMapper.selectUsedIntegral(student);
 	}
 
-	public List<Order> selectChildrenFeeSituation(Integer classId, Integer studentId) {
+	public List<Order> selectChildrenFeeSituation(Integer classId, Integer studentId,String startTime,String endTime) {
 		// TODO Auto-generated method stub
-		return orderMapper.selectChildrenFeeSituation(classId, studentId);
+		return orderMapper.selectChildrenFeeSituation(classId, studentId,startTime,endTime);
 	}
 
 	@Override
-	public List<Order> selectHighsFeeSituation(Integer classId) {
+	public List<Order> selectHighsFeeSituation(Integer classId,String startTime,String endTime) {
 		// TODO Auto-generated method stub
-		return orderMapper.selectHighsFeeSituation(classId);
+		return orderMapper.selectHighsFeeSituation(classId,startTime, endTime);
 	}
 
 	@Override
@@ -121,9 +121,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> selectArtFeeSituation(Integer classId) {
+	public List<Order> selectArtFeeSituation(Integer classId,String startTime,String endTime) {
 		// TODO Auto-generated method stub
-		return orderMapper.selectArtFeeSituation(classId);
+		return orderMapper.selectArtFeeSituation(classId,startTime,endTime);
 	}
 
 	@Override

@@ -85,7 +85,31 @@
 							</div>
 						</div>
 					</div>
-
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="billing-first-name">开始日期</label> <input
+									class="form-control" type="date" id="startTime" />
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="billing-first-name">截至日期</label> <input
+									class="form-control" type="date" id="endTime" />
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="billing-first-name">班级</label> 
+								<select id="classId" class="form-control">
+									<option value="">请选择班级</option>
+									<c:forEach items="${classList }" var="cc">
+										<option value="${cc.classId }">${cc.className }</option>
+									</c:forEach>
+								</select> 
+							</div>
+						</div>
+					</div>
 					<div class="col-12">
 						<div class="card">
 							<div class="card-body">
@@ -93,11 +117,13 @@
 									<div class="col-sm-4">
 										<button type="button" class="btn btn-success btn-sm mt-2"
 											onclick="print()">打印订单</button>
+										<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+											onclick="exportExsal()">导出exsal</button>
 									</div>
 									<div class="col-sm-8">
 										<div class="text-sm-right">
-											<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-												onclick="exportExsal()">导出exsal</button>
+											<button type="button" class="btn btn-success btn-sm mt-2"
+												onclick="queryStudentHour()">查询</button>
 										</div>
 									</div>
 									<!-- end col-->
@@ -105,7 +131,7 @@
 								<!-- Question/Answer -->
 								<div class="table-responsive">
 									<!--startprint-->
-									<h3 style="display: none;text-align: center;" id="tables">学员课时总报表</h3>
+									<h3 style="text-align: center;" id="tables">学员课时总报表</h3>
 									<table
 										class="table table-centered table-striped dt-responsive nowrap w-100"
 										id="products-datatable" border="1px solid" width="100%">
@@ -116,7 +142,10 @@
 												<td>学员名称</td>
 												<td>新增课时</td>
 												<td>赠送课时</td>
+												<td>总课时</td>
 												<td>已上课时</td>
+												<td>剩余课时</td>
+												<td>缴费记录</td>
 											</tr>
 										</tbody>
 										<tbody>
@@ -128,7 +157,13 @@
 													<td class="table-user">${stu.studentName}</td>
 													<td class="table-user">${stu.order.addhour }</td>
 													<td class="table-user">${stu.order.givehour }</td>
+													<td class="table-user">${stu.order.givehour+stu.order.addhour }</td>
 													<td class="table-user">${stu.sumHour }</td>
+													<td class="table-user">${(stu.order.addhour+stu.order.givehour )-stu.sumHour }</td>
+													<td><a href="javascript:void(0);"
+														class="action-icon jiaofei" name="${stu.childStuId }">
+															<i class="mdi mdi-eye"></i>
+													</a></td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -145,7 +180,8 @@
 							<iframe id="iframe1" style="display: none"></iframe>
 							<!-- App js -->
 							<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-							<script src="${Path }/static/js/admin/info/schoolInfo.js"></script>
+							<script
+								src="${Path }/static/js/admin/classStudent/selectClassSchoolInfo.js"></script>
 							<script src="${Path }/static/js/admin/leftSidebar.js"></script>
 </body>
 </html>

@@ -39,6 +39,15 @@
 			<if test="schoolId !=null and schoolId !=''">
 				th.schoolId =#{schoolId} 
 			</if>
+			<if test="startTime !=null and startTime !=''">
+				and date(th.startTime) between #{startTime} and #{endTime}
+			</if>
+			<if test="teacherId !=null and teacherId !=''">
+				and th.teacherId =#{teacherId} 
+			</if>
+			<if test="dpId !=null and dpId !=''">
+				and th.dpId =#{dpId} 
+			</if>
 			group by th.teacherId  
 		</where> 
 	</select>

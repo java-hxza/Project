@@ -11,6 +11,7 @@ public class Teacher {
 	private String telephone;
 	private Integer departmentId;
 	private String loginName;
+	private Integer state;
 
 	/**
 	 * 教师权限
@@ -35,7 +36,8 @@ public class Teacher {
 
 	public Teacher(Integer teacherId, String teacherName, String loginPassword, Integer teacherTypeId,
 			Integer feeCategory, String remarks, String telephone, Integer departmentId, String loginName,
-			TeacherDiction teacherDiction, School school, TeacherType teacherType, DepartMent deparMent) {
+			Integer state, TeacherDiction teacherDiction, School school, TeacherType teacherType,
+			DepartMent deparMent) {
 		super();
 		this.teacherId = teacherId;
 		this.teacherName = teacherName;
@@ -46,10 +48,19 @@ public class Teacher {
 		this.telephone = telephone;
 		this.departmentId = departmentId;
 		this.loginName = loginName;
+		this.state = state;
 		this.teacherDiction = teacherDiction;
 		this.school = school;
 		this.teacherType = teacherType;
 		this.deparMent = deparMent;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
 	}
 
 	public String getLoginName() {

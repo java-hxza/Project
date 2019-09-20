@@ -1,5 +1,6 @@
 package cn.huizhi.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,8 +15,8 @@ public class ChildStuReistrationServiceImpl implements ChildStuReistrationServic
 	@Resource
 	ChildStuReistrationMapper childStuReistrationMapper;
 	
-	public List<ChildStuReistration> findchildStuReistrationListByClass(Integer classId) {
-		return childStuReistrationMapper.childStuReistrationListByClass(classId);
+	public List<ChildStuReistration> findchildStuReistrationListByClass(Integer classId,String startTime,String endTime) {
+		return childStuReistrationMapper.childStuReistrationListByClass(classId, startTime, endTime);
 	}
 
 	@Override

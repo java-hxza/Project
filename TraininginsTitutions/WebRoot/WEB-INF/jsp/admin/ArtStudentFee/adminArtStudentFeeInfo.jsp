@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <c:set scope="request" value="${pageContext.request.contextPath }"
 	var="Path" />
 <!DOCTYPE html>
@@ -23,7 +23,6 @@
 	type="text/css" />
 <link href="${Path }/static/css/style.css" rel="stylesheet"
 	type="text/css" />
-
 </head>
 
 <body>
@@ -45,6 +44,7 @@
 						<div class="container-fluid">
 							<div class="navbar-custom">
 								<ul class="list-unstyled topbar-right-menu float-right mb-0">
+
 
 									<li class="dropdown notification-list"><a
 										class="nav-link dropdown-toggle nav-user arrow-none mr-0"
@@ -88,112 +88,109 @@
 												<li class="breadcrumb-item active">FAQ</li>
 											</ol>
 										</div>
-										<h4 class="page-title">教师课时总汇</h4>
+										<h4 class="page-title">学校信息</h4>
 									</div>
 								</div>
 							</div>
+							<!-- end page title -->
+
 							<!-- end row -->
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="billing-first-name">开始日期</label> <input
-											class="form-control" type="date" id="startTime" />
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="billing-first-name">截至日期</label> <input
-											class="form-control" type="date" id="endTime" />
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="billing-first-name">教师</label> <select id="teacherId"
-											class="form-control">
-												<option value="">请选教师</option>
-												<c:forEach items="${teachers }" var="t">
-													<option value="${t.teacherId }">${t.teacherName }</option>
-												</c:forEach>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="billing-first-name">课程</label> <select id="dpId"
-											class="form-control">
-											<option value="">请选择课程类型</option>
-											<c:forEach items="${departmentOfPediatrics }" var="dp">
-												<option value="${dp.dpId }">${dp.dpTypeName }</option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-							</div>
+
 							<div class="col-12">
 								<div class="card">
 									<div class="card-body">
 										<div class="row mb-2">
 											<div class="col-sm-4">
 												<button type="button" class="btn btn-success btn-sm mt-2"
-													onclick="print()">打印订单</button>
-												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-													onclick="exportExsal()">导出exsal</button>
+													onclick="createSchool()">创建学校</button>
 											</div>
 											<div class="col-sm-8">
 												<div class="text-sm-right">
 													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-														onclick="queryTeacherInfo()">查询</button>
+														onclick="createUser()">创建账号</button>
+													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+														onclick="createTeacher()">创建教师账号</button>
 												</div>
 											</div>
+											<!-- end col-->
 										</div>
-									</div>
 
-									<!-- end col -->
-									<!-- end row -->
-									<!-- Question/Answer -->
-									<div class="table-responsive">
-										<!--startprint-->
-										<h3 style="display: none;text-align: center;" id="tables">教师课时总报表</h3>
-										<table
-											class="table table-centered table-striped dt-responsive nowrap w-80"
-											id="products-datatable" border="1px solid" width="100%">
-											<thead>
-												<tr>
-
-													<td>序</td>
-													<td>校区</td>
-													<td>教师名称</td>
-													<td>课时名称</td>
-													<td>教师总课时</td>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${teacherHourList }" var="th"
-													varStatus="status">
+										<!-- end row -->
+										<!-- Question/Answer -->
+										<div class="table-responsive">
+											<table
+												class="table table-centered table-striped dt-responsive nowrap w-100"
+												id="products-datatable">
+												<thead>
 													<tr>
-														<td class="table-user">${status.index }</td>
-														<td class="table-user">${schoolName}</td>
-														<td class="table-user">${th.teacherName}</td>
-														<td class="table-user">${th.dpName }</td>
-														<td class="table-user">${th.sumHours }</td>
+														<th style="width: 20px;">
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" class="custom-control-input"
+																	id="customCheck1"> <label
+																	class="custom-control-label" for="customCheck1">&nbsp;</label>
+															</div>
+														</th>
+														<th>学校编号</th>
+														<th>学校名称</th>
+														<th>学校所属城市</th>
+														<th>学校备注</th>
+														<th>学校所属省份</th>
+														<th>学校所属级别</th>
 													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-										<!--endprint-->
-									</div>
-									<iframe id="iframe1" style="display: none"></iframe>
-									<!-- ============================================================== -->
-									<!-- End Page content -->
-									<!-- ============================================================== -->
-								</div>
-								<!-- END wrapper -->
+												</thead>
+												<tbody>
+													<c:forEach items="${schoolListAll }" var="school">
+														<c:if test="${school.schoolType == 3 }">
+															<tr class="schoolId">
+																<td>
+																	<div class="custom-control custom-checkbox">
+																		<input type="checkbox" class="custom-control-input"
+																			id="customCheck2"> <label
+																			class="custom-control-label" for="customCheck2">&nbsp;</label>
+																	</div>
+																</td>
+																<td class="table-user"><a
+																	href="javascript:void(0);"
+																	class="text-body font-weight-semibold">${school.schoolId }</a>
+																</td>
+																<td class="table-user"><a
+																	href="javascript:void(0);"
+																	class="text-body font-weight-semibold">${school.schoolName }</a>
+																</td>
+																<td class="table-user"><a
+																	href="javascript:void(0);"
+																	class="text-body font-weight-semibold">${school.city.cityName }</a>
+																</td>
+																<td class="table-user"><a
+																	href="javascript:void(0);"
+																	class="text-body font-weight-semibold">${school.schoolRemarks }</a>
+																</td>
+																<td class="table-user"><a
+																	href="javascript:void(0);"
+																	class="text-body font-weight-semibold">${school.province.provinceName }</a>
+																</td>
+																<td class="table-user"><a
+																	href="javascript:void(0);"
+																	class="text-body font-weight-semibold">艺考</a></td>
+															</tr>
+														</c:if>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
 
-								<!-- App js -->
-								<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-								<script src="${Path }/static/js/admin/teacher/teacherInfo.js"></script>
-								<script src="${Path }/static/js/admin/leftSidebar.js"></script>
+
+
+										<!-- ============================================================== -->
+										<!-- End Page content -->
+										<!-- ============================================================== -->
+
+									</div>
+									<!-- App js -->
+									<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
+									<script type="text/javascript"
+										src="${Path }/static/js/admin/leftSidebar.js"></script>
+									<script type="text/javascript"
+										src="${Path }/static/js/admin/ArtStudentFee/adminArtStudentFeeInfo.js"></script>
 </body>
 </html>

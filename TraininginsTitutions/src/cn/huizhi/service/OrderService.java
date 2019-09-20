@@ -98,7 +98,7 @@ public interface OrderService {
 	 * @param classId
 	 * @return
 	 */
-	public List<Order> selectChildrenFeeSituation(Integer classId, Integer studentId);
+	public List<Order> selectChildrenFeeSituation(Integer classId, Integer studentId,String startTime,String endTime);
 
 	/**
 	 * 查询高中学生收费情况
@@ -106,7 +106,7 @@ public interface OrderService {
 	 * @param classId
 	 * @return
 	 */
-	public List<Order> selectHighsFeeSituation(Integer classId);
+	public List<Order> selectHighsFeeSituation(Integer classId,String startTime,String endTime);
 
 	/**
 	 * 查询学生收费
@@ -138,7 +138,7 @@ public interface OrderService {
 	 * @param classId
 	 * @return
 	 */
-	public List<Order> selectArtFeeSituation(Integer classId);
+	public List<Order> selectArtFeeSituation(Integer classId,String startTime,String endTime);
 	
 
 	/**

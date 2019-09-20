@@ -24,4 +24,11 @@ public interface SchoolService {
 	 * @return
 	 */
 	public int addSchool(School school);
+	
+	/**
+	 * 根据学校主键查询学校信息
+	 * @return
+	 */
+	public School selectSchoolById(Integer schoolId);
+	
 }

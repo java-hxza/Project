@@ -17,7 +17,7 @@
 		select u.*
 		from user u,school sc,userdiction ud
 		<where>
-			ud.schoolId = sc.schoolId and ud.userId = u.uId 
+			ud.schoolId = sc.schoolId and ud.userId = u.uId
 			<if test="loginName!=null and  loginName!=''">
 				and u.loginName=#{loginName}
 			</if>
@@ -32,13 +32,16 @@
 	<!-- 创建用户 -->
 	<insert id="insertUser" parameterType="User">
 		INSERT INTO
-		traininginstitutions.user ( loginName, loginPassword,userTypeId, telephone, remarks)VALUES(
-		#{loginName}, #{loginPassword},
+		traininginstitutions.user ( loginName,
+		loginPassword,userTypeId, telephone, remarks)VALUES(
+		#{loginName},
+		#{loginPassword},
 		#{userTypeId}, #{telephone},
 		#{remarks})
-		<selectKey keyProperty="uId" order="AFTER" resultType="java.lang.Integer">  
-       		 SELECT LAST_INSERT_ID()  
-   		</selectKey>  
+		<selectKey keyProperty="uId" order="AFTER"
+			resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
 
 
@@ -64,16 +67,17 @@
 		#{schoolId}
 		, userTypeId = #{userTypeId} , telephone = #{telephone} ,
 		remarks =
-		#{remarks}  WHERE uId = #{uId} ;
+		#{remarks} WHERE uId = #{uId} ;
 	</update>
 
 
 	<delete id="delTeacher">
-		DELETE FROM traininginstitutions.user WHERE uId = #{0}
+		DELETE FROM traininginstitutions.user WHERE uId =
+		#{0}
 	</delete>
 
-	<!--根据科别查询老师-->
-	
+	<!--根据科别查询老师 -->
+
 
 	<insert id="addTeacher" parameterType="User">
 		INSERT INTO
@@ -83,77 +87,93 @@
 		#{loginName}, #{loginPassword},
 		#{schoolId}, 3, #{telephone},
 		#{remarks})
-	  	
+
 	</insert>
-	<!--查询所有管理员-->
+	<!--查询所有管理员 -->
 	<sql id="selectListAllCol">
-		 u.loginName u_loginName,
-		 u.loginPassword u_loginPassword,
-		 u.remarks u_remarks,
-		 u.telephone u_telephone,
-		 u.uId u_uId,
-		 u.userTypeId u_userTypeId,
-		 ut.userTypeId ut_userTypeId,
-		 ut.userTypeName ut_userTypeName,
-		 sc.schoolId sc_schoolId,
-		 sc.cityId sc_cityId,
-		 sc.cityProperId sc_cityProperId,
-		 sc.schoolName sc_schoolName,
-		 sc.schoolRemarks sc_schoolRemarks
+		u.loginName u_loginName,
+		u.loginPassword u_loginPassword,
+		u.remarks u_remarks,
+		u.telephone u_telephone,
+		u.uId u_uId,
+		u.userTypeId u_userTypeId,
+		ut.userTypeId ut_userTypeId,
+		ut.userTypeName ut_userTypeName,
+		sc.schoolId sc_schoolId,
+		sc.cityId sc_cityId,
+		sc.cityProperId sc_cityProperId,
+		sc.schoolName sc_schoolName,
+		sc.schoolRemarks sc_schoolRemarks
 	</sql>
 	<resultMap type="User" id="selectListAllMap">
-		<id column="u_uId" property="uId"/>
-		<result column="u_loginName" property="loginName"/>
-		<result column="u_loginPassword" property="loginPassword"/>
-		<result column="u_remarks" property="remarks"/>
-		<result column="u_telephone" property="telephone"/>
-		<result column="u_userTypeId" property="userTypeId"/>
+		<id column="u_uId" property="uId" />
+		<result column="u_loginName" property="loginName" />
+		<result column="u_loginPassword" property="loginPassword" />
+		<result column="u_remarks" property="remarks" />
+		<result column="u_telephone" property="telephone" />
+		<result column="u_userTypeId" property="userTypeId" />
 		<association property="school" javaType="School">
-			<id column="sc_schoolId" property="schoolId"/>
-			<result column="sc_cityId" property="cityId"/>
-			<result column="sc_cityProperId" property="cityProperId"/>
-			<result column="sc_schoolName" property="schoolName"/>
-			<result column="sc_schoolRemarks" property="schoolRemarks"/>
+			<id column="sc_schoolId" property="schoolId" />
+			<result column="sc_cityId" property="cityId" />
+			<result column="sc_cityProperId" property="cityProperId" />
+			<result column="sc_schoolName" property="schoolName" />
+			<result column="sc_schoolRemarks" property="schoolRemarks" />
 		</association>
 		<association property="userType" javaType="UserType">
-			<id column="ut_userTypeId" property="userTypeId"/>
-			<result column="ut_userTypeName" property="userTypeName"/>
+			<id column="ut_userTypeId" property="userTypeId" />
+			<result column="ut_userTypeName" property="userTypeName" />
 		</association>
 	</resultMap>
-	
+
 	<select id="selectListAll" resultMap="selectListAllMap">
-		select<include refid="selectListAllCol"/>
+		select
+		<include refid="selectListAllCol" />
 		from user u,school sc ,userdiction ud,usertype ut
 		<where>
-		 	u.uId = ud.userId and ut.userTypeId = u.userTypeId and sc.schoolId = ud.schoolId
+			u.uId = ud.userId and ut.userTypeId = u.userTypeId and sc.schoolId =
+			ud.schoolId
 			<if test="uId !=null and uId!=''">
 				and u.uId = #{uId}
 			</if>
 		</where>
 	</select>
-	<!--修改操作员信息-->
+	<!--修改操作员信息 -->
 	<update id="updateUser" parameterType="User">
 		update user
-		set
-		loginName = #{loginName} ,
-		loginPassword = #{loginPassword} ,
-		schoolId = #{schoolId} ,
-		userTypeId = #{userTypeId} ,
-		telephone = #{telephone} ,
-		remarks = #{remarks}
+		<set>
+			<if test="loginName !=null and loginName !=''">
+				loginName = #{loginName} ,
+			</if>
+			<if test="loginPassword !=null and loginPassword !=''">
+				loginPassword = #{loginPassword} ,
+			</if>
+			<if test="userTypeId !=null and userTypeId !=''">
+				userTypeId = #{userTypeId} ,
+			</if>
+			<if test="telephone !=null and telephone !=''">
+				telephone = #{telephone} ,
+			</if>
+			<if test="remarks !=null and remarks !=''">
+				remarks = #{remarks}
+			</if>
+			<if test="state !=null and state !=''">
+				state = #{state}
+			</if>
+		</set>
+
 		<where>
 			<if test="uId!=null and uId !=''">
 				uId = #{uId}
 			</if>
 		</where>
 	</update>
-	
+
 	<delete id="deleteUser" parameterType="java.lang.Integer">
-		delete from  user 
+		delete from user
 		<where>
 			<if test="uId != null and  uId != ''">
-				uId = #{uId} 
+				uId = #{uId}
 			</if>
-		</where> 
+		</where>
 	</delete>
 </mapper>

@@ -65,7 +65,15 @@
 		insert into school  (schoolName,  cityId,  schoolRemarks,cityProperId,schoolType )
 			values (#{schoolName},#{cityId},#{schoolRemarks},#{cityProperId},#{schoolType})
 	</insert>
-	
-
+	<!--根据学校主键查询学校信息-->
+	<select id="selectSchoolById" resultType="School" parameterType="java.lang.Integer">	
+		select <include refid="schoolCol"/>
+		from school
+		<where>
+			<if test="schoolId != null and schoolId != ''">
+				schoolId = #{schoolId}
+			</if>
+		</where>
+	</select>
 	
 </mapper>
