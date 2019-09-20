@@ -238,8 +238,7 @@ public class HighesController {
 	public Object AddExpenditureitemses(@RequestParam String expenditureitemsName, @RequestParam String category) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
-		if (expenditureitemsService.addExpenditureitems(expenditureitemsName, category,
-				schoolId.toString()) == 1) {
+		if (expenditureitemsService.addExpenditureitems(expenditureitemsName, category, schoolId.toString()) == 1) {
 			map.put("add", "1");
 		} else {
 			map.put("add", "0");
@@ -389,7 +388,8 @@ public class HighesController {
 			@RequestParam Integer departmentofpediatricsId, @RequestParam Integer addhour,
 			@RequestParam Integer givehour, @RequestParam String remarks, @RequestParam Integer paymentmethodId,
 			@RequestParam String date, @RequestParam Integer classId, @RequestParam Double integral,
-			@RequestParam Integer giftId, @RequestParam Integer giftNumber,@RequestParam Integer activityId,@RequestParam Double discount,@RequestParam String startTimes) {
+			@RequestParam Integer giftId, @RequestParam Integer giftNumber, @RequestParam Integer activityId,
+			@RequestParam Double discount, @RequestParam String startTimes) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		Order order = new Order();
 		order.setStuId(stuId);
@@ -495,7 +495,8 @@ public class HighesController {
 			@RequestParam String lastdate, @RequestParam String personliable, @RequestParam String remarks,
 			@RequestParam Integer paymentmethodId, @RequestParam Integer classId, @RequestParam Integer giftId,
 			@RequestParam Integer giftNumber, @RequestParam Double integral, @RequestParam Integer hour,
-			@RequestParam String date, @RequestParam Double discount,@RequestParam Integer activityId,@RequestParam String startTimes,@RequestParam String feecateMoney) {
+			@RequestParam String date, @RequestParam Double discount, @RequestParam Integer activityId,
+			@RequestParam String startTimes, @RequestParam String feecateMoney) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		Order order = new Order();
 		try {
@@ -589,7 +590,7 @@ public class HighesController {
 	public Object AddChargeOthers(@RequestParam Integer stuId, @RequestParam String startTime,
 			@RequestParam String feecateId, @RequestParam Double dpMoney, @RequestParam String personliable,
 			@RequestParam String remarks, @RequestParam Integer paymentmethodId, @RequestParam String date,
-			@RequestParam Integer classId,@RequestParam String startTimes) {
+			@RequestParam Integer classId, @RequestParam String startTimes) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		Order order = new Order();
 		order.setIdentification(0);
@@ -893,7 +894,7 @@ public class HighesController {
 	public Object AddOrderExpenditure(@RequestParam Integer stuId, @RequestParam String startTime,
 			@RequestParam Double feecategoryMoney, @RequestParam Integer expenditureitemsId,
 			@RequestParam Integer paymentmethodId, @RequestParam String personliable, @RequestParam String remarks,
-			@RequestParam String date, @RequestParam Integer classId,@RequestParam String startTimes) {
+			@RequestParam String date, @RequestParam Integer classId, @RequestParam String startTimes) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		Order order = new Order();
 		order.setIdentification(1);
@@ -1097,6 +1098,23 @@ public class HighesController {
 	}
 
 	/**
+	 * 查询参与活动订单
+	 * 
+	 * @param startTime
+	 * @param activityIdName
+	 * @return
+	 */
+	@RequestMapping("selectActivityOrderes.html")
+	@ResponseBody
+	public Object selectActivityOrderes(@RequestParam String startTime, @RequestParam Integer activityId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		List<Order> order = orderService.selectActivityOrders(startTime, activityId,
+				(Integer) session.getAttribute("schoolId"));
+		map.put("order", order);
+		return JSONArray.toJSONString(map);
+	}
+
+	/**
 	 * 添加学校活动
 	 * 
 	 * @param activity
@@ -1144,6 +1162,22 @@ public class HighesController {
 		List<Gift> gift = giftService.selectGift((Integer) session.getAttribute("schoolId"));
 		model.addAttribute("gift", gift);
 		return "high/Gift";
+	}
+
+	/**
+	 * 查询赠品报表统计
+	 * 
+	 * @param startTime
+	 * @param giftId
+	 * @return
+	 */
+	@RequestMapping("selectGiftes.html")
+	@ResponseBody
+	public Object selectGiftes(@RequestParam String startTime, @RequestParam Integer giftId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		List<Order> order = orderService.selectGiftes(startTime, giftId, (Integer) session.getAttribute("schoolId"));
+		map.put("order", order);
+		return JSONArray.toJSONString(map);
 	}
 
 	/**
@@ -1231,8 +1265,9 @@ public class HighesController {
 			List<Order> order = orderService.selectUsedIntegral(sql);
 			model.addAttribute("order", order);
 		}
+		List<Class> classes = classService.selectMyClass((Integer) session.getAttribute("schoolId"));
 		model.addAttribute("student", student);
-
+		model.addAttribute("classes", classes);
 		return "high/GiftUsedIntegral";
 	}
 

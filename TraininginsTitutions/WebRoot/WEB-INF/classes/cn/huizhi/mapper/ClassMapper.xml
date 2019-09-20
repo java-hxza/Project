@@ -263,4 +263,8 @@
 		</where>
 	</select>
 
+	<select id="selectMyClass" parameterType="java.lang.Integer" resultType="Class">
+		SELECT * FROM class WHERE schoolId=#{0}
+	</select>
+
 </mapper>

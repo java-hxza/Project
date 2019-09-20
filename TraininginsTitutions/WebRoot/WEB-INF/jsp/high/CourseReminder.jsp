@@ -185,7 +185,7 @@
 											<select class="form-control feecateId" id="example-select">
 												<option value="0">---请选择---</option>
 												<c:forEach items="${feeCategory }" var="f">
-													<option value="${f.chargeTypeId }" name="${f.chargeMoney }">${f.chargeTypeName}</option>
+													<option value="${f.chargeTypeId }" >${f.chargeTypeName}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -413,7 +413,7 @@
 		$(document).ready(function() {
 			$(".Exports").click(function() {
 				if ($(".adds td").val() != "") {
-					alert("没有可以打印的数据！")
+					alert("没有可以导出的数据！")
 					return false;
 				}
 				excel = new ExcelGen({

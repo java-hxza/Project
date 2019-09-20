@@ -124,7 +124,37 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
-								<h4 style="text-align:center">赠送礼品</h4>
+								<h4 style="text-align:center">赠送礼品管理</h4>
+								<div class="row shows" style="display: none;">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<label>订单日期</label>
+										<div class="input-group">
+											<button class="btn btn-dark  " type="button"
+												onclick="DaYin()">打印</button>
+											&nbsp; <input class="form-control Times" id="example-date"
+												type="date" name="date">
+											<button class="btn btn-dark  " type="button" onclick="Hour()">查找</button>
+										</div>
+									</div>
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<label for="example-select">赠品名称</label>
+										<div class="input-group">
+											<select class="form-control gifts"
+												id="example-select">
+												<option value="0">---请选择---</option>
+												<c:forEach items="${gift }" var="g">
+													<option value="${g.giftId }">${g.giftName }</option>
+												</c:forEach>
+											</select>
+											<button class="btn btn-dark  " type="button" onclick=Time()>查找</button>
+											&nbsp;
+											<button class="btn btn-dark  " type="button"
+												onclick="Excels()" style="margin-bottom: 0px">导出Excel</button>
+										</div>
+									</div>
+								</div>
 								<div class="card-body showgiftes">
 									<div class="row mb-2">
 										<div class="col-sm-4">
@@ -136,12 +166,14 @@
 												class="mdi mdi-plus-circle mr-2"></i> 修改</a> <a
 												href="javascript:void(0);" class="btn btn-danger mb-2 del"
 												onclick="delgiftes()"><i
-												class="mdi mdi-plus-circle mr-2"></i> 删除</a>
+												class="mdi mdi-plus-circle mr-2"></i> 删除</a> <a
+												href="javascript:void(0);" class="btn btn-danger mb-2 del"
+												onclick="GiftBB()"><i class="mdi mdi-plus-circle mr-2"></i>
+												报表</a>
 										</div>
 
 										<!-- end col-->
 									</div>
-
 									<div class="table-responsive mt-4">
 										<table class="table table-bordered table-centered mb-0">
 											<thead class="thead-light">
@@ -400,5 +432,20 @@
 			src="${Path }/static/js/highes/leftSidebar.js"></script>
 		<script type="text/javascript" src="${Path }/static/js/highes/Gift.js"></script>
 		<!-- third party js ends -->
+		<script type="text/javascript">
+		$(document).ready(function() {
+			Excels = function() {
+				if ($(".adds td").val() != "") {
+					alert("没有可以导出的数据！")
+					return false;
+				}
+				excel = new ExcelGen({
+					"src_id" : "delSts",
+					"show_header" : true
+				});
+				excel.generate("赠品统计表");
+			};
+		});
+	</script>
 </body>
 </html>

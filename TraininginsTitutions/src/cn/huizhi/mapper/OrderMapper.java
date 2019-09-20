@@ -143,4 +143,21 @@ public interface OrderMapper {
 	 */
 	public List<Order> selectStduentDay(@Param("time") Integer time, @Param("schoolId") Integer schoolId,@Param("studentName") String studentName,@Param("number") Integer number);
 
+	/**
+	 * 查找参与活动订单
+	 * @param startTime
+	 * @param activityId
+	 * @return
+	 */
+	public List<Order> selectActivityOrders(@Param("startTime")String startTime,@Param("activityId")Integer activityId,@Param("schoolId")Integer schoolId);
+
+	/**
+	 * 查找获得赠品订单
+	 * @param startTime
+	 * @param giftId
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Order> selectGiftes(@Param("startTime")String startTime,@Param("giftId")Integer giftId,@Param("schoolId")Integer schoolId);
+
 }

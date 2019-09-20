@@ -3,6 +3,7 @@ package cn.huizhi.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 
 import cn.huizhi.pojo.Order;
 
@@ -139,5 +140,21 @@ public interface OrderService {
 	 * @return
 	 */
 	public List<Order> selectArtFeeSituation(Integer classId);
+	
+	/**
+	 * 查找参与活动订单
+	 * @param startTime
+	 * @param activityId
+	 * @return
+	 */
+	public List<Order> selectActivityOrders(String startTime,Integer activityId,Integer schoolId);
 
+	/**
+	 * 查找获得赠品订单
+	 * @param startTime
+	 * @param giftId
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Order> selectGiftes(String startTime,Integer giftId,Integer schoolId);
 }

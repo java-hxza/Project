@@ -121,55 +121,82 @@
 					</div>
 					<!-- end page title -->
 
-					<div class="row">
+					<div class="row dayin">
 						<div class="col-12">
-							<div class="card">
-								<h3 style="text-align:center">赠品税分统计</h3>
-								<div class="card-body ">
-									<div class="table-responsive mt-4">
-										<table class="table table-bordered table-centered mb-0">
-											<thead class="thead-light">
-												<tr>
-													<th>校区信息</th>
-													<th>班级名称</th>
-													<th>日期</th>
-													<th>学员姓名</th>
-													<th>赠品名称</th>
-													<th>赠品数量</th>
-													<th>总积分</th>
-													<th>已使用积分</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${ student}" var="s">
-													<tr>
-														<td>${s.school }</td>
-														<td>${s.classes.className }</td>
-														<td></td>
-														<td>${s.studentName }</td>
-														<td class="studentId" name="${s.studentId }"></td>
-														<td></td>
-														<td>${s.integral }</td>
-														<td>${s.usedIntegral }</td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-
-										<div class="col-md-6" style="display: none;">
-											<div class="form-group mb-3">
-												<label for="example-select">赠品</label> <select
-													class="form-control order" id="example-select">
-													<c:forEach items="${order }" var="o">
-														<option value="${o.stuId }" class="${o.giftNumber }">${o.gift.giftName}</option>
-													</c:forEach>
-												</select>
-											</div>
-										</div>
-
-									</div>
-									<!-- end card-body-->
+							<div class="row">
+								<div class="col-md-12">
+									<h3 style="text-align:center">赠品税分统计</h3>
 								</div>
+								<div class="col-md-1"></div>
+								<div class="col-md-4">
+									<label>班级名称</label>
+									<div class="input-group">
+										<button class="btn btn-dark  " type="button" onclick="DaYin()">打印</button>
+										&nbsp; <select class="form-control classes"
+											id="example-select">
+											<option value="0">---请选择---</option>
+											<c:forEach items="${classes }" var="c">
+												<option value="${c.classId }">${c.className }</option>
+											</c:forEach>
+										</select>
+										<button class="btn btn-dark  Hour" type="button">查找</button>
+									</div>
+								</div>
+								<div class="col-md-1"></div>
+								<div class="col-md-4">
+									<label for="example-select">学生姓名</label>
+									<div class="input-group">
+										<input class="form-control studentName" type="text"
+											id="billing-first-name" placeholder="学生姓名" />
+										<button class="btn btn-dark  Time" type="button">查找</button>
+										&nbsp;
+										<button class="btn btn-dark  " type="button"
+											onclick="Excels()" style="margin-bottom: 0px">导出Excel</button>
+									</div>
+								</div>
+								<!--startprint-->
+								<table class="table dt-responsive nowrap"
+									id="basic-datatable" width="100%" border="1px" cellspacing="0">
+									<thead class="thead-light">
+										<tr>
+											<th>校区信息</th>
+											<th>班级名称</th>
+											<th>学员姓名</th>
+											<th>赠品名称</th>
+											<th>赠品数量</th>
+											<th>总积分</th>
+											<th>已使用积分</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${ student}" var="s">
+											<tr class="GiftActivity">
+												<td class="school"></td>
+												<td class="selectClasses">${s.classes.className }</td>
+												<td class="selectStudentName">${s.studentName }</td>
+												<td class="studentId" name="${s.studentId }"></td>
+												<td></td>
+												<td>${s.integral }</td>
+												<td>${s.usedIntegral }</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+								<!--endprint-->
+								<iframe id='iframe1' style='display: none'></iframe>
+								<div class="col-md-6" style="display: none;">
+									<div class="form-group mb-3">
+										<label for="example-select">赠品</label> <select
+											class="form-control order" id="example-select">
+											<c:forEach items="${order }" var="o">
+												<option value="${o.stuId }" class="${o.giftNumber }"
+													school="${o.school.schoolName }">${o.gift.giftName}</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+
+								<!-- end card-body-->
 								<!-- end card-->
 							</div>
 						</div>
@@ -356,5 +383,32 @@
 	<script type="text/javascript"
 		src="${Path }/static/js/highes/GiftUsedIntegral.js"></script>
 	<!-- third party js ends -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			Excels = function() {
+				var num = 0;
+				for (var i = 0; i < $(".GiftActivity").length; i++) {
+					if ($(".GiftActivity").eq(i).css('display') == "none") {
+						num = num + 1;
+					}
+				}
+				if (num == $(".GiftActivity").length) {
+					alert("没有可以导出的数据！")
+					return false;
+				}
+				for (var i = 0; i < $(".GiftActivity").length; i++) {
+					if ($(".GiftActivity").eq(i).css('display') == "none") {
+						$(".GiftActivity").eq(i).remove();
+						i = i - 1;
+					}
+				}
+				excel = new ExcelGen({
+					"src_id" : "basic-datatable",
+					"show_header" : true
+				});
+				excel.generate("赠品税分统计表");
+			};
+		});
+	</script>
 </body>
 </html>

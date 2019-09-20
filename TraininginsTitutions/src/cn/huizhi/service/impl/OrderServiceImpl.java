@@ -126,4 +126,16 @@ public class OrderServiceImpl implements OrderService {
 		return orderMapper.selectArtFeeSituation(classId);
 	}
 
+	@Override
+	public List<Order> selectActivityOrders(String startTime, Integer activityId, Integer schoolId) {
+		return orderMapper.selectActivityOrders(startTime, activityId, schoolId);
+	}
+
+	@Override
+	public List<Order> selectGiftes(String startTime, Integer giftId, Integer schoolId) {
+		return orderMapper.selectGiftes(startTime, giftId, schoolId);
+	}
+	
+	
+
 }

@@ -85,4 +85,11 @@ public interface ClassService {
 	 * @return
 	 */
 	public List<Class> selectClass2(Integer schoolId,Integer classType);
+	
+	/**
+	 * 查询本校的班级
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Class> selectMyClass(Integer schoolId);
 }

@@ -194,6 +194,7 @@ $(function() {
 	}
 
 	$(".DaYins").click(function() {
+		$("#ChargePeriod").css("width","1550px");
 		$(".WBK").parent().text($(".WBK").val());
 		$(".WBK").remove();
 		bdhtml = $("#dayin").html();
@@ -210,5 +211,6 @@ $(function() {
 		iwindow.document.close();
 		iwindow.document.write(prnhtml);
 		iwindow.print(); //调用浏览器的打印功能打印指定区域
+		$("#ChargePeriod").css("width","100%");
 	});
 });

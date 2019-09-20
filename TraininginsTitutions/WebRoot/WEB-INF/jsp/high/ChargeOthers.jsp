@@ -158,7 +158,7 @@
 																<div class="card-body">
 																	<h4 style="text-align:center">全国统一收款收据</h4>
 																	<div class="row mb-2">
-																		<table id="ChargePeriod" border="1" width="1600">
+																		<table id="ChargePeriod" border="1" width="100%">
 																			<tr>
 																				<th width="400" height="20px" class="RiQi"
 																					style="text-align: left;"></th>

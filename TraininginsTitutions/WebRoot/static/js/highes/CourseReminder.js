@@ -118,6 +118,7 @@ $(function() {
 		iwindow.document.close();
 		iwindow.document.write(prnhtml);
 		iwindow.print(); //调用浏览器的打印功能打印指定区域
+		alert();
 	};
 	
 });
