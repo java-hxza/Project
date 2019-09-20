@@ -132,8 +132,6 @@
 													<button type="button" class="btn btn-success mb-2 mr-1">
 														<i class="mdi mdi-settings"></i>
 													</button>
-													<button type="button" class="btn btn-light mb-2 mr-1"
-														onclick="createChildrenStudent()">添加学生</button>
 												</div>
 											</div>
 											<!-- end col-->
@@ -395,7 +393,7 @@
 		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
 		<script src="${Path }/static/js/children/childrenIndex.js"></script>
 		<script
-			src="${Path }/static/js/admin/teacher/selectSchoolTeacherClassHourInfo.js"></script>
+			src="${Path }/static/js/root/teacher/selectSchoolTeacherClassHourInfo.js"></script>
 
 		<!-- third party js ends -->
 

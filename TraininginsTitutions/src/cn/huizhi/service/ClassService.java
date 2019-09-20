@@ -92,4 +92,10 @@ public interface ClassService {
 	 * @return
 	 */
 	public List<Class> selectMyClass(Integer schoolId);
+	
+	/*
+	 * 删除表数据
+	 * @return
+	 */
+	public Integer delClassTable();
 }

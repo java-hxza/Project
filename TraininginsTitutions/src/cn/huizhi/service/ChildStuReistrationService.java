@@ -1,5 +1,6 @@
 package cn.huizhi.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +13,7 @@ public interface ChildStuReistrationService {
 	 * @param classId
 	 * @return
 	 */
-	public List<ChildStuReistration> findchildStuReistrationListByClass(Integer classId);
+	public List<ChildStuReistration> findchildStuReistrationListByClass(Integer classId,String startTime,String endTime);
 	
 	
 	/**

@@ -93,5 +93,25 @@ public interface StudentMapper {
 	 * @return
 	 */
 	public Integer updateStuHour(List<Student> list);
+	
+	/**
+	 * 清空表数据
+	 * @return
+	 */
+	public Integer delStudentTable();
+	
+	/**
+	 * 艺考收费情况
+	 * @param map
+	 * @return
+	 */
+	public List<Student> findArtStudentResverSchoolInfo(@Param("map")Map<String, Object> map);
+	
+	/**
+	 * 高中收费情况
+	 * @param map
+	 * @return
+	 */
+	public List<Student> findHighStudentResverSchoolInfo(@Param("map")Map<String, Object> map);
 
 }

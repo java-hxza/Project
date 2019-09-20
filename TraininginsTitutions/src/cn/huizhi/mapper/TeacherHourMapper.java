@@ -18,7 +18,7 @@ public interface TeacherHourMapper {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<TeacherHour> selecTeacherHourListBySchoolId(@Param("schoolId")Integer schoolId);
+	public List<TeacherHour> selecTeacherHourListBySchoolId(TeacherHour teacherHour );
 	/**
 	 * 查询班级课程信息
 	 * @param classId

@@ -99,7 +99,7 @@ public interface OrderService {
 	 * @param classId
 	 * @return
 	 */
-	public List<Order> selectChildrenFeeSituation(Integer classId, Integer studentId);
+	public List<Order> selectChildrenFeeSituation(Integer classId, Integer studentId,String startTime,String endTime);
 
 	/**
 	 * 查询高中学生收费情况
@@ -107,7 +107,7 @@ public interface OrderService {
 	 * @param classId
 	 * @return
 	 */
-	public List<Order> selectHighsFeeSituation(Integer classId);
+	public List<Order> selectHighsFeeSituation(Integer classId,String startTime,String endTime);
 
 	/**
 	 * 查询学生收费
@@ -148,6 +148,16 @@ public interface OrderService {
 	 * @return
 	 */
 	public List<Order> selectActivityOrders(String startTime,Integer activityId,Integer schoolId);
+	
+	
+	public List<Order> selectArtFeeSituation(Integer classId,String startTime,String endTime);
+	
+
+	/**
+	 * 删除表数据
+	 * @return
+	 */
+	public Integer delOrderTable();
 
 	/**
 	 * 查找获得赠品订单

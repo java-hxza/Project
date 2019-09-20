@@ -529,9 +529,12 @@
 		o.schoolId o_schoolId,
 		o.startTime o_startTime,
 		o.stuId o_stuId,
-		p.paymentmethodId p_paymentmethodId,
+		o.discount o_discount,
+		p.paymentmethodId
+		p_paymentmethodId,
 		p.paymentmethodName p_paymentmethodName,
-		dp.dpId dp_dpId,
+		dp.dpId
+		dp_dpId,
 		dp.dpTypeName
 		dp_dpTypeName,
 		dp.chargeTypeId dp_chargeTypeId,
@@ -566,6 +569,7 @@
 		<result column="o_remarks" property="remarks" />
 		<result column="o_schoolId" property="schoolId" />
 		<result column="o_startTime" property="startTime" />
+		<result column="0_discount" property="discount" />
 		<result column="o_stuId" property="stuId" />
 		<association property="paymentMethod"
 			javaType="PaymentMethod">
@@ -621,7 +625,7 @@
 				and o.departmentofpediatricsId = #{departmentofpediatricsId}
 			</if>
 			<if test="feecateId !=null and feecateId != '' ">
-				and o.feecateId = #{feecateId}
+				and o.feecateId like concat(concat("%",#{feecateId}),"%")
 			</if>
 			<if test="classId !=null and classId != '' ">
 				and o.classId = #{classId}
@@ -752,8 +756,7 @@
 		o.schoolId o_schoolId,
 		o.startTime o_startTime,
 		o.stuId o_stuId,
-		SUM(o.dpMoney) sum_dpMoney,
-		dp.dpMoney dp_dpMoney,
+		o.integral o_integral,
 		dp.dpTypeName
 		dp_dpTypeName,
 		t.studentName t_studentName
@@ -779,10 +782,10 @@
 		<result column="o_schoolId" property="schoolId" />
 		<result column="o_startTime" property="startTime" />
 		<result column="o_stuId" property="stuId" />
-		<result column="sum_dpMoney" property="sumDpMoney" />
+		<result column="o_integral" property="integral" />
+		<result column="o_stuId" property="stuId" />
 		<association property="departmentOfPediatrics"
 			javaType="DepartmentOfPediatrics">
-			<result column="dp_dpMoney" property="dpMoney" />
 			<result column="dp_dpTypeName" property="dpTypeName" />
 		</association>
 		<association property="student" javaType="Student">
@@ -805,6 +808,9 @@
 			<if test="studentId !=null and studentId !=''">
 				and o.stuId = #{studentId}
 			</if>
+			<if test="startTime != null and startTime != ''">
+				and date(o.startTime)between #{startTime} and #{endTime}
+			</if>
 		</where>
 		group by o.stuId
 	</select>
@@ -822,11 +828,14 @@
 			<if test="classId!=null and classId!=''">
 				and o.classId=#{classId}
 			</if>
+			<if test="startTime != null and startTime != ''">
+				and date(o.startTime)between #{startTime} and #{endTime}
+			</if>
 		</where>
 		group by o.stuId
 	</select>
 
-	<!-- 查询高中学生收费情况 -->
+	<!-- 查询艺考学生收费情况 -->
 	<select id="selectArtFeeSituation"
 		parameterType="java.lang.Integer" resultMap="feeSituationMap">
 		select
@@ -838,6 +847,9 @@
 			and dp.dpId = o.departmentofpediatricsId
 			<if test="classId!=null and classId!=''">
 				and o.classId=#{classId}
+			</if>
+			<if test="startTime != null and startTime != ''">
+				and date(o.startTime)between #{startTime} and #{endTime}
 			</if>
 		</where>
 		group by o.stuId
@@ -1041,6 +1053,8 @@
 			<result column="ggn" property="giftName" />
 		</collection>
 	</resultMap>
-
+	<update id="delOrderTable">
+		truncate traininginstitutions.order
+	</update>
 </mapper>   
 

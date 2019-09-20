@@ -62,10 +62,6 @@
 							<div class="text-center">
 								<h3 class="">管理学校及城市</h3>
 								<p class="text-muted mt-3">请选择要查看的教师学校</p>
-                                    <button type="button" class="btn btn-success btn-sm mt-2" onclick="createSchool()"> 创建学校</button>
-                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="createUser()"> 创建账号</button>
-                                    <button type="button" class="btn btn-info btn-sm mt-2 ml-1" onclick="createTeacher()"> 创建教师账号</button>
-                                </div>
                             </div>
 						<!-- end col -->
                         </div>

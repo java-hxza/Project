@@ -15,5 +15,8 @@
 	<insert id="addExpenditureitems" parameterType="java.lang.Integer">
 		INSERT INTO expenditureitems (expenditureitemsName, category,schoolId)VALUES(#{0}, #{1},#{2});
 	</insert>
-
+	
+	<update id="delExpenditureitemsTable">
+		truncate expenditureitems
+	</update>
 </mapper>

@@ -1,5 +1,7 @@
 package cn.huizhi.pojo;
 
+import java.math.BigDecimal;
+
 public class School {
 	private Integer schoolId;
 	private String schoolName;
@@ -11,11 +13,11 @@ public class School {
 	/**
 	 * 共支出
 	 */
-	public Double schoolExPenSum =0.0;
+	private Double schoolExPenSum =0.0;
 	/**
 	 * 共收入
 	 */
-	public Double schoolFeeceat = 0.0;
+	private Double schoolFeeceat = 0.0;
 
 	private City city;
 
@@ -50,7 +52,12 @@ public class School {
 
 
 	public void setSchoolExPenSum(Double schoolExPenSum) {
-		this.schoolExPenSum = schoolExPenSum;
+		
+		BigDecimal bd = new BigDecimal(schoolExPenSum);
+
+		bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
+		
+		this.schoolExPenSum = Double.parseDouble(bd.toString());
 	}
 
 
@@ -62,9 +69,11 @@ public class School {
 
 
 	public void setSchoolFeeceat(Double schoolFeeceat) {
-		this.schoolFeeceat = schoolFeeceat;
-	}
+		BigDecimal bd = new BigDecimal(schoolFeeceat);
 
+		bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
+		this.schoolFeeceat = Double.valueOf(bd.toString());
+	}
 
 
 	public City getCity() {

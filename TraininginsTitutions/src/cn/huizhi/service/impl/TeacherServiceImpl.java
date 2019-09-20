@@ -91,6 +91,13 @@ public class TeacherServiceImpl implements TeacherService{
 	public List<Teacher> selectTeacherZS(Integer schoolId) {
 		return teacherMapper.selectTeacherZS(schoolId);
 	}
+
+
+	@Override
+	public Integer delTeacherTable() {
+		// TODO Auto-generated method stub
+		return teacherMapper.delTeacherTable();
+	}
 	
 	
 	

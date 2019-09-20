@@ -88,95 +88,112 @@
 												<li class="breadcrumb-item active">FAQ</li>
 											</ol>
 										</div>
-										<h4 class="page-title">学校信息</h4>
+										<h4 class="page-title">教师课时总汇</h4>
+									</div>
+								</div>
+							</div>
+							<!-- end row -->
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="billing-first-name">开始日期</label> <input
+											class="form-control" type="date" id="startTime" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="billing-first-name">截至日期</label> <input
+											class="form-control" type="date" id="endTime" />
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-sm-12">
-									<div class="text-center">
-										<h3 class="schoolId" name="${schoolId }">${schoolName }</h3>
-										<div class="app-search">
-											<form>
-												<div class="input-group">
-													<input type="text" class="form-control"
-														placeholder="Search..."> <span
-														class="mdi mdi-magnify"></span>
-													<div class="input-group-append">
-														<button class="btn btn-primary" type="button">搜索</button>
-													</div>
-												</div>
-											</form>
-										</div>
-										<p class="text-muted mt-3"></p>
-										<button type="button" class="btn btn-success btn-sm mt-2"
-											onclick="print()">打印订单</button>
-										<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-											onclick="exportExsal()">导出exsal</button>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="billing-first-name">教师</label> <select id="teacherId"
+											class="form-control">
+												<option value="">请选教师</option>
+												<c:forEach items="${teachers }" var="t">
+													<option value="${t.teacherId }">${t.teacherName }</option>
+												</c:forEach>
+										</select>
 									</div>
 								</div>
-								<!-- end col -->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="billing-first-name">课程</label> <select id="dpId"
+											class="form-control">
+											<option value="">请选择课程类型</option>
+											<c:forEach items="${departmentOfPediatrics }" var="dp">
+												<option value="${dp.dpId }">${dp.dpTypeName }</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
 							</div>
-							<!-- end row -->
-							<!-- Question/Answer -->
-							<div class="table-responsive">
-								<!--startprint-->
-								<table
-									class="table table-centered table-striped dt-responsive nowrap w-80"
-										id="products-datatable" width="100%">
-									<thead>
-										<tr>
-											<td style="width: 20px;">
-												<div class="custom-control custom-checkbox"></div>
-											</td>
-											<td>序</td>
-											<td>校区</td>
-											<td>教师名称</td>
-											<td>课时名称</td>
-											<td>教师总课时</td>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${teacherHourList }" var="th"
-											varStatus="status">
-											<tr>
-												<td>
-													<div class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input"
-															id="customCheck2"> <label
-															class="custom-control-label" for="customCheck2">&nbsp;</label>
-													</div>
-												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${status.index }</a>
-												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${schoolName}</a></td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${th.teacherName}</a>
-												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${th.dpName }</a></td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${th.sumHours }</a>
-												</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-								<!--endprint-->
-							</div>
-							<iframe id="iframe1" style="display: none"></iframe>
-							<!-- ============================================================== -->
-							<!-- End Page content -->
-							<!-- ============================================================== -->
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row mb-2">
+											<div class="col-sm-4">
+												<button type="button" class="btn btn-success btn-sm mt-2"
+													onclick="print()">打印订单</button>
+												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+													onclick="exportExsal()">导出exsal</button>
+											</div>
+											<div class="col-sm-8">
+												<div class="text-sm-right">
+													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+														onclick="queryTeacherInfo()">查询</button>
+												</div>
+											</div>
+										</div>
+									</div>
 
-						</div>
-						<!-- END wrapper -->
+									<!-- end col -->
+									<!-- end row -->
+									<!-- Question/Answer -->
+									<div class="table-responsive">
+										<!--startprint-->
+										<h3 style="display: none;text-align: center;" id="tables">教师课时总报表</h3>
+										<table
+											class="table table-centered table-striped dt-responsive nowrap w-80"
+											id="products-datatable" border="1px solid" width="100%">
+											<thead>
+												<tr>
 
-						<!-- App js -->
-						<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-						<script src="${Path }/static/js/admin/info/schoolInfo.js"></script>
-						<script src="${Path }/static/js/admin/leftSidebar.js"></script>
+													<td>序</td>
+													<td>校区</td>
+													<td>教师名称</td>
+													<td>课时名称</td>
+													<td>教师总课时</td>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="${teacherHourList }" var="th"
+													varStatus="status">
+													<tr>
+														<td class="table-user">${status.index }</td>
+														<td class="table-user">${schoolName}</td>
+														<td class="table-user">${th.teacherName}</td>
+														<td class="table-user">${th.dpName }</td>
+														<td class="table-user">${th.sumHours }</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+										<!--endprint-->
+									</div>
+									<iframe id="iframe1" style="display: none"></iframe>
+									<!-- ============================================================== -->
+									<!-- End Page content -->
+									<!-- ============================================================== -->
+								</div>
+								<!-- END wrapper -->
+
+								<!-- App js -->
+								<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
+								<script src="${Path }/static/js/admin/teacher/teacherInfo.js"></script>
+								<script src="${Path }/static/js/admin/leftSidebar.js"></script>
 </body>
 </html>

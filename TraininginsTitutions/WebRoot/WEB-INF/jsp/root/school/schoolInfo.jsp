@@ -134,6 +134,30 @@
 						</div>
 						<!-- end col -->
 					</div>
+					<!-- end row -->
+					<div class="row">
+						<div class="col-md-5">
+							<div class="form-group">
+								<label for="billing-first-name">开始日期</label> <input
+									class="form-control" type="date" id="startTime" />
+							</div>
+						</div>
+						<div class="col-md-5">
+							<div class="form-group">
+								<label for="billing-first-name">截至日期</label> <input
+									class="form-control" type="date" id="endTime" />
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<button type="button" class="btn btn-info btn-sm mt-2 ml-1 "
+									onclick="expenditureOrder()">支出订单</button>
+								<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+									onclick="incomeOrder()">收入订单</button>
+							</div>
+						</div>
+
+					</div>
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
@@ -148,10 +172,6 @@
 											<div class="text-sm-right">
 												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
 													onclick="exportExsal()">导出exsal</button>
-												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-													onclick="expenditureOrder()">支出订单</button>
-												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-													onclick="incomeOrder()">收入订单</button>
 											</div>
 										</div>
 										<!-- end col-->
@@ -160,69 +180,40 @@
 									<!-- Question/Answer -->
 									<div class="table-responsive">
 										<!--startprint-->
+										<h3 style="text-align: center;" id="tables">${schoolName}学生账户余额</h3>
 										<table
-											class="table table-centered table-striped dt-responsive nowrap w-100"
-											id="products-datatable" width="100%">
+											class="table table-centered table-striped dt-responsive nowrap w-80"
+											id="products-datatable" border="1px solid" width="100%">
 											<tbody>
 												<tr>
-													<td style="width: 20px;">
-														<div class="custom-control custom-checkbox"></div>
-													</td>
-													<td>支出总额</td>
-													<td>收入总额</td>
+													<td colspan='2'>支出总额</td>
+													<td colspan='2'>收入总额</td>
 													<td>账户余额</td>
 												</tr>
 												<tr>
-													<td>
-														<div class="custom-control custom-checkbox"></div>
+													<td class="table-user" colspan='2'>${schoolExPenSum }</td>
+													<td class="table-user" colspan='2'>${schoolFeeceat }</td>
+													<td class="table-user">${schoolFeeceat-schoolExPenSum }
 													</td>
-													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${schoolExPenSum }</a>
-													</td>
-													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${schoolFeeceat }</a>
-													</td>
-													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${schoolFeeceat-schoolExPenSum }</a>
-													</td>
-
 												</tr>
 												<tr>
-													<td style="width: 20px;">
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="customCheck1"> <label
-																class="custom-control-label" for="customCheck1">&nbsp;</label>
-														</div>
-													</td>
-													<td>负责人</td>
+													<td>校区</td>
 													<td>账户</td>
 													<td>收入</td>
 													<td>支出</td>
+													<td>订单时间</td>
 												</tr>
 											</tbody>
 											<tbody>
 												<c:forEach items="${schoolOrderList }" var="sa">
 													<tr onclick="clickSchool()" id="schoolId">
-														<td>
-															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input"
-																	id="customCheck2"> <label
-																	class="custom-control-label" for="customCheck2">&nbsp;</label>
-															</div>
+														<td class="table-user">${schoolName}</td>
+														<td class="table-user">${sa.paymentMethod.paymentmethodName}
 														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${sa.personliable}</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${sa.paymentMethod.paymentmethodName}</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${sa.dpMoney }</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${sa.feecategoryMoney }</a>
-														</td>
+														<td class="table-user">${sa.dpMoney }</td>
+														<td class="table-user">${sa.feecategoryMoney}</td>
+														<td class="table-user"><fmt:formatDate
+																value="${sa.startTime }" pattern="yyyy-MM-dd HH:mm" /></td>
 													</tr>
 												</c:forEach>
 											</tbody>

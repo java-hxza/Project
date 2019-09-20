@@ -48,9 +48,8 @@ $(function() {
 		var loginPassword = $("#loginPassword").val();
 		var teacherName = $("#teacherName").val();
 		var feeCategory = $("#feeCategory").val();
-		var teacherTypeId = $("#departmentId").val();
 		var schoolId = $("#schoolId").val();
-
+		var departmentId =$("#departmentId").val();
 		if (telephone, loginPassword == null) {
 			$.NotificationApp.send("错误！", "信息不能为空！。", "top-right", "rgba(0,0,0,0.2)", "error");
 			return false;
@@ -65,8 +64,8 @@ $(function() {
 				loginPassword : loginPassword,
 				teacherName : teacherName,
 				feeCategory : feeCategory,
-				teacherTypeId : teacherTypeId,
-				schoolId : schoolId
+				schoolId : schoolId,
+				departmentId :departmentId
 			},
 			dataType : 'JSON',
 			type : 'post',

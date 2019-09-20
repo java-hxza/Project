@@ -136,57 +136,42 @@
 							<!-- Question/Answer -->
 							<!--startprint-->
 							<div class="table-responsive"><!--startprint-->
+								<h3 style="display: none;text-align: center;" id="tables">学员收费情况报表</h3>
 								<table
 									class="table table-centered table-striped dt-responsive nowrap w-100"
-									id="products-datatable">
-									<thead>
+									id="products-datatable" border="1px solid" width="100%">
+									<tbody>
 										<tr>
-											<th style="width: 20px;">
-												<div class="custom-control custom-checkbox"></div>
-											</th>
-											<th>序</th>
-											<th>校区</th>
-											<th>单号</th>
-											<th>学员名称</th>
-											<th>课程</th>
-											<th>应收费用</th>
-											<th>实收金额</th>
-											<th>未收金额</th>
+											
+											<td>序</td>
+											<td>校区</td>
+											<td>单号</td>
+											<td>学员名称</td>
+											<td>课程</td>
+											<td>应收费用</td>
+											<td>实收金额</td>
+											<td>未收金额</td>
 										</tr>
-									</thead>
+									</tbody>
 									<tbody>
 										<c:forEach items="${studentFeeSituationList }" var="ts"
 											varStatus="status">
 											<tr>
-												<td>
-													<div class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input"
-															id="customCheck2"> <label
-															class="custom-control-label" for="customCheck2">&nbsp;</label>
-													</div>
+												
+												<td class="table-user">${status.index }
 												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${status.index }</a>
+												<td class="table-user">>${schoolName}</td>
+												<td class="table-user">${ts.orderNumber}
 												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${schoolName}</a></td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${ts.orderNumber}</a>
+												<td class="table-user">${ts.student.studentName }
 												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${ts.student.studentName }</a>
+												<td class="table-user">${ts.departmentOfPediatrics.dpTypeName }
 												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${ts.departmentOfPediatrics.dpTypeName }</a>
+												<td class="table-user">${ts.departmentOfPediatrics.dpMoney }
 												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${ts.departmentOfPediatrics.dpMoney }</a>
+												<td class="table-user">${ts.sumDpMoney }
 												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${ts.sumDpMoney }</a>
-												</td>
-												<td class="table-user"><a href="javascript:void(0);"
-													class="text-body font-weight-semibold">${ts.departmentOfPediatrics.dpMoney-ts.sumDpMoney }</a>
+												<td class="table-user">${ts.departmentOfPediatrics.dpMoney-ts.sumDpMoney }
 												</td>
 											</tr>
 										</c:forEach>

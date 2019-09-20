@@ -440,7 +440,7 @@
 					return false;
 				}
 				excel = new ExcelGen({
-					"src_id" : "delSts",
+					"src_id" : "basic-datatable",
 					"show_header" : true
 				});
 				excel.generate("赠品统计表");

@@ -93,4 +93,25 @@ public interface StudentService {
 	 * @return
 	 */
 	public Integer updateStuHour(List<Student> list);
+	
+	/**
+	 * 清空表数据
+	 * @return
+	 */
+	public Integer delStudentTable();
+	
+	/**
+	 * 依靠收费情况
+	 * @param map
+	 * @return
+	 */
+	public List<Student> findArtStudentResverSchoolInfo(Map<String, Object> map);
+	
+
+	/**
+	 * 高中收费情况
+	 * @param map
+	 * @return
+	 */
+	public List<Student> findHighStudentResverSchoolInfo(@Param("map")Map<String, Object> map);
 }

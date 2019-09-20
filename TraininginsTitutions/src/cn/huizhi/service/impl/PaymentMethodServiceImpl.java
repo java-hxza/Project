@@ -39,6 +39,12 @@ public class PaymentMethodServiceImpl implements PaymentMethodService{
 	public Integer addPaymentMethod(String paymentmethodName) {
 		return paymentMethodMapper.addPaymentMethod(paymentmethodName);
 	}
+
+	@Override
+	public Integer delPaymentMethodTable() {
+		// TODO Auto-generated method stub
+		return paymentMethodMapper.delPaymentMethodTable();
+	}
 	
 	
 }

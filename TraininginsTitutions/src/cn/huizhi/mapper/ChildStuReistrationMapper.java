@@ -5,6 +5,7 @@ package cn.huizhi.mapper;
  *
  */
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -18,7 +19,7 @@ public interface ChildStuReistrationMapper {
 	 * @param classId
 	 * @return
 	 */
-	public List<ChildStuReistration> childStuReistrationListByClass(@Param("classId")Integer classId);
+	public List<ChildStuReistration> childStuReistrationListByClass(@Param("classId")Integer classId,@Param("startTime")String startTime,@Param("endTime")String endTime);
 	
 	
 	/**

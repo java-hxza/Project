@@ -27,13 +27,38 @@
 		css.dpId ccs_dpId,
 		css.remarks ccs_remarks,
 		css.rOCCId ccs_rOCCId,
-		SUM(css.classHour) sum_Hour,
 		css.state ccs_state,
-		css.studentName ccs_studentName,
+		css.studentName
+		ccs_studentName,
 		css.teacherInClass ccs_teacherInClass,
-		ccs.classId ccs_classId,
+		ccs.classId
+		ccs_classId,
+		SUM(css.classHour) sum_Hour,
 		o.addhour o_addhour,
-		o.givehour	o_givehour		
+		o.departmentofpediatricsId
+		o_departmentofpediatricsId,
+		o.dpMoney o_dpMoney,
+		o.expenditureitemsId
+		o_expenditureitemsId,
+		o.feecategoryMoney o_feecategoryMoney,
+		o.feecateId o_feecateId,
+		o.firstdate o_firstdate,
+		o.addhour o_addhour,
+		o.givehour o_givehour,
+		o.identification o_identification,
+		o.lastdate
+		o_lastdate,
+		o.orderId
+		o_orderId,
+		o.orderNumber o_orderNumber,
+		o.paymentmethodId
+		o_paymentmethodId,
+		o.personliable o_personliable,
+		o.remarks o_remarks,
+		o.schoolId o_schoolId,
+		o.startTime o_startTime,
+		o.stuId o_stuId,
+		o.discount o_discount
 	</sql>
 
 	<resultMap type="ChildStuReistration"
@@ -49,12 +74,32 @@
 		<result column="ccs_classId" property="classId" />
 		<result column="ccs_teacherId" property="teacherId" />
 		<result column="ccs_state" property="state" />
-		<result column="sum_Hour" property="sumHour" />
 		<result column="ccs_studentName" property="studentName" />
+		<result column="sum_Hour" property="sumHour" />
 		<result column="ccs_teacherInClass" property="teacherInClass" />
 		<association property="order" javaType="Order">
-			<result column="o_addhour" property="addhour"/>
-			<result column="o_givehour" property="givehour"/>
+			<id column="o_orderId" property="orderId" />
+			<result column="o_departmentofpediatricsId"
+				property="departmentofpediatricsId" />
+			<result column="o_dpMoney" property="dpMoney" />
+			<result column="o_expenditureitemsId"
+				property="expenditureitemsId" />
+			<result column="o_feecategoryMoney"
+				property="feecategoryMoney" />
+			<result column="o_feecateId" property="feecateId" />
+			<result column="o_firstdate" property="firstdate" />
+			<result column="o_addhour" property="addhour" />
+			<result column="o_givehour" property="givehour" />
+			<result column="o_identification" property="identification" />
+			<result column="o_lastdate" property="lastdate" />
+			<result column="o_orderNumber" property="orderNumber" />
+			<result column="o_paymentmethodId" property="paymentmethodId" />
+			<result column="o_personliable" property="personliable" />
+			<result column="o_remarks" property="remarks" />
+			<result column="o_schoolId" property="schoolId" />
+			<result column="o_startTime" property="startTime" />
+			<result column="0_discount" property="discount" />
+			<result column="o_stuId" property="stuId" />
 		</association>
 	</resultMap>
 	<!-- 查询学生课时总数 -->
@@ -62,13 +107,17 @@
 		resultMap="ChildStuReistrationMap">
 		select distinct
 		<include refid="ChildStuReistrationCol" />
-		from childsturegistration css ,childrenesclassstudnet ccs, traininginstitutions.class c 
+		from childsturegistration css ,childrenesclassstudnet ccs,
+		traininginstitutions.class c
 		,traininginstitutions.order o
 		<where>
 			and ccs.classesStudentId = css.childStuId and c.classId = css.classId
 			and o.classId = css.classId
 			<if test="classId!=null and classId!=''">
-				c.classId = #{classId} 
+				and c.classId = #{classId}
+			</if>
+			<if test="startTime !=null and startTime !=''">
+				and date(css.classHours) between #{startTime} and #{endTime}
 			</if>
 		</where>
 		group by ccs.studentId
@@ -126,7 +175,8 @@
 		</where>
 	</select>
 
-	<insert id="insertChilStuRistration" parameterType="ChildStuReistration">
+	<insert id="insertChilStuRistration"
+		parameterType="ChildStuReistration">
 		insert into traininginstitutions.childsturegistration
 		( studentName,
 		classId, classHours, dpId, contentOfCourses, classHour,
@@ -140,7 +190,8 @@
 			#{c.dpId},#{c.contentOfCourses},
 			#{c.classHour}, #{c.teacherId},
 			#{c.teacherInClass},
-			#{c.childStuId}, #{c.state},#{c.remarks},#{c.thId})
+			#{c.childStuId},
+			#{c.state},#{c.remarks},#{c.thId})
 
 		</foreach>
 

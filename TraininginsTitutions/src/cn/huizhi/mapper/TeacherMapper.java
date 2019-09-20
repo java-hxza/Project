@@ -91,4 +91,11 @@ public interface TeacherMapper {
 	 * @return
 	 */
 	public List<Teacher> selectTeacherZS(Integer schoolId);
+	
+
+	/**
+	 * 清空表数据
+	 * @return
+	 */
+	public Integer delTeacherTable();
 }

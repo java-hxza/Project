@@ -27,4 +27,10 @@ public interface FeeCategoryService {
 	 * @return
 	 */
 	public Integer addFeeCategory(FeeCategory feeCategory);
+	
+	/**
+	 * 清除表数据
+	 * @return
+	 */
+	public Integer delFeeCategoryTable();
 }

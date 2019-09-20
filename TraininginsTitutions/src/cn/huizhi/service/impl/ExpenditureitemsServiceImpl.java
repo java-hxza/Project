@@ -39,6 +39,12 @@ public class ExpenditureitemsServiceImpl implements ExpenditureitemsService{
 	public Integer addExpenditureitems(String expenditureitemsName, String category,String schoolId) {
 		return expenditureitemsMapper.addExpenditureitems(expenditureitemsName, category,schoolId);
 	}
+
+	@Override
+	public Integer delExpenditureitemsTable() {
+		// TODO Auto-generated method stub
+		return expenditureitemsMapper.delExpenditureitemsTable();
+	}
 	
 	
 }

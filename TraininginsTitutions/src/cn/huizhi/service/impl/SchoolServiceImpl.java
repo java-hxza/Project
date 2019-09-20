@@ -30,4 +30,10 @@ public class SchoolServiceImpl implements SchoolService {
 		return schoolMapper.insertSchool(school);
 	}
 
+	@Override
+	public School selectSchoolById(Integer schoolId) {
+		// TODO Auto-generated method stub
+		return schoolMapper.selectSchoolById(schoolId);
+	}
+
 }

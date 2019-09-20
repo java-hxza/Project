@@ -49,7 +49,6 @@ $(function(){
 					var teacherTypeId = $.trim($(".teacherTypeId").attr("name"));
 					var teacherId = $(".teacherId").val();
 					var departmentId = $(".departmentId").val();
-					alert(departmentId);
 					if(teacherName == "") {
 						alert("请填写姓名！");
 						return false;
@@ -183,7 +182,7 @@ $(function(){
 		}
 
 		$.ajax({
-			url : 'delTeacher.html',
+			url : 'delAdminTeacher.html',
 			data : {
 				teacherId : teacherId
 			},
@@ -223,6 +222,7 @@ $(function(){
 				return false;
 			}
 		}
+		
 		var teacherId = $(".customCheckes:checked").parent().parent().next().children().html();
 		
 		location.href="teacherAuthorization.html?teacherId="+teacherId;
@@ -235,6 +235,7 @@ $(function(){
 		var teacherId = $("#teacherId").attr("name");
 		var schoolId = $("#schoolId").val();
 		
+		var state = $("#state").val();
 		if(teacherId,schoolId == null){
 			alert("请选择数据");
 			return false;
@@ -245,7 +246,8 @@ $(function(){
 			url : 'authorization.html',
 			data : {
 				teacherId : teacherId,
-				schoolId : schoolId
+				schoolId : schoolId,
+				state : state
 			},
 			dataType: 'JSON',
 			type : 'post',

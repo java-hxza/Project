@@ -10,8 +10,8 @@ $(function(){
 	 * 收入ajax
 	 */
 	query = function(){
-		$("#btn1").addClass("spinner-border spinner-border-sm");
-		$("#btn2").addClass("spinner-border spinner-border-sm");
+	/*	$("#btn1").addClass("spinner-border spinner-border-sm");
+		$("#btn2").addClass("spinner-border spinner-border-sm");*/
 		var startTime = $("#startTime").val();
 		var endTime =$("#endTime").val();
 		var paymentmethodId = $("#paymentmethodId").val();
@@ -61,7 +61,7 @@ $(function(){
 				
 			},
 			error : function(data){
-				alert("系统出错！");
+				alert("请重试！");
 				location.href = "adminIndex.html";
 			}
 			
@@ -75,16 +75,9 @@ $(function(){
 		var $html = "";
 		
 		order = eval("("+data.orderListBySchool+")");
-		
+		var sumMoney = 0.0;
 		for (var i = 0; i < order.length; i++) {
-		
 			$html +="<tr class='userId' >" +
-						"<td>" +
-							"<div class='custom-control custom-checkbox'>" +
-								"<input type='checkbox' class='customChecks custom-control-input'>" +
-								"<label class='custom-control-label  customCheck'for='customCheck2'>&nbsp;</label>" +
-							"</div>" +
-						"</td>" +
 						"<td class='table-user'><a href='javascript:void(0);' class='text-body font-weight-semibold'>"+order[i].orderNumber +"</a> </td>" +
 						"<td class='table-user'><a href='javascript:void(0);'" +
 						"class='text-body font-weight-semibold' >"+order[i].student.studentName +"</a></td>" +
@@ -109,11 +102,17 @@ $(function(){
 						"<td class='table-user'><a href='javascript:void(0);'" +
 						"class='text-body font-weight-semibold' >"+order[i].lastdate+"</a></td>" +
 				"</tr>" ;
-						
+			if(order[i].dpMoney !=null && order[i].dpMoney!='' && order.dpMoney!="undefined"){
+				sumMoney +=order[i].dpMoney;
+			}
 		}
 		
 		$("#info").append($html);
-
+		$("#expen").empty();
+		$html = "" +
+		"<tr><td colspan='12'>支出总额</td></tr>" +
+		"<tr><td colspan='12'>"+sumMoney+"</td></tr>";
+		$("#expen").append($html);
 	}
 	
 	
@@ -125,8 +124,6 @@ $(function(){
 		var expenditureitemsId = $("#expenditureitemsId").val();
 		var startTime = $("#startTime").val();
 		var endTime =$("#endTime").val();
-		$("#btn1").addClass("spinner-border spinner-border-sm");
-		$("#btn2").addClass("spinner-border spinner-border-sm");
 		
 		//判断时间是都空值
 		if(startTime != null && startTime !=''){
@@ -159,8 +156,6 @@ $(function(){
 					$("#products-datatable").append(expenditureOrderforeach(data));
 					/*$(".text-center").append("<button type='button' id='btn1' class='btn btn-success btn-sm mt-2' onclick='expen()'>支出查询</button>" +
 							"<button type='button'	id='btn2' class='btn btn-success btn-sm mt-2' onclick='query()'>收入查询</button>);**/
-					$("#btn1").removeClass("spinner-border spinner-border-sm");
-					$("#btn2").removeClass("spinner-border spinner-border-sm");
                     
 				}
 				
@@ -197,6 +192,7 @@ $(function(){
 	
 	expenditureOrderforeach=  function(data) {
 		var $html = "<tbody>";
+		var sumMoney = 0.0;
 		for (var i = 0; i < data.length; i++) {
 			if(data[i].identification == 0){
 				continue;
@@ -224,8 +220,12 @@ $(function(){
 								"<a href='javascript:void(0);'class='text-body font-weight-semibold'>" +
 								""+data[i].startTime+"</a>" +
 							"</td>";
+				sumMoney += data[i].feecategoryMoney;
 			}
-					$html += "</tbody>";
+					$html += "</tbody>" +
+					"<tbody style='text-align: center;'>" +
+					"<tr><td colspan='12'>支出总额</td></tr>" +
+					"<tr><td colspan='12'>"+sumMoney+"</td></tr>";
 					return $html;
 	}
 	

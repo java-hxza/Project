@@ -1,5 +1,6 @@
 $(function() {
 	print = function() {
+		$("#tables").show();
 		bdhtml = $(".table-responsive").html();
 		//alert(bdhtml);
 		sprnstr = "<!--startprint-->"; //开始打印标识字符串有17个字符
@@ -21,6 +22,6 @@ $(function() {
 			"src_id" : "products-datatable",
 			"show_header" : true
 		});
-		excel.generate();
+		excel.generate("同心同慧报表");
 	}
 });

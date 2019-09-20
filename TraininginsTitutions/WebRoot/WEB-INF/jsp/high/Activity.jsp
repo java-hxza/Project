@@ -463,11 +463,11 @@
 		$(document).ready(function() {
 			Excels = function() {
 				if ($(".adds td").val() != "") {
-					alert("没有可以打印的数据！")
+					alert("没有可以导出的数据！")
 					return false;
 				}
 				excel = new ExcelGen({
-					"src_id" : "delSts",
+					"src_id" : "basic-datatable",
 					"show_header" : true
 				});
 				excel.generate("活动统计表");

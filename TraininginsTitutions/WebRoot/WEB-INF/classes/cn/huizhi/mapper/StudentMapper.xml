@@ -189,12 +189,13 @@
 		#{registrationChannels},
 		#{registrationConsultant}, #{startTime},
 		#{endTime}, #{theSurrogate}, #{remarks}, #{feeCategory},#{integral})
-		<!--order属性是取数据生成之前(before)or生成之后(after)  -->
-		<selectKey keyProperty="studentId" resultType="java.lang.Integer" order="AFTER">
-    		<!--  当前事务最后一个生成的主键id-->
-    		select last_insert_id()
-    	</selectKey>
-		
+		<!--order属性是取数据生成之前(before)or生成之后(after) -->
+		<selectKey keyProperty="studentId"
+			resultType="java.lang.Integer" order="AFTER">
+			<!-- 当前事务最后一个生成的主键id -->
+			select last_insert_id()
+		</selectKey>
+
 
 	</insert>
 
@@ -248,9 +249,6 @@
 		s.studentSex=#{2}
 	</select>
 
-	 
-		
-
 
 	<!-- 根据主键查询学生 -->
 	<select id="findStudentById" resultType="Student"
@@ -297,19 +295,304 @@
 			</if>
 		</where>
 	</update>
-	
-	<!--批量修改学生课时  -->
+
+	<!--批量修改学生课时 -->
 	<update id="updateStuHour" parameterType="Student">
-		<foreach collection="list" item="s" index="index" open="" close="" separator=";"></foreach>
-			update traininginstitutions.student 
-			<set>
-				<if test="s.studentHour !=null and s.studentHour!=''">
-					studentHour = studentHour-#{s.studentHour}  
-				</if>
-			</set>
-			
-			<where>
-				studentId = #{s.studentId} 
-			</where>
+		<foreach collection="list" item="s" index="index" open=""
+			close="" separator=";"></foreach>
+		update traininginstitutions.student
+		<set>
+			<if test="s.studentHour !=null and s.studentHour!=''">
+				studentHour = studentHour-#{s.studentHour}
+			</if>
+		</set>
+
+		<where>
+			studentId = #{s.studentId}
+		</where>
 	</update>
+
+	<update id="delStudentTable">
+		truncate student
+	</update>
+
+	<sql id="ArtStudentResverSchoolInfoCol">
+		st.studentId st_studentId,
+		st.studentName st_studentName,
+		st.studentSex st_studentSex,
+		st.studentIDCard st_studentIDCard,
+		st.studentBirth st_studentBirth,
+		st.school st_school,
+		st.parentName
+		st_parentName,
+		st.telephone st_telephone,
+		st.familyAddress
+		st_familyAddress,
+		st.registrationChannels st_registrationChannels,
+		st.registrationConsultant st_registrationConsultant,
+		st.theSurrogate
+		st_theSurrogate,
+		st.remarks st_remarks,
+		st.feeCategory st_feeCategory,
+		st.studentHour st_studentHour,
+		st.integral st_integral,
+		st.usedIntegral
+		st_usedIntegral,
+		o.orderId o_orderId,
+		o.feecateId o_feecateId,
+		o.dpMoney
+		o_dpMoney,
+		o.stuId o_stuId,
+		o.startTime o_startTime,
+		o.schoolId
+		o_schoolId,
+		o.identification
+		o_identification,
+		o.feecategoryMoney
+		o_feecategoryMoney,
+		o.paymentmethodId o_paymentmethodId,
+		o.personliable
+		o_personliable,
+		o.departmentofpediatricsId o_departmentofpediatricsId,
+		o.firstdate
+		o_firstdate,
+		o.lastdate o_lastdate,
+		o.remarks o_remarks,
+		o.orderNumber
+		o_orderNumber,
+		o.expenditureitemsId o_expenditureitemsId,
+		o.classId
+		o_classId,
+		o.giftId o_giftId,
+		o.giftNumber o_giftNumber,
+		o.integral
+		o_integral,
+		o.teacherId o_teacherId,
+		o.discount o_discount,
+		o.feecateMoney o_feecateMoney,
+		o.feecateMoneyYiKao o_feecateMoneyYiKao,
+		res.state res_state
+	</sql>
+
+	<resultMap type="Student" id="ArtStudentResverSchoolInfoMap">
+		<id column="st_studentId" property="studentId" />
+		<result column="st_studentName" property="studentName" />
+		<result column="st_studentSex" property="studentSex" />
+		<result column="st_studentIDCard" property="studentIDCard" />
+		<result column="st_studentBirth" property="studentBirth" />
+		<result column="st_school" property="school" />
+		<result column="st_parentName" property="parentName" />
+		<result column="st_telephone" property="telephone" />
+		<result column="st_familyAddress" property="familyAddress" />
+		<result column="st_registrationChannels"
+			property="registrationChannels" />
+		<result column="st_registrationConsultant"
+			property="registrationConsultant" />
+		<result column="st_theSurrogate" property="theSurrogate" />
+		<result column="st_remarks" property="remarks" />
+		<result column="st_feeCategory" property="feeCategory" />
+		<result column="st_studentHour" property="studentHour" />
+		<result column="st_integral" property="integral" />
+		<result column="st_usedIntegral" property="usedIntegral" />
+		<association property="order" javaType="Order">
+			<id column="o_orderId" property="orderId" />
+			<result column="o_feecateId" property="feecateId" />
+			<result column="o_dpMoney" property="dpMoney" />
+			<result column="o_stuId" property="stuId" />
+			<result column="o_startTime" property="startTime" />
+			<result column="o_schoolId" property="schoolId" />
+			<result column="o_identification" property="identification" />
+			<result column="o_feecategoryMoney"
+				property="feecategoryMoney" />
+			<result column="o_paymentmethodId" property="paymentmethodId" />
+			<result column="o_personliable" property="personliable" />
+			<result column="o_departmentofpediatricsId"
+				property="departmentofpediatricsId" />
+			<result column="o_firstdate" property="firstdate" />
+			<result column="o_lastdate" property="lastdate" />
+			<result column="o_remarks" property="remarks" />
+			<result column="o_orderNumber" property="orderNumber" />
+			<result column="o_expenditureitemsId"
+				property="expenditureitemsId" />
+			<result column="o_classId" property="classId" />
+			<result column="o_giftId" property="giftId" />
+			<result column="o_giftNumber" property="giftNumber" />
+			<result column="o_integral" property="integral" />
+			<result column="o_teacherId" property="teacherId" />
+			<result column="o_discount" property="discount" />
+			<result column="o_feecateMoney" property="feecateMoney" />
+			<result column="o_feecateMoneyYiKao"
+				property="feecateMoneyYiKao" />
+		</association>
+		<association property="reserveschool"
+			javaType="Reserveschool">
+			<result column="res_state" property="state" />
+		</association>
+	</resultMap>
+
+	<select id="findArtStudentResverSchoolInfo"
+		resultMap="ArtStudentResverSchoolInfoMap" parameterType="map">
+		select distinct
+		<include refid="ArtStudentResverSchoolInfoCol" />
+		from reserveschool res, student st,traininginstitutions.order o
+		<where>
+			st.studentId = res.studentId and st.studentId = o.stuId
+			<if test="map.schoolId != null and map.schoolId != ''">
+				and res.schoolId = #{map.schoolId}
+			</if>
+			<if test="map.state != '' and map.state != null">
+				and res.state = #{map.state}
+			</if>
+			<if test="map.classId != '' and map.classId != null">
+				and o.classId = #{map.classId}
+			</if>
+			<if
+				test="map.paymentmethodId != '' and map.paymentmethodId != null">
+				and o.paymentmethodId = #{map.paymentmethodId}
+			</if>
+			<if test="map.feecateId != '' and map.feecateId != null">
+				and o.feecateId LIKE CONCAT('%', #{map.feecateId},'%')
+			</if>
+			<if test="map.startTime !=null and map.startTime !=''">
+				and date(st.startTime) between #{map.startTime} and
+				#{map.endTime}
+			</if>
+
+		</where>
+	</select>
+
+	<!-- 高中学生收费情况 -->
+	<sql id="highStudentResverSchoolInfoCol">
+		st.studentId st_studentId,
+		st.studentName st_studentName,
+		st.studentSex st_studentSex,
+		st.studentIDCard st_studentIDCard,
+		st.studentBirth st_studentBirth,
+		st.school st_school,
+		st.parentName
+		st_parentName,
+		st.telephone st_telephone,
+		st.familyAddress
+		st_familyAddress,
+		st.registrationChannels st_registrationChannels,
+		st.registrationConsultant st_registrationConsultant,
+		st.theSurrogate
+		st_theSurrogate,
+		st.remarks st_remarks,
+		st.feeCategory st_feeCategory,
+		st.studentHour st_studentHour,
+		st.integral st_integral,
+		st.usedIntegral
+		st_usedIntegral,
+		o.orderId o_orderId,
+		o.feecateId o_feecateId,
+		o.dpMoney
+		o_dpMoney,
+		o.stuId o_stuId,
+		o.startTime o_startTime,
+		o.schoolId
+		o_schoolId,
+		o.identification
+		o_identification,
+		o.feecategoryMoney
+		o_feecategoryMoney,
+		o.paymentmethodId o_paymentmethodId,
+		o.personliable
+		o_personliable,
+		o.departmentofpediatricsId o_departmentofpediatricsId,
+		o.firstdate
+		o_firstdate,
+		o.lastdate o_lastdate,
+		o.remarks o_remarks,
+		o.orderNumber
+		o_orderNumber,
+		o.expenditureitemsId o_expenditureitemsId,
+		o.classId
+		o_classId,
+		o.giftId o_giftId,
+		o.giftNumber o_giftNumber,
+		o.integral
+		o_integral,
+		o.teacherId o_teacherId,
+		o.discount o_discount,
+		o.feecateMoney o_feecateMoney,
+		o.feecateMoneyYiKao o_feecateMoneyYiKao
+	</sql>
+
+	<resultMap type="Student" id="highStudentResverSchoolInfoMap">
+		<id column="st_studentId" property="studentId" />
+		<result column="st_studentName" property="studentName" />
+		<result column="st_studentSex" property="studentSex" />
+		<result column="st_studentIDCard" property="studentIDCard" />
+		<result column="st_studentBirth" property="studentBirth" />
+		<result column="st_school" property="school" />
+		<result column="st_parentName" property="parentName" />
+		<result column="st_telephone" property="telephone" />
+		<result column="st_familyAddress" property="familyAddress" />
+		<result column="st_registrationChannels"
+			property="registrationChannels" />
+		<result column="st_registrationConsultant"
+			property="registrationConsultant" />
+		<result column="st_theSurrogate" property="theSurrogate" />
+		<result column="st_remarks" property="remarks" />
+		<result column="st_feeCategory" property="feeCategory" />
+		<result column="st_studentHour" property="studentHour" />
+		<result column="st_integral" property="integral" />
+		<result column="st_usedIntegral" property="usedIntegral" />
+		<association property="order" javaType="Order">
+			<id column="o_orderId" property="orderId" />
+			<result column="o_feecateId" property="feecateId" />
+			<result column="o_dpMoney" property="dpMoney" />
+			<result column="o_stuId" property="stuId" />
+			<result column="o_startTime" property="startTime" />
+			<result column="o_schoolId" property="schoolId" />
+			<result column="o_identification" property="identification" />
+			<result column="o_feecategoryMoney"
+				property="feecategoryMoney" />
+			<result column="o_paymentmethodId" property="paymentmethodId" />
+			<result column="o_personliable" property="personliable" />
+			<result column="o_departmentofpediatricsId"
+				property="departmentofpediatricsId" />
+			<result column="o_firstdate" property="firstdate" />
+			<result column="o_lastdate" property="lastdate" />
+			<result column="o_remarks" property="remarks" />
+			<result column="o_orderNumber" property="orderNumber" />
+			<result column="o_expenditureitemsId"
+				property="expenditureitemsId" />
+			<result column="o_classId" property="classId" />
+			<result column="o_giftId" property="giftId" />
+			<result column="o_giftNumber" property="giftNumber" />
+			<result column="o_integral" property="integral" />
+			<result column="o_teacherId" property="teacherId" />
+			<result column="o_discount" property="discount" />
+			<result column="o_feecateMoney" property="feecateMoney" />
+			<result column="o_feecateMoneyYiKao"
+				property="feecateMoneyYiKao" />
+		</association>
+	</resultMap>
+	
+	<select id="findHighStudentResverSchoolInfo" resultMap="highStudentResverSchoolInfoMap" parameterType="map">
+	select distinct
+		<include refid="highStudentResverSchoolInfoCol" />
+		from  student st,traininginstitutions.order o
+		<where>
+			  and st.studentId = o.stuId
+			<if test="map.schoolId != null and map.schoolId != ''">
+				and o.schoolId = #{map.schoolId}
+			</if>
+			<if test="map.paymentmethodId != '' and map.paymentmethodId != null">
+				and o.paymentmethodId = #{map.paymentmethodId}
+			</if>
+			<if test="map.classId != '' and map.classId != null">
+				and o.classId = #{map.classId}
+			</if>
+			<if test="map.feecateId != '' and map.feecateId != null">
+				and o.feecateId LIKE CONCAT('%', #{map.feecateId},'%')
+			</if>
+			<if test="map.startTime !=null and map.startTime !=''">
+				and date(st.startTime) between #{map.startTime} and
+				#{map.endTime}
+			</if>
+		</where>
+	</select>
 </mapper>

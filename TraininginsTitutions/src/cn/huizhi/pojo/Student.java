@@ -30,14 +30,15 @@ public class Student {
 	private PaymentMethod paymentMethod;
 	private FeeCategory feeCategorys;
 	
-
+	private Reserveschool reserveschool;
+	
 	public Student(Integer studentId, String studentName, Integer studentSex, String studentIDCard, String studentBirth,
 			String school, String parentName, String telephone, String familyAddress, String registrationChannels,
 			String registrationConsultant, String startTime, String endTime, String theSurrogate, String remarks,
 			Integer feeCategory, Double studentHour, Double integral, Double usedIntegral,
 			ChildrenesClassStudnet childrenesClassStudnet, Class classes, School schools,
 			DepartmentOfPediatrics departmentOfPediatrics, Order order, PaymentMethod paymentMethod,
-			FeeCategory feeCategorys) {
+			FeeCategory feeCategorys, Reserveschool reserveschool) {
 		super();
 		this.studentId = studentId;
 		this.studentName = studentName;
@@ -65,6 +66,15 @@ public class Student {
 		this.order = order;
 		this.paymentMethod = paymentMethod;
 		this.feeCategorys = feeCategorys;
+		this.reserveschool = reserveschool;
+	}
+
+	public Reserveschool getReserveschool() {
+		return reserveschool;
+	}
+
+	public void setReserveschool(Reserveschool reserveschool) {
+		this.reserveschool = reserveschool;
 	}
 
 	public Student() {

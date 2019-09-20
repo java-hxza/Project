@@ -168,8 +168,8 @@
 																<td class="table-user"><a
 																	href="javascript:void(0);"
 																	class="text-body font-weight-semibold"> <c:choose>
-																			<c:when test="${teacher.feeCategory ==1} ">少儿</c:when>
-																			<c:when test="${teacher.feeCategory ==1} ">高中</c:when>
+																			<c:when test="${teacher.feeCategory ==1}">少儿</c:when>
+																			<c:when test="${teacher.feeCategory ==1}">高中</c:when>
 																			<c:otherwise>艺考</c:otherwise>
 																		</c:choose>
 																</a></td>

@@ -13,7 +13,7 @@ public interface TeacherHourService {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<TeacherHour> findTeacherHourListBySchoolId(Integer schoolId);
+	public List<TeacherHour> findTeacherHourListBySchoolId(TeacherHour teacherHour );
 	
 	/**
 	 * 查询班级课程信息

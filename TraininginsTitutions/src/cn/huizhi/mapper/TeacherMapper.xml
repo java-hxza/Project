@@ -81,6 +81,9 @@
 			<if test="remarks != null and remarks !='' ">
 				remarks = #{remarks} 
 			</if>
+			<if test="state != null and state !='' ">
+				state = #{state} 
+			</if>
 		
 		</set> 
 		 <where>
@@ -227,5 +230,9 @@
 		JOIN teacherdiction td ON t.teacherId=td.teacherId
 		WHERE tt.teacherTypeName LIKE CONCAT('%', '招生','%') AND td.schoolId=#{0}
 	</select>
+	
+	<update id="delTeacherTable">
+		truncate teacher
+	</update>
 
 </mapper>

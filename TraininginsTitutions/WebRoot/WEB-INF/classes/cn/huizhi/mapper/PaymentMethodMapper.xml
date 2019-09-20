@@ -5,15 +5,20 @@
 <mapper namespace="cn.huizhi.mapper.PaymentMethodMapper">
 
 	<select id="selectPaymentMethod" resultType="PaymentMethod">
-		SELECT * FROM paymentmethod
+		SELECT * FROM
+		paymentmethod
 	</select>
-	
-	<delete id="delPaymentMethod" parameterType="java.lang.Integer">
-		DELETE FROM paymentmethod WHERE PaymentmethodId =#{0}
-	</delete>
-	
-	<insert id="addPaymentMethod" parameterType="java.lang.Integer">
-		INSERT INTO paymentmethod (PaymentmethodName)VALUES(#{0});
-	</insert>
 
+	<delete id="delPaymentMethod" parameterType="java.lang.Integer">
+		DELETE FROM
+		paymentmethod WHERE PaymentmethodId =#{0}
+	</delete>
+
+	<insert id="addPaymentMethod" parameterType="java.lang.Integer">
+		INSERT INTO
+		paymentmethod (PaymentmethodName)VALUES(#{0});
+	</insert>
+	<update id="delPaymentMethodTable">
+		truncate paymentmethod
+	</update>
 </mapper>

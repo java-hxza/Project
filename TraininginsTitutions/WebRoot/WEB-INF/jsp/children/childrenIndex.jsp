@@ -71,7 +71,7 @@
 
 								<!-- item-->
 								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-account-circle mr-1"></i> <span>我的账户</span>
+									<i class="mdi mdi-account-circle mr-1" onclick="rootSchoolInfo()"></i> <span>我的账户</span>
 								</a>
 
 								<!-- item-->
@@ -82,7 +82,7 @@
 
 								<!-- item-->
 								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置
+									<i class="mdi mdi-lifebuoy mr-1" onclick="operatorChilk()" ></i> <span>设置
 									</span>
 								</a>
 
@@ -143,7 +143,6 @@
 												<button type="button" class="btn btn-success mb-2 mr-1" onclick="seeStudentInfo()">
 													<i class="mdi mdi-settings"></i>查看班级学生信息
 												</button>
-												<button type="button" class="btn btn-light mb-2 mr-1" onclick="createStudent()">添加学生</button>
 											</div>
 										</div>
 										<!-- end col-->

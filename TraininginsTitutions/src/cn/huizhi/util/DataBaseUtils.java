@@ -18,28 +18,22 @@ import java.io.OutputStream;
 
 import java.io.OutputStreamWriter;
 
-import java.nio.channels.FileChannel;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 
-public  class DataBaseUtils {
+public class DataBaseUtils {
 	Log loger = LogFactory.getLog(this.getClass());
 	 
-    @Value("${host_ip}")
-    private String HOSTIP;//数据库服务器IP
-    @Value("${user_name}")
-    private String USERNAME;//数据库用户
-    @Value("${password}")
-    private String PASSWORD;//数据库密码
-    @Value("${save_path}")
-    private String SAVEPATH;//备份文件路径
- 
+    private String HOSTIP = "152.136.46.217";//数据库服务器IP
+    private String USERNAME = "root";//数据库用户
+    private String PASSWORD = "root";//数据库密码
+    private String SAVEPATH = "/root/stup/mysqlbase/";//备份文件路径
     /**
      * 每隔xxx时间就执行，暂定每天0点
      */
-    public  final void dbbackup() {
+    public  boolean dbbackup() {
         loger.debug("数据库备份开始");
         String[] databaseName = {"traininginstitutions"};
         String dates = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
@@ -50,12 +44,13 @@ public  class DataBaseUtils {
             String savePath=SAVEPATH + "/" + dated;
             String fileName =  o.toString() + dates+".sql";
             System.out.println(SAVEPATH + "/" + dated + "/" + o.toString() + dates+".sql");
-            exportDatabaseTool(HOSTIP, USERNAME, PASSWORD, savePath,fileName, o.toString());
+           return exportDatabaseTool(HOSTIP, USERNAME, PASSWORD, savePath,fileName, o.toString());
         }
+        return false;
     }
  
  
-    public void exportDatabaseTool(String hostIP, String userName, String password, String savePath,String fileName, String databaseName) {
+    public boolean exportDatabaseTool(String hostIP, String userName, String password, String savePath,String fileName, String databaseName) {
         File saveFile = new File(savePath);
         if (!saveFile.exists()) {// 如果目录不存在
             saveFile.mkdirs();// 创建文件夹
@@ -71,6 +66,7 @@ public  class DataBaseUtils {
             Process process = Runtime.getRuntime().exec(stringBuilder.toString());
             if (process.waitFor() == 0) {// 0 表示线程正常终止。
                 loger.info("数据库备份成功");
+                return true;
             }
         } catch (IOException e) {
             loger.info("数据库备份异常");
@@ -79,6 +75,8 @@ public  class DataBaseUtils {
             loger.info("数据库备份异常");
             e.printStackTrace();
         }
+        
+        return false;
     }
 
 	

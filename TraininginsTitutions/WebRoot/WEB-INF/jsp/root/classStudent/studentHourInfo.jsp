@@ -73,7 +73,7 @@
 								</div>
 								<p class="text-muted mt-3"></p>
 								<button type="button" class="btn btn-success btn-sm mt-2"
-									onclick="printOrders()">打印订单</button>
+									onclick="print()">打印订单</button>
 								<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
 									onclick="exportExsal()">导出exsal</button>
 							</div>
@@ -84,9 +84,10 @@
 					<!-- Question/Answer -->
 					<div class="table-responsive">
 						<!--startprint-->
+						<h3 style="display: none;text-align: center;" id="tables">收入明细报表</h3>
 						<table
 							class="table table-centered table-striped dt-responsive nowrap w-100"
-							id="products-datatable" width="100%">
+							id="products-datatable" border="1px solid" width="100%">
 							<tbody>
 								<tr>
 									<td style="width: 20px;">
@@ -111,22 +112,15 @@
 													class="custom-control-label" for="customCheck2">&nbsp;</label>
 											</div>
 										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${status.index }</a>
+										<td class="table-user">${status.index }
 										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${schoolName}</a></td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${stu.studentName}</a>
+										<td class="table-user">${schoolName}</td>
+										<td class="table-user">${stu.studentName}
+										<td class="table-user">${stu.order.addhour }
 										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${stu.order.addhour }</a>
+										<td class="table-user">${stu.order.givehour }
 										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${stu.order.givehour }</a>
-										</td>
-										<td class="table-user"><a href="javascript:void(0);"
-											class="text-body font-weight-semibold">${stu.sumHour }</a></td>
+										<td class="table-user">${stu.sumHour }</td>
 									</tr>
 								</c:forEach>
 							</tbody>

@@ -1,5 +1,8 @@
 package cn.huizhi.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -31,24 +34,25 @@ import cn.huizhi.service.TeacherTypeService;
  *
  */
 import cn.huizhi.service.UserTypeService;
+
 @Controller
 public class WelcomeController {
 	/**
-	 *  省份业务层注入容器
+	 * 省份业务层注入容器
 	 */
 	@Resource
 	ProvinceService provinceService;
 	/**
-	 *  城市业务层注入容器
+	 * 城市业务层注入容器
 	 */
 	@Resource
 	CityService CityService;
 	/**
-	 *  学校业务逻辑层
+	 * 学校业务逻辑层
 	 */
 	@Resource
 	SchoolService schoolService;
-	
+
 	/**
 	 * 用户类型
 	 */
@@ -59,18 +63,19 @@ public class WelcomeController {
 	 */
 	@Resource
 	TeacherTypeService teacherTypeService;
-	
+
 	@Resource
 	DepartMentService deparMentService;
-	
+
 	@Resource
 	ClassService classService;
-	
+
 	@Resource
 	OrderService orderService;
-	
+
 	/**
 	 * 默认进入登陆页面并把查询结果封装到session域
+	 * 
 	 * @param session
 	 * @return
 	 */
@@ -89,24 +94,30 @@ public class WelcomeController {
 		session.setAttribute("schoolList", schoolList);
 		return "selectionModule";
 	}
+
 	/**
 	 * 错误页面返回
+	 * 
 	 * @return
 	 */
 	@RequestMapping("erro.html")
 	public String errorView() {
 		return "error";
 	}
+
 	/**
 	 * 注册账户页面
+	 * 
 	 * @return
 	 */
 	@RequestMapping("Register.html")
 	public String userRegit() {
 		return "UserRegister";
 	}
+
 	/**
 	 * 返回管理员页面
+	 * 
 	 * @return
 	 */
 	@RequestMapping("adminIndex.html")
@@ -116,51 +127,104 @@ public class WelcomeController {
 		for (School school : schoolListAll) {
 			order = new Order();
 			order.setSchoolId(school.getSchoolId());
-			
-			//学校收入订单
+
+			// 学校收入订单
 			List<Order> orderListBySchool = orderService.findOrderListBySchool(order);
-			
-			//学校支出订单
+
+			// 学校支出订单
 			List<Order> schoolExpenList = orderService.findExpenOrderList(order);
 			for (Order order2 : orderListBySchool) {
-				if(order2.getIdentification()==0) {
-					school.schoolFeeceat += order2.getDpMoney();
+				if (order2.getIdentification() == 0) {
+					school.setSchoolFeeceat(school.getSchoolFeeceat() + order2.getDpMoney()); 
 				}
 			}
+
 			for (Order order3 : schoolExpenList) {
-				if(order3.getIdentification() == 1) {
-					school.schoolExPenSum +=order3.getFeecategoryMoney();
+				if (order3.getIdentification() == 1) {
+					school.setSchoolExPenSum( school.getSchoolExPenSum() + order3.getFeecategoryMoney());
 				}
 			}
 		}
-		
+
 		session.setAttribute("schoolListAll", schoolListAll);
-		return	"admin/adminIndex";
+		return "admin/adminIndex";
 	}
 
-	
+	@SuppressWarnings("unlikely-arg-type")
+	@RequestMapping("querySchoolOrderByTime.html")
+	public String querySchoolOrderByTime(String endTime, String startTime,HttpSession session) {
+		List<School> schoolListAll = schoolService.findSchools();
+		Order order;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		for (School school : schoolListAll) {
+			order = new Order();
+			//判断非空
+			if(("").equals(startTime) || startTime == null) {
+				order.setStartTime(new Date());
+			}
+			if(("").equals(endTime) || endTime == null) {
+					order.setEndTime(new Date());
+			}
+			order.setSchoolId(school.getSchoolId());
+			
+			try {
+				if(order.getEndTime() == null || ("").equals(order.getEndTime())) {
+					order.setEndTime(formatter.parse(endTime));
+				}
+				if(order.getStartTime() == null || ("").equals(order.getStartTime())) {
+					order.setStartTime(formatter.parse(startTime));
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			// 学校收入订单
+			List<Order> orderListBySchool = orderService.findOrderListBySchool(order);
+
+			// 学校支出订单
+			List<Order> schoolExpenList = orderService.findExpenOrderList(order);
+			for (Order order2 : orderListBySchool) {
+				if (order2.getIdentification() == 0) {
+					school.setSchoolFeeceat(school.getSchoolFeeceat() + order2.getDpMoney()); 
+				}
+			}
+
+			for (Order order3 : schoolExpenList) {
+				if (order3.getIdentification() == 1) {
+					school.setSchoolExPenSum( school.getSchoolExPenSum() + order3.getFeecategoryMoney());
+				}
+			}
+		}
+		session.setAttribute("schoolListAll", schoolListAll);
+		return "admin/adminIndex";
+	}
+
 	/**
 	 * 返回创建学校视图
+	 * 
 	 * @return
 	 */
 	@RequestMapping("createSchool.html")
 	public String createSchool() {
-		return"admin/create/createSchool";
+		return "admin/create/createSchool";
 	}
+
 	/**
 	 * 返回创建学校用户视图
+	 * 
 	 * @return
 	 */
 	@RequestMapping("createUser.html")
 	public String createUser(HttpSession session) {
 		List<UserType> userTypeList = userTypeService.findUserTypes();
 		session.setAttribute("userTypeList", userTypeList);
-		return"admin/create/createUser";
+		return "admin/create/createUser";
 	}
-	
-	
+
 	/**
 	 * 返回创建教师视图
+	 * 
 	 * @return
 	 */
 	@RequestMapping("creageTeacher.html")
@@ -169,50 +233,51 @@ public class WelcomeController {
 		session.setAttribute("teacherTypeListAl", teacherTypeListAl);
 		return "admin/create/createTeacher";
 	}
+
 	@RequestMapping("highSchoolLogin.html")
 	public String highSchoolLogin(HttpSession session) {
 		session.setAttribute("schoolType", 2);
-		
+
 		return "/login";
 	}
+
 	@RequestMapping("artSchoolLogin.html")
 	public String artSchoolLogin(HttpSession session) {
 		session.setAttribute("schoolType", 3);
-		
+
 		return "/login";
 	}
-	
+
 	@RequestMapping("highIndex.html")
 	public String highIndex(HttpSession session) {
 		Integer loginType = (Integer) session.getAttribute("loginType");
-		if(loginType == 1) {
-			
+		if (loginType == 1) {
+
 			List<UserDiction> userListDiction = (List<UserDiction>) session.getAttribute("schoolListByUId");
 			Integer schoolId = userListDiction.get(0).getSchoolId();
 			session.setAttribute("schoolId", schoolId);
-			
+
 			List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
-			
+
 			session.setAttribute("classList", classList);
 		}
-		if(loginType == 2) {
-			
+		if (loginType == 2) {
+
 			List<TeacherDiction> userListDiction = (List<TeacherDiction>) session.getAttribute("schoolListByUId");
 			Integer schoolId = userListDiction.get(0).getSchoolId();
 			session.setAttribute("schoolId", schoolId);
-			
+
 			List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
-			
+
 			session.setAttribute("classList", classList);
 		}
-		
-		
+
 		return "redirect:/Accountinformation.html";
 	}
-	
-	
+
 	/**
 	 * 切换账号
+	 * 
 	 * @param schoolId
 	 * @param schoolName
 	 * @param schoolType
@@ -220,17 +285,16 @@ public class WelcomeController {
 	 * @return
 	 */
 	@RequestMapping("switchHighIndex.html")
-	public String switchHighIndex(Integer schoolId,String schoolName,Integer schoolType,HttpSession session) {
-		
-		
+	public String switchHighIndex(Integer schoolId, String schoolName, Integer schoolType, HttpSession session) {
+
 		session.setAttribute("schoolId", schoolId);
 		session.setAttribute("schoolType", schoolType);
-		
+
 		List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
-		
+
 		session.setAttribute("classList", classList);
-		
+
 		return "redirect:/Accountinformation.html";
 	}
-	
+
 }

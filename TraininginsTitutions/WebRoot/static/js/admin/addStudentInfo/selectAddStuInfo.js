@@ -49,7 +49,6 @@ $(function(){
 		var schoolId = $("#schoolId").attr("name");
 		var schoolType = $("#schoolId").attr("id_type");
 		var schoolName = $("#schoolName").html();
-		alert(startTime);
 		//判断时间是都空值
 		if(startTime == '' || startTime == null){
 			startTime = new Date();
