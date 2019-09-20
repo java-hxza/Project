@@ -237,8 +237,9 @@ public class HighesController {
 	@ResponseBody
 	public Object AddExpenditureitemses(@RequestParam String expenditureitemsName, @RequestParam String category) {
 		HashMap<String, String> map = new HashMap<String, String>();
+		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		if (expenditureitemsService.addExpenditureitems(expenditureitemsName, category,
-				(String) session.getAttribute("schoolId")) == 1) {
+				schoolId.toString()) == 1) {
 			map.put("add", "1");
 		} else {
 			map.put("add", "0");
