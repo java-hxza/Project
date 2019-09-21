@@ -310,22 +310,7 @@ public class ChildrenClassesController {
 		DepartmentOfPediatrics departmentOfPediatrics = departmentOfPediatricsService.findDepartmentOfByClassId(classId);
 		
 		DepartmentOfPediatrics depa = departmentOfPediatricsService.findDepartmentOfByClassId(classesId);
-		/**
-		 * 转班前非vip班的价钱
-		 */
-		Double price = null;
-		/**
-		 * 转班后非vip的价钱
-		 */
-		Double money = null;
-		
-		/**
-		 * 转班前vip班的价钱
-		 */
-		Double vipPrice= null;
-		/**
-		 * 转班后vip班的价钱
-		 */
+
 		Double vipMoney = null;
 		if(student.getStudentHour() == null) {
 			student.setStudentHour(0.0);
@@ -334,20 +319,10 @@ public class ChildrenClassesController {
 		jsonMap.put("studentHour",student.getStudentHour());
 		
 		if(classesType ==1) {
-			//获取非vip的价钱
-			price = student.getStudentHour()*departmentOfPediatrics.getDpMoney(); 
-			
-			money = student.getStudentHour()*depa.getDpMoney();
-			
-				jsonMap.put("money",money - price);
+		
 		}
-		if(classesType ==2 && classesType == 2) {
-			//获取vip的价钱
-			vipPrice = student.getStudentHour()*departmentOfPediatrics.getDpMoneyVip();
-			
-			vipMoney = student.getStudentHour()*depa.getDpMoneyVip();
-			
-				jsonMap.put("money",vipMoney - vipPrice);
+		if(classesType ==2) {
+		
 		}
 	
 		return jsonMap;

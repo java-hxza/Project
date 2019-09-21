@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 
 import cn.huizhi.pojo.Teacher;
@@ -90,7 +91,7 @@ public class AdminTeacherController {
 
 	@Resource
 	DepartmentOfPediatricsService departmentOfPediatricsService;
-	
+
 	@Resource
 	UserService userService;
 
@@ -208,7 +209,7 @@ public class AdminTeacherController {
 
 	@RequestMapping("authorization.html")
 	@ResponseBody
-	public Map<String, String> authorization(Integer teacherId, Integer schoolId,Integer state) {
+	public Map<String, String> authorization(Integer teacherId, Integer schoolId, Integer state) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
 		TeacherDiction teacherDiction = teacherDictionService.findTeacherDictionBySchoolIdAndTeacherId(schoolId,
 				teacherId);
@@ -217,12 +218,12 @@ public class AdminTeacherController {
 			return jsonMap;
 		}
 		if (teacherDictionService.addTeacherDiction(schoolId, teacherId) > 0) {
-			
+
 			Teacher teacher = new Teacher();
-			if(state !=null) {
+			if (state != null) {
 				teacher.setTeacherId(teacherId);
 				teacher.setState(state);
-				if(teacherService.updateTeacher(teacher)>0) {
+				if (teacherService.updateTeacher(teacher) > 0) {
 					jsonMap.put("state", "1");
 				}
 			}
@@ -269,6 +270,13 @@ public class AdminTeacherController {
 		return "admin/teacher/teacherInfo";
 	}
 
+	/**
+	 * 查询教师课时
+	 * 
+	 * @param teacherHour
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("queryTeacherInfo.html")
 	@ResponseBody
 	public Map<String, Object> queryTeacherInfo(TeacherHour teacherHour, HttpSession session) {
@@ -293,23 +301,23 @@ public class AdminTeacherController {
 	public String selectClassSchool() {
 		return "admin/classStudent/selectClassSchoolInfo";
 	}
-/*
-	*//**
-	 * 返回班级学校页面
-	 * 
-	 * @param schoolId
-	 * @param schoolName
-	 * @param session
-	 * @return
-	 *//*
-	@RequestMapping("classSchoolInfo.html")
-	public String classSchoolInfo(Integer schoolId, String schoolName, HttpSession session) {
+	/*
+		*//**
+			 * 返回班级学校页面
+			 * 
+			 * @param schoolId
+			 * @param schoolName
+			 * @param session
+			 * @return
+			 *//*
+				 * @RequestMapping("classSchoolInfo.html") public String classSchoolInfo(Integer
+				 * schoolId, String schoolName, HttpSession session) {
+				 * 
+				 * 
+				 * 
+				 * return "admin/classStudent/classSchoolInfo"; }
+				 */
 
-
-
-		return "admin/classStudent/classSchoolInfo";
-	}
-*/
 	/**
 	 * 返回少儿班级学生课时信息
 	 * 
@@ -318,7 +326,7 @@ public class AdminTeacherController {
 	 * @return
 	 */
 	@RequestMapping("childrenStudentHourInfo.html")
-	public String studentHourInfo(Integer schoolId,String schoolName, HttpSession session) {
+	public String studentHourInfo(Integer schoolId, String schoolName, HttpSession session) {
 		List<ChildStuReistration> stuReistrationList = childStuReistrationService
 				.findchildStuReistrationListByClass(null, null, null);
 		List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
@@ -328,9 +336,10 @@ public class AdminTeacherController {
 		session.setAttribute("stuReistrationList", stuReistrationList);
 		return "admin/classStudent/studentHourInfo";
 	}
-	
+
 	/**
 	 * 按照条件查询少儿课时记录
+	 * 
 	 * @param startTime
 	 * @param endTime
 	 * @param classId
@@ -338,7 +347,7 @@ public class AdminTeacherController {
 	 * @return
 	 */
 	@RequestMapping("queryStudentHour.html")
-	public String queryStudentHour(String startTime, String endTime, Integer classId,HttpSession session) {
+	public String queryStudentHour(String startTime, String endTime, Integer classId, HttpSession session) {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		if (endTime == null || endTime == "") {
 			endTime = formatter.format(new Date());
@@ -353,6 +362,12 @@ public class AdminTeacherController {
 		return "admin/classStudent/studentHourInfo";
 	}
 
+	/**
+	 * 学员缴费记录信息
+	 * 
+	 * @param studentId
+	 * @return
+	 */
 	@RequestMapping("studentBill.html")
 	@ResponseBody
 	public Map<String, Object> studentBill(Integer studentId) {
@@ -504,37 +519,31 @@ public class AdminTeacherController {
 	}
 
 	/**
-	 * 返回班级学校页面
-	 * 
-	 * @param schoolId
-	 * @param schoolName
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping("teacherClassSchoolInfo.html")
-	public String TeacherClassSchoolInfo(Integer schoolId, String schoolName, HttpSession session) {
-
-		List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
-
-		session.setAttribute("classList", classList);
-
-		return "admin/teacher/classSchoolInfo";
-	}
-
-	/**
 	 * 返回教师上课明细页面
 	 * 
 	 * @param schoolId
 	 * @param schoolName
 	 * @return
 	 */
-	@RequestMapping("teacherClassHourInfo.html")
-	public String teacherClassHourInfo(Integer classId, String schoolName, Integer schoolType, HttpSession session) {
+	@RequestMapping("teacherClassSchoolInfo.html")
+	public String teacherClassHourInfo(Integer schoolId, String schoolName, Integer schoolType, HttpSession session) {
 		// 判断学校类型
 		session.setAttribute("schoolName", schoolName);
 
-		List<TeacherHour> teacherHourList = teacherHourService.selectCurriculumInfo(classId, null);
+		List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
 
+		session.setAttribute("classList", classList);
+
+		List<TeacherHour> teacherHourList = teacherHourService.selectCurriculumInfo(null, null,schoolId);
+		List<Teacher> teachers = teacherService.findTeacherListBySchoolId(schoolId);
+		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService
+				.findDepartmentOfPediatrics(schoolId);
+
+		session.setAttribute("schoolName", schoolName);
+		session.setAttribute("teacherHourList", teacherHourList);
+		session.setAttribute("teachers", teachers);
+		session.setAttribute("schoolId", schoolId);
+		session.setAttribute("departmentOfPediatrics", departmentOfPediatrics);
 		/*
 		 * if (schoolType == 1) { List<ChildStuReistration> childStuHourDetailedList =
 		 * childStuReistrationService .selectTeacherDetailed(classId);
@@ -556,34 +565,52 @@ public class AdminTeacherController {
 		return "admin/teacher/childrenFeeInfo";
 	}
 
+	/**
+	 * 根据条件查询教师上课信息
+	 * 
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("queryChildrenTeacherInfo.html")
+	public String queryChildrenTeacherInfo(String map,HttpSession session) {
+		Map<String, Object> map2 = (Map<String, Object>) JSONObject.parse(map);
+		map2.put("schoolId",session.getAttribute("schoolId"));
+		List<TeacherHour> teacherHourList = teacherHourService.findCurriculumInfo(map2);
+		
+		session.setAttribute("teacherHourList", teacherHourList);
+
+		return "admin/teacher/childrenFeeInfo";
+	}
+
 	@RequestMapping("selectStudentFeeInfo.html")
 	public String selectStudentFeeInfo() {
 		return "admin/studentInfo/selectStudentFeeInfo";
 	}
 
-/*	*//**
-	 * 学生收费情况
-	 * 
-	 * @param schoolId
-	 * @param schoolName
-	 * @param schoolType
-	 * @param session
-	 * @return
-	 *//*
-	@RequestMapping("classStudentFeeInfo.html")
-	public String classStudentFeeInfo(String schoolName, Integer schoolType, HttpSession session) {
-	
+	/*	*//**
+			 * 学生收费情况
+			 * 
+			 * @param schoolId
+			 * @param schoolName
+			 * @param schoolType
+			 * @param session
+			 * @return
+			 *//*
+				 * @RequestMapping("classStudentFeeInfo.html") public String
+				 * classStudentFeeInfo(String schoolName, Integer schoolType, HttpSession
+				 * session) {
+				 * 
+				 * 
+				 * return "admin/studentInfo/classSchoolInfo"; }
+				 */
 
-		return "admin/studentInfo/classSchoolInfo";
-	}
-*/
 	/**
 	 * 返回学生明细表
 	 * 
 	 * @return
 	 */
 	@RequestMapping("studentFeeSituation.html")
-	public String studentFeeSituation(Integer schoolId,  String schoolName, Integer schoolType, HttpSession session) {
+	public String studentFeeSituation(Integer schoolId, String schoolName, Integer schoolType, HttpSession session) {
 
 		List<Order> studentFeeSituationList = null;
 		List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
@@ -613,11 +640,11 @@ public class AdminTeacherController {
 	 * @return
 	 */
 	@RequestMapping("queryStudent.html")
-	public String queryStudent(String startTime, String endTime,Integer classId ,HttpSession session) {
+	public String queryStudent(String startTime, String endTime, Integer classId, HttpSession session) {
 		List<Order> studentFeeSituationList = null;
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		if (endTime == null || endTime == "" ) {
+		if (endTime == null || endTime == "") {
 			endTime = formatter.format(new Date());
 		}
 		if (startTime == null || startTime == "") {
@@ -665,7 +692,7 @@ public class AdminTeacherController {
 				User user = new User();
 				user.setuId(userDiction.getUserId());
 				user.setState(state);
-				if (userService.modifyUser(user)>0) {
+				if (userService.modifyUser(user) > 0) {
 					jsonMap.put("state", "1");
 				}
 			}

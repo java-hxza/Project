@@ -54,90 +54,104 @@
 							</div>
 						</div>
 					</div>
-					<!-- end page title -->
 					<div class="row">
-						<div class="col-sm-12">
-							<div class="text-center">
-								<h3 class="schoolId" name="${schoolId }">${schoolName }</h3>
-								<div class="app-search">
-									<form>
-										<div class="input-group">
-											<input type="text" class="form-control"
-												placeholder="Search..."> <span
-												class="mdi mdi-magnify"></span>
-											<div class="input-group-append">
-												<button class="btn btn-primary" type="button">搜索</button>
-											</div>
-										</div>
-									</form>
-								</div>
-								<p class="text-muted mt-3"></p>
-								<button type="button" class="btn btn-success btn-sm mt-2"
-									onclick="print()">打印订单</button>
-								<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-									onclick="exportExsal()">导出exsal</button>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="billing-first-name">开始日期</label> <input
+									class="form-control" type="date" id="startTime" />
 							</div>
 						</div>
-						<!-- end col -->
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="billing-first-name">截至日期</label> <input
+									class="form-control" type="date" id="endTime" />
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="billing-first-name">班级</label> <select id="classId"
+									class="form-control">
+									<option value="">请选择班级</option>
+									<c:forEach items="${classList }" var="cc">
+										<option value="${cc.classId }">${cc.className }</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
 					</div>
-					<!-- end row -->
-					<!-- Question/Answer -->
-					<div class="table-responsive">
-						<!--startprint-->
-						<h3 style="display: none;text-align: center;" id="tables">收入明细报表</h3>
-						<table
-							class="table table-centered table-striped dt-responsive nowrap w-100"
-							id="products-datatable" border="1px solid" width="100%">
-							<tbody>
-								<tr>
-									<td style="width: 20px;">
-										<div class="custom-control custom-checkbox"></div>
-									</td>
-									<td>序</td>
-									<td>校区</td>
-									<td>学员名称</td>
-									<td>新增课时</td>
-									<td>赠送课时</td>
-									<td>已上课时</td>
-								</tr>
-							</tbody>
-							<tbody>
-								<c:forEach items="${stuReistrationList}" var="stu"
-									varStatus="status">
-									<tr>
-										<td>
-											<div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input"
-													id="customCheck2"> <label
-													class="custom-control-label" for="customCheck2">&nbsp;</label>
-											</div>
-										</td>
-										<td class="table-user">${status.index }
-										</td>
-										<td class="table-user">${schoolName}</td>
-										<td class="table-user">${stu.studentName}
-										<td class="table-user">${stu.order.addhour }
-										</td>
-										<td class="table-user">${stu.order.givehour }
-										</td>
-										<td class="table-user">${stu.sumHour }</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-						<!--endprint-->
-					</div>
-					<iframe id="iframe1" style="display: none"></iframe>
-					<!-- ============================================================== -->
-					<!-- End Page content -->
-					<!-- ============================================================== -->
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row mb-2">
+									<div class="col-sm-4">
+										<button type="button" class="btn btn-success btn-sm mt-2"
+											onclick="print()">打印订单</button>
+										<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+											onclick="exportExsal()">导出exsal</button>
+									</div>
+									<div class="col-sm-8">
+										<div class="text-sm-right">
+											<button type="button" class="btn btn-success btn-sm mt-2"
+												onclick="queryStudentHour()">查询</button>
+										</div>
+									</div>
+									<!-- end col-->
+								</div>
+								<!-- Question/Answer -->
+								<div class="table-responsive">
+									<!--startprint-->
+									<h3 style="text-align: center;" id="tables">学员课时总报表</h3>
+									<table
+										class="table table-centered table-striped dt-responsive nowrap w-100"
+										id="products-datatable" border="1px solid" width="100%">
+										<tbody>
+											<tr>
+												<td>序</td>
+												<td>校区</td>
+												<td>学员名称</td>
+												<td>新增课时</td>
+												<td>赠送课时</td>
+												<td>总课时</td>
+												<td>已上课时</td>
+												<td>剩余课时</td>
+												<td>缴费记录</td>
+											</tr>
+										</tbody>
+										<tbody>
+											<c:forEach items="${stuReistrationList}" var="stu"
+												varStatus="status">
+												<tr>
+													<td class="table-user">${status.index }</td>
+													<td class="table-user">${schoolName}</td>
+													<td class="table-user">${stu.studentName}</td>
+													<td class="table-user">${stu.order.addhour }</td>
+													<td class="table-user">${stu.order.givehour }</td>
+													<td class="table-user">${stu.order.givehour+stu.order.addhour }</td>
+													<td class="table-user">${stu.sumHour }</td>
+													<td class="table-user">${(stu.order.addhour+stu.order.givehour )-stu.sumHour }</td>
+													<td><a href="javascript:void(0);"
+														class="action-icon jiaofei" name="${stu.childStuId }">
+															<i class="mdi mdi-eye"></i>
+													</a></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									<!--endprint-->
+								</div>
 
-				</div>
-				<!-- END wrapper -->
+								<!-- ============================================================== -->
+								<!-- End Page content -->
+								<!-- ============================================================== -->
 
-				<!-- App js -->
-				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-				<script src="${Path }/static/js/admin/info/schoolInfo.js"></script>
-				<script src="${Path }/static/js/admin/leftSidebar.js"></script>
+							</div>
+							<!-- END wrapper -->
+							<iframe id="iframe1" style="display: none"></iframe>
+							<!-- END wrapper -->
+
+							<!-- App js -->
+							<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
+							<script src="${Path }/static/js/root/classStudent/classInfo.js"></script>
+							<script src="${Path }/static/js/admin/leftSidebar.js"></script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 package cn.huizhi.service;
 
 import java.util.List;
+import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 
 import cn.huizhi.pojo.TeacherHour;
 
@@ -20,7 +20,7 @@ public interface TeacherHourService {
 	 * @param classId
 	 * @return
 	 */
-	public List<TeacherHour> selectCurriculumInfo(Integer classId,Integer teacherHourId);
+	public List<TeacherHour> selectCurriculumInfo(Integer classId,Integer teacherHourId,Integer schoolId);
 	
 	/**
 	 *添加课程信息 
@@ -43,4 +43,11 @@ public interface TeacherHourService {
 	 * @return
 	 */
 	public Integer delTeacherHour(Integer teacherHourId);
+	
+	/**
+	 * 根据条件查询教师课程
+	 * @param map
+	 * @return
+	 */
+	public List<TeacherHour> findCurriculumInfo(Map<String, Object> map);
 }

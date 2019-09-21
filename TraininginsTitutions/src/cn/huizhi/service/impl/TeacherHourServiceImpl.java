@@ -1,6 +1,7 @@
 package cn.huizhi.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -22,9 +23,9 @@ public class TeacherHourServiceImpl implements TeacherHourService {
 	}
 
 	@Override
-	public List<TeacherHour> selectCurriculumInfo(Integer classId,Integer teacherHourId) {
+	public List<TeacherHour> selectCurriculumInfo(Integer classId,Integer teacherHourId,Integer schoolId) {
 		// TODO Auto-generated method stub
-		return teacherHourMapper.selectCurriculumInfo(classId,teacherHourId);
+		return teacherHourMapper.selectCurriculumInfo(classId,teacherHourId,schoolId);
 	}
 
 	@Override
@@ -43,6 +44,12 @@ public class TeacherHourServiceImpl implements TeacherHourService {
 	public Integer delTeacherHour(Integer teacherHourId) {
 		// TODO Auto-generated method stub
 		return teacherHourMapper.delTeacherHour(teacherHourId);
+	}
+
+	@Override
+	public List<TeacherHour> findCurriculumInfo(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return teacherHourMapper.findCurriculumInfo(map);
 	}
 
 }

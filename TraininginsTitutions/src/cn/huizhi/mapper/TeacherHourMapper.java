@@ -6,6 +6,7 @@ package cn.huizhi.mapper;
  */
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -24,7 +25,7 @@ public interface TeacherHourMapper {
 	 * @param classId
 	 * @return
 	 */
-	public List<TeacherHour> selectCurriculumInfo(@Param("classId")Integer classId,@Param("teacherHourId")Integer teacherHourId);
+	public List<TeacherHour> selectCurriculumInfo(@Param("classId")Integer classId,@Param("teacherHourId")Integer teacherHourId,@Param("schoolId")Integer schoolId);
 	
 	/**
 	 *添加课程信息 
@@ -47,4 +48,11 @@ public interface TeacherHourMapper {
 	 * @return
 	 */
 	public Integer delTeacherHour(@Param("teacherHourId")Integer teacherHourId);
+	
+	/**
+	 * 根据条件查询教师课程
+	 * @param map
+	 * @return
+	 */
+	public List<TeacherHour> findCurriculumInfo(@Param("map")Map<String, Object> map);
 }

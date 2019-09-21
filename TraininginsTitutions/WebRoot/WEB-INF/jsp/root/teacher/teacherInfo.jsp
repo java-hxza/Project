@@ -107,81 +107,115 @@
 										<li class="breadcrumb-item active">FAQ</li>
 									</ol>
 								</div>
-								<h4 class="page-title">学生信息管理</h4>
+								<h4 class="page-title">教师课时汇总</h4>
 							</div>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-12">
-							<div class="text-center">
-								<h3 class="schoolId" name="${schoolId }">${schoolName }</h3>
-								<div class="app-search">
-									<form>
-										<div class="input-group">
-											<input type="text" class="form-control"
-												placeholder="Search..."> <span
-												class="mdi mdi-magnify"></span>
-											<div class="input-group-append">
-												<button class="btn btn-primary" type="button">搜索</button>
-											</div>
-										</div>
-									</form>
-								</div>
-								<p class="text-muted mt-3"></p>
-								<button type="button" class="btn btn-success btn-sm mt-2"
-									onclick="print()">打印订单</button>
-								<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-									onclick="exportExsal()">导出exsal</button>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="billing-first-name">开始日期</label> <input
+									class="form-control" type="date" id="startTime" />
 							</div>
 						</div>
-						<!-- end col -->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="billing-first-name">截至日期</label> <input
+									class="form-control" type="date" id="endTime" />
+							</div>
+						</div>
 					</div>
-					<!-- end row -->
-					<!-- Question/Answer -->
-					<div class="table-responsive">
-						<!--startprint-->
-						<h3 style="display: none;text-align: center;" id="tables">教师课时总报表</h3>
-						<table
-							class="table table-centered table-striped dt-responsive nowrap w-100"
-							id="products-datatable" border="1px solid" width="100%">
-							<tbody>
-								<tr>
-
-									<td>序</td>
-									<td>校区</td>
-									<td>教师名称</td>
-									<td>课时名称</td>
-									<td>教师总课时</td>
-								</tr>
-
-							</tbody>
-							<tbody>
-								<c:forEach items="${teacherHourList }" var="th"
-									varStatus="status">
-									<tr>
-
-										<td class="table-user">${status.index }</td>
-										<td class="table-user">${schoolName}</td>
-										<td class="table-user">${th.teacherName}</td>
-										<td class="table-user">${th.dpName }</td>
-										<td class="table-user">${th.sumHours }</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-						<!--endprint-->
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="billing-first-name">教师</label> <select
+									id="teacherId" class="form-control">
+									<option value="">请选教师</option>
+									<c:forEach items="${teachers }" var="t">
+										<option value="${t.teacherId }">${t.teacherName }</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="billing-first-name">课程</label> <select id="dpId"
+									class="form-control">
+									<option value="">请选择课程类型</option>
+									<c:forEach items="${departmentOfPediatrics }" var="dp">
+										<option value="${dp.dpId }">${dp.dpTypeName }</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
 					</div>
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row mb-2">
+									<div class="col-sm-4">
+										<button type="button" class="btn btn-success btn-sm mt-2"
+											onclick="print()">打印订单</button>
+										<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+											onclick="exportExsal()">导出exsal</button>
+									</div>
+									<div class="col-sm-8">
+										<div class="text-sm-right">
+											<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+												onclick="queryTeacherInfo()">查询</button>
+										</div>
+									</div>
+								</div>
+							</div>
 
-					<!-- ============================================================== -->
-					<!-- End Page content -->
-					<!-- ============================================================== -->
-					<iframe id="iframe1" style="display: none"></iframe>
-				</div>
-				<!-- END wrapper -->
+							<!-- end col -->
+							<!-- end row -->
+							<!-- Question/Answer -->
+							<div class="table-responsive">
+								<!--startprint-->
+								<h3 style="text-align: center;" id="tables">教师课时总报表</h3>
+								<table
+									class="table table-centered table-striped dt-responsive nowrap w-80"
+									id="products-datatable" border="1px solid" width="100%">
+									<thead>
+										<tr>
 
-				<!-- App js -->
-				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-				<script src="${Path }/static/js/admin/info/schoolInfo.js"></script>
-				
+											<td>序</td>
+											<td>校区</td>
+											<td>教师名称</td>
+											<td>课时名称</td>
+											<td>教师总课时</td>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${teacherHourList }" var="th"
+											varStatus="status">
+											<tr>
+												<td class="table-user">${status.index }</td>
+												<td class="table-user">${schoolName}</td>
+												<td class="table-user">${th.teacherName}</td>
+												<td class="table-user">${th.dpName }</td>
+												<td class="table-user">${th.sumHours }</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+								<!--endprint-->
+							</div>
+							<iframe id="iframe1" style="display: none"></iframe>
+							<!-- ============================================================== -->
+							<!-- End Page content -->
+							<!-- ============================================================== -->
+						</div>
+						<!-- ============================================================== -->
+						<!-- End Page content -->
+						<!-- ============================================================== -->
+						<iframe id="iframe1" style="display: none"></iframe>
+					</div>
+					<!-- END wrapper -->
+
+					<!-- App js -->
+					<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
+					<script src="${Path }/static/js/admin/teacher/teacherInfo.js"></script>
 </body>
 </html>

@@ -41,7 +41,7 @@
 				</a></li>
 				<li><a href="javascript:void(0)" onclick="classTypeInfo()">学员科别管理
 				</a></li>
-				<c:if test="${schoolType != 1 }">
+				<c:if test="${schoolType == 3 }">
 					<li><a href="javascript:void(0)" onclick="assignment()">学员班级管理
 							-->分班</a></li>
 				</c:if>
@@ -49,6 +49,8 @@
 					<li><a href="javascript:void(0)" onclick="classInfo()">上课登记</a></li>
 					<li><a href="javascript:void(0)" onclick="classInfo()">上课批量登记</a></li>
 				</c:if>
+				<li><a href="javascript:void(0)" onclick="classInfo()">学员退学 </a></li>
+				<li><a href="javascript:void(0)" onclick="classInfo()">学员请假 </a></li>
 			</ul></li>
 
 <<<<<<< HEAD
@@ -111,7 +113,7 @@
 					<li><a href="javascript:void(0)" onclick="highFeeSituation()">高中收费情况报表</a></li>
 				</c:if>
 				<c:if test="${schoolType ==3 }">
-					<li><a href="javascript:void(0)" onclick="artAeeSituation()">高中收费情况报表</a></li>
+					<li><a href="javascript:void(0)" onclick="artFeeSituation()">艺考收费情况报表</a></li>
 				</c:if>
 			</ul></li>
 		<li class="side-nav-item"><a href="javascript: void(0);"

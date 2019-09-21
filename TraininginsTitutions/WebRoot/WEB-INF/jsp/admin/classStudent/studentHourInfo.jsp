@@ -100,13 +100,13 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="billing-first-name">班级</label> 
-								<select id="classId" class="form-control">
+								<label for="billing-first-name">班级</label> <select id="classId"
+									class="form-control">
 									<option value="">请选择班级</option>
 									<c:forEach items="${classList }" var="cc">
 										<option value="${cc.classId }">${cc.className }</option>
 									</c:forEach>
-								</select> 
+								</select>
 							</div>
 						</div>
 					</div>
@@ -174,7 +174,6 @@
 								<!-- ============================================================== -->
 								<!-- End Page content -->
 								<!-- ============================================================== -->
-
 							</div>
 							<!-- END wrapper -->
 							<iframe id="iframe1" style="display: none"></iframe>

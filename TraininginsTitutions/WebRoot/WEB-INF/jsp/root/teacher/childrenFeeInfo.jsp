@@ -86,11 +86,60 @@
 												<li class="breadcrumb-item active">FAQ</li>
 											</ol>
 										</div>
-										<h3 class="schoolId" name="${schoolId }">${schoolName }</h3>
+										<h4 class="page-title">教师课时总汇</h4>
 									</div>
 								</div>
 							</div>
-							<!-- end page title -->
+							<!-- end row -->
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="billing-first-name">开始日期</label> <input
+											class="form-control" type="date" id="startTime" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="billing-first-name">截至日期</label> <input
+											class="form-control" type="date" id="endTime" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="billing-first-name">教师</label> <select
+											id="teacherId" class="form-control">
+											<option value="">请选教师</option>
+											<c:forEach items="${teachers }" var="t">
+												<option value="${t.teacherId }">${t.teacherName }</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="billing-first-name">课程</label> <select id="dpId"
+											class="form-control">
+											<option value="">请选择课程类型</option>
+											<c:forEach items="${departmentOfPediatrics }" var="dp">
+												<option value="${dp.dpId }">${dp.dpTypeName }</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="billing-first-name">班级</label> <select id="classId"
+											class="form-control">
+											<option value="">请选择班级</option>
+											<c:forEach items="${classList }" var="cc">
+												<option value="${cc.classId }">${cc.className }</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+							</div>
 							<div class="col-12">
 								<div class="card">
 									<div class="card-body">
@@ -98,66 +147,67 @@
 											<div class="col-sm-4">
 												<button type="button" class="btn btn-success btn-sm mt-2"
 													onclick="print()">打印订单</button>
+												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+													onclick="exportExsal()">导出exsal</button>
 											</div>
 											<div class="col-sm-8">
 												<div class="text-sm-right">
-
 													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-														onclick="exportExsal()">导出exsal</button>
+														onclick="queryTeacherInfo()">查询</button>
 												</div>
 											</div>
-											<!-- end col-->
 										</div>
+									</div>
 
+									<!-- Question/Answer -->
+									<div class="table-responsive">
+										<!--startprint-->
+										<h3 style="display: none;text-align: center;" id="tables">教师课时总报表</h3>
+										<table
+											class="table table-centered table-striped dt-responsive nowrap w-100"
+											id="products-datatable" border="1px solid" width="100%">
+											<tbody>
+												<tr>
 
-										<!-- Question/Answer -->
-										<div class="table-responsive">
-											<!--startprint-->
-											<h3 style="display: none;text-align: center;" id="tables">教师上课明细报表</h3>
-											<table
-												class="table table-centered table-striped dt-responsive nowrap w-100"
-												id="products-datatable" border="1px solid" width="100%">
-												<tbody>
+													<td>序</td>
+													<td>校区</td>
+													<td>教师名称</td>
+													<td>课时名称</td>
+													<td>课时</td>
+													<td>上课日期</td>
+													<td>备注</td>
+												</tr>
+											</tbody>
+											<tbody>
+												<c:forEach items="${teacherHourList}" var="ch"
+													varStatus="status">
 													<tr>
-														<td>序</td>
-														<td>校区</td>
-														<td>教师名称</td>
-														<td>课时名称</td>
-														<td>课时</td>
-														<td>上课日期</td>
-														<td>备注</td>
+
+														<td class="table-user">${status.index }</td>
+														<td class="table-user">${schoolName}</td>
+														<td class="table-user">${ch.teacherName}</td>
+														<td class="table-user">${ch.dpName }</td>
+														<td class="table-user">${ch.hours}</td>
+														<td class="table-user"><fmt:formatDate
+																value="${ch.startTime}" pattern="yyyy-MM-dd HH:MM" /></td>
+														<td class="table-user">${ch.remarks }</td>
 													</tr>
-												</tbody>
-												<tbody>
-													<c:forEach items="${teacherHourList}" var="ch"
-														varStatus="status">
-														<tr>
-															<td class="table-user">${status.index }</td>
-															<td class="table-user">${schoolName}</td>
-															<td class="table-user">${ch.teacherName}</td>
-															<td class="table-user">${ch.dpName }</td>
-															<td class="table-user">${ch.hours}</td>
-															<td class="table-user"><fmt:formatDate
-																	value="${ch.startTime}" pattern="yyyy-MM-dd HH:MM" />
-															</td>
-															<td class="table-user">${ch.remarks }</td>
-														</tr>
-													</c:forEach>
-												</tbody>
-											</table>
-											<!--endprint-->
-										</div>
-										<iframe id="iframe1" style="display: none"></iframe>
-										<!-- ============================================================== -->
-										<!-- End Page content -->
-										<!-- ============================================================== -->
+												</c:forEach>
+											</tbody>
+										</table>
+										<!--endprint-->
+									</div>
+									<iframe id="iframe1" style="display: none"></iframe>
+									<!-- ============================================================== -->
+									<!-- End Page content -->
+									<!-- ============================================================== -->
 
 									</div>
 									<!-- END wrapper -->
 
 									<!-- App js -->
 									<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-									<script src="${Path }/static/js/admin/info/schoolInfo.js"></script>
+									<script src="${Path }/static/js/root/teacher/teacherCurricome.js"></script>
 									<script src="${Path }/static/js/admin/leftSidebar.js"></script>
 </body>
 </html>

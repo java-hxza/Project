@@ -194,4 +194,18 @@ $(function() {
 	    return format;
 	}
 	
+	/**
+	 * 高中收费情况报表
+	 */
+	highFeeSituation = function(){
+		location.href = "highFeeSituation.html";
+	}
+	
+	/**
+	 *艺考收费报表 
+	 */
+	artFeeSituation = function(){
+		location.href = "rootArtStudentFooInfo.html";
+	}
+	
 });

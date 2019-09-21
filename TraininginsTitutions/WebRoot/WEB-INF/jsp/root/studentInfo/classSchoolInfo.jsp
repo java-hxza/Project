@@ -38,103 +38,104 @@
 
 		<!-- ========== Left Sidebar Start ========== -->
 		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
-		<!-- Left Sidebar End -->
+		<div class="content-page">
+			<div class="content">
 
-		<!-- ============================================================== -->
-		<!-- Start Page Content here -->
-		<!-- ============================================================== -->
-		<div class="container-fluid">
-			<div class="navbar-custom">
-				<ul class="list-unstyled topbar-right-menu float-right mb-0">
+				<!-- Start Content-->
+				<div class="container-fluid">
+					<div class="navbar-custom">
+						<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
 
-					<li class="dropdown notification-list"><a
-						class="nav-link dropdown-toggle nav-user arrow-none mr-0"
-						data-toggle="dropdown" href="#" role="button"
-						aria-haspopup="false" aria-expanded="false"> <span
-							class="account-user-avatar"> <img
-								src="${Path }/static/images/avatar-1.jpg" alt="user-image"
-								class="rounded-circle">
-						</span> <span> <span class="account-user-name">${user.loginName }
-							</span> <span class="account-position">管理员</span>
-						</span>
-					</a>
-						<div
-							class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-							<!-- item-->
-							<div class=" dropdown-header noti-title">
-								<h6 class="text-overflow m-0">欢迎 !</h6>
-							</div>
-
-							<!-- item-->
-							<a href="javascript:void(0);" class="dropdown-item notify-item">
-								<i class="mdi mdi-account-circle mr-1"></i> <span>我的账户</span>
+							<li class="dropdown notification-list"><a
+								class="nav-link dropdown-toggle nav-user arrow-none mr-0"
+								data-toggle="dropdown" href="#" role="button"
+								aria-haspopup="false" aria-expanded="false"> <span
+									class="account-user-avatar"> <img
+										src="${Path }/static/images/avatar-1.jpg" alt="user-image"
+										class="rounded-circle">
+								</span> <span> <span class="account-user-name">${user.loginName }
+									</span> <span class="account-position">管理员</span>
+								</span>
 							</a>
+								<div
+									class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+									<!-- item-->
+									<div class=" dropdown-header noti-title">
+										<h6 class="text-overflow m-0">欢迎 !</h6>
+									</div>
 
-							<!-- item-->
-							<a href="javascript:void(0);" class="dropdown-item notify-item"
-								onclick="switchingAccounts()"> <i
-								class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
-							</a>
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item">
+										<i class="mdi mdi-account-circle mr-1"></i> <span>我的账户</span>
+									</a>
 
-							<!-- item-->
-							<a href="javascript:void(0);" class="dropdown-item notify-item">
-								<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
-							</a>
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item"
+										onclick="switchingAccounts()"> <i
+										class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
+									</a>
+
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item">
+										<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
+									</a>
 
 
-						</div></li>
+								</div></li>
 
-				</ul>
-				<button class="button-menu-mobile open-left disable-btn">
-					<i class="mdi mdi-menu"></i>
-				</button>
-				<div class="app-search">
-					<form>
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search...">
-							<span class="mdi mdi-magnify"></span>
-							<div class="input-group-append">
-								<button class="btn btn-primary" type="submit">Search</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-			<!-- end Topbar -->
-			<!-- Start Content-->
-			<div class="container-fluid">
-
-				<!-- start page title -->
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="text-center">
-							<h3 class="">选择班级</h3>
-							<p class="text-muted mt-3">请选择要查看的班级学生</p>
+						</ul>
+						<button class="button-menu-mobile open-left disable-btn">
+							<i class="mdi mdi-menu"></i>
+						</button>
+						<div class="app-search">
+							<form>
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Search...">
+									<span class="mdi mdi-magnify"></span>
+									<div class="input-group-append">
+										<button class="btn btn-primary" type="submit">Search</button>
+									</div>
+								</div>
+							</form>
 						</div>
 					</div>
-
-					<!-- end col -->
+					<!-- end Topbar -->
+					<!-- start page title -->
+					<div class="row">
+						<div class="col-12">
+							<div class="page-title-box">
+								<div class="page-title-right">
+									<ol class="breadcrumb m-0">
+										<li class="breadcrumb-item"><a
+											href="javascript: void(0);">Hyper</a></li>
+										<li class="breadcrumb-item"><a
+											href="javascript: void(0);">Pages</a></li>
+										<li class="breadcrumb-item active">FAQ</li>
+									</ol>
+								</div>
+								<h4 class="page-title">学生收费情况</h4>
+							</div>
+						</div>
+					</div>
+					<!-- end page title -->
 				</div>
-
-				<!-- end page title -->
-
+				<!-- end row -->
 				<div class="row">
 					<div class="col-12">
 						<div class="card">
 							<div class="card-body">
 								<div class="row mb-2">
-									<div class="col-sm-4"></div>
+									<div class="col-sm-4">
+										<!-- <a href="javascript:void(0);" onclick="studnetLeave()"
+												class="btn btn-danger mb-2"><i
+												class="mdi mdi-plus-circle mr-2"></i>学生请假</a> -->
+									</div>
 									<div class="col-sm-8">
-										<div class="text-sm-right">
-											<button type="button" class="btn btn-success mb-2 mr-1">
-												<i class="mdi mdi-settings"></i>
-											</button>
-										</div>
+										<div class="text-sm-right"></div>
 									</div>
 									<!-- end col-->
 								</div>
-
 								<div class="table-responsive">
 									<!--startprint-->
 									<table
@@ -226,8 +227,7 @@
 		<footer class="footer">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-6">2018 - 2019 Â© Hyper - Coderthemes.com
-					</div>
+					<div class="col-md-6">2018 - 2019 Â© Hyper - Coderthemes.com</div>
 					<div class="col-md-6">
 						<div class="text-md-right footer-links d-none d-md-block">
 							<a href="javascript: void(0);">About</a> <a

@@ -20,7 +20,6 @@ $(function() {
 		}
 		var dpId = $("#dpId").val();
 		var teacherId = $("#teacherId").val();
-
 		$.ajax({
 			url : 'queryTeacherInfo.html',
 			data : {

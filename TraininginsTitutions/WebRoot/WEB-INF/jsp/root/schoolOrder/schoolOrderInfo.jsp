@@ -183,7 +183,7 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label for="billing-first-name">账户</label> <select
-												id="paymentmethodId" class="form-control col-sm-8">
+												id="paymentmethodId" class="form-control">
 												<option value="">请选择</option>
 												<c:forEach items="${payMentList}" var="pay">
 													<option value="${pay.paymentmethodId }">${pay.paymentmethodName }</option>
@@ -194,7 +194,7 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label for="billing-first-name">收入类型:</label> <select
-												id="feecateId" class="form-control col-sm-8">
+												id="feecateId" class="form-control">
 												<option value="">请选择</option>
 												<c:forEach items="${feeCategoryList}" var="fee">
 													<option value="${fee.chargeTypeId}">${fee.chargeTypeName }</option>
@@ -205,7 +205,7 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label for="billing-first-name">班级:</label> <select
-												id="classId" class="form-control col-sm-8">
+												id="classId" class="form-control">
 												<option value="">请选择</option>
 												<c:forEach items="${classBySchooList}" var="c">
 													<option value="${c.classId}">${c.className}</option>
@@ -216,7 +216,7 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label for="billing-first-name">课程:</label> <select
-												id="departmentofpediatricsId" class="form-control col-sm-8">
+												id="departmentofpediatricsId" class="form-control">
 												<option value="">请选择</option>
 												<c:forEach items="${departmentOfPediatricsList}" var="dp">
 													<option value="${dp.dpId}">${dp.dpTypeName }</option>
@@ -231,7 +231,7 @@
 							<!-- Question/Answer -->
 							<div class="table-responsive">
 								<!--startprint-->
-									<h3 style="display: none;text-align: center;" id="tables">收入明细报表</h3>
+								<h3 style="text-align: center;" id="tables">收支明细报表</h3>
 								<table
 									class="table table-centered table-striped dt-responsive nowrap w-100"
 									id="products-datatable" border="1px solid" width="100%">
@@ -257,7 +257,7 @@
 												<td class="table-user">${order.orderNumber }</td>
 												<td class="table-user">${order.student.studentName }</td>
 												<td class="table-user"><fmt:formatDate
-														value="${order.startTime }" pattern="yyyy-MM-dd hh:mm:ss"></fmt:formatDate>
+														value="${order.startTime }" pattern="yyyy-MM-dd hh:mm"></fmt:formatDate>
 												</td>
 												<td class="table-user">
 													${order.feeCategory.chargeTypeName }</td>
@@ -270,13 +270,21 @@
 												<td class="table-user">${order.addhour }</td>
 												<td class="table-user">${order.givehour }</td>
 												<td class="table-user"><fmt:formatDate
-														value="${order.firstdate }" pattern="yyyy-MM-dd HH:mm:ss" />
-												</td>
+														value="${order.firstdate }" pattern="yyyy-MM-dd" /></td>
 												<td class="table-user"><fmt:formatDate
-														value="${order.lastdate }" pattern="yyyy-MM-dd HH:mm:ss" />
-												</td>
+														value="${order.lastdate }" pattern="yyyy-MM-dd" /></td>
 											</tr>
 										</c:forEach>
+									</tbody>
+									<tbody id = "expen" style='text-align: center;'>
+										<tr>
+											<td colspan='6' >支出总额</td>
+											<td colspan='6' >收入总额</td>
+										</tr>
+										<tr>
+											<td colspan='6' >${schoolExPenSum }</td>
+											<td colspan='6' >${schoolFeeceat }</td>
+										</tr>
 									</tbody>
 								</table>
 								<!--endprint-->
@@ -293,9 +301,6 @@
 						<!-- App js -->
 						<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
 						<script type="text/javascript"
-							src="${Path }/static/js/admin/adminIndex.js"></script>
-						<script src="${Path }/static/js/admin/leftSidebar.js"></script>
-						<script
-							src="${Path }/static/js/admin/orderSchool/selectOrderSchoolInfo.js"></script>
+						<script src="${Path }/static/js/root/orderSchool/selectOrderSchoolInfo.js"></script>
 						<script src="${Path }/static/js/admin/operator.js"></script>
 </html>
