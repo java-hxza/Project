@@ -52,8 +52,6 @@
 				<li><a href="javascript:void(0)" onclick="classInfo()">学员退学 </a></li>
 				<li><a href="javascript:void(0)" onclick="classInfo()">学员请假 </a></li>
 			</ul></li>
-
-<<<<<<< HEAD
 				</ul></li>
 			<li class="side-nav-item"><a href="javascript: void(0);"
 				class="side-nav-link"> <i class=" mdi mdi-yahoo"></i> <span>

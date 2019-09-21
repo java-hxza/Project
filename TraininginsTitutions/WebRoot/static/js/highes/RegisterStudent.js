@@ -292,7 +292,7 @@ $(function() {
 			for (var i = 0; i < $(".feecateIds2").length; i++) {
 				if ($.trim($(".feecateIds2").eq(i).val()) != "" && $.trim($(".feecateIds2").eq(i).val()) != 0) {
 					number++;
-					feecateId = $.trim(feecateId + "," + $(".feecateIds2").eq(i).attr("chargeTypeId").toString());
+					feecateId = $.trim(feecateId + "," + $(".f eecateIds2").eq(i).attr("chargeTypeId").toString());
 				}
 			}
 			feecateId = feecateId.substring(1);
