@@ -155,7 +155,7 @@
 									<!-- Question/Answer -->
 									<div class="table-responsive">
 										<!--startprint-->
-										<h3 style="display: none;text-align: center;" id="tables">教师课时总报表</h3>
+										<h3 style="text-align: center;" id="tables">教师课时总报表</h3>
 										<table
 											class="table table-centered table-striped dt-responsive nowrap w-80"
 											id="products-datatable" border="1px solid" width="100%">

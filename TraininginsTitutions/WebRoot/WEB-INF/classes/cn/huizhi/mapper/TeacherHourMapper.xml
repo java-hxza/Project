@@ -3,9 +3,9 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.TeacherHourMapper">
-	
+
 	<sql id="teacherHourCol">
-	 	teacherHourId,
+		teacherHourId,
 		teacherName,
 		teacherId,
 		classId,
@@ -16,7 +16,7 @@
 		schoolId,
 		remarks
 	</sql>
-	
+
 	<sql id="selecTeacherHourListBySchoolIdCol">
 		th.dpId,
 		th.dpName,
@@ -27,106 +27,148 @@
 		th.startTime,
 		th.teacherHourId,
 		th.teacherId,
-		th.teacherName, 
+		th.teacherName,
 		SUM(th.hours) sumHours
 	</sql>
-	
-	<!--查询教师课时-->	
-	<select id="selecTeacherHourListBySchoolId" resultType="TeacherHour" parameterType="java.lang.Integer">
-		select <include refid="selecTeacherHourListBySchoolIdCol"/>
+
+	<!--查询教师课时 -->
+	<select id="selecTeacherHourListBySchoolId"
+		resultType="TeacherHour" parameterType="java.lang.Integer">
+		select
+		<include refid="selecTeacherHourListBySchoolIdCol" />
 		from teacherhour th
 		<where>
 			<if test="schoolId !=null and schoolId !=''">
-				th.schoolId =#{schoolId} 
+				th.schoolId =#{schoolId}
 			</if>
 			<if test="startTime !=null and startTime !=''">
-				and date(th.startTime) between #{startTime} and #{endTime}
+				and date(th.startTime) between #{startTime} and
+				#{endTime}
 			</if>
 			<if test="teacherId !=null and teacherId !=''">
-				and th.teacherId =#{teacherId} 
+				and th.teacherId =#{teacherId}
 			</if>
 			<if test="dpId !=null and dpId !=''">
-				and th.dpId =#{dpId} 
+				and th.dpId =#{dpId}
 			</if>
-			group by th.teacherId  
-		</where> 
+			group by th.teacherId
+		</where>
 	</select>
-	
+
 	<sql id="CurriculumInfoCol">
 		t.classId t_classId,
 		t.dpId t_dpId,
 		t.dpName t_dpName,
-		t.hours t_hours, 
+		t.hours t_hours,
 		t.remarks t_remarks,
 		t.schoolId t_schoolId,
 		t.startTime t_startTime,
 		t.teacherHourId t_teacherHourId,
 		t.teacherId t_teacherId,
-		t.teacherName t_teacherName
+		t.teacherName
+		t_teacherName
 	</sql>
-	
+
 	<resultMap type="TeacherHour" id="CurriculumInfoMap">
-		<id column="t_classId" property="classId"/>
-		<result column="t_dpId" property="dpId"/>
-		<result column="t_dpName" property="dpName"/>
-		<result column="t_hours" property="hours"/>
-		<result column="t_remarks" property="remarks"/>
-		<result column="t_schoolId" property="schoolId"/>
-		<result column="t_startTime" property="startTime"/>
-		<result column="t_teacherHourId" property="teacherHourId"/>
-		<result column="t_teacherName" property="teacherName"/>
-		<result column="t_teacherId" property="teacherId"/>
+		<id column="t_classId" property="classId" />
+		<result column="t_dpId" property="dpId" />
+		<result column="t_dpName" property="dpName" />
+		<result column="t_hours" property="hours" />
+		<result column="t_remarks" property="remarks" />
+		<result column="t_schoolId" property="schoolId" />
+		<result column="t_startTime" property="startTime" />
+		<result column="t_teacherHourId" property="teacherHourId" />
+		<result column="t_teacherName" property="teacherName" />
+		<result column="t_teacherId" property="teacherId" />
 	</resultMap>
-	
-	<select id="selectCurriculumInfo" parameterType="java.lang.Integer" resultMap="CurriculumInfoMap">
-		select <include refid="CurriculumInfoCol"/>
+
+	<select id="selectCurriculumInfo"
+		parameterType="java.lang.Integer" resultMap="CurriculumInfoMap">
+		select
+		<include refid="CurriculumInfoCol" />
 		from teacherhour t
 		<where>
 			<if test="classId!=null and classId!=''">
-				t.classId = #{classId}
+				and t.classId = #{classId}
+			</if>
+			<if test="schoolId !=null and schoolId !=''">
+				and t.schoolId = #{schoolId}
 			</if>
 			<if test="teacherHourId!=null and teacherHourId !=''">
-				t.teacherHourId= #{teacherHourId}
+				and t.teacherHourId= #{teacherHourId}
 			</if>
-			order by t.startTime desc 
-		</where> 
+			order by t.startTime desc
+		</where>
 	</select>
-	
+
+	<select id="findCurriculumInfo" resultMap="CurriculumInfoMap">
+		select
+		<include refid="CurriculumInfoCol" />
+		from teacherhour t
+		<where>
+			
+			<if test="map.classId != null and map.classId != ''">
+				and t.classId = #{map.classId}
+			</if>
+			<if test="map.dpId !=null and map.dpId !=''">
+				and t.dpId = #{map.dpId}
+			</if>
+			<if test="map.teacherId !=null and map.teacherId !=''">
+				and t.teacherId = #{map.teacherId}
+			</if>
+			<if test="map.schoolId !=null and map.schoolId !=''">
+				and t.schoolId = #{map.schoolId}
+			</if>
+			<if test="map.startTime !=null and map.startTime !=''">
+				and date(t.startTime) between #{map.startTime} and
+				#{map.endTime}
+			</if>
+			order by t.startTime desc
+		</where>
+	</select>
+
 	<insert id="insertTeacherHour" parameterType="TeacherHour">
-		insert into traininginstitutions.teacherhour  ( teacherName, teacherId, classId, hours, dpName, dpId, startTime,  schoolId, remarks)
-		values (#{teacherName},#{teacherId},#{classId},#{hours}, #{dpName},#{dpId},#{startTime},#{schoolId},#{remarks})
+		insert into
+		traininginstitutions.teacherhour ( teacherName, teacherId, classId,
+		hours, dpName, dpId, startTime, schoolId, remarks)
+		values
+		(#{teacherName},#{teacherId},#{classId},#{hours},
+		#{dpName},#{dpId},#{startTime},#{schoolId},#{remarks})
 	</insert>
 
 	<update id="updateTeacherHour" parameterType="TeacherHour">
 		update traininginstitutions.teacherhour
 		set
-		teacherName = #{teacherName},
+		teacherName =
+		#{teacherName},
 		teacherId = #{teacherId},
 		classId = #{classId},
-		hours = #{hours} ,
+		hours =
+		#{hours} ,
 		dpName = #{dpName},
 		dpId = #{dpId} ,
-		startTime = #{startTime} ,
+		startTime = #{startTime}
+		,
 		schoolId = #{schoolId},
 		remarks = #{remarks}
 		<where>
 			<if test="teacherHourId!=null and teacherHourId!=''">
 				teacherHourId = #{teacherHourId}
-			</if>		
+			</if>
 		</where>
 
 	</update>
-	
+
 	<delete id="delTeacherHour" parameterType="java.lang.Integer">
-		delete from traininginstitutions.teacherhour 
-			<where>
-				<if test="teacherHourId!=null and teacherHourId!=''">
-					teacherHourId = #{teacherHourId}
-				</if>
-			</where>
-		
+		delete from traininginstitutions.teacherhour
+		<where>
+			<if test="teacherHourId!=null and teacherHourId!=''">
+				teacherHourId = #{teacherHourId}
+			</if>
+		</where>
+
 	</delete>
-	
-	
-	<!--查询教室上课明细  -->
+
+
+	<!--查询教室上课明细 -->
 </mapper>
