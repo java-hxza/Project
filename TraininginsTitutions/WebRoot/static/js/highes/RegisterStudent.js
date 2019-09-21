@@ -285,8 +285,8 @@ $(function() {
 			}
 			feecateMoney = feecateMoney.substr(1);
 			var startTimes = " " + Time.getHours() + ":" + Time.getMinutes().toString();
-			if (studentName == "" || studentBirth == "" || registrationConsultant == "" || registrationConsultant == "" || startTime == "" || studentIDCard == "") {
-				alert("请填写 姓名- 出生日期-报名老师-报名时间-身份证号！");
+			if (studentName == "" || studentBirth == "" || startTime == "" || studentIDCard == "") {
+				alert("请填写 姓名- 出生日期-报名时间-身份证号！");
 				return false;
 			}
 			for (var i = 0; i < $(".feecateIds2").length; i++) {
@@ -334,8 +334,7 @@ $(function() {
 			}
 			
 			if (teacherId == 0) {
-				alert("请选择招生老师！");
-				return false;
+				teacherId = null;
 			}
 			telephone = telephone.toString().replace(/-/g, "");
 			$.ajax({
@@ -568,9 +567,8 @@ $(function() {
 				if (discount != "" && discount != 0) {
 					dpMoney = (parseFloat($.trim($(".moneys").val())).toFixed(1) - discount).toFixed(1);
 				}
-				alert(dpMoney);alert(discount);alert(integral);return false;
-				if (studentName == "" || studentBirth == "" || registrationConsultant == "" || registrationConsultant == "" || startTime == "") {
-					alert("请填写 姓名-出生日期-报名老师-报名时间！");
+				if (studentName == "" || studentBirth == "" || startTime == "") {
+					alert("请填写 姓名-出生日期-报名时间！");
 					return false;
 				}
 
@@ -592,8 +590,7 @@ $(function() {
 					hours = 0;
 				}
 				if (teacherId == 0) {
-					alert("请选择招生老师！");
-					return false;
+					teacherId = null;
 				}
 				if($(".dpMoneyActivity4").val() < 0) {
 					alert("请输入正确的实收金额！");
@@ -780,8 +777,8 @@ $(function() {
 					var teacherId = $.trim($(".teacherId2 option:selected").val());
 					var dpMoneyActivity4 = $.trim($(".dpMoneyActivity").val());
 					dpMoney = dpMoney - dpMoneyActivity4;
-					if (studentName == "" || studentBirth == "" || registrationConsultant == "" || registrationConsultant == "" || startTime == "" || studentIDCard == "") {
-						alert("请填写 姓名- 出生日期-报名老师-报名时间-身份证号！");
+					if (studentName == "" || studentBirth == "" || startTime == "" || studentIDCard == "") {
+						alert("请填写 姓名- 出生日期-报名时间-身份证号！");
 						return false;
 					}
 					for (var i = 0; i < $(".feecateIds2").length; i++) {
@@ -815,8 +812,7 @@ $(function() {
 						return false;
 					}
 					if (teacherId == 0) {
-						alert("请选择招生老师！");
-						return false;
+						teacherId = null;
 					}
 					var feecateMoney = "";
 					for (var i = 0; i < $(".feecateIds2").length; i++) {
@@ -1094,8 +1090,8 @@ $(function() {
 					}
 					feecateMoney = feecateMoney.substr(1);
 					var startTimes = " " + Time.getHours() + ":" + Time.getMinutes().toString();
-					if (studentName == "" || studentBirth == "" || registrationConsultant == "" || registrationConsultant == "" || startTime == "") {
-						alert("请填写 姓名- 出生日期-报名老师-报名时间！");
+					if (studentName == "" || studentBirth == "" || startTime == "") {
+						alert("请填写 姓名- 出生日期-报名时间！");
 						return false;
 					}
 					for (var i = 0; i < $(".feecateIds2").length; i++) {
@@ -1143,8 +1139,7 @@ $(function() {
 					}
 					
 					if (teacherId == 0) {
-						alert("请选择招生老师！");
-						return false;
+						teacherId = null;
 					}
 					telephone = telephone.toString().replace(/-/g, "");
 					$.ajax({
@@ -1422,8 +1417,7 @@ $(function() {
 //						discount = (parseFloat($.trim($(".dpMoney").val())).toFixed(1) - dpMoney).toFixed(1);
 //					}
 //					if (teacherId == 0) {
-//						alert("请选择招生老师！");
-//						return false;
+//						teacherId = null;
 //					}
 //
 //					telephone = telephone.toString().replace(/-/g, "");

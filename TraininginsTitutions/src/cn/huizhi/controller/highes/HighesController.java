@@ -1361,7 +1361,7 @@ public class HighesController {
 			childrenesClassStudnet.setState("1");
 			childrenesClassStudnet.setStudentName(student.getStudentName());
 			childrenesClassStudnet.setHeadmaster(headmaster);
-			Student s = studentService.selectStudentId(student.getStudentName(), student.getParentName(),
+			Student s = studentService.selectStudentId(student.getStudentName(), student.getStudentBirth(),
 					student.getStudentSex());
 			childrenesClassStudnet.setStudentId(s.getStudentId());
 			childrenesClassStudnet.setClassId(classId);
@@ -1471,7 +1471,7 @@ public class HighesController {
 			childrenesClassStudnet.setState("1");
 			childrenesClassStudnet.setStudentName(student.getStudentName());
 			childrenesClassStudnet.setHeadmaster(headmaster);
-			Student s = studentService.selectStudentId(student.getStudentName(), student.getParentName(),
+			Student s = studentService.selectStudentId(student.getStudentName(), student.getStudentBirth(),
 					student.getStudentSex());
 			childrenesClassStudnet.setStudentId(s.getStudentId());
 			childrenesClassStudnet.setClassId(classId);
@@ -1580,7 +1580,7 @@ public class HighesController {
 			childrenesClassStudnet.setState("1");
 			childrenesClassStudnet.setStudentName(student.getStudentName());
 			childrenesClassStudnet.setHeadmaster(headmaster);
-			Student s = studentService.selectStudentId(student.getStudentName(), student.getParentName(),
+			Student s = studentService.selectStudentId(student.getStudentName(), student.getStudentBirth(),
 					student.getStudentSex());
 			childrenesClassStudnet.setStudentId(s.getStudentId());
 			childrenesClassStudnet.setClassId(classId);
@@ -1677,7 +1677,7 @@ public class HighesController {
 		student.setStartTime(student.getStartTime() + startTimes);
 		student.setStudentHour(0.0);
 		if (studentService.addStudnetInfo(student) == 1) {
-			Student s = studentService.selectStudentId(student.getStudentName(), student.getParentName(),
+			Student s = studentService.selectStudentId(student.getStudentName(), student.getStudentBirth(),
 					student.getStudentSex());
 			Reserveschool reserveschool = new Reserveschool();
 			reserveschool.setSchoolId((Integer) session.getAttribute("schoolId"));

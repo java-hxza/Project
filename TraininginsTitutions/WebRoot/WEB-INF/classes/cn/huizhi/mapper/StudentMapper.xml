@@ -243,7 +243,7 @@
 		FROM
 		student s
 		WHERE s.studentName LIKE
-		CONCAT('%',#{0},'%') AND s.parentName
+		CONCAT('%',#{0},'%') AND s.studentBirth
 		LIKE
 		CONCAT('%',#{1},'%') AND
 		s.studentSex=#{2}
