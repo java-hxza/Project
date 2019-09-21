@@ -68,10 +68,15 @@ public class ClassServiceImpl implements ClassService {
 	}
 
 	@Override
+	public List<Class> selectMyClass(Integer schoolId) {
+		return classMapper.selectMyClass(schoolId);
+	}
+	
 	public Integer delClassTable() {
 		// TODO Auto-generated method stub
 		return classMapper.delClassTable();
 	}
 
+	
 	
 }

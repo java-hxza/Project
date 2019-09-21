@@ -87,6 +87,13 @@ public interface ClassService {
 	public List<Class> selectClass2(Integer schoolId,Integer classType);
 	
 	/**
+	 * 查询本校的班级
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Class> selectMyClass(Integer schoolId);
+	
+	/*
 	 * 删除表数据
 	 * @return
 	 */

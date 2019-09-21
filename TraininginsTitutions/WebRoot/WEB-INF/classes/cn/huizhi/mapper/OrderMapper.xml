@@ -16,7 +16,8 @@
 		`order`
 		o
 		JOIN student s
-		ON o.stuId=s.studentId
+		ON
+		o.stuId=s.studentId
 		JOIN
 		paymentmethod p ON
 		o.paymentmethodId=p.paymentmethodId
@@ -80,7 +81,8 @@
 		p.paymentmethodName,s.school,s.integral,o.giftId,o.giftNumber
 		ogm,o.integral oi,o.teacherId ot,sc.schoolName
 		sn,s.studentBirth,c.dpId cdp,o.discount odi,o.feecateMoney ofmy
-		FROM `order` o
+		FROM
+		`order` o
 		JOIN
 		student s ON
 		o.stuId=s.studentId
@@ -706,10 +708,11 @@
 		statementType="STATEMENT">
 		SELECT o.orderId oi,
 		o.giftId od,g.giftName
-		gn,o.giftNumber ogn,o.stuId
+		gn,o.giftNumber ogn,o.stuId,sc.schoolName scn
 		FROM `order` o
 		JOIN gift g ON
 		o.giftId=g.giftId
+		join school sc on o.schoolId=sc.schoolId
 		WHERE o.stuId=${stuId}
 	</select>
 
@@ -720,6 +723,9 @@
 		<result column="o.stuId" property="stuId" />
 		<collection property="gift" javaType="Gift">
 			<result column="gn" property="giftName" />
+		</collection>
+		<collection property="school" javaType="School">
+			<result column="scn" property="schoolName" />
 		</collection>
 	</resultMap>
 
@@ -967,6 +973,84 @@
 			<result column="stp" property="telephone" />
 			<result column="sch" property="school" />
 			<result column="sth" property="studentHour" />
+		</collection>
+	</resultMap>
+
+	<select id="selectActivityOrders"
+		resultMap="selectActivityOrderes">
+		SELECT o.orderId ooi,o.startTime ost,o.discount odt,sc.schoolName
+		ssn,st.studentName stn,o.orderNumber oon,o.activityId oai
+		FROM `order`
+		o
+		JOIN school sc
+		ON o.schoolId=sc.schoolId
+		JOIN student st ON
+		o.stuId=st.studentId
+		<where>
+			<if test="startTime !=null and startTime !=''">
+				AND o.startTime LIKE CONCAT('%',#{startTime},'%')
+			</if>
+			<if test="activityId !=null and activityId !=''">
+				AND o.activityId = #{activityId}
+			</if>
+			<if test="activityId ==null and activityId ==''">
+				AND o.activityId != NULL
+			</if>
+			<if test="schoolId !=null and schoolId !=''">
+				AND o.schoolId = #{schoolId}
+			</if>
+		</where>
+	</select>
+	<resultMap type="Order" id="selectActivityOrderes">
+		<id column="ooi" property="orderId" />
+		<result column="ost" property="startTime" />
+		<result column="odt" property="discount" />
+		<result column="oon" property="orderNumber" />
+		<result column="oai" property="activityId" />
+		<collection property="school" javaType="School">
+			<result column="ssn" property="schoolName" />
+		</collection>
+		<collection property="student" javaType="Student">
+			<result column="stn" property="studentName" />
+		</collection>
+	</resultMap>
+
+
+	<select id="selectGiftes" resultMap="selectGiftes2">
+		SELECT
+		o.orderId ooi,o.startTime ost,o.orderNumber oon,s.studentName stn,sc.schoolName ssn,g.giftName ggn,o.giftNumber ogn
+		FROM `order` o
+		JOIN student s ON o.stuId=s.studentId
+		JOIN school sc ON o.schoolId=sc.schoolId
+		JOIN gift g ON o.giftId=g.giftId
+		<where>
+			<if test="startTime !=null and startTime !=''">
+				AND o.startTime LIKE CONCAT('%',#{startTime},'%')
+			</if>
+			<if test="giftId !=null and giftId !=''">
+				AND o.giftId=#{giftId}
+			</if>
+			<if test="giftId ==null and giftId ==''">
+				AND o.activityId != NULL or 0
+			</if>
+			<if test="schoolId !=null and schoolId !=''">
+				AND o.schoolId = #{schoolId}
+			</if>
+		</where>
+	</select>
+	<resultMap type="Order" id="selectGiftes2">
+		<id column="ooi" property="orderId" />
+		<result column="ost" property="startTime" />
+		<result column="ogn" property="giftNumber" />
+		<result column="oon" property="orderNumber" />
+		<collection property="school" javaType="School">
+			<result column="ssn" property="schoolName" />
+		</collection>
+		<collection property="student" javaType="Student">
+			<result column="stn" property="studentName" />
+		</collection>
+		<collection property="gift" javaType="Gift">
+			<result column="ggn" property="giftName" />
 		</collection>
 	</resultMap>
 	<update id="delOrderTable">

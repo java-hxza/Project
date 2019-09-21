@@ -141,7 +141,11 @@
 												class="mdi mdi-plus-circle mr-2"></i> 添加</a> <a
 												href="javascript:void(0);" class="btn btn-danger mb-2 del"
 												onclick="delActivitySchooles()"><i
-												class="mdi mdi-plus-circle mr-2"></i> 删除</a>
+												class="mdi mdi-plus-circle mr-2"></i> 删除</a> <a
+												href="javascript:void(0);" class="btn btn-danger mb-2 "
+												onclick="selectActivityBB()"><i
+												class="mdi mdi-plus-circle mr-2"></i> 报表</a>
+
 										</div>
 
 										<!-- end col-->
@@ -239,191 +243,236 @@
 									</div>
 									<!-- end card-body-->
 								</div>
-							</div>
-							<!-- end col -->
-						</div>
-						<!-- end row -->
 
-					</div>
-					<!-- container -->
-
-				</div>
-				<!-- content -->
-
-				<!-- Footer Start -->
-				<footer class="footer">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-6">2018 - 2019 Â© Hyper -
-								Coderthemes.com</div>
-							<div class="col-md-6">
-								<div class="text-md-right footer-links d-none d-md-block">
-									<a href="javascript: void(0);">About</a> <a
-										href="javascript: void(0);">Support</a> <a
-										href="javascript: void(0);">Contact Us</a>
+								<div class="row shows" style="display: none;">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<label>订单日期</label>
+										<div class="input-group">
+											<button class="btn btn-dark  " type="button"
+												onclick="DaYin()">打印</button>
+											&nbsp; <input class="form-control Times" id="example-date"
+												type="date" name="date">
+											<button class="btn btn-dark  " type="button" onclick="Hour()">查找</button>
+										</div>
+									</div>
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<label for="example-select">活动名称</label>
+										<div class="input-group">
+											<select class="form-control activityIdName"
+												id="example-select">
+												<option value="0">---请选择---</option>
+												<c:forEach items="${activity }" var="a">
+													<option value="${a.activityId }">${a.activityName }</option>
+												</c:forEach>
+											</select>
+											<button class="btn btn-dark  " type="button" onclick=Time()>查找</button>
+											&nbsp;
+											<button class="btn btn-dark  " type="button"
+												onclick="Excels()" style="margin-bottom: 0px">导出Excel</button>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
+						<!-- end col -->
 					</div>
-				</footer>
-				<!-- end Footer -->
+					<!-- end row -->
+
+				</div>
+				<!-- container -->
 
 			</div>
+			<!-- content -->
 
-			<!-- ============================================================== -->
-			<!-- End Page content -->
-			<!-- ============================================================== -->
-
+			<!-- Footer Start -->
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6">2018 - 2019 Â© Hyper - Coderthemes.com</div>
+						<div class="col-md-6">
+							<div class="text-md-right footer-links d-none d-md-block">
+								<a href="javascript: void(0);">About</a> <a
+									href="javascript: void(0);">Support</a> <a
+									href="javascript: void(0);">Contact Us</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!-- end Footer -->
 
 		</div>
-		<!-- END wrapper -->
+
+		<!-- ============================================================== -->
+		<!-- End Page content -->
+		<!-- ============================================================== -->
 
 
-		<!-- Right Sidebar -->
-		<div class="right-bar">
+	</div>
+	<!-- END wrapper -->
 
-			<div class="rightbar-title">
-				<a href="javascript:void(0);" class="right-bar-toggle float-right">
-					<i class="dripicons-cross noti-icon"></i>
-				</a>
-				<h5 class="m-0">Settings</h5>
+
+	<!-- Right Sidebar -->
+	<div class="right-bar">
+
+		<div class="rightbar-title">
+			<a href="javascript:void(0);" class="right-bar-toggle float-right">
+				<i class="dripicons-cross noti-icon"></i>
+			</a>
+			<h5 class="m-0">Settings</h5>
+		</div>
+
+		<div class="slimscroll-menu rightbar-content">
+
+			<!-- Settings -->
+			<hr class="mt-0" />
+			<h5 class="pl-3">Basic Settings</h5>
+			<hr class="mb-0" />
+
+			<div class="p-3">
+				<div class="custom-control custom-checkbox mb-2">
+					<input type="checkbox" class="custom-control-input"
+						id="notifications-check" checked> <label
+						class="custom-control-label" for="notifications-check">Notifications</label>
+				</div>
+
+				<div class="custom-control custom-checkbox mb-2">
+					<input type="checkbox" class="custom-control-input"
+						id="api-access-check"> <label class="custom-control-label"
+						for="api-access-check">API Access</label>
+				</div>
+
+				<div class="custom-control custom-checkbox mb-2">
+					<input type="checkbox" class="custom-control-input"
+						id="auto-updates-check" checked> <label
+						class="custom-control-label" for="auto-updates-check">Auto
+						Updates</label>
+				</div>
+
+				<div class="custom-control custom-checkbox mb-2">
+					<input type="checkbox" class="custom-control-input"
+						id="online-status-check" checked> <label
+						class="custom-control-label" for="online-status-check">Online
+						Status</label>
+				</div>
+
+				<div class="custom-control custom-checkbox mb-2">
+					<input type="checkbox" class="custom-control-input"
+						id="auto-payout-check"> <label
+						class="custom-control-label" for="auto-payout-check">Auto
+						Payout</label>
+				</div>
+
 			</div>
 
-			<div class="slimscroll-menu rightbar-content">
 
-				<!-- Settings -->
-				<hr class="mt-0" />
-				<h5 class="pl-3">Basic Settings</h5>
-				<hr class="mb-0" />
-
-				<div class="p-3">
-					<div class="custom-control custom-checkbox mb-2">
-						<input type="checkbox" class="custom-control-input"
-							id="notifications-check" checked> <label
-							class="custom-control-label" for="notifications-check">Notifications</label>
+			<!-- Timeline -->
+			<hr class="mt-0" />
+			<h5 class="pl-3">Recent Activity</h5>
+			<hr class="mb-0" />
+			<div class="pl-2 pr-2">
+				<div class="timeline-alt">
+					<div class="timeline-item">
+						<i class="mdi mdi-upload bg-info-lighten text-info timeline-icon"></i>
+						<div class="timeline-item-info">
+							<a href="#" class="text-info font-weight-bold mb-1 d-block">You
+								sold an item</a> <small>Paul Burgess just purchased âHyper
+								- Admin Dashboardâ!</small>
+							<p class="mb-0 pb-2">
+								<small class="text-muted">5 minutes ago</small>
+							</p>
+						</div>
 					</div>
 
-					<div class="custom-control custom-checkbox mb-2">
-						<input type="checkbox" class="custom-control-input"
-							id="api-access-check"> <label
-							class="custom-control-label" for="api-access-check">API
-							Access</label>
+					<div class="timeline-item">
+						<i
+							class="mdi mdi-airplane bg-primary-lighten text-primary timeline-icon"></i>
+						<div class="timeline-item-info">
+							<a href="#" class="text-primary font-weight-bold mb-1 d-block">Product
+								on the Bootstrap Market</a> <small>Dave Gamache added <span
+								class="font-weight-bold">Admin Dashboard</span>
+							</small>
+							<p class="mb-0 pb-2">
+								<small class="text-muted">30 minutes ago</small>
+							</p>
+						</div>
 					</div>
 
-					<div class="custom-control custom-checkbox mb-2">
-						<input type="checkbox" class="custom-control-input"
-							id="auto-updates-check" checked> <label
-							class="custom-control-label" for="auto-updates-check">Auto
-							Updates</label>
+					<div class="timeline-item">
+						<i
+							class="mdi mdi-microphone bg-info-lighten text-info timeline-icon"></i>
+						<div class="timeline-item-info">
+							<a href="#" class="text-info font-weight-bold mb-1 d-block">Robert
+								Delaney</a> <small>Send you message <span
+								class="font-weight-bold">"Are you there?"</span>
+							</small>
+							<p class="mb-0 pb-2">
+								<small class="text-muted">2 hours ago</small>
+							</p>
+						</div>
 					</div>
 
-					<div class="custom-control custom-checkbox mb-2">
-						<input type="checkbox" class="custom-control-input"
-							id="online-status-check" checked> <label
-							class="custom-control-label" for="online-status-check">Online
-							Status</label>
+					<div class="timeline-item">
+						<i
+							class="mdi mdi-upload bg-primary-lighten text-primary timeline-icon"></i>
+						<div class="timeline-item-info">
+							<a href="#" class="text-primary font-weight-bold mb-1 d-block">Audrey
+								Tobey</a> <small>Uploaded a photo <span
+								class="font-weight-bold">"Error.jpg"</span>
+							</small>
+							<p class="mb-0 pb-2">
+								<small class="text-muted">14 hours ago</small>
+							</p>
+						</div>
 					</div>
 
-					<div class="custom-control custom-checkbox mb-2">
-						<input type="checkbox" class="custom-control-input"
-							id="auto-payout-check"> <label
-							class="custom-control-label" for="auto-payout-check">Auto
-							Payout</label>
+					<div class="timeline-item">
+						<i class="mdi mdi-upload bg-info-lighten text-info timeline-icon"></i>
+						<div class="timeline-item-info">
+							<a href="#" class="text-info font-weight-bold mb-1 d-block">You
+								sold an item</a> <small>Paul Burgess just purchased âHyper
+								- Admin Dashboardâ!</small>
+							<p class="mb-0 pb-2">
+								<small class="text-muted">1 day ago</small>
+							</p>
+						</div>
 					</div>
 
 				</div>
-
-
-				<!-- Timeline -->
-				<hr class="mt-0" />
-				<h5 class="pl-3">Recent Activity</h5>
-				<hr class="mb-0" />
-				<div class="pl-2 pr-2">
-					<div class="timeline-alt">
-						<div class="timeline-item">
-							<i class="mdi mdi-upload bg-info-lighten text-info timeline-icon"></i>
-							<div class="timeline-item-info">
-								<a href="#" class="text-info font-weight-bold mb-1 d-block">You
-									sold an item</a> <small>Paul Burgess just purchased
-									âHyper - Admin Dashboardâ!</small>
-								<p class="mb-0 pb-2">
-									<small class="text-muted">5 minutes ago</small>
-								</p>
-							</div>
-						</div>
-
-						<div class="timeline-item">
-							<i
-								class="mdi mdi-airplane bg-primary-lighten text-primary timeline-icon"></i>
-							<div class="timeline-item-info">
-								<a href="#" class="text-primary font-weight-bold mb-1 d-block">Product
-									on the Bootstrap Market</a> <small>Dave Gamache added <span
-									class="font-weight-bold">Admin Dashboard</span>
-								</small>
-								<p class="mb-0 pb-2">
-									<small class="text-muted">30 minutes ago</small>
-								</p>
-							</div>
-						</div>
-
-						<div class="timeline-item">
-							<i
-								class="mdi mdi-microphone bg-info-lighten text-info timeline-icon"></i>
-							<div class="timeline-item-info">
-								<a href="#" class="text-info font-weight-bold mb-1 d-block">Robert
-									Delaney</a> <small>Send you message <span
-									class="font-weight-bold">"Are you there?"</span>
-								</small>
-								<p class="mb-0 pb-2">
-									<small class="text-muted">2 hours ago</small>
-								</p>
-							</div>
-						</div>
-
-						<div class="timeline-item">
-							<i
-								class="mdi mdi-upload bg-primary-lighten text-primary timeline-icon"></i>
-							<div class="timeline-item-info">
-								<a href="#" class="text-primary font-weight-bold mb-1 d-block">Audrey
-									Tobey</a> <small>Uploaded a photo <span
-									class="font-weight-bold">"Error.jpg"</span>
-								</small>
-								<p class="mb-0 pb-2">
-									<small class="text-muted">14 hours ago</small>
-								</p>
-							</div>
-						</div>
-
-						<div class="timeline-item">
-							<i class="mdi mdi-upload bg-info-lighten text-info timeline-icon"></i>
-							<div class="timeline-item-info">
-								<a href="#" class="text-info font-weight-bold mb-1 d-block">You
-									sold an item</a> <small>Paul Burgess just purchased
-									âHyper - Admin Dashboardâ!</small>
-								<p class="mb-0 pb-2">
-									<small class="text-muted">1 day ago</small>
-								</p>
-							</div>
-						</div>
-
-					</div>
-				</div>
 			</div>
 		</div>
+	</div>
 
 
-		<div class="rightbar-overlay"></div>
-		<!-- /Right-bar -->
+	<div class="rightbar-overlay"></div>
+	<!-- /Right-bar -->
 
 
-		<!-- App js -->
+	<!-- App js -->
 
-		<!-- third party js -->
-		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-		<script type="text/javascript"
-			src="${Path }/static/js/highes/leftSidebar.js"></script>
-		<script type="text/javascript"
-			src="${Path }/static/js/highes/Activity.js"></script>
-		<!-- third party js ends -->
+	<!-- third party js -->
+	<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
+	<script type="text/javascript"
+		src="${Path }/static/js/highes/leftSidebar.js"></script>
+	<script type="text/javascript"
+		src="${Path }/static/js/highes/Activity.js"></script>
+	<!-- third party js ends -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			Excels = function() {
+				if ($(".adds td").val() != "") {
+					alert("没有可以导出的数据！")
+					return false;
+				}
+				excel = new ExcelGen({
+					"src_id" : "basic-datatable",
+					"show_header" : true
+				});
+				excel.generate("活动统计表");
+			};
+		});
+	</script>
 </body>
 </html>

@@ -53,55 +53,53 @@
 				<li><a href="javascript:void(0)" onclick="classInfo()">学员请假 </a></li>
 			</ul></li>
 
+<<<<<<< HEAD
+				</ul></li>
+			<li class="side-nav-item"><a href="javascript: void(0);"
+				class="side-nav-link"> <i class=" mdi mdi-yahoo"></i> <span>
+						培训收款 </span> <span class="menu-arrow"></span>
+			</a>
+				<ul class="side-nav-second-level" aria-expanded="false">
+					<c:choose>
+						<c:when test="${schoolType == 1 }">
+							<li><a href="#" onclick="ChargeHours()">收费--按课时</a></li>
+							<li><a href="#" onclick="ChargePeriod()">收费--按时间段</a></li>
+							<li><a href="#" onclick="ChargeOthers()">收费其他</a></li>
+							<li><a href="#" onclick="Expenditure()">费用支出</a></li>
+							<li><a href="#" onclick="Activitys()">优惠活动管理</a></li>
+							<li><a href="#" onclick="selectgifts()">赠送礼品管理</a></li>
+							<li><a href="#" onclick="selectUsedIntegrals()">赠品税分统计</a></li>
+							<li><a href="#" onclick="StudentDepartmentofpediatrics()">课程提醒</a></li>
+							<li><a href="#" onclick="StduentRegister()">学生注册</a></li>
+						</c:when>
+						<c:when test="${schoolType == 2 }">
+							<li><a href="#" onclick="ChargePeriod()">收费</a></li>
+							<li><a href="#" onclick="ChargeOthers()">收费其他</a></li>
+							<li><a href="#" onclick="Expenditure()">费用支出</a></li>
+							<li><a href="#" onclick="StduentRegister()">学生注册</a></li>
+						</c:when>
+						<c:when test="${schoolType == 3 }">
+							<li><a href="#" onclick="ChargePeriod()">收费--按时间段</a></li>
+							<li><a href="#" onclick="ChargeOthers()">收费其他</a></li>
+							<li><a href="#" onclick="Expenditure()">费用支出</a></li>
+							<li><a href="#" onclick="Activitys()">优惠活动管理</a></li>
+							<li><a href="#" onclick="selectgifts()">赠送礼品管理</a></li>
+							<li><a href="#" onclick="selectUsedIntegrals()">赠品税分统计</a></li>
+							<li><a href="#" onclick="StudentDepartmentofpediatrics()">课程提醒</a></li>
+							<li><a href="#" onclick="StduentRegister()">学生注册</a></li>
+						</c:when>
+					</c:choose>
+				</ul></li>
+			<li class="side-nav-item"><a href="javascript: void(0);"
+				class="side-nav-link"> <i class="mdi mdi-yelp"></i> <span>
+						报表统计</span> <span class="menu-arrow"></span>
+			</a>
+				<ul class="side-nav-second-level" aria-expanded="false">
+					<li><a href="javascript:void(0)" onclick="rootSchoolInfo()">资金账余额</a></li>
+					<li><a href="javascript:void(0)"
+						onclick="selectOrderSchoolInfo()">收支明细报表</a></li>
+					<li><a href="javascript:void(0)" onclick="schoolListInfo()">收支汇总报表</a></li>
 
-		<li class="side-nav-item"><a href="javascript: void(0);"
-			class="side-nav-link"> <i class=" mdi mdi-yahoo"></i> <span>
-					培训收款 </span> <span class="menu-arrow"></span>
-		</a>
-			<ul class="side-nav-second-level" aria-expanded="false">
-				<c:choose>
-					<c:when test="${schoolType == 1 }">
-						<li><a href="#" onclick="ChargeHours()">收费--按课时</a></li>
-						<li><a href="#" onclick="ChargePeriod()">收费--按时间段</a></li>
-						<li><a href="#" onclick="ChargeOthers()">收费其他</a></li>
-						<li><a href="#" onclick="Expenditure()">费用支出</a></li>
-						<li><a href="#" onclick="Activitys()">优惠活动管理</a></li>
-						<li><a href="#" onclick="selectgifts()">赠送礼品管理</a></li>
-						<li><a href="#" onclick="selectUsedIntegrals()">赠品税分</a></li>
-						<li><a href="#" onclick="StudentDepartmentofpediatrics()">课程提醒</a></li>
-						<li><a href="#" onclick="StduentRegister()">学生注册</a></li>
-					</c:when>
-					<c:when test="${schoolType == 2 }">
-						<li><a href="#" onclick="ChargePeriod()">收费</a></li>
-						<li><a href="#" onclick="ChargeOthers()">收费其他</a></li>
-						<li><a href="#" onclick="Expenditure()">费用支出</a></li>
-						<li><a href="#" onclick="Activitys()">优惠活动管理</a></li>
-						<li><a href="#" onclick="selectgifts()">赠送礼品管理</a></li>
-						<li><a href="#" onclick="selectUsedIntegrals()">赠品税分</a></li>
-						<li><a href="#" onclick="StudentDepartmentofpediatrics()">课程提醒</a></li>
-						<li><a href="#" onclick="StduentRegister()">学生注册</a></li>
-					</c:when>
-					<c:when test="${schoolType == 3 }">
-						<li><a href="#" onclick="ChargePeriod()">收费--按时间段</a></li>
-						<li><a href="#" onclick="ChargeOthers()">收费其他</a></li>
-						<li><a href="#" onclick="Expenditure()">费用支出</a></li>
-						<li><a href="#" onclick="Activitys()">优惠活动管理</a></li>
-						<li><a href="#" onclick="selectgifts()">赠送礼品管理</a></li>
-						<li><a href="#" onclick="selectUsedIntegrals()">赠品税分</a></li>
-						<li><a href="#" onclick="StudentDepartmentofpediatrics()">课程提醒</a></li>
-						<li><a href="#" onclick="StduentRegister()">学生注册</a></li>
-					</c:when>
-				</c:choose>
-			</ul></li>
-		<li class="side-nav-item"><a href="javascript: void(0);"
-			class="side-nav-link"> <i class="mdi mdi-yelp"></i> <span>
-					报表统计</span> <span class="menu-arrow"></span>
-		</a>
-			<ul class="side-nav-second-level" aria-expanded="false">
-				<li><a href="javascript:void(0)" onclick="rootSchoolInfo()">资金账余额</a></li>
-				<li><a href="javascript:void(0)"
-					onclick="selectOrderSchoolInfo()">收支明细报表</a></li>
-				<li><a href="javascript:void(0)" onclick="schoolListInfo()">收支汇总报表</a></li>
 				<c:if test="${schoolType == 1 }">
 					<li><a href="javascript:void(0)" onclick="teacherHourSum()">教师课时总表</a></li>
 					<li><a href="javascript:void(0)" onclick="studentHourInfo()">学员课时总表</a></li>
