@@ -1795,4 +1795,35 @@ public class HighesController {
 		}
 		return JSONArray.toJSONString(map);
 	}
+	
+	/**
+	 * 招生报表
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("RecruitStudents.html")
+	public String RecruitStudents(Model model) {
+		List<Teacher> teacher = teacherService.selectTeacherZS((Integer) session.getAttribute("schoolId"));
+		List<Class> classes = classService.selectMyClass((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("teacher", teacher);
+		model.addAttribute("classes", classes);
+		return "high/RecruitStudents";
+	}
+	
+	/**
+	 * 根据条件查找招生报表
+	 * @param studentName
+	 * @param classes
+	 * @param teacherId
+	 * @param startTime
+	 * @return
+	 */
+	@RequestMapping("RecruitStudents2.html")
+	@ResponseBody
+	public Object RecruitStudents2(@RequestParam String studentName,@RequestParam Integer classes,@RequestParam Integer teacherId,@RequestParam String startTime) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		List<Order> order = orderService.RecruitStudentes(studentName, startTime, classes, teacherId, (Integer) session.getAttribute("schoolId"));
+		map.put("order", order);
+		return JSONArray.toJSONString(map);
+	}
 }

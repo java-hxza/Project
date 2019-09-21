@@ -152,6 +152,9 @@ $(function() {
 	StduentRegister = function() {
 		location.href = "StduentRegister.html";
 	};
+	RecruitStudents = function() {
+		location.href = "RecruitStudents.html";
+	};
 
 	/**
 	 * 切换账户

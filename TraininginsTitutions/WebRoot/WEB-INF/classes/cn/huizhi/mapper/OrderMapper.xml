@@ -710,10 +710,12 @@
 		o.giftId od,g.giftName
 		gn,o.giftNumber ogn,o.stuId,sc.schoolName scn
 		FROM `order` o
-		JOIN gift g ON
+		JOIN gift g
+		ON
 		o.giftId=g.giftId
 		join school sc on o.schoolId=sc.schoolId
-		WHERE o.stuId=${stuId}
+		WHERE
+		o.stuId=${stuId}
 	</select>
 
 	<resultMap type="Order" id="selectUsedIntegrals">
@@ -1018,10 +1020,12 @@
 
 	<select id="selectGiftes" resultMap="selectGiftes2">
 		SELECT
-		o.orderId ooi,o.startTime ost,o.orderNumber oon,s.studentName stn,sc.schoolName ssn,g.giftName ggn,o.giftNumber ogn
+		o.orderId ooi,o.startTime ost,o.orderNumber oon,s.studentName
+		stn,sc.schoolName ssn,g.giftName ggn,o.giftNumber ogn
 		FROM `order` o
 		JOIN student s ON o.stuId=s.studentId
-		JOIN school sc ON o.schoolId=sc.schoolId
+		JOIN school sc ON
+		o.schoolId=sc.schoolId
 		JOIN gift g ON o.giftId=g.giftId
 		<where>
 			<if test="startTime !=null and startTime !=''">
@@ -1056,5 +1060,54 @@
 	<update id="delOrderTable">
 		truncate traininginstitutions.order
 	</update>
+
+	<select id="RecruitStudentes" resultMap="RecruitStudentes2">
+		SELECT o.orderId
+		ooi,o.startTime ost,o.teacherId oti,o.orderNumber
+		onb,s.schoolName ssn,st.studentName stn,t.teacherName ttn,c.className ccn
+		FROM `order` o
+		JOIN school s ON
+		o.schoolId=s.schoolId
+		JOIN student st ON o.stuId=st.studentId
+		JOIN teacher t ON o.teacherId=t.teacherId
+		JOIN class c ON o.classId=c.classId
+		<where>
+			<if test="startTime !=null and startTime !=''">
+				AND o.startTime LIKE CONCAT('%',#{startTime},'%')
+			</if>
+			<if test="classes !=null and classes !=''">
+				AND o.classId=#{classes}
+			</if>
+			<if test="teacherId !=null and teacherId !=''">
+				AND o.teacherId = #{teacherId}
+			</if>
+			<if test="studentName !=null and studentName !=''">
+				AND st.studentName LIKE CONCAT('%',#{studentName},'%')
+			</if>
+			<if test="schoolId !=null and schoolId !=''">
+				AND o.schoolId = #{schoolId}
+			</if>
+		</where>
+	</select>
+
+	<resultMap type="Order" id="RecruitStudentes2">
+		<id column="ooi" property="orderId" />
+		<result column="ost" property="startTime" />
+		<result column="oti" property="teacherId" />
+		<result column="onb" property="orderNumber" />
+		<collection property="school" javaType="School">
+			<result column="ssn" property="schoolName" />
+		</collection>
+		<collection property="student" javaType="Student">
+			<result column="stn" property="studentName" />
+		</collection>
+		<collection property="teacher" javaType="Teacher">
+			<result column="ttn" property="teacherName" />
+		</collection>
+		<collection property="classes" javaType="Class">
+			<result column="ccn" property="className" />
+		</collection>
+	</resultMap>
+
 </mapper>   
 

@@ -146,6 +146,11 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> selectArtFeeSituation(Integer classId) {
 		return null;
 	}
+
+	@Override
+	public List<Order> RecruitStudentes(String studentName,String startTime,Integer classes,Integer teacherId,Integer schoolId) {
+		return orderMapper.RecruitStudentes(studentName,startTime, classes, teacherId, schoolId);
+	}
 	
 	
 

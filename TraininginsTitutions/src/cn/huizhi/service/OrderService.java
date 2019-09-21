@@ -167,4 +167,11 @@ public interface OrderService {
 	 * @return
 	 */
 	public List<Order> selectGiftes(String startTime,Integer giftId,Integer schoolId);
+	
+	/**
+	 * 招生报表
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Order> RecruitStudentes(String studentName,String startTime,Integer classes,Integer teacherId,Integer schoolId);
 }

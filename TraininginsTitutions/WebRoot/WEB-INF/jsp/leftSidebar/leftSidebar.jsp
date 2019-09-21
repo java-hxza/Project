@@ -68,12 +68,14 @@
 							<li><a href="#" onclick="selectgifts()">赠送礼品管理</a></li>
 							<li><a href="#" onclick="selectUsedIntegrals()">赠品税分统计</a></li>
 							<li><a href="#" onclick="StudentDepartmentofpediatrics()">课程提醒</a></li>
+							<li><a href="#" onclick="RecruitStudents()">招生报表</a></li>
 							<li><a href="#" onclick="StduentRegister()">学生注册</a></li>
 						</c:when>
 						<c:when test="${schoolType == 2 }">
 							<li><a href="#" onclick="ChargePeriod()">收费</a></li>
 							<li><a href="#" onclick="ChargeOthers()">收费其他</a></li>
 							<li><a href="#" onclick="Expenditure()">费用支出</a></li>
+							<li><a href="#" onclick="RecruitStudents()">招生报表</a></li>
 							<li><a href="#" onclick="StduentRegister()">学生注册</a></li>
 						</c:when>
 						<c:when test="${schoolType == 3 }">
@@ -84,6 +86,7 @@
 							<li><a href="#" onclick="selectgifts()">赠送礼品管理</a></li>
 							<li><a href="#" onclick="selectUsedIntegrals()">赠品税分统计</a></li>
 							<li><a href="#" onclick="StudentDepartmentofpediatrics()">课程提醒</a></li>
+							<li><a href="#" onclick="RecruitStudents()">招生报表</a></li>
 							<li><a href="#" onclick="StduentRegister()">学生注册</a></li>
 						</c:when>
 					</c:choose>
