@@ -1,6 +1,7 @@
 package cn.huizhi.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -20,7 +21,14 @@ public interface StudentLeaveMapper {
 	 * @param classId
 	 * @return
 	 */
-	public List<StudentLeave> findStudentLeavesByClassId(@Param("classId")Integer classId);
+	public List<StudentLeave> findStudentLeavesByClassId(@Param("map")Map<String,Object> map);
+	
+	/**
+	 * 查询高中及艺考学生请假列表
+	 * @param map
+	 * @return
+	 */
+	public List<StudentLeave> findStudentLeavesByHighClassId(@Param("map")Map<String, Object> map);
 	
 	
 }

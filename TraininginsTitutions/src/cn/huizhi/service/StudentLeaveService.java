@@ -1,6 +1,7 @@
 package cn.huizhi.service;
 
 import java.util.List;
+import java.util.Map;
 
 
 import cn.huizhi.pojo.StudentLeave;
@@ -19,5 +20,12 @@ public interface StudentLeaveService {
 	 * @param classId
 	 * @return
 	 */
-	public List<StudentLeave> findStudentLeavesByClassId(Integer classId);
+	public List<StudentLeave> findStudentLeavesByClassId(Map<String,Object> map);
+	
+	/**
+	 * 查询高中及艺考学生请假列表
+	 * @param map
+	 * @return
+	 */
+	public List<StudentLeave> findStudentLeavesByHighClassId(Map<String, Object> map);
 }

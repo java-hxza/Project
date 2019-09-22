@@ -23,15 +23,12 @@
 	type="text/css" />
 <link href="${Path }/static/css/style.css" rel="stylesheet"
 	type="text/css" />
-<<<<<<< HEAD
 <style type="text/css">
 .text-body {
 	text-decoration: none;
 	color: black;
 }
-=======
-<style type="text/css">z
->>>>>>> branch 'master' of https://github.com/tianmabdqn/TraininginsTitutions.git
+<style type="text/css">
 </style>
 </head>
 

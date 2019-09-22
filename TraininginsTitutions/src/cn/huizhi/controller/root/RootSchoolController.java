@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 import javax.net.ssl.SSLContext;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.type.IntegerTypeHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,7 @@ import cn.huizhi.pojo.PaymentMethod;
 import cn.huizhi.pojo.Reserveschool;
 import cn.huizhi.pojo.School;
 import cn.huizhi.pojo.Student;
+import cn.huizhi.pojo.StudentLeave;
 import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.TeacherDiction;
 import cn.huizhi.pojo.TeacherHour;
@@ -61,6 +63,7 @@ import cn.huizhi.service.OrderService;
 import cn.huizhi.service.PaymentMethodService;
 import cn.huizhi.service.ReserveschoolService;
 import cn.huizhi.service.SchoolService;
+import cn.huizhi.service.StudentLeaveService;
 import cn.huizhi.service.StudentService;
 import cn.huizhi.service.TeacherDictionService;
 import cn.huizhi.service.TeacherHourService;
@@ -132,6 +135,9 @@ public class RootSchoolController {
 
 	@Resource
 	TeacherService teacherService;
+
+	@Resource
+	StudentLeaveService studentLeaveService;
 
 	/**
 	 * 切换账户
@@ -823,33 +829,56 @@ public class RootSchoolController {
 	@SuppressWarnings("unlikely-arg-type")
 	@RequestMapping("exitSchool.html")
 	public String highExitSchool(Integer studentId, String studentName, Integer classId, HttpSession session) {
+
 		String[] feeId;
 
 		String feeIds = "";
-
+		// 退款项目
 		String feeIdName = "";
-
+		// 单天价格
 		Double price = 0.0;
-
+		// 退款总额
 		Double nowPrice = 0.0;
-
+		// 收款总额
 		Double sumMoney = 0.0;
+		Integer time = 1;
+		Integer dateTime = 1;
+		List<Order> studentOrder = orderService.selectOrderListByStudentId(studentId);
+		Order orderStudent = studentOrder.get(0);
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		if (orderStudent.getLastdate() != null && orderStudent.getFirstdate() != null) {
+			// 剩余天数
+			time = Integer.valueOf(
+					(int) (new Date().getTime() - orderStudent.getLastdate().getTime()) / (1000 * 60 * 60 * 24));
+			// 实际天数
+			dateTime = Integer
+					.valueOf((int) (orderStudent.getLastdate().getTime() - orderStudent.getFirstdate().getTime())
+							/ (1000 * 60 * 60 * 24));
+		}
 
 		if (schoolType == 1) {
 			Student student = studentService.findStudentById(studentId);
 
-			Class class1 = classService.findClassByClassId(classId);
+			price = (orderStudent.getDpMoney() + orderStudent.getDiscount()) / dateTime;
 
-			if (class1.getClassTypeId() == 1) {
-				nowPrice = student.getStudentHour() * class1.getDepartmentOfPediatrics().getDpMoney();
-			}
-			if (class1.getClassTypeId() == 2) {
-				nowPrice = student.getStudentHour() * class1.getDepartmentOfPediatrics().getDpMoneyVip();
-			}
+			nowPrice = price * time;
+			session.setAttribute("orderStudent", orderStudent);
+			session.setAttribute("student", student);
+		} else {
+			Student student = studentService.findStudentById(studentId);
 
+			if (orderStudent.getDpMoney() == null) {
+				orderStudent.setDpMoney(0.0);
+			}
+			if (orderStudent.getDiscount() == null) {
+				orderStudent.setDiscount(0.0);
+			}
+			price = (orderStudent.getDpMoney() + orderStudent.getDiscount()) / dateTime;
+
+			nowPrice = price * time;
+			session.setAttribute("orderStudent", orderStudent);
+			session.setAttribute("student", student);
 		}
-
 		// 查询学生的订单信息
 		List<Order> stuOrders = orderService.selectOrderListByStudentId(studentId);
 		// 存放学生的收费项目
@@ -867,9 +896,12 @@ public class RootSchoolController {
 
 		// 循环读取订单的收费项目并添加到集合
 		for (Order order : stuOrders) {
+			if (order.getFeecateId() == null) {
+				continue;
+			}
 			feeId = order.getFeecateId().split(",");
 			feeIds = order.getFeecateId();
-			if (feeId.length > 0) {
+			if (feeId.length < 0) {
 				continue;
 			}
 			for (int i = 0; i < feeId.length; i++) {
@@ -883,28 +915,9 @@ public class RootSchoolController {
 					}
 				}
 			}
-
-			if (order.getFirstdate() != null && order.getLastdate() != null) {
-
-				// 获取订单开始时间和结束时间
-				long to1 = order.getFirstdate().getTime();
-				long from1 = order.getLastdate().getTime();
-				long date = new Date().getTime();
-
-				// 计算天数
-				int sumDarte = (int) ((from1 - to1) / (1000 * 60 * 60 * 24));
-
-				// 差价天数
-				int nowDate = (int) ((from1 - date) / (1000 * 60 * 60 * 24));
-
-				// 总单价
-				price = order.getDpMoney() / sumDarte;
-				// 退差价
-				nowPrice = price * nowDate;
-				// 总价格
-				sumMoney += order.getDpMoney();
-			}
 		}
+
+		sumMoney += orderStudent.getDpMoney() + orderStudent.getDiscount();
 
 		BigDecimal bd = new BigDecimal(nowPrice);
 
@@ -912,6 +925,7 @@ public class RootSchoolController {
 
 		session.setAttribute("sumMoney", sumMoney);
 		session.setAttribute("nowPrice", bd);
+		session.setAttribute("time", time);
 		session.setAttribute("feeCategories", feeCategories);
 		session.setAttribute("stuOrders", stuOrders);
 		session.setAttribute("studentName", studentName);
@@ -1768,4 +1782,183 @@ public class RootSchoolController {
 		return "root/ArtStudentFee/artStudentInfo";
 	}
 
+	/**
+	 * 跳转学生请假页面
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("studentLeave.html")
+	public String studentLeave(HttpSession session) {
+
+		Integer schoolId = (Integer) session.getAttribute("schoolId");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("schoolId", schoolId);
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		List<StudentLeave> studentLeaves = null;
+		if (schoolType == 1) {
+			studentLeaves = studentLeaveService.findStudentLeavesByClassId(map);
+			List<ChildrenesClassStudnet> studentList = childrenesClassStudnetService
+					.findChildrenesClassStudnetByClassId(null);
+			// 如果学生主键对应添加请假时间
+			for (int i = 0; i < studentLeaves.size(); i++) {
+				for (int j = 0; j < studentList.size(); j++) {
+					if (studentLeaves.get(i).getStudentId() == studentList.get(j).getStudentId()) {
+						studentList.get(j).setStartTime(studentLeaves.get(i).getStartTime());
+						studentList.get(j).setEndTime(studentLeaves.get(i).getEndTime());
+						studentList.get(j).setTeacherName(studentLeaves.get(i).getTeacherHour().getTeacherName());
+						studentList.get(j).setRemarks(studentLeaves.get(i).getRemarks());
+					}
+				}
+			}
+			session.setAttribute("studentList", studentList);
+		} else if (schoolType == 2) {
+			List<HighesClassStudnet> studentList = highesClassStudnetService.findHighesClassStudnetListByClassId(null);
+			studentLeaves = studentLeaveService.findStudentLeavesByHighClassId(map);
+			for (int i = 0; i < studentLeaves.size(); i++) {
+				for (int j = 0; j < studentList.size(); j++) {
+					if (studentLeaves.get(i).getStudentId() == studentList.get(j).getStudentId()) {
+						studentList.get(j).setStartTime(studentLeaves.get(i).getStartTime());
+						studentList.get(j).setEndTime(studentLeaves.get(i).getEndTime());
+						studentList.get(j).setRemarks(studentLeaves.get(i).getRemarks());
+					}
+				}
+			}
+			session.setAttribute("studentList", studentList);
+		} else {
+			List<ArtClassStudnet> studentList = artClassStudnetService.findArtClassStudnetListByClassId(null);
+			studentLeaves = studentLeaveService.findStudentLeavesByHighClassId(map);
+			for (int i = 0; i < studentLeaves.size(); i++) {
+				for (int j = 0; j < studentList.size(); j++) {
+					if (studentLeaves.get(i).getStudentId() == studentList.get(j).getStudentId()) {
+						studentList.get(j).setStartTime(studentLeaves.get(i).getStartTime());
+						studentList.get(j).setEndTime(studentLeaves.get(i).getEndTime());
+						studentList.get(j).setRemarks(studentLeaves.get(i).getRemarks());
+					}
+				}
+			}
+
+			session.setAttribute("studentList", studentList);
+		}
+
+		List<Class> classBySchooList = classService.findChildrenescClasses(String.valueOf(schoolId));
+		session.setAttribute("classBySchooList", classBySchooList);
+
+		return "root/studentInfo/studentLeave";
+	}
+
+	/**
+	 * 根据条件查询
+	 * 
+	 * @param map
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("queryStudentLeave.html")
+	public String queryStudentLeave(String map, HttpSession session) {
+		Map<String, Object> map2 = (Map<String, Object>) JSONObject.parse(map);
+		List<StudentLeave> studentLeaves = null;
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		Integer classId = 0;
+		for (String key : map2.keySet()) {
+			if (("classId").equals(key)) {
+				classId = (Integer.valueOf((String) map2.get(key)));
+			}
+		}
+
+		if (schoolType == 1) {
+			studentLeaves = studentLeaveService.findStudentLeavesByClassId(map2);
+			List<ChildrenesClassStudnet> studentList = childrenesClassStudnetService
+					.findChildrenesClassStudnetByClassId(classId);
+			// 如果学生主键对应添加请假时间
+			for (int i = 0; i > studentLeaves.size(); i++) {
+				for (int j = 0; j < studentList.size(); j++) {
+					if (studentLeaves.get(i).getStudentId() == studentList.get(i).getStudentId()) {
+						studentList.get(i).setStartTime(studentLeaves.get(i).getStartTime());
+						studentList.get(i).setEndTime(studentLeaves.get(i).getEndTime());
+						studentList.get(i).setTeacherName(studentLeaves.get(i).getTeacherHour().getTeacherName());
+						studentList.get(i).setRemarks(studentLeaves.get(i).getRemarks());
+					}
+				}
+			}
+			session.setAttribute("studentList", studentList);
+		} else if (schoolType == 2) {
+			List<HighesClassStudnet> studentList = highesClassStudnetService
+					.findHighesClassStudnetListByClassId(classId);
+			studentLeaves = studentLeaveService.findStudentLeavesByHighClassId(map2);
+			for (int i = 0; i < studentLeaves.size(); i++) {
+				for (int j = 0; j < studentList.size(); j++) {
+					if (studentLeaves.get(i).getStudentId() == studentList.get(j).getStudentId()) {
+						studentList.get(j).setStartTime(studentLeaves.get(i).getStartTime());
+						studentList.get(j).setEndTime(studentLeaves.get(i).getEndTime());
+						studentList.get(j).setRemarks(studentLeaves.get(i).getRemarks());
+					}
+				}
+			}
+			session.setAttribute("studentList", studentList);
+		} else {
+			List<ArtClassStudnet> studentList = artClassStudnetService.findArtClassStudnetListByClassId(classId);
+			studentLeaves = studentLeaveService.findStudentLeavesByHighClassId(map2);
+			for (int i = 0; i < studentLeaves.size(); i++) {
+				for (int j = 0; j < studentList.size(); j++) {
+					if (studentLeaves.get(i).getStudentId() == studentList.get(j).getStudentId()) {
+						studentList.get(j).setStartTime(studentLeaves.get(i).getStartTime());
+						studentList.get(j).setEndTime(studentLeaves.get(i).getEndTime());
+						studentList.get(j).setRemarks(studentLeaves.get(i).getRemarks());
+					}
+				}
+			}
+			session.setAttribute("studentList", studentList);
+		}
+		List<Class> classBySchooList = classService
+				.findChildrenescClasses(String.valueOf((Integer) session.getAttribute("schoolId")));
+		session.setAttribute("classBySchooList", classBySchooList);
+
+		return "root/studentInfo/studentLeave";
+	}
+
+	/**
+	 * 加载缓存页面
+	 * 
+	 * @param schoolId
+	 * @param classId
+	 * @param studentId
+	 * @return
+	 */
+	@RequestMapping("insertStudentLevea.html")
+	@ResponseBody
+	public Map<String, Object> insertStudentLevea(Integer schoolId, Integer classId, Integer studentId) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		// 查询学生信息
+
+		jsonMap.put("student", studentService.findStudentById(studentId));
+		jsonMap.put("class1", classService.findClassByClassId(classId));
+		jsonMap.put("school", schoolService.selectSchoolById(schoolId));
+		jsonMap.put("teacherHourList", teacherHourService.selectCurriculumInfo(classId, null, schoolId));
+
+		return jsonMap;
+	}
+
+	/**
+	 * 学生请假保存
+	 * 
+	 * @param studentLeave
+	 * @return
+	 */
+	@RequestMapping("addStudentLevea.html")
+	@ResponseBody
+	public Map<String, String> addStudentLevea(StudentLeave studentLeave) {
+		Map<String, String> jsonMap = new HashMap<String, String>();
+
+		if (studentLeaveService.insertStudentLeave(studentLeave) > 0) {
+			jsonMap.put("state", "1");
+		} else {
+			jsonMap.put("state", "0");
+		}
+
+		return jsonMap;
+	}
 }

@@ -79,7 +79,6 @@ $(function() {
 			"<td>费用截至日</td>" +
 			"</tr>" +
 			"</thead>";
-
 		return $html;
 	}
 

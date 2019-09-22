@@ -10,6 +10,10 @@ public class ArtClassStudnet {
 	private Integer classId;
 	private Integer studentId;
 	private Integer state;
+	// 请假时间
+	private Date startTime;
+	private Date endTime;
+	private String remarks;
 
 	public ArtClassStudnet() {
 		super();
@@ -25,6 +29,30 @@ public class ArtClassStudnet {
 		this.classId = classId;
 		this.studentId = studentId;
 		this.state = state;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 	public Integer getClassesStudentId() {

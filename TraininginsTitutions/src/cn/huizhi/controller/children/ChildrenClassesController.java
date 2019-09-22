@@ -145,7 +145,7 @@ public class ChildrenClassesController {
 	@ResponseBody
 	public String dpChange(Integer dpId,HttpSession session) {
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
-		List<Teacher> teacherUserList = teacherService.findTeachersByTeacherTypeId(dpId,schoolId);
+		List<Teacher> teacherUserList = teacherService.findTeachersByTeacherTypeId(null,schoolId);
 		if(teacherUserList.size()>0) {
 			return JSON.toJSONString(teacherUserList);
 		}
@@ -163,9 +163,7 @@ public class ChildrenClassesController {
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		classes.setSchoolId(schoolId);
 		Integer schoolType = (Integer) session.getAttribute("schoolType"); 
-		if(schoolType ==1) {
-			classes.setClassType(0);
-		}else {
+		if(schoolType !=1) {
 			classes.setClassType(1);
 		}
 		if(classService.addChildrenescClass(classes)>0) {
@@ -188,7 +186,7 @@ public class ChildrenClassesController {
 		
  		Integer schoolType = (Integer) session.getAttribute("schoolType");
  		session.setAttribute("classId", classId);
- 		List<TeacherHour> teacherHourList = teacherHourService.selectCurriculumInfo(classId, null);
+ 		List<TeacherHour> teacherHourList = teacherHourService.selectCurriculumInfo(classId, null,null);
  		session.setAttribute("teacherHourList", teacherHourList);
 		if(schoolType == 1 ) {
 			List<ChildrenesClassStudnet> childrenesClassStudnets = childrenesClassStudnetService.findChildrenesClassStudnetByClassId(classId);
@@ -265,6 +263,15 @@ public class ChildrenClassesController {
 		if(schoolType == 1) {
 			//查询
 			List<ChildrenesClassStudnet> childrenesClassStudnets = childrenesClassStudnetService.findChildrenesClassStudnetByClassId(classId);
+			List<Order> studentOrder =  orderService.selectOrderListByStudentId(studentId); 
+			
+			Order student = studentOrder.get(0);
+			if(student.getLastdate() !=null) {
+				Integer time = Integer.valueOf((int) (new Date().getTime() - student.getLastdate().getTime()) / (1000 * 60 * 60 * 24));
+				
+				session.setAttribute("time", time);
+			}
+			session.setAttribute("studentOrder", student);
 			for (ChildrenesClassStudnet childrenesClassStudnet : childrenesClassStudnets) {
 				if (childrenesClassStudnet.getStudentId().equals(studentId)) {
 					session.setAttribute("childrenesClassStudnet", childrenesClassStudnet);
@@ -299,7 +306,7 @@ public class ChildrenClassesController {
 		 
 	}
 
-
+/*
 	@RequestMapping("classIdChange.html")
 	@ResponseBody
 	public Map<String, Object> updateStudentShiftWork(Integer classId,Integer studentId,Integer classesId,Integer classType,Integer classesType){
@@ -327,7 +334,7 @@ public class ChildrenClassesController {
 	
 		return jsonMap;
 	
-	}
+	}*/
 	
 	/**
 	 * 学生专班
@@ -342,7 +349,6 @@ public class ChildrenClassesController {
 	@ResponseBody
 	public Map<String, String> updateStudentShiftWork(Integer classId, Integer  studentId, String  remarks, Double  money,HttpSession session){
 		Map<String, String> jsonMap = new HashMap<String, String>();
-		User user = (User) session.getAttribute("user");
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		Order order = new Order();
 		order.setStuId(studentId);
@@ -355,11 +361,12 @@ public class ChildrenClassesController {
 		order.setIntegral(0.0);
 		order.setPaymentmethodId(0);
 		order.setSchoolId(schoolId);
+		order.setActivityId(0);
 		SimpleDateFormat startTime1 = new SimpleDateFormat("yyyy-MM-dd");
 		
 		String date = startTime1.format(new Date());
-		
-		order.setOrderNumber("QT" + date + studentId + new Random().nextInt(100));
+		String str = date.replace("-", "");
+		order.setOrderNumber("SJ" + str + studentId + new Random().nextInt(100));
 		try {
 			Date startTime = new SimpleDateFormat("yyyy-MM-dd").parse(date);
 			order.setStartTime(startTime);

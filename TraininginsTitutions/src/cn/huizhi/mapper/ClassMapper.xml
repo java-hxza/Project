@@ -249,9 +249,7 @@
 		c.teacherId,
 		c.classLevel,
 		c.classTypeId c_classTypeId,
-		d.dpTypeName,
-		d.dpMoney,
-		d.dpMoneyVip
+		d.dpTypeName
 	</sql>
 	<select id="selectClassByClassId" parameterType="java.lang.Integer" resultMap="classByClassIdMap">
 		select <include refid="classByClassIdCol"/>

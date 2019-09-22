@@ -10,17 +10,55 @@
 		sl.classId,
 		sl.remarks,
 		sl.startTime,
-		sl.endTime
+		sl.endTime,
+		sl .schoolId,
+		sl.thId,
+		th.teacherHourId,
+		th.teacherName,
+		th.teacherId,
+		th.classId,
+		th.hours,
+		th.dpName,
+		th.dpId,
+		th.startTime,
+		th.schoolId,
+		th.remarks
 	</sql>
 
 	<!-- 根据班级查询请假学生 -->
-	<select id="findStudentLeavesByClassId" parameterType="java.lang.Integer">
+	<select id="findStudentLeavesByClassId"
+		resultType="StudentLeave">
 		select
 		<include refid="studentLeaveCol" />
+		from studentLeave sl,teacherhour th
+		<where>
+			sl.thId = th.teacherHourId
+			<if test="map.classId != null and map.classId != ''">
+				and sl.classId = #{map.classId}
+			</if>
+			<if test="map.schoolId != null and map.schoolId != ''">
+				and sl.schoolId = #{map.schoolId}
+			</if>
+			<if test="map.startTime != null and map.startTime  != ''">
+				and date(sl.startTime) between #{map.startTime} and
+				#{map.endTime}
+			</if>
+		</where>
+	</select>
+
+	<select id="findStudentLeavesByHighClassId" resultType="StudentLeave">
+		select *
 		from studentLeave sl
 		<where>
-			<if test="classId != null and classId != ''">
-				sl.classId = #{classId}
+			<if test="map.classId != null and map.classId != ''">
+				and sl.classId = #{map.classId}
+			</if>
+			<if test="map.schoolId != null and map.schoolId != ''">
+				and sl.schoolId = #{map.schoolId}
+			</if>
+			<if test="map.startTime != null and map.startTime  != ''">
+				and date(sl.startTime) between #{map.startTime} and
+				#{map.endTime}
 			</if>
 		</where>
 	</select>
@@ -28,10 +66,13 @@
 	<insert id="insertStudentLeave" parameterType="StudentLeave">
 		insert into
 		traininginstitutions.studentleave
-		( studentId, studentName, classId, remarks, startTime, endTime )
+		( studentId, studentName, classId,
+		remarks, startTime, endTime,schoolId )
 		values
-		( #{studentId}, #{studentName}, #{classId}, #{remarks}, #{startTime},
-		#{endTime} )
+		( #{studentId},
+		#{studentName}, #{classId}, #{remarks}, #{startTime},
+		#{endTime}
+		,#{schoolId})
 	</insert>
 
 </mapper>

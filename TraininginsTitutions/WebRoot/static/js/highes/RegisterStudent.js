@@ -568,7 +568,6 @@ $(function() {
 				if (discount != "" && discount != 0) {
 					dpMoney = (parseFloat($.trim($(".moneys").val())).toFixed(1) - discount).toFixed(1);
 				}
-				alert(dpMoney);alert(discount);alert(integral);return false;
 				if (studentName == "" || studentBirth == "" || registrationConsultant == "" || registrationConsultant == "" || startTime == "") {
 					alert("请填写 姓名-出生日期-报名老师-报名时间！");
 					return false;
@@ -590,10 +589,6 @@ $(function() {
 				}
 				if (hours == "") {
 					hours = 0;
-				}
-				if (teacherId == 0) {
-					alert("请选择招生老师！");
-					return false;
 				}
 				if($(".dpMoneyActivity4").val() < 0) {
 					alert("请输入正确的实收金额！");

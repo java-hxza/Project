@@ -18,7 +18,7 @@
 
 	<!--新增班级科别-->
 	<insert id="insertDepartmentOfPediatrics" parameterType="DepartmentOfPediatrics" >
-		insert into departmentofpediatrics ( dpTypeName, chargeTypeId,schoolId,dpMoney,dpMoneyVip )
+		insert into departmentofpediatrics ( dpTypeName, chargeTypeId,schoolId)
 		values ( #{dpTypeName}, #{chargeTypeId} ,#{schoolId})
 	</insert>
 	

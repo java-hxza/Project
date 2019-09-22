@@ -10,13 +10,16 @@ public class StudentLeave {
 	private String remarks;
 	private Date startTime;
 	private Date endTime;
+	private Integer schoolId;
+	private Integer thId;
+	private TeacherHour teacherHour;
 
 	public StudentLeave() {
 		super();
 	}
 
 	public StudentLeave(Integer slId, Integer studentId, String studentName, Integer classId, String remarks,
-			Date startTime, Date endTime) {
+			Date startTime, Date endTime, Integer schoolId, Integer thId, TeacherHour teacherHour) {
 		super();
 		this.slId = slId;
 		this.studentId = studentId;
@@ -25,6 +28,25 @@ public class StudentLeave {
 		this.remarks = remarks;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.schoolId = schoolId;
+		this.thId = thId;
+		this.teacherHour = teacherHour;
+	}
+
+	public Integer getThId() {
+		return thId;
+	}
+
+	public void setThId(Integer thId) {
+		this.thId = thId;
+	}
+
+	public TeacherHour getTeacherHour() {
+		return teacherHour;
+	}
+
+	public void setTeacherHour(TeacherHour teacherHour) {
+		this.teacherHour = teacherHour;
 	}
 
 	public Integer getSlId() {
@@ -41,6 +63,14 @@ public class StudentLeave {
 
 	public void setStudentId(Integer studentId) {
 		this.studentId = studentId;
+	}
+
+	public Integer getSchoolId() {
+		return schoolId;
+	}
+
+	public void setSchoolId(Integer schoolId) {
+		this.schoolId = schoolId;
 	}
 
 	public String getStudentName() {

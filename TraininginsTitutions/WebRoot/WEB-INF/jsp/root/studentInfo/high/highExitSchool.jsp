@@ -131,13 +131,16 @@
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label for="billing-first-name">名字</label> <input
-																		class="form-control" type="text" value="${studentName}" name="${studentId }" id="studentId" />
+																		class="form-control" type="text"
+																		value="${studentName}" name="${studentId }"
+																		id="studentId" />
 																</div>
 															</div>
 															<div class="col-md-6">
 																<div class="form-group">
-																	<label for="billing-last-name">退费日期</label>
-																		<input type="date" class="form-control" value="" id="startTime">
+																	<label for="billing-last-name">退费日期</label> <input
+																		type="date" class="form-control" value=""
+																		id="startTime">
 																</div>
 															</div>
 														</div>
@@ -146,78 +149,86 @@
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label for="billing-email-address">退费项目<span
-																		class="text-danger">*</span></label> 
-																		<input class="form-control" type="text" name="${feeIds }" value="${feeIdName }"
-																		id="feeIds" />
+																		class="text-danger">*</span></label> <input
+																		class="form-control" type="text" name="${feeIds }"
+																		value="${feeIdName }" id="feeIds" />
 																</div>
 															</div>
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label for="billing-phone">退费方式<span
-																		class="text-danger">*</span></label> 
-																		<select id="paymentmethodId" class="form-control">
-																			<c:forEach items="${paymentMethods }" var="p">
-																				<option value="${p.paymentmethodId }">${p.paymentmethodName }</option>
-																			</c:forEach>
-																		</select>
+																		class="text-danger">*</span></label> <select
+																		id="paymentmethodId" class="form-control">
+																		<c:forEach items="${paymentMethods }" var="p">
+																			<option value="${p.paymentmethodId }">${p.paymentmethodName }</option>
+																		</c:forEach>
+																	</select>
 																</div>
 															</div>
 
 														</div>
+
 														<div class="row">
 															<div class="col-6">
 																<div class="form-group">
 																	<label for="billing-address">收款总额</label> <input
-																		class="form-control" type="text" value="${sumMoney }" id="sumMoney">
+																		class="form-control" type="text" value="${sumMoney }"
+																		id="sumMoney">
 																</div>
 															</div>
-															<div class="col-6">													<div class="col-md-6">
+															<div class="col-6">
 																<div class="form-group">
 																	<label for="billing-phone">退费方式<span
-																		class="text-danger">*</span></label> 
-																		<select id="expenditureitemsId" class="form-control">
-																			<c:forEach items="${expenditureitems }" var="e">
-																				<option value="${e.expenditureitemsId}">${e.expenditureitemsName }</option>
-																			</c:forEach>
-																		</select>
+																		class="text-danger">*</span></label> <select
+																		id="expenditureitemsId" class="form-control">
+																		<c:forEach items="${expenditureitems }" var="e">
+																			<option value="${e.expenditureitemsId}">${e.expenditureitemsName }</option>
+																		</c:forEach>
+																	</select>
 																</div>
 															</div>
 														</div>
 														<!-- end row -->
 														<div class="row">
-															<div class="col-6">
+															<c:if test="${schoolType ==1 }">
+																<div class="col-3">
+																	<div class="form-group">
+																		<label for="billing-address">退款课时</label> <input
+																			class="form-control" type="text"
+																			value="${student.studentHour }" id="nowPrice">
+																	</div>
+																</div>
+															</c:if>
+															<div class="col-3">
 																<div class="form-group">
 																	<label for="billing-address">退款总额</label> <input
-																		class="form-control" type="text"  value="${nowPrice }" id="nowPrice">
+																		class="form-control" type="text" value="${nowPrice }"
+																		id="nowPrice">
 																</div>
 															</div>
-															
-															<div class="col-6">
+															<div class="col-3">
+																<div class="form-group">
+																	<label for="billing-address">剩余天数</label> <input
+																		class="form-control" type="text" value="${time }"
+																		id="nowPrice">
+																</div>
+															</div>
+															<div class="col-3">
 																<div class="form-group">
 																	<label for="example-textarea">备注</label>
-																	<textarea class="form-control" id="remarks" name="${classId}" rows="1"
-																		placeholder="Write some note.."></textarea>
+																	<textarea class="form-control" id="remarks"
+																		name="${classId}" rows="1"></textarea>
 																</div>
 															</div>
 														</div>
-													</div>
-
 														<!-- end row -->
-
-														<div class="row mt-4">
-															<div class="col-sm-6">
-																<a href="apps-ecommerce-shopping-cart.html"
-																	class="btn text-muted d-none d-sm-inline-block btn-link font-weight-semibold">
-																	<i class="mdi mdi-arrow-left"></i> Back to Shopping
-																	Cart
-																</a>
-															</div>
+														<div class="row">
 															<!-- end col -->
-															<div class="col-sm-6">
-																<div class="text-sm-right">
-																	<a href="javascript:void(0)" class="btn btn-danger"
-																		onclick="save()"> <i
-																		class="mdi mdi-truck-fast mr-1"></i> 保存
+															<div class="col-12">
+																<div class="form-group">
+																	<a href="javascript:void(0)"
+																		class="btn btn-danger form-control" onclick="save()">
+																		<i class="mdi mdi-truck-fast mr-1"></i> 保存
 																	</a>
 																</div>
 															</div>
@@ -284,26 +295,27 @@
 
 		<!-- App js -->
 		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-		<script type="text/javascript" src="${Path }/static/js/root/studentInfo/high/highExitSchool.js"></script>
-		
+		<script type="text/javascript"
+			src="${Path }/static/js/root/studentInfo/high/highExitSchool.js"></script>
+
 		<script type="text/javascript">
-		
-			$(function(){
-				//设置日期默认值为当天
-	            var nowDate=new Date();     
-	            var nowMonth=nowDate.getMonth()+1;   //月份和日期若为小于10的数要做处理
-	            var nowDay=nowDate.getDate(); 
-	            if((nowDate.getMonth()+1)<10){    
-	                nowMonth="0"+nowMonth; 
-	            }
-	            if(nowDate.getDate()<10){
-	                nowDay='0'+nowDay;
-	            }
-	            var dateVal=nowDate.getFullYear()+"-"+nowMonth+"-"+nowDay; 
-				
-				$("#startTime").val(dateVal);
-			});
-		</script>
+	
+		$(function() {
+			//设置日期默认值为当天
+			var nowDate = new Date();
+			var nowMonth = nowDate.getMonth() + 1; //月份和日期若为小于10的数要做处理
+			var nowDay = nowDate.getDate();
+			if ((nowDate.getMonth() + 1) < 10) {
+				nowMonth = "0" + nowMonth;
+			}
+			if (nowDate.getDate() < 10) {
+				nowDay = '0' + nowDay;
+			}
+			var dateVal = nowDate.getFullYear() + "-" + nowMonth + "-" + nowDay;
+	
+			$("#startTime").val(dateVal);
+		});
+	</script>
 </body>
 
 </html>

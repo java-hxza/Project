@@ -27,10 +27,10 @@ $(function() {
 			success : function(data) {
 				if (data.state == "1") {
 					alert("删除成功！");
-					location.href = "Accountinformation.html";
+					location.href = "classTypeInfo.html";
 				} else {
 					alert("删除失败！");
-					location.href = "Accountinformation.html";
+					location.href = "classTypeInfo.html";
 				}
 			},
 			error : function(data) {
@@ -51,25 +51,21 @@ $(function() {
 		$(".add").click(function() {
 			var dpTypeName = $("#validationTooltip01").val();
 			var chargeTypeId = $("#chargeTypeId").val();
-			var dpMoney = $("#money").val();
-			var dpMoneyVip = $("#vipMoney").val();
 			$.ajax({
 				type : "POST",
 				url : "addDepartmentOfPediatrics.html",
 				data : {
 					dpTypeName : dpTypeName,
 					chargeTypeId : chargeTypeId,
-					dpMoney : dpMoney,
-					dpMoneyVip : dpMoneyVip
 				},
 				dataType : "json",
 				success : function(data) {
 					if (data.state == "1") {
 						alert("添加成功！");
-						location.href = "Accountinformation.html";
+						location.href = "classTypeInfo.html";
 					} else {
 						alert("添加失败！");
-						location.href = "Accountinformation.html";
+						location.href = "classTypeInfo.html";
 					}
 				},
 				error : function(data) {

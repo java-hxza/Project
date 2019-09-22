@@ -22,9 +22,11 @@
 <link href="${Path }/static/css/vendor/responsive.bootstrap4.css"
 	rel="stylesheet" type="text/css" />
 <!-- third party css end -->
-<link href="${Path }/static/css/style.css" rel="stylesheet" type="text/css" />
+<link href="${Path }/static/css/style.css" rel="stylesheet"
+	type="text/css" />
 <!-- App css -->
-<link href="${Path }/static/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="${Path }/static/css/icons.min.css" rel="stylesheet"
+	type="text/css" />
 <link href="${Path }/static/css/app.min.css" rel="stylesheet"
 	type="text/css" />
 </head>
@@ -58,7 +60,7 @@
 									src="${Path }/static/images/avatar-1.jpg" alt="user-image"
 									class="rounded-circle">
 							</span> <span> <span class="account-user-name">${user.loginName }
-										</span> <span class="account-position">管理员</span>
+								</span> <span class="account-position">管理员</span>
 							</span>
 						</a>
 							<div
@@ -74,15 +76,14 @@
 								</a>
 
 								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item" onclick="switchingAccounts()">
-									<i class="mdi mdi-account-edit mr-1"></i> <span>切换账号
-									</span> 
+								<a href="javascript:void(0);" class="dropdown-item notify-item"
+									onclick="switchingAccounts()"> <i
+									class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
 								</a>
 
 								<!-- item-->
 								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置
-									</span>
+									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
 								</a>
 
 
@@ -132,9 +133,11 @@
 								<div class="card-body">
 									<div class="row mb-2">
 										<div class="col-sm-4">
-											<a href="javascript:void(0);" class="btn btn-danger mb-2" onclick="addAccountinformation()"><i
-												class="mdi mdi-plus-circle mr-2"></i> 添加</a> 
-											<a href="javascript:void(0);" class="btn btn-danger mb-2 del" onclick="delAccountinformation()"><i
+											<a href="javascript:void(0);" class="btn btn-danger mb-2"
+												onclick="addAccountinformation()"><i
+												class="mdi mdi-plus-circle mr-2"></i> 添加</a> <a
+												href="javascript:void(0);" class="btn btn-danger mb-2 del"
+												onclick="delAccountinformation()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 删除</a>
 										</div>
 
@@ -147,14 +150,12 @@
 													<th style="width: 20px;">
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input"
-																id="customCheck1"  disabled> <label
+																id="customCheck1" disabled> <label
 																class="custom-control-label" for="customCheck1">&nbsp;</label>
 														</div>
 													</th>
 													<th>编码</th>
 													<th>名称</th>
-													<th>普通班金额</th>
-													<th>vip班金额</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -162,52 +163,49 @@
 													<tr>
 														<td>
 															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input customCheckes"
-																	> <label class="custom-control-label customCheck" for="customCheck2">&nbsp;</label>
+																<input type="checkbox"
+																	class="custom-control-input customCheckes">
+																<label class="custom-control-label customCheck"
+																	for="customCheck2">&nbsp;</label>
 															</div>
 														</td>
 														<td>${p.dpId }</td>
 														<td>${p.dpTypeName }</td>
-														<td>${p.dpMoney }</td>
-														<td>${p.dpMoneyVip }</td>
 													</tr>
 												</c:forEach>
 											</tbody>
 										</table>
 									</div>
-									
-							<div class="col-lg-6 addAccountinformations " style="display:none;">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <form class="needs-validation" novalidate>
-                                            <div class="form-group position-relative mb-3">
-                                                <label for="validationTooltip01">名称</label>
-                                                <input type="text" class="form-control" id="validationTooltip01" placeholder="请填写名称"  required>
-                                            </div>
-                                            <div class="form-group position-relative mb-3">
-                                                <label for="validationTooltip01">班级类别</label>
-                                                <select class="form-control" id="chargeTypeId">
-                                                	<c:forEach items="${feeCategorieList }" var="f">
-	                                                	<option value="${f.chargeTypeId }">${f.chargeTypeName }</option>
-                                                	</c:forEach>
-                                                </select>
-                                            </div>
-                                            <div class="form-group position-relative mb-3">
-                                                <label for="validationTooltip01">普通版价钱</label>
-                                                <input type="text" class="form-control" id="money" placeholder="请填写金额"  required>
-                                            </div>
-                                            <div class="form-group position-relative mb-3">
-                                                <label for="validationTooltip01">VIP价钱</label>
-                                                <input type="text" class="form-control" id="vipMoney" placeholder="请填写金额"  required>
-                                            </div>
-                                            <button class="btn btn-primary add" type="submit">提交</button>
-                                            <button class="btn btn-primary back" type="reset" style="float: right;">重置</button>
-                                        </form>
-                                        
-                                    </div> <!-- end card-body-->
-                                </div> <!-- end card-->
-                            </div>
-									
+
+									<div class="col-lg-6 addAccountinformations "
+										style="display:none;">
+										<div class="card">
+											<div class="card-body">
+												<form class="needs-validation" novalidate>
+													<div class="form-group position-relative mb-3">
+														<label for="validationTooltip01">名称</label> <input
+															type="text" class="form-control" id="validationTooltip01"
+															placeholder="请填写名称" required>
+													</div>
+													<div class="form-group position-relative mb-3">
+														<label for="validationTooltip01">班级类别</label> <select
+															class="form-control" id="chargeTypeId">
+															<c:forEach items="${feeCategorieList }" var="f">
+																<option value="${f.chargeTypeId }">${f.chargeTypeName }</option>
+															</c:forEach>
+														</select>
+													</div>
+													<button class="btn btn-primary add" type="submit">提交</button>
+													<button class="btn btn-primary back" type="reset"
+														style="float: right;">重置</button>
+												</form>
+
+											</div>
+											<!-- end card-body-->
+										</div>
+										<!-- end card-->
+									</div>
+
 									<!-- end card-body-->
 								</div>
 								<!-- end card-->
@@ -392,7 +390,8 @@
 
 		<!-- third party js -->
 		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-		<script type="text/javascript" src="${Path }/static/js/root/classTypeInfo/classType.js"></script>
+		<script type="text/javascript"
+			src="${Path }/static/js/root/classTypeInfo/classType.js"></script>
 		<!-- third party js ends -->
 </body>
 </html>

@@ -208,4 +208,14 @@ $(function() {
 		location.href = "rootArtStudentFooInfo.html";
 	}
 	
+	/**
+	 * 学院退学
+	 */
+	studentLeave = function(){
+		location.href = "studentLeave.html";
+	}
+	
+	studentGraduation = function(){
+		
+	}
 });

@@ -10,9 +10,16 @@ public class ChildrenesClassStudnet {
 	private Integer classId;
 	private Integer studentId;
 	private String state;
-
+	// 请假时间
+	private Date startTime;
+	private Date endTime;
+	private String teacherName;
+	private Integer thId;
+	private String remarks;
+	
 	private Student student;
 	
+
 	public ChildrenesClassStudnet() {
 		super();
 	}
@@ -28,6 +35,46 @@ public class ChildrenesClassStudnet {
 		this.studentId = studentId;
 		this.state = state;
 		this.student = student;
+	}
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	public Integer getThId() {
+		return thId;
+	}
+
+	public void setThId(Integer thId) {
+		this.thId = thId;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	public Student getStudent() {

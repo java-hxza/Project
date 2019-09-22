@@ -79,6 +79,15 @@
 								<option value="2">vip班</option>
 							</select>
 						</div>
+						<c:if test="${schoolType ==1}">
+							<div class="form-group">
+								<label for="emailaddress">课程分类</label> <select id="classType"
+									class="form-control">
+									<option value="0">课时班</option>
+									<option value="1">速成班</option>
+								</select>
+							</div>
+						</c:if>
 						<div class="form-group">
 							<label for="emailaddress">班级所属级别</label> <select id="classLevel"
 								class="form-control">

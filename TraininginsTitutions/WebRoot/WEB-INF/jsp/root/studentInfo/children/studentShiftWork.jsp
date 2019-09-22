@@ -46,10 +46,17 @@
 							</div>
 
 							<form>
-								
 								<div class="form-group">
 									<label for="emailaddress">学生姓名</label> <input
 										class="form-control" type="text"  id="studentId" name="${childrenesClassStudnet.studentId }" value="${childrenesClassStudnet.studentName }"  disabled="disabled">
+								</div>
+								<div class="form-group">
+									<label for="emailaddress">学生剩余课时</label> <input
+										class="form-control" type="text" id="studentHour" value="${childrenesClassStudnet.student.studentHour }"  disabled="disabled">
+								</div>
+								<div class="form-group">
+									<label for="emailaddress">学生剩余天数</label> 
+									<input class="form-control" type="text" id="time"  value="${time}"  disabled="disabled">
 								</div>
 								<div class="form-group">
 									<label for="emailaddress">学生现所在班级</label>

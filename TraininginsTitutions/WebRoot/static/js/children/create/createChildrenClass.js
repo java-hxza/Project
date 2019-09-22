@@ -47,6 +47,7 @@ $(function() {
 		var classTypeId = $("#classTypeId").val();
 		headmaster = headmaster.text();
 		var teacherId = $("#headmaster").val();
+		var classType = $("#classType").val();
 		if (classNumber, className == null || $.trim(classNumber), $.trim(className) == '') {
 			$.NotificationApp.send("错误!", "请认真填写不能为空，请检查重试。", "top-right", "rgba(0,0,0,0.2)", "error");
 			return false;
@@ -61,7 +62,8 @@ $(function() {
 				classLevel : classLevel,
 				classTypeId : classTypeId,
 				headmaster : headmaster,
-				teacherId : teacherId
+				teacherId : teacherId,
+				classType : classType
 			},
 			dataType : 'JSON',
 			type : 'post',
