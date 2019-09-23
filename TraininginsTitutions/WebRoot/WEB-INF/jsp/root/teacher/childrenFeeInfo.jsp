@@ -55,6 +55,29 @@
 											</span> <span class="account-position">管理员</span>
 										</span>
 									</a>
+										<div
+											class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+											<!-- item-->
+											<div class=" dropdown-header noti-title">
+												<h6 class="text-overflow m-0">欢迎 !</h6>
+											</div>
+
+
+											<!-- item-->
+											<a href="javascript:void(0);"
+												class="dropdown-item notify-item"
+												onclick="switchingAccounts()"> <i
+												class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
+											</a>
+
+											<!-- item-->
+											<a href="welCome.html" class="dropdown-item notify-item">
+												<i class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
+											</a>
+
+
+										</div></li>
+
 								</ul>
 								<button class="button-menu-mobile open-left disable-btn">
 									<i class="mdi mdi-menu"></i>
@@ -130,8 +153,8 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<label for="billing-first-name">班级</label> <select id="classId"
-											class="form-control">
+										<label for="billing-first-name">班级</label> <select
+											id="classId" class="form-control">
 											<option value="">请选择班级</option>
 											<c:forEach items="${classList }" var="cc">
 												<option value="${cc.classId }">${cc.className }</option>
@@ -202,12 +225,13 @@
 									<!-- End Page content -->
 									<!-- ============================================================== -->
 
-									</div>
-									<!-- END wrapper -->
+								</div>
+								<!-- END wrapper -->
 
-									<!-- App js -->
-									<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-									<script src="${Path }/static/js/root/teacher/teacherCurricome.js"></script>
-									<script src="${Path }/static/js/admin/leftSidebar.js"></script>
+								<!-- App js -->
+								<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
+								<script
+									src="${Path }/static/js/root/teacher/teacherCurricome.js"></script>
+								<script src="${Path }/static/js/admin/leftSidebar.js"></script>
 </body>
 </html>

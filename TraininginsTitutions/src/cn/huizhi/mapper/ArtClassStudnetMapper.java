@@ -1,6 +1,9 @@
 package cn.huizhi.mapper;
 
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 import cn.huizhi.pojo.ArtClassStudnet;
 
@@ -33,4 +36,11 @@ public interface ArtClassStudnetMapper {
 	 * @return
 	 */
 	public Integer updateArtStudentState(ArtClassStudnet art);
+	
+	/**
+	 * 批量结业
+	 * @param map
+	 * @return
+	 */
+	public Integer updateArtStudentGradution(@Param("list") List list);
 }

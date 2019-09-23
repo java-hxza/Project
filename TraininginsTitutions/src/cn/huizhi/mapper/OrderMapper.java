@@ -165,4 +165,11 @@ public interface OrderMapper {
 	 * @return
 	 */
 	public Integer delOrderTable();
+	
+	/**
+	 * 招生报表
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Order> RecruitStudentes(@Param("studentName")String studentName,@Param("startTime")String startTime,@Param("classes")Integer classes,@Param("teacherId")Integer teacherId,@Param("schoolId")Integer schoolId);
 }

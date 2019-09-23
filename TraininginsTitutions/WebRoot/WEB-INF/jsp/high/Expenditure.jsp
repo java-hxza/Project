@@ -66,21 +66,16 @@
 								</div>
 
 								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-account-circle mr-1"></i> <span>我的账户</span>
-								</a>
-
-								<!-- item-->
 								<a href="javascript:void(0);" class="dropdown-item notify-item"
 									onclick="switchingAccounts()"> <i
 									class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
 								</a>
 
-								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
-								</a>
 
+								<!-- item-->
+								<a href="welCome.html" class="dropdown-item notify-item"> <i
+									class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
+								</a>
 
 							</div></li>
 
@@ -336,8 +331,7 @@
 																class="form-control expenditureitemsId"
 																id="example-select">
 																<c:forEach items="${expenditureitems }" var="e">
-																	<option value="${e.expenditureitemsId }"
-																		>${e.expenditureitemsName}</option>
+																	<option value="${e.expenditureitemsId }">${e.expenditureitemsName}</option>
 																</c:forEach>
 															</select>
 														</div>
@@ -672,7 +666,7 @@
 							"src_id" : "ChargePeriod",
 							"show_header" : true
 						});
-						excel.generate("费用支出单" ,$(".customCheckes:checked").parent().parent().next().next().next().next().next().text());
+						excel.generate("费用支出单", $(".customCheckes:checked").parent().parent().next().next().next().next().next().text());
 					});
 				});
 			</script>

@@ -10,7 +10,6 @@ $(function() {
 		$(".add").click(function() {
 			var chargeTypeName = $(".chargeTypeName").val();
 			var category = $(".category").val();
-			var chargeMoney = $(".chargeMoney").val();
 			var schoolId = $(".add").attr("name");
 			$.ajax({
 				type : "POST",
@@ -18,7 +17,6 @@ $(function() {
 				data : {
 					chargeTypeName : chargeTypeName,
 					category : category,
-					chargeMoney : chargeMoney,
 					schoolId : schoolId
 				},
 				dataType : "json",

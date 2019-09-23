@@ -1,8 +1,8 @@
 package cn.huizhi.service;
 
 import java.util.List;
+import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 
 import cn.huizhi.pojo.ChildrenesClassStudnet;
 /**
@@ -46,4 +46,12 @@ public interface ChildrenesClassStudnetService {
 	 * @return
 	 */
 	public Integer updateChildrenStudentState(ChildrenesClassStudnet childrenesClassStudnet);
+	
+	/**
+	 * 批量结业
+	 * 
+	 * @param map
+	 * @return
+	 */
+	public Integer updateChildrenStudentGradution(List list);
 }

@@ -30,7 +30,7 @@
 		resultType="StudentLeave">
 		select
 		<include refid="studentLeaveCol" />
-		from studentLeave sl,teacherhour th
+		from studentleave sl,teacherhour th
 		<where>
 			sl.thId = th.teacherHourId
 			<if test="map.classId != null and map.classId != ''">
@@ -48,7 +48,7 @@
 
 	<select id="findStudentLeavesByHighClassId" resultType="StudentLeave">
 		select *
-		from studentLeave sl
+		from studentleave sl
 		<where>
 			<if test="map.classId != null and map.classId != ''">
 				and sl.classId = #{map.classId}

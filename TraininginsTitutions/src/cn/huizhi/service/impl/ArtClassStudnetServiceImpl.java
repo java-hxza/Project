@@ -1,9 +1,11 @@
 package cn.huizhi.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import cn.huizhi.mapper.ArtClassStudnetMapper;
@@ -38,6 +40,12 @@ public class ArtClassStudnetServiceImpl implements ArtClassStudnetService {
 	public List<ArtClassStudnet> findArtClassStudnetListByClassId(Integer classId) {
 		// TODO Auto-generated method stub
 		return artClassStudnetMapper.findArtClassStudnetListByClassId(classId);
+	}
+
+	@Override
+	public Integer updateArtStudentGradution(List list) {
+		// TODO Auto-generated method stub
+		return artClassStudnetMapper.updateArtStudentGradution(list);
 	}
 
 }

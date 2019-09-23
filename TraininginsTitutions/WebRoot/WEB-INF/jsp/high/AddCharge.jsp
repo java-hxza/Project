@@ -28,7 +28,7 @@
 	type="text/css" />
 <link href="${Path }/static/css/app.min.css" rel="stylesheet"
 	type="text/css" />
-	<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
+<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
 
 </head>
 
@@ -48,7 +48,7 @@
 		<div class="content-page">
 			<div class="content">
 
-					<!-- Topbar Start -->
+				<!-- Topbar Start -->
 				<div class="navbar-custom">
 					<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
@@ -61,7 +61,7 @@
 									src="${Path }/static/images/avatar-1.jpg" alt="user-image"
 									class="rounded-circle">
 							</span> <span> <span class="account-user-name">${user.loginName }
-										</span> <span class="account-position">管理员</span>
+								</span> <span class="account-position">管理员</span>
 							</span>
 						</a>
 							<div
@@ -71,21 +71,16 @@
 									<h6 class="text-overflow m-0">欢迎 !</h6>
 								</div>
 
+
 								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-account-circle mr-1"></i> <span>我的账户</span>
+								<a href="javascript:void(0);" class="dropdown-item notify-item"
+									onclick="switchingAccounts()"> <i
+									class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
 								</a>
 
 								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item" onclick="switchingAccounts()">
-									<i class="mdi mdi-account-edit mr-1"></i> <span>切换账号
-									</span> 
-								</a>
-
-								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置
-									</span>
+								<a href="welCome.html" class="dropdown-item notify-item"> <i
+									class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
 								</a>
 
 
@@ -134,14 +129,16 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-body">
-								<c:choose>
-									<c:when test="${schoolType == 2}">
-										<h4 style="text-align:center" class="Type" name="${schoolType }">收费单</h4>
-									</c:when>
-									<c:otherwise>
-										<h4 style="text-align:center" class="Type" name="${schoolType }">按时间段收费单</h4>
-									</c:otherwise>
-								</c:choose>
+									<c:choose>
+										<c:when test="${schoolType == 2}">
+											<h4 style="text-align:center" class="Type"
+												name="${schoolType }">收费单</h4>
+										</c:when>
+										<c:otherwise>
+											<h4 style="text-align:center" class="Type"
+												name="${schoolType }">按时间段收费单</h4>
+										</c:otherwise>
+									</c:choose>
 									<div class="row mb-2">
 										<div class="col-md-12">
 											<form class="needs-validation" novalidate>
@@ -171,8 +168,7 @@
 																<label for="example-select">${f.chargeTypeName}</label>
 																<input class="form-control feecateIds"
 																	id="example-number" type="number" name="number"
-																	chargeTypeId="${f.chargeTypeId }"
-																	>
+																	chargeTypeId="${f.chargeTypeId }">
 
 															</div>
 														</div>
@@ -277,28 +273,26 @@
 														</div>
 													</div>
 													<div class="col-md-6 feecateId4Div">
-																<div class="form-group mb-3">
-																	<label for="example-select">活动名称</label> <select
-																		class="form-control feecateId4 " id="example-select">
-																		<option value="0">---请选择---</option>
-																		<c:forEach items="${activity }" var="a">
-																			<option value="${a.activityId }"
-																				activityMoney="${a.activityMoney }"
-																				discount="${a.discount }">
-																				${a.activityName }
-																			</option>
-																		</c:forEach>
-																	</select>
-																</div>
-															</div>
-															<div class="col-md-6">
-																<div class="form-group mb-3">
-																	<label for="example-number">实收金额</label> <input
-																		class="form-control dpMoneyActivity4"
-																		id="example-number" type="number" name="number"
-																		>
-																</div>
-															</div>
+														<div class="form-group mb-3">
+															<label for="example-select">活动名称</label> <select
+																class="form-control feecateId4 " id="example-select">
+																<option value="0">---请选择---</option>
+																<c:forEach items="${activity }" var="a">
+																	<option value="${a.activityId }"
+																		activityMoney="${a.activityMoney }"
+																		discount="${a.discount }">${a.activityName }
+																	</option>
+																</c:forEach>
+															</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-number">实收金额</label> <input
+																class="form-control dpMoneyActivity4"
+																id="example-number" type="number" name="number">
+														</div>
+													</div>
 													<!-- <div class="col-md-12">
 														<div class="form-group">
 															<select class="form-control teacherId"

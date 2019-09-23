@@ -1,6 +1,7 @@
 package cn.huizhi.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -29,4 +30,12 @@ public interface HighesClassStudnetMapper {
 	 * @return
 	 */
 	public Integer updateHighStudentClass(HighesClassStudnet cStudnet);
+	
+	/**
+	 * 批量结业
+	 * 
+	 * @param map
+	 * @return
+	 */
+	public Integer updateHighStudentGradution(@Param("list") List list);
 }

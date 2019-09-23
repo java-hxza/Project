@@ -266,7 +266,6 @@ public class SchoolController {
 
 	/**
 	 * 学校订单
-	 * 
 	 * @param schoolId
 	 * @param schoolName
 	 * @param session
@@ -598,7 +597,7 @@ public class SchoolController {
 		/**
 		 * 查询艺考学生信息
 		 */
-		List<Student> artStudentInfoList = studentService.findArtStudentResverSchoolInfo(map);
+		List<Student> artStudentInfoList = studentService.findHighStudentResverSchoolInfo(map);
 		/**
 		 * 依靠预定班型
 		 */
@@ -672,7 +671,7 @@ public class SchoolController {
 		/**
 		 * 查询艺考学生信息
 		 */
-		List<Student> artStudentInfoList = studentService.findArtStudentResverSchoolInfo(map2);
+		List<Student> artStudentInfoList = studentService.findHighStudentResverSchoolInfo(map2);
 		/**
 		 * 依靠预定班型
 		 */

@@ -64,10 +64,6 @@
 									<h6 class="text-overflow m-0">欢迎 !</h6>
 								</div>
 
-								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-account-circle mr-1"></i> <span>我的账户</span>
-								</a>
 
 								<!-- item-->
 								<a href="javascript:void(0);" class="dropdown-item notify-item"
@@ -75,9 +71,10 @@
 									class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
 								</a>
 
+
 								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
+								<a href="welCome.html" class="dropdown-item notify-item"> <i
+									class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
 								</a>
 
 
@@ -155,8 +152,8 @@
 									</div>
 								</div>
 								<!--startprint-->
-								<table class="table dt-responsive nowrap"
-									id="basic-datatable" width="100%" border="1px" cellspacing="0">
+								<table class="table dt-responsive nowrap" id="basic-datatable"
+									width="100%" border="1px" cellspacing="0">
 									<thead class="thead-light">
 										<tr>
 											<th>校区信息</th>

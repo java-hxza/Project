@@ -57,10 +57,6 @@
 										<h6 class="text-overflow m-0">欢迎 !</h6>
 									</div>
 
-									<!-- item-->
-									<a href="javascript:void(0);" class="dropdown-item notify-item">
-										<i class="mdi mdi-account-circle mr-1"></i> <span>我的账户</span>
-									</a>
 
 									<!-- item-->
 									<a href="javascript:void(0);" class="dropdown-item notify-item"
@@ -69,9 +65,11 @@
 									</a>
 
 									<!-- item-->
-									<a href="javascript:void(0);" class="dropdown-item notify-item">
-										<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
+									<a href="welCome.html" class="dropdown-item notify-item"> <i
+										class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
 									</a>
+
+
 								</div></li>
 						</ul>
 						<button class="button-menu-mobile open-left disable-btn">
@@ -192,9 +190,9 @@
 										<div class="form-group">
 											<label for="billing-first-name">分班情况:</label> <select
 												id="state" class="form-control col-sm-8">
-													<option value="">请选择</option>
-													<option value="0">未分班</option>
-													<option value="1">已分班</option>
+												<option value="">请选择</option>
+												<option value="0">未分班</option>
+												<option value="1">已分班</option>
 											</select>
 										</div>
 									</div>
@@ -263,10 +261,10 @@
 													</c:forEach>
 												</c:forEach>
 												<td class="table-user">${art.remarks }</td>
-												<c:forEach items="${feeCategories }" var="fee" begin="<%=index %>"
-															end="<%=index %>">
-													<c:forEach items="${feeIdArray }"  var="feeId">
-														<c:forEach items="${feeId }" var="fId" >
+												<c:forEach items="${feeCategories }" var="fee"
+													begin="<%=index %>" end="<%=index %>">
+													<c:forEach items="${feeIdArray }" var="feeId">
+														<c:forEach items="${feeId }" var="fId">
 															<c:if test="${fee.chargeTypeId == fId}">
 																<c:forEach items="${feeMoneyArray }" var="moneyArray">
 																	<c:forEach items="${moneyArray }" var="m">

@@ -1,3 +1,4 @@
+<%@page import="cn.huizhi.pojo.FeeCategory"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -57,10 +58,6 @@
 										<h6 class="text-overflow m-0">欢迎 !</h6>
 									</div>
 
-									<!-- item-->
-									<a href="javascript:void(0);" class="dropdown-item notify-item">
-										<i class="mdi mdi-account-circle mr-1"></i> <span>我的账户</span>
-									</a>
 
 									<!-- item-->
 									<a href="javascript:void(0);" class="dropdown-item notify-item"
@@ -69,8 +66,8 @@
 									</a>
 
 									<!-- item-->
-									<a href="javascript:void(0);" class="dropdown-item notify-item">
-										<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
+									<a href="welCome.html" class="dropdown-item notify-item"> <i
+										class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
 									</a>
 								</div></li>
 						</ul>
@@ -211,10 +208,9 @@
 											<td>接待人员</td>
 											<td>高中学校</td>
 											<td>备注</td>
-											<%
-												int num = 0;
-												int index = 0;
-											%>
+											<%!int num = 0;
+	int index = 0;
+	int i = 0;%>
 
 											<c:forEach items="${feeCategories }" var="fee">
 												<%
@@ -224,7 +220,6 @@
 											</c:forEach>
 											<td>实付金额</td>
 											<td>应收金额</td>
-											<td>分班情况</td>
 										</tr>
 									</tbody>
 
@@ -242,22 +237,43 @@
 												<td class="table-user">${art.parentName}</td>
 												<td class="table-user">${art.registrationConsultant }</td>
 												<td class="table-user">${art.school}</td>
-												<td class="table-user">${schoolName }</td>
 												<td class="table-user">${art.remarks }</td>
-												<c:forEach items="${feeCategories }" var="fee"
-													begin="<%=index %>" end="<%=index %>">
-													<c:forEach items="${feeIdArray }" var="feeId">
-														<c:forEach items="${feeId }" var="fId">
-															<c:if test="${fee.chargeTypeId == fId}">
-																<c:forEach items="${feeMoneyArray }" var="moneyArray">
-																	<c:forEach items="${moneyArray }" var="m">
-																		<td class="table-user">${m }</td>
-																	</c:forEach>
-																</c:forEach>
-															</c:if>
+
+												<%
+													List<FeeCategory> feeCategories = (List<FeeCategory>) session.getAttribute("feeCategories");
+
+														List<String[]> feeMoneyArray = (List) session.getAttribute("feeMoneyArray");
+
+
+														//for (int i = 0; i < num; i++) {
+
+														for (int j = i; j < feeMoneyArray.size(); j++) {
+
+															for (int k = 0; k < feeMoneyArray.get(j).length; k++) {
+												%>
+
+												<td class="table-user"><%=feeMoneyArray.get(j)[k]%></td>
+
+
+												<%
+													break;
+															}
+														}
+														i = i + 1;
+														//}
+												%>
+												<%-- <c:forEach items="${feeCategories }" var="fee">
+													<c:forEach items="${feeMoneyArray }" var="moneyArray">
+														<c:forEach items="${moneyArray }" var="m"
+															begin="<%=index %>" end="<%=index %>">
+															
 														</c:forEach>
 													</c:forEach>
+
+													<%
+														index = index + 1;
 												</c:forEach>
+													%> --%>
 												<td class="table-user">${art.order.dpMoney }</td>
 												<c:set var="dpMoneySum"
 													value="${art.order.dpMoney + dpMoneySum}" />
@@ -265,9 +281,7 @@
 													value="${art.order.dpMoney+art.order.discount + sumMoney}" />
 												<td class="table-user">${art.order.dpMoney+art.order.discount }</td>
 											</tr>
-											<%
-												index = index + 1;
-											%>
+
 										</c:forEach>
 
 									</tbody>

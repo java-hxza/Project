@@ -1,6 +1,7 @@
 package cn.huizhi.service;
 
 import java.util.List;
+import java.util.Map;
 
 
 import cn.huizhi.pojo.HighesClassStudnet;
@@ -28,4 +29,13 @@ public interface HighesClassStudnetService {
 	 * @return
 	 */
 	public Integer updateHighStudentClass(HighesClassStudnet cStudnet);
+	
+	
+	/**
+	 * 批量结业
+	 * 
+	 * @param map
+	 * @return
+	 */
+	public Integer updateHighStudentGradution(List list);
 }

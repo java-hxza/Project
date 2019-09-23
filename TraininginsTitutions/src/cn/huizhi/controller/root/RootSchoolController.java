@@ -1512,7 +1512,7 @@ public class RootSchoolController {
 		/**
 		 * 查询艺考学生信息
 		 */
-		List<Student> artStudentInfoList = studentService.findArtStudentResverSchoolInfo(map);
+		List<Student> artStudentInfoList = studentService.findHighStudentResverSchoolInfo(map);
 		/**
 		 * 依靠预定班型
 		 */
@@ -1585,7 +1585,7 @@ public class RootSchoolController {
 		/**
 		 * 查询艺考学生信息
 		 */
-		List<Student> artStudentInfoList = studentService.findArtStudentResverSchoolInfo(map2);
+		List<Student> artStudentInfoList = studentService.findHighStudentResverSchoolInfo(map2);
 		/**
 		 * 依靠预定班型
 		 */
@@ -1633,7 +1633,7 @@ public class RootSchoolController {
 		// session.setAttribute("feecateMoneyYiKaoList", feecateMoneyYiKaoList);
 		session.setAttribute("schoolId", schoolId);
 
-		return "admin/highStudentFee/highStudentInfo";
+		return "root/highStudentFee/highStudentInfo";
 	}
 
 	/**
@@ -1960,5 +1960,128 @@ public class RootSchoolController {
 		}
 
 		return jsonMap;
+	}
+
+	/**
+	 * 学生结业页面跳转
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("studentGraduation.html")
+	public String studentGraduation(HttpSession session) {
+
+		List studentList = null;
+
+		Integer schoolId = (Integer) session.getAttribute("schoolId");
+
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+
+		// 查询班级学生
+		if (schoolType == 1) {
+			studentList = childrenesClassStudnetService.findChildrenesClassStudnetByClassId(null);
+		}
+
+		if (schoolType == 2) {
+			studentList = highesClassStudnetService.findHighesClassStudnetListByClassId(null);
+		}
+
+		if (schoolType == 3) {
+			studentList = artClassStudnetService.findArtClassStudnetListByClassId(null);
+		}
+
+		List<Class> classAllList = classService.findChildrenescClasses(String.valueOf(schoolId));
+
+		session.setAttribute("classAllList", classAllList);
+		session.setAttribute("studentList", studentList);
+
+		return "root/studentInfo/studentGraduation";
+
+	}
+
+	/**
+	 * 保存批量结业
+	 * 
+	 * @param map
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("insertStudentGraduation.html")
+	@ResponseBody
+	public Map<String, String> insertStudentGraduation(String map, HttpSession session) {
+		Map<String, String> jsonMap = new HashMap<String, String>();
+
+		Map<String, Object> map2 = (Map<String, Object>) JSONObject.parse(map);
+		List studentId = null;
+		for (String key : map2.keySet()) {
+			studentId = (List) map2.get(key);
+		}
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+
+		if (schoolType == 1) {
+			if (childrenesClassStudnetService.updateChildrenStudentGradution(studentId) > 0)
+				jsonMap.put("state", "1");
+		}
+		if (schoolType == 2) {
+			if (highesClassStudnetService.updateHighStudentGradution(studentId) > 0)
+				jsonMap.put("state", "1");
+		}
+		if (schoolType == 3) {
+			if (artClassStudnetService.updateArtStudentGradution(studentId) > 0)
+				jsonMap.put("state", "1");
+		}
+
+		return jsonMap;
+
+	}
+	
+	/**
+	 * 学生结业页面跳转
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("queryStudentGraduation.html")
+	public String queryStudentGraduation(Integer classId,HttpSession session) {
+
+		List studentList = null;
+
+		Integer schoolId = (Integer) session.getAttribute("schoolId");
+
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+
+		// 查询班级学生
+		if (schoolType == 1) {
+			studentList = childrenesClassStudnetService.findChildrenesClassStudnetByClassId(classId);
+		}
+
+		if (schoolType == 2) {
+			studentList = highesClassStudnetService.findHighesClassStudnetListByClassId(classId);
+		}
+
+		if (schoolType == 3) {
+			studentList = artClassStudnetService.findArtClassStudnetListByClassId(classId);
+		}
+
+		List<Class> classAllList = classService.findChildrenescClasses(String.valueOf(schoolId));
+
+		session.setAttribute("classAllList", classAllList);
+		session.setAttribute("studentList", studentList);
+
+		return "root/studentInfo/studentGraduation";
+
+	}
+	/**
+	 * 操作员授权
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("rootOperatorAuthorize.html")
+	public String rootOperatorAuthorize(HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		List<UserDiction> dictionListByUId = userDictionService.findDictionListByUserId(user.getuId());
+
+		session.setAttribute("dictionListByUId", dictionListByUId);
+		return "root/basicSettings/operatorRootAuthorization";
 	}
 }

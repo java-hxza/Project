@@ -1,6 +1,7 @@
 package cn.huizhi.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -31,6 +32,12 @@ public class HighesClassStudnetServiceImpl implements HighesClassStudnetService{
 	public Integer updateHighStudentClass(HighesClassStudnet cStudnet) {
 		// TODO Auto-generated method stub
 		return highesClassStudnetMapper.updateHighStudentClass(cStudnet);
+	}
+
+	@Override
+	public Integer updateHighStudentGradution(List list) {
+		// TODO Auto-generated method stub
+		return highesClassStudnetMapper.updateHighStudentGradution(list);
 	}
 
 }

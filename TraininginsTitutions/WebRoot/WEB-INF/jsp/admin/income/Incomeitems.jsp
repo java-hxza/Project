@@ -140,7 +140,6 @@
 													<th>校区</th>
 													<th>类别</th>
 													<th>收入项目名称</th>
-													<th>收入项目金额</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -157,7 +156,6 @@
 														<td>${schoolName}</td>
 														<td>${f.category }</td>
 														<td>${f.chargeTypeName }</td>
-														<td>${f.chargeMoney }</td>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -172,8 +170,6 @@
                                                 <input type="text" class="form-control category" id="validationTooltip01" placeholder="请填写类别"  required>
                                                 <label for="validationTooltip01">收入项目名称</label>
                                                 <input type="text" class="form-control chargeTypeName" id="validationTooltip01" placeholder="请填写收入项目名称"  required>
-                                                <label for="validationTooltip01">收入项目金额</label>
-                                                <input type="text" class="form-control chargeMoney" id="validationTooltip01" placeholder="请填写收入项目名称"  required>
                                             </div>
                                             <button class="btn btn-primary add" name="${schoolId  }" type="submit">提交</button>
                                             <button class="btn btn-primary back" type="reset" style="float: right;">重置</button>

@@ -6,74 +6,87 @@
 
 	<sql id="highesCol">
 		hcs.classesStudentId hcs_classesStudentId,
-		hcs.studentName hcs_studentName,
+		hcs.studentName
+		hcs_studentName,
 		hcs.headmaster hcs_headmaster,
-		hcs.enrollmentTime hcs_enrollmentTime,
+		hcs.enrollmentTime
+		hcs_enrollmentTime,
 		hcs.classId hcs_classId,
-		hcs.studentId hcs_studentId,
+		hcs.studentId
+		hcs_studentId,
 		hcs.state hcs_state,
 		t.endTime t_endTime,
-		t.familyAddress t_familyAddress,
+		t.familyAddress
+		t_familyAddress,
 		t.feeCategory t_feeCategory,
 		t.integral t_integral,
 		t.parentName t_parentName,
-		t.registrationChannels t_registrationChannels,
-		t.registrationConsultant t_registrationConsultant,
+		t.registrationChannels
+		t_registrationChannels,
+		t.registrationConsultant
+		t_registrationConsultant,
 		t.remarks t_remarks,
 		t.school t_school,
 		t.startTime t_startTime,
 		t.studentBirth t_studentBirth,
-		t.studentHour t_studentHour,
+		t.studentHour
+		t_studentHour,
 		t.studentId t_studentId,
 		t.studentName t_studentName,
 		t.studentSex t_studentSex,
 		t.telephone t_telephone,
-		t.theSurrogate t_theSurrogate
+		t.theSurrogate
+		t_theSurrogate
 	</sql>
-	
-		<resultMap type="HighesClassStudnet" id="studnetByClassIdMap">
-		<id column="hcs_classesStudentId" property="classesStudentId"/>
-		<result column="hcs_studentName" property="studentName"/>
-		<result column="hcs_headmaster" property="headmaster"/>
-		<result column="hcs_enrollmentTime" property="enrollmentTime"/>
-		<result column="hcs_classId" property="classId"/>
-		<result column="hcs_studentId" property="studentId"/>
-		<result column="hcs_state" property="state"/>
+
+	<resultMap type="HighesClassStudnet" id="studnetByClassIdMap">
+		<id column="hcs_classesStudentId" property="classesStudentId" />
+		<result column="hcs_studentName" property="studentName" />
+		<result column="hcs_headmaster" property="headmaster" />
+		<result column="hcs_enrollmentTime" property="enrollmentTime" />
+		<result column="hcs_classId" property="classId" />
+		<result column="hcs_studentId" property="studentId" />
+		<result column="hcs_state" property="state" />
 		<association property="student" javaType="Student">
-			<id column="t_studentId" property="studentId"/>
-			<result column="t_endTime" property="endTime"/>
-			<result column="t_familyAddress" property="familyAddress"/>
-			<result column="t_feeCategory" property="feeCategory"/>
-			<result column="t_integral" property="integral"/>
-			<result column="t_parentName" property="parentName"/>
-			<result column="t_registrationChannels" property="registrationChannels"/>
-			<result column="t_registrationConsultant" property="registrationConsultant"/>
-			<result column="t_remarks" property="remarks"/>
-			<result column="t_school" property="school"/>
-			<result column="t_startTime" property="startTime"/>
-			<result column="t_studentBirth" property="studentBirth"/>
-			<result column="t_studentHour" property="studentHour"/>
-			<result column="t_studentName" property="studentName"/>
-			<result column="t_studentSex" property="studentSex"/>
-			<result column="t_telephone" property="telephone"/>
-			<result column="t_theSurrogate" property="theSurrogate"/>
+			<id column="t_studentId" property="studentId" />
+			<result column="t_endTime" property="endTime" />
+			<result column="t_familyAddress" property="familyAddress" />
+			<result column="t_feeCategory" property="feeCategory" />
+			<result column="t_integral" property="integral" />
+			<result column="t_parentName" property="parentName" />
+			<result column="t_registrationChannels"
+				property="registrationChannels" />
+			<result column="t_registrationConsultant"
+				property="registrationConsultant" />
+			<result column="t_remarks" property="remarks" />
+			<result column="t_school" property="school" />
+			<result column="t_startTime" property="startTime" />
+			<result column="t_studentBirth" property="studentBirth" />
+			<result column="t_studentHour" property="studentHour" />
+			<result column="t_studentName" property="studentName" />
+			<result column="t_studentSex" property="studentSex" />
+			<result column="t_telephone" property="telephone" />
+			<result column="t_theSurrogate" property="theSurrogate" />
 		</association>
 	</resultMap>
-	
-	<select id="findHighesClassStudnetListByClassId" resultMap="studnetByClassIdMap" parameterType="java.lang.Integer">
-		select <include refid="highesCol"/>
+
+	<select id="findHighesClassStudnetListByClassId"
+		resultMap="studnetByClassIdMap" parameterType="java.lang.Integer">
+		select
+		<include refid="highesCol" />
 		from highesclassstudnet hcs,student t
 		<where>
-			t.studentId = hcs.studentId and hcs.state !=  2
+			t.studentId = hcs.studentId and hcs.state != 2
 			<if test="classId!=null and classId!=''">
 				and classId = #{classId}
 			</if>
-			
+
 		</where>
 	</select>
-	
+
 	<!-- 退学 -->
-	<update id="updateHighStudentState" parameterType="HighesClassStudnet">
+	<update id="updateHighStudentState"
+		parameterType="HighesClassStudnet">
 		update traininginstitutions.highesclassstudnet
 		set
 		state = #{state}
@@ -84,14 +97,15 @@
 			</if>
 		</where>
 	</update>
-	
+
 	<!-- 转班 -->
-	<update id="updateHighStudentClass" parameterType="HighesClassStudnet">
+	<update id="updateHighStudentClass"
+		parameterType="HighesClassStudnet">
 		update traininginstitutions.highesclassstudnet
 		<set>
 			<if test="classId!=null and classId!=''">
 				classId = #{classId}
-			</if>		
+			</if>
 		</set>
 
 		<where>
@@ -100,8 +114,21 @@
 			</if>
 		</where>
 	</update>
-	
-	
+	<!-- 批量结业 -->
+	<update id="updateHighStudentGradution" parameterType="java.util.List">
+
+		<foreach collection="list" item="c" separator=";">
+			update traininginstitutions.highesclassstudnet
+			set
+			state = 0
+			<where>
+				<if test="c != null and c !=''">
+					studentId = #{c}
+				</if>
+			</where>
+		</foreach>
+	</update>
+
 </mapper>  
     
   

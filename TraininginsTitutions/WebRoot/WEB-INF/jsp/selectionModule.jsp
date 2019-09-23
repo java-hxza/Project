@@ -23,10 +23,23 @@
 	type="text/css" />
 <style type="text/css">
 body {
-	/* 	background-image: url(${Path}/static/images/back.png); */
-	/* 	background-repeat: no-repeat; */
-	/* 	background-size: 100% 100%; */
-	/* 	-moz-background-size: 100% 100%; */
+	background-color: #0093E9;
+	background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+}
+
+.top1 {
+	border-radius: 50%;
+	height: "400px";
+	width: " 400px";
+	margin-bottom: 5%;
+	background-color: #f9fa61;
+	background-image: linear-gradient(90deg, #f9fa61 0%, #f9fa61 100%);
+	background-color: #f9fa61;
+}
+
+.top1:hover {
+	background-color: #FAACA8;
+	background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
 }
 </style>
 </head>
@@ -39,47 +52,43 @@ body {
 				<div class="col-12">
 
 					<div class="text-center">
-						<img src="${Path }/static/images/maintenance.jpg"  width="200" height="200"
+						<img src="${Path }/static/images/maintenance.jpg"
+							style="border-radius:50%" " width="200" height="200"
 							alt="File not found Image">
-						<p class="mt-4" style="font-size: 70px">请选择进入的管理系统</p>
-						<p class="text-muted">该选项只有学校管理员可见.</p>
+						<h1 class="mt-4">请选择进入的管理系统</h1>
 
 						<div class="row mt-5">
-							<div class="col-md-4">
-								<div class="text-center mt-3 pl-1 pr-1" onclick="childrenJump()">
-									<img alt="" style="border-radius:50%"
-										src="${Path }/static/images/logo.jpg" width="150" height="160">
-									<h5 class="text-uppercase" onclick="childrenJump()">少儿版</h5>
-								</div>
-							</div>
-							<!-- end col-->
-							<div class="col-md-4">
-								<div class="text-center mt-3 pl-1 pr-1" onclick="highJump()">
-									<img alt="" style="border-radius:50%"
-										src="${Path }/static/images/maintenance.jpg" width="150" height="160">
-									<h5 class="text-uppercase" onclick="highJump()">高中版</h5>
-								</div>
-							</div>
-							<!-- end col-->
-							<div class="col-md-4">
-								<div class="text-center mt-3 pl-1 pr-1" onclick="artJump()">
-									<img alt="" style="border-radius:50%"
-										src="${Path }/static/images/maintenance.jpg" width="150" height="160">
-									<h5 class="text-uppercase">艺考版</h5>
-								</div>
-							</div>
-							<!-- end col-->
-						</div>
-						<!-- end row-->
-					</div>
-					<!-- end /.text-center-->
 
+							<!-- end row-->
+						</div>
+						<!-- end /.text-center-->
+
+					</div>
+					<!-- end col -->
 				</div>
-				<!-- end col -->
+				<!-- end row -->
 			</div>
-			<!-- end row -->
+			<!-- end container -->
+
 		</div>
-		<!-- end container -->
+		<div class="top1">
+			<div class="text-center" onclick="childrenJump()">
+				<h1 onclick="childrenJump()">少儿版</h1>
+			</div>
+		</div>
+		<!-- end col-->
+		<div class="top1">
+			<div class="text-center" onclick="highJump()">
+				<h1 onclick="highJump()">高中版</h1>
+			</div>
+		</div>
+		<!-- end col-->
+		<div class="top1">
+			<div class="text-center" onclick="artJump()">
+				<h1 onclick="artJump()">艺考版</h1>
+			</div>
+		</div>
+		<!-- end col-->
 	</div>
 	<!-- end page -->
 

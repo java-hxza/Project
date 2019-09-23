@@ -1361,7 +1361,7 @@ public class HighesController {
 			childrenesClassStudnet.setState("1");
 			childrenesClassStudnet.setStudentName(student.getStudentName());
 			childrenesClassStudnet.setHeadmaster(headmaster);
-			Student s = studentService.selectStudentId(student.getStudentName(), student.getParentName(),
+			Student s = studentService.selectStudentId(student.getStudentName(), student.getStudentBirth(),
 					student.getStudentSex());
 			childrenesClassStudnet.setStudentId(s.getStudentId());
 			childrenesClassStudnet.setClassId(classId);
@@ -1471,7 +1471,7 @@ public class HighesController {
 			childrenesClassStudnet.setState("1");
 			childrenesClassStudnet.setStudentName(student.getStudentName());
 			childrenesClassStudnet.setHeadmaster(headmaster);
-			Student s = studentService.selectStudentId(student.getStudentName(), student.getParentName(),
+			Student s = studentService.selectStudentId(student.getStudentName(), student.getStudentBirth(),
 					student.getStudentSex());
 			childrenesClassStudnet.setStudentId(s.getStudentId());
 			childrenesClassStudnet.setClassId(classId);
@@ -1580,7 +1580,7 @@ public class HighesController {
 			childrenesClassStudnet.setState("1");
 			childrenesClassStudnet.setStudentName(student.getStudentName());
 			childrenesClassStudnet.setHeadmaster(headmaster);
-			Student s = studentService.selectStudentId(student.getStudentName(), student.getParentName(),
+			Student s = studentService.selectStudentId(student.getStudentName(), student.getStudentBirth(),
 					student.getStudentSex());
 			childrenesClassStudnet.setStudentId(s.getStudentId());
 			childrenesClassStudnet.setClassId(classId);
@@ -1677,7 +1677,7 @@ public class HighesController {
 		student.setStartTime(student.getStartTime() + startTimes);
 		student.setStudentHour(0.0);
 		if (studentService.addStudnetInfo(student) == 1) {
-			Student s = studentService.selectStudentId(student.getStudentName(), student.getParentName(),
+			Student s = studentService.selectStudentId(student.getStudentName(), student.getStudentBirth(),
 					student.getStudentSex());
 			Reserveschool reserveschool = new Reserveschool();
 			reserveschool.setSchoolId((Integer) session.getAttribute("schoolId"));
@@ -1793,6 +1793,37 @@ public class HighesController {
 			}
 			map.put("order", order);
 		}
+		return JSONArray.toJSONString(map);
+	}
+	
+	/**
+	 * 招生报表
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("RecruitStudents.html")
+	public String RecruitStudents(Model model) {
+		List<Teacher> teacher = teacherService.selectTeacherZS((Integer) session.getAttribute("schoolId"));
+		List<Class> classes = classService.selectMyClass((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("teacher", teacher);
+		model.addAttribute("classes", classes);
+		return "high/RecruitStudents";
+	}
+	
+	/**
+	 * 根据条件查找招生报表
+	 * @param studentName
+	 * @param classes
+	 * @param teacherId
+	 * @param startTime
+	 * @return
+	 */
+	@RequestMapping("RecruitStudents2.html")
+	@ResponseBody
+	public Object RecruitStudents2(@RequestParam String studentName,@RequestParam Integer classes,@RequestParam Integer teacherId,@RequestParam String startTime) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		List<Order> order = orderService.RecruitStudentes(studentName, startTime, classes, teacherId, (Integer) session.getAttribute("schoolId"));
+		map.put("order", order);
 		return JSONArray.toJSONString(map);
 	}
 }

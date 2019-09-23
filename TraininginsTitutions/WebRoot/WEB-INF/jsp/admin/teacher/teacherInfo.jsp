@@ -57,6 +57,28 @@
 											</span> <span class="account-position">管理员</span>
 										</span>
 									</a>
+										<div
+											class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+											<!-- item-->
+											<div class=" dropdown-header noti-title">
+												<h6 class="text-overflow m-0">欢迎 !</h6>
+											</div>
+
+
+											<!-- item-->
+											<a href="javascript:void(0);"
+												class="dropdown-item notify-item"
+												onclick="switchingAccounts()"> <i
+												class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
+											</a>
+
+											<!-- item-->
+											<a href="welCome.html" class="dropdown-item notify-item">
+												<i class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
+											</a>
+
+
+										</div></li>
 								</ul>
 								<button class="button-menu-mobile open-left disable-btn">
 									<i class="mdi mdi-menu"></i>
@@ -110,12 +132,12 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
-										<label for="billing-first-name">教师</label> <select id="teacherId"
-											class="form-control">
-												<option value="">请选教师</option>
-												<c:forEach items="${teachers }" var="t">
-													<option value="${t.teacherId }">${t.teacherName }</option>
-												</c:forEach>
+										<label for="billing-first-name">教师</label> <select
+											id="teacherId" class="form-control">
+											<option value="">请选教师</option>
+											<c:forEach items="${teachers }" var="t">
+												<option value="${t.teacherId }">${t.teacherName }</option>
+											</c:forEach>
 										</select>
 									</div>
 								</div>

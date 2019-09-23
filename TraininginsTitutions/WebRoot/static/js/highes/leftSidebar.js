@@ -152,6 +152,9 @@ $(function() {
 	StduentRegister = function() {
 		location.href = "StduentRegister.html";
 	};
+	RecruitStudents = function() {
+		location.href = "RecruitStudents.html";
+	};
 
 	/**
 	 * 切换账户
@@ -215,7 +218,10 @@ $(function() {
 		location.href = "studentLeave.html";
 	}
 	
+	/**
+	 * 学员结业
+	 */
 	studentGraduation = function(){
-		
+		location.href = "studentGraduation.html";
 	}
 });

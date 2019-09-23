@@ -211,8 +211,7 @@ public class AdminTeacherController {
 	@ResponseBody
 	public Map<String, String> authorization(Integer teacherId, Integer schoolId, Integer state) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
-		TeacherDiction teacherDiction = teacherDictionService.findTeacherDictionBySchoolIdAndTeacherId(schoolId,
-				teacherId);
+		TeacherDiction teacherDiction = teacherDictionService.findTeacherDictionBySchoolIdAndTeacherId(schoolId,teacherId);
 		if (teacherDiction != null) {
 			jsonMap.put("state", "2");
 			return jsonMap;

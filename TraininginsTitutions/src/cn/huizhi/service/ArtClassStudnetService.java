@@ -1,6 +1,8 @@
 package cn.huizhi.service;
 
 import java.util.List;
+import java.util.Map;
+
 
 import cn.huizhi.pojo.ArtClassStudnet;
 
@@ -34,4 +36,11 @@ public interface ArtClassStudnetService {
 	 * @return
 	 */
 	public Integer updateArtStudentState(ArtClassStudnet art);
+	
+	/**
+	 * 批量结业
+	 * @param map
+	 * @return
+	 */
+	public Integer updateArtStudentGradution( List list);
 }

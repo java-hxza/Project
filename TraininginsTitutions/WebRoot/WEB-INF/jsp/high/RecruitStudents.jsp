@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set scope="request" value="${pageContext.request.contextPath }"
 	var="Path" />
 <!DOCTYPE html>
@@ -21,8 +21,6 @@
 	rel="stylesheet" type="text/css" />
 <link href="${Path }/static/css/vendor/responsive.bootstrap4.css"
 	rel="stylesheet" type="text/css" />
-<link href="${Path }/static/css/style.css" rel="stylesheet"
-	type="text/css" />
 <!-- third party css end -->
 
 <!-- App css -->
@@ -41,14 +39,9 @@
 		<!-- ========== Left Sidebar Start ========== -->
 		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
 		<!-- Left Sidebar End -->
-
-		<!-- ============================================================== -->
-		<!-- Start Page Content here -->
-		<!-- ============================================================== -->
-
 		<div class="content-page">
 			<div class="content">
-
+				<!-- Topbar Start -->
 				<div class="navbar-custom">
 					<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
@@ -78,6 +71,7 @@
 									class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
 								</a>
 
+
 								<!-- item-->
 								<a href="welCome.html" class="dropdown-item notify-item"> <i
 									class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
@@ -106,154 +100,134 @@
 
 				<!-- Start Content-->
 				<div class="container-fluid">
-
 					<!-- start page title -->
 					<div class="row">
-						<div class="col-sm-12">
-							<div class="text-center">
-								<h3 class="">课程信息</h3>
-								<p class="text-muted mt-3">请选择要查看的班级学生</p>
+						<div class="col-12">
+							<div class="page-title-box">
+								<div class="page-title-right">
+									<ol class="breadcrumb m-0">
+										<li class="breadcrumb-item"><a
+											href="javascript: void(0);">培训收费</a></li>
+										<li class="breadcrumb-item"><a
+											href="javascript: void(0);">招生报表</a></li>
+									</ol>
+								</div>
+								<h4 class="page-title">招生报表</h4>
 							</div>
 						</div>
-
-						<!-- end col -->
 					</div>
-
 					<!-- end page title -->
 
-					<div class="row">
-						<div class="col-12">
-							<div class="card">
-								<div class="card-body">
-									<div class="row mb-2">
-										<div class="col-sm-4">
-											<a href="javascript:void(0);" onclick="createChildrenClass()"
-												class="btn btn-danger mb-2"><i
-												class="mdi mdi-plus-circle mr-2"></i> 添加班级</a>
-										</div>
-										<div class="col-sm-8">
-											<div class="text-sm-right">
-												<button type="button" class="btn btn-success mb-2 mr-1">
-													<i class="mdi mdi-settings"></i>
-												</button>
-												<button type="button" class="btn btn-light mb-2 mr-1"
-													onclick="createChildrenStudent()">添加学生</button>
-											</div>
-										</div>
-										<!-- end col-->
-									</div>
+					<div class="col-12">
+						<div class="card">
+							<h3 style="text-align:center">招生报表</h3>
+							<div class="card-body ">
+								<div class="row">
+									<button type="button" id="btn2" class="btn btn-danger mb-2"
+										onclick="Printing()">打印</button>
 
-									<div class="table-responsive">
-										<table
-											class="table table-centered table-striped dt-responsive nowrap w-100"
-											id="products-datatable">
-											<thead>
-												<tr>
-													<th style="width: 20px;">
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="customCheck1"> <label
-																class="custom-control-label" for="customCheck1">&nbsp;</label>
-														</div>
-													</th>
-													<th>班级班号</th>
-													<th>班级名称</th>
-													<th>班级类型</th>
-													<th>任课老师</th>
-													<th>班级所属学校</th>
-													<th>班级所属级别</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${classList}" var="childrenClass">
-													<tr class="classId">
-														<td>
-															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input"
-																	id="customCheck2"> <label
-																	class="custom-control-label " for="customCheck2">&nbsp;</label>
-															</div>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold"
-															name="${childrenClass.classId }">${childrenClass.classNumber }</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${childrenClass.className}</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${childrenClass.departmentOfPediatrics.dpTypeName}</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${childrenClass.headmaster}</a>
-														</td>
-														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${childrenClass.school.schoolName}</a>
-														</td>
-														<c:choose>
-															<c:when test="${childrenClass.classLevel == 1}">
-																<td class="table-user"><a
-																	href="javascript:void(0);"
-																	class="text-body font-weight-semibold"
-																	name="${childrenClass.classLevel}">少儿</a></td>
-															</c:when>
-															<c:when test="${childrenClass.classLevel == 2}">
-																<td class="table-user"><a
-																	href="javascript:void(0);"
-																	class="text-body font-weight-semibold"
-																	name="${childrenClass.classLevel}">高中</a></td>
-															</c:when>
-															<c:otherwise>
-																<td class="table-user"><a
-																	href="javascript:void(0);"
-																	class="text-body font-weight-semibold"
-																	name="${childrenClass.classLevel}">艺考</a></td>
-															</c:otherwise>
-														</c:choose>
-
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
+									<div class="col-md-4" style="margin:auto;">
+										<label>学员姓名</label>
+										<div class="input-group">
+											<input class="form-control studentName" type="text"
+												id="billing-first-name" placeholder="可填可不填" />
+										</div>
 									</div>
+									<button type="button" id="btn2" class="btn btn-danger mb-2"
+										onclick="Exports()">导出Excel</button>
 								</div>
-								<!-- end card-body-->
+								<div class="row">
+									<div class="col-md-3">
+										<label>班级选择</label>
+										<div class="input-group">
+											<select class="form-control classes" id="example-select">
+												<option value="0">---请选择---</option>
+												<c:forEach items="${classes }" var="c">
+													<option value="${c.classId }">${c.className}</option>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<label for="example-select">老师选择</label>
+										<div class="input-group">
+											<select class="form-control teacher" id="example-select">
+												<c:forEach items="${teacher }" var="t">
+													<option value="${t.teacherId }">${t.teacherName}</option>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<label>订单日期</label>
+										<div class="input-group">
+											<input class="form-control Times" id="example-date"
+												type="date" name="date">
+											<button class="btn btn-dark  " type="button" onclick=Hour()>查找</button>
+										</div>
+									</div>
+
+								</div>
+								<div class="dayin">
+									<!--startprint-->
+									<table class="table dt-responsive nowrap" id="basic-datatable"
+										width="100%" border="1px">
+										<thead class="thead-light">
+											<tr>
+												<th>序号</th>
+												<th>校区信息</th>
+												<th>班级名称</th>
+												<th>学员名称</th>
+												<th>订单时间</th>
+												<th>单号</th>
+												<th>招生老师</th>
+											</tr>
+										</thead>
+										<tbody class="adds">
+										</tbody>
+									</table>
+									<!--endprint-->
+									<iframe id="iframe1" style="display: none"></iframe>
+								</div>
+
 							</div>
-							<!-- end card-->
+							<!-- end card-body-->
 						</div>
-						<!-- end col -->
+						<!-- end card-->
 					</div>
-					<!-- end row -->
-
 				</div>
-				<!-- container -->
-
+				<!-- end col -->
 			</div>
-			<!-- content -->
-
-			<!-- Footer Start -->
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-6">2018 - 2019 Â© Hyper - Coderthemes.com
-						</div>
-						<div class="col-md-6">
-							<div class="text-md-right footer-links d-none d-md-block">
-								<a href="javascript: void(0);">About</a> <a
-									href="javascript: void(0);">Support</a> <a
-									href="javascript: void(0);">Contact Us</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
-			<!-- end Footer -->
+			<!-- end row -->
 
 		</div>
+		<!-- container -->
 
-		<!-- ============================================================== -->
-		<!-- End Page content -->
-		<!-- ============================================================== -->
+	</div>
+	<!-- content -->
+
+	<!-- Footer Start -->
+	<footer class="footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-6">2018 - 2019 Â© Hyper - Coderthemes.com</div>
+				<div class="col-md-6">
+					<div class="text-md-right footer-links d-none d-md-block">
+						<a href="javascript: void(0);">About</a> <a
+							href="javascript: void(0);">Support</a> <a
+							href="javascript: void(0);">Contact Us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- end Footer -->
+
+	</div>
+
+	<!-- ============================================================== -->
+	<!-- End Page content -->
+	<!-- ============================================================== -->
 
 
 	</div>
@@ -312,6 +286,7 @@
 				</div>
 
 			</div>
+
 
 			<!-- Timeline -->
 			<hr class="mt-0" />
@@ -394,15 +369,30 @@
 	<div class="rightbar-overlay"></div>
 	<!-- /Right-bar -->
 
+
 	<!-- App js -->
+
+	<!-- third party js -->
 	<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-	<script src="${Path }/static/js/children/childrenIndex.js"></script>
-	<script src="${Path }/static/js/root/curriculum/classInfo.js"></script>
-
+	<script type="text/javascript"
+		src="${Path }/static/js/highes/leftSidebar.js"></script>
+	<script type="text/javascript"
+		src="${Path }/static/js/highes/RecruitStudents.js"></script>
 	<!-- third party js ends -->
-
-	<!-- demo app -->
-	<!-- end demo js-->
-
+	<script type="text/javascript">
+		$(document).ready(function() {
+			Exports = function() {
+				if ($(".delSt").val() == undefined) {
+					alert("没有可以打印的数据！")
+					return false;
+				}
+				excel = new ExcelGen({
+					"src_id" : "basic-datatable",
+					"show_header" : true
+				});
+				excel.generate("招生统计报表");
+			};
+		});
+	</script>
 </body>
 </html>

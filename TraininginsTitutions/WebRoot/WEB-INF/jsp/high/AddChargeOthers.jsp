@@ -68,10 +68,6 @@
 									<h6 class="text-overflow m-0">欢迎 !</h6>
 								</div>
 
-								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-account-circle mr-1"></i> <span>我的账户</span>
-								</a>
 
 								<!-- item-->
 								<a href="javascript:void(0);" class="dropdown-item notify-item"
@@ -80,8 +76,8 @@
 								</a>
 
 								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<i class="mdi mdi-lifebuoy mr-1"></i> <span>设置 </span>
+								<a href="welCome.html" class="dropdown-item notify-item"> <i
+									class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
 								</a>
 
 
@@ -173,8 +169,7 @@
 															<label for="example-select">收款项目</label> <select
 																class="form-control feecateId" id="example-select">
 																<c:forEach items="${feeCategory }" var="f">
-																	<option value="${f.chargeTypeId }"
-																		>${f.chargeTypeName}</option>
+																	<option value="${f.chargeTypeId }">${f.chargeTypeName}</option>
 																</c:forEach>
 															</select>
 														</div>
