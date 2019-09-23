@@ -1,3 +1,4 @@
+<%@page import="cn.huizhi.pojo.FeeCategory"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -33,7 +34,7 @@
 	<div class="wrapper">
 
 		<!-- ========== Left Sidebar Start ========== -->
-		<%@include file="/WEB-INF/jsp/admin/bar/leftSidebar.jsp"%>
+		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
 		<div class="content-page">
 			<div class="content">
 				<div class="container-fluid">
@@ -50,29 +51,25 @@
 									</span> <span class="account-position">管理员</span>
 								</span>
 							</a>
-							
 								<div
-											class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-											<!-- item-->
-											<div class=" dropdown-header noti-title">
-												<h6 class="text-overflow m-0">欢迎 !</h6>
-											</div>
+									class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+									<!-- item-->
+									<div class=" dropdown-header noti-title">
+										<h6 class="text-overflow m-0">欢迎 !</h6>
+									</div>
 
 
-											<!-- item-->
-											<a href="javascript:void(0);"
-												class="dropdown-item notify-item"
-												onclick="switchingAccounts()"> <i
-												class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
-											</a>
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item"
+										onclick="switchingAccounts()"> <i
+										class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
+									</a>
 
-											<!-- item-->
-											<a href="welCome.html" class="dropdown-item notify-item">
-												<i class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
-											</a>
-
-
-										</div></li>
+									<!-- item-->
+									<a href="welCome.html" class="dropdown-item notify-item"> <i
+										class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
+									</a>
+								</div></li>
 						</ul>
 						<button class="button-menu-mobile open-left disable-btn">
 							<i class="mdi mdi-menu"></i>
@@ -211,17 +208,8 @@
 											<td>接待人员</td>
 											<td>高中学校</td>
 											<td>备注</td>
-											<%!
-												int num = 0;
-												int index = 0;
-												int i = 0;
-											%>
-
 											<c:forEach items="${feeCategories }" var="fee">
-												<%
-													num = num + 1;
-												%>
-												<td>${fee.chargeTypeName}</td>
+												<td name="${fee.chargeTypeId }" class="feecategorys">${fee.chargeTypeName}</td>
 											</c:forEach>
 											<td>实付金额</td>
 											<td>应收金额</td>
@@ -242,22 +230,19 @@
 												<td class="table-user">${art.parentName}</td>
 												<td class="table-user">${art.registrationConsultant }</td>
 												<td class="table-user">${art.school}</td>
-												<td class="table-user">${schoolName }</td>
-												<td class="table-user">${art.remarks }</td>
-												<c:forEach items="${feeCategories }" var="fee"
-													begin="<%=index %>" end="<%=index %>">
-													<c:forEach items="${feeIdArray }" var="feeId">
-														<c:forEach items="${feeId }" var="fId">
-															<c:if test="${fee.chargeTypeId == fId}">
-																<c:forEach items="${feeMoneyArray }" var="moneyArray">
-																	<c:forEach items="${moneyArray }" var="m">
-																		<td class="table-user">${m }</td>
-																	</c:forEach>
-																</c:forEach>
-															</c:if>
+												<td class="table-user" name="${art.order.feecateId }" Money="${art.order.feecateMoney }">${art.remarks }</td>
+												<%-- <c:forEach items="${feeCategories }" var="fee">
+													<c:forEach items="${feeMoneyArray }" var="moneyArray">
+														<c:forEach items="${moneyArray }" var="m"
+															begin="<%=index %>" end="<%=index %>">
+															
 														</c:forEach>
 													</c:forEach>
+
+													<%
+														index = index + 1;
 												</c:forEach>
+													%> --%>
 												<td class="table-user">${art.order.dpMoney }</td>
 												<c:set var="dpMoneySum"
 													value="${art.order.dpMoney + dpMoneySum}" />
@@ -265,21 +250,9 @@
 													value="${art.order.dpMoney+art.order.discount + sumMoney}" />
 												<td class="table-user">${art.order.dpMoney+art.order.discount }</td>
 											</tr>
-											<%
-												index = index + 1;
-											%>
+
 										</c:forEach>
 
-									</tbody>
-									<tbody id="expen" style='text-align: center;'>
-										<tr>
-											<td colspan='<%=num / 2 + 8%>'>实收总额</td>
-											<td colspan='<%=num / 2 + 9%>'>应收总额</td>
-										</tr>
-										<tr>
-											<td colspan='<%=num / 2 + 8%>'>${ dpMoneySum}</td>
-											<td colspan='<%=num / 2 + 9%>'>${sumMoney }</td>
-										</tr>
 									</tbody>
 								</table>
 								<!--endprint-->
@@ -296,5 +269,5 @@
 							src="${Path }/static/js/admin/adminIndex.js"></script>
 						<script src="${Path }/static/js/admin/leftSidebar.js"></script>
 						<script
-							src="${Path }/static/js/admin/highStudentFee/adminArtStudentFeeInfo.js"></script>
+							src="${Path }/static/js/root/highStudentFee/adminArtStudentFeeInfo.js"></script>
 </html>
