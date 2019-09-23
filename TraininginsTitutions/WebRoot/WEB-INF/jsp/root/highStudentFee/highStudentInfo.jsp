@@ -208,15 +208,8 @@
 											<td>接待人员</td>
 											<td>高中学校</td>
 											<td>备注</td>
-											<%!int num = 0;
-	int index = 0;
-	int i = 0;%>
-
 											<c:forEach items="${feeCategories }" var="fee">
-												<%
-													num = num + 1;
-												%>
-												<td>${fee.chargeTypeName}</td>
+												<td name="${fee.chargeTypeId }" class="feecategorys">${fee.chargeTypeName}</td>
 											</c:forEach>
 											<td>实付金额</td>
 											<td>应收金额</td>
@@ -237,31 +230,7 @@
 												<td class="table-user">${art.parentName}</td>
 												<td class="table-user">${art.registrationConsultant }</td>
 												<td class="table-user">${art.school}</td>
-												<td class="table-user">${art.remarks }</td>
-
-												<%
-													List<FeeCategory> feeCategories = (List<FeeCategory>) session.getAttribute("feeCategories");
-
-														List<String[]> feeMoneyArray = (List) session.getAttribute("feeMoneyArray");
-
-
-														//for (int i = 0; i < num; i++) {
-
-														for (int j = i; j < feeMoneyArray.size(); j++) {
-
-															for (int k = 0; k < feeMoneyArray.get(j).length; k++) {
-												%>
-
-												<td class="table-user"><%=feeMoneyArray.get(j)[k]%></td>
-
-
-												<%
-													break;
-															}
-														}
-														i = i + 1;
-														//}
-												%>
+												<td class="table-user" name="${art.order.feecateId }" Money="${art.order.feecateMoney }">${art.remarks }</td>
 												<%-- <c:forEach items="${feeCategories }" var="fee">
 													<c:forEach items="${feeMoneyArray }" var="moneyArray">
 														<c:forEach items="${moneyArray }" var="m"
@@ -284,16 +253,6 @@
 
 										</c:forEach>
 
-									</tbody>
-									<tbody id="expen" style='text-align: center;'>
-										<tr>
-											<td colspan='<%=num / 2 + 8%>'>实收总额</td>
-											<td colspan='<%=num / 2 + 9%>'>应收总额</td>
-										</tr>
-										<tr>
-											<td colspan='<%=num / 2 + 8%>'>${ dpMoneySum}</td>
-											<td colspan='<%=num / 2 + 9%>'>${sumMoney }</td>
-										</tr>
 									</tbody>
 								</table>
 								<!--endprint-->
