@@ -23,14 +23,13 @@ $(function() {
 	for (var i = 0; i < $(".userId").length; i++) {
 		for (var j = 0; j < $(".feecategorys").length; j++) {
 			if((j + 1) == num.split("-")[number].split(",")[j]) {
+				$(".userId").eq(i).find("td").eq(8 + j).after("<td>0</td>");
+			}else {
 				if($(".userId").eq(i).find("td").eq(8).attr("Money").split(",")[j] == undefined) {
 					$(".userId").eq(i).find("td").eq(8 + j).after("<td>0</td>");
 				}else {
 					$(".userId").eq(i).find("td").eq(8 + j).after("<td>" + $(".userId").eq(i).find("td").eq(8).attr("Money").split(",")[j] + "</td>");
 				}
-				
-			}else {
-				$(".userId").eq(i).find("td").eq(8 + j).after("<td>0</td>");
 			}
 		}
 		if((j + 1) == $(".feecategorys").length) {

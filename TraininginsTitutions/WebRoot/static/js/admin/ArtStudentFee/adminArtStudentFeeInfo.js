@@ -5,6 +5,37 @@ $(function() {
 		location.href = "artStudentFooInfo.html?schoolId=" + schoolId + "&schoolName=" + schoolName;
 	});
 
+	var num = "";
+	for (var i = 0; i < $(".userId").length; i++) {
+		for (var j = 0; j < $(".userId").eq(i).find("td").eq(8).attr("name").split(",").length; j++) {
+			for (var k = 0; k < $(".feecategorys").length; k++) {
+				if ($(".userId").eq(i).find("td").eq(8).attr("name").split(",")[j] == $(".feecategorys").eq(k).attr("name")) {
+					num = num + "," + (k + 1);
+				}
+				if ((k + 1) == $(".feecategorys").length && (j + 1) == $(".userId").eq(i).find("td").eq(8).attr("name").split(",").length) {
+					num = num + "-";
+				}
+			}
+		}
+	}
+	num = num.substring(1, num.length - 1);
+	var number = 0;
+	for (var i = 0; i < $(".userId").length; i++) {
+		for (var j = 0; j < $(".feecategorys").length; j++) {
+			if ((j + 1) == num.split("-")[number].split(",")[j]) {
+				$(".userId").eq(i).find("td").eq(8 + j).after("<td>0</td>");
+			} else {
+				if ($(".userId").eq(i).find("td").eq(8).attr("Money").split(",")[j] == undefined) {
+					$(".userId").eq(i).find("td").eq(8 + j).after("<td>0</td>");
+				} else {
+					$(".userId").eq(i).find("td").eq(8 + j).after("<td>" + $(".userId").eq(i).find("td").eq(8).attr("Money").split(",")[j] + "</td>");
+				}
+			}
+		}
+		if ((j + 1) == $(".feecategorys").length) {
+			number = number + 1;
+		}
+	}
 
 	queryArtStudentFee = function() {
 		var endTime = $("#endTime").val();

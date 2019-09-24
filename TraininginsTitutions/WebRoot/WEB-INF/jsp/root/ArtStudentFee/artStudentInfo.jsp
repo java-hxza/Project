@@ -258,7 +258,8 @@
 													</c:forEach>
 												</c:forEach>
 												<td class="table-user">${art.remarks }</td>
-												<c:forEach items="${feeCategories }" var="fee" begin="<%=index %>"
+												<td class="table-user" name="${art.order.feecateId }" Money="${art.order.feecateMoney }">${art.remarks }</td>
+											<%-- 	<c:forEach items="${feeCategories }" var="fee" begin="<%=index %>"
 															end="<%=index %>">
 													<c:forEach items="${feeIdArray }"  var="feeId">
 														<c:forEach items="${feeId }" var="fId" >
@@ -271,7 +272,7 @@
 															</c:if>
 														</c:forEach>
 													</c:forEach>
-												</c:forEach>
+												</c:forEach> --%>
 												<td class="table-user">${art.order.dpMoney }</td>
 												<c:set var="dpMoneySum"
 													value="${art.order.dpMoney + dpMoneySum}" />

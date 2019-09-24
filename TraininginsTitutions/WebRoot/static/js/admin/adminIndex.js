@@ -32,7 +32,6 @@ $(function(){
 		var endTime = $("#endTime").val();
 		var startTime = $("#startTime").val();
 		
-		
 		location.href = "querySchoolOrderByTime.html?endTime="+endTime+"&startTime="+startTime;
 		
 	}

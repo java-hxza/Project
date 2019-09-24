@@ -34,7 +34,7 @@
 	<div class="wrapper">
 
 		<!-- ========== Left Sidebar Start ========== -->
-		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
+		<%@include file="/WEB-INF/jsp/admin/bar/leftSidebar.jsp"%>
 		<div class="content-page">
 			<div class="content">
 				<div class="container-fluid">
@@ -230,7 +230,8 @@
 												<td class="table-user">${art.parentName}</td>
 												<td class="table-user">${art.registrationConsultant }</td>
 												<td class="table-user">${art.school}</td>
-												<td class="table-user" name="${art.order.feecateId }" Money="${art.order.feecateMoney }">${art.remarks }</td>
+												<td class="table-user" name="${art.order.feecateId }"
+													Money="${art.order.feecateMoney }">${art.remarks }</td>
 												<%-- <c:forEach items="${feeCategories }" var="fee">
 													<c:forEach items="${feeMoneyArray }" var="moneyArray">
 														<c:forEach items="${moneyArray }" var="m"
