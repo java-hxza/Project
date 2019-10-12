@@ -225,6 +225,13 @@
 												</div>
 												<div class="col-md-6">
 													<div class="form-group mb-3">
+														<label for="example-number">手续费</label> <input
+															class="form-control serviceCharge" id="example-number"
+															type="number" name="number">
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group mb-3">
 														<label for="example-select">积分</label> <input
 															class="form-control integral" id="example-number"
 															type="number" name="number">

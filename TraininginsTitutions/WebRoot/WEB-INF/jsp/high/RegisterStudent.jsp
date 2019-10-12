@@ -251,10 +251,9 @@
 																	<label for="billing-zip-postal">班级类别</label> <select
 																		class="form-control classType">
 																		<option value="0">---请选择---</option>
-																		<option value="1">课时班</option>
-																		<option value="2">VIP课时班</option>
-																		<option value="3">速成班</option>
-																		<option value="4">VIP速成班</option>
+																		<c:forEach items="${classType }" var="c">
+																			<option value="${c.classTypeId }" name="${c.classTypeTime }">${c.classTypeName }</option>
+																		</c:forEach>
 																	</select>
 																</div>
 															</div>
@@ -334,6 +333,15 @@
 																		data-reverse="true" value="0">
 																</div>
 															</div>
+															<div class="col-md-6 numbers">
+																<div class="form-group">
+																	<label for="billing-last-name">上课次数</label> <input
+																		type="text" class="form-control numbers2"
+																		data-toggle="input-mask"
+																		data-mask-format="00000000000000000"
+																		data-reverse="true">
+																</div>
+															</div>
 															<div class="col-md-6">
 																<div class="form-group mb-3">
 																	<label for="example-select">核算项目</label> <select
@@ -389,6 +397,13 @@
 																<div class="form-group mb-3">
 																	<label for="example-number">实收金额</label> <input
 																		class="form-control dpMoneyActivity4"
+																		id="example-number" type="number" name="number">
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group mb-3">
+																	<label for="example-number">手续费</label> <input
+																		class="form-control serviceCharges"
 																		id="example-number" type="number" name="number">
 																</div>
 															</div>
@@ -458,6 +473,15 @@
 																	<label for="example-select">课程名称</label> <input
 																		class="form-control departmentofpediatricsIds2"
 																		type="text" id="billing-last-name" disabled />
+																</div>
+															</div>
+															<div class="col-md-6 numbers4">
+																<div class="form-group">
+																	<label for="billing-last-name">上课次数</label> <input
+																		type="text" class="form-control numbers3"
+																		data-toggle="input-mask"
+																		data-mask-format="00000000000000000"
+																		data-reverse="true">
 																</div>
 															</div>
 															<div class="col-md-6">
@@ -547,6 +571,13 @@
 																<div class="form-group mb-3">
 																	<label for="example-number">实收金额</label> <input
 																		class="form-control dpMoneyActivity"
+																		id="example-number" type="number" name="number">
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group mb-3">
+																	<label for="example-number">手续费</label> <input
+																		class="form-control serviceCharge"
 																		id="example-number" type="number" name="number">
 																</div>
 															</div>

@@ -71,7 +71,7 @@
 									class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
 								</a>
 
-							
+
 								<!-- item-->
 								<a href="welCome.html" class="dropdown-item notify-item"> <i
 									class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
@@ -131,12 +131,11 @@
 														<div class="col-sm-4">
 															<a href="${Path }/ChargeHours.html"
 																class="btn btn-danger mb-2"><i
-																class="mdi mdi-plus-circle mr-2"></i> 添加</a>
-															<!-- <a
+																class="mdi mdi-plus-circle mr-2"></i> 添加</a> <a
 																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="updateOrder()"><i
-																class="mdi mdi-plus-circle mr-2"></i> 修改</a> -->
-															<a href="javascript:void(0);"
+																class="mdi mdi-plus-circle mr-2"></i> 修改</a> <a
+																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="delOrder()"><i
 																class="mdi mdi-plus-circle mr-2"></i> 删除</a>
 															<button type="button" id="btn2"
@@ -299,6 +298,7 @@
 																		</td>
 																		<td class="discounts">${o.discount }</td>
 																		<td style="display: none;">${o.student.studentBirth }</td>
+																		<td style="display: none;">${o.activityId }</td>
 																	</tr>
 																</c:forEach>
 															</tbody>
@@ -333,7 +333,7 @@
 													</div>
 													<div class="col-md-6">
 														<div class="form-group mb-3">
-															<label for="example-number">收费金额</label> <input
+															<label for="example-number">应收金额</label> <input
 																class="form-control money" id="example-number"
 																type="number" name="number">
 														</div>
@@ -402,6 +402,27 @@
 																data-mask-format="00000000000000000" data-reverse="true">
 														</div>
 													</div>
+													<div class="col-md-6 feecateId4s">
+														<div class="form-group mb-3">
+															<label for="example-select">活动名称</label> <select
+																class="form-control feecateId4 " id="example-select">
+																<option value="0">---请选择---</option>
+																<c:forEach items="${activity }" var="a">
+																	<option value="${a.activityId }"
+																		activityMoney="${a.activityMoney }"
+																		discount="${a.discount }">${a.activityName }
+																	</option>
+																</c:forEach>
+															</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group mb-3">
+															<label for="example-number">实收金额</label> <input
+																class="form-control dpMoneyActivity4"
+																id="example-number" type="number" name="number">
+														</div>
+													</div>
 													<div class="col-md-6">
 														<div class="form-group mb-3">
 															<label for="example-select">积分</label> <input
@@ -414,17 +435,6 @@
 															<label for="billing-last-name">备注信息</label> <input
 																class="form-control remarks" type="text"
 																id="billing-last-name" />
-														</div>
-													</div>
-													<div class="col-md-12">
-														<div class="form-group">
-															<select class="form-control teacherId"
-																style="text-align: center; text-align-last: center;"
-																id="example-select">
-																<c:forEach items="${teacher }" var="t">
-																	<option value="${t.teacherId }">${t.teacherName}</option>
-																</c:forEach>
-															</select>
 														</div>
 													</div>
 													<div class="col-md-12">

@@ -16,16 +16,17 @@ public class ChildrenesClassStudnet {
 	private String teacherName;
 	private Integer thId;
 	private String remarks;
-	
+
 	private Student student;
-	
+	private String schoolTime;
 
 	public ChildrenesClassStudnet() {
 		super();
 	}
 
 	public ChildrenesClassStudnet(Integer classesStudentId, String studentName, String headmaster, Date enrollmentTime,
-			Integer classId, Integer studentId, String state, Student student) {
+			Integer classId, Integer studentId, String state, Date startTime, Date endTime, String teacherName,
+			Integer thId, String remarks, Student student, String schoolTime) {
 		super();
 		this.classesStudentId = classesStudentId;
 		this.studentName = studentName;
@@ -34,7 +35,13 @@ public class ChildrenesClassStudnet {
 		this.classId = classId;
 		this.studentId = studentId;
 		this.state = state;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.teacherName = teacherName;
+		this.thId = thId;
+		this.remarks = remarks;
 		this.student = student;
+		this.schoolTime = schoolTime;
 	}
 
 	public String getTeacherName() {
@@ -139,6 +146,14 @@ public class ChildrenesClassStudnet {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public String getSchoolTime() {
+		return schoolTime;
+	}
+
+	public void setSchoolTime(String schoolTime) {
+		this.schoolTime = schoolTime;
 	}
 
 }

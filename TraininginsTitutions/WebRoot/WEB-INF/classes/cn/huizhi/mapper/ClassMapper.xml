@@ -30,7 +30,9 @@
 		dp.dpId as dp_dpId
 	</sql>
 
-	<select id="selectChildrenescClasses" resultMap="selectChildrenescClassesMap" parameterType="java.lang.String">
+	<select id="selectChildrenescClasses"
+		resultMap="selectChildrenescClassesMap"
+		parameterType="java.lang.String">
 		select
 		<include refid="selectChildrenescClassesCol" />
 		from class cc
@@ -43,7 +45,7 @@
 			</if>
 		</where>
 	</select>
-	
+
 	<resultMap id="selectChildrenescClassesMap" type="Class">
 		<id column="cc_classId" property="classId" />
 		<result column="cc_classNumber" property="classNumber" />
@@ -71,36 +73,45 @@
 		insert into
 		traininginstitutions.class ( classNumber, className, dpId,
 		schoolId,classTypeId, headmaster, teacherId, classLevel,classType)
-		values ( #{classNumber},#{className}, #{dpId}, #{schoolId}, #{classTypeId},
-		#{headmaster}, #{teacherId}, #{classLevel} ,#{classType})
+		values ( #{classNumber},#{className}, #{dpId}, #{schoolId},
+		#{classTypeId},
+		#{headmaster}, #{teacherId}, #{classLevel}
+		,#{classType})
 	</insert>
-	
-	
-	
-	
-	<select id="selectClassListByTeacherId" resultMap="selectChildrenescClassesMap" parameterType="java.lang.Integer">
-		select <include refid="selectChildrenescClassesCol"/>
+
+
+
+
+	<select id="selectClassListByTeacherId"
+		resultMap="selectChildrenescClassesMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="selectChildrenescClassesCol" />
 		from traininginstitutions.class cc
-		join school s on cc.schoolId = s.schoolId
+		join school s on cc.schoolId =
+		s.schoolId
 		join departmentofpediatrics dp on cc.classTypeId = dp.dpId
 		<where>
 			<if test="teacherId !=null and teacherId !=''">
-				cc.teacherId =#{teacherId} 
+				cc.teacherId =#{teacherId}
 			</if>
-		</where> 
+		</where>
 	</select>
-	
+
 
 	<select id="selectClass" resultMap="selectClasses"
 		parameterType="java.lang.Integer">
 		SELECT
 		c.classId cd,c.classNumber,c.className,c.schoolId
-		cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,d.dpId,d.dpTypeName,s.schoolName ssi
+		cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,d.dpId,d.dpTypeName,s.schoolName
+		ssi
 		FROM class c
 		JOIN departmentofpediatrics d ON c.dpId=d.dpId
-		JOIN school s ON c.schoolId=s.schoolId
-		WHERE
-		c.schoolId=#{0} AND d.schoolId=#{0} AND c.classType=#{1}
+		JOIN
+		school s ON c.schoolId=s.schoolId
+		JOIN classType ct ON
+		c.classTypeId=ct.classTypeId
+		WHERE c.schoolId=#{0} AND ct.classTypeTime=#{1}
 		ORDER BY cd
 	</select>
 
@@ -118,21 +129,23 @@
 			<id column="d.dpId" property="dpId" javaType="java.lang.Integer" />
 			<result column="d.dpTypeName" property="dpTypeName" />
 		</collection>
-		<collection property="school"
-			javaType="School">
+		<collection property="school" javaType="School">
 			<result column="ssi" property="schoolName" />
 		</collection>
 	</resultMap>
 
 	<select id="selectClass2" resultMap="selectClass2s">
 		SELECT
-		c.classId cd,c.classNumber,c.className,c.schoolId
-		cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,s.schoolName ssi,d.dpTypeName
+		c.classId
+		cd,c.classNumber,c.className,c.schoolId
+		cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,s.schoolName
+		ssi,d.dpTypeName
 		FROM class c
 		JOIN school s ON c.schoolId=s.schoolId
 		JOIN departmentofpediatrics d ON c.dpId=d.dpId
-		WHERE
-		c.schoolId=#{0} AND c.classType=#{1}
+		JOIN classType ct ON
+		c.classTypeId=ct.classTypeId
+		WHERE c.schoolId=#{0} AND ct.classTypeTime=#{1}
 		ORDER BY cd
 	</select>
 
@@ -145,8 +158,7 @@
 		<result column="c.headmaster" property="headmaster" />
 		<result column="c.teacherId" property="teacherId" />
 		<result column="c.classLevel" property="classLevel" />
-		<collection property="school"
-			javaType="School">
+		<collection property="school" javaType="School">
 			<result column="ssi" property="schoolName" />
 		</collection>
 		<collection property="departmentOfPediatrics"
@@ -154,12 +166,13 @@
 			<result column="d.dpTypeName" property="dpTypeName" />
 		</collection>
 	</resultMap>
-	
+
 	<select id="selectClassAll" resultMap="selectClassesAll"
 		parameterType="java.lang.Integer">
 		SELECT
 		c.classId cd,c.classNumber,c.className,c.schoolId
-		cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,s.schoolName ssi,d.dpTypeName
+		cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,s.schoolName
+		ssi,d.dpTypeName
 		FROM class c
 		JOIN school s ON c.schoolId=s.schoolId
 		JOIN departmentofpediatrics d ON c.dpId=d.dpId
@@ -177,8 +190,7 @@
 		<result column="c.headmaster" property="headmaster" />
 		<result column="c.teacherId" property="teacherId" />
 		<result column="c.classLevel" property="classLevel" />
-		<collection property="school"
-			javaType="School">
+		<collection property="school" javaType="School">
 			<result column="ssi" property="schoolName" />
 		</collection>
 		<collection property="departmentOfPediatrics"
@@ -197,8 +209,9 @@
 		JOIN departmentofpediatrics d ON c.dpId=d.dpId
 		JOIN
 		school s ON c.schoolId=s.schoolId
-		WHERE c.classTypeId=#{0} AND
-		c.classType=#{1} AND c.schoolId=#{2}
+		JOIN classType ct on c.classTypeId =
+		ct.classTypeId
+		WHERE ct.classTypeId=#{0} AND c.schoolId=#{1}
 	</select>
 
 	<resultMap id="selectVIPClasses" type="Class">
@@ -215,30 +228,30 @@
 			<id column="d.dpId" property="dpId" javaType="java.lang.Integer" />
 			<result column="d.dpTypeName" property="dpTypeName" />
 		</collection>
-		<collection property="school"
-			javaType="School">
+		<collection property="school" javaType="School">
 			<result column="ssi" property="schoolName" />
 		</collection>
 	</resultMap>
-	
+
 	<resultMap type="Class" id="classByClassIdMap">
-		<id column="c.classId" property="classId"/>
-		<result column="c.classNumber" property="classNumber"/>
-		<result column="c.className" property="className"/>
-		<result column="c.dpId" property="dpId"/>
-		<result column="c.dpId" property="dpId"/>
-		<result column="c.headmaster" property="headmaster"/>
-		<result column="c.schoolId" property="schoolId"/>
-		<result column="c.teacherId" property="teacherId"/>
-		<result column="c.classLevel" property="classLevel"/>
-		<result column="c_classTypeId" property="classTypeId"/>
-		<collection property="departmentOfPediatrics" javaType="DepartmentOfPediatrics">
+		<id column="c.classId" property="classId" />
+		<result column="c.classNumber" property="classNumber" />
+		<result column="c.className" property="className" />
+		<result column="c.dpId" property="dpId" />
+		<result column="c.dpId" property="dpId" />
+		<result column="c.headmaster" property="headmaster" />
+		<result column="c.schoolId" property="schoolId" />
+		<result column="c.teacherId" property="teacherId" />
+		<result column="c.classLevel" property="classLevel" />
+		<result column="c_classTypeId" property="classTypeId" />
+		<collection property="departmentOfPediatrics"
+			javaType="DepartmentOfPediatrics">
 			<result column="d.dpTypeName" property="dpTypeName" />
 			<result column="d.dpMoney" property="dpMoney" />
 			<result column="d.dpMoneyVip" property="dpMoneyVip" />
 		</collection>
 	</resultMap>
-	
+
 	<sql id="classByClassIdCol">
 		c.classId,
 		c.classNumber,
@@ -251,8 +264,10 @@
 		c.classTypeId c_classTypeId,
 		d.dpTypeName
 	</sql>
-	<select id="selectClassByClassId" parameterType="java.lang.Integer" resultMap="classByClassIdMap">
-		select <include refid="classByClassIdCol"/>
+	<select id="selectClassByClassId"
+		parameterType="java.lang.Integer" resultMap="classByClassIdMap">
+		select
+		<include refid="classByClassIdCol" />
 		from traininginstitutions.class c,departmentofpediatrics d
 		<where>
 			<if test="classId!=null and classId!=''">
@@ -261,11 +276,12 @@
 		</where>
 	</select>
 	<!-- 清空表数据 -->
-	<update id="delClassTable" >
+	<update id="delClassTable">
 		truncate traininginstitutions.class
 	</update>
 
-	<select id="selectMyClass" parameterType="java.lang.Integer" resultType="Class">
+	<select id="selectMyClass" parameterType="java.lang.Integer"
+		resultType="Class">
 		SELECT * FROM class WHERE schoolId=#{0}
 	</select>
 

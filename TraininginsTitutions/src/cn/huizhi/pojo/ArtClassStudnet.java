@@ -20,7 +20,7 @@ public class ArtClassStudnet {
 	}
 
 	public ArtClassStudnet(Integer classesStudentId, String studentName, String headmaster, Date enrollmentTime,
-			Integer classId, Integer studentId, Integer state) {
+			Integer classId, Integer studentId, Integer state, Date startTime, Date endTime, String remarks) {
 		super();
 		this.classesStudentId = classesStudentId;
 		this.studentName = studentName;
@@ -29,6 +29,9 @@ public class ArtClassStudnet {
 		this.classId = classId;
 		this.studentId = studentId;
 		this.state = state;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.remarks = remarks;
 	}
 
 	public Date getStartTime() {
@@ -110,5 +113,6 @@ public class ArtClassStudnet {
 	public void setState(Integer state) {
 		this.state = state;
 	}
+
 
 }

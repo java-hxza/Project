@@ -55,7 +55,7 @@ public interface ClassService {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<Class> selectClass(Integer schoolId,Integer classType);
+	public List<Class> selectClass(Integer schoolId,Integer classTypeTime);
 	
 	/**
 	 * 查询普通班和vip班
@@ -68,7 +68,7 @@ public interface ClassService {
 	 * 特定条件查询班级
 	 * @return
 	 */
-	public List<Class> selectVIPClass(Integer classTypeId,Integer classType,Integer schoolId);
+	public List<Class> selectVIPClass(Integer classTypeId,Integer schoolId);
 	
 	
 	/**
@@ -84,7 +84,7 @@ public interface ClassService {
 	 * @param classType
 	 * @return
 	 */
-	public List<Class> selectClass2(Integer schoolId,Integer classType);
+	public List<Class> selectClass2(Integer schoolId,Integer classTypeTime);
 	
 	/**
 	 * 查询本校的班级

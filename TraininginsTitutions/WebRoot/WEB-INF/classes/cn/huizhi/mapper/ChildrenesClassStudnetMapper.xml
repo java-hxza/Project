@@ -74,9 +74,9 @@
 		parameterType="ChildrenesClassStudnet">
 		insert into
 		childrenesclassstudnet ( studentName, headmaster, enrollmentTime,
-		classId, studentId, state )
+		classId, studentId, state ,schoolTime)
 		values ( #{studentName}, #{headmaster}, #{enrollmentTime}, #{classId},
-		#{studentId}, #{state})
+		#{studentId}, #{state},#{schoolTime})
 	</insert>
 
 	<insert id="insertChildrenesClassStudnets"

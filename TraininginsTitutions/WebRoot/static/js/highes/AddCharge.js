@@ -160,7 +160,7 @@ $(function() {
 				alert("请填写责任人！");
 				return false;
 			}
-			
+			var serviceCharge = parseFloat($.trim($(".serviceCharge").val()));
 			$.ajax({
 				type : "POST",
 				url : "addChargePeriod.html",
@@ -183,7 +183,8 @@ $(function() {
 					discount : discount,
 					activityId : null,
 					startTimes : startTimes,
-					feecateMoney : feecateMoney
+					feecateMoney : feecateMoney,
+					serviceCharge : serviceCharge
 				},
 				dataType : "json",
 				success : function(data) {

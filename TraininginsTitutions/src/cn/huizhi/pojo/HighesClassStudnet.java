@@ -22,7 +22,8 @@ public class HighesClassStudnet {
 	}
 
 	public HighesClassStudnet(Integer classesStudentId, String studentName, String headmaster, Date enrollmentTime,
-			Integer classId, Integer studentId, Integer state, Student student) {
+			Integer classId, Integer studentId, Integer state, Date startTime, Date endTime, String remarks,
+			Student student) {
 		super();
 		this.classesStudentId = classesStudentId;
 		this.studentName = studentName;
@@ -31,6 +32,9 @@ public class HighesClassStudnet {
 		this.classId = classId;
 		this.studentId = studentId;
 		this.state = state;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.remarks = remarks;
 		this.student = student;
 	}
 
@@ -121,5 +125,6 @@ public class HighesClassStudnet {
 	public void setState(Integer state) {
 		this.state = state;
 	}
+
 
 }

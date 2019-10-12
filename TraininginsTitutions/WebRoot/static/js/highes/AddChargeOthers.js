@@ -33,7 +33,7 @@ $(function() {
 			}
 		});
 	});
-	
+
 	$(".TiJiao").click(function() {
 		var date = $.trim($(".date").val());
 		var dpMoney = $.trim($(".dpMoney").val());
@@ -45,7 +45,7 @@ $(function() {
 		var paymentmethodId = $.trim($(".paymentmethodId").val());
 		var personliable = $.trim($(".personliable").val());
 		var startTimes = " " + Time.getHours() + ":" + Time.getMinutes().toString();
-		if(stuId == "") {
+		if (stuId == "") {
 			alert("请选择学生！");
 			return flase;
 		}
@@ -56,10 +56,11 @@ $(function() {
 			alert("请填写正确的收费金额！");
 			return false;
 		}
-		if(personliable == "") {
+		if (personliable == "") {
 			alert("请填写责任人！");
 			return false;
 		}
+		var serviceCharge = parseFloat($.trim($(".serviceCharge").val()));
 		$.ajax({
 			type : "POST",
 			url : "addChargeOthers.html",
@@ -73,7 +74,8 @@ $(function() {
 				date : date2,
 				classId : classId,
 				personliable : personliable,
-				startTimes : startTimes
+				startTimes : startTimes,
+				serviceCharge : serviceCharge
 			},
 			dataType : "json",
 			success : function(data) {
@@ -91,8 +93,8 @@ $(function() {
 				location.href = "selectOrderOthers.html";
 			}
 		});
-		
+
 	});
-	
-	
+
+
 });
