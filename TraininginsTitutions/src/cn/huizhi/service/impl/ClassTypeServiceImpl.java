@@ -21,4 +21,19 @@ public class ClassTypeServiceImpl implements ClassTypeService {
 		return classTypeMapper.selectClassTypes(schoolId);
 	}
 
+	@Override
+	public Integer addClassTypes(ClassType classType) {
+		return classTypeMapper.addClassTypes(classType);
+	}
+
+	@Override
+	public Integer delClassTypes(Integer classTypeId) {
+		return classTypeMapper.delClassTypes(classTypeId);
+	}
+
+	@Override
+	public Integer updateClassTypes(ClassType classType) {
+		return classTypeMapper.updateClassTypes(classType);
+	}
+
 }

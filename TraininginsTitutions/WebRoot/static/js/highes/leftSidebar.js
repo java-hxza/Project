@@ -155,6 +155,9 @@ $(function() {
 	RecruitStudents = function() {
 		location.href = "RecruitStudents.html";
 	};
+	classTypes = function() {
+		location.href = "selectClassTypes.html";
+	};
 
 	/**
 	 * 切换账户

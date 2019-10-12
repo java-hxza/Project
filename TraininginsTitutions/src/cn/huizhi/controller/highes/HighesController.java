@@ -1878,4 +1878,69 @@ public class HighesController {
 		map.put("order", order);
 		return JSONArray.toJSONString(map);
 	}
+	
+	/**
+	 * 查看本校班级类型
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("selectClassTypes.html")
+	public String selectClassTypes(Model model) {
+		List<ClassType> classType = classTypeService.selectClassTypes((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("classType", classType);
+		model.addAttribute("schoolType", (Integer) session.getAttribute("schoolType"));
+		return "high/ClassType";
+	}
+	
+	/**
+	 * 添加本校班级类型
+	 * @param classType
+	 * @return
+	 */
+	@RequestMapping("addClassTypes.html")
+	@ResponseBody
+	public Object addClassTypes(ClassType classType) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		classType.setSchoolId((Integer) session.getAttribute("schoolId"));
+		if(classTypeService.addClassTypes(classType) == 1) {
+			map.put("add", "1");
+		}else {
+			map.put("add", "0");
+		}
+		return JSONArray.toJSONString(map);
+	}
+	
+	/**
+	 * 修改本校班级类型
+	 * @param classType
+	 * @return
+	 */
+	@RequestMapping("updateClassTypes.html")
+	@ResponseBody
+	public Object updateClassTypes(ClassType classType) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		if(classTypeService.updateClassTypes(classType) == 1) {
+			map.put("update", "1");
+		}else {
+			map.put("update", "0");
+		}
+		return JSONArray.toJSONString(map);
+	}
+	
+	/**
+	 * 删除本校班级类型
+	 * @param classTypeId
+	 * @return
+	 */
+	@RequestMapping("delClassTypes.html")
+	@ResponseBody
+	public Object delClassTypes(Integer classTypeId) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		if(classTypeService.delClassTypes(classTypeId) == 1) {
+			map.put("del", "1");
+		}else {
+			map.put("del", "0");
+		}
+		return JSONArray.toJSONString(map);
+	}
 }

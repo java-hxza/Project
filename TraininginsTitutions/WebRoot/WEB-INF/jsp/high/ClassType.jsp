@@ -21,6 +21,8 @@
 	rel="stylesheet" type="text/css" />
 <link href="${Path }/static/css/vendor/responsive.bootstrap4.css"
 	rel="stylesheet" type="text/css" />
+<link href="${Path }/static/css/style.css" rel="stylesheet"
+	type="text/css" />
 <!-- third party css end -->
 
 <!-- App css -->
@@ -39,66 +41,71 @@
 		<!-- ========== Left Sidebar Start ========== -->
 		<%@include file="/WEB-INF/jsp/leftSidebar/leftSidebar.jsp"%>
 		<!-- Left Sidebar End -->
+
+		<!-- ============================================================== -->
+		<!-- Start Page Content here -->
+		<!-- ============================================================== -->
+
 		<div class="content-page">
 			<div class="content">
-				<!-- Topbar Start -->
-				<div class="navbar-custom">
-					<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
-
-						<li class="dropdown notification-list"><a
-							class="nav-link dropdown-toggle nav-user arrow-none mr-0"
-							data-toggle="dropdown" href="#" role="button"
-							aria-haspopup="false" aria-expanded="false"> <span
-								class="account-user-avatar"> <img
-									src="${Path }/static/images/avatar-1.jpg" alt="user-image"
-									class="rounded-circle">
-							</span> <span> <span class="account-user-name">${user.loginName }
-								</span> <span class="account-position">管理员</span>
-							</span>
-						</a>
-							<div
-								class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-								<!-- item-->
-								<div class=" dropdown-header noti-title">
-									<h6 class="text-overflow m-0">欢迎 !</h6>
-								</div>
-
-
-								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item"
-									onclick="switchingAccounts()"> <i
-									class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
-								</a>
-
-
-								<!-- item-->
-								<a href="welCome.html" class="dropdown-item notify-item"> <i
-									class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
-								</a>
-
-							</div></li>
-
-					</ul>
-					<button class="button-menu-mobile open-left disable-btn">
-						<i class="mdi mdi-menu"></i>
-					</button>
-					<div class="app-search">
-						<form>
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search...">
-								<span class="mdi mdi-magnify"></span>
-								<div class="input-group-append">
-									<button class="btn btn-primary" type="submit">Search</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-				<!-- end Topbar -->
-
-				<!-- Start Content-->
+				!-- Start Content-->
 				<div class="container-fluid">
+					<div class="navbar-custom">
+						<ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+
+							<li class="dropdown notification-list"><a
+								class="nav-link dropdown-toggle nav-user arrow-none mr-0"
+								data-toggle="dropdown" href="#" role="button"
+								aria-haspopup="false" aria-expanded="false"> <span
+									class="account-user-avatar"> <img
+										src="${Path }/static/images/avatar-1.jpg" alt="user-image"
+										class="rounded-circle">
+								</span> <span> <span class="account-user-name">${user.loginName }
+									</span> <span class="account-position">管理员</span>
+								</span>
+							</a>
+								<div
+									class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+									<!-- item-->
+									<div class=" dropdown-header noti-title">
+										<h6 class="text-overflow m-0">欢迎 !</h6>
+									</div>
+
+
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item"
+										onclick="switchingAccounts()"> <i
+										class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
+									</a>
+
+
+									<!-- item-->
+									<a href="welCome.html" class="dropdown-item notify-item"> <i
+										class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
+									</a>
+
+
+								</div></li>
+
+						</ul>
+						<button class="button-menu-mobile open-left disable-btn">
+							<i class="mdi mdi-menu"></i>
+						</button>
+						<div class="app-search">
+							<form>
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Search...">
+									<span class="mdi mdi-magnify"></span>
+									<div class="input-group-append">
+										<button class="btn btn-primary" type="submit">Search</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- end Topbar -->
 					<!-- start page title -->
 					<div class="row">
 						<div class="col-12">
@@ -106,34 +113,41 @@
 								<div class="page-title-right">
 									<ol class="breadcrumb m-0">
 										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">校区信息</a></li>
+											href="javascript: void(0);">Hyper</a></li>
 										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">支出项目</a></li>
+											href="javascript: void(0);">Pages</a></li>
+										<li class="breadcrumb-item active">FAQ</li>
 									</ol>
 								</div>
-								<h4 class="page-title">支出项目</h4>
+								<h4 class="page-title">收入项目</h4>
 							</div>
 						</div>
 					</div>
+					<!-- end Topbar -->
+
 					<!-- end page title -->
+
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-body">
 									<div class="row mb-2">
-										<div class="col-sm-4">
-											<a href="javascript:void(0);" class="btn btn-danger mb-2"
-												onclick="Expenditureitemses2()"><i
+										<div class="col-sm-4 AN">
+											<a href="javascript:void(0);"
+												class="btn btn-danger mb-2 adds" onclick="addClassTypes()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 添加</a> <a
+												href="javascript:void(0);" class="btn btn-danger mb-2 adds"
+												onclick="updateClassTypes()"><i
+												class="mdi mdi-plus-circle mr-2"></i> 修改</a> <a
 												href="javascript:void(0);" class="btn btn-danger mb-2 del"
-												onclick="delExpenditureitemses()"><i
+												onclick="delClassTypes()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 删除</a>
 										</div>
 
 										<!-- end col-->
 									</div>
 
-									<div class="table-responsive mt-4 Expenditureitemses">
+									<div class="table-responsive mt-4 classTypes">
 										<table class="table table-bordered table-centered mb-0">
 											<thead class="thead-light">
 												<tr>
@@ -144,13 +158,13 @@
 																class="custom-control-label" for="customCheck1">&nbsp;</label>
 														</div>
 													</th>
-													<th>编码</th>
-													<th>类别</th>
-													<th>支出项目名称</th>
+													<th class="LX" name="${schoolType }">班级序号</th>
+													<th>班级类型名称</th>
+													<th class="YN">是否课时</th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${list}" var="e">
+												<c:forEach items="${classType }" var="c">
 													<tr>
 														<td>
 															<div class="custom-control custom-checkbox">
@@ -160,26 +174,30 @@
 																	for="customCheck2">&nbsp;</label>
 															</div>
 														</td>
-														<td>${e.expenditureitemsId }</td>
-														<td>${e.category }</td>
-														<td>${e.expenditureitemsName }</td>
+														<td>${c.classTypeId }</td>
+														<td>${c.classTypeName }</td>
+														<td class="YN2"><c:choose>
+																<c:when test="${c.classTypeTime == 1 }">是</c:when>
+																<c:otherwise>否</c:otherwise>
+															</c:choose></td>
 													</tr>
 												</c:forEach>
 											</tbody>
 										</table>
 									</div>
-									<div class="col-lg-6 addExpenditureitemses "
-										style="display:none;">
+									<div class="col-lg-6 addClassTypes2 " style="display:none;">
 										<div class="card">
 											<div class="card-body">
 												<form class="needs-validation" novalidate>
 													<div class="form-group position-relative mb-3">
-														<label for="validationTooltip01">类别</label> <input
-															type="text" class="form-control category"
-															id="validationTooltip01" placeholder="请填写类别" required>
-														<label for="validationTooltip01">支出项目名称</label> <input
-															type="text" class="form-control expenditureitemsName"
-															id="validationTooltip01" placeholder="请填写支出项目名称" required>
+														<label for="validationTooltip01">班级类型名称</label> <input
+															type="text" class="form-control classTypeName"
+															id="validationTooltip01" placeholder="请填写班级类型名称" required>
+														<label for="example-select">是否为课时</label> <select
+															class="form-control classTypeTime " id="example-select">
+															<option value="0">否</option>
+															<option value="1">是</option>
+														</select>
 													</div>
 													<button class="btn btn-primary add" type="button">提交</button>
 													<button class="btn btn-primary back" type="reset"
@@ -376,9 +394,7 @@
 		<!-- third party js -->
 		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
 		<script type="text/javascript"
-			src="${Path }/static/js/highes/leftSidebar.js"></script>
-		<script type="text/javascript"
-			src="${Path }/static/js/highes/Expenditureitemses.js"></script>
+			src="${Path }/static/js/highes/ClassType.js"></script>
 		<!-- third party js ends -->
 </body>
 </html>
