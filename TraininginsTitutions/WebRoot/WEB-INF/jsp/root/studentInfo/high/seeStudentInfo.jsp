@@ -68,7 +68,7 @@
 									</a>
 
 									<!-- item-->
-									<a href="welCome.html" class="dropdown-item notify-item" >
+									<a href="welCome.html" class="dropdown-item notify-item">
 										<i class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
 									</a>
 
@@ -127,7 +127,9 @@
 									<div class="col-sm-8">
 										<div class="text-sm-right">
 											<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-												onclick="shiftWork()">学员转班</button>
+												data-toggle="modal" data-target="#top-modal">学员转班</button>
+											<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+												data-toggle="modal" data-target="#top-modal">学员批量转班</button>
 											<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
 												onclick="exitSchool()">学员退学</button>
 										</div>
@@ -240,7 +242,7 @@
 									<div class="modal-dialog modal-top">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h4 class="modal-title" id="topModalLabel">请选择课程</h4>
+												<h4 class="modal-title" id="topModalLabel">请选择班级</h4>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-hidden="true">×</button>
 											</div>
@@ -257,14 +259,12 @@
 																		class="custom-control-label" for="customCheck1">&nbsp;</label>
 																</div>
 															</th>
+															<th>班级名称</th>
 															<th>教师名称</th>
-															<th>课时名称</th>
-															<th>上课时间</th>
-															<th>课时</th>
 														</tr>
 													</thead>
 													<tbody>
-														<c:forEach items="${teacherHourList }" var="th">
+														<c:forEach items="${classList }" var="th">
 															<tr class="thId">
 																<td>
 																	<div class="custom-control custom-checkbox">
@@ -276,31 +276,21 @@
 																<td class="table-user"><a
 																	href="javascript:void(0);"
 																	class="text-body font-weight-semibold"
-																	name="${th.teacherId }" th_id="${th.teacherHourId }">${th.teacherName }</a></td>
+																	name="${th.classId }">${th.className }</a></td>
 																<td class="table-user"><a
 																	href="javascript:void(0);"
 																	class="text-body font-weight-semibold"
-																	name="${th.dpId }">${th.dpName }</a></td>
-																<td class="table-user"><a
-																	href="javascript:void(0);"
-																	class="text-body font-weight-semibold"><fmt:formatDate
-																			value="${th.startTime }"
-																			pattern="yyyy-MM-dd hh:mm:ss" /></a></td>
-																<td class="table-user"><a
-																	href="javascript:void(0);"
-																	class="text-body font-weight-semibold">${th.hours }</a></td>
+																	name="${th.teacherId }">${th.headmaster }</a></td>
 															</tr>
 														</c:forEach>
 													</tbody>
 												</table>
 											</div>
 											<div class="modal-footer">
-												<label for="billing-address">教学内容</label> <input type="text"
-													class="form-control" id="contentOfCourses">
 												<button type="button" class="btn btn-light"
 													data-dismiss="modal">关闭</button>
 												<button type="button" class="btn btn-primary"
-													onclick="classBatchRegistration()">保存</button>
+													onclick="updateStudentShiftWork()">保存</button>
 											</div>
 										</div>
 										<!-- /.modal-content -->

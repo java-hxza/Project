@@ -26,9 +26,9 @@
 		t.usedIntegral
 	</sql>
 
-	<select id="selectHigh" resultType="Student">
+	<select id="selectHigh" resultType="java.lang.Integer">
 		SELECT
-		<include refid="studentCol" />
+		count(1)
 		FROM student t
 		JOIN highesclassstudnet hc ON t.studentId=hc.studentId
 		JOIN class c ON hc.classId=c.classId
@@ -41,24 +41,8 @@
 
 	</select>
 
-	<select id="selectChildren" resultMap="selectChildrens">
-		SELECT t.studentId si,
-		t.studentName sn,
-		t.studentSex ss,
-		t.studentIDCard sd,
-		t.studentBirth sb,
-		t.school sc,
-		t.parentName sp,
-		t.telephone st,
-		t.familyAddress sf,
-		t.registrationChannels sr,
-		t.registrationConsultant src,
-		t.startTime stt,
-		t.endTime se,
-		t.theSurrogate sts,
-		t.remarks srk,
-		t.feeCategory sfc,
-		cl.classId cd
+	<select id="selectChildren" resultType="java.lang.Integer">
+		SELECT count(1)
 		FROM
 		student t
 		JOIN childrenesclassstudnet cl ON
@@ -73,33 +57,11 @@
 		</if>
 	</select>
 
-	<resultMap type="Student" id="selectChildrens">
-		<id column="si" property="studentId" />
-		<result column="sn" property="studentName" />
-		<result column="ss" property="studentSex" />
-		<result column="sd" property="studentIDCard" />
-		<result column="sb" property="studentBirth" />
-		<result column="sc" property="school" />
-		<result column="sp" property="parentName" />
-		<result column="st" property="telephone" />
-		<result column="sf" property="familyAddress" />
-		<result column="sr" property="registrationChannels" />
-		<result column="src" property="registrationConsultant" />
-		<result column="stt" property="startTime" />
-		<result column="se" property="endTime" />
-		<result column="sts" property="theSurrogate" />
-		<result column="srk" property="remarks" />
-		<result column="sfc" property="feeCategory" />
-		<collection property="childrenesClassStudnet"
-			javaType="ChildrenesClassStudnet">
-			<result column="cd" property="classId" />
-		</collection>
-	</resultMap>
 
 
-	<select id="selectYiKao" resultType="Student">
+	<select id="selectYiKao" resultType="java.lang.Integer">
 		SELECT
-		<include refid="studentCol" />
+		count(1)
 		FROM student t
 		JOIN highesclassstudnet hc ON t.studentId=hc.studentId
 		JOIN class c ON hc.classId=c.classId

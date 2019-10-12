@@ -125,10 +125,6 @@
 													onclick="shiftWork()">学员转班</button>
 												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
 													onclick="exitSchool()">学员退学</button>
-												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-													data-toggle="modal" data-target="#top-modal">学员上课登记</button>
-												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-													data-toggle="modal" data-target="#top-modal">学员批量登记</button>
 											</div>
 										</div>
 										<!-- end col-->

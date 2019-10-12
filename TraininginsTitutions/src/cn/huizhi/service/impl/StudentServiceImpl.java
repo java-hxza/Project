@@ -21,7 +21,7 @@ public class StudentServiceImpl implements StudentService {
 	 * 查询所有高中学生
 	 */
 	@Override
-	public List<Student> selectHigh(Integer schoolId, Map<Object, Object> map) {
+	public Integer selectHigh(Integer schoolId, Map<Object, Object> map) {
 		return studentMapper.selectHigh(schoolId, map);
 	}
 
@@ -29,7 +29,7 @@ public class StudentServiceImpl implements StudentService {
 	 * 查询所有少儿学生
 	 */
 	@Override
-	public List<Student> selectChildren(Integer schoolId, Map<Object, Object> map) {
+	public Integer selectChildren(Integer schoolId, Map<Object, Object> map) {
 		return studentMapper.selectChildren(schoolId, map);
 	}
 
@@ -37,7 +37,7 @@ public class StudentServiceImpl implements StudentService {
 	 * 查询所有艺考学生
 	 */
 	@Override
-	public List<Student> selectYiKao(Integer schoolId, Map<Object, Object> map) {
+	public Integer selectYiKao(Integer schoolId, Map<Object, Object> map) {
 		return studentMapper.selectYiKao(schoolId, map);
 	}
 

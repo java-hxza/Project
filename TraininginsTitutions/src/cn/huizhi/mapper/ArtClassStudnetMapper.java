@@ -14,7 +14,7 @@ public interface ArtClassStudnetMapper {
 	 * @param classId
 	 * @return
 	 */
-	public List<ArtClassStudnet> findArtClassStudnetListByClassId(Integer classId);
+	public List<ArtClassStudnet> findArtClassStudnetListByClassId(@Param("classId")Integer classId);
 	
 	/**
 	 * 批量插入学生

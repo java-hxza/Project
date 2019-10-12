@@ -46,11 +46,6 @@
 							</div>
 
 							<form>
-								
-								<div class="form-group">
-									<label for="emailaddress">学生姓名</label> <input
-										class="form-control" type="text"  id="studentId" name="${childrenesClassStudnet.studentId }" value="${childrenesClassStudnet.studentName }"  disabled="disabled">
-								</div>
 								<div class="form-group">
 									<label for="emailaddress">学生现所在班级</label>
 										<select class="form-control"   id="classId" disabled="disabled">
@@ -72,14 +67,6 @@
 											<span hidden="hidden">${c.classTypeId }</span>
 										</c:forEach>
 									</select>
-								</div>
-								<div class="form-group">
-									<label for="emailaddress">差额</label> 
-									<input type="text" class="form-control" id="money">
-								</div>
-								<div class="form-group">
-									<label for="emailaddress">转班原因</label> 
-									<input type="text" class="form-control" id="remarks">
 								</div>
 								<div class="form-group mb-0 text-center">
 									<button class="btn btn-primary" type="button" onclick="updateStudentShiftWork()" >保存</button>

@@ -1,96 +1,65 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set scope="request" value="${pageContext.request.contextPath }" var="Path" />
+<c:set scope="request" value="${pageContext.request.contextPath }"
+	var="Path" />
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
-<meta charset="utf-8" />
-<title>Login</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta
-	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
-	name="description" />
-<meta content="Coderthemes" name="author" />
-<!-- App favicon -->
-<link rel="shortcut icon" href="assets/images/favicon.ico">
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>login</title>
+<link rel="stylesheet" type="text/css" href="${Path }/static/css/login/normalize.css" />
+<link rel="stylesheet" type="text/css" href="${Path }/static/css/login/demo.css" />
+<!--必要样式-->
+<link rel="stylesheet" type="text/css" href="${Path }/static/css/login/component.css" />
 
-<!-- App css -->
-<link href="${Path }/static/css/icons.min.css" rel="stylesheet" type="text/css" />
-<link href="${Path }/static/css/app.min.css" rel="stylesheet" type="text/css" />
-
-
+<style type="text/css">
+.demo-1 .large-header {
+	background-image: url('${Path}/static/images/back.jpg');
+}
+</style>
+<!--[if IE]>
+	<script src="js/html5.js"></script>
+<![endif]-->
 </head>
-
-<body class="authentication-bg">
-
-	<div class="account-pages mt-5 mb-5">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-5">
-					<div class="card">
-
-						<!-- Logo -->
-						<div class="card-header pt-4 pb-4 text-center bg-primary">
-							<a href="index.html"> <span>
-							<img src="${Path }/static/images/login.png" alt=""width="50%" height="30px"> </span>
-							</a>
+<body>
+	<div class="container demo-1">
+		<div class="content">
+			<div id="large-header" class="large-header">
+				<canvas id="demo-canvas"></canvas>
+				<div class="logo_box">
+					<h3>欢迎你</h3>
+					<form action="#" name="f" method="post">
+						<div class="input_outer">
+							<span class="u_user"></span> <input name="logname"  id="logname" class="text"
+								style="color: #FFFFFF !important" type="text"
+								placeholder="请输入账户">
 						</div>
-
-						<div class="card-body p-4">
-
-							<div class="text-center w-75 m-auto">
-								<h4 class="text-dark-50 text-center mt-0 font-weight-bold">登录</h4>
-								<p class="text-muted mb-4">请输入您的账户密码登录：</p>
-							</div>
-								
-								<div class="form-group">
-									<label for="emailaddress">账户名：</label> <input
-										class="form-control" type="text" id="username" name="username"
-										required placeholder="Enter your username">
-								</div>
-								<div class="form-group">
-									<a href="pages-recoverpw.html" class="text-muted float-right"><small>忘记密码?</small></a> <label for="password">Password</label> <input
-										class="form-control" type="password" required id="password" name="password"
-										placeholder="Enter your password">
-								</div>
-								<div class="form-group mb-0 text-center">
-									<button class="btn btn-primary" id="loginBtn" type="submit" onclick="UserLogin()">
-										<span class="" role="status" aria-hidden="true">登录</span>
-									</button>
-								</div>
+						<div class="input_outer">
+							<span class="us_uer"></span> <input name="password"  id="password"class="text"
+								style="color: #FFFFFF !important; position:absolute; z-index:100;"
+								value="" type="password" placeholder="请输入密码">
 						</div>
-						<!-- end card-body -->
-					</div>
-					<!-- end card -->
-
-					<div class="row mt-3">
-						<div class="col-12 text-center">
-							<p class="text-muted">
-								还没有账户? <a href="#"
-									class="text-muted ml-1"><b>请登录管理员账号创建账户</b></a>
-							</p>
+						<div class="mb2">
+							<a class="act-but submit" href="javascript:;"
+								style="color: #FFFFFF" onclick="UserLogin()">登录</a>
 						</div>
-						<!-- end col -->
-					</div>
-					<!-- end row -->
-
+					</form>
 				</div>
-				<!-- end col -->
 			</div>
-			<!-- end row -->
 		</div>
-		<!-- end container -->
 	</div>
-	<!-- end page -->
-
-	<footer class="footer footer-alt">
-	 2018 - 2019 ©  - Order.com 
-	 </footer>
-
-	<!-- App js -->
+	<!-- /container -->
+	<script src="${Path }/static/js/login/TweenLite.min.js"></script>
+	<script src="${Path }/static/js/login/EasePack.min.js"></script>
+	<script src="${Path }/static/js/login/rAF.js"></script>
+	<script src="${Path }/static/js/login/demo-1.js"></script>
 	<script src="${Path }/static/js/jquery.min.js"></script>
-	<script src="${Path }/static/js/login.js"></script>
 	<script src="${Path }/static/js/app.min.js"></script>
+	<script src="${Path }/static/js/login.js"></script>
+	
+	<div style="text-align:center;"></div>
 </body>
 </html>

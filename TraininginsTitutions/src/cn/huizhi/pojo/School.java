@@ -9,6 +9,7 @@ public class School {
 	private Integer cityProperId;
 	private String schoolRemarks;
 	private Integer schoolType;
+	private FeeCategory feeCategory;
 	
 	/**
 	 * 共支出
@@ -44,7 +45,6 @@ public class School {
 	}
 
 
-
 	public Double getSchoolExPenSum() {
 		return schoolExPenSum;
 	}
@@ -60,6 +60,15 @@ public class School {
 		this.schoolExPenSum = Double.parseDouble(bd.toString());
 	}
 
+
+	public FeeCategory getFeeCategory() {
+		return feeCategory;
+	}
+
+
+	public void setFeeCategory(FeeCategory feeCategory) {
+		this.feeCategory = feeCategory;
+	}
 
 
 	public Double getSchoolFeeceat() {

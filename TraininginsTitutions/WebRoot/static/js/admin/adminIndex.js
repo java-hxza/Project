@@ -32,9 +32,14 @@ $(function(){
 		var endTime = $("#endTime").val();
 		var startTime = $("#startTime").val();
 		
-		location.href = "querySchoolOrderByTime.html?endTime="+endTime+"&startTime="+startTime;
+		var provinceId = $("#provinceId").val();
+		var cityId = $("#cityId").val();
+		
+		location.href = "querySchoolOrderByTime.html?endTime="+endTime+"&startTime="+startTime+"&provinceId="+provinceId+"&cityId="+cityId;
 		
 	}
+	
+	
 	
 
 });

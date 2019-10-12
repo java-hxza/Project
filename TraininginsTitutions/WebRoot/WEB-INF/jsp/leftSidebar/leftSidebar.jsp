@@ -110,7 +110,7 @@
 				<li><a href="javascript:void(0)" onclick="studentHourInfo()">学员课时总表</a></li>
 				<li><a href="javascript:void(0)" onclick="teacherClassHour()">教师上课明细</a></li>
 			</c:if>
-			<li><a href="javascript:void(0)" onclick="addStudent()">新增学院报表</a></li>
+			<li><a href="javascript:void(0)" onclick="addStudent()">新增学员报表</a></li>
 			<c:if test="${schoolType ==1 }">
 				<li><a href="javascript:void(0)" onclick="feeSituation()">收费情况报表</a></li>
 			</c:if>

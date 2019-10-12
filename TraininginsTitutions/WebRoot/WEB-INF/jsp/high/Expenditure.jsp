@@ -108,7 +108,7 @@
 										<li class="breadcrumb-item"><a
 											href="javascript: void(0);">培训收费</a></li>
 										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">按课时收费单</a></li>
+											href="javascript: void(0);">费用支出单</a></li>
 									</ol>
 								</div>
 								<h4 class="page-title">费用支出收款单</h4>

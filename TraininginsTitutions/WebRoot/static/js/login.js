@@ -15,6 +15,7 @@ $(function() {
 			success : function(data) {
 				data = JSON.parse(data);
 				$("#cityId").empty();
+				$("#schoolId").empty();
 				$("#cityId").append("<option value=''>请选择城市</option>");
 				$("#schoolId").append("<option value=''>请选择学校</option>");
 				for (var i = 0; i < data.length; i++) {
@@ -60,9 +61,6 @@ $(function() {
 	 */
 	UserLogin = function() {
 
-		$("#loginBtn span").addClass("spinner-border spinner-border-sm");
-		$("#loginBtn span").text("");
-		$("#loginBtn").attr("disabled", "disabled");
 
 		var loginName = $("#username").val();
 		var loginPassword = $("#password").val();
@@ -70,9 +68,6 @@ $(function() {
 
 		if (loginName, loginPassword == "") {
 			$.NotificationApp.send("错误!", "你必须输入账户名及密码。", "top-right", "rgba(0,0,0,0.2)", "error")
-			$("#loginBtn span").removeClass("spinner-border spinner-border-sm");
-			$("#loginBtn span").text("立即登录");
-			$("#loginBtn").attr("disabled", false);
 			return false;
 		}
 
@@ -89,18 +84,13 @@ $(function() {
 			success : function(data) {
 				data = eval(data);
 				if (data.state == "1") {
-					$.NotificationApp.send("成功！", "账户密码校验正确！。", "top-right", "rgba(0,0,0,0.2)", "success")
 					if (data.UsertypeId == "1") {
-						setTimeout(function() {
 							location.href = "adminIndex.html";
-						}, 2000);
 					} else {
-						setTimeout(function() {
 							location.href = "highIndex.html";
-						}, 2000);
 					}
 				} else {
-					$.NotificationApp.send("错误!", "账号密码错误，请检查重试。", "top-right", "rgba(0,0,0,0.2)", "error")
+					alert("账号密码错误，请检查重试!");
 					setTimeout(function() {
 						location.href = "erro.html";
 					}, 2000);
@@ -108,10 +98,8 @@ $(function() {
 				}
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
-				$.NotificationApp.send("错误!", "账号密码错误，请检查重试。", "top-right", "rgba(0,0,0,0.2)", "error")
-				setTimeout(function() {
+				alert("账号密码错误，请检查重试!");
 					location.href = "erro.html";
-				}, 2000);
 			}
 		})
 

@@ -25,7 +25,7 @@ $(function() {
 			data : {
 				schoolId : schoolId,
 				endTime : endTime,
-				startTime : startTime
+				startTime : startTime 
 			},
 			dataType : 'JSON',
 			type : 'post',
@@ -163,6 +163,7 @@ $(function() {
 		var schoolId = $(".schoolId").attr("name");
 		var endTime = $("#endTime").val();
 		var startTime = $("#startTime").val();
+		var feeId = $("#feeId").val();
 		//判断时间是都空值
 		if (startTime == '' || startTime == null) {
 			startTime = new Date();
@@ -181,7 +182,8 @@ $(function() {
 			data : {
 				schoolId : schoolId,
 				endTime : endTime,
-				startTime : startTime
+				startTime : startTime,
+				feeId : feeId
 			},
 			dataType : "JSON",
 			type : 'post',

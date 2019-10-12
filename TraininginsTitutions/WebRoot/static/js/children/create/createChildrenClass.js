@@ -34,7 +34,7 @@ $(function() {
 		});
 	}
 
-	
+
 	/**
 	 * 添加少儿班级
 	 */
@@ -45,7 +45,7 @@ $(function() {
 		var headmaster = $("#headmaster option:selected");
 		var classLevel = $("#classLevel").val();
 		var classTypeId = $("#classTypeId").val();
-		headmaster = headmaster.text();
+		var headmaster = headmaster.text();
 		var teacherId = $("#headmaster").val();
 		var classType = $("#classType").val();
 		if (classNumber, className == null || $.trim(classNumber), $.trim(className) == '') {
@@ -53,6 +53,11 @@ $(function() {
 			return false;
 		}
 
+		if (classTypeId, dpId, classLevel == "0") {
+			$.NotificationApp.send("错误!", "请认真填写不能为空，请检查重试。", "top-right", "rgba(0,0,0,0.2)", "error");
+			return false;
+		}
+		
 		$.ajax({
 			url : 'createClass.html',
 			data : {
@@ -68,27 +73,23 @@ $(function() {
 			dataType : 'JSON',
 			type : 'post',
 			success : function(data) {
-				if(data.state == "1"){
+				if (data.state == "1") {
 					$.NotificationApp.send("成功！", "添加班级成功", "top-right", "rgba(0,0,0,0.2)", "success");
-					setTimeout(function () { 
-						location.href="classIndex.html";
+					setTimeout(function() {
+						location.href = "classIndex.html";
 					}, 2000);
-				}else{
-					location.href="error.html";
+				} else {
+					location.href = "error.html";
 				}
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
-				alert(XMLHttpRequest.status);
-				alert(XMLHttpRequest.readyState);
-				alert(textStatus);
 				$.NotificationApp.send("错误!", "输入错误请重试。", "top-right", "rgba(0,0,0,0.2)", "error")
 				setTimeout(function() {
 					location.href = "erro.html";
 				}, 2000);
 			}
 		});
-
-
+		
 	}
 
 

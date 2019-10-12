@@ -89,14 +89,14 @@ public class SchoolController {
 
 	@RequestMapping("incomeOrder.html")
 	@ResponseBody
-	public Map<String, Object> incomeOrder(Order order) {
+	public Map<String, Object> incomeOrder(Order order,String feeId) {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		List<Order> expenditureOrderList = orderService.findOrderListBySchool(order);
 		// 收费项目主键列
 		List<String[]> feeIdArray = new ArrayList<String[]>();
 
 		List<String> feeNameArray = new ArrayList<String>();
-		// 学校收费项目
+		//学校收费项目
 		List<FeeCategory> feeCategories = feeCategoryService.selectFeeCategory(order.getSchoolId());
 
 		for (Order order2 : expenditureOrderList) {

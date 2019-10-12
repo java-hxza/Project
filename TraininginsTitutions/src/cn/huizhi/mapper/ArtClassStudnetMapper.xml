@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.ArtClassStudnetMapper">
 
-	<sql id="highesCol">
+	<sql id="artCol">
 		hcs.classesStudentId hcs_classesStudentId,
 		hcs.studentName
 		hcs_studentName,
@@ -39,7 +39,7 @@
 		t_theSurrogate
 	</sql>
 
-	<resultMap type="HighesClassStudnet" id="studnetByClassIdMap">
+	<resultMap type="ArtClassStudnet" id="studnetByClassIdMap">
 		<id column="hcs_classesStudentId" property="classesStudentId" />
 		<result column="hcs_studentName" property="studentName" />
 		<result column="hcs_headmaster" property="headmaster" />
@@ -73,7 +73,7 @@
 	<select id="findArtClassStudnetListByClassId"
 		resultMap="studnetByClassIdMap" parameterType="java.lang.Integer">
 		select
-		<include refid="highesCol" />
+		<include refid="artCol" />
 		from artclassstudnet hcs,student t
 		<where>
 			t.studentId = hcs.studentId and hcs.state != 2

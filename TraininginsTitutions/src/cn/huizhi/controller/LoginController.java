@@ -79,7 +79,7 @@ public class LoginController {
 	@RequestMapping("city.html")
 	@ResponseBody
 	public String cityChange(Integer cityId) {
-		List<School> schoolList = schoolService.findSchoolByCityId(cityId);
+		List<School> schoolList = schoolService.findSchoolByCityId(cityId,null);
 		
 		if(schoolList.size()>0) {
 			return JSON.toJSONString(schoolList);

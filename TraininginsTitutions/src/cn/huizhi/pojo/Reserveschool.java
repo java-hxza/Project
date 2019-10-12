@@ -7,16 +7,27 @@ public class Reserveschool {
 	private Integer studentId;
 	private Integer state;
 
+	private Student student;
+
 	public Reserveschool() {
 		super();
 	}
 
-	public Reserveschool(Integer reserveSchoolId, Integer schoolId, Integer studentId, Integer state) {
+	public Reserveschool(Integer reserveSchoolId, Integer schoolId, Integer studentId, Integer state, Student student) {
 		super();
 		this.reserveSchoolId = reserveSchoolId;
 		this.schoolId = schoolId;
 		this.studentId = studentId;
 		this.state = state;
+		this.student = student;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	public Integer getReserveSchoolId() {

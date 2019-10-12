@@ -451,9 +451,9 @@ public class AdminTeacherController {
 		map.put("startTime", startTime);
 		map.put("endTime", endTime);
 
-		List<Student> addstudentList = studentService.selectChildren(schoolId, map);
+		Integer addstudentList = studentService.selectChildren(schoolId, map);
 
-		session.setAttribute("stuCount", addstudentList.size());
+		session.setAttribute("stuCount", addstudentList);
 		session.setAttribute("stuClassification", "少儿");
 		session.setAttribute("schoolType", schoolType);
 		session.setAttribute("schoolName", schoolName);
@@ -474,9 +474,9 @@ public class AdminTeacherController {
 		map.put("startTime", startTime);
 		map.put("endTime", endTime);
 
-		List<Student> addstudentList = studentService.selectHigh(schoolId, map);
+		Integer addstudentList = studentService.selectHigh(schoolId, map);
 
-		session.setAttribute("stuCount", addstudentList.size());
+		session.setAttribute("stuCount", addstudentList);
 		session.setAttribute("stuClassification", "高中");
 		session.setAttribute("schoolType", schoolType);
 		session.setAttribute("schoolName", schoolName);
@@ -497,9 +497,9 @@ public class AdminTeacherController {
 		map.put("startTime", startTime);
 		map.put("endTime", endTime);
 
-		List<Student> addstudentList = studentService.selectHigh(schoolId, map);
+		Integer addstudentList = studentService.selectHigh(schoolId, map);
 
-		session.setAttribute("stuCount", addstudentList.size());
+		session.setAttribute("stuCount", addstudentList);
 		session.setAttribute("stuClassification", "艺考");
 		session.setAttribute("schoolType", schoolType);
 		session.setAttribute("schoolName", schoolName);

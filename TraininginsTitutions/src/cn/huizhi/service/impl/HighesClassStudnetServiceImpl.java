@@ -29,7 +29,7 @@ public class HighesClassStudnetServiceImpl implements HighesClassStudnetService{
 	}
 
 	@Override
-	public Integer updateHighStudentClass(HighesClassStudnet cStudnet) {
+	public Integer updateHighStudentClass(List<HighesClassStudnet> cStudnet) {
 		// TODO Auto-generated method stub
 		return highesClassStudnetMapper.updateHighStudentClass(cStudnet);
 	}

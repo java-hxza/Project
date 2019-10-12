@@ -28,7 +28,7 @@ public interface HighesClassStudnetService {
 	 * @param cStudnet
 	 * @return
 	 */
-	public Integer updateHighStudentClass(HighesClassStudnet cStudnet);
+	public Integer updateHighStudentClass(List<HighesClassStudnet> cStudnet);
 	
 	
 	/**

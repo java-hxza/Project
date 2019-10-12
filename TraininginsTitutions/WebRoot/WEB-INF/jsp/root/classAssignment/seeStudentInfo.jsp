@@ -234,7 +234,7 @@
 									<div class="modal-dialog modal-top">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h4 class="modal-title" id="topModalLabel">请选择课程</h4>
+												<h4 class="modal-title" id="topModalLabel">请选择班级</h4>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-hidden="true">×</button>
 											</div>

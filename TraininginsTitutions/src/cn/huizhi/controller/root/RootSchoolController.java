@@ -1262,7 +1262,7 @@ public class RootSchoolController {
 		map.put("startTime", startTime);
 		map.put("endTime", endTime);
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
-		List<Student> addstudentList = null;
+		Integer addstudentList = 0;
 		if (schoolType == 1) {
 			addstudentList = studentService.selectChildren((Integer) session.getAttribute("schoolId"), map);
 			session.setAttribute("stuClassification", "少儿");
@@ -1273,8 +1273,10 @@ public class RootSchoolController {
 			addstudentList = studentService.selectHigh((Integer) session.getAttribute("schoolId"), map);
 			session.setAttribute("stuClassification", "艺考");
 		}
-		session.setAttribute("stuCount", addstudentList.size());
-
+		
+		School school = schoolService.selectSchoolById((Integer)session.getAttribute("schoolId"));
+		session.setAttribute("stuCount", addstudentList);
+		session.setAttribute("schoolName", school.getSchoolName());
 		return "root/addStudentInfo/addStudentInfo";
 	}
 

@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="utf-8" />
-<title>添加少儿班级</title>
+<title>添加班级</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta
 	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
@@ -41,7 +41,7 @@
 					</div>
 
 					<!-- title-->
-					<h4 class="mt-0">添加少儿班级</h4>
+					<h4 class="mt-0">添加班级</h4>
 					<p class="text-muted mb-4">请填写班级信息</p>
 					<!-- form -->
 					<form action="#">

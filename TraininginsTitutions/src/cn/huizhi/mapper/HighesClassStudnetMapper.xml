@@ -98,24 +98,27 @@
 		</where>
 	</update>
 
-	<!-- 转班 -->
+	<!-- 批量转班 -->
 	<update id="updateHighStudentClass"
-		parameterType="HighesClassStudnet">
-		update traininginstitutions.highesclassstudnet
-		<set>
-			<if test="classId!=null and classId!=''">
-				classId = #{classId}
-			</if>
-		</set>
+		parameterType="java.util.List">
+		<foreach collection="list" item="c" separator=";">
+			update traininginstitutions.highesclassstudnet h
+			<set>
+				<if test="c.classId != null and c.classId != ''">
+					h.classId = #{c.classId}
+				</if>
+			</set>
 
-		<where>
-			<if test="studentId!=null and studentId!=''">
-				studentId = #{studentId}
-			</if>
-		</where>
+			<where>
+				<if test="c.studentId !=null and c.studentId != ''">
+					h.studentId = #{c.studentId}
+				</if>
+			</where>
+		</foreach>
 	</update>
 	<!-- 批量结业 -->
-	<update id="updateHighStudentGradution" parameterType="java.util.List">
+	<update id="updateHighStudentGradution"
+		parameterType="java.util.List">
 
 		<foreach collection="list" item="c" separator=";">
 			update traininginstitutions.highesclassstudnet

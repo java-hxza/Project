@@ -58,6 +58,9 @@
 			<if test="cityId != null and cityId != ''">
 				cityId = #{cityId}
 			</if>
+			<if test="cityProperId != null and cityProperId != ''">
+				cityProperId = #{cityProperId}
+			</if>
 		</where>
 	</select>
 	

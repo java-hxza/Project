@@ -514,6 +514,7 @@
 		o.expenditureitemsId
 		o_expenditureitemsId,
 		o.feecategoryMoney o_feecategoryMoney,
+		o.feecateMoney o_feecateMoney,
 		o.feecateId o_feecateId,
 		o.firstdate o_firstdate,
 		o.addhour o_addhour,
@@ -538,11 +539,6 @@
 		dp.dpTypeName
 		dp_dpTypeName,
 		dp.chargeTypeId dp_chargeTypeId,
-		fc.chargeTypeId
-		fc_chargeTypeId,
-		fc.chargeTypeName fc_chargeTypeName,
-		fc.category
-		fc_category,
 		stu.studentId stu_studentId,
 		stu.studentName
 		stu_studentName
@@ -570,6 +566,7 @@
 		<result column="o_schoolId" property="schoolId" />
 		<result column="o_startTime" property="startTime" />
 		<result column="0_discount" property="discount" />
+		<result column="o_feecateMoney" property="feecateMoney" />
 		<result column="o_stuId" property="stuId" />
 		<association property="paymentMethod"
 			javaType="PaymentMethod">
@@ -597,20 +594,20 @@
 	<!--根据学校主键查询学校收入明细 -->
 	<select id="selectOrderListBySchool"
 		resultMap="selectOrderListBySchoolMap" parameterType="Order">
-		select
+		select distinct
 		<include refid="selectOrderListBySchoolCol" />
 		from traininginstitutions.order o
 		, paymentmethod p
-		,departmentofpediatrics dp
-		, feecategory fc , student stu
+		,departmentofpediatrics dp , student stu,
+		province pro,city c,school sc
 		<where>
 			p.paymentmethodId = o.paymentmethodId
 			and dp.dpId =
 			o.departmentofpediatricsId
-			and fc.chargeTypeId =
-			o.feecateId
 			and
 			stu.studentId = o.stuId
+			and sc.cityId = c.cityId
+			and sc.cityProperId = pro.provinceId
 			<if test="schoolId !=null and schoolId != ''">
 				and o.schoolId =#{schoolId}
 			</if>
@@ -630,11 +627,18 @@
 			<if test="classId !=null and classId != '' ">
 				and o.classId = #{classId}
 			</if>
+			<if test="cityId !=null and cityId != '' ">
+				and sc.cityId = #{cityId}
+			</if>
+			<if test="cityProperId !=null and cityProperId != '' ">
+				and sc.cityProperId = #{cityProperId}
+			</if>
 		</where>
 	</select>
 
 
 	<sql id="selectExpenOrderListCol">
+		distinct
 		o.expenditureitemsId
 		o_expenditureitemsId,
 		o.identification
@@ -647,6 +651,7 @@
 		o.schoolId o_schoolId,
 		o.startTime o_startTime,
 		o.feecategoryMoney o_feecategoryMoney,
+		o.feecateMoney o_feecateMoney,
 		e.expenditureitemsId
 		e_expenditureitemsId,
 		e.category e_category,
@@ -669,6 +674,7 @@
 		<result column="o_schoolId" property="schoolId" />
 		<result column="o_startTime" property="startTime" />
 		<result column="o_feecategoryMoney" property="feecategoryMoney" />
+		<result column="o_feecateMoney" property="feecateMoney" />
 		<association property="expenditureitems"
 			javaType="Expenditureitems">
 			<id column="e_expenditureitemsId" property="expenditureitemsId" />
@@ -685,7 +691,7 @@
 	</resultMap>
 	<select id="selectExpenOrderList"
 		resultMap="selectExpenOrderListMap" parameterType="Order">
-		select
+		select distinct
 		<include refid="selectExpenOrderListCol" />
 		from traininginstitutions.order o
 		join expenditureitems e on

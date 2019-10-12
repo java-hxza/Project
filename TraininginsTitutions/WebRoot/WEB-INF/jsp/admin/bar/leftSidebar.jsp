@@ -5,7 +5,7 @@
 
 		<!-- LOGO -->
 		<a href="index.html" class="logo text-center"> <span
-			class="logo-lg"> <img src="${Path }/static/images/logo.png"
+			class="logo-lg"> <img src="${Path }/static/images/logo.gif"
 				alt="" width="50%" height="30px">
 		</span> <span class="logo-sm"> <img
 				src="${Path }/static/images/logo_sm.png" alt="" height="16">

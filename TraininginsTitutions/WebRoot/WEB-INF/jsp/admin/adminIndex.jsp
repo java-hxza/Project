@@ -119,16 +119,40 @@
 
 							<!-- end row -->
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-3">
 									<div class="form-group">
 										<label for="billing-first-name">开始日期</label> <input
 											class="form-control" type="date" id="startTime" />
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-3">
 									<div class="form-group">
 										<label for="billing-first-name">截至日期</label> <input
 											class="form-control" type="date" id="endTime" />
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for="billing-first-name">省份</label> <select
+											class="form-control" id="provinceId"
+											onchange="provinceChange()">
+											<option value="">请选择省份</option>
+											<c:forEach items="${provinceList }" var="pro">
+												<option value="${pro.provinceId }">${pro.provinceName }</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for="billing-first-name">城市</label> <select
+											class="form-control" id="cityId" onchange="cityChange()">
+											<option value="">请选择城市</option>
+											<c:forEach items="${cityList }" var="pro">
+												<option value="${pro.cityId }">${pro.cityName }</option>
+											</c:forEach>
+										</select>
 									</div>
 								</div>
 							</div>
@@ -185,6 +209,7 @@
 														<th>学校支出金额</th>
 														<th>学校收入金额</th>
 														<th>学校账户余额</th>
+														<th>学校收入项目金额</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -220,7 +245,14 @@
 															<td class="table-user"><a href="javascript:void(0);"
 																class="text-body font-weight-semibold">${school.schoolFeeceat - school.schoolExPenSum}</a>
 															</td>
-														</tr>
+															<td class="table-user"><a href="javascript:void(0);"
+																class="text-body font-weight-semibold"> <c:forEach
+																		items="${smList }" var="sm">
+																		<c:if test="${sm.schoolId == school.schoolId }">
+																	${sm.feeName } : ${sm.sumMoney }</a> </c:if>
+															</c:forEach>
+													</td>
+													</tr>
 													</c:forEach>
 												</tbody>
 											</table>
@@ -236,5 +268,6 @@
 									<script type="text/javascript"
 										src="${Path }/static/js/admin/adminIndex.js"></script>
 									<script src="${Path }/static/js/admin/leftSidebar.js"></script>
+									<script src="${Path }/static/js/login.js"></script>
 </body>
 </html>

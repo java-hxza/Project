@@ -83,7 +83,7 @@
 					</if>
 				</set>				
 				<where>
-					<if test="c.reserveSchoolId !=null and c.reserveSchoolId!=''">
+					<if test="c.studentId !=null and c.studentId !=''">
 						studentId = #{c.studentId}
 					</if>				
 				</where>

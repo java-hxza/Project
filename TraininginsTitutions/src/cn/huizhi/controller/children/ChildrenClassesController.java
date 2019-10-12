@@ -3,6 +3,7 @@ package cn.huizhi.controller.children;
 import java.awt.Image;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -64,66 +65,71 @@ public class ChildrenClassesController {
 	 */
 	@Resource
 	TeacherService teacherService;
-	
+
 	@Resource
 	ChildrenesClassStudnetService childrenesClassStudnetService;
-	
+
 	@Resource
 	HighesClassStudnetService highesClassStudnetService;
-	
+
 	@Resource
 	StudentService studentService;
-	
+
 	@Resource
 	OrderService orderService;
-	
+
 	@Resource
 	TeacherHourService teacherHourService;
-	
+
 	@Resource
 	ArtClassStudnetService artClassStudnetService;
-	
+
 	@RequestMapping("childrenSchoolLogin.html")
 	public String childrenSchoolLogin(HttpSession session) {
 		session.setAttribute("schoolType", 1);
-		
+
 		return "/login";
 	}
-	
+
 	/**
 	 * 返回到少儿首页
+	 * 
 	 * @return
 	 */
 	@RequestMapping("classIndex.html")
 	public String childrenIndex(HttpSession session) {
-		
+
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		List<Class> childrenClassList = classService.findChildrenescClasses(String.valueOf(schoolId));
-		if(childrenClassList !=null) {
+		if (childrenClassList != null) {
 			session.setAttribute("childrenClassList", childrenClassList);
 		}
 		return "children/childrenIndex";
 	}
-	
+
 	/**
 	 * 返回创建少儿学生页面
+	 * 
 	 * @return
 	 */
 	@RequestMapping("regitStudent.html")
 	public String createChildrenStudent(Integer classId) {
 		return "children/create/createChildrenStudent";
 	}
+
 	/**
 	 * 跳转到学生信息管理页面
+	 * 
 	 * @return
 	 */
 	@RequestMapping("studentInfo.html")
 	public String studentInfo() {
 		return "children/studentInfo";
 	}
-	
+
 	/**
 	 * 返回注册班级页面
+	 * 
 	 * @param session
 	 * @return
 	 */
@@ -134,121 +140,131 @@ public class ChildrenClassesController {
 		session.setAttribute("dpList", dpList);
 		return "children/create/createChildrenClass";
 	}
-	
+
 	/**
 	 * 根据教师科别，学校主键查询所有老师并异步返回数据
+	 * 
 	 * @param dpId
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("dpChange.html")
 	@ResponseBody
-	public String dpChange(Integer dpId,HttpSession session) {
+	public String dpChange(Integer dpId, HttpSession session) {
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
-		List<Teacher> teacherUserList = teacherService.findTeachersByTeacherTypeId(null,schoolId);
-		if(teacherUserList.size()>0) {
+		List<Teacher> teacherUserList = teacherService.findTeachersByTeacherTypeId(null, schoolId);
+		if (teacherUserList.size() > 0) {
 			return JSON.toJSONString(teacherUserList);
 		}
 		return "";
 	}
+
 	/**
 	 * 创建学生班级
+	 * 
 	 * @param childrenescClass
 	 * @return
 	 */
 	@RequestMapping("createClass.html")
 	@ResponseBody
-	public Map<String, String> createChildrenClass(Class classes,HttpSession session) {
+	public Map<String, String> createChildrenClass(Class classes, HttpSession session) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		classes.setSchoolId(schoolId);
-		Integer schoolType = (Integer) session.getAttribute("schoolType"); 
-		if(schoolType !=1) {
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		if (schoolType != 1) {
 			classes.setClassType(1);
 		}
-		if(classService.addChildrenescClass(classes)>0) {
+		if (classService.addChildrenescClass(classes) > 0) {
 			jsonMap.put("state", "1");
-		}else {
+		} else {
 			jsonMap.put("state", "0");
 		}
 		return jsonMap;
 	}
-	
-	
+
 	/**
 	 * 跳转班级信息管理
+	 * 
 	 * @param classId
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("seeStudentInfo.html")
-	public String seeStudentInfo(Integer classId,HttpSession session) {
-		
- 		Integer schoolType = (Integer) session.getAttribute("schoolType");
- 		session.setAttribute("classId", classId);
- 		List<TeacherHour> teacherHourList = teacherHourService.selectCurriculumInfo(classId, null,null);
- 		session.setAttribute("teacherHourList", teacherHourList);
-		if(schoolType == 1 ) {
-			List<ChildrenesClassStudnet> childrenesClassStudnets = childrenesClassStudnetService.findChildrenesClassStudnetByClassId(classId);
+	public String seeStudentInfo(Integer classId, HttpSession session) {
+
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		session.setAttribute("classId", classId);
+
+		List<Class> classList = classService
+				.findChildrenescClasses(String.valueOf((Integer) session.getAttribute("schoolId")));
+		List<TeacherHour> teacherHourList = teacherHourService.selectCurriculumInfo(classId, null, null);
+		session.setAttribute("teacherHourList", teacherHourList);
+		if (schoolType == 1) {
+			List<ChildrenesClassStudnet> childrenesClassStudnets = childrenesClassStudnetService
+					.findChildrenesClassStudnetByClassId(classId);
 			session.setAttribute("childrenesClassStudnets", childrenesClassStudnets);
 			return "root/studentInfo/children/seeStudentInfo";
 		}
-		if(schoolType == 2) {
-			List<HighesClassStudnet> highesClassStudnets = highesClassStudnetService.findHighesClassStudnetListByClassId(classId);
-
+		if (schoolType == 2) {
+			List<HighesClassStudnet> highesClassStudnets = highesClassStudnetService
+					.findHighesClassStudnetListByClassId(classId);
+			session.setAttribute("classList", classList);
 			session.setAttribute("highesClassStudnets", highesClassStudnets);
 			return "root/studentInfo/high/seeStudentInfo";
 		}
-		if(schoolType ==3) {
+		if (schoolType == 3) {
 			List<ArtClassStudnet> artClassStudnets = artClassStudnetService.findArtClassStudnetListByClassId(classId);
 			session.setAttribute("artClassStudnets", artClassStudnets);
 			return "root/studentInfo/art/seeStudentInfo";
 		}
-		
+
 		return "seeStudentInfo";
 	}
-	
-	
+
 	/**
 	 * 查询学生信息
+	 * 
 	 * @param studentId
 	 * @return
 	 */
 	@RequestMapping("updateStudnet.html")
 	@ResponseBody
 	public String updateStudnet(Integer studentId) {
-		
+
 		Student student = studentService.findStudentById(studentId);
-		
-		if(student!=null) {
-			return JSON.toJSONStringWithDateFormat(student, "yyyy-MM-dd hh:mm:ss", SerializerFeature.WriteDateUseDateFormat);
+
+		if (student != null) {
+			return JSON.toJSONStringWithDateFormat(student, "yyyy-MM-dd hh:mm:ss",
+					SerializerFeature.WriteDateUseDateFormat);
 		}
-		
+
 		return "";
 	}
-	
+
 	/**
 	 * 修改学生信息
+	 * 
 	 * @param student
 	 * @return
 	 */
 	@RequestMapping("updateStudentInfo.html")
 	@ResponseBody
-	public Map<String, String> updateStudentInfo(Student student){
+	public Map<String, String> updateStudentInfo(Student student) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
-		if(studentService.updateStudent(student)>0) {
-			jsonMap.put("update","1");
-		}else {
-			jsonMap.put("update","0");
-			
+		if (studentService.updateStudent(student) > 0) {
+			jsonMap.put("update", "1");
+		} else {
+			jsonMap.put("update", "0");
+
 		}
-		
+
 		return jsonMap;
 	}
-	
-	
+
 	/**
 	 * 学生转班
+	 * 
 	 * @param studentId
 	 * @param classId
 	 * @param session
@@ -260,15 +276,17 @@ public class ChildrenClassesController {
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		List<Class> classListAll = classService.findChildrenescClasses(String.valueOf(schoolId));
 		session.setAttribute("classListAll", classListAll);
-		if(schoolType == 1) {
-			//查询
-			List<ChildrenesClassStudnet> childrenesClassStudnets = childrenesClassStudnetService.findChildrenesClassStudnetByClassId(classId);
-			List<Order> studentOrder =  orderService.selectOrderListByStudentId(studentId); 
-			
+		if (schoolType == 1) {
+			// 查询
+			List<ChildrenesClassStudnet> childrenesClassStudnets = childrenesClassStudnetService
+					.findChildrenesClassStudnetByClassId(classId);
+			List<Order> studentOrder = orderService.selectOrderListByStudentId(studentId);
+
 			Order student = studentOrder.get(0);
-			if(student.getLastdate() !=null) {
-				Integer time = Integer.valueOf((int) (new Date().getTime() - student.getLastdate().getTime()) / (1000 * 60 * 60 * 24));
-				
+			if (student.getLastdate() != null) {
+				Integer time = Integer.valueOf(
+						(int) (new Date().getTime() - student.getLastdate().getTime()) / (1000 * 60 * 60 * 24));
+
 				session.setAttribute("time", time);
 			}
 			session.setAttribute("studentOrder", student);
@@ -280,9 +298,10 @@ public class ChildrenClassesController {
 			}
 			return "root/studentInfo/children/studentShiftWork";
 		}
-		if(schoolType == 2) {
-			//查询
-			List<HighesClassStudnet> highesClassStudnets = highesClassStudnetService.findHighesClassStudnetListByClassId(classId);
+		if (schoolType == 2) {
+			// 查询
+			List<HighesClassStudnet> highesClassStudnets = highesClassStudnetService
+					.findHighesClassStudnetListByClassId(classId);
 			for (HighesClassStudnet highesClassStudnet : highesClassStudnets) {
 				if (highesClassStudnet.getStudentId().equals(studentId)) {
 					session.setAttribute("childrenesClassStudnet", highesClassStudnet);
@@ -291,53 +310,55 @@ public class ChildrenClassesController {
 			}
 			return "root/studentInfo/high/studentShiftWork";
 		}
-		if(schoolType == 3) {
-			//查询
-			List<ArtClassStudnet> highesClassStudnets = artClassStudnetService.findArtClassStudnetListByClassId(classId);
-			for (ArtClassStudnet highesClassStudnet : highesClassStudnets) {
-				if (highesClassStudnet.getStudentId().equals(studentId)) {
-					session.setAttribute("childrenesClassStudnet", highesClassStudnet);
+		if (schoolType == 3) {
+			// 查询
+			List<ArtClassStudnet> artClassStudnets = artClassStudnetService.findArtClassStudnetListByClassId(classId);
+
+			for (int i = 0; i < artClassStudnets.size(); i++) {
+				if (artClassStudnets.get(i).getStudentId().equals(studentId)) {
+					session.setAttribute("childrenesClassStudnet", artClassStudnets.get(i));
 					break;
 				}
 			}
 			return "root/studentInfo/art/studentShiftWork";
 		}
 		return "root/studentInfo/children/studentShiftWork";
-		 
+
 	}
 
-/*
-	@RequestMapping("classIdChange.html")
-	@ResponseBody
-	public Map<String, Object> updateStudentShiftWork(Integer classId,Integer studentId,Integer classesId,Integer classType,Integer classesType){
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		Student student = studentService.findStudentById(studentId);
-		
-		
-		DepartmentOfPediatrics departmentOfPediatrics = departmentOfPediatricsService.findDepartmentOfByClassId(classId);
-		
-		DepartmentOfPediatrics depa = departmentOfPediatricsService.findDepartmentOfByClassId(classesId);
+	/*
+	 * @RequestMapping("classIdChange.html")
+	 * 
+	 * @ResponseBody public Map<String, Object> updateStudentShiftWork(Integer
+	 * classId,Integer studentId,Integer classesId,Integer classType,Integer
+	 * classesType){ Map<String, Object> jsonMap = new HashMap<String, Object>();
+	 * Student student = studentService.findStudentById(studentId);
+	 * 
+	 * 
+	 * DepartmentOfPediatrics departmentOfPediatrics =
+	 * departmentOfPediatricsService.findDepartmentOfByClassId(classId);
+	 * 
+	 * DepartmentOfPediatrics depa =
+	 * departmentOfPediatricsService.findDepartmentOfByClassId(classesId);
+	 * 
+	 * Double vipMoney = null; if(student.getStudentHour() == null) {
+	 * student.setStudentHour(0.0); } //获取学生总课时
+	 * jsonMap.put("studentHour",student.getStudentHour());
+	 * 
+	 * if(classesType ==1) {
+	 * 
+	 * } if(classesType ==2) {
+	 * 
+	 * }
+	 * 
+	 * return jsonMap;
+	 * 
+	 * }
+	 */
 
-		Double vipMoney = null;
-		if(student.getStudentHour() == null) {
-			student.setStudentHour(0.0);
-		}
-		//获取学生总课时
-		jsonMap.put("studentHour",student.getStudentHour());
-		
-		if(classesType ==1) {
-		
-		}
-		if(classesType ==2) {
-		
-		}
-	
-		return jsonMap;
-	
-	}*/
-	
 	/**
-	 * 学生专班
+	 * 学生转班
+	 * 
 	 * @param classId
 	 * @param studentId
 	 * @param remarks
@@ -347,7 +368,8 @@ public class ChildrenClassesController {
 	 */
 	@RequestMapping("updateStudentShiftWork.html")
 	@ResponseBody
-	public Map<String, String> updateStudentShiftWork(Integer classId, Integer  studentId, String  remarks, Double  money,HttpSession session){
+	public Map<String, String> updateStudentShiftWork(Integer classId, Integer studentId, String remarks, Double money,
+			HttpSession session) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		Order order = new Order();
@@ -363,7 +385,7 @@ public class ChildrenClassesController {
 		order.setSchoolId(schoolId);
 		order.setActivityId(0);
 		SimpleDateFormat startTime1 = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		String date = startTime1.format(new Date());
 		String str = date.replace("-", "");
 		order.setOrderNumber("SJ" + str + studentId + new Random().nextInt(100));
@@ -374,46 +396,77 @@ public class ChildrenClassesController {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
-		//获取学校类别
+
+		// 获取学校类别
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
-				
-		if(orderService.addOrder(order)>0) {
-			//如果学校是少儿修改少儿班级学生
-			if(schoolType == 1) {
+
+		if (orderService.addOrder(order) > 0) {
+			// 如果学校是少儿修改少儿班级学生
+			if (schoolType == 1) {
 				ChildrenesClassStudnet cStudnet = new ChildrenesClassStudnet();
 				cStudnet.setStudentId(studentId);
 				cStudnet.setClassId(classId);
-				if(childrenesClassStudnetService.updateChildrenesClassStudnet(cStudnet)>0) {
-					jsonMap.put("state","1");
+				if (childrenesClassStudnetService.updateChildrenesClassStudnet(cStudnet) > 0) {
+					jsonMap.put("state", "1");
 				}
 			}
-			//如果学校类别是高中，修改高中班级
-			if(schoolType == 2) {
-				HighesClassStudnet cStudnet = new HighesClassStudnet();
-				cStudnet.setStudentId(studentId);
-				cStudnet.setClassId(classId);
-				if(highesClassStudnetService.updateHighStudentClass(cStudnet)>0) {
-					jsonMap.put("state","1");
-				}
-			}
-			//如果是艺考，修改艺考
-			if(schoolType == 3) {
+
+			// 如果是艺考，修改艺考
+			if (schoolType == 3) {
 				ArtClassStudnet cStudnet = new ArtClassStudnet();
 				cStudnet.setStudentId(studentId);
 				cStudnet.setClassId(classId);
-				if(artClassStudnetService.updateArtClassStudentByClass(cStudnet)>0) {
-					jsonMap.put("state","1");
+				if (artClassStudnetService.updateArtClassStudentByClass(cStudnet) > 0) {
+					jsonMap.put("state", "1");
 				}
 			}
-		}else {
-			jsonMap.put("state","0");
+		} else {
+			jsonMap.put("state", "0");
 		}
-		
-		
+
 		return jsonMap;
 	}
-	
-	
-	
+
+	/**
+	 * 高中学生转班
+	 * 
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("updateHighStudentShiftWork.html")
+	@ResponseBody
+	public Map<String, String> updateHighStudentShiftWork(String map) {
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		Map<String, Object> map2 = (Map<String, Object>) JSON.parseObject(map);
+
+		List<HighesClassStudnet> highesClassStudnets = new ArrayList<HighesClassStudnet>();
+		HighesClassStudnet high = null;
+		List<String> studentId = null ;
+		String classId = null;
+		for (String key : map2.keySet()) {
+			if (("classId").equals(key)) {
+				classId = (String) map2.get(key);
+			}
+			if (("studentId").equals(key)) {
+				studentId = (List<String>) map2.get(key);
+			}
+		}
+
+		for (int i = 0; i < studentId.size(); i++) {
+			high = new HighesClassStudnet();
+			high.setStudentId(Integer.valueOf(studentId.get(i)));
+			high.setClassId(Integer.valueOf(classId));
+			highesClassStudnets.add(high);
+		}
+
+		if (highesClassStudnetService.updateHighStudentClass(highesClassStudnets) > 0) {
+			jsonMap.put("state", "1");
+		} else {
+			jsonMap.put("state", "0");
+
+		}
+
+		return jsonMap;
+	}
+
 }

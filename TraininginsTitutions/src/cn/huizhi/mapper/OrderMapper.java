@@ -86,7 +86,6 @@ public interface OrderMapper {
 	public List<Order> selectExpenOrderList(Order order);
 
 	/**
-	 * <<<<<<< HEAD 查询学生 赠品 税分
 	 * 
 	 * @param student
 	 * @return

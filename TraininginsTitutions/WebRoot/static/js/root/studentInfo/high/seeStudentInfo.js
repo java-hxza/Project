@@ -219,29 +219,6 @@ $(function() {
 	}
 
 
-	/**
-	 * 学生转班
-	 */
-	shiftWork = function() {
-		if ($(".customCheckes:checked").length < 1) {
-			if (!$(".customCheckes").prop("checked")) {
-				alert("请选中一条数据！");
-				return false;
-			}
-		} else if ($(".customCheckes:checked").length > 1) {
-			if ($(".customCheckes").prop("checked")) {
-				alert("只能选中一条数据！");
-				return false;
-			}
-		}
-
-		var studentId = $(".customCheckes:checked").parent().parent().next().children().attr("name");
-		var classId = $(".customCheckes:checked").parent().parent().next().children().attr("id_classId");
-
-
-		location.href = "studentShiftWork.html?studentId=" + studentId + "&classId=" + classId;
-
-	}
 
 	/**
 	 * 下拉框事件
@@ -280,29 +257,23 @@ $(function() {
 	 * 保存转班
 	 */
 	updateStudentShiftWork = function() {
-		var classId = $("#classIdes").val();
-
-		var studentId = $("#studentId").attr("name");
-
-		var remarks = $("#remarks").val();
-		var money = $("#money").val();
-
-		var reg = /\d+(\.\d+)?/;
-		if (!reg.test(money)) {
-			alert("请输入正确的金额");
-			return false;
+		var classId = $(".checkes:checked").parent().parent().next().children().attr("name");
+		var studentId = [];
+		for (var i = 0; i < $(".customCheckes:checked").length; i++) {
+			studentId.push($(".customCheckes:checked").eq(i).parent().parent().parent().children("td:eq(1)").children().attr("name"));
 		}
+
 		if (classId == "") {
 			alert("请选择正确的班级！");
 			return false;
 		}
 		$.ajax({
-			url : 'updateStudentShiftWork.html',
+			url : 'updateHighStudentShiftWork.html',
 			data : {
-				classId : classId,
-				studentId : studentId,
-				remarks : remarks,
-				money : money
+				map : JSON.stringify({
+					classId : classId,
+					studentId : studentId
+				})
 			},
 			dataType : 'JSON',
 			type : 'post',
@@ -442,7 +413,7 @@ $(function() {
 				return false;
 			}
 		}
-		
+
 		var studentId = $(".customCheckes:checked").parent().parent().parent().children("td:eq(1)").children().attr("name")
 		var studentName = $(".customCheckes:checked").parent().parent().next().next().next().children().html();
 		var classId = $(".customCheckes:checked").parent().parent().next().next().next().children().attr("name");

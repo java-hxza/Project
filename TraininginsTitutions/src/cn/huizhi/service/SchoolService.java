@@ -16,7 +16,7 @@ public interface SchoolService {
 	 * @param cityId
 	 * @return
 	 */
-	public List<School> findSchoolByCityId(Integer cityId);
+	public List<School> findSchoolByCityId(Integer cityId,Integer cityProperId);
 	
 	/**
 	 * 添加学校

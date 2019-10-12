@@ -29,7 +29,7 @@ public interface HighesClassStudnetMapper {
 	 * @param cStudnet
 	 * @return
 	 */
-	public Integer updateHighStudentClass(HighesClassStudnet cStudnet);
+	public Integer updateHighStudentClass(@Param("list")List<HighesClassStudnet> cStudnet);
 	
 	/**
 	 * 批量结业

@@ -23,7 +23,7 @@ public interface SchoolMapper {
 	 * @param cityId
 	 * @return
 	 */
-	public List<School> selectSchoolByCityId(@Param("cityId")Integer cityId);
+	public List<School> selectSchoolByCityId(@Param("cityId")Integer cityId,@Param("cityProperId")Integer cityProperId);
 	
 	/**
 	 * 添加学校

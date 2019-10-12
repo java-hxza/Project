@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>同心同慧</title>
+<title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta
 	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
@@ -28,13 +28,13 @@ body {
 }
 
 .top1 {
-	border-radius: 50%;
-	height: "400px";
-	width: " 400px";
+	width: 50% ;
+	height : 30%;
 	margin-bottom: 5%;
 	background-color: #f9fa61;
 	background-image: linear-gradient(90deg, #f9fa61 0%, #f9fa61 100%);
 	background-color: #f9fa61;
+	margin-left: 25%;
 }
 
 .top1:hover {
@@ -52,9 +52,10 @@ body {
 				<div class="col-12">
 
 					<div class="text-center">
-						<img src="${Path }/static/images/maintenance.jpg"
+						<%-- <img src="${Path }/static/images/maintenance.jpg"
 							style="border-radius:50%" " width="200" height="200"
-							alt="File not found Image">
+							alt="File not found Image"> --%>
+						<h1 style="font-size: 70px;">同心同慧教育集团管理系统</h1>
 						<h1 class="mt-4">请选择进入的管理系统</h1>
 
 						<div class="row mt-5">

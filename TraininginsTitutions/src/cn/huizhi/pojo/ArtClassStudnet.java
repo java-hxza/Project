@@ -15,12 +15,15 @@ public class ArtClassStudnet {
 	private Date endTime;
 	private String remarks;
 
+	private Student student;
+
 	public ArtClassStudnet() {
 		super();
 	}
 
 	public ArtClassStudnet(Integer classesStudentId, String studentName, String headmaster, Date enrollmentTime,
-			Integer classId, Integer studentId, Integer state) {
+			Integer classId, Integer studentId, Integer state, Date startTime, Date endTime, String remarks,
+			Student student) {
 		super();
 		this.classesStudentId = classesStudentId;
 		this.studentName = studentName;
@@ -29,6 +32,18 @@ public class ArtClassStudnet {
 		this.classId = classId;
 		this.studentId = studentId;
 		this.state = state;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.remarks = remarks;
+		this.student = student;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	public Date getStartTime() {

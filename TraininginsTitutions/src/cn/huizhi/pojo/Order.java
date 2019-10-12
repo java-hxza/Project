@@ -27,6 +27,8 @@ public class Order {
 	private String feecateMoneyYiKao;
 	private Integer activityId;
 
+	private String cityId;
+	private String cityProperId;
 	/**
 	 * 学生交钱总数
 	 */
@@ -130,6 +132,22 @@ public class Order {
 
 	public Integer getOrderId() {
 		return orderId;
+	}
+
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+
+	public String getCityProperId() {
+		return cityProperId;
+	}
+
+	public void setCityProperId(String cityProperId) {
+		this.cityProperId = cityProperId;
 	}
 
 	public void setOrderId(Integer orderId) {

@@ -53,27 +53,26 @@
 								</span>
 							</a>
 								<div
-											class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-											<!-- item-->
-											<div class=" dropdown-header noti-title">
-												<h6 class="text-overflow m-0">欢迎 !</h6>
-											</div>
+									class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+									<!-- item-->
+									<div class=" dropdown-header noti-title">
+										<h6 class="text-overflow m-0">欢迎 !</h6>
+									</div>
 
 
-											<!-- item-->
-											<a href="javascript:void(0);"
-												class="dropdown-item notify-item"
-												onclick="switchingAccounts()"> <i
-												class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
-											</a>
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item"
+										onclick="switchingAccounts()"> <i
+										class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
+									</a>
 
-											<!-- item-->
-											<a href="welCome.html" class="dropdown-item notify-item">
-												<i class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
-											</a>
+									<!-- item-->
+									<a href="welCome.html" class="dropdown-item notify-item"> <i
+										class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
+									</a>
 
 
-										</div></li>
+								</div></li>
 						</ul>
 						<button class="button-menu-mobile open-left disable-btn">
 							<i class="mdi mdi-menu"></i>
@@ -132,16 +131,27 @@
 					</div>
 					<!-- end row -->
 					<div class="row">
-						<div class="col-md-5">
+						<div class="col-md-3">
 							<div class="form-group">
 								<label for="billing-first-name">开始日期</label> <input
 									class="form-control" type="date" id="startTime" />
 							</div>
 						</div>
-						<div class="col-md-5">
+						<div class="col-md-3">
 							<div class="form-group">
 								<label for="billing-first-name">截至日期</label> <input
 									class="form-control" type="date" id="endTime" />
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="billing-first-name">收入项目</label> 
+								<select id="feeId" class="form-control">
+									<option value="">请选择</option>
+									<c:forEach items="${schoolFeeCategories }" var="fee">
+											<option value="${fee.chargeTypeId }">${fee.chargeTypeName }</option>
+									</c:forEach>
+								</select>
 							</div>
 						</div>
 						<div class="col-md-2">
@@ -180,7 +190,17 @@
 										<table
 											class="table table-centered table-striped dt-responsive nowrap w-80"
 											id="products-datatable" border="1px solid" width="100%">
-											<tbody >
+											<tbody>
+												<tr>
+													<c:forEach items="${smList }" var="sm">
+														<td>${sm.feeName}</td>
+													</c:forEach>
+												</tr>
+												<tr>
+													<c:forEach items="${smList }" var="sm">
+														<td>${sm.sumMoney}</td>
+													</c:forEach>
+												</tr>
 												<tr>
 													<td colspan='2'>支出总额</td>
 													<td colspan='2'>收入总额</td>
@@ -189,9 +209,10 @@
 												<tr>
 													<td class="table-user" colspan='2'>${schoolExPenSum }</td>
 													<td class="table-user" colspan='2'>${schoolFeeceat }</td>
-													<td class="table-user">${schoolFeeceat-schoolExPenSum }
+													<td class="table-user">${schoolFeeceat-schoolExPenSum}
 													</td>
 												</tr>
+
 												<tr>
 													<td>校区</td>
 													<td>账户</td>
