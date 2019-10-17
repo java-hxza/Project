@@ -225,5 +225,6 @@
 										src="${Path }/static/js/admin/leftSidebar.js"></script>
 									<script
 										src="${Path }/static/js/admin/studentInfo/selectStudentFeeInfo.js"></script>
+										<script src="${Path }/static/js/admin/adminIndex.js"></script>
 </body>
 </html>

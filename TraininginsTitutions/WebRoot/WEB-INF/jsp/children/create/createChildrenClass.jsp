@@ -45,7 +45,6 @@
 					<p class="text-muted mb-4">请填写班级信息</p>
 					<!-- form -->
 					<form action="#">
-					
 						<div class="form-group">
 							<label for="fullname">班级标号</label> <input class="form-control"
 								type="text" id="classNumber" placeholder="Enter your name"
@@ -73,21 +72,13 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="emailaddress">班级所属分类</label> <select id="classTypeId"
-								class="form-control">
-								<option value="1">普通班</option>
-								<option value="2">vip班</option>
+							<label for="emailaddress">班级所属分类</label> 
+							<select id="classTypeId" class="form-control">
+									<c:forEach items="${classTypes }" var="c">
+										<option value="${c.classTypeId }">${c.classTypeName }</option>
+									</c:forEach>
 							</select>
 						</div>
-						<c:if test="${schoolType ==1}">
-							<div class="form-group">
-								<label for="emailaddress">课程分类</label> <select id="classType"
-									class="form-control">
-									<option value="0">课时班</option>
-									<option value="1">速成班</option>
-								</select>
-							</div>
-						</c:if>
 						<div class="form-group">
 							<label for="emailaddress">班级所属级别</label> <select id="classLevel"
 								class="form-control">

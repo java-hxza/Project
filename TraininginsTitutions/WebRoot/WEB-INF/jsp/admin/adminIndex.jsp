@@ -13,6 +13,10 @@
 	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
 	name="description" />
 <meta content="Coderthemes" name="author" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <!-- App favicon -->
 <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -25,6 +29,20 @@
 	type="text/css" />
 
 </head>
+<!--[if lt IE9]>
+	<script>
+	  (function() {
+	   if (!
+	   /*@cc_on!@*/
+	   0) return;
+	   var e = "abbr, article, aside, audio, canvas, datalist, details, dialog, eventsource, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, time, video".split(', ');
+	   var i= e.length;
+	   while (i--){
+	     document.createElement(e[i])
+	   }
+	})()
+	</script>
+	<![endif]-->
 
 <body>
 
@@ -209,6 +227,7 @@
 														<th>学校支出金额</th>
 														<th>学校收入金额</th>
 														<th>学校账户余额</th>
+														<th>手续费总额</th>
 														<th>学校收入项目金额</th>
 													</tr>
 												</thead>
@@ -246,6 +265,9 @@
 																class="text-body font-weight-semibold">${school.schoolFeeceat - school.schoolExPenSum}</a>
 															</td>
 															<td class="table-user"><a href="javascript:void(0);"
+																class="text-body font-weight-semibold">${serviceCharge}</a>
+															</td>
+															<td class="table-user"><a href="javascript:void(0);"
 																class="text-body font-weight-semibold"> <c:forEach
 																		items="${smList }" var="sm">
 																		<c:if test="${sm.schoolId == school.schoolId }">
@@ -265,9 +287,8 @@
 									</div>
 									<!-- App js -->
 									<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-									<script type="text/javascript"
-										src="${Path }/static/js/admin/adminIndex.js"></script>
 									<script src="${Path }/static/js/admin/leftSidebar.js"></script>
 									<script src="${Path }/static/js/login.js"></script>
+									<script src="${Path }/static/js/admin/adminIndex.js"></script>
 </body>
 </html>

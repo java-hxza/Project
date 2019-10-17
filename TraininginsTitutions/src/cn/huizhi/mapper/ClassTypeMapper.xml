@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huizhi.mapper.ClassTypeMapper">
+
+	<select id="selectClassTypes" resultType="ClassType">
+		SELECT * FROM classtype
+		WHERE schoolId = #{0}
+	</select>
+
+	<update id="updateClassTypes">
+		UPDATE traininginstitutions.classtype SET
+		classTypeName = #{classTypeName}, classTypeTime = #{classTypeTime}
+		WHERE
+		classTypeId = #{classTypeId} ;
+	</update>
+
+	<delete id="delClassTypes">
+		DELETE FROM traininginstitutions.classtype
+		WHERE
+		classTypeId = #{0} ;
+
+	</delete>
+
+	<insert id="addClassTypes">
+		INSERT INTO traininginstitutions.classtype
+		(classTypeName, schoolId, classTypeTime)VALUES(#{classTypeName},
+		#{schoolId}, #{classTypeTime});
+	</insert>
+
+</mapper>

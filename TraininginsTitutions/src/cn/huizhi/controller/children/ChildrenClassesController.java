@@ -25,6 +25,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import cn.huizhi.pojo.ArtClassStudnet;
 import cn.huizhi.pojo.ChildrenesClassStudnet;
 import cn.huizhi.pojo.Class;
+import cn.huizhi.pojo.ClassType;
 import cn.huizhi.pojo.DepartmentOfPediatrics;
 import cn.huizhi.pojo.HighesClassStudnet;
 import cn.huizhi.pojo.Order;
@@ -35,6 +36,7 @@ import cn.huizhi.pojo.User;
 import cn.huizhi.service.ArtClassStudnetService;
 import cn.huizhi.service.ChildrenesClassStudnetService;
 import cn.huizhi.service.ClassService;
+import cn.huizhi.service.ClassTypeService;
 import cn.huizhi.service.DepartmentOfPediatricsService;
 import cn.huizhi.service.HighesClassStudnetService;
 import cn.huizhi.service.OrderService;
@@ -83,6 +85,9 @@ public class ChildrenClassesController {
 
 	@Resource
 	ArtClassStudnetService artClassStudnetService;
+	
+	@Resource
+	ClassTypeService classTypeService;
 
 	@RequestMapping("childrenSchoolLogin.html")
 	public String childrenSchoolLogin(HttpSession session) {
@@ -137,7 +142,9 @@ public class ChildrenClassesController {
 	public String createChildrenClass(HttpSession session) {
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		List<DepartmentOfPediatrics> dpList = departmentOfPediatricsService.findDepartmentOfPediatrics(schoolId);
+		List<ClassType> classTypes = classTypeService.selectClassTypes(schoolId);
 		session.setAttribute("dpList", dpList);
+		session.setAttribute("classTypes", classTypes);
 		return "children/create/createChildrenClass";
 	}
 
@@ -153,6 +160,7 @@ public class ChildrenClassesController {
 	public String dpChange(Integer dpId, HttpSession session) {
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		List<Teacher> teacherUserList = teacherService.findTeachersByTeacherTypeId(null, schoolId);
+		
 		if (teacherUserList.size() > 0) {
 			return JSON.toJSONString(teacherUserList);
 		}

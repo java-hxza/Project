@@ -131,12 +131,11 @@
 														<div class="col-sm-4">
 															<a href="javascript:void(0);" class="btn btn-danger mb-2"
 																onclick="addOrders()"><i
-																class="mdi mdi-plus-circle mr-2"></i> 添加</a>
-															<!-- <a
+																class="mdi mdi-plus-circle mr-2"></i> 添加</a> <a
 																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="updateOrder()"><i
-																class="mdi mdi-plus-circle mr-2"></i> 修改</a> -->
-															<a href="javascript:void(0);"
+																class="mdi mdi-plus-circle mr-2"></i> 修改</a> <a
+																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="delOrder()"><i
 																class="mdi mdi-plus-circle mr-2"></i> 删除</a>
 															<button type="button" id="btn2"
@@ -336,7 +335,7 @@
 															</select>
 														</div>
 													</div>
-													<div class="col-md-6">
+													<div class="col-md-6 classes2">
 														<div class="form-group mb-3">
 															<label for="example-select">班级选择</label> <select
 																class="form-control classes" id="example-select">
@@ -369,7 +368,7 @@
 																type="text" id="billing-last-name" disabled />
 														</div>
 													</div>
-													<div class="col-md-6">
+													<div class="col-md-6 stuIds">
 														<div class="form-group mb-3">
 															<label for="example-select">收款人</label> <select
 																class="form-control stuId" id="example-select">

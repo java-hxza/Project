@@ -124,9 +124,9 @@ $(function() {
 			" <input type='date' class='form-control endTime'   >" +
 			"<label for='validationTooltip01'>备注</label>" +
 			"<input type='text' class='form-control remarks'  placeholder='请填写备注'   required>";
+			
 
-
-		if (class1.classTypeId == 1) {
+		if (1 == class1.classLevel) {
 			$html += "<label for='validationTooltip01'>请假课程</label><select id='thId'>";
 			for (var i = 0; i < teacherHourList.length; i++) {
 				$html += "<option value='" + teacherHourList[i].teacherHourId + "'>" +

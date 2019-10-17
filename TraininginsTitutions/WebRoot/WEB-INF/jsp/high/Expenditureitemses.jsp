@@ -181,7 +181,7 @@
 															type="text" class="form-control expenditureitemsName"
 															id="validationTooltip01" placeholder="请填写支出项目名称" required>
 													</div>
-													<button class="btn btn-primary add" type="submit">提交</button>
+													<button class="btn btn-primary add" type="button">提交</button>
 													<button class="btn btn-primary back" type="reset"
 														style="float: right;">重置</button>
 												</form>

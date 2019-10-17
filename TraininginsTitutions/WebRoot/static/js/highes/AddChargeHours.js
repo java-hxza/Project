@@ -153,10 +153,10 @@ $(function() {
 			return flase;
 		}
 		if (dpMoney == "") {
-			alert("请填写收费金额！");
+			alert("请填写实收金额！");
 			return false;
 		} else if (dpMoney < 1) {
-			alert("请填写正确的收费金额！");
+			alert("请填写正确的实收金额！");
 			return false;
 		}
 		if (hour == "") {
@@ -169,7 +169,10 @@ $(function() {
 		if (hours == "") {
 			hours = 0;
 		}
-		
+		var serviceCharge = parseFloat($.trim($(".serviceCharge").val()));
+		if(serviceCharge == ""){
+			serviceCharge = 0;
+		}
 		$.ajax({
 			type : "POST",
 			url : "addChargeHours.html",
@@ -190,7 +193,8 @@ $(function() {
 				integral : integral,
 				activityId : feecateId4,
 				discount : discount,
-				startTimes : startTimes
+				startTimes : startTimes,
+				serviceCharge : serviceCharge
 			},
 			dataType : "json",
 			success : function(data) {

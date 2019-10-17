@@ -224,8 +224,7 @@
 															test="${stu.remarks eq null}">
 															无
 													</c:if> ${stu.remarks}</td>
-													<c:if test="${schoolType == 1 }">
-
+													<c:if test="${schoolType == 1}">
 														<td class="table-user">
 														<c:if test="${stu.teacherName eq null}">
 															无

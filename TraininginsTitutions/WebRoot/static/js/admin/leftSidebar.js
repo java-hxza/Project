@@ -186,4 +186,5 @@ $(function() {
 	AdminHighStudentFeeInfo = function(){
 		location.href = "adminHighStudentFeeInfo.html";
 	}
+	
 });

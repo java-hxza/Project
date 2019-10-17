@@ -133,11 +133,6 @@
 										</div>
 										<div class="col-sm-8">
 											<div class="text-sm-right">
-												<button type="button" class="btn btn-success mb-2 mr-1">
-													<i class="mdi mdi-settings"></i>
-												</button>
-												<button type="button" class="btn btn-light mb-2 mr-1"
-													onclick="createChildrenStudent()">添加学生</button>
 											</div>
 										</div>
 										<!-- end col-->

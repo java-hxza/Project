@@ -4,7 +4,7 @@
 	<div class="slimscroll-menu" id="left-side-menu-container">
 
 		<!-- LOGO -->
-		<a href="index.html" class="logo text-center"> <span
+		<a href="adminIndex.html" class="logo text-center"> <span
 			class="logo-lg"> <img src="${Path }/static/images/logo.gif"
 				alt="" width="50%" height="30px">
 		</span> <span class="logo-sm"> <img

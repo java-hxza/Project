@@ -59,6 +59,72 @@ $(function() {
 			return false;
 		}
 	};
+	
+	updateOrder = function() {
+		if ($(".customCheckes:checked").length < 1) {
+			if (!$(".customCheckes").prop("checked")) {
+				alert("请选中一条数据！");
+				return false;
+			}
+		} else if ($(".customCheckes:checked").length > 1) {
+			alert("只能选中一条数据！");
+			return false;
+		}
+		$(".date").val($(".customCheckes:checked").parent().parent().next().next().next().text());
+		$(".expenditureitemsId").val($(".customCheckes:checked").parent().parent().next().next().next().next().attr("class"));
+		$(".paymentmethodId").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().attr("class"));
+		$(".personliable").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().text());
+		$(".remarks").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().text());
+		$(".feecategoryMoney").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().text());
+		$(".stuIds").before("<div class='col-md-6'><div class='form-group mb-3'><label for='example-select'>收款人</label><input class='form-control' type='text' id='billing-last-name' value=" + $(".customCheckes:checked").parent().parent().next().next().next().next().next().text() + " disabled /></div></div>");
+		$(".departmentofpediatricsIds").val($(".customCheckes:checked").parent().parent().next().next().next().next().next().next().next().next().next().next().next().text());
+		var orderId = $(".customCheckes:checked").parent().parent().next().text();
+		$(".stuIds").remove();
+		$(".classes2").remove();
+		$(".showOrder").remove();
+		$(".addOrder").show();
+		$(".TiJiao").click(function() {
+			var paymentmethodId = $(".paymentmethodId").val();
+			var remarks = $.trim($(".remarks").val());
+			var expenditureitemsId = $(".expenditureitemsId option:selected").val();
+			var personliable = $.trim($(".personliable").val());
+			var feecategoryMoney = $.trim($(".feecategoryMoney").val());
+			if (feecategoryMoney == "" || parseFloat(feecategoryMoney) < 1) {
+				alert("请输入正确的金额！");
+				return false;
+			} else if (personliable == "") {
+				alert("请输入责任人！");
+				return false;
+			}
+			$.ajax({
+				type : "POST",
+				url : "UpdateOrderExpenditure.html",
+				data : {
+					expenditureitemsId : expenditureitemsId,
+					feecategoryMoney : feecategoryMoney,
+					remarks : remarks,
+					paymentmethodId : paymentmethodId,
+					personliable : personliable,
+					orderId : orderId
+				},
+				dataType : "json",
+				success : function(data) {
+					data = JSON.parse(data);
+					if (data.update == "1") {
+						alert("修改成功！");
+						location.href = "selectOrderExpenditure.html";
+					} else {
+						alert("修改失败！");
+						location.href = "selectOrderExpenditure.html";
+					}
+				},
+				error : function(data) {
+					alert("系统出错！");
+					location.href = "selectOrderExpenditure.html";
+				}
+			});
+		});
+	};
 
 	addOrders = function() {
 		$(".showOrder").remove();

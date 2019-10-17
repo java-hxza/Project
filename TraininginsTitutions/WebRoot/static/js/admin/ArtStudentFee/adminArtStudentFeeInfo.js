@@ -20,21 +20,33 @@ $(function() {
 	}
 	num = num.substring(1, num.length - 1);
 	var number = 0;
+	var numbers = 0;
+	var numbers2 = 0;
 	for (var i = 0; i < $(".userId").length; i++) {
+		numbers = 0;
+		numbers2 = 0;
 		for (var j = 0; j < $(".feecategorys").length; j++) {
-			if ((j + 1) == num.split("-")[number].split(",")[j]) {
-				$(".userId").eq(i).find("td").eq(8 + j).after("<td>0</td>");
-			} else {
-				if ($(".userId").eq(i).find("td").eq(8).attr("Money").split(",")[j] == undefined) {
+			if (num.split("-")[number].split(",")[numbers] == "") {
+				numbers = numbers + 1;
+			}
+			if ((j + 1) == num.split("-")[number].split(",")[numbers]) {
+				if ($(".userId").eq(i).find("td").eq(8).attr("Money").split(",")[numbers2] == undefined) {
 					$(".userId").eq(i).find("td").eq(8 + j).after("<td>0</td>");
 				} else {
-					$(".userId").eq(i).find("td").eq(8 + j).after("<td>" + $(".userId").eq(i).find("td").eq(8).attr("Money").split(",")[j] + "</td>");
+					$(".userId").eq(i).find("td").eq(8 + j).after("<td>" + $(".userId").eq(i).find("td").eq(8).attr("Money").split(",")[numbers2] + "</td>");
+					var a = $(".userId").eq(i).find("td").eq(8).attr("Money").split(",")[numbers2];
+					numbers2++;
 				}
+			} else {
+				$(".userId").eq(i).find("td").eq(8 + j).after("<td>0</td>");
 			}
+			//alert((j + 1) + "," + num.split("-")[number].split(",")[numbers]);
+			if ((j + 1) == num.split("-")[number].split(",")[numbers]) {
+				numbers = numbers + 1;
+			}
+
 		}
-		if ((j + 1) == $(".feecategorys").length) {
-			number = number + 1;
-		}
+		number = number + 1;
 	}
 
 	queryArtStudentFee = function() {

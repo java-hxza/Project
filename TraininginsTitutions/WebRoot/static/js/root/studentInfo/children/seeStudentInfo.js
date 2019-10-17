@@ -377,7 +377,6 @@ $(function(){
 			var thId = $(".checkes:checked").parent().parent().parent().children("td:eq(1)").children().attr("th_id");
 			var contentOfCourses = $("#contentOfCourses").val();
 			
-			alert(classHours);
 
 		$.ajax({
 			url : 'childrenClassBatchRegistration.html',

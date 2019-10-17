@@ -87,7 +87,7 @@ $(function() {
 					if (data.UsertypeId == "1") {
 							location.href = "adminIndex.html";
 					} else {
-							location.href = "highIndex.html";
+							location.href = "index.html";
 					}
 				} else {
 					alert("账号密码错误，请检查重试!");

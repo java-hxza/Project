@@ -223,8 +223,6 @@
 										<script type="text/javascript"
 											src="${Path }/static/js/admin/leftSidebar.js"></script>
 										<script type="text/javascript"
-											src="${Path }/static/js/admin/adminIndex.js"></script>
-										<script type="text/javascript"
 											src="${Path }/static/js/admin/info/schoolTeacherInfo.js"></script>
 </body>
 </html>

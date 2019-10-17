@@ -1,5 +1,7 @@
 package cn.huizhi.pojo;
 
+import org.omg.CORBA.PRIVATE_MEMBER;
+
 /**
  * 少儿班级
  * 
@@ -39,8 +41,11 @@ public class Class {
 	private Integer teacherId;
 
 	private Integer classLevel;
+	
 	private Integer classType;
-
+	
+	private ClassType classType2;
+	
 	/**
 	 * 少儿班级所属学校主键
 	 */
@@ -65,9 +70,10 @@ public class Class {
 		this.classType = classType;
 	}
 
+
 	public Class(Integer classId, String classNumber, String className, Integer classTypeId, Integer dpId,
-			String headmaster, Integer teacherId, Integer classLevel, Integer classType, Integer schoolId,
-			School school, DepartmentOfPediatrics departmentOfPediatrics) {
+			String headmaster, Integer teacherId, Integer classLevel, Integer classType, ClassType classType2,
+			Integer schoolId, School school, DepartmentOfPediatrics departmentOfPediatrics) {
 		super();
 		this.classId = classId;
 		this.classNumber = classNumber;
@@ -78,11 +84,17 @@ public class Class {
 		this.teacherId = teacherId;
 		this.classLevel = classLevel;
 		this.classType = classType;
+		this.classType2 = classType2;
 		this.schoolId = schoolId;
 		this.school = school;
 		this.departmentOfPediatrics = departmentOfPediatrics;
 	}
-
+	public ClassType getClassType2() {
+		return classType2;
+	}
+	public void setClassType2(ClassType classType2) {
+		this.classType2 = classType2;
+	}
 	public Integer getDpId() {
 		return dpId;
 	}

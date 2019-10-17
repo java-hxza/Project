@@ -163,6 +163,7 @@
 													</th>
 													<th>班级班号</th>
 													<th>班级名称</th>
+													<th>班级所属科别</th>
 													<th>班级类型</th>
 													<th>任课老师</th>
 													<th>班级所属学校</th>
@@ -185,6 +186,9 @@
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${childrenClass.departmentOfPediatrics.dpTypeName}</a>
+														</td>
+														<td class="table-user"><a href="javascript:void(0);"
+															class="text-body font-weight-semibold">${childrenClass.classType2.classTypeName}</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${childrenClass.headmaster}</a>

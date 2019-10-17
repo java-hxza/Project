@@ -137,6 +137,7 @@ public class WelcomeController {
 		List<School> schoolListAll = schoolService.findSchools();
 		List<SchoolFeeCategorySumMoney> smList = new ArrayList<SchoolFeeCategorySumMoney>();
 		SchoolFeeCategorySumMoney sm = null;
+		Double serviceCharge = 0.0;
 		Order order;
 		for (School school : schoolListAll) {
 			order = new Order();
@@ -159,6 +160,9 @@ public class WelcomeController {
 			//计算收费项目金额
 			for (int i = 0; i < orderListBySchool.size(); i++) {
 				
+				if(orderListBySchool.get(i).getFeecateId() == null) {
+					continue;
+				}
 				String feeId [] = orderListBySchool.get(i).getFeecateId().split(",");
 				if( orderListBySchool.get(i).getFeecateMoney() == null) {
 					orderListBySchool.get(i).setFeecateMoney("0");
@@ -188,6 +192,10 @@ public class WelcomeController {
 			for (Order order2 : orderListBySchool) {
 				if (order2.getIdentification() == 0) {
 					school.setSchoolFeeceat(school.getSchoolFeeceat() + order2.getDpMoney()); 
+					if(order2.getServiceCharge() == null) {
+						continue;
+					}
+					serviceCharge += order2.getServiceCharge();
 				}
 			}
 			
@@ -198,6 +206,7 @@ public class WelcomeController {
 				}
 			}
 		}
+		session.setAttribute("serviceCharge", serviceCharge);
 		session.setAttribute("smList", smList);
 		session.setAttribute("schoolListAll", schoolListAll);
 		return "admin/adminIndex";
@@ -217,6 +226,7 @@ public class WelcomeController {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		List<SchoolFeeCategorySumMoney> smList = new ArrayList<SchoolFeeCategorySumMoney>();
 		SchoolFeeCategorySumMoney sm = null;
+		Double serviceCharge = 0.0;
 		for (School school : schoolListAll) {
 			order = new Order();
 			//判断非空
@@ -258,7 +268,9 @@ public class WelcomeController {
 		
 			//计算收费项目金额
 			for (int i = 0; i < orderListBySchool.size(); i++) {
-				
+				if(orderListBySchool.get(i).getFeecateId() == null) {
+					continue;
+				}
 				String feeId [] = orderListBySchool.get(i).getFeecateId().split(",");
 				if( orderListBySchool.get(i).getFeecateMoney() == null) {
 					orderListBySchool.get(i).setFeecateMoney("0");
@@ -281,12 +293,17 @@ public class WelcomeController {
 					
 				}
 			}
-
+			
+			
 			// 学校支出订单
 			List<Order> schoolExpenList = orderService.findExpenOrderList(order);
 			for (Order order2 : orderListBySchool) {
 				if (order2.getIdentification() == 0) {
 					school.setSchoolFeeceat(school.getSchoolFeeceat() + order2.getDpMoney()); 
+					if(order2.getServiceCharge() == null) {
+						continue;
+					}
+					serviceCharge += order2.getServiceCharge();
 				}
 			}
 
@@ -297,6 +314,7 @@ public class WelcomeController {
 			}
 		}
 		session.setAttribute("smList", smList);
+		session.setAttribute("serviceCharge", serviceCharge);
 		session.setAttribute("schoolListAll", schoolListAll);
 		return "admin/adminIndex";
 	}

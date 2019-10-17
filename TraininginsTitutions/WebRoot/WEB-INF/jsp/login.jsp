@@ -19,6 +19,17 @@
 .demo-1 .large-header {
 	background-image: url('${Path}/static/images/back.jpg');
 }
+
+#logo{
+	position: relative;
+	top: 60px;
+	left: 90px;
+	
+}
+#d1{
+	position: relative;
+	top: -100px;
+}
 </style>
 <!--[if IE]>
 	<script src="js/html5.js"></script>
@@ -30,7 +41,10 @@
 			<div id="large-header" class="large-header">
 				<canvas id="demo-canvas"></canvas>
 				<div class="logo_box">
-					<h3>欢迎你</h3>
+					<div id="d1">
+						<img alt="" id="logo" src="${Path }/static/images/LOGO(1).jpg" width="50%" height="50%">
+						<h3>同心同慧教育集团</h3>
+					</div>
 					<form action="#" name="f" method="post">
 						<div class="input_outer">
 							<span class="u_user"></span> <input name="logname"  id="logname" class="text"

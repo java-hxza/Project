@@ -229,11 +229,9 @@
 											<td>订单编号</td>
 											<td>收款人</td>
 											<td>日期</td>
-											<td>项目名称</td>
 											<td>收款金额</td>
 											<td>收款方式</td>
 											<td>责任人</td>
-											<td>课程</td>
 											<td>新增课时</td>
 											<td>赠送课时</td>
 											<td>费用起始日</td>
@@ -248,14 +246,10 @@
 												<td class="table-user"><fmt:formatDate
 														value="${order.startTime }" pattern="yyyy-MM-dd hh:mm"></fmt:formatDate>
 												</td>
-												<td class="table-user">
-													${order.feeCategory.chargeTypeName }</td>
 												<td class="table-user">${order.dpMoney }</td>
 												<td class="table-user">${order.paymentMethod.paymentmethodName }
 												</td>
 												<td class="table-user">${order.personliable }</td>
-												<td class="table-user">${order.departmentOfPediatrics.dpTypeName }
-												</td>
 												<td class="table-user">${order.addhour }</td>
 												<td class="table-user">${order.givehour }</td>
 												<td class="table-user"><fmt:formatDate
@@ -292,4 +286,5 @@
 						<script
 							src="${Path }/static/js/admin/orderSchool/selectOrderSchoolInfo.js"></script>
 						<script src="${Path }/static/js/admin/operator.js"></script>
+						
 </html>

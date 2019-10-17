@@ -67,8 +67,8 @@
 									</a>
 
 									<!-- item-->
-									<a href="welCome.html" class="dropdown-item notify-item">
-										<i class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
+									<a href="welCome.html" class="dropdown-item notify-item"> <i
+										class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
 									</a>
 
 
@@ -181,6 +181,16 @@
 											class="table table-centered table-striped dt-responsive nowrap w-80"
 											id="products-datatable" border="1px solid" width="100%">
 											<tbody>
+												<tr>
+													<c:forEach items="${smList }" var="sm">
+														<td>${sm.feeName}</td>
+													</c:forEach>
+												</tr>
+												<tr>
+													<c:forEach items="${smList }" var="sm">
+														<td>${sm.sumMoney}</td>
+													</c:forEach>
+												</tr>
 												<tr>
 													<td colspan='2'>支出总额</td>
 													<td colspan='2'>收入总额</td>

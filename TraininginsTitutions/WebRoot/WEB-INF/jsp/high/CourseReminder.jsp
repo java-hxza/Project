@@ -123,47 +123,17 @@
 							<h3 style="text-align:center">学生课程提醒</h3>
 							<div class="card-body ">
 								<div class="row">
-									<button type="button" id="btn2" class="btn btn-danger mb-2"
+									<button type="button" id="btn2" class="btn btn-danger mb-1"
 										onclick="Printing()">打印</button>
 
-									<div class="col-md-4" style="margin:auto;">
+									<div class="col-md-2">
 										<label>学员姓名</label>
 										<div class="input-group">
 											<input class="form-control studentName" type="text"
 												id="billing-first-name" placeholder="可填可不填" />
 										</div>
 									</div>
-									<button type="button" id="btn2"
-										class="btn btn-danger mb-2 Exports">导出Excel</button>
-								</div>
-								<div class="row">
-									<div class="col-md-1"></div>
-									<div class="col-md-4">
-										<label>课时</label>
-										<div class="input-group">
-											<input type="text" class="form-control Hours"
-												data-toggle="input-mask"
-												data-mask-format="00000000000000000" data-reverse="true"
-												placeholder="剩余XXX课时提醒">
-											<button class="btn btn-dark  " type="button" onclick=Hour()>查找</button>
-										</div>
-									</div>
-									<div class="col-md-1"></div>
-									<div class="col-md-4">
-										<label>时间段</label>
-										<div class="input-group">
-											<input type="text" class="form-control Times"
-												data-toggle="input-mask"
-												data-mask-format="00000000000000000" data-reverse="true"
-												placeholder="剩余XXX天数提醒">
-											<button class="btn btn-dark  " type="button" onclick=Time()>查找</button>
-										</div>
-									</div>
-
-								</div>
-								<div class="row appends">
-									<div class="col-md-1"></div>
-									<div class="col-md-4">
+									<div class="col-md-2">
 										<label>选择课程</label>
 										<div class="input-group">
 											<select class="form-control departmentOfPediatrics"
@@ -175,8 +145,17 @@
 											</select>
 										</div>
 									</div>
-									<div class="col-md-1"></div>
-									<div class="col-md-4">
+									<div class="col-md-2">
+										<label>课时</label>
+										<div class="input-group">
+											<input type="text" class="form-control Hours"
+												data-toggle="input-mask"
+												data-mask-format="00000000000000000" data-reverse="true"
+												placeholder="剩余XXX课时提醒">
+											<button class="btn btn-dark  " type="button" onclick=Hour()>查找</button>
+										</div>
+									</div>
+									<div class="col-md-2">
 										<label for="example-select">收款项目</label>
 										<div class="input-group">
 											<select class="form-control feecateId" id="example-select">
@@ -187,6 +166,33 @@
 											</select>
 										</div>
 									</div>
+									<div class="col-md-2">
+										<label>时间段</label>
+										<div class="input-group">
+											<input type="text" class="form-control Times"
+												data-toggle="input-mask"
+												data-mask-format="00000000000000000" data-reverse="true"
+												placeholder="剩余XXX天数提醒">
+											<button class="btn btn-dark  " type="button" onclick=Time()>查找</button>
+										</div>
+									</div>
+									
+									
+									<button type="button" id="btn2"
+										class="btn btn-danger mb-1 Exports">导出Excel</button>
+								</div>
+								<div class="row">
+									<div class="col-md-1"></div>
+									
+									<div class="col-md-1"></div>
+									
+
+								</div>
+								<div class="row appends">
+									<div class="col-md-1"></div>
+									
+									<div class="col-md-1"></div>
+									
 								</div>
 								<!-- <table class="table table-bordered table-centered mb-0">
 											<thead class="thead-light">

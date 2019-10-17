@@ -168,6 +168,7 @@
 													<th>报名渠道</th>
 													<th>招生老师</th>
 													<th>接送人</th>
+													<th>上课时间段</th>
 													<th>备注</th>
 												</tr>
 											</thead>
@@ -227,7 +228,10 @@
 															class="text-body font-weight-semibold">${children.student.registrationConsultant }</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
-															class="text-body font-weight-semibold">${children.student.registrationConsultant }</a>
+															class="text-body font-weight-semibold">${children.student.theSurrogate }</a>
+														</td>
+														<td class="table-user"><a href="javascript:void(0);"
+															class="text-body font-weight-semibold">${children.schoolTime}</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${children.student.remarks }</a>

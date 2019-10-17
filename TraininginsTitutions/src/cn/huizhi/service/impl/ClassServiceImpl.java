@@ -42,8 +42,8 @@ public class ClassServiceImpl implements ClassService {
 	 * 查询班级
 	 */
 	@Override
-	public List<Class> selectClass(Integer schoolId,Integer classType) {
-		return classMapper.selectClass(schoolId,classType);
+	public List<Class> selectClass(Integer schoolId,Integer classTypeTime) {
+		return classMapper.selectClass(schoolId,classTypeTime);
 	}
 
 	@Override
@@ -52,8 +52,8 @@ public class ClassServiceImpl implements ClassService {
 	}
 
 	@Override
-	public List<Class> selectVIPClass(Integer classTypeId, Integer classType, Integer schoolId) {
-		return classMapper.selectVIPClass(classTypeId, classType, schoolId);
+	public List<Class> selectVIPClass(Integer classTypeId, Integer schoolId) {
+		return classMapper.selectVIPClass(classTypeId, schoolId);
 	}
 	
 	
@@ -63,8 +63,8 @@ public class ClassServiceImpl implements ClassService {
 	}
 
 	@Override
-	public List<Class> selectClass2(Integer schoolId, Integer classType) {
-		return classMapper.selectClass2(schoolId, classType);
+	public List<Class> selectClass2(Integer schoolId,Integer classTypeTime) {
+		return classMapper.selectClass2(schoolId,classTypeTime);
 	}
 
 	@Override

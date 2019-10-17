@@ -14,7 +14,6 @@ public class ArtClassStudnet {
 	private Date startTime;
 	private Date endTime;
 	private String remarks;
-
 	private Student student;
 
 	public ArtClassStudnet() {
@@ -37,6 +36,7 @@ public class ArtClassStudnet {
 		this.remarks = remarks;
 		this.student = student;
 	}
+
 
 	public Student getStudent() {
 		return student;
@@ -125,5 +125,6 @@ public class ArtClassStudnet {
 	public void setState(Integer state) {
 		this.state = state;
 	}
+
 
 }

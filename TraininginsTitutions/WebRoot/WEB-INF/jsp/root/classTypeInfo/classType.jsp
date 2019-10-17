@@ -117,7 +117,7 @@
 											href="javascript: void(0);">账户信息</a></li>
 									</ol>
 								</div>
-								<h4 class="page-title">账户信息</h4>
+								<h4 class="page-title">学员科别信息</h4>
 							</div>
 						</div>
 					</div>
@@ -182,14 +182,6 @@
 														<label for="validationTooltip01">名称</label> <input
 															type="text" class="form-control" id="validationTooltip01"
 															placeholder="请填写名称" required>
-													</div>
-													<div class="form-group position-relative mb-3">
-														<label for="validationTooltip01">班级类别</label> <select
-															class="form-control" id="chargeTypeId">
-															<c:forEach items="${feeCategorieList }" var="f">
-																<option value="${f.chargeTypeId }">${f.chargeTypeName }</option>
-															</c:forEach>
-														</select>
 													</div>
 													<button class="btn btn-primary add" type="submit">提交</button>
 													<button class="btn btn-primary back" type="reset"

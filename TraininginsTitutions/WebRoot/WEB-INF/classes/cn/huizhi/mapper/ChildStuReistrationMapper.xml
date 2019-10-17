@@ -111,8 +111,8 @@
 		traininginstitutions.class c
 		,traininginstitutions.order o
 		<where>
-			and ccs.classesStudentId = css.childStuId and c.classId = css.classId
-			and o.classId = css.classId
+		 	 and ccs.studentId = css.childStuId and c.classId = css.classId
+			and o.classId = css.classId  
 			<if test="classId!=null and classId!=''">
 				and c.classId = #{classId}
 			</if>

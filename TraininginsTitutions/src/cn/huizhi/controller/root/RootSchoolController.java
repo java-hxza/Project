@@ -42,6 +42,7 @@ import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.PaymentMethod;
 import cn.huizhi.pojo.Reserveschool;
 import cn.huizhi.pojo.School;
+import cn.huizhi.pojo.SchoolFeeCategorySumMoney;
 import cn.huizhi.pojo.Student;
 import cn.huizhi.pojo.StudentLeave;
 import cn.huizhi.pojo.Teacher;
@@ -139,6 +140,39 @@ public class RootSchoolController {
 	@Resource
 	StudentLeaveService studentLeaveService;
 
+	@RequestMapping("index.html")
+	public String indexHtml(HttpSession session) {
+
+		Integer loginType = (Integer) session.getAttribute("loginType");
+		if (loginType == 1) {
+
+			List<UserDiction> userListDiction = (List<UserDiction>) session.getAttribute("schoolListByUId");
+			Integer schoolId = userListDiction.get(0).getSchoolId();
+			session.setAttribute("schoolId", schoolId);
+
+			School school = schoolService.selectSchoolById(schoolId);
+
+			session.setAttribute("schoolName", school.getSchoolName());
+			List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
+
+			session.setAttribute("classList", classList);
+		}
+		if (loginType == 2) {
+
+			List<TeacherDiction> userListDiction = (List<TeacherDiction>) session.getAttribute("schoolListByUId");
+			Integer schoolId = userListDiction.get(0).getSchoolId();
+			session.setAttribute("schoolId", schoolId);
+			
+			School school = schoolService.selectSchoolById(schoolId);
+
+			session.setAttribute("schoolName", school.getSchoolName());
+			List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
+
+			session.setAttribute("classList", classList);
+		}
+		return "root/index";
+	}
+
 	/**
 	 * 切换账户
 	 * 
@@ -158,20 +192,59 @@ public class RootSchoolController {
 	 */
 	@RequestMapping("rootSchoolInfo.html")
 	public String schoolInfo(HttpSession session) {
-
+		Integer schoolId = (Integer) session.getAttribute("schoolId");
 		Order orders = new Order();
-		orders.setSchoolId((Integer) session.getAttribute("schoolId"));
+		orders.setSchoolId(schoolId);
 		List<Order> schoolOrderList = orderService.findOrderListBySchool(orders);
-
-		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
-
+		List<SchoolFeeCategorySumMoney> smList = new ArrayList<SchoolFeeCategorySumMoney>();
+		SchoolFeeCategorySumMoney sm = null;
+		Double serviceCharge = 0.0;
 		// 学校支出订单
 		List<Order> schoolExpenList = orderService.findExpenOrderList(orders);
 
+		List<Order> orderListBySchool = orderService.findOrderListBySchool(orders);
+		// 学校收费项目
+		List<FeeCategory> schoolFeeCategories = feeCategoryService.selectFeeCategory(schoolId);
+		// 统计学校收费项目
+		for (int i = 0; i < schoolFeeCategories.size(); i++) {
+			sm = new SchoolFeeCategorySumMoney();
+			sm.setFeeId(String.valueOf(schoolFeeCategories.get(i).getChargeTypeId()));
+			sm.setFeeName(schoolFeeCategories.get(i).getChargeTypeName());
+			sm.setSchoolId(String.valueOf(schoolFeeCategories.get(i).getSchoolId()));
+			smList.add(sm);
+		}
+
+		// 计算收费项目金额
+		for (int i = 0; i < orderListBySchool.size(); i++) {
+			if (orderListBySchool.get(i).getFeecateId() == null) {
+				continue;
+			}
+			String feeId[] = orderListBySchool.get(i).getFeecateId().split(",");
+			if (orderListBySchool.get(i).getFeecateMoney() == null) {
+				orderListBySchool.get(i).setFeecateMoney("0");
+			}
+			String feeMoney[] = orderListBySchool.get(i).getFeecateMoney().split(",");
+			// 循环收费项目订单
+			for (int j = 0; j < feeId.length; j++) {
+				// 计算收费项目总金额
+				for (int k = 0; k < schoolFeeCategories.size(); k++) {
+					if (feeId[j].equals(String.valueOf(schoolFeeCategories.get(k).getChargeTypeId()))) {
+						for (int l = 0; l < smList.size(); l++) {
+							// 比较收费项目主键添加
+							if (smList.get(l).getFeeId().equals(feeId[j])) {
+								smList.get(l).setSumMoney(Double.valueOf(feeMoney[j]) + smList.get(l).getSumMoney());
+							}
+						}
+					}
+				}
+
+			}
+		}
 		/**
 		 * 共支出
 		 */
 		Double schoolExPenSum = 0.0;
+
 		/**
 		 * 共收入
 		 */
@@ -180,6 +253,10 @@ public class RootSchoolController {
 			for (Order order : schoolOrderList) {
 				if (order.getIdentification() == 0) {
 					schoolFeeceat += order.getDpMoney();
+					if (order.getServiceCharge() == null) {
+						continue;
+					}
+					serviceCharge = order.getServiceCharge();
 				}
 			}
 		}
@@ -189,6 +266,7 @@ public class RootSchoolController {
 		 */
 		for (Order order : schoolExpenList) {
 			if (order.getIdentification() == 1) {
+
 				schoolExPenSum += order.getFeecategoryMoney();
 			}
 		}
@@ -199,10 +277,14 @@ public class RootSchoolController {
 		BigDecimal bc = new BigDecimal(schoolFeeceat);
 		bc = bc.setScale(2, BigDecimal.ROUND_HALF_UP);
 
+		session.setAttribute("serviceCharge", serviceCharge);
 		session.setAttribute("schoolExPenSum", bd);
 		session.setAttribute("schoolFeeceat", bc);
-		session.setAttribute("schoolName", school.getSchoolName());
+		session.setAttribute("schoolName", session.getAttribute("schoolName"));
+		session.setAttribute("schoolId", schoolId);
 		session.setAttribute("schoolOrderList", schoolOrderList);
+		session.setAttribute("smList", smList);
+		session.setAttribute("schoolFeeCategories", schoolFeeCategories);
 		return "root/school/schoolInfo";
 	}
 
@@ -1131,6 +1213,7 @@ public class RootSchoolController {
 			HttpSession session) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
 		departmentOfPediatrics.setSchoolId((Integer) session.getAttribute("schoolId"));
+		departmentOfPediatrics.setChargeTypeId(2);
 		if (departmentOfPediatricsService.addDepartmentOfPediatrics(departmentOfPediatrics) > 0) {
 			jsonMap.put("state", "1");
 		} else {
@@ -1273,8 +1356,8 @@ public class RootSchoolController {
 			addstudentList = studentService.selectHigh((Integer) session.getAttribute("schoolId"), map);
 			session.setAttribute("stuClassification", "艺考");
 		}
-		
-		School school = schoolService.selectSchoolById((Integer)session.getAttribute("schoolId"));
+
+		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 		session.setAttribute("stuCount", addstudentList);
 		session.setAttribute("schoolName", school.getSchoolName());
 		return "root/addStudentInfo/addStudentInfo";
@@ -2036,7 +2119,7 @@ public class RootSchoolController {
 		return jsonMap;
 
 	}
-	
+
 	/**
 	 * 学生结业页面跳转
 	 * 
@@ -2044,7 +2127,7 @@ public class RootSchoolController {
 	 * @return
 	 */
 	@RequestMapping("queryStudentGraduation.html")
-	public String queryStudentGraduation(Integer classId,HttpSession session) {
+	public String queryStudentGraduation(Integer classId, HttpSession session) {
 
 		List studentList = null;
 
@@ -2073,8 +2156,10 @@ public class RootSchoolController {
 		return "root/studentInfo/studentGraduation";
 
 	}
+
 	/**
 	 * 操作员授权
+	 * 
 	 * @param session
 	 * @return
 	 */

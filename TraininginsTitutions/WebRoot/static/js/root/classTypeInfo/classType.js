@@ -50,13 +50,11 @@ $(function() {
 		$(".del").remove();
 		$(".add").click(function() {
 			var dpTypeName = $("#validationTooltip01").val();
-			var chargeTypeId = $("#chargeTypeId").val();
 			$.ajax({
 				type : "POST",
 				url : "addDepartmentOfPediatrics.html",
 				data : {
-					dpTypeName : dpTypeName,
-					chargeTypeId : chargeTypeId,
+					dpTypeName : dpTypeName
 				},
 				dataType : "json",
 				success : function(data) {

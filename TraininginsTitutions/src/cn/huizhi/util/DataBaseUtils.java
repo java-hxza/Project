@@ -26,7 +26,7 @@ import org.springframework.beans.factory.annotation.Value;
 public class DataBaseUtils {
 	Log loger = LogFactory.getLog(this.getClass());
 	 
-    private String HOSTIP = "152.136.46.217";//数据库服务器IP
+    private String HOSTIP = "127.0.0.1";//数据库服务器IP
     private String USERNAME = "root";//数据库用户
     private String PASSWORD = "root";//数据库密码
     private String SAVEPATH = "/root/stup/mysqlbase/";//备份文件路径

@@ -30,9 +30,11 @@
 		SELECT
 		count(1)
 		FROM student t
-		JOIN highesclassstudnet hc ON t.studentId=hc.studentId
+		JOIN highesclassstudnet hc ON
+		t.studentId=hc.studentId
 		JOIN class c ON hc.classId=c.classId
-		WHERE c.schoolId=#{0} AND
+		WHERE
+		c.schoolId=#{0} AND
 		t.feeCategory = 2
 		<if test="map.startTime !=null and map.startTime!=''">
 			and date(t.startTime) between #{map.startTime} and
@@ -63,9 +65,11 @@
 		SELECT
 		count(1)
 		FROM student t
-		JOIN highesclassstudnet hc ON t.studentId=hc.studentId
+		JOIN highesclassstudnet hc ON
+		t.studentId=hc.studentId
 		JOIN class c ON hc.classId=c.classId
-		WHERE c.schoolId=#{0} AND
+		WHERE
+		c.schoolId=#{0} AND
 		t.feeCategory = 3
 		<if test="map.startTime !=null and map.startTime!=''">
 			and date(t.startTime) between #{map.startTime} and
@@ -205,7 +209,8 @@
 		FROM
 		student s
 		WHERE s.studentName LIKE
-		CONCAT('%',#{0},'%') AND s.studentBirth
+		CONCAT('%',#{0},'%') AND
+		s.studentBirth
 		LIKE
 		CONCAT('%',#{1},'%') AND
 		s.studentSex=#{2}
@@ -337,7 +342,7 @@
 	</sql>
 
 	<resultMap type="Student" id="ArtStudentResverSchoolInfoMap">
-		<id column="st_studentId" property="studentId" />
+		<result column="st_studentId" property="studentId" />
 		<result column="st_studentName" property="studentName" />
 		<result column="st_studentSex" property="studentSex" />
 		<result column="st_studentIDCard" property="studentIDCard" />
@@ -356,7 +361,7 @@
 		<result column="st_studentHour" property="studentHour" />
 		<result column="st_integral" property="integral" />
 		<result column="st_usedIntegral" property="usedIntegral" />
-		<association property="order" javaType="Order">
+		<collection property="order" javaType="Order">
 			<id column="o_orderId" property="orderId" />
 			<result column="o_feecateId" property="feecateId" />
 			<result column="o_dpMoney" property="dpMoney" />
@@ -385,11 +390,11 @@
 			<result column="o_feecateMoney" property="feecateMoney" />
 			<result column="o_feecateMoneyYiKao"
 				property="feecateMoneyYiKao" />
-		</association>
-		<association property="reserveschool"
+		</collection>
+		<collection property="reserveschool"
 			javaType="Reserveschool">
 			<result column="res_state" property="state" />
-		</association>
+		</collection>
 	</resultMap>
 
 	<select id="findArtStudentResverSchoolInfo"
@@ -398,7 +403,7 @@
 		<include refid="ArtStudentResverSchoolInfoCol" />
 		from reserveschool res, student st,traininginstitutions.order o
 		<where>
-			st.studentId = res.studentId and st.studentId = o.stuId
+			st.studentId = res.studentId and st.studentId = o.stuId and o.identification = 0
 			<if test="map.schoolId != null and map.schoolId != ''">
 				and res.schoolId = #{map.schoolId}
 			</if>
@@ -478,11 +483,12 @@
 		o.teacherId o_teacherId,
 		o.discount o_discount,
 		o.feecateMoney o_feecateMoney,
-		o.feecateMoneyYiKao o_feecateMoneyYiKao
+		o.feecateMoneyYiKao o_feecateMoneyYiKao,
+		serviceCharge o_serviceCharge
 	</sql>
 
 	<resultMap type="Student" id="highStudentResverSchoolInfoMap">
-		<id column="st_studentId" property="studentId" />
+		<result column="st_studentId" property="studentId" />
 		<result column="st_studentName" property="studentName" />
 		<result column="st_studentSex" property="studentSex" />
 		<result column="st_studentIDCard" property="studentIDCard" />
@@ -501,7 +507,7 @@
 		<result column="st_studentHour" property="studentHour" />
 		<result column="st_integral" property="integral" />
 		<result column="st_usedIntegral" property="usedIntegral" />
-		<association property="order" javaType="Order">
+		<collection  property="order" javaType="Order">
 			<id column="o_orderId" property="orderId" />
 			<result column="o_feecateId" property="feecateId" />
 			<result column="o_dpMoney" property="dpMoney" />
@@ -527,22 +533,25 @@
 			<result column="o_integral" property="integral" />
 			<result column="o_teacherId" property="teacherId" />
 			<result column="o_discount" property="discount" />
+			<result column="o_serviceCharge" property="serviceCharge" />
 			<result column="o_feecateMoney" property="feecateMoney" />
 			<result column="o_feecateMoneyYiKao"
 				property="feecateMoneyYiKao" />
-		</association>
+		</collection>
 	</resultMap>
-	
-	<select id="findHighStudentResverSchoolInfo" resultMap="highStudentResverSchoolInfoMap" parameterType="map">
-	select distinct
+
+	<select id="findHighStudentResverSchoolInfo"
+		resultMap="highStudentResverSchoolInfoMap" parameterType="map">
+		select distinct
 		<include refid="highStudentResverSchoolInfoCol" />
-		from  student st,traininginstitutions.order o
+		from student st,traininginstitutions.order o 
 		<where>
-			  and st.studentId = o.stuId
+			and st.studentId = o.stuId and o.identification = 0
 			<if test="map.schoolId != null and map.schoolId != ''">
 				and o.schoolId = #{map.schoolId}
 			</if>
-			<if test="map.paymentmethodId != '' and map.paymentmethodId != null">
+			<if
+				test="map.paymentmethodId != '' and map.paymentmethodId != null">
 				and o.paymentmethodId = #{map.paymentmethodId}
 			</if>
 			<if test="map.classId != '' and map.classId != null">

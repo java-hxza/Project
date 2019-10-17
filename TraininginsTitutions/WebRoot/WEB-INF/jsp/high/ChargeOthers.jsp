@@ -71,7 +71,7 @@
 									class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
 								</a>
 
-							
+
 								<!-- item-->
 								<a href="welCome.html" class="dropdown-item notify-item"> <i
 									class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
@@ -131,12 +131,11 @@
 														<div class="col-sm-4">
 															<a href="${Path }/ChargeOthers.html"
 																class="btn btn-danger mb-2"><i
-																class="mdi mdi-plus-circle mr-2"></i> 添加</a>
-															<!-- <a
+																class="mdi mdi-plus-circle mr-2"></i> 添加</a> <a
 																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="updateOrder()"><i
-																class="mdi mdi-plus-circle mr-2"></i> 修改</a> -->
-															<a href="javascript:void(0);"
+																class="mdi mdi-plus-circle mr-2"></i> 修改</a> <a
+																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="delOrder()"><i
 																class="mdi mdi-plus-circle mr-2"></i> 删除</a>
 															<button type="button" id="btn2"
@@ -331,8 +330,7 @@
 															<label for="example-select">收款项目</label> <select
 																class="form-control feecateId" id="example-select">
 																<c:forEach items="${feeCategory }" var="f">
-																	<option value="${f.chargeTypeId }"
-																		>${f.chargeTypeName}</option>
+																	<option value="${f.chargeTypeId }">${f.chargeTypeName}</option>
 																</c:forEach>
 															</select>
 														</div>

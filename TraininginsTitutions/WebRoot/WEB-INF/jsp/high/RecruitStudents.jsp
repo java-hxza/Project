@@ -123,20 +123,15 @@
 							<h3 style="text-align:center">招生报表</h3>
 							<div class="card-body ">
 								<div class="row">
-									<button type="button" id="btn2" class="btn btn-danger mb-2"
+									<button type="button" id="btn2" class="btn btn-danger mb-1"
 										onclick="Printing()">打印</button>
-
-									<div class="col-md-4" style="margin:auto;">
+									<div class="col-md-2">
 										<label>学员姓名</label>
 										<div class="input-group">
 											<input class="form-control studentName" type="text"
 												id="billing-first-name" placeholder="可填可不填" />
 										</div>
 									</div>
-									<button type="button" id="btn2" class="btn btn-danger mb-2"
-										onclick="Exports()">导出Excel</button>
-								</div>
-								<div class="row">
 									<div class="col-md-3">
 										<label>班级选择</label>
 										<div class="input-group">
@@ -166,8 +161,10 @@
 											<button class="btn btn-dark  " type="button" onclick=Hour()>查找</button>
 										</div>
 									</div>
-
+									<button type="button" id="btn2" class="btn btn-danger mb-1"
+											onclick="Exports()">导出Excel</button>
 								</div>
+								<div class="row"></div>
 								<div class="dayin">
 									<!--startprint-->
 									<table class="table dt-responsive nowrap" id="basic-datatable"

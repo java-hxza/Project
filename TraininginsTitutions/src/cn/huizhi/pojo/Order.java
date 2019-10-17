@@ -26,6 +26,7 @@ public class Order {
 	private String feecateMoney;
 	private String feecateMoneyYiKao;
 	private Integer activityId;
+	private Double serviceCharge;
 
 	private String cityId;
 	private String cityProperId;
@@ -77,8 +78,8 @@ public class Order {
 			Integer identification, Double feecategoryMoney, Integer paymentmethodId, String personliable,
 			Integer departmentofpediatricsId, Integer addhour, Integer givehour, Date firstdate, Date lastdate,
 			String remarks, String orderNumber, Integer expenditureitemsId, Integer classId, String feecateMoney,
-			String feecateMoneyYiKao, Integer activityId, Double sumDpMoney, Integer giftId, Integer giftNumber,
-			Double integral, Integer teacherId, Double discount, Date endTime, Student student,
+			String feecateMoneyYiKao, Integer activityId, Double serviceCharge, Double sumDpMoney, Integer giftId,
+			Integer giftNumber, Double integral, Integer teacherId, Double discount, Date endTime, Student student,
 			PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics, FeeCategory feeCategory,
 			Expenditureitems expenditureitems, School school, Gift gift, Teacher teacher, Class classes) {
 		super();
@@ -104,6 +105,7 @@ public class Order {
 		this.feecateMoney = feecateMoney;
 		this.feecateMoneyYiKao = feecateMoneyYiKao;
 		this.activityId = activityId;
+		this.serviceCharge = serviceCharge;
 		this.sumDpMoney = sumDpMoney;
 		this.giftId = giftId;
 		this.giftNumber = giftNumber;
@@ -440,6 +442,14 @@ public class Order {
 
 	public void setClasses(Class classes) {
 		this.classes = classes;
+	}
+
+	public Double getServiceCharge() {
+		return serviceCharge;
+	}
+
+	public void setServiceCharge(Double serviceCharge) {
+		this.serviceCharge = serviceCharge;
 	}
 
 }

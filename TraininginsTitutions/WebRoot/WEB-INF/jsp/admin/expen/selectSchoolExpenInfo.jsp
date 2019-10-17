@@ -195,5 +195,6 @@
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
 				<script type="text/javascript" src="${Path }/static/js/admin/leftSidebar.js"></script>
 				<script src="${Path }/static/js/admin/expen/selectSchoolExpenInfo.js"></script>
+				<script src="${Path }/static/js/admin/adminIndex.js"></script>
 </body>
 </html>

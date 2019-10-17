@@ -132,6 +132,7 @@ public class AdminCreateController {
 		List<Order> schoolOrderList = orderService.findOrderListBySchool(orders);
 		List<SchoolFeeCategorySumMoney> smList = new ArrayList<SchoolFeeCategorySumMoney>();
 		SchoolFeeCategorySumMoney sm = null;
+		Double serviceCharge = 0.0;
 		//学校支出订单
 		List<Order> schoolExpenList = orderService.findExpenOrderList(orders);
 		
@@ -151,7 +152,9 @@ public class AdminCreateController {
 	
 		//计算收费项目金额
 		for (int i = 0; i < orderListBySchool.size(); i++) {
-			
+			if(orderListBySchool.get(i).getFeecateId() == null) {
+				continue;
+			}
 			String feeId [] = orderListBySchool.get(i).getFeecateId().split(",");
 			if( orderListBySchool.get(i).getFeecateMoney() == null) {
 				orderListBySchool.get(i).setFeecateMoney("0");
@@ -188,6 +191,10 @@ public class AdminCreateController {
 			for (Order order : schoolOrderList) {
 				if(order.getIdentification()==0) {
 					schoolFeeceat += order.getDpMoney();
+					if(order.getServiceCharge() == null) {
+						continue;
+					}
+					serviceCharge+= order.getServiceCharge();
 				}
 			}
 		}
@@ -200,6 +207,7 @@ public class AdminCreateController {
 				schoolExPenSum +=order.getFeecategoryMoney();
 			}
 		}
+		session.setAttribute("serviceCharge", serviceCharge);
 		BigDecimal bd = new BigDecimal(schoolExPenSum);
 
 		bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);

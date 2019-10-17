@@ -155,6 +155,10 @@ $(function() {
 	RecruitStudents = function() {
 		location.href = "RecruitStudents.html";
 	};
+	
+	classTypes = function() {
+		location.href = "selectClassTypes.html";
+	};
 
 	/**
 	 * 切换账户
@@ -224,4 +228,22 @@ $(function() {
 	studentGraduation = function(){
 		location.href = "studentGraduation.html";
 	}
+	
+	$('input[type="date"]').change(function(){
+	 	var myDate = new Date();  //获取当前时间对象，精确到当前的时、分、秒
+	 	
+	 	var this_time=$('input[name="time"]').val();//获取用户选择后的时间值
+	 
+	 	var this_datetime=new Date(this_time);//获取用户选择的时间，生成时间对象  具体时间为时间8:00:00
+	 	var year = myDate.getFullYear();	//获取当前时间的年份 格式xxxx 如：2016
+	 	var month =myDate.getMonth()+1;		//获取当前时间的月份 格式1-9月为x， 10-12月为xx 如：11
+	 	var date = myDate.getDate();		//获取当前时间的日期 格式同月份 如11
+	 	 myDate=new Date(year+'-'+month+'-'+date);	//获取根据上述时间生成的时间对象 具体时间为0:00:00 	
+	 	var now=new Date(year+'-'+month+'-'+date+' 8:00:00'); 
+	 	myDate.setDate(now.getDate()-7); //设置now对象相应日期的七天前日期 具体时间为0:00:00
+	 	if(this_datetime<myDate||this_datetime>now){	//时间对象可以直接比较大小
+	 		alert('拜访时间需选择今天及以前7天内的时间');
+	 		$('input[name="time"]').val('');	
+	 	};
+	 });
 });
