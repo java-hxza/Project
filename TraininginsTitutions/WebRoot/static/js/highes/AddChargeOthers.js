@@ -29,7 +29,7 @@ $(function() {
 			},
 			error : function(data) {
 				alert("系统出错！");
-				location.href = "selectOrderOthers.html";
+				location.href = "selectOrderOthers.html?orderCounts=0&classId=0&studentName=000111";
 			}
 		});
 	});
@@ -40,7 +40,7 @@ $(function() {
 		var stuId = $.trim($(".stuId").val());
 		var classId = $.trim($(".classes option:selected").val());
 		var feecateId = $.trim($(".feecateId").val());
-		var date2 = Time.getFullYear().toString() + month.toString() + Time.getDate().toString();
+		var date2 = Time.getFullYear().toString() + month.toString();
 		var remarks = $.trim($(".remarks").val());
 		var paymentmethodId = $.trim($(".paymentmethodId").val());
 		var personliable = $.trim($(".personliable").val());
@@ -85,15 +85,15 @@ $(function() {
 				data = JSON.parse(data);
 				if (data.add == "1") {
 					alert("添加成功！");
-					location.href = "selectOrderOthers.html";
+					location.href = "selectOrderOthers.html?orderCounts=0&classId=0&studentName=000111";
 				} else {
 					alert("添加失败！");
-					location.href = "selectOrderOthers.html";
+					location.href = "selectOrderOthers.html?orderCounts=0&classId=0&studentName=000111";
 				}
 			},
 			error : function(data) {
 				alert("系统出错！");
-				location.href = "selectOrderOthers.html";
+				location.href = "selectOrderOthers.html?orderCounts=0&classId=0&studentName=000111";
 			}
 		});
 

@@ -10,11 +10,12 @@ public class School {
 	private String schoolRemarks;
 	private Integer schoolType;
 	private FeeCategory feeCategory;
-	
+	private String schoolNameSx;
+
 	/**
 	 * 共支出
 	 */
-	private Double schoolExPenSum =0.0;
+	private Double schoolExPenSum = 0.0;
 	/**
 	 * 共收入
 	 */
@@ -27,10 +28,10 @@ public class School {
 	public School() {
 		super();
 	}
-	
 
 	public School(Integer schoolId, String schoolName, Integer cityId, Integer cityProperId, String schoolRemarks,
-			Integer schoolType, Double schoolExPenSum, Double schoolFeeceat, City city, Province province) {
+			Integer schoolType, FeeCategory feeCategory, String schoolNameSx, Double schoolExPenSum,
+			Double schoolFeeceat, City city, Province province) {
 		super();
 		this.schoolId = schoolId;
 		this.schoolName = schoolName;
@@ -38,44 +39,38 @@ public class School {
 		this.cityProperId = cityProperId;
 		this.schoolRemarks = schoolRemarks;
 		this.schoolType = schoolType;
+		this.feeCategory = feeCategory;
+		this.schoolNameSx = schoolNameSx;
 		this.schoolExPenSum = schoolExPenSum;
 		this.schoolFeeceat = schoolFeeceat;
 		this.city = city;
 		this.province = province;
 	}
 
-
 	public Double getSchoolExPenSum() {
 		return schoolExPenSum;
 	}
 
-
-
 	public void setSchoolExPenSum(Double schoolExPenSum) {
-		
+
 		BigDecimal bd = new BigDecimal(schoolExPenSum);
 
 		bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
-		
+
 		this.schoolExPenSum = Double.parseDouble(bd.toString());
 	}
-
 
 	public FeeCategory getFeeCategory() {
 		return feeCategory;
 	}
 
-
 	public void setFeeCategory(FeeCategory feeCategory) {
 		this.feeCategory = feeCategory;
 	}
 
-
 	public Double getSchoolFeeceat() {
 		return schoolFeeceat;
 	}
-
-
 
 	public void setSchoolFeeceat(Double schoolFeeceat) {
 		BigDecimal bd = new BigDecimal(schoolFeeceat);
@@ -83,7 +78,6 @@ public class School {
 		bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
 		this.schoolFeeceat = Double.valueOf(bd.toString());
 	}
-
 
 	public City getCity() {
 		return city;
@@ -147,6 +141,14 @@ public class School {
 
 	public void setSchoolRemarks(String schoolRemarks) {
 		this.schoolRemarks = schoolRemarks;
+	}
+
+	public String getSchoolNameSx() {
+		return schoolNameSx;
+	}
+
+	public void setSchoolNameSx(String schoolNameSx) {
+		this.schoolNameSx = schoolNameSx;
 	}
 
 }

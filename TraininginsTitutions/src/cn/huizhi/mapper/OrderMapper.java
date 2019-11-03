@@ -10,32 +10,60 @@ import cn.huizhi.pojo.Order;
 public interface OrderMapper {
 
 	/**
+	 * 查询课时订单总数
+	 * @param schoolId
+	 * @return
+	 */
+	public Integer selectCountHour(Integer schoolId);
+	
+	/**
+	 * 查询时间段订单总数
+	 * @param schoolId
+	 * @return
+	 */
+	public Integer selectCount(Integer schoolId);
+	
+	/**
+	 * 查询其他订单总数
+	 * @param schoolId
+	 * @return
+	 */
+	public Integer selectCountOther(Integer schoolId);
+	
+	/**
+	 * 查询支出订单总数
+	 * @param schoolId
+	 * @return
+	 */
+	public Integer selectCountExpenditure(Integer schoolId);
+	
+	/**
 	 * 查询课时订单
 	 * 
 	 * @return
 	 */
-	public List<Order> selectOrderHour(Integer schoolId);
+	public List<Order> selectOrderHour(@Param("schoolId")Integer schoolId,@Param("page")Integer page,@Param("studentName")String studentName,@Param("classId")Integer classId);
 
 	/**
 	 * 查询时间段订单
 	 * 
 	 * @return
 	 */
-	public List<Order> selectOrderPeriod(Integer schoolId);
+	public List<Order> selectOrderPeriod(@Param("schoolId")Integer schoolId,@Param("page")Integer page,@Param("studentName")String studentName,@Param("classId")Integer classId);
 
 	/**
 	 * 查询艺考时间段订单
 	 * 
 	 * @return
 	 */
-	public List<Order> selectOrderPeriods(Integer schoolId);
+	public List<Order> selectOrderPeriods(@Param("schoolId")Integer schoolId,@Param("page")Integer page,@Param("studentName")String studentName,@Param("classId")Integer classId);
 
 	/**
 	 * 查询其他订单
 	 * 
 	 * @return
 	 */
-	public List<Order> selectOrderOther(Integer schoolId);
+	public List<Order> selectOrderOther(@Param("schoolId")Integer schoolId,@Param("page")Integer page,@Param("studentName")String studentName,@Param("classId")Integer classId);
 
 	/**
 	 * 查询费用支出订单
@@ -43,7 +71,7 @@ public interface OrderMapper {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<Order> selectOrderExpenditure(Integer schoolId);
+	public List<Order> selectOrderExpenditure(@Param("schoolId")Integer schoolId,@Param("page")Integer page,@Param("studentName")String studentName,@Param("classId")Integer classId);
 
 	/**
 	 * 修改订单
@@ -140,7 +168,7 @@ public interface OrderMapper {
 	 * @param time
 	 * @return
 	 */
-	public List<Order> selectStduentDay(@Param("time") Integer time, @Param("schoolId") Integer schoolId,@Param("studentName") String studentName,@Param("number") Integer number);
+	public List<Order> selectStduentDay(@Param("time") String time, @Param("schoolId") Integer schoolId,@Param("studentName") String studentName,@Param("number") Integer number);
 
 	/**
 	 * 查找参与活动订单
@@ -171,4 +199,11 @@ public interface OrderMapper {
 	 * @return
 	 */
 	public List<Order> RecruitStudentes(@Param("studentName")String studentName,@Param("startTime")String startTime,@Param("classes")Integer classes,@Param("teacherId")Integer teacherId,@Param("schoolId")Integer schoolId);
+
+	/**
+	 * 批量添加时间段订单
+	 * @param order
+	 * @return
+	 */
+	public Integer BulkChargingInsert(@Param("order") List<Order> order);
 }

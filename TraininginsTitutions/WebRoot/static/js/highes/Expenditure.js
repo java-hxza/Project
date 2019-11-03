@@ -17,6 +17,16 @@ $(function() {
 	}
 	$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
 
+	Hour = function() {
+		var classId = $(".classesId").val();
+		var studentName = $(".studentName").val();
+		if (classId == 0 && studentName == "") {
+			alert("请至少选择一项！");
+			return false;
+		}
+		location.href = "selectOrderExpenditure.html?orderCounts=0&classId=" + classId + "&studentName=" + studentName;
+	};
+	
 	delOrder = function() {
 		if ($(".customCheckes:checked").length < 1) {
 			if (!$(".customCheckes").prop("checked")) {
@@ -44,15 +54,15 @@ $(function() {
 					data = JSON.parse(data);
 					if (data.del == "1") {
 						alert("删除成功！");
-						location.href = "selectOrderExpenditure.html";
+						location.href = "selectOrderExpenditure.html?orderCounts=0&classId=0&studentName=000111";
 					} else {
 						alert("删除失败！");
-						location.href = "selectOrderExpenditure.html";
+						location.href = "selectOrderExpenditure.html?orderCounts=0&classId=0&studentName=000111";
 					}
 				},
 				error : function(data) {
 					alert("系统出错！");
-					location.href = "selectOrderExpenditure.html";
+					location.href = "selectOrderExpenditure.html?orderCounts=0&classId=0&studentName=000111";
 				}
 			});
 		} else {
@@ -112,15 +122,15 @@ $(function() {
 					data = JSON.parse(data);
 					if (data.update == "1") {
 						alert("修改成功！");
-						location.href = "selectOrderExpenditure.html";
+						location.href = "selectOrderExpenditure.html?orderCounts=0&classId=0&studentName=000111";
 					} else {
 						alert("修改失败！");
-						location.href = "selectOrderExpenditure.html";
+						location.href = "selectOrderExpenditure.html?orderCounts=0&classId=0&studentName=000111";
 					}
 				},
 				error : function(data) {
 					alert("系统出错！");
-					location.href = "selectOrderExpenditure.html";
+					location.href = "selectOrderExpenditure.html?orderCounts=0&classId=0&studentName=000111";
 				}
 			});
 		});
@@ -149,7 +159,7 @@ $(function() {
 				},
 				error : function(data) {
 					alert("系统出错！");
-					location.href = "selectOrderExpenditure.html";
+					location.href = "selectOrderExpenditure.html?orderCounts=0&classId=0&studentName=000111";
 				}
 			});
 		});
@@ -162,7 +172,7 @@ $(function() {
 			var classId = $(".classes option:selected").val();
 			var expenditureitemsId = $(".expenditureitemsId option:selected").val();
 			var startTime = $.trim($(".date").val());
-			var date = Time.getFullYear().toString() + month.toString() + Time.getDate().toString();
+			var date = Time.getFullYear().toString() + month.toString();
 			var startTimes = " " + Time.getHours() + ":" + Time.getMinutes().toString();
 			if (stuId == "") {
 				alert("请选择学生！");
@@ -195,15 +205,15 @@ $(function() {
 					data = JSON.parse(data);
 					if (data.add == "1") {
 						alert("添加成功！");
-						location.href = "selectOrderExpenditure.html";
+						location.href = "selectOrderExpenditure.html?orderCounts=0&classId=0&studentName=000111";
 					} else {
 						alert("添加失败！");
-						location.href = "selectOrderExpenditure.html";
+						location.href = "selectOrderExpenditure.html?orderCounts=0&classId=0&studentName=000111";
 					}
 				},
 				error : function(data) {
 					alert("系统出错！");
-					location.href = "selectOrderExpenditure.html";
+					location.href = "selectOrderExpenditure.html?orderCounts=0&classId=0&studentName=000111";
 				}
 			});
 		});

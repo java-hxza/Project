@@ -71,7 +71,7 @@
 									class="mdi mdi-account-edit mr-1"></i> <span>切换账号 </span>
 								</a>
 
-							
+
 								<!-- item-->
 								<a href="welCome.html" class="dropdown-item notify-item"> <i
 									class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
@@ -161,7 +161,7 @@
 											<select class="form-control feecateId" id="example-select">
 												<option value="0">---请选择---</option>
 												<c:forEach items="${feeCategory }" var="f">
-													<option value="${f.chargeTypeId }" >${f.chargeTypeName}</option>
+													<option value="${f.chargeTypeId }">${f.chargeTypeName}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -169,30 +169,27 @@
 									<div class="col-md-2">
 										<label>时间段</label>
 										<div class="input-group">
-											<input type="text" class="form-control Times"
-												data-toggle="input-mask"
-												data-mask-format="00000000000000000" data-reverse="true"
-												placeholder="剩余XXX天数提醒">
+											<input class="form-control Times" type="date">
 											<button class="btn btn-dark  " type="button" onclick=Time()>查找</button>
 										</div>
 									</div>
-									
-									
+
+
 									<button type="button" id="btn2"
 										class="btn btn-danger mb-1 Exports">导出Excel</button>
 								</div>
 								<div class="row">
 									<div class="col-md-1"></div>
-									
+
 									<div class="col-md-1"></div>
-									
+
 
 								</div>
 								<div class="row appends">
 									<div class="col-md-1"></div>
-									
+
 									<div class="col-md-1"></div>
-									
+
 								</div>
 								<!-- <table class="table table-bordered table-centered mb-0">
 											<thead class="thead-light">

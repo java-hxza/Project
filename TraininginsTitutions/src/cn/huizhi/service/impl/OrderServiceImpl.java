@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import cn.huizhi.mapper.OrderMapper;
@@ -16,36 +17,56 @@ public class OrderServiceImpl implements OrderService {
 	@Resource
 	private OrderMapper orderMapper;// 注入容器
 
+	@Override
+	public Integer selectCountHour(Integer schoolId) {
+		return orderMapper.selectCountHour(schoolId);
+	}
+
+	@Override
+	public Integer selectCount(Integer schoolId) {
+		return orderMapper.selectCount(schoolId);
+	}
+
+	@Override
+	public Integer selectCountOther(Integer schoolId) {
+		return orderMapper.selectCountOther(schoolId);
+	}
+
+	@Override
+	public Integer selectCountExpenditure(Integer schoolId) {
+		return orderMapper.selectCountExpenditure(schoolId);
+	}
+
 	/**
 	 * 查询课时订单
 	 */
 	@Override
-	public List<Order> selectOrderHour(Integer schoolId) {
-		return orderMapper.selectOrderHour(schoolId);
+	public List<Order> selectOrderHour(Integer schoolId,Integer page,String studentName,Integer classId) {
+		return orderMapper.selectOrderHour(schoolId,page,studentName,classId);
 	}
 
 	/**
 	 * 查询时间段订单
 	 */
 	@Override
-	public List<Order> selectOrderPeriod(Integer schoolId) {
-		return orderMapper.selectOrderPeriod(schoolId);
+	public List<Order> selectOrderPeriod(Integer schoolId,Integer page,String studentName,Integer classId) {
+		return orderMapper.selectOrderPeriod(schoolId,page,studentName,classId);
 	}
 
 	/**
 	 * 查询其他订单
 	 */
 	@Override
-	public List<Order> selectOrderOther(Integer schoolId) {
-		return orderMapper.selectOrderOther(schoolId);
+	public List<Order> selectOrderOther(Integer schoolId,Integer page,String studentName,Integer classId) {
+		return orderMapper.selectOrderOther(schoolId,page,studentName,classId);
 	}
 
 	/**
 	 * 查询费用支出订单
 	 */
 	@Override
-	public List<Order> selectOrderExpenditure(Integer schoolId) {
-		return orderMapper.selectOrderExpenditure(schoolId);
+	public List<Order> selectOrderExpenditure(Integer schoolId,Integer page,String studentName,Integer classId) {
+		return orderMapper.selectOrderExpenditure(schoolId,page,studentName,classId);
 	}
 
 	/**
@@ -89,15 +110,16 @@ public class OrderServiceImpl implements OrderService {
 		return orderMapper.selectUsedIntegral(student);
 	}
 
-	public List<Order> selectChildrenFeeSituation(Integer classId, Integer studentId,String startTime,String endTime) {
+	public List<Order> selectChildrenFeeSituation(Integer classId, Integer studentId, String startTime,
+			String endTime) {
 		// TODO Auto-generated method stub
-		return orderMapper.selectChildrenFeeSituation(classId, studentId,startTime,endTime);
+		return orderMapper.selectChildrenFeeSituation(classId, studentId, startTime, endTime);
 	}
 
 	@Override
-	public List<Order> selectHighsFeeSituation(Integer classId,String startTime,String endTime) {
+	public List<Order> selectHighsFeeSituation(Integer classId, String startTime, String endTime) {
 		// TODO Auto-generated method stub
-		return orderMapper.selectHighsFeeSituation(classId,startTime, endTime);
+		return orderMapper.selectHighsFeeSituation(classId, startTime, endTime);
 	}
 
 	@Override
@@ -111,19 +133,19 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> selectStduentDay(Integer time, Integer schoolId, String studentName, Integer number) {
+	public List<Order> selectStduentDay(String time, Integer schoolId, String studentName, Integer number) {
 		return orderMapper.selectStduentDay(time, schoolId, studentName, number);
 	}
 
 	@Override
-	public List<Order> selectOrderPeriods(Integer schoolId) {
-		return orderMapper.selectOrderPeriods(schoolId);
+	public List<Order> selectOrderPeriods(Integer schoolId,Integer page,String studentName,Integer classId) {
+		return orderMapper.selectOrderPeriods(schoolId,page,studentName,classId);
 	}
 
 	@Override
-	public List<Order> selectArtFeeSituation(Integer classId,String startTime,String endTime) {
+	public List<Order> selectArtFeeSituation(Integer classId, String startTime, String endTime) {
 		// TODO Auto-generated method stub
-		return orderMapper.selectArtFeeSituation(classId,startTime,endTime);
+		return orderMapper.selectArtFeeSituation(classId, startTime, endTime);
 	}
 
 	@Override
@@ -148,10 +170,15 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> RecruitStudentes(String studentName,String startTime,Integer classes,Integer teacherId,Integer schoolId) {
-		return orderMapper.RecruitStudentes(studentName,startTime, classes, teacherId, schoolId);
+	public List<Order> RecruitStudentes(String studentName, String startTime, Integer classes, Integer teacherId,
+			Integer schoolId) {
+		return orderMapper.RecruitStudentes(studentName, startTime, classes, teacherId, schoolId);
 	}
-	
-	
 
+	@Override
+	public Integer BulkChargingInsert(List<Order> order) {
+		return orderMapper.BulkChargingInsert(order);
+	}
+
+	
 }

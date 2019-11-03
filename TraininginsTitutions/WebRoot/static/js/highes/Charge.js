@@ -41,6 +41,17 @@ $(function() {
 		a = $(".feecateIds2").eq(i).text().toString();
 		$(".feecateIds2").eq(i).text(a.substr(1));
 	}
+
+	Hour = function() {
+		var classId = $(".classesId").val();
+		var studentName = $(".studentName").val();
+		if (classId == 0 && studentName == "") {
+			alert("请至少选择一项！");
+			return false;
+		}
+		location.href = "selectOrderPeriod.html?orderCounts=0&classId=" + classId + "&studentName=" + studentName;
+	};
+
 	delOrder = function() {
 		if ($(".customCheckes:checked").length < 1) {
 			if (!$(".customCheckes").prop("checked")) {
@@ -78,15 +89,15 @@ $(function() {
 					data = JSON.parse(data);
 					if (data.del == "1") {
 						alert("删除成功！");
-						location.href = "selectOrderPeriod.html";
+						location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 					} else {
 						alert("删除失败！");
-						location.href = "selectOrderPeriod.html";
+						location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 					}
 				},
 				error : function(data) {
 					alert("系统出错！");
-					location.href = "selectOrderPeriod.html";
+					location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 				}
 			});
 		} else {
@@ -232,15 +243,15 @@ $(function() {
 						data = JSON.parse(data);
 						if (data.update == "1") {
 							alert("修改成功！");
-							location.href = "selectOrderPeriod.html";
+							location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 						} else {
 							alert("修改失败！");
-							location.href = "selectOrderPeriod.html";
+							location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 						}
 					},
 					error : function(data) {
 						alert("系统出错！");
-						location.href = "selectOrderPeriod.html";
+						location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 					}
 				});
 			});
@@ -448,15 +459,15 @@ $(function() {
 						data = JSON.parse(data);
 						if (data.update == "1") {
 							alert("修改成功！");
-							location.href = "selectOrderPeriod.html";
+							location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 						} else {
 							alert("修改失败！");
-							location.href = "selectOrderPeriod.html";
+							location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 						}
 					},
 					error : function(data) {
 						alert("系统出错！");
-						location.href = "selectOrderPeriod.html";
+						location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 					}
 				});
 			});

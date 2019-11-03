@@ -250,12 +250,16 @@ $(function() {
 			var integral = $.trim($(".integral2").val());
 			var giftNumber = $.trim($(".giftNumber2").val());
 			var giftId = $.trim($(".giftName2 option:selected").val());
-			var date2 = Time.getFullYear().toString() + month.toString() + Time.getDate().toString();
+			var date2 = Time.getFullYear().toString() + month.toString();
 			var feecateId = "";
 			var number = 0;
 			var feecateMoney = "";
 			var activityId = $(".feecateId3 option:selected").val();
 			var teacherId = $.trim($(".teacherId2 option:selected").val());
+			var EntertainTeacher = $(".EntertainTeacher").val();
+			var ConsultationTeacher = $(".ConsultationTeacher").val();
+			var professionalTeacher = $(".EntertainTeacher").val();
+			var Headmaster = $(".ConsultationTeacher").val();
 			var feecateMoneyYiKao = "";
 			if ($.trim($(".YDBX").val()).toString() != "") {
 				feecateMoneyYiKao = feecateMoneyYiKao + ($.trim($(".YDBX").val()).toString()) + ",";
@@ -378,7 +382,11 @@ $(function() {
 					feecateMoney : feecateMoney,
 					startTimes : startTimes,
 					activityId : activityId,
-					serviceCharge : serviceCharge
+					serviceCharge : serviceCharge,
+					ConsultationTeacher : ConsultationTeacher,
+					EntertainTeacher : EntertainTeacher,
+					professionalTeacher : professionalTeacher,
+					Headmaster : Headmaster
 				},
 				dataType : "json",
 				success : function(data) {
@@ -468,10 +476,15 @@ $(function() {
 			//								}
 			//			});
 			$(".numbers2").blur(function() {
-				$(".schoolTimes").remove();
+				$(".schoolTimes2").remove();
 				if ($(".numbers2").val() != "") {
-					for (var i = 0; i < parseInt($(".numbers2").val()); i++) {
-						$(".numbers").after("<div class='col-md-6 schoolTimes'><div class='form-group mb-3'><label for='example-select'>上课时间段</label> <select class='form-control schoolTimes2' id='example-select'><option>周一上午</option><option>周一下午</option><option>周二上午</option><option>周二下午</option><option>周三上午</option><option>周三下午</option><option>周四上午</option><option>周四下午</option><option>周五上午</option><option>周五下午</option><option>周六上午</option><option>周六下午</option><option>周日上午</option><option>周日下午</option></select></div></div>");
+					for (var i = 0; i < parseInt($(".numbers3").val()); i++) {
+						$(".numbers2").after("<div class='col-md-3 schoolTimes2'><div class='form-group mb-3'><label for='example-select'>上课时间段</label> <select class='form-control schoolTimes3' id='example-select'></select></div></div>");
+					}
+					for (var i = 0; i < $(".schoolTimes3").length; i++) {
+						for (var j = 0; j < $(".classTimes option").length; j++) {
+							$(".schoolTimes3").eq(i).append("<option value=" + $(".classTimes option").eq(j).val() + ">" + $(".classTimes option").eq(j).text() + "</option>");
+						}
 					}
 				}
 			});
@@ -559,7 +572,7 @@ $(function() {
 				var hour = $.trim($(".hours").val());
 				var hours = $.trim($(".hourses").val());
 				var feecateId = $.trim($(".feecateIds").val());
-				var date2 = Time.getFullYear().toString() + month.toString() + Time.getDate().toString();
+				var date2 = Time.getFullYear().toString() + month.toString();
 				var departmentofpediatricsId = $.trim($(".classes option:selected").attr("name"));
 				var remarks2 = $.trim($(".remarks2").val());
 				var paymentmethodId = $.trim($(".paymentmethodIds").val());
@@ -569,6 +582,10 @@ $(function() {
 				var teacherId = $.trim($(".teacherIds option:selected").val());
 				var activityId = $.trim($(".feecateId4 option:selected").val());
 				var discount = $.trim($(".dpMoneyActivity4").val());
+				var EntertainTeacher = $(".EntertainTeacher").val();
+				var ConsultationTeacher = $(".ConsultationTeacher").val();
+				var professionalTeacher = $(".EntertainTeacher").val();
+				var Headmaster = $(".ConsultationTeacher").val();
 				var schoolTime = "";
 				var startTimes = " " + Time.getHours() + ":" + Time.getMinutes().toString();
 				if (discount != "" && discount != 0) {
@@ -582,7 +599,7 @@ $(function() {
 					return false;
 				}
 				for (var i = 0; i < $(".schoolTimes2").length; i++) {
-					schoolTime = schoolTime + $(".schoolTimes2 option:selected").eq(i).text() + ",";
+					schoolTime = schoolTime + $(".schoolTimes2 option:selected").eq(i).val() + ",";
 				}
 				schoolTime = schoolTime.substring(0, schoolTime.length - 1);
 				if (studentName == "" || studentBirth == "" || startTime == "") {
@@ -654,7 +671,11 @@ $(function() {
 						discount : discount,
 						activityId : activityId,
 						schoolTime : schoolTime,
-						serviceCharge : serviceCharge
+						serviceCharge : serviceCharge,
+						ConsultationTeacher : ConsultationTeacher,
+						EntertainTeacher : EntertainTeacher,
+						professionalTeacher : professionalTeacher,
+						Headmaster : Headmaster
 					},
 					dataType : "json",
 					success : function(data) {
@@ -788,11 +809,15 @@ $(function() {
 					var personliable = $.trim($(".personliable2").val());
 					var remarks3 = $.trim($(".remarks3").val());
 					var paymentmethodId = $.trim($(".paymentmethodId2").val());
-					var date2 = Time.getFullYear().toString() + month.toString() + Time.getDate().toString();
+					var date2 = Time.getFullYear().toString() + month.toString();
 					var feecateId = "";
 					var number = 0;
 					var teacherId = $.trim($(".teacherId2 option:selected").val());
 					var dpMoneyActivity4 = $.trim($(".dpMoneyActivity").val());
+					var EntertainTeacher = $(".EntertainTeacher").val();
+					var ConsultationTeacher = $(".ConsultationTeacher").val();
+					var professionalTeacher = $(".EntertainTeacher").val();
+					var Headmaster = $(".ConsultationTeacher").val();
 					dpMoney = dpMoney - dpMoneyActivity4;
 					if (studentName == "" || studentBirth == "" || startTime == "" || studentIDCard == "") {
 						alert("请填写 姓名- 出生日期-报名时间-身份证号！");
@@ -884,7 +909,11 @@ $(function() {
 							studentIDCard : studentIDCard,
 							discount : dpMoneyActivity4,
 							startTimes : startTimes,
-							serviceCharge : serviceCharge
+							serviceCharge : serviceCharge,
+							ConsultationTeacher : ConsultationTeacher,
+							EntertainTeacher : EntertainTeacher,
+							Headmaster : Headmaster,
+							professionalTeacher : professionalTeacher
 						},
 						dataType : "json",
 						success : function(data) {
@@ -967,7 +996,12 @@ $(function() {
 					$(".schoolTimes2").remove();
 					if ($(".numbers3").val() != "") {
 						for (var i = 0; i < parseInt($(".numbers3").val()); i++) {
-							$(".numbers4").after("<div class='col-md-6 schoolTimes2'><div class='form-group mb-3'><label for='example-select'>上课时间段</label> <select class='form-control schoolTimes3' id='example-select'><option>周一上午</option><option>周一下午</option><option>周二上午</option><option>周二下午</option><option>周三上午</option><option>周三下午</option><option>周四上午</option><option>周四下午</option><option>周五上午</option><option>周五下午</option><option>周六上午</option><option>周六下午</option><option>周日上午</option><option>周日下午</option></select></div></div>");
+							$(".numbers4").after("<div class='col-md-3 schoolTimes2'><div class='form-group mb-3'><label for='example-select'>上课时间段</label> <select class='form-control schoolTimes3' id='example-select'></select></div></div>");
+						}
+						for (var i = 0; i < $(".schoolTimes3").length; i++) {
+							for (var j = 0; j < $(".classTimes option").length; j++) {
+								$(".schoolTimes3").eq(i).append("<option value=" + $(".classTimes option").eq(j).val() + ">" + $(".classTimes option").eq(j).text() + "</option>");
+							}
 						}
 					}
 				});
@@ -1102,7 +1136,7 @@ $(function() {
 					var integral = $.trim($(".integral2").val());
 					var giftNumber = $.trim($(".giftNumber2").val());
 					var giftId = $.trim($(".giftName2 option:selected").val());
-					var date2 = Time.getFullYear().toString() + month.toString() + Time.getDate().toString();
+					var date2 = Time.getFullYear().toString() + month.toString();
 					var feecateId = "";
 					var number = 0;
 					var feecateMoney = "";
@@ -1111,6 +1145,10 @@ $(function() {
 					var classId = parseInt($.trim($(".classes option:selected").val()));
 					var headmaster = $(".classes option:selected").attr("class");
 					var numbers3 = $(".numbers3").val();
+					var EntertainTeacher = $(".EntertainTeacher").val();
+					var ConsultationTeacher = $(".ConsultationTeacher").val();
+					var professionalTeacher = $(".EntertainTeacher").val();
+					var Headmaster = $(".ConsultationTeacher").val();
 					var schoolTime = "";
 					for (var i = 0; i < $(".feecateIds2").length; i++) {
 						if ($(".feecateIds2").eq(i).val() != "") {
@@ -1131,7 +1169,7 @@ $(function() {
 						return false;
 					}
 					for (var i = 0; i < $(".schoolTimes3").length; i++) {
-						schoolTime = schoolTime + $(".schoolTimes3 option:selected").eq(i).text() + ",";
+						schoolTime = schoolTime + $(".schoolTimes3 option:selected").eq(i).val() + ",";
 					}
 					schoolTime = schoolTime.substring(0, schoolTime.length - 1);
 					if (studentName == "" || studentBirth == "" || startTime == "") {
@@ -1227,7 +1265,11 @@ $(function() {
 							classId : classId,
 							headmaster : headmasters,
 							schoolTime : schoolTime,
-							serviceCharge : serviceCharge
+							serviceCharge : serviceCharge,
+							ConsultationTeacher : ConsultationTeacher,
+							EntertainTeacher : EntertainTeacher,
+							Headmaster : Headmaster,
+							professionalTeacher : professionalTeacher
 						},
 						dataType : "json",
 						success : function(data) {

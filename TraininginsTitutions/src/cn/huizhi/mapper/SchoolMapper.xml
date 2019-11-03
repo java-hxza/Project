@@ -11,7 +11,8 @@
 		cityId,
 		schoolRemarks,
 		cityProperId,
-		schoolType
+		schoolType,
+		schoolNameSx
 	</sql>
 	<sql id="schoolColByPro">
 		sc.schoolId as sc_schoolId,

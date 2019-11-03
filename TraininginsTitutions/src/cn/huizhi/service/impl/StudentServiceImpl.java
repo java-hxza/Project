@@ -113,4 +113,16 @@ public class StudentServiceImpl implements StudentService {
 		// TODO Auto-generated method stub
 		return studentMapper.findHighStudentResverSchoolInfo(map);
 	}
+
+	@Override
+	public List<Student> selectAllStudent(Integer schoolId) {
+		return studentMapper.selectAllStudent(schoolId);
+	}
+
+	@Override
+	public List<Student> selectByClassIdStudent(Integer schoolId, Integer classId, String studentName) {
+		return studentMapper.selectByClassIdStudent(schoolId, classId, studentName);
+	}
+	
+	
 }

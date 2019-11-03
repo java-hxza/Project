@@ -11,6 +11,7 @@ import java.util.Random;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,16 +27,19 @@ import cn.huizhi.pojo.Gift;
 import cn.huizhi.pojo.Activity;
 import cn.huizhi.pojo.ChildrenesClassStudnet;
 import cn.huizhi.pojo.Class;
+import cn.huizhi.pojo.ClassTime;
 import cn.huizhi.pojo.ClassType;
 import cn.huizhi.pojo.DepartMent;
 import cn.huizhi.pojo.Student;
 import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.PaymentMethod;
 import cn.huizhi.pojo.Reserveschool;
+import cn.huizhi.pojo.School;
 import cn.huizhi.pojo.User;
 import cn.huizhi.service.ActivityService;
 import cn.huizhi.service.ChildrenesClassStudnetService;
 import cn.huizhi.service.ClassService;
+import cn.huizhi.service.ClassTimeService;
 import cn.huizhi.service.ClassTypeService;
 import cn.huizhi.service.DepartMentService;
 import cn.huizhi.service.DepartmentOfPediatricsService;
@@ -46,6 +50,7 @@ import cn.huizhi.service.StudentService;
 import cn.huizhi.service.OrderService;
 import cn.huizhi.service.PaymentMethodService;
 import cn.huizhi.service.ReserveschoolService;
+import cn.huizhi.service.SchoolService;
 import cn.huizhi.service.TeacherDictionService;
 import cn.huizhi.service.TeacherService;
 import cn.huizhi.service.TeacherTypeService;
@@ -91,7 +96,13 @@ public class HighesController {
 	@Resource
 	private ClassTypeService classTypeService;
 	@Resource
-	DepartMentService departMentService;
+	private DepartMentService departMentService;
+	@Resource
+	private ClassTimeService classTimeService;
+	@Resource
+	private SchoolService schoolService;
+
+	Integer OrderHour = 1;
 
 	/**
 	 * 查询所有账户信息
@@ -407,7 +418,21 @@ public class HighesController {
 		}
 		order.setIdentification(0);
 		order.setAddhour(addhour);
-		order.setOrderNumber("KS" + date + stuId + new Random().nextInt(100));
+		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
+		if (OrderHour >= 10) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+		} else if (OrderHour >= 100) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+		} else if (OrderHour >= 1000) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+		} else {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+		}
+		OrderHour += 1;
 		order.setGivehour(givehour);
 		order.setDepartmentofpediatricsId(departmentofpediatricsId);
 		order.setFeecateId(feecateId);
@@ -458,7 +483,7 @@ public class HighesController {
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		List<Class> classes = classService.selectClass2((Integer) session.getAttribute("schoolId"), 0);
 		model.addAttribute("classes", classes);
-		if (classes.size()>0) {
+		if (classes.size() > 0) {
 			if (schoolType == 1) {
 				List<Student> children = studentService.selectStudentClass("childrenesclassstudnet",
 						classes.get(0).getClassId());
@@ -505,6 +530,7 @@ public class HighesController {
 			@RequestParam String date, @RequestParam Double discount, @RequestParam Integer activityId,
 			@RequestParam String startTimes, @RequestParam String feecateMoney, @RequestParam Double serviceCharge) {
 		HashMap<String, String> map = new HashMap<String, String>();
+		OrderHour += 1;
 		Order order = new Order();
 		try {
 			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(startTime + startTimes);
@@ -531,7 +557,21 @@ public class HighesController {
 		order.setIntegral(integral);
 		order.setActivityId(activityId);
 		order.setDiscount(discount);
-		order.setOrderNumber("SJ" + date + stuId + new Random().nextInt(100));
+		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
+		if (OrderHour >= 10) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+		} else if (OrderHour >= 100) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+		} else if (OrderHour >= 1000) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+		} else {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+		}
+		OrderHour += 1;
 		order.setPaymentmethodId(paymentmethodId);
 		order.setIdentification(0);
 		if (orderService.addOrder(order) == 1) {
@@ -567,7 +607,7 @@ public class HighesController {
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		List<Class> classes = classService.selectClassAll((Integer) session.getAttribute("schoolId"));
 		model.addAttribute("classes", classes);
-		if (classes.size()>0) {
+		if (classes.size() > 0) {
 
 			if (schoolType == 1) {
 				List<Student> high = studentService.selectStudentClass("childrenesclassstudnet",
@@ -625,7 +665,21 @@ public class HighesController {
 		order.setClassId(classId);
 		order.setGiftId(0);
 		order.setGiftNumber(0);
-		order.setOrderNumber("QT" + date + stuId + new Random().nextInt(100));
+		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
+		if (OrderHour >= 10) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+		} else if (OrderHour >= 100) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+		} else if (OrderHour >= 1000) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+		} else {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+		}
+		OrderHour += 1;
 		order.setStuId(stuId);
 		if (orderService.addOrder(order) == 1) {
 			map.put("add", "1");
@@ -966,7 +1020,21 @@ public class HighesController {
 		order.setGiftId(0);
 		order.setGiftNumber(0);
 		order.setIntegral(0.0);
-		order.setOrderNumber("ZC" + date + stuId + new Random().nextInt(100));
+		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
+		if (OrderHour >= 10) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+		} else if (OrderHour >= 100) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+		} else if (OrderHour >= 1000) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+		} else {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+		}
+		OrderHour += 1;
 		try {
 			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(startTime + startTimes);
 			order.setStartTime(startTime1);
@@ -1016,21 +1084,61 @@ public class HighesController {
 	 * @return
 	 */
 	@RequestMapping("selectOrderHour.html")
-	public String selectOrderHour(Model model) {
+	public String selectOrderHour(Model model, @RequestParam Integer orderCounts, @RequestParam Integer classId,
+			@RequestParam String studentName) {
+		Integer pageCount = 0;
+		Integer orderNumber = orderService.selectCountHour((Integer) session.getAttribute("schoolId"));
+		if ("000111".equals(studentName)) {
+			studentName = null;
+		}
+		int num = orderNumber % 2 == 0 ? orderNumber / 2 : orderNumber / 2 + 1;
+		model.addAttribute("orderCount", num);
+		if (num == 0) {
+			model.addAttribute("orderCounts", 0);
+		} else {
+			if (orderCounts <= 0) {
+				model.addAttribute("orderCounts", 1);
+			} else if (orderCounts == num) {
+				model.addAttribute("orderCounts", orderCounts);
+			} else {
+				model.addAttribute("orderCounts", orderCounts + 1);
+				orderCounts += 1;
+			}
+			if (orderCounts < 0) {
+				orderCounts = 1;
+			}
+			for (int i = 1; i < orderCounts; i++) {
+				pageCount += 2;
+			}
+		}
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
-		List<Order> order = orderService.selectOrderHour((Integer) session.getAttribute("schoolId"));
+		if (classId == 0 && studentName == null) {
+			List<Order> order = orderService.selectOrderHour((Integer) session.getAttribute("schoolId"), pageCount,
+					null, classId);
+			model.addAttribute("order", order);
+		} else {
+			List<Order> order = orderService.selectOrderHour((Integer) session.getAttribute("schoolId"), null,
+					studentName, classId);
+			model.addAttribute("order", order);
+		}
 		List<FeeCategory> feeCategory = feecategoryService
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
 		List<Gift> gift = giftService.selectGift((Integer) session.getAttribute("schoolId"));
 		List<Teacher> teacher = teacherService.selectTeacherZS((Integer) session.getAttribute("schoolId"));
 		List<Activity> activity = activityService.selectActivitySchool((Integer) session.getAttribute("schoolId"));
+		List<Class> classes = classService.selectClass2((Integer) session.getAttribute("schoolId"), 1);
+		model.addAttribute("classes", classes);
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("feeCategory", feeCategory);
 		model.addAttribute("teacher", teacher);
-		model.addAttribute("order", order);
 		model.addAttribute("state", (Integer) session.getAttribute("state"));
 		model.addAttribute("gift", gift);
 		model.addAttribute("activity", activity);
+		if (classId != 0 || studentName != null) {
+			model.addAttribute("JY", 0);
+		} else {
+			model.addAttribute("JY", 1);
+		}
 		return "high/ChargeHours";
 	}
 
@@ -1041,15 +1149,54 @@ public class HighesController {
 	 * @return
 	 */
 	@RequestMapping("selectOrderPeriod.html")
-	public String selectOrderPeriod(Model model) {
-		if ((Integer) session.getAttribute("schoolType") == 3) {
-			List<Order> order = orderService.selectOrderPeriods((Integer) session.getAttribute("schoolId"));
-			model.addAttribute("order", order);
-		} else {
-			List<Order> order = orderService.selectOrderPeriod((Integer) session.getAttribute("schoolId"));
-			model.addAttribute("order", order);
+	public String selectOrderPeriod(Model model, @RequestParam Integer orderCounts, @RequestParam Integer classId,
+			@RequestParam String studentName) {
+		Integer pageCount = 0;
+		Integer orderNumber = orderService.selectCount((Integer) session.getAttribute("schoolId"));
+		if ("000111".equals(studentName)) {
+			studentName = null;
 		}
-
+		int num = orderNumber % 2 == 0 ? orderNumber / 2 : orderNumber / 2 + 1;
+		model.addAttribute("orderCount", num);
+		if (num == 0) {
+			model.addAttribute("orderCounts", 0);
+		} else {
+			if (orderCounts <= 0) {
+				model.addAttribute("orderCounts", 1);
+			} else if (orderCounts == num) {
+				model.addAttribute("orderCounts", orderCounts);
+			} else {
+				model.addAttribute("orderCounts", orderCounts + 1);
+				orderCounts += 1;
+			}
+			if (orderCounts < 0) {
+				orderCounts = 1;
+			}
+			for (int i = 1; i < orderCounts; i++) {
+				pageCount += 2;
+			}
+		}
+		if ((Integer) session.getAttribute("schoolType") == 3) {
+			if (classId == 0 && studentName == null) {
+				List<Order> order = orderService.selectOrderPeriods((Integer) session.getAttribute("schoolId"),
+						pageCount, null, classId);
+				model.addAttribute("order", order);
+			} else {
+				List<Order> order = orderService.selectOrderPeriods((Integer) session.getAttribute("schoolId"), null,
+						studentName, classId);
+				model.addAttribute("order", order);
+			}
+		} else {
+			if (classId == 0 && studentName == null) {
+				List<Order> order = orderService.selectOrderPeriod((Integer) session.getAttribute("schoolId"),
+						pageCount, null, classId);
+				model.addAttribute("order", order);
+			} else {
+				List<Order> order = orderService.selectOrderPeriod((Integer) session.getAttribute("schoolId"), null,
+						studentName, classId);
+				model.addAttribute("order", order);
+			}
+		}
 		List<Gift> gift = giftService.selectGift((Integer) session.getAttribute("schoolId"));
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<FeeCategory> feeCategory = feecategoryService
@@ -1058,6 +1205,13 @@ public class HighesController {
 		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService
 				.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
 		List<Activity> activity = activityService.selectActivitySchool((Integer) session.getAttribute("schoolId"));
+		if ((Integer) session.getAttribute("schoolType") == 1) {
+			List<Class> classes = classService.selectClass2((Integer) session.getAttribute("schoolId"), 1);
+			model.addAttribute("classes", classes);
+		} else {
+			List<Class> classes = classService.selectClass2((Integer) session.getAttribute("schoolId"), 0);
+			model.addAttribute("classes", classes);
+		}
 		model.addAttribute("departmentOfPediatrics", departmentOfPediatrics);
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("feeCategory", feeCategory);
@@ -1066,6 +1220,11 @@ public class HighesController {
 		model.addAttribute("gift", gift);
 		model.addAttribute("activity", activity);
 		model.addAttribute("schoolType", (Integer) session.getAttribute("schoolType"));
+		if (classId != 0 || studentName != null) {
+			model.addAttribute("JY", 0);
+		} else {
+			model.addAttribute("JY", 1);
+		}
 		return "high/Charge";
 	}
 
@@ -1076,18 +1235,58 @@ public class HighesController {
 	 * @return
 	 */
 	@RequestMapping("selectOrderOthers.html")
-	public String selectOrderOthers(Model model) {
+	public String selectOrderOthers(Model model, @RequestParam Integer orderCounts, @RequestParam Integer classId,
+			@RequestParam String studentName) {
+		Integer pageCount = 0;
+		Integer orderNumber = orderService.selectCountOther((Integer) session.getAttribute("schoolId"));
+		if ("000111".equals(studentName)) {
+			studentName = null;
+		}
+		int num = orderNumber % 2 == 0 ? orderNumber / 2 : orderNumber / 2 + 1;
+		model.addAttribute("orderCount", num);
+		if (num == 0) {
+			model.addAttribute("orderCounts", 0);
+		} else {
+			if (orderCounts <= 0) {
+				model.addAttribute("orderCounts", 1);
+			} else if (orderCounts == num) {
+				model.addAttribute("orderCounts", orderCounts);
+			} else {
+				model.addAttribute("orderCounts", orderCounts + 1);
+				orderCounts += 1;
+			}
+			if (orderCounts < 0) {
+				orderCounts = 1;
+			}
+			for (int i = 1; i < orderCounts; i++) {
+				pageCount += 2;
+			}
+		}
 		List<FeeCategory> feeCategory = feecategoryService
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
-		List<Order> order = orderService.selectOrderOther((Integer) session.getAttribute("schoolId"));
+		if (classId == 0 && studentName == null) {
+			List<Order> order = orderService.selectOrderOther((Integer) session.getAttribute("schoolId"), pageCount,
+					null, classId);
+			model.addAttribute("order", order);
+		} else {
+			List<Order> order = orderService.selectOrderOther((Integer) session.getAttribute("schoolId"), null,
+					studentName, classId);
+			model.addAttribute("order", order);
+		}
 		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService
 				.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
+		List<Class> classes = classService.selectClassAll((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("classes", classes);
 		model.addAttribute("departmentOfPediatrics", departmentOfPediatrics);
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("feeCategory", feeCategory);
-		model.addAttribute("order", order);
 		model.addAttribute("state", (Integer) session.getAttribute("state"));
+		if (classId != 0 || studentName != null) {
+			model.addAttribute("JY", 0);
+		} else {
+			model.addAttribute("JY", 1);
+		}
 		return "high/ChargeOthers";
 	}
 
@@ -1098,7 +1297,33 @@ public class HighesController {
 	 * @return
 	 */
 	@RequestMapping("selectOrderExpenditure.html")
-	public String selectOrderExpenditure(Model model) {
+	public String selectOrderExpenditure(Model model, @RequestParam Integer orderCounts, @RequestParam Integer classId,
+			@RequestParam String studentName) {
+		Integer pageCount = 0;
+		Integer orderNumber = orderService.selectCountExpenditure((Integer) session.getAttribute("schoolId"));
+		if ("000111".equals(studentName)) {
+			studentName = null;
+		}
+		int num = orderNumber % 2 == 0 ? orderNumber / 2 : orderNumber / 2 + 1;
+		model.addAttribute("orderCount", num);
+		if (num == 0) {
+			model.addAttribute("orderCounts", 0);
+		} else {
+			if (orderCounts <= 0) {
+				model.addAttribute("orderCounts", 1);
+			} else if (orderCounts == num) {
+				model.addAttribute("orderCounts", orderCounts);
+			} else {
+				model.addAttribute("orderCounts", orderCounts + 1);
+				orderCounts += 1;
+			}
+			if (orderCounts < 0) {
+				orderCounts = 1;
+			}
+			for (int i = 1; i < orderCounts; i++) {
+				pageCount += 2;
+			}
+		}
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		List<Class> classes = classService.selectClassAll((Integer) session.getAttribute("schoolId"));
 		model.addAttribute("classes", classes);
@@ -1118,7 +1343,15 @@ public class HighesController {
 			}
 		}
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
-		List<Order> order = orderService.selectOrderExpenditure(schoolId);
+		if (classId == 0 && studentName == null) {
+			List<Order> order = orderService.selectOrderExpenditure((Integer) session.getAttribute("schoolId"),
+					pageCount, null, classId);
+			model.addAttribute("order", order);
+		} else {
+			List<Order> order = orderService.selectOrderExpenditure((Integer) session.getAttribute("schoolId"), null,
+					studentName, classId);
+			model.addAttribute("order", order);
+		}
 		List<Expenditureitems> expenditureitems = expenditureitemsService.selectExpenditureitems(schoolId.toString());
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
 		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService
@@ -1126,8 +1359,12 @@ public class HighesController {
 		model.addAttribute("departmentOfPediatrics", departmentOfPediatrics);
 		model.addAttribute("expenditureitems", expenditureitems);
 		model.addAttribute("paymentMethod", paymentMethod);
-		model.addAttribute("order", order);
 		model.addAttribute("state", (Integer) session.getAttribute("state"));
+		if (classId != 0 || studentName != null) {
+			model.addAttribute("JY", 0);
+		} else {
+			model.addAttribute("JY", 1);
+		}
 		return "high/Expenditure";
 	}
 
@@ -1358,12 +1595,14 @@ public class HighesController {
 		List<Teacher> teacher = teacherService.selectTeacherZS((Integer) session.getAttribute("schoolId"));
 		List<Activity> activity = activityService.selectActivitySchool((Integer) session.getAttribute("schoolId"));
 		List<ClassType> classType = classTypeService.selectClassTypes((Integer) session.getAttribute("schoolId"));
+		List<ClassTime> classTime = classTimeService.selectClassTime((Integer) session.getAttribute("schoolId"));
 		model.addAttribute("activity", activity);
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("feeCategory", feeCategory);
 		model.addAttribute("teacher", teacher);
 		model.addAttribute("gift", gift);
 		model.addAttribute("classType", classType);
+		model.addAttribute("classTime", classTime);
 		return "high/RegisterStudent";
 	}
 
@@ -1431,7 +1670,21 @@ public class HighesController {
 				order.setStartTime(childrenesClassStudnet.getEnrollmentTime());
 				order.setIdentification(0);
 				order.setAddhour(addhour);
-				order.setOrderNumber("KS" + date + childrenesClassStudnet.getStudentId() + new Random().nextInt(100));
+				School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
+				if (OrderHour >= 10) {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+				} else if (OrderHour >= 100) {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+				} else if (OrderHour >= 1000) {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+				} else {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+				}
+				OrderHour += 1;
 				order.setGivehour(givehour);
 				order.setTeacherId(teacherId);
 				order.setDepartmentofpediatricsId(departmentofpediatricsId);
@@ -1562,7 +1815,21 @@ public class HighesController {
 				order.setIntegral(integral);
 				order.setFeecateMoney(feecateMoney);
 				order.setDiscount(discount);
-				order.setOrderNumber("SJ" + date + childrenesClassStudnet.getStudentId() + new Random().nextInt(100));
+				School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
+				if (OrderHour >= 10) {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+				} else if (OrderHour >= 100) {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+				} else if (OrderHour >= 1000) {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+				} else {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+				}
+				OrderHour += 1;
 				order.setPaymentmethodId(paymentmethodId);
 				order.setIdentification(0);
 				if (orderService.addOrder(order) == 1) {
@@ -1671,7 +1938,21 @@ public class HighesController {
 				order.setIntegral(0.0);
 				order.setFeecateMoney(feecateMoney);
 				order.setDiscount(dpMoney);
-				order.setOrderNumber("SJ" + date + childrenesClassStudnet.getStudentId() + new Random().nextInt(100));
+				School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
+				if (OrderHour >= 10) {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+				} else if (OrderHour >= 100) {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+				} else if (OrderHour >= 1000) {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+				} else {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+				}
+				OrderHour += 1;
 				order.setPaymentmethodId(paymentmethodId);
 				order.setIdentification(0);
 				if (orderService.addOrder(order) == 1) {
@@ -1767,7 +2048,21 @@ public class HighesController {
 				order.setFeecateMoney(feecateMoney);
 				order.setFeecateMoneyYiKao(feecateMoneyYiKao);
 				order.setDiscount(discount);
-				order.setOrderNumber("SJ" + date + s.getStudentId() + new Random().nextInt(100));
+				School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
+				if (OrderHour >= 10) {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+				} else if (OrderHour >= 100) {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+				} else if (OrderHour >= 1000) {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+				} else {
+					order.setOrderNumber(
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+				}
+				OrderHour += 1;
 				order.setPaymentmethodId(paymentmethodId);
 				order.setIdentification(0);
 				if (orderService.addOrder(order) == 1) {
@@ -1811,15 +2106,15 @@ public class HighesController {
 	 */
 	@RequestMapping("selectHour.html")
 	@ResponseBody
-	public Object selectHour(@RequestParam Integer time, @RequestParam Integer Choice, @RequestParam String studentName,
+	public Object selectHour(@RequestParam String time, @RequestParam Integer Choice, @RequestParam String studentName,
 			@RequestParam Integer number) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if (number == 0) {
 			number = null;
 		}
 		if (Choice == 1) {
-			List<Order> order = orderService.selectStduentHour(time, (Integer) session.getAttribute("schoolId"),
-					studentName, number);
+			List<Order> order = orderService.selectStduentHour(Integer.parseInt(time),
+					(Integer) session.getAttribute("schoolId"), studentName, number);
 			System.out.println(order.size());
 			for (int i = 0; i < order.size(); i++) {
 				if (i != order.size() - 1) {
@@ -1955,5 +2250,85 @@ public class HighesController {
 			map.put("del", "0");
 		}
 		return JSONArray.toJSONString(map);
+	}
+
+	/**
+	 * 查看本校上课时间
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("selectClassTime.html")
+	public String selectClassTime(Model model) {
+		List<ClassTime> classTime = classTimeService.selectClassTime((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("classTime", classTime);
+		return "high/ClassTime";
+	}
+
+	/**
+	 * 添加本校上课时间
+	 * 
+	 * @param classTime
+	 * @return
+	 */
+	@RequestMapping("addClassTime.html")
+	@ResponseBody
+	public Object addClassTime(ClassTime classTime) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		classTime.setSchoolId((Integer) session.getAttribute("schoolId"));
+		if (classTimeService.addClassTime(classTime) == 1) {
+			map.put("add", "1");
+		} else {
+			map.put("add", "0");
+		}
+		return JSONArray.toJSONString(map);
+	}
+
+	/**
+	 * 删除本校上课时间
+	 * 
+	 * @param classTimeId
+	 * @return
+	 */
+	@RequestMapping("delClassTime.html")
+	@ResponseBody
+	public Object delClassTime(Integer classTimeId) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		if (classTimeService.delClassTime(classTimeId) == 1) {
+			map.put("del", "1");
+		} else {
+			map.put("del", "0");
+		}
+		return JSONArray.toJSONString(map);
+	}
+
+	/**
+	 * 转到批量收费页面
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("BulkCharging.html")
+	public String BulkCharging(Model model) {
+		List<Student> student = studentService.selectAllStudent((Integer) session.getAttribute("schoolId"));
+		List<Class> classes = classService.selectClass2((Integer) session.getAttribute("schoolId"), 0);
+		model.addAttribute("classes", classes);
+		model.addAttribute("student", student);
+		return "high/BulkCharging";
+	}
+
+	/**
+	 * 根据班级、名字查找学生
+	 * 
+	 * @param classId
+	 * @param StudentName
+	 * @return
+	 */
+	@RequestMapping("selectBulkCharging.html")
+	public String selectBulkCharging(Model model, @RequestParam Integer classId, @RequestParam String studentName) {
+		List<Student> student = studentService.selectByClassIdStudent((Integer) session.getAttribute("schoolId"),
+				classId, studentName);
+		model.addAttribute("student", student);
+		return "high/BulkCharging";
 	}
 }

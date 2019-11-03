@@ -114,4 +114,19 @@ public interface StudentService {
 	 * @return
 	 */
 	public List<Student> findHighStudentResverSchoolInfo(@Param("map")Map<String, Object> map);
+	
+	/**
+	 * 查看本校所有学生
+	 * @return
+	 */
+	public List<Student> selectAllStudent(Integer schoolId);
+	
+	/**
+	 * 根据班级、名字查找学生
+	 * @param schoolId
+	 * @param classId
+	 * @param studentName
+	 * @return
+	 */
+	public List<Student> selectByClassIdStudent(Integer schoolId,Integer classId,String studentName);
 }
