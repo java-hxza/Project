@@ -69,6 +69,11 @@
 										placeholder="学校名称">
 								</div>
 								<div class="form-group">
+									<label for="emailaddress">学校单号首拼</label> <input
+										class="form-control" type="text" id="schoolNameSx" required
+										placeholder="学校单号首拼">
+								</div>
+								<div class="form-group">
 									<label for="emailaddress">学校级别</label> 
 									<select class="form-control"  id="schoolType">
 										<option value="1">少儿</option>

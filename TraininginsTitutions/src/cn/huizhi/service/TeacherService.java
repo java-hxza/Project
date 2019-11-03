@@ -99,5 +99,13 @@ public interface TeacherService {
 	 * @return
 	 */
 	public Integer delTeacherTable();
+	/**
+	 * 修改教师权限
+	 * @param state
+	 * @param addState
+	 * @param teacherId
+	 * @return
+	 */
+	public Integer updateTeacherQuanXian(Integer state,Integer addState,Integer teacherId);
 	
 }

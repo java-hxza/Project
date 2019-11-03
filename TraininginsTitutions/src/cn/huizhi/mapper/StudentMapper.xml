@@ -427,9 +427,12 @@
 			<if test="map.feecateId != '' and map.feecateId != null">
 				and o.feecateId LIKE CONCAT('%', #{map.feecateId},'%')
 			</if>
-			<if test="map.startTime !=null and map.startTime !=''">
+			<if test="map.startTime !=null and map.startTime !='' ">
 				and date(st.startTime) between #{map.startTime} and
 				#{map.endTime}
+			</if>
+			<if test="map.studentName !=null and map.studentName !=''">
+				and  st.studentName like concat('%',#{map.studentName},'%')  
 			</if>
 
 		</where>
@@ -570,6 +573,9 @@
 			<if test="map.startTime !=null and map.startTime !=''">
 				and date(st.startTime) between #{map.startTime} and
 				#{map.endTime}
+			</if>
+			<if test="map.studentName !=null and map.studentName !=''">
+				and  st.studentName like concat('%',#{map.studentName},'%')  
 			</if>
 		</where>
 	</select>

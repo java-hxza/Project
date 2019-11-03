@@ -98,4 +98,15 @@ public interface TeacherMapper {
 	 * @return
 	 */
 	public Integer delTeacherTable();
+	
+	/**
+	 * 修改教师权限
+	 * @param state
+	 * @param addState
+	 * @param teacherId
+	 * @return
+	 */
+	public Integer updateTeacherQuanXian(@Param("state")Integer state,@Param("addState")Integer addState,@Param("teacherId")Integer teacherId);
+	
+	
 }

@@ -14,18 +14,15 @@
 	</sql>
 	<!--添加登录sql语句根据账号密码校区校验 -->
 	<select id="selectUserByLogin" resultType="User">
-		select u.*
-		from user u,school sc,userdiction ud
-		<where>
+		select distinct u.*
+		from  user u,school sc,userdiction ud
+		<where> 
 			ud.schoolId = sc.schoolId and ud.userId = u.uId
-			<if test="loginName!=null and  loginName!=''">
+			<if test="loginName != null and  loginName != ''">
 				and u.loginName=#{loginName}
 			</if>
 			<if test="loginPassword!=null and loginPassword!=''">
-				and u.loginPassword=#{loginPassword}
-			</if>
-			<if test="schoolType !=null and schoolType!=''">
-				and sc.schoolType = #{schoolType}
+				and u.loginPassword = #{loginPassword}
 			</if>
 		</where>
 	</select>

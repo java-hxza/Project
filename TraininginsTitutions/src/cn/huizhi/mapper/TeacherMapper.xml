@@ -28,8 +28,9 @@
 		t.teacherName t_teacherName,
 		t.teacherTypeId t_teacherTypeId,
 		t.telephone as t_telephone,
-		t.remarks
-		as t_remarks
+		t.remarks as t_remarks,
+		t.state as t_state,
+		t.addState as t_addState
 	</sql>
 	<!--登陆时返回Map -->
 	<resultMap type="Teacher" id="teacherByLogin">
@@ -40,13 +41,15 @@
 		<result column="t_teacherTypeId" property="teacherTypeId" />
 		<result column="t_telephone" property="telephone" />
 		<result column="t_remarks" property="remarks" />
+		<result column="t_state" property="state" />
+		<result column="t_addState" property="addState" />
 	</resultMap>
 	<!--教师登录 -->
 	<select id="selectTeacherByLogin" resultMap="teacherByLogin">
 		select
-		<include refid="teacherByLoginCol"/>
-		from teacher t, teacherdiction td ,school sc 
-		
+		<include refid="teacherByLoginCol" />
+		from teacher t, teacherdiction td ,school sc
+
 		<where>
 			td.teacherId = t.teacherId and sc.schoolId = td.schoolId
 			<if test="teacherName!='' and teacherName!=null">
@@ -58,40 +61,39 @@
 			<if test="schoolType != null and schoolType !=''">
 				and sc.schoolType =#{schoolType}
 			</if>
-			
 		</where>
 	</select>
-	
+
 	<update id="updateTeacher" parameterType="Teacher">
 		UPDATE
-		traininginstitutions.teacher 
+		traininginstitutions.teacher
 		<set>
 			<if test="teacherName != null and teacherName != '' ">
 				teacherName = #{teacherName},
 			</if>
 			<if test="loginPassword != null and loginPassword != '' ">
-				loginPassword = #{loginPassword}, 
+				loginPassword = #{loginPassword},
 			</if>
 			<if test="teacherTypeId != null and teacherTypeId !='' ">
-				 teacherTypeId = #{teacherTypeId}, 
+				teacherTypeId = #{teacherTypeId},
 			</if>
 			<if test="telephone != null and telephone !='' ">
-				telePhone = #{telephone}, 
+				telePhone = #{telephone},
 			</if>
 			<if test="remarks != null and remarks !='' ">
-				remarks = #{remarks} 
+				remarks = #{remarks}
 			</if>
 			<if test="state != null and state !='' ">
-				state = #{state} 
+				state = #{state}
 			</if>
-		
-		</set> 
-		 <where>
-		 	<if test="teacherId !=null and teacherId != '' ">
-		 		teacherId = #{teacherId} 
-		 	</if>	
-		 </where> 
-		 
+
+		</set>
+		<where>
+			<if test="teacherId !=null and teacherId != '' ">
+				teacherId = #{teacherId}
+			</if>
+		</where>
+
 	</update>
 
 	<delete id="delTeacher">
@@ -103,22 +105,24 @@
 	<insert id="addTeacher" parameterType="Teacher">
 		insert into traininginstitutions.teacher ( teacherName, loginPassword,
 		teacherTypeId, feeCategory, telePhone, remarks,departmentId )
-		values ( #{teacherName}, #{loginPassword}, #{teacherTypeId}, #{feeCategory},
+		values (
+		#{teacherName}, #{loginPassword}, #{teacherTypeId}, #{feeCategory},
 		#{telephone}, #{remarks} ,#{departmentId})
-			<!--order属性是取数据生成之前(before)or生成之后(after)  -->
-		<selectKey keyProperty="teacherId" resultType="java.lang.Integer" order="AFTER">
-    		<!--  当前事务最后一个生成的主键id-->
-    		select last_insert_id()
-    	</selectKey>
+		<!--order属性是取数据生成之前(before)or生成之后(after) -->
+		<selectKey keyProperty="teacherId"
+			resultType="java.lang.Integer" order="AFTER">
+			<!-- 当前事务最后一个生成的主键id -->
+			select last_insert_id()
+		</selectKey>
 	</insert>
-
 
 
 	<!--根据学校逐渐和教师类别查询教师 -->
 	<select id="selecTeachersByTeacherTypeId" resultType="Teacher">
 		select t.*
 		from teacher t
-		join teacherdiction td on td.teacherId = t.teacherId
+		join teacherdiction td on td.teacherId =
+		t.teacherId
 		join school sc on
 		sc.schoolId = td.schoolId
 		<where>
@@ -138,7 +142,8 @@
 		t.teacherName t_teacherName,
 		t.feeCategory t_feeCategory,
 		t.loginPassword t_loginPassword,
-		t.remarks t_remarks,
+		t.remarks
+		t_remarks,
 		t.teacherTypeId t_teacherTypeId,
 		t.telePhone t_telePhone,
 		ty.teacherTypeName ty_teacherTypeName,
@@ -150,14 +155,17 @@
 		sc.schoolName sc_schoolName
 	</sql>
 	<!-- 根据学校主键查询学校下所有老师以及教师类别 -->
-	<select id="selectTeacherListBySchoolId" resultMap="selectTeacherListBySchoolIdMap"
+	<select id="selectTeacherListBySchoolId"
+		resultMap="selectTeacherListBySchoolIdMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="selectTeacherListBySchoolIdCol" />
-		from teacher t,teacherdiction td, teachertype ty ,department d,school sc
+		from teacher t,teacherdiction td, teachertype ty ,department d,school
+		sc
 		<where>
-			td.teacherId = t.teacherId and ty.teacherTypeId= t.teacherTypeId 
-			and d.departmentId = t.departmentId and sc.schoolId = td.schoolId
+			td.teacherId = t.teacherId and ty.teacherTypeId= t.teacherTypeId
+			and
+			d.departmentId = t.departmentId and sc.schoolId = td.schoolId
 			<if test="schoolId !=null and schoolId!=''">
 				and td.schoolId = #{schoolId}
 			</if>
@@ -184,15 +192,16 @@
 			<result column="td_teacherId" property="teacherId" />
 		</association>
 		<association property="deparMent" javaType="DepartMent">
-			<id column="d_departmentId" property="departmentId"/>
-			<result column="d_departmentName" property="departmentName"/>
+			<id column="d_departmentId" property="departmentId" />
+			<result column="d_departmentName" property="departmentName" />
 		</association>
 		<association property="school" javaType="School">
-			<result column="sc_schoolName" property="schoolName"/>
+			<result column="sc_schoolName" property="schoolName" />
 		</association>
 	</resultMap>
 
-	<select id="selectTeachers" parameterType="Teacher" resultType="Teacher">
+	<select id="selectTeachers" parameterType="Teacher"
+		resultType="Teacher">
 		SELECT * FROM teacher
 		WHERE teacherName=#{teacherName} AND
 		loginPassword=#{loginPassword} AND teacherTypeId=#{teacherTypeId} AND
@@ -227,12 +236,31 @@
 		SELECT t.*
 		FROM teacher t
 		JOIN teachertype tt ON t.teacherTypeId=tt.teacherTypeId
-		JOIN teacherdiction td ON t.teacherId=td.teacherId
-		WHERE tt.teacherTypeName LIKE CONCAT('%', '招生','%') AND td.schoolId=#{0}
+		JOIN
+		teacherdiction td ON t.teacherId=td.teacherId
+		WHERE tt.teacherTypeName
+		LIKE CONCAT('%', '招生','%') AND td.schoolId=#{0}
 	</select>
-	
+
 	<update id="delTeacherTable">
 		truncate teacher
+	</update>
+
+	<update id="updateTeacherQuanXian">
+		update traininginstitutions.teacher
+		<set>
+		<if test="state !=null and state!=''">
+			state = #{state} ,
+		</if>
+		<if test="addState!=null and addState !=''">
+			addState = #{addState}
+		</if>
+		</set>
+		<where>
+			<if test="teacherId !=null and teacherId!=''">
+				teacherId = #{teacherId}
+			</if>
+		</where>
 	</update>
 
 </mapper>

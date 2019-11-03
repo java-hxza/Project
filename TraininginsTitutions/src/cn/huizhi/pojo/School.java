@@ -11,7 +11,6 @@ public class School {
 	private Integer schoolType;
 	private FeeCategory feeCategory;
 	private String schoolNameSx;
-
 	/**
 	 * 共支出
 	 */

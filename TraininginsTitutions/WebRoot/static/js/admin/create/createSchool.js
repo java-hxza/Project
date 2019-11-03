@@ -12,6 +12,8 @@ $(function() {
 		var schoolName = $("#schoolName").val();
 		var schoolType = $("#schoolType").val();
 		var schoolRemarks = $("#schoolRemarks").val();
+		var schoolNameSx = $("#schoolNameSx").val();
+		
 		if (schoolName == '' || schoolName == null) {
 			$.NotificationApp.send("错误!", "你必须城市名及学校名。", "top-right", "rgba(0,0,0,0.2)", "error")
 			$("#loginBtn span").removeClass("spinner-border spinner-border-sm");
@@ -26,7 +28,8 @@ $(function() {
 				cityId : cityId,
 				schoolName : schoolName,
 				schoolRemarks : schoolRemarks,
-				schoolType : schoolType
+				schoolType : schoolType,
+				schoolNameSx : schoolNameSx
 			},
 			dataType : 'JSON',
 			type : 'post',

@@ -276,7 +276,8 @@ public class RootSchoolController {
 
 		BigDecimal bc = new BigDecimal(schoolFeeceat);
 		bc = bc.setScale(2, BigDecimal.ROUND_HALF_UP);
-
+		
+		
 		session.setAttribute("serviceCharge", serviceCharge);
 		session.setAttribute("schoolExPenSum", bd);
 		session.setAttribute("schoolFeeceat", bc);
@@ -286,6 +287,7 @@ public class RootSchoolController {
 		session.setAttribute("smList", smList);
 		session.setAttribute("schoolFeeCategories", schoolFeeCategories);
 		return "root/school/schoolInfo";
+		
 	}
 
 	@RequestMapping("schoolExpen.html")
@@ -1769,7 +1771,11 @@ public class RootSchoolController {
 				feeMoneyArray.add(feeMoney);
 			}
 			if (student.getOrder().getFeecateMoneyYiKao() != null && student.getOrder().getFeecateMoneyYiKao() != "") {
+				if(student.getOrder().getFeecateMoneyYiKao() == null) {
+					student.getOrder().setFeecateMoneyYiKao("0,0,0");
+				}
 				feeYiKao = student.getOrder().getFeecateMoneyYiKao().split(",");
+				
 				feecateMoneyYiKaoList.add(feeYiKao);
 			}
 
@@ -1840,6 +1846,9 @@ public class RootSchoolController {
 				feeMoneyArray.add(feeMoney);
 			}
 			if (student.getOrder().getFeecateMoneyYiKao() != null && student.getOrder().getFeecateMoneyYiKao() != "") {
+				if(student.getOrder().getFeecateMoneyYiKao() == null) {
+					student.getOrder().setFeecateMoneyYiKao("0,0,0");
+				}
 				feeYiKao = student.getOrder().getFeecateMoneyYiKao().split(",");
 				feecateMoneyYiKaoList.add(feeYiKao);
 			}
@@ -1869,7 +1878,6 @@ public class RootSchoolController {
 
 	/**
 	 * 跳转学生请假页面
-	 * 
 	 * @param session
 	 * @return
 	 */
@@ -2156,7 +2164,6 @@ public class RootSchoolController {
 		return "root/studentInfo/studentGraduation";
 
 	}
-
 	/**
 	 * 操作员授权
 	 * 
@@ -2170,5 +2177,18 @@ public class RootSchoolController {
 
 		session.setAttribute("dictionListByUId", dictionListByUId);
 		return "root/basicSettings/operatorRootAuthorization";
+	}
+	
+	@RequestMapping("quanxiansave.html")
+	@ResponseBody
+	public Map<String,String> quanxiansave(Integer state,Integer addState,Integer teacherId){
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		if(teacherService.updateTeacherQuanXian(state, addState, teacherId)>0) {
+			jsonMap.put("state","1");
+		}else {
+			jsonMap.put("state","0");
+		}
+		
+		return jsonMap;
 	}
 }
