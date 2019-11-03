@@ -61,17 +61,6 @@
 					<button class="button-menu-mobile open-left disable-btn">
 						<i class="mdi mdi-menu"></i>
 					</button>
-					<div class="app-search">
-						<form>
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search...">
-								<span class="mdi mdi-magnify"></span>
-								<div class="input-group-append">
-									<button class="btn btn-primary" type="submit">Search</button>
-								</div>
-							</div>
-						</form>
-					</div>
 				</div>
 				<!-- end Topbar -->
 					<!-- start page title -->
@@ -94,29 +83,6 @@
 					<!-- end page title -->
 
 					<!-- end row -->
-
-							<div class="col-12">
-								<div class="card">
-									<div class="card-body">
-										<div class="row mb-2">
-											<div class="col-sm-4">
-												<button type="button" class="btn btn-success btn-sm mt-2"
-													onclick="createSchool()">创建学校</button>
-												<button type="button" class="btn btn-success btn-sm mt-2"
-													onclick="createUser()">创建账号</button>
-												<button type="button" class="btn btn-success btn-sm mt-2"
-													onclick="operatorAuthorization()">操作员授权</button>
-											</div>
-											<div class="col-sm-8">
-												<div class="text-sm-right">
-													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-														onclick="updateUser()">修改账号</button>
-													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-														onclick="delUser()">删除账号</button>
-												</div>
-											</div>
-											<!-- end col-->
-										</div>
 
 					<!-- end row -->
                                 <!-- Question/Answer -->

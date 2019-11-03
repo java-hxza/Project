@@ -1048,8 +1048,7 @@ public class RootSchoolController {
 			ChildrenesClassStudnet cStudnet = new ChildrenesClassStudnet();
 			cStudnet.setStudentId(order.getStuId());
 			cStudnet.setState("2");
-			if (orderService.addOrder(order) > 0
-					&& childrenesClassStudnetService.updateChildrenStudentState(cStudnet) > 0) {
+			if (childrenesClassStudnetService.updateChildrenStudentState(cStudnet) > 0) {
 				jsonMap.put("state", "1");
 			} else {
 				jsonMap.put("state", "0");
@@ -1060,8 +1059,7 @@ public class RootSchoolController {
 			HighesClassStudnet highesClassStudnet = new HighesClassStudnet();
 			highesClassStudnet.setClassesStudentId(order.getStuId());
 			highesClassStudnet.setState(2);
-			if (orderService.addOrder(order) > 0
-					&& highesClassStudnetService.updateHighStudentState(highesClassStudnet) > 0) {
+			if (highesClassStudnetService.updateHighStudentState(highesClassStudnet) > 0) {
 				jsonMap.put("state", "1");
 			} else {
 				jsonMap.put("state", "0");
@@ -1071,7 +1069,7 @@ public class RootSchoolController {
 			ArtClassStudnet artClassStudnet = new ArtClassStudnet();
 			artClassStudnet.setClassesStudentId(order.getStuId());
 			artClassStudnet.setState(2);
-			if (orderService.addOrder(order) > 0 && artClassStudnetService.updateArtStudentState(artClassStudnet) > 0) {
+			if ( artClassStudnetService.updateArtStudentState(artClassStudnet) > 0) {
 				jsonMap.put("state", "1");
 			} else {
 				jsonMap.put("state", "0");
@@ -2162,7 +2160,6 @@ public class RootSchoolController {
 		session.setAttribute("studentList", studentList);
 
 		return "root/studentInfo/studentGraduation";
-
 	}
 	/**
 	 * 操作员授权

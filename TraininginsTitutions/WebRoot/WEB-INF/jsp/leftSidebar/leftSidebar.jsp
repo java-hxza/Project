@@ -68,8 +68,6 @@
 				<li><a href="javascript:void(0)" onclick="studentGraduation()">学生结业
 				</a></li>
 			</ul></li>
-
-
 		<li class="side-nav-item"><a href="javascript: void(0);"
 			class="side-nav-link"> <i class=" mdi mdi-yahoo"></i> <span>
 					培训收款 </span> <span class="menu-arrow"></span>
@@ -149,5 +147,6 @@
 	<div class="clearfix"></div>
 
 </div>
-
+<span id="state" hidden="hidden">${state }</span>
+<span id="addState" hidden="hidden">${addState }</span>
 </div>

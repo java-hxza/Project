@@ -11,7 +11,7 @@ $(function() {
 		var remarks = $("#remarks").val();
 		var classId = $("#remarks").attr("name");
 		var expenditureitemsId = $("#expenditureitemsId").val();
-		
+		alert(stuId)
 		startTime = new Date(startTime);
 		
 		$.ajax({

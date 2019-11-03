@@ -22,7 +22,6 @@ $(function(){
 	 */
 	studentInfo = function(){
 		location.href="studentInfo.html";
-		
 	}
 	
 	/**
