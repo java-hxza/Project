@@ -31,8 +31,10 @@ import cn.huizhi.pojo.HighesClassStudnet;
 import cn.huizhi.pojo.Order;
 import cn.huizhi.pojo.Student;
 import cn.huizhi.pojo.Teacher;
+import cn.huizhi.pojo.TeacherDiction;
 import cn.huizhi.pojo.TeacherHour;
 import cn.huizhi.pojo.User;
+import cn.huizhi.pojo.UserDiction;
 import cn.huizhi.service.ArtClassStudnetService;
 import cn.huizhi.service.ChildrenesClassStudnetService;
 import cn.huizhi.service.ClassService;
@@ -92,8 +94,26 @@ public class ChildrenClassesController {
 	@RequestMapping("childrenSchoolLogin.html")
 	public String childrenSchoolLogin(HttpSession session) {
 		session.setAttribute("schoolType", 1);
+		Integer loginType = (Integer) session.getAttribute("loginType");
+		if (loginType == 1) {
 
-		return "/login";
+			List<UserDiction> list = (List<UserDiction>) session.getAttribute("schoolListByUId");
+			for (int i = 0; i < list.size(); i++) {
+				if (1 == list.get(i).getSchool().getSchoolType()) {
+					return "redirect:/index.html";
+				}
+			}
+		}
+		if (loginType == 2) {
+
+			List<TeacherDiction> list = (List<TeacherDiction>) session.getAttribute("schoolListByUId");
+			for (int i = 0; i < list.size(); i++) {
+				if (1 == list.get(i).getSchool().getSchoolType()) {
+					return "redirect:/index.html";
+				}
+			}
+		}
+		return "redirect:/selectionModule.html";
 	}
 
 	/**

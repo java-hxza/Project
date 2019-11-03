@@ -62,9 +62,8 @@ $(function() {
 	UserLogin = function() {
 
 
-		var loginName = $("#username").val();
+		var loginName = $("#logname").val();
 		var loginPassword = $("#password").val();
-		var schoolId = $("#schoolId").val();
 
 		if (loginName, loginPassword == "") {
 			$.NotificationApp.send("错误!", "你必须输入账户名及密码。", "top-right", "rgba(0,0,0,0.2)", "error")
@@ -77,7 +76,6 @@ $(function() {
 			data : {
 				loginName : loginName,
 				loginPassword : loginPassword,
-				schoolId : schoolId
 			},
 			dataType : 'JSON',
 			type : 'post',
@@ -87,7 +85,7 @@ $(function() {
 					if (data.UsertypeId == "1") {
 							location.href = "adminIndex.html";
 					} else {
-							location.href = "index.html";
+							location.href = "selectionModule.html";
 					}
 				} else {
 					alert("账号密码错误，请检查重试!");

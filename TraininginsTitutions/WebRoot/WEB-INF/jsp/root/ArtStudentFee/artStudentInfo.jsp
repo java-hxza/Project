@@ -72,17 +72,6 @@
 						<button class="button-menu-mobile open-left disable-btn">
 							<i class="mdi mdi-menu"></i>
 						</button>
-						<div class="app-search">
-							<form>
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search...">
-									<span class="mdi mdi-magnify"></span>
-									<div class="input-group-append">
-										<button class="btn btn-primary" type="submit">Search</button>
-									</div>
-								</div>
-							</form>
-						</div>
 					</div>
 					<!-- end Topbar -->
 					<!-- start page title -->
@@ -135,16 +124,22 @@
 
 
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label for="billing-first-name">开始日期</label> <input
 												class="form-control" type="date" id="startTime" />
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label for="billing-first-name">结束日期</label> <input
 												class="form-control" type="date" id="endTime" />
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="billing-first-name">学生姓名</label> <input
+												class="form-control" type="text" id="studentName" />
 										</div>
 									</div>
 								</div>
@@ -219,7 +214,6 @@
 											<td>预定班型</td>
 											<td>宿舍号</td>
 											<td>几人间</td>
-											<td>备注</td>
 											<%
 												int num = 0;
 												int index = 0;
@@ -234,6 +228,7 @@
 											<td>实付金额</td>
 											<td>应收金额</td>
 											<td>分班情况</td>
+											<td>备注</td>
 										</tr>
 									</tbody>
 
@@ -257,8 +252,7 @@
 														<td class="table-user">${yi}</td>
 													</c:forEach>
 												</c:forEach>
-												<td class="table-user">${art.remarks }</td>
-												<td class="table-user" name="${art.order.feecateId }" Money="${art.order.feecateMoney }">${art.remarks }</td>
+												<td class="table-user" name="${art.order.feecateId }" hidden="hidden" Money="${art.order.feecateMoney }"></td>
 											<%-- 	<c:forEach items="${feeCategories }" var="fee" begin="<%=index %>"
 															end="<%=index %>">
 													<c:forEach items="${feeIdArray }"  var="feeId">
@@ -285,12 +279,12 @@
 												<c:if test="${art.reserveschool.state == 0 }">
 													<td class="table-user">未分班</td>
 												</c:if>
+												<td class="table-user">${art.remarks }</td>
 											</tr>
 											<%
 												index = index + 1;
 											%>
 										</c:forEach>
-
 									</tbody>
 									<tbody id="expen" style='text-align: center;'>
 										<tr>

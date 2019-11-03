@@ -63,8 +63,7 @@
 								</span> <span class="account-position">管理员</span>
 							</span>
 						</a>
-							<div
-								class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+							<div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
 								<!-- item-->
 								<div class=" dropdown-header noti-title">
 									<h6 class="text-overflow m-0">欢迎 !</h6>
@@ -90,17 +89,6 @@
 					<button class="button-menu-mobile open-left disable-btn">
 						<i class="mdi mdi-menu"></i>
 					</button>
-					<div class="app-search">
-						<form>
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search...">
-								<span class="mdi mdi-magnify"></span>
-								<div class="input-group-append">
-									<button class="btn btn-primary" type="submit">Search</button>
-								</div>
-							</div>
-						</form>
-					</div>
 				</div>
 				<!-- end Topbar -->
 				<!-- Start Content-->
@@ -141,11 +129,15 @@
 											<div class="text-sm-right">
 												<a href="javascript:void(0);"
 													class="btn btn-danger mb-2 del" onclick="delTeacher()"><i
-													class="mdi mdi-plus-circle mr-2"></i> 删除</a> <a
-													href="javascript:void(0);" class="btn btn-danger mb-2 del"
-													onclick="teacherAuthorization()"> <i
-													class="mdi mdi-plus-circle mr-2"></i>教师授权
-												</a>
+													class="mdi mdi-plus-circle mr-2"></i> 删除</a>
+												<button type="button" class="btn btn-danger mb-2"
+													data-toggle="modal" data-target="#top-modal"><i
+													class="mdi mdi-plus-circle mr-2"></i>教师管理授权</button>
+												 <a href="javascript:void(0);"
+													class="btn btn-danger mb-2 del"
+													onclick="teacherAuthorization()">教师跨区授权<i
+													class="mdi mdi-plus-circle mr-2"></i>
+												</a>  
 											</div>
 										</div>
 
@@ -431,14 +423,62 @@
 
 		<div class="rightbar-overlay"></div>
 		<!-- /Right-bar -->
-
-
-		<!-- App js -->
-
-		<!-- third party js -->
-		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
-		<script type="text/javascript"
-			src="${Path }/static/js/highes/Teacher.js"></script>
-		<!-- third party js ends -->
+		<!-- Top modal content -->
+		<div id="top-modal" class="modal fade" tabindex="-1" role="dialog"
+			aria-hidden="true">
+			<div class="modal-dialog modal-top">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="topModalLabel">请选择权限</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+					</div>
+					<div class="modal-body">
+						<table
+							class="table table-centered table-striped dt-responsive nowrap w-100"
+							id="products-datatable">
+							<thead>
+								<tr>
+									<th style="width: 20px;">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input"
+												id="customCheck1" disabled="disabled"> <label
+												class="custom-control-label" for="customCheck1">&nbsp;</label>
+										</div>
+									</th>
+									<th>权限名称</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" id="thId" class="custom-control-input customCheckes">
+											<label class="custom-control-label customCheck" for="customCheck2">&nbsp;</label>
+										</div>
+									</td>
+									<td class="table-user">删除修改账户信息权限</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" id="addId" class="custom-control-input customCheckes">
+											<label class="custom-control-label customCheck" for="customCheck2">&nbsp;</label>
+										</div>
+									</td>
+									<td class="table-user">增加班级信息权限</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-light" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" onclick="quanxiansave()">保存</button>
+					</div>
+				</div>
+				<!-- third party js -->
+				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
+				<script type="text/javascript" src="${Path }/static/js/highes/Teacher.js"></script>
+				<!-- third party js ends -->
 </body>
 </html>

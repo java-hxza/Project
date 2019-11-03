@@ -3,58 +3,67 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.TeacherDictionMapper">
-	<!--删除-->
+	<!--删除 -->
 	<delete id="delTeacherDiction">
-		DELETE FROM teacherdiction WHERE schoolId=#{0} AND teacherId=#{1}
+		DELETE FROM teacherdiction WHERE schoolId=#{0} AND
+		teacherId=#{1}
 	</delete>
-	<!--添加-->
+	<!--添加 -->
 	<insert id="addTeacherDiction" parameterType="java.lang.Integer">
-		INSERT INTO traininginstitutions.teacherdiction (schoolId, teacherId)VALUES(#{0}, #{1});
+		INSERT INTO
+		traininginstitutions.teacherdiction (schoolId, teacherId)VALUES(#{0},
+		#{1});
 	</insert>
-	<!--根据主键查询教师所在的学校-->
+	<!--根据主键查询教师所在的学校 -->
 	<sql id="selecTeacherDictionListByTeacherIdCol">
-	td.teacherDictionId td_teacherDictionId,
-	td.schoolId td_schoolId,
-	td.teacherId td_teacherId,
-	sc.schoolId sc_schoolId,
-	sc.cityId sc_cityId,
-	sc.cityProperId sc_cityProperId,
-	sc.schoolName sc_schoolName,
-	sc.schoolRemarks sc_schoolRemarks,
-	t.teacherName t_teacherName,
-	t.teacherId t_teacherId
+		td.teacherDictionId td_teacherDictionId,
+		td.schoolId td_schoolId,
+		td.teacherId td_teacherId,
+		sc.schoolId sc_schoolId,
+		sc.cityId sc_cityId,
+		sc.cityProperId sc_cityProperId,
+		sc.schoolName sc_schoolName,
+		sc.schoolRemarks sc_schoolRemarks,
+		t.teacherName t_teacherName,
+		t.teacherId t_teacherId,
 	</sql>
-	<!--根据主键查询教师所在的学校-->
-	<resultMap type="TeacherDiction" id="selecTeacherDictionListByTeacherIdMap">
-		<id column="td_teacherDictionId" property="teacherDictionId"/>
-		<result column="td_schoolId" property="schoolId"/>
-		<result column="td_teacherId" property="teacherId"/>
+	<!--根据主键查询教师所在的学校 -->
+	<resultMap type="TeacherDiction"
+		id="selecTeacherDictionListByTeacherIdMap">
+		<id column="td_teacherDictionId" property="teacherDictionId" />
+		<result column="td_schoolId" property="schoolId" />
+		<result column="td_teacherId" property="teacherId" />
 		<association property="school" javaType="School">
-			<id column="sc_schoolId" property="schoolId"/>
-			<result column="sc_schoolName" property="schoolName" javaType="java.lang.String"/>
-			<result column="sc_cityId" property="cityId"/>
-			<result column="sc_schoolRemarks" property="schoolRemarks"/>
+			<id column="sc_schoolId" property="schoolId" />
+			<result column="sc_schoolName" property="schoolName"
+				javaType="java.lang.String" />
+			<result column="sc_cityId" property="cityId" />
+			<result column="sc_schoolRemarks" property="schoolRemarks" />
 		</association>
 		<association property="teacher" javaType="Teacher">
-			<id column="t_teacherId" property="teacherId"/>
-			<result column="t_teacherName" property="teacherName"/>
+			<id column="t_teacherId" property="teacherId" />
+			<result column="t_teacherName" property="teacherName" />
 		</association>
 	</resultMap>
-	<!--根据主键查询教师所在的学校-->
-	<select id="selecTeacherDictionListByTeacherId" resultMap="selecTeacherDictionListByTeacherIdMap" parameterType="java.lang.Integer" >
-			select <include refid="selecTeacherDictionListByTeacherIdCol"/> 
-			from teacherdiction td 
-			join teacher t on t.teacherId = td.teacherId
-			join school sc on sc.schoolId = td.schoolId
-			<where>
-				<if test="teacherId!=null and teacherId!=''">
-					t.teacherId = #{teacherId} 
-				</if>
-			</where> 
+	<!--根据主键查询教师所在的学校 -->
+	<select id="selecTeacherDictionListByTeacherId"
+		resultMap="selecTeacherDictionListByTeacherIdMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="selecTeacherDictionListByTeacherIdCol" />
+		from teacherdiction td
+		join teacher t on t.teacherId = td.teacherId
+		join school sc on sc.schoolId = td.schoolId
+		<where>
+			<if test="teacherId!=null and teacherId!=''">
+				t.teacherId = #{teacherId}
+			</if>
+		</where>
 	</select>
-	
-	
-	<select id="selectTeacherDictionBySchoolIdAndTeacherId" resultType="TeacherDiction" parameterType="java.lang.Integer">
+
+
+	<select id="selectTeacherDictionBySchoolIdAndTeacherId"
+		resultType="TeacherDiction" parameterType="java.lang.Integer">
 		select *
 		from teacherdiction
 		<where>
@@ -65,7 +74,7 @@
 				and teacherId = #{teacherId}
 			</if>
 		</where>
-		
+
 	</select>
 
 </mapper>

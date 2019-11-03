@@ -30,7 +30,7 @@ public interface UserService {
 	 * @param schoolId
 	 * @return
 	 */
-	public User findUserByLogin(String loginName, String loginPassword ,Integer schoolType);
+	public User findUserByLogin(String loginName, String loginPassword );
 	
 
 	/**

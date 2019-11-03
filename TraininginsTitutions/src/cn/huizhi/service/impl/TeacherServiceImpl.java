@@ -98,6 +98,13 @@ public class TeacherServiceImpl implements TeacherService{
 		// TODO Auto-generated method stub
 		return teacherMapper.delTeacherTable();
 	}
+
+
+	@Override
+	public Integer updateTeacherQuanXian(Integer state, Integer addState, Integer teacherId) {
+		// TODO Auto-generated method stub
+		return teacherMapper.updateTeacherQuanXian(state, addState, teacherId);
+	}
 	
 	
 	

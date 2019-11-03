@@ -78,10 +78,10 @@ public class WelcomeController {
 
 	@Resource
 	OrderService orderService;
-	
+
 	@Resource
 	DepartmentOfPediatricsService deparmentOfPediatricsService;
-	
+
 	@Resource
 	FeeCategoryService feeCategoryService;
 
@@ -98,13 +98,13 @@ public class WelcomeController {
 		 */
 		List<Province> provinceList = provinceService.findProvinces();
 		List<City> cityList = CityService.findCitysByProvinceId(provinceList.get(0).getProvinceId());
-		List<School> schoolList = schoolService.findSchoolByCityId(cityList.get(0).getCityId(),null);
+		List<School> schoolList = schoolService.findSchoolByCityId(cityList.get(0).getCityId(), null);
 		List<DepartMent> departMentListAllList = deparMentService.selectDepartMentListAll();
 		session.setAttribute("departMentListAllList", departMentListAllList);
 		session.setAttribute("provinceList", provinceList);
 		session.setAttribute("cityList", cityList);
 		session.setAttribute("schoolList", schoolList);
-		return "selectionModule";
+		return "/login";
 	}
 
 	/**
@@ -142,10 +142,10 @@ public class WelcomeController {
 		for (School school : schoolListAll) {
 			order = new Order();
 			order.setSchoolId(school.getSchoolId());
-			
-			//学校收费项目
+
+			// 学校收费项目
 			List<FeeCategory> schoolFeeCategories = feeCategoryService.selectFeeCategory(school.getSchoolId());
-			//统计学校收费项目
+			// 统计学校收费项目
 			for (int i = 0; i < schoolFeeCategories.size(); i++) {
 				sm = new SchoolFeeCategorySumMoney();
 				sm.setFeeId(String.valueOf(schoolFeeCategories.get(i).getChargeTypeId()));
@@ -155,51 +155,50 @@ public class WelcomeController {
 			}
 			// 学校收入订单
 			List<Order> orderListBySchool = orderService.findOrderListBySchool(order);
-			
-		
-			//计算收费项目金额
+
+			// 计算收费项目金额
 			for (int i = 0; i < orderListBySchool.size(); i++) {
-				
-				if(orderListBySchool.get(i).getFeecateId() == null) {
+
+				if (orderListBySchool.get(i).getFeecateId() == null) {
 					continue;
 				}
-				String feeId [] = orderListBySchool.get(i).getFeecateId().split(",");
-				if( orderListBySchool.get(i).getFeecateMoney() == null) {
+				String feeId[] = orderListBySchool.get(i).getFeecateId().split(",");
+				if (orderListBySchool.get(i).getFeecateMoney() == null) {
 					orderListBySchool.get(i).setFeecateMoney("0");
 				}
-				String feeMoney [] = orderListBySchool.get(i).getFeecateMoney().split(",");
-				//循环收费项目订单
+				String feeMoney[] = orderListBySchool.get(i).getFeecateMoney().split(",");
+				// 循环收费项目订单
 				for (int j = 0; j < feeId.length; j++) {
-					//计算收费项目总金额
+					// 计算收费项目总金额
 					for (int k = 0; k < schoolFeeCategories.size(); k++) {
-						if(feeId[j].equals(String.valueOf(schoolFeeCategories.get(k).getChargeTypeId()))) {
+						if (feeId[j].equals(String.valueOf(schoolFeeCategories.get(k).getChargeTypeId()))) {
 							for (int l = 0; l < smList.size(); l++) {
-								//比较收费项目主键添加
-								if(smList.get(l).getFeeId().equals(feeId[j])) {
-									smList.get(l).setSumMoney(Double.valueOf(feeMoney[j])+smList.get(l).getSumMoney());
+								// 比较收费项目主键添加
+								if (smList.get(l).getFeeId().equals(feeId[j])) {
+									smList.get(l)
+											.setSumMoney(Double.valueOf(feeMoney[j]) + smList.get(l).getSumMoney());
 								}
 							}
 						}
 					}
-					
-					
+
 				}
-				
+
 			}
-			
+
 			// 学校shou订单
 			List<Order> schoolExpenList = orderService.findExpenOrderList(order);
 			for (Order order2 : orderListBySchool) {
 				if (order2.getIdentification() == 0) {
-					school.setSchoolFeeceat(school.getSchoolFeeceat() + order2.getDpMoney()); 
-					if(order2.getServiceCharge() == null) {
+					school.setSchoolFeeceat(school.getSchoolFeeceat() + order2.getDpMoney());
+					if (order2.getServiceCharge() == null) {
 						continue;
 					}
 					serviceCharge += order2.getServiceCharge();
 				}
 			}
-			
-			//学校支出订单
+
+			// 学校支出订单
 			for (Order order3 : schoolExpenList) {
 				if (order3.getIdentification() == 1) {
 					school.setSchoolExPenSum(school.getSchoolExPenSum() + order3.getFeecategoryMoney());
@@ -214,13 +213,14 @@ public class WelcomeController {
 
 	@SuppressWarnings("unlikely-arg-type")
 	@RequestMapping("querySchoolOrderByTime.html")
-	public String querySchoolOrderByTime(String endTime, String startTime,String provinceId,String cityId,HttpSession session) {
+	public String querySchoolOrderByTime(String endTime, String startTime, String provinceId, String cityId,
+			HttpSession session) {
 		List<School> schoolListAll = null;
-		if(cityId !=null && cityId !="") {
-			schoolListAll = schoolService.findSchoolByCityId(Integer.valueOf(cityId),null);
+		if (cityId != null && cityId != "") {
+			schoolListAll = schoolService.findSchoolByCityId(Integer.valueOf(cityId), null);
 		}
-		if(provinceId !=null && provinceId !="") {
-			schoolListAll = schoolService.findSchoolByCityId(null,Integer.valueOf(provinceId));
+		if (provinceId != null && provinceId != "") {
+			schoolListAll = schoolService.findSchoolByCityId(null, Integer.valueOf(provinceId));
 		}
 		Order order;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -229,20 +229,20 @@ public class WelcomeController {
 		Double serviceCharge = 0.0;
 		for (School school : schoolListAll) {
 			order = new Order();
-			//判断非空
-			if(("").equals(startTime) || startTime == null) {
+			// 判断非空
+			if (("").equals(startTime) || startTime == null) {
 				order.setStartTime(null);
 			}
-			if(("").equals(endTime) || endTime == null) {
-					order.setEndTime(null);
+			if (("").equals(endTime) || endTime == null) {
+				order.setEndTime(null);
 			}
 			order.setSchoolId(school.getSchoolId());
-			
+
 			try {
-				if(order.getEndTime() != null || !("").equals(order.getEndTime())) {
+				if (order.getEndTime() != null || !("").equals(order.getEndTime())) {
 					order.setEndTime(formatter.parse(endTime));
 				}
-				if(order.getStartTime() != null || !("").equals(order.getStartTime())) {
+				if (order.getStartTime() != null || !("").equals(order.getStartTime())) {
 					order.setStartTime(formatter.parse(startTime));
 				}
 			} catch (ParseException e) {
@@ -251,12 +251,12 @@ public class WelcomeController {
 			}
 			order.setCityId(cityId);
 			order.setCityProperId(provinceId);
-			
+
 			// 学校收入订单
 			List<Order> orderListBySchool = orderService.findOrderListBySchool(order);
-			//学校收费项目
+			// 学校收费项目
 			List<FeeCategory> schoolFeeCategories = feeCategoryService.selectFeeCategory(school.getSchoolId());
-			//统计学校收费项目
+			// 统计学校收费项目
 			for (int i = 0; i < schoolFeeCategories.size(); i++) {
 				sm = new SchoolFeeCategorySumMoney();
 				sm.setFeeId(String.valueOf(schoolFeeCategories.get(i).getChargeTypeId()));
@@ -264,43 +264,41 @@ public class WelcomeController {
 				sm.setSchoolId(String.valueOf(schoolFeeCategories.get(i).getSchoolId()));
 				smList.add(sm);
 			}
-			
-		
-			//计算收费项目金额
+
+			// 计算收费项目金额
 			for (int i = 0; i < orderListBySchool.size(); i++) {
-				if(orderListBySchool.get(i).getFeecateId() == null) {
+				if (orderListBySchool.get(i).getFeecateId() == null) {
 					continue;
 				}
-				String feeId [] = orderListBySchool.get(i).getFeecateId().split(",");
-				if( orderListBySchool.get(i).getFeecateMoney() == null) {
+				String feeId[] = orderListBySchool.get(i).getFeecateId().split(",");
+				if (orderListBySchool.get(i).getFeecateMoney() == null) {
 					orderListBySchool.get(i).setFeecateMoney("0");
 				}
-				String feeMoney [] = orderListBySchool.get(i).getFeecateMoney().split(",");
-				//循环收费项目订单
+				String feeMoney[] = orderListBySchool.get(i).getFeecateMoney().split(",");
+				// 循环收费项目订单
 				for (int j = 0; j < feeId.length; j++) {
-					//计算收费项目总金额
+					// 计算收费项目总金额
 					for (int k = 0; k < schoolFeeCategories.size(); k++) {
-						if(feeId[j].equals(String.valueOf(schoolFeeCategories.get(k).getChargeTypeId()))) {
+						if (feeId[j].equals(String.valueOf(schoolFeeCategories.get(k).getChargeTypeId()))) {
 							for (int l = 0; l < smList.size(); l++) {
-								//比较收费项目主键添加
-								if(smList.get(l).getFeeId().equals(feeId[j])) {
-									smList.get(l).setSumMoney(Double.valueOf(feeMoney[j])+smList.get(l).getSumMoney());
+								// 比较收费项目主键添加
+								if (smList.get(l).getFeeId().equals(feeId[j])) {
+									smList.get(l)
+											.setSumMoney(Double.valueOf(feeMoney[j]) + smList.get(l).getSumMoney());
 								}
 							}
 						}
 					}
-					
-					
+
 				}
 			}
-			
-			
+
 			// 学校支出订单
 			List<Order> schoolExpenList = orderService.findExpenOrderList(order);
 			for (Order order2 : orderListBySchool) {
 				if (order2.getIdentification() == 0) {
-					school.setSchoolFeeceat(school.getSchoolFeeceat() + order2.getDpMoney()); 
-					if(order2.getServiceCharge() == null) {
+					school.setSchoolFeeceat(school.getSchoolFeeceat() + order2.getDpMoney());
+					if (order2.getServiceCharge() == null) {
 						continue;
 					}
 					serviceCharge += order2.getServiceCharge();
@@ -309,7 +307,7 @@ public class WelcomeController {
 
 			for (Order order3 : schoolExpenList) {
 				if (order3.getIdentification() == 1) {
-					school.setSchoolExPenSum( school.getSchoolExPenSum() + order3.getFeecategoryMoney());
+					school.setSchoolExPenSum(school.getSchoolExPenSum() + order3.getFeecategoryMoney());
 				}
 			}
 		}
@@ -357,14 +355,53 @@ public class WelcomeController {
 	public String highSchoolLogin(HttpSession session) {
 		session.setAttribute("schoolType", 2);
 
-		return "/login";
+		Integer loginType = (Integer) session.getAttribute("loginType");
+		if (loginType == 1) {
+
+			List<UserDiction> list = (List<UserDiction>) session.getAttribute("schoolListByUId");
+			for (int i = 0; i < list.size(); i++) {
+				if (2 == list.get(i).getSchool().getSchoolType()) {
+					return "redirect:/index.html";
+				}
+			}
+		}
+		if (loginType == 2) {
+
+			List<TeacherDiction> list = (List<TeacherDiction>) session.getAttribute("schoolListByUId");
+			for (int i = 0; i < list.size(); i++) {
+				if (2 == list.get(i).getSchool().getSchoolType()) {
+					return "redirect:/index.html";
+				}
+			}
+		}
+
+		return "redirect:/selectionModule.html";
+
 	}
 
 	@RequestMapping("artSchoolLogin.html")
 	public String artSchoolLogin(HttpSession session) {
 		session.setAttribute("schoolType", 3);
+		Integer loginType = (Integer) session.getAttribute("loginType");
+		if (loginType == 1) {
 
-		return "/login";
+			List<UserDiction> list = (List<UserDiction>) session.getAttribute("schoolListByUId");
+			for (int i = 0; i < list.size(); i++) {
+				if (3 == list.get(i).getSchool().getSchoolType()) {
+					return "redirect:/index.html";
+				}
+			}
+		}
+		if (loginType == 2) {
+
+			List<TeacherDiction> list = (List<TeacherDiction>) session.getAttribute("schoolListByUId");
+			for (int i = 0; i < list.size(); i++) {
+				if (3 == list.get(i).getSchool().getSchoolType()) {
+					return "redirect:/index.html";
+				}
+			}
+		}
+		return "redirect:/selectionModule.html";
 	}
 
 	@RequestMapping("highIndex.html")

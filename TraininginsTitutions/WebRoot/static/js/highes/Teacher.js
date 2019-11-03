@@ -258,4 +258,36 @@ $(function() {
 		
 		location.href ="rootOperatorAuthorization.html?teacherId="+teacherId;
 	}
+	
+	quanxiansave = function(){
+		var thId=0;
+		var addId=0;
+		if($("#thId:checked").length >0){
+			 thId = 1;
+		 }
+		if($("#addId:checked").length >0){
+			 addId = 1;
+		 }
+		var teacherId = $(".customCheckes:checked").parent().parent().next().attr("id_teacherId");
+		$.ajax({
+			url : "quanxiansave.html",
+			dataType: "JSON",
+			data : {
+				state : thId,
+				addState : addId,
+				teacherId : teacherId
+			},
+			type : "POST",
+			success : function(data){
+				if(data.state == 1){
+					alert("修改成功！");
+					location.href="Teacher.html";
+				}else{
+					alert("修改失败");
+					location.href="Teacher.html";
+				}
+			}
+			
+		});
+	}
 });
