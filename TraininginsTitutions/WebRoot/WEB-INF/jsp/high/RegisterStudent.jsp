@@ -127,7 +127,8 @@
 														class="btn btn-danger mb-2" value="读卡"
 														onclick="readCert()"> <input type="button"
 														class="btn btn-danger mb-2" value="断开"
-														onclick="disconnect()">
+														onclick="disconnect()"> <a href="${pageContext.request.contextPath }/selectClassTime.html"><input type="button"
+														class="btn btn-danger mb-2" value="上课时间管理"></a>
 													<h4 class="mt-2" style="text-align: center;">学员信息录入</h4>
 												</div>
 											</div>
@@ -204,6 +205,20 @@
 														</div>
 														<div class="col-3">
 															<div class="form-group">
+																<label for="billing-state">班主任</label> <input
+																	class="form-control Headmaster" type="text"
+																	placeholder="来源学校：班主任" id="registrationChannels" />
+															</div>
+														</div>
+														<div class="col-3">
+															<div class="form-group">
+																<label for="billing-state">专业老师</label> <input
+																	class="form-control professionalTeacher" type="text"
+																	placeholder="来源学校：专业老师" id="registrationChannels" />
+															</div>
+														</div>
+														<div class="col-3">
+															<div class="form-group">
 																<label for="billing-state">报名渠道</label> <input
 																	class="form-control registrationChannels" type="text"
 																	placeholder="报名渠道" id="registrationChannels" />
@@ -214,6 +229,20 @@
 																<label for="billing-zip-postal">报名老师</label> <input
 																	class="form-control registrationConsultant" type="text"
 																	placeholder="报名老师" id="registrationConsultant" />
+															</div>
+														</div>
+														<div class="col-md-3">
+															<div class="form-group">
+																<label for="billing-zip-postal">咨询老师</label> <input
+																	class="form-control ConsultationTeacher" type="text"
+																	placeholder="咨询老师" id="registrationConsultant" />
+															</div>
+														</div>
+														<div class="col-md-3">
+															<div class="form-group">
+																<label for="billing-zip-postal">接待老师</label> <input
+																	class="form-control EntertainTeacher" type="text"
+																	placeholder="接待老师" id="registrationConsultant" />
 															</div>
 														</div>
 														<div class="col-md-3">
@@ -467,6 +496,17 @@
 																	data-toggle="input-mask"
 																	data-mask-format="00000000000000000"
 																	data-reverse="true">
+															</div>
+														</div>
+														<div class="col-3" style="display: none;">
+															<div class="form-group mb-3">
+																<label for="example-select">上课时间段</label> <select
+																	class="form-control classTimes"
+																	id="example-select">
+																	<c:forEach items="${classTime }" var="c">
+																		<option value="${c.classTimeId }">${c.classTimeName}</option>
+																	</c:forEach>
+																</select>
 															</div>
 														</div>
 														<div class="col-3">

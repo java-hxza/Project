@@ -14,7 +14,7 @@ public class School {
 	/**
 	 * 共支出
 	 */
-	private Double schoolExPenSum =0.0;
+	private Double schoolExPenSum = 0.0;
 	/**
 	 * 共收入
 	 */
@@ -46,54 +46,30 @@ public class School {
 		this.province = province;
 	}
 
-
-
-
-	public String getSchoolNameSx() {
-		return schoolNameSx;
-	}
-
-
-
-
-	public void setSchoolNameSx(String schoolNameSx) {
-		this.schoolNameSx = schoolNameSx;
-	}
-
-
-
-
 	public Double getSchoolExPenSum() {
 		return schoolExPenSum;
 	}
 
-
-
 	public void setSchoolExPenSum(Double schoolExPenSum) {
-		
+
 		BigDecimal bd = new BigDecimal(schoolExPenSum);
 
 		bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
-		
+
 		this.schoolExPenSum = Double.parseDouble(bd.toString());
 	}
-
 
 	public FeeCategory getFeeCategory() {
 		return feeCategory;
 	}
 
-
 	public void setFeeCategory(FeeCategory feeCategory) {
 		this.feeCategory = feeCategory;
 	}
 
-
 	public Double getSchoolFeeceat() {
 		return schoolFeeceat;
 	}
-
-
 
 	public void setSchoolFeeceat(Double schoolFeeceat) {
 		BigDecimal bd = new BigDecimal(schoolFeeceat);
@@ -101,7 +77,6 @@ public class School {
 		bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
 		this.schoolFeeceat = Double.valueOf(bd.toString());
 	}
-
 
 	public City getCity() {
 		return city;
@@ -165,6 +140,14 @@ public class School {
 
 	public void setSchoolRemarks(String schoolRemarks) {
 		this.schoolRemarks = schoolRemarks;
+	}
+
+	public String getSchoolNameSx() {
+		return schoolNameSx;
+	}
+
+	public void setSchoolNameSx(String schoolNameSx) {
+		this.schoolNameSx = schoolNameSx;
 	}
 
 }

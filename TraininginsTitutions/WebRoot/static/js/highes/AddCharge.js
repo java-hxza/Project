@@ -39,7 +39,7 @@ $(function() {
 				},
 				error : function(data) {
 					alert("系统出错！");
-					location.href = "selectOrderHour.html";
+					location.href = "selectOrderHour.html?orderCounts=0&classId=0&studentName=000111";
 				}
 			});
 		});
@@ -105,7 +105,7 @@ $(function() {
 			var personliable = $.trim($(".personliable").val());
 			var remarks = $.trim($(".remarks").val());
 			var paymentmethodId = $.trim($(".paymentmethodId").val());
-			var date2 = Time.getFullYear().toString() + month.toString() + Time.getDate().toString();
+			var date2 = Time.getFullYear().toString() + month.toString();
 			var feecateId = "";
 			var number = 0;
 			var feecateMoney = "";
@@ -194,15 +194,15 @@ $(function() {
 					data = JSON.parse(data);
 					if (data.add == "1") {
 						alert("添加成功！");
-						location.href = "selectOrderPeriod.html";
+						location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 					} else {
 						alert("添加失败！");
-						location.href = "selectOrderPeriod.html";
+						location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 					}
 				},
 				error : function(data) {
 					alert("系统出错！");
-					location.href = "selectOrderPeriod.html";
+					location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 				}
 			});
 		});
@@ -252,7 +252,7 @@ $(function() {
 				},
 				error : function(data) {
 					alert("系统出错！");
-					location.href = "selectOrderHour.html";
+					location.href = "selectOrderHour.html?orderCounts=0&classId=0&studentName=000111";
 				}
 			});
 		});
@@ -358,7 +358,7 @@ $(function() {
 			}
 		});
 		$(".TiJiao").click(function() {
-			var date = $.trim($(".date").val());
+			var date =  $.trim($(".date").val());
 			var dpMoney = $.trim($(".dpMoneyActivity4").val());
 			var firstdate = $.trim($(".firstdate").val());
 			var lastdate = $.trim($(".lastdate").val());
@@ -370,7 +370,7 @@ $(function() {
 			var integral = $.trim($(".integral").val());
 			var giftNumber = $.trim($(".giftNumber").val());
 			var giftId = $.trim($(".giftName option:selected").val());
-			var date2 = Time.getFullYear().toString() + month.toString() + Time.getDate().toString();
+			var date2 = Time.getFullYear().toString() + month.toString();
 			var feecateId = "";
 			var number = 0;
 			var feecateMoney = "";
@@ -465,15 +465,15 @@ $(function() {
 					data = JSON.parse(data);
 					if (data.add == "1") {
 						alert("添加成功！");
-						location.href = "selectOrderPeriod.html";
+						location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 					} else {
 						alert("添加失败！");
-						location.href = "selectOrderPeriod.html";
+						location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 					}
 				},
 				error : function(data) {
 					alert("系统出错！");
-					location.href = "selectOrderPeriod.html";
+					location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 				}
 			});
 		});

@@ -126,16 +126,16 @@ $(function() {
 		location.href = "Teacher.html";
 	}
 	ChargeHours = function() {
-		location.href = "selectOrderHour.html";
+		location.href = "selectOrderHour.html?orderCounts=0&classId=0&studentName=000111";
 	}
 	ChargePeriod = function() {
-		location.href = "selectOrderPeriod.html";
+		location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
 	}
 	ChargeOthers = function() {
-		location.href = "selectOrderOthers.html";
+		location.href = "selectOrderOthers.html?orderCounts=0&classId=0&studentName=000111";
 	}
 	Expenditure = function() {
-		location.href = "selectOrderExpenditure.html";
+		location.href = "selectOrderExpenditure.html?orderCounts=0&classId=0&studentName=000111";
 	}
 	Activitys = function() {
 		location.href = "selectActivitySchools.html";

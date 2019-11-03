@@ -10,32 +10,64 @@ import cn.huizhi.pojo.Order;
 public interface OrderService {
 
 	/**
+	 * 查询课时订单总数
+	 * 
+	 * @param schoolId
+	 * @return
+	 */
+	public Integer selectCountHour(Integer schoolId);
+
+	/**
+	 * 查询时间段订单总数
+	 * 
+	 * @param schoolId
+	 * @return
+	 */
+	public Integer selectCount(Integer schoolId);
+
+	/**
+	 * 查询其他订单总数
+	 * 
+	 * @param schoolId
+	 * @return
+	 */
+	public Integer selectCountOther(Integer schoolId);
+
+	/**
+	 * 查询支出订单总数
+	 * 
+	 * @param schoolId
+	 * @return
+	 */
+	public Integer selectCountExpenditure(Integer schoolId);
+
+	/**
 	 * 查询课时订单
 	 * 
 	 * @return
 	 */
-	public List<Order> selectOrderHour(Integer schoolId);
+	public List<Order> selectOrderHour(Integer schoolId, Integer page, String studentName, Integer classId);
 
 	/**
 	 * 查询时间段订单
 	 * 
 	 * @return
 	 */
-	public List<Order> selectOrderPeriod(Integer schoolId);
+	public List<Order> selectOrderPeriod(Integer schoolId, Integer page, String studentName, Integer classId);
 
 	/**
 	 * 查询艺考时间段订单
 	 * 
 	 * @return
 	 */
-	public List<Order> selectOrderPeriods(Integer schoolId);
+	public List<Order> selectOrderPeriods(Integer schoolId, Integer page, String studentName, Integer classId);
 
 	/**
 	 * 查询其他订单
 	 * 
 	 * @return
 	 */
-	public List<Order> selectOrderOther(Integer schoolId);
+	public List<Order> selectOrderOther(Integer schoolId, Integer page, String studentName, Integer classId);
 
 	/**
 	 * 查询费用支出订单
@@ -43,7 +75,7 @@ public interface OrderService {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<Order> selectOrderExpenditure(Integer schoolId);
+	public List<Order> selectOrderExpenditure(Integer schoolId, Integer page, String studentName, Integer classId);
 
 	/**
 	 * 修改订单
@@ -99,7 +131,7 @@ public interface OrderService {
 	 * @param classId
 	 * @return
 	 */
-	public List<Order> selectChildrenFeeSituation(Integer classId, Integer studentId,String startTime,String endTime);
+	public List<Order> selectChildrenFeeSituation(Integer classId, Integer studentId, String startTime, String endTime);
 
 	/**
 	 * 查询高中学生收费情况
@@ -107,7 +139,7 @@ public interface OrderService {
 	 * @param classId
 	 * @return
 	 */
-	public List<Order> selectHighsFeeSituation(Integer classId,String startTime,String endTime);
+	public List<Order> selectHighsFeeSituation(Integer classId, String startTime, String endTime);
 
 	/**
 	 * 查询学生收费
@@ -124,7 +156,7 @@ public interface OrderService {
 	 * 
 	 * @return
 	 */
-	public List<Order> selectStduentHour(Integer time, Integer schoolId,String studentName,Integer number);
+	public List<Order> selectStduentHour(Integer time, Integer schoolId, String studentName, Integer number);
 
 	/**
 	 * 时间段提醒
@@ -132,46 +164,58 @@ public interface OrderService {
 	 * @param time
 	 * @return
 	 */
-	public List<Order> selectStduentDay(Integer time, Integer schoolId,String studentName,Integer number);
-	
+	public List<Order> selectStduentDay(String time, Integer schoolId, String studentName, Integer number);
+
 	/**
 	 * 查询高中学生收费情况
+	 * 
 	 * @param classId
 	 * @return
 	 */
 	public List<Order> selectArtFeeSituation(Integer classId);
-	
+
 	/**
 	 * 查找参与活动订单
+	 * 
 	 * @param startTime
 	 * @param activityId
 	 * @return
 	 */
-	public List<Order> selectActivityOrders(String startTime,Integer activityId,Integer schoolId);
-	
-	
-	public List<Order> selectArtFeeSituation(Integer classId,String startTime,String endTime);
-	
+	public List<Order> selectActivityOrders(String startTime, Integer activityId, Integer schoolId);
+
+	public List<Order> selectArtFeeSituation(Integer classId, String startTime, String endTime);
 
 	/**
 	 * 删除表数据
+	 * 
 	 * @return
 	 */
 	public Integer delOrderTable();
 
 	/**
 	 * 查找获得赠品订单
+	 * 
 	 * @param startTime
 	 * @param giftId
 	 * @param schoolId
 	 * @return
 	 */
-	public List<Order> selectGiftes(String startTime,Integer giftId,Integer schoolId);
-	
+	public List<Order> selectGiftes(String startTime, Integer giftId, Integer schoolId);
+
 	/**
 	 * 招生报表
+	 * 
 	 * @param schoolId
 	 * @return
 	 */
-	public List<Order> RecruitStudentes(String studentName,String startTime,Integer classes,Integer teacherId,Integer schoolId);
+	public List<Order> RecruitStudentes(String studentName, String startTime, Integer classes, Integer teacherId,
+			Integer schoolId);
+
+	/**
+	 * 批量添加时间段订单
+	 * 
+	 * @param order
+	 * @return
+	 */
+	public Integer BulkChargingInsert(List<Order> order);
 }

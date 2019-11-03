@@ -132,7 +132,27 @@
 															<button type="button" id="btn2"
 																class="btn btn-danger mb-2 Exports">导出Excel</button>
 														</div>
-
+														<div class="row col-sm-12">
+															<div class="col-md-2">
+																<div class="input-group">
+																	<select class="form-control classesId"
+																		id="example-select">
+																		<option value="0">---请选择---</option>
+																		<c:forEach items="${classes }" var="c">
+																			<option value="${c.classId }">${c.className}</option>
+																		</c:forEach>
+																	</select>
+																</div>
+															</div>
+															<div class="col-md-2">
+																<div class="input-group">
+																	<input class="form-control studentName" type="text"
+																		id="billing-first-name" placeholder="学生姓名" />
+																	<button class="btn btn-dark  " type="button"
+																		onclick=Hour()>查找</button>
+																</div>
+															</div>
+														</div>
 														<!-- end col-->
 													</div>
 
@@ -275,6 +295,25 @@
 																</c:forEach>
 															</tbody>
 														</table>
+														<c:if test="${JY == 1 }">
+															<div class="float-right">
+															<a
+																href="${pageContext.request.contextPath }/selectOrderExpenditure.html?orderCounts=0&classId=0&studentName=000111"><input
+																type='button' class='btn btn-info button-next'
+																name='next' value="首页" /></a> <a
+																href="${pageContext.request.contextPath }/selectOrderExpenditure.html?classId=0&studentName=000111&orderCounts= ${orderCounts - 2 }"><input
+																type='button' class='btn btn-info button-last'
+																name='last' value="上一页" /></a> <input type='button'
+																class='btn btn-info button-last' name='last'
+																value="${orderCounts }/${orderCount }" /> <a
+																href="${pageContext.request.contextPath }/selectOrderExpenditure.html?classId=0&studentName=000111&orderCounts= ${orderCounts}"><input
+																type='button' class='btn btn-info button-next'
+																name='next' value="下一页" /></a> <a
+																href="${pageContext.request.contextPath }/selectOrderExpenditure.html?classId=0&studentName=000111&orderCounts= ${orderCount }"><input
+																type='button' class='btn btn-info button-last'
+																name='last' value="末页" /></a>
+														</div>
+														</c:if>
 													</div>
 													<!-- end card-body-->
 												</div>

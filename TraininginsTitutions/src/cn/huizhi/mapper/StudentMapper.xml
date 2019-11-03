@@ -148,13 +148,19 @@
 		parentName, telephone, familyAddress,
 		registrationChannels,registrationConsultant,
 		startTime, endTime,
-		theSurrogate, remarks, feeCategory,integral )
+		theSurrogate, remarks,
+		feeCategory,integral,ConsultationTeacher,EntertainTeacher,Headmaster,professionalTeacher
+		)
 		values (#{studentName},
-		#{studentSex}, #{studentIDCard}, #{studentBirth}, #{school},
-		#{parentName}, #{telephone}, #{familyAddress},
+		#{studentSex}, #{studentIDCard},
+		#{studentBirth}, #{school},
+		#{parentName}, #{telephone},
+		#{familyAddress},
 		#{registrationChannels},
-		#{registrationConsultant}, #{startTime},
-		#{endTime}, #{theSurrogate}, #{remarks}, #{feeCategory},#{integral})
+		#{registrationConsultant},
+		#{startTime},
+		#{endTime}, #{theSurrogate}, #{remarks},
+		#{feeCategory},#{integral},#{ConsultationTeacher},#{EntertainTeacher},#{Headmaster},#{professionalTeacher})
 		<!--order属性是取数据生成之前(before)or生成之后(after) -->
 		<selectKey keyProperty="studentId"
 			resultType="java.lang.Integer" order="AFTER">
@@ -403,7 +409,8 @@
 		<include refid="ArtStudentResverSchoolInfoCol" />
 		from reserveschool res, student st,traininginstitutions.order o
 		<where>
-			st.studentId = res.studentId and st.studentId = o.stuId and o.identification = 0
+			st.studentId = res.studentId and st.studentId = o.stuId and
+			o.identification = 0
 			<if test="map.schoolId != null and map.schoolId != ''">
 				and res.schoolId = #{map.schoolId}
 			</if>
@@ -510,7 +517,7 @@
 		<result column="st_studentHour" property="studentHour" />
 		<result column="st_integral" property="integral" />
 		<result column="st_usedIntegral" property="usedIntegral" />
-		<collection  property="order" javaType="Order">
+		<collection property="order" javaType="Order">
 			<id column="o_orderId" property="orderId" />
 			<result column="o_feecateId" property="feecateId" />
 			<result column="o_dpMoney" property="dpMoney" />
@@ -547,7 +554,7 @@
 		resultMap="highStudentResverSchoolInfoMap" parameterType="map">
 		select distinct
 		<include refid="highStudentResverSchoolInfoCol" />
-		from student st,traininginstitutions.order o 
+		from student st,traininginstitutions.order o
 		<where>
 			and st.studentId = o.stuId and o.identification = 0
 			<if test="map.schoolId != null and map.schoolId != ''">
@@ -572,4 +579,65 @@
 			</if>
 		</where>
 	</select>
+
+	<select id="selectAllStudent" resultMap="selectAllStudents">
+		SELECT
+		s.studentId ss,s.studentName st,s.studentBirth sb,c.className cc
+		FROM student s
+		JOIN highesclassstudnet h ON s.studentId=h.studentId
+		JOIN class c ON h.classId=c.classId
+		WHERE c.schoolId=#{0}
+	</select>
+
+	<resultMap type="Student" id="selectAllStudents">
+		<result column="ss" property="studentId" />
+		<result column="st" property="studentName" />
+		<result column="sb" property="studentBirth" />
+		<collection property="classes" javaType="Class">
+			<result column="cc" property="className" />
+		</collection>
+	</resultMap>
+
+	<select id="selectByClassIdStudent" resultMap="selectByClassIdStudents">
+		SELECT
+		s.studentId ss,s.studentName st,s.studentBirth sb,c.className cc
+		FROM student s
+		JOIN highesclassstudnet h ON s.studentId=h.studentId
+		JOIN class c ON h.classId=c.classId
+		<where>
+			AND c.schoolId=#{schoolId}
+			<if test="studentName != null || studentName != ''">
+				AND s.studentName=#{studentName}
+			</if>
+			<if test="classId != null || classId != 0">
+				AND c.classId=#{classId}
+			</if>
+		</where>
+	</select>
+
+	<resultMap type="Student" id="selectByClassIdStudents">
+		<result column="ss" property="studentId" />
+		<result column="st" property="studentName" />
+		<result column="sb" property="studentBirth" />
+		<collection property="classes" javaType="Class">
+			<result column="cc" property="className" />
+		</collection>
+	</resultMap>
+	
+	<insert id="BulkChargingInsert">
+		INSERT INTO
+		traininginstitutions.order
+		(feecateId,dpMoney,stuId,startTime,schoolId,identification,
+		feecategoryMoney,paymentmethodId,personliable,departmentofpediatricsId,
+		addhour,givehour,firstdate,lastdate,remarks,orderNumber,expenditureitemsId,
+		classId,giftId,giftNumber,integral,teacherId,discount,feecateMoney,feecateMoneyYiKao,activityId,serviceCharge)VALUES
+		<foreach collection="order" item="order" separator=",">
+			(
+			#{order.feecateId},#{order.dpMoney},#{order.stuId},#{order.startTime},#{order.schoolId},
+			#{order.identification},#{order.feecategoryMoney},#{order.paymentmethodId},#{order.personliable},
+			#{order.departmentofpediatricsId},#{order.addhour},#{order.givehour},#{order.firstdate},#{order.lastdate},
+			#{order.remarks},#{order.orderNumber},#{order.expenditureitemsId},#{order.classId},#{order.giftId},#{order.giftNumber},#{order.integral},#{order.teacherId},#{order.discount},#{order.feecateMoney},#{order.feecateMoneyYiKao},#{order.activityId},#{order.serviceCharge})
+		</foreach>
+	</insert>
+
 </mapper>

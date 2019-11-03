@@ -4,6 +4,87 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.OrderMapper">
 
+	<select id="selectCountHour" resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		FROM
+		`order` o
+		JOIN student
+		s
+		ON
+		o.stuId=s.studentId
+		JOIN
+		paymentmethod p ON
+		o.paymentmethodId=p.paymentmethodId
+		JOIN
+		departmentofpediatrics d ON
+		o.departmentofpediatricsId=d.dpId
+		JOIN
+		school sc ON
+		o.schoolId=sc.schoolId
+		where o.schoolId = #{0} and o.addhour IS NOT
+		NULL
+	</select>
+
+	<select id="selectCount" resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		FROM `order`
+		o
+		JOIN
+		student s ON
+		o.stuId=s.studentId
+		JOIN
+		paymentmethod p ON
+		o.paymentmethodId=p.paymentmethodId
+		JOIN class c ON
+		o.classId=c.classId
+		JOIN school sc ON
+		o.schoolId=sc.schoolId
+		where o.schoolId = #{0} and
+		o.firstdate IS NOT
+		NULL
+	</select>
+
+	<select id="selectCountOther" resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		FROM
+		`order` o
+		JOIN student s ON
+		o.stuId=s.studentId
+		JOIN
+		feecategory f
+		ON
+		o.feecateId=f.chargeTypeId
+		JOIN paymentmethod p ON
+		o.paymentmethodId=p.paymentmethodId
+		JOIN class c ON o.classId=c.classId
+		JOIN school sc ON
+		o.schoolId=sc.schoolId
+		where o.schoolId = #{0} and
+		o.addhour IS NULL and o.firstdate IS NULL
+	</select>
+
+	<select id="selectCountExpenditure"
+		resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		FROM `order` o
+		JOIN student s ON
+		o.stuId=s.studentId
+		JOIN
+		expenditureitems e ON
+		o.expenditureitemsId=e.expenditureitemsId
+		JOIN
+		paymentmethod p ON
+		o.paymentmethodId=p.paymentmethodId
+		JOIN class c ON
+		o.classId=c.classId
+		JOIN school sc ON
+		o.schoolId=sc.schoolId
+		where o.schoolId = #{0} and
+		o.identification = 1 AND
+		o.firstdate IS
+		NULL AND o.addhour IS NULL
+	</select>
+
 	<select id="selectOrderHour" resultMap="selectOrderHours">
 		SELECT o.orderId
 		od,o.dpMoney,o.remarks,o.paymentmethodId
@@ -28,13 +109,20 @@
 		JOIN
 		school sc ON
 		o.schoolId=sc.schoolId
-		WHERE o.identification = 0 AND
-		o.stuId=s.studentId and
-		o.paymentmethodId=p.paymentmethodId and
-		o.departmentofpediatricsId IS NOT NULL
-		AND
-		o.schoolId=#{0} ORDER BY od
-		desc
+		<where>
+			AND o.stuId=s.studentId AND o.addhour IS NOT NULL AND
+			o.schoolId=#{schoolId}
+			<if test="studentName != null">
+				AND s.studentName LIKE CONCAT('%',#{studentName},'%')
+			</if>
+			<if test="classId != 0">
+				AND o.classId = #{classId}
+			</if>
+		</where>
+		ORDER BY od desc
+		<if test="page != null">
+			limit #{page},2
+		</if>
 	</select>
 
 	<resultMap type="Order" id="selectOrderHours">
@@ -96,11 +184,19 @@
 		o.classId=c.classId
 		JOIN school sc ON
 		o.schoolId=sc.schoolId
-		WHERE
-		o.firstdate IS NOT NULL
-		AND
-		o.schoolId=#{0} ORDER BY od desc
-
+		<where>
+			AND o.firstdate IS NOT NULL AND o.schoolId=#{schoolId}
+			<if test="studentName != null">
+				AND s.studentName LIKE CONCAT('%',#{studentName},'%')
+			</if>
+			<if test="classId != 0">
+				AND o.classId = #{classId}
+			</if>
+		</where>
+		ORDER BY od desc
+		<if test="page != null">
+			limit #{page},2
+		</if>
 	</select>
 
 	<resultMap type="Order" id="selectOrderPeriodes">
@@ -158,10 +254,19 @@
 		JOIN class c ON o.classId=c.classId
 		JOIN school sc ON
 		o.schoolId=sc.schoolId
-		WHERE o.firstdate IS NOT NULL
-		AND
-		o.schoolId=#{0} ORDER BY od desc
-
+		<where>
+			AND o.firstdate IS NOT NULL AND o.schoolId=#{schoolId}
+			<if test="studentName != ''">
+				AND s.studentName LIKE CONCAT('%',#{studentName},'%')
+			</if>
+			<if test="classId != 0">
+				AND o.classId = #{classId}
+			</if>
+		</where>
+		ORDER BY od desc
+		<if test="page != 0">
+			limit #{page},2
+		</if>
 	</select>
 
 	<resultMap type="Order" id="selectOrderPeriods2">
@@ -217,13 +322,20 @@
 		JOIN class c ON o.classId=c.classId
 		JOIN school sc ON
 		o.schoolId=sc.schoolId
-		WHERE
-		o.identification = 0 AND
-		o.firstdate IS NULL
-		AND o.addhour IS NULL AND
-		o.schoolId=#{0}
-		ORDER BY oo
-		desc
+		<where>
+			AND o.identification = 0 AND o.addhour IS NULL AND o.firstdate IS
+			NULL AND o.schoolId=#{schoolId}
+			<if test="studentName != null">
+				AND s.studentName LIKE CONCAT('%',#{studentName},'%')
+			</if>
+			<if test="classId != 0">
+				AND o.classId = #{classId}
+			</if>
+		</where>
+		ORDER BY oo desc
+		<if test="page != null">
+			limit #{page},2
+		</if>
 	</select>
 
 	<resultMap type="Order" id="selectOrderOtheres">
@@ -277,13 +389,20 @@
 		o.classId=c.classId
 		JOIN school sc ON
 		o.schoolId=sc.schoolId
-		WHERE
-		o.identification = 1 AND
-		o.firstdate IS
-		NULL AND o.addhour IS NULL AND
-		o.schoolId=#{0}
-		ORDER BY
-		oo desc
+		<where>
+			AND o.identification = 1 AND o.addhour IS NULL AND o.firstdate IS
+			NULL AND o.schoolId=#{schoolId}
+			<if test="studentName != null">
+				AND s.studentName LIKE CONCAT('%',#{studentName},'%')
+			</if>
+			<if test="classId != 0">
+				AND o.classId = #{classId}
+			</if>
+		</where>
+		ORDER BY oo desc
+		<if test="page != null">
+			limit #{page},2
+		</if>
 	</select>
 
 	<resultMap type="Order" id="selectOrderExpenditures">
@@ -908,7 +1027,7 @@
 		departmentofpediatrics d ON
 		o.departmentofpediatricsId=d.dpId
 		<where>
-			s.studentHour &lt; #{time} AND
+			s.studentHour &lt;= #{time} AND
 			o.addhour IS NOT NULL AND
 			o.schoolId=#{schoolId}
 			<if test="studentName !=null and studentName !=''">
@@ -961,7 +1080,7 @@
 		paymentmethod p ON
 		o.paymentmethodId=p.paymentmethodId
 		<where>
-			s.studentHour &lt; #{time} AND
+			o.lastdate &lt;= #{time} AND
 			o.firstdate IS NOT NULL AND
 			o.schoolId=#{schoolId}
 			<if test="studentName !=null and studentName !=''">
@@ -1131,6 +1250,22 @@
 			<result column="ccn" property="className" />
 		</collection>
 	</resultMap>
+
+	<insert id="StudentInsert">
+		INSERT INTO
+		traininginstitutions.order
+		(feecateId,dpMoney,stuId,startTime,schoolId,identification,
+		feecategoryMoney,paymentmethodId,personliable,departmentofpediatricsId,
+		addhour,givehour,firstdate,lastdate,remarks,orderNumber,expenditureitemsId,
+		classId,giftId,giftNumber,integral,teacherId,discount,feecateMoney,feecateMoneyYiKao,activityId,serviceCharge)VALUES
+		<foreach collection="student" item="student" separator=",">
+			(
+			#{order.feecateId},#{order.dpMoney},#{order.stuId},#{order.startTime},#{order.schoolId},
+			#{order.identification},#{order.feecategoryMoney},#{order.paymentmethodId},#{order.personliable},
+			#{order.departmentofpediatricsId},#{order.addhour},#{order.givehour},#{order.firstdate},#{order.lastdate},
+			#{order.remarks},#{order.orderNumber},#{order.expenditureitemsId},#{order.classId},#{order.giftId},#{order.giftNumber},#{order.integral},#{order.teacherId},#{order.discount},#{order.feecateMoney},#{order.feecateMoneyYiKao},#{order.activityId},#{order.serviceCharge})
+		</foreach>
+	</insert>
 
 </mapper>   
 
