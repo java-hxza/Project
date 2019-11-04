@@ -343,7 +343,7 @@ $(function() {
 			}
 			telephone = telephone.toString().replace(/-/g, "");
 			var serviceCharge = parseFloat($.trim($(".serviceCharge").val()));
-			if(serviceCharge == ""){
+			if ($(".serviceCharge").val() == "") {
 				serviceCharge = 0;
 			}
 			$.ajax({
@@ -634,7 +634,7 @@ $(function() {
 				telephone = telephone.toString().replace(/-/g, "");
 				startTime = startTime + " " + Time.getHours() + ":" + Time.getMinutes();
 				var serviceCharge = parseFloat($.trim($(".serviceCharges").val()));
-				if(serviceCharge == ""){
+				if ($(".serviceCharge").val() == "") {
 					serviceCharge = 0;
 				}
 				$.ajax({
@@ -873,7 +873,7 @@ $(function() {
 						urls = "RegisterStudentsCharges.html";
 					}
 					var serviceCharge = parseFloat($.trim($(".serviceCharge").val()));
-					if(serviceCharge == ""){
+					if ($(".serviceCharge").val() == "") {
 						serviceCharge = 0;
 					}
 					$.ajax({
@@ -1225,7 +1225,7 @@ $(function() {
 					}
 					telephone = telephone.toString().replace(/-/g, "");
 					var serviceCharge = parseFloat($.trim($(".serviceCharge").val()));
-					if(serviceCharge == ""){
+					if ($(".serviceCharge").val() == "") {
 						serviceCharge = 0;
 					}
 					$.ajax({

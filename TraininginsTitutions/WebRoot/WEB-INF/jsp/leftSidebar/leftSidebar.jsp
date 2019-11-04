@@ -82,6 +82,7 @@
 						<li><a href="#" onclick="ChargePeriod()">收费--按时间段</a></li>
 						<li><a href="#" onclick="ChargeOthers()">收费其他</a></li>
 						<li><a href="#" onclick="Expenditure()">费用支出</a></li>
+						<li><a href="#" onclick="selectRefund()">退费</a></li>
 						<li><a href="#" onclick="Activitys()">优惠活动管理</a></li>
 						<li><a href="#" onclick="selectgifts()">赠送礼品管理</a></li>
 						<li><a href="#" onclick="selectUsedIntegrals()">赠品税分统计</a></li>

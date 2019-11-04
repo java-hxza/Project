@@ -65,8 +65,8 @@ public class StudentServiceImpl implements StudentService {
 	 * 根据班级查找学生
 	 */
 	@Override
-	public List<Student> selectStudentClass(String table,Integer classId) {
-		return studentMapper.selectStudentClass(table,classId);
+	public List<Student> selectStudentClass(String table,Integer classId,Integer state) {
+		return studentMapper.selectStudentClass(table,classId,state);
 	}
 
 	@Override

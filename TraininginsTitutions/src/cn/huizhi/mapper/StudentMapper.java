@@ -65,7 +65,7 @@ public interface StudentMapper {
 	 * @param classId
 	 * @return
 	 */
-	public List<Student> selectStudentClass(@Param("table") String table, @Param("classId") Integer classId);
+	public List<Student> selectStudentClass(@Param("table") String table, @Param("classId") Integer classId, @Param("state") Integer state);
 
 	/**
 	 * 查询本校全部学生
