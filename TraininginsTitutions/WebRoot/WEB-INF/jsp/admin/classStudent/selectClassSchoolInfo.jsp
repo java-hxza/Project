@@ -175,6 +175,6 @@
 									<script type="text/javascript"
 										src="${Path }/static/js/admin/leftSidebar.js"></script>
 									<script type="text/javascript"
-										src="${Path }/static/js/admin/classStudent/selectClassSchoolInfo.js">
+										src="${Path }/static/js/admin/classStudent/selectClassSchoolInfo.js"></script>
 </body>
 </html>

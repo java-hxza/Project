@@ -1,4 +1,7 @@
 $(function() {
+	var addState = $("#addState").html();
+	var state = $("#state").html();
+	var loginType = $("#loginType").html();
 	/**
 	 * 跳转学校账户余额
 	 */
@@ -23,6 +26,13 @@ $(function() {
 	 * 跳转学生课时
 	 */
 	studentHour = function() {
+		if(loginType == 2){
+			if(addState == 0){
+				alert("您没有权限查看");
+				return false;
+			}
+			
+		}
 		location.href = "classSchoolInfo.html";
 	}
 	
@@ -50,6 +60,13 @@ $(function() {
 	 * 跳转班级课程页面
 	 */
 	curriculumClassInfo = function() {
+		if(loginType == 2){
+			if(addState == 0){
+				alert("您没有权限查看");
+				return false;
+			}
+			
+		}
 		location.href = "curriculumClassInfo.html";
 	}
 	/**
@@ -63,6 +80,13 @@ $(function() {
 	 * 跳转班级科别管理
 	 */
 	classTypeInfo = function() {
+		if(loginType == 2){
+			if(addState == 0){
+				alert("您没有权限查看");
+				return false;
+			}
+			
+		}
 		location.href = "classTypeInfo.html";
 	}
 
@@ -70,11 +94,25 @@ $(function() {
 	 * 返回操作员信息
 	 */
 	operatorChilk = function() {
+		if(loginType == 2){
+			if(addState == 0){
+				alert("您没有权限查看");
+				return false;
+			}
+			
+		}
 		location.href = "schoolOperatorChilk.html";
 	}
 
 
 	rootTeacherInto = function() {
+		if(loginType == 2){
+			if(addState == 0){
+				alert("您没有添加权限");
+				return false;
+			}
+			
+		}
 		location.href = "rootOperatorAuthorize.html";
 	}
 
@@ -123,6 +161,13 @@ $(function() {
 	 * 跳转到教师信息的页面
 	 */
 	Teacher = function() {
+		if(loginType == 2){
+			if(addState == 0){
+				alert("您没有权限查看");
+				return false;
+			}
+			
+		}
 		location.href = "Teacher.html";
 	}
 	ChargeHours = function() {

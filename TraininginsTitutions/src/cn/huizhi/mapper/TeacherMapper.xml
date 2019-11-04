@@ -46,7 +46,7 @@
 	</resultMap>
 	<!--教师登录 -->
 	<select id="selectTeacherByLogin" resultMap="teacherByLogin">
-		select
+		select distinct 
 		<include refid="teacherByLoginCol" />
 		from teacher t, teacherdiction td ,school sc
 

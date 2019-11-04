@@ -61,17 +61,6 @@
 					<button class="button-menu-mobile open-left disable-btn">
 						<i class="mdi mdi-menu"></i>
 					</button>
-					<div class="app-search">
-						<form>
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search...">
-								<span class="mdi mdi-magnify"></span>
-								<div class="input-group-append">
-									<button class="btn btn-primary" type="submit">Search</button>
-								</div>
-							</div>
-						</form>
-					</div>
 				</div>
 				<!-- end Topbar -->
 					<!-- start page title -->
@@ -95,24 +84,6 @@
 
 					<!-- end row -->
 
-							<div class="col-12">
-								<div class="card">
-									<div class="card-body">
-										<div class="row mb-2">
-											<div class="col-sm-4">
-												<button type="button" class="btn btn-success btn-sm mt-2"
-													onclick="createSchool()">创建学校</button>
-											</div>
-											<div class="col-sm-8">
-												<div class="text-sm-right">
-													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-														onclick="createUser()">创建账号</button>
-													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-														onclick="createTeacher()">创建教师账号</button>
-												</div>
-											</div>
-											<!-- end col-->
-										</div>
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="text-center">
@@ -205,6 +176,5 @@
 				<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp" %>
 				<script type="text/javascript" src="${Path }/static/js/admin/leftSidebar.js"></script>
 				<script src="${Path }/static/js/admin/income/selectSchoolIncomeInfo.js"></script>
-				<script src="${Path }/static/js/admin/adminIndex.js"></script>
 </body>
 </html>

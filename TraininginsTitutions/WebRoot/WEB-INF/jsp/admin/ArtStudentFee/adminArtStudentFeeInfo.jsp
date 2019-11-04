@@ -195,6 +195,6 @@
 									<script type="text/javascript"
 										src="${Path }/static/js/admin/leftSidebar.js"></script>
 									<script type="text/javascript"
-										src="${Path }/static/js/admin/ArtStudentFee/adminArtStudentFeeInfo.js">
+										src="${Path }/static/js/admin/ArtStudentFee/adminArtStudentFeeInfo.js"></script>
 </body>
 </html>

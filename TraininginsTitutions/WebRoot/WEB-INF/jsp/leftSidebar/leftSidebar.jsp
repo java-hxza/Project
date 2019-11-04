@@ -147,6 +147,7 @@
 	<div class="clearfix"></div>
 
 </div>
-<span id="state" hidden="hidden">${state }</span>
-<span id="addState" hidden="hidden">${addState }</span>
+<p id="state" hidden="hidden">${state}</p>
+<p id="addState" hidden="hidden">${addState}</p>
+<p id="loginType" hidden="hidden">${loginType}</p>
 </div>
