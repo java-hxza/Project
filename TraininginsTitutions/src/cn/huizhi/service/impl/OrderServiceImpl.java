@@ -180,5 +180,20 @@ public class OrderServiceImpl implements OrderService {
 		return orderMapper.BulkChargingInsert(order);
 	}
 
+	@Override
+	public Integer selectCountRefund(Integer schoolId) {
+		return orderMapper.selectCountRefund(schoolId);
+	}
+
+	@Override
+	public List<Order> selectOrderRefund(Integer schoolId, Integer page, String studentName, Integer classId) {
+		return orderMapper.selectOrderRefund(schoolId, page, studentName, classId);
+	}
+
+	@Override
+	public Order selectOrderTF(Integer studentId) {
+		return orderMapper.selectOrderTF(studentId);
+	}
+
 	
 }

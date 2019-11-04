@@ -54,7 +54,7 @@ public interface StudentService {
 	 * @param classId
 	 * @return
 	 */
-	public List<Student> selectStudentClass(String table,Integer classId);
+	public List<Student> selectStudentClass(String table,Integer classId,Integer state);
 	
 	/**
 	 * 查询本校全部学生

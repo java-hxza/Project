@@ -170,7 +170,7 @@ $(function() {
 			hours = 0;
 		}
 		var serviceCharge = parseFloat($.trim($(".serviceCharge").val()));
-		if(serviceCharge == ""){
+		if ($(".serviceCharge").val() == "") {
 			serviceCharge = 0;
 		}
 		$.ajax({

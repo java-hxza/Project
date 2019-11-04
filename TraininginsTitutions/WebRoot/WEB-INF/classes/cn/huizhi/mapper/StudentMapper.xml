@@ -188,6 +188,7 @@
 		class s ON c.classId=s.classId
 		WHERE
 		c.classId=${classId}
+		AND c.state = ${state}
 		ORDER BY t.studentId
 	</select>
 	<select id="selectStudentUsedIntegral"

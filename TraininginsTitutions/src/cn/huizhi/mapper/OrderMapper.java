@@ -38,6 +38,13 @@ public interface OrderMapper {
 	public Integer selectCountExpenditure(Integer schoolId);
 	
 	/**
+	 * 查询退费订单总数
+	 * @param schoolId
+	 * @return
+	 */
+	public Integer selectCountRefund(Integer schoolId);
+	
+	/**
 	 * 查询课时订单
 	 * 
 	 * @return
@@ -206,4 +213,18 @@ public interface OrderMapper {
 	 * @return
 	 */
 	public Integer BulkChargingInsert(@Param("order") List<Order> order);
+	
+	/**
+	 * 查询退费订单
+	 * 
+	 * @return
+	 */
+	public List<Order> selectOrderRefund(@Param("schoolId")Integer schoolId,@Param("page")Integer page,@Param("studentName")String studentName,@Param("classId")Integer classId);
+
+	/**
+	 * 根据退费学生查找最后一次订单
+	 * @param studentId
+	 * @return
+	 */
+	public Order selectOrderTF(Integer studentId);
 }

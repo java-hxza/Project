@@ -182,6 +182,9 @@ $(function() {
 	Expenditure = function() {
 		location.href = "selectOrderExpenditure.html?orderCounts=0&classId=0&studentName=000111";
 	}
+	selectRefund = function() {
+		location.href = "selectRefund.html?orderCounts=0&classId=0&studentName=000111";
+	}
 	Activitys = function() {
 		location.href = "selectActivitySchools.html";
 	}

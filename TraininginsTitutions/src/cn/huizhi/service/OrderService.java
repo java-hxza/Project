@@ -40,6 +40,13 @@ public interface OrderService {
 	 * @return
 	 */
 	public Integer selectCountExpenditure(Integer schoolId);
+	
+	/**
+	 * 查询退费订单总数
+	 * @param schoolId
+	 * @return
+	 */
+	public Integer selectCountRefund(Integer schoolId);
 
 	/**
 	 * 查询课时订单
@@ -218,4 +225,18 @@ public interface OrderService {
 	 * @return
 	 */
 	public Integer BulkChargingInsert(List<Order> order);
+	
+	/**
+	 * 查询退费订单
+	 * 
+	 * @return
+	 */
+	public List<Order> selectOrderRefund(Integer schoolId,Integer page,String studentName,Integer classId);
+	
+	/**
+	 * 根据退费学生查找最后一次订单
+	 * @param studentId
+	 * @return
+	 */
+	public Order selectOrderTF(Integer studentId);
 }

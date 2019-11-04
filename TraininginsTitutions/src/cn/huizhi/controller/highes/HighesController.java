@@ -347,7 +347,7 @@ public class HighesController {
 		List<Class> classes = classService.selectClass((Integer) session.getAttribute("schoolId"), 1);
 		if (classes.size() > 0) {
 			List<Student> children = studentService.selectStudentClass("childrenesclassstudnet",
-					classes.get(0).getClassId());
+					classes.get(0).getClassId(), 1);
 			model.addAttribute("children", children);
 		}
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
@@ -377,14 +377,74 @@ public class HighesController {
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if (schoolType == 1) {
-			List<Student> children = studentService.selectStudentClass("childrenesclassstudnet", classId);
+			List<Student> children = studentService.selectStudentClass("childrenesclassstudnet", classId, 1);
 			map.put("children", children);
 		} else if (schoolType == 2) {
-			List<Student> children = studentService.selectStudentClass("highesclassstudnet", classId);
+			List<Student> children = studentService.selectStudentClass("highesclassstudnet", classId, 1);
 			map.put("children", children);
 		} else if (schoolType == 3) {
-			List<Student> children = studentService.selectStudentClass("artclassstudnet", classId);
+			List<Student> children = studentService.selectStudentClass("artclassstudnet", classId, 1);
 			map.put("children", children);
+		}
+		return JSONArray.toJSONString(map);
+	}
+	
+	/**
+	 * 根据班级选择学生2
+	 * 
+	 * @param classId
+	 * @return
+	 */
+	@RequestMapping("selectClassStudent2.html")
+	@ResponseBody
+	public Object selectClassStudent2(@RequestParam Integer classId) {
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if (schoolType == 1) {
+			List<Student> children = studentService.selectStudentClass("childrenesclassstudnet", classId, 2);
+			if(children.size() > 0) {
+				Order order = orderService.selectOrderTF(children.get(0).getStudentId());
+				map.put("order", order);
+			}
+			map.put("children", children);
+		} else if (schoolType == 2) {
+			List<Student> children = studentService.selectStudentClass("highesclassstudnet", classId, 2);
+			if(children.size() > 0) {
+				Order order = orderService.selectOrderTF(children.get(0).getStudentId());
+				map.put("order", order);
+			}
+			map.put("children", children);
+		} else if (schoolType == 3) {
+			List<Student> children = studentService.selectStudentClass("artclassstudnet", classId, 2);
+			if(children.size() > 0) {
+				Order order = orderService.selectOrderTF(children.get(0).getStudentId());
+				map.put("order", order);
+			}
+			map.put("children", children);
+		}
+		return JSONArray.toJSONString(map);
+	}
+	
+	/**
+	 * 根据学生选择订单
+	 * 
+	 * @param classId
+	 * @return
+	 */
+	@RequestMapping("selectClassStudentOrder.html")
+	@ResponseBody
+	public Object selectClassStudentOrder(@RequestParam Integer studentId) {
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if (schoolType == 1) {
+			Order order = orderService.selectOrderTF(studentId);
+			map.put("order", order);
+		} else if (schoolType == 2) {
+			Order order = orderService.selectOrderTF(studentId);
+			map.put("order", order);
+		} else if (schoolType == 3) {
+			Order order = orderService.selectOrderTF(studentId);
+			map.put("order", order);
 		}
 		return JSONArray.toJSONString(map);
 	}
@@ -486,16 +546,16 @@ public class HighesController {
 		if (classes.size() > 0) {
 			if (schoolType == 1) {
 				List<Student> children = studentService.selectStudentClass("childrenesclassstudnet",
-						classes.get(0).getClassId());
+						classes.get(0).getClassId(), 1);
 				model.addAttribute("children", children);
 
 			} else if (schoolType == 2) {
 				List<Student> children = studentService.selectStudentClass("highesclassstudnet",
-						classes.get(0).getClassId());
+						classes.get(0).getClassId(), 1);
 				model.addAttribute("children", children);
 			} else if (schoolType == 3) {
 				List<Student> children = studentService.selectStudentClass("artclassstudnet",
-						classes.get(0).getClassId());
+						classes.get(0).getClassId(), 1);
 				model.addAttribute("children", children);
 			}
 		}
@@ -611,14 +671,15 @@ public class HighesController {
 
 			if (schoolType == 1) {
 				List<Student> high = studentService.selectStudentClass("childrenesclassstudnet",
-						classes.get(0).getClassId());
+						classes.get(0).getClassId(), 1);
 				model.addAttribute("high", high);
 			} else if (schoolType == 2) {
 				List<Student> high = studentService.selectStudentClass("highesclassstudnet",
-						classes.get(0).getClassId());
+						classes.get(0).getClassId(), 1);
 				model.addAttribute("high", high);
 			} else if (schoolType == 3) {
-				List<Student> high = studentService.selectStudentClass("artclassstudnet", classes.get(0).getClassId());
+				List<Student> high = studentService.selectStudentClass("artclassstudnet", classes.get(0).getClassId(),
+						1);
 				model.addAttribute("high", high);
 			}
 		}
@@ -1091,7 +1152,7 @@ public class HighesController {
 		if ("000111".equals(studentName)) {
 			studentName = null;
 		}
-		int num = orderNumber % 2 == 0 ? orderNumber / 2 : orderNumber / 2 + 1;
+		int num = orderNumber % 20 == 0 ? orderNumber / 20 : orderNumber / 20 + 1;
 		model.addAttribute("orderCount", num);
 		if (num == 0) {
 			model.addAttribute("orderCounts", 0);
@@ -1108,7 +1169,7 @@ public class HighesController {
 				orderCounts = 1;
 			}
 			for (int i = 1; i < orderCounts; i++) {
-				pageCount += 2;
+				pageCount += 20;
 			}
 		}
 		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
@@ -1156,7 +1217,7 @@ public class HighesController {
 		if ("000111".equals(studentName)) {
 			studentName = null;
 		}
-		int num = orderNumber % 2 == 0 ? orderNumber / 2 : orderNumber / 2 + 1;
+		int num = orderNumber % 20 == 0 ? orderNumber / 20 : orderNumber / 20 + 1;
 		model.addAttribute("orderCount", num);
 		if (num == 0) {
 			model.addAttribute("orderCounts", 0);
@@ -1173,7 +1234,7 @@ public class HighesController {
 				orderCounts = 1;
 			}
 			for (int i = 1; i < orderCounts; i++) {
-				pageCount += 2;
+				pageCount += 20;
 			}
 		}
 		if ((Integer) session.getAttribute("schoolType") == 3) {
@@ -1242,7 +1303,7 @@ public class HighesController {
 		if ("000111".equals(studentName)) {
 			studentName = null;
 		}
-		int num = orderNumber % 2 == 0 ? orderNumber / 2 : orderNumber / 2 + 1;
+		int num = orderNumber % 20 == 0 ? orderNumber / 20 : orderNumber / 20 + 1;
 		model.addAttribute("orderCount", num);
 		if (num == 0) {
 			model.addAttribute("orderCounts", 0);
@@ -1259,7 +1320,7 @@ public class HighesController {
 				orderCounts = 1;
 			}
 			for (int i = 1; i < orderCounts; i++) {
-				pageCount += 2;
+				pageCount += 20;
 			}
 		}
 		List<FeeCategory> feeCategory = feecategoryService
@@ -1304,7 +1365,7 @@ public class HighesController {
 		if ("000111".equals(studentName)) {
 			studentName = null;
 		}
-		int num = orderNumber % 2 == 0 ? orderNumber / 2 : orderNumber / 2 + 1;
+		int num = orderNumber % 20 == 0 ? orderNumber / 20 : orderNumber / 20 + 1;
 		model.addAttribute("orderCount", num);
 		if (num == 0) {
 			model.addAttribute("orderCounts", 0);
@@ -1321,7 +1382,7 @@ public class HighesController {
 				orderCounts = 1;
 			}
 			for (int i = 1; i < orderCounts; i++) {
-				pageCount += 2;
+				pageCount += 20;
 			}
 		}
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
@@ -1330,15 +1391,15 @@ public class HighesController {
 		if (classes.size() > 0) {
 			if (schoolType == 1) {
 				List<Student> student = studentService.selectStudentClass("childrenesclassstudnet",
-						classes.get(0).getClassId());
+						classes.get(0).getClassId(),1);
 				model.addAttribute("student", student);
 			} else if (schoolType == 2) {
 				List<Student> student = studentService.selectStudentClass("highesclassstudnet",
-						classes.get(0).getClassId());
+						classes.get(0).getClassId(),1);
 				model.addAttribute("student", student);
 			} else if (schoolType == 3) {
 				List<Student> student = studentService.selectStudentClass("artclassstudnet",
-						classes.get(0).getClassId());
+						classes.get(0).getClassId(),1);
 				model.addAttribute("student", student);
 			}
 		}
@@ -1366,6 +1427,182 @@ public class HighesController {
 			model.addAttribute("JY", 1);
 		}
 		return "high/Expenditure";
+	}
+
+	/**
+	 * 查询退费订单
+	 * 
+	 * @param model
+	 * @param orderCounts
+	 * @param classId
+	 * @param studentName
+	 * @return
+	 */
+	@RequestMapping("selectRefund.html")
+	public String selectRefund(Model model, @RequestParam Integer orderCounts, @RequestParam Integer classId,
+			@RequestParam String studentName) {
+		Integer pageCount = 0;
+		Integer orderNumber = orderService.selectCountRefund((Integer) session.getAttribute("schoolId"));
+		if ("000111".equals(studentName)) {
+			studentName = null;
+		}
+		int num = orderNumber % 20 == 0 ? orderNumber / 20 : orderNumber / 20 + 1;
+		model.addAttribute("orderCount", num);
+		if (num == 0) {
+			model.addAttribute("orderCounts", 0);
+		} else {
+			if (orderCounts <= 0) {
+				model.addAttribute("orderCounts", 1);
+			} else if (orderCounts == num) {
+				model.addAttribute("orderCounts", orderCounts);
+			} else {
+				model.addAttribute("orderCounts", orderCounts + 1);
+				orderCounts += 1;
+			}
+			if (orderCounts < 0) {
+				orderCounts = 1;
+			}
+			for (int i = 1; i < orderCounts; i++) {
+				pageCount += 20;
+			}
+		}
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		List<Class> classes = classService.selectClassAll((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("classes", classes);
+		if (classes.size() > 0) {
+			if (schoolType == 1) {
+				List<Student> student = studentService.selectStudentClass("childrenesclassstudnet",
+						classes.get(0).getClassId(),1);
+				model.addAttribute("student", student);
+			} else if (schoolType == 2) {
+				List<Student> student = studentService.selectStudentClass("highesclassstudnet",
+						classes.get(0).getClassId(),1);
+				model.addAttribute("student", student);
+			} else if (schoolType == 3) {
+				List<Student> student = studentService.selectStudentClass("artclassstudnet",
+						classes.get(0).getClassId(),1);
+				model.addAttribute("student", student);
+			}
+		}
+		if (classId == 0 && studentName == null) {
+			List<Order> order = orderService.selectOrderRefund((Integer) session.getAttribute("schoolId"), pageCount,
+					null, classId);
+			model.addAttribute("order", order);
+		} else {
+			List<Order> order = orderService.selectOrderRefund((Integer) session.getAttribute("schoolId"), null,
+					studentName, classId);
+			model.addAttribute("order", order);
+		}
+		List<FeeCategory> feeCategory = feecategoryService
+				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
+		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
+		List<DepartmentOfPediatrics> departmentOfPediatrics = departmentOfPediatricsService
+				.findDepartmentOfPediatrics((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("departmentOfPediatrics", departmentOfPediatrics);
+		model.addAttribute("feeCategory", feeCategory);
+		model.addAttribute("paymentMethod", paymentMethod);
+		model.addAttribute("state", (Integer) session.getAttribute("state"));
+		if (classId != 0 || studentName != null) {
+			model.addAttribute("JY", 0);
+		} else {
+			model.addAttribute("JY", 1);
+		}
+		return "high/Refund";
+	}
+
+	/**
+	 * 退费
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("Refund.html")
+	public String Refund(Model model) {
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		List<Class> classes = classService.selectClassAll((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("classes", classes);
+		if (classes.size() > 0) {
+			if (schoolType == 1) {
+				List<Student> high = studentService.selectStudentClass("childrenesclassstudnet",
+						classes.get(0).getClassId(),2);
+				Order order = orderService.selectOrderTF(high.get(0).getStudentId());
+				model.addAttribute("order", order);
+				model.addAttribute("high", high);
+			} else if (schoolType == 2) {
+				List<Student> high = studentService.selectStudentClass("highesclassstudnet",
+						classes.get(0).getClassId(),2);
+				Order order = orderService.selectOrderTF(high.get(0).getStudentId());
+				model.addAttribute("order", order);
+				model.addAttribute("high", high);
+			} else if (schoolType == 3) {
+				List<Student> high = studentService.selectStudentClass("artclassstudnet", classes.get(0).getClassId(),2);
+				Order order = orderService.selectOrderTF(high.get(0).getStudentId());
+				model.addAttribute("order", order);
+				model.addAttribute("high", high);
+			}
+		}
+		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
+		model.addAttribute("classes", classes);
+		model.addAttribute("paymentMethod", paymentMethod);
+		return "high/AddRefund";
+	}
+	
+	/**
+	 * 添加退费
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("addRefund.html")
+	@ResponseBody
+	public Object addRefund(@RequestParam Integer stuId, @RequestParam String startTime,
+			@RequestParam String feecateId, @RequestParam String feecateMoney, @RequestParam String personliable,
+			@RequestParam String remarks, @RequestParam Integer paymentmethodId, @RequestParam String date,
+			@RequestParam Integer classId, @RequestParam String startTimes, @RequestParam Double serviceCharge) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		Order order = new Order();
+		order.setIdentification(3);
+		order.setSchoolId((Integer) session.getAttribute("schoolId"));
+		try {
+			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(startTime + startTimes);
+			order.setStartTime(startTime1);
+		} catch (ParseException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		order.setRemarks(remarks);
+		order.setPaymentmethodId(paymentmethodId);
+		order.setFeecateId(feecateId);
+		order.setPersonliable(personliable);
+		order.setFeecateMoney(feecateMoney);
+		order.setIntegral(0.0);
+		order.setServiceCharge(serviceCharge);
+		order.setSchoolId((Integer) session.getAttribute("schoolId"));
+		order.setClassId(classId);
+		order.setGiftId(0);
+		order.setGiftNumber(0);
+		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
+		if (OrderHour >= 10) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+		} else if (OrderHour >= 100) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+		} else if (OrderHour >= 1000) {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+		} else {
+			order.setOrderNumber(
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+		}
+		OrderHour += 1;
+		order.setStuId(stuId);
+		if (orderService.addOrder(order) == 1) {
+			map.put("add", "1");
+		} else {
+			map.put("add", "0");
+		}
+		return JSONArray.toJSONString(map);
 	}
 
 	/**
