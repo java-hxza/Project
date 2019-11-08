@@ -127,8 +127,7 @@
 														class="btn btn-danger mb-2" value="读卡"
 														onclick="readCert()"> <input type="button"
 														class="btn btn-danger mb-2" value="断开"
-														onclick="disconnect()"> <a href="${pageContext.request.contextPath }/selectClassTime.html"><input type="button"
-														class="btn btn-danger mb-2" value="上课时间管理"></a>
+														onclick="disconnect()"> 
 													<h4 class="mt-2" style="text-align: center;">学员信息录入</h4>
 												</div>
 											</div>
@@ -203,7 +202,7 @@
 																	placeholder="在读学校" id="school" />
 															</div>
 														</div>
-														<div class="col-3">
+														<div class="col-3 Headmasters">
 															<div class="form-group">
 																<label for="billing-state">班主任</label> <input
 																	class="form-control Headmaster" type="text"

@@ -405,7 +405,8 @@ $(function() {
 				}
 			});
 		});
-	}else if($("#LX").attr("class") == 1) {
+	}else {
+		$(".Headmasters").remove();
 		$(".professionalTeachers").remove();
 	}
 	$(".TiJiao").click(function() {
@@ -586,7 +587,6 @@ $(function() {
 				var discount = $.trim($(".dpMoneyActivity4").val());
 				var EntertainTeacher = $(".EntertainTeacher").val();
 				var ConsultationTeacher = $(".ConsultationTeacher").val();
-				var Headmaster = $(".ConsultationTeacher").val();
 				var schoolTime = "";
 				var startTimes = " " + Time.getHours() + ":" + Time.getMinutes().toString();
 				if (discount != "" && discount != 0) {
@@ -675,7 +675,6 @@ $(function() {
 						serviceCharge : serviceCharge,
 						ConsultationTeacher : ConsultationTeacher,
 						EntertainTeacher : EntertainTeacher,
-						Headmaster : Headmaster
 					},
 					dataType : "json",
 					success : function(data) {
@@ -816,8 +815,6 @@ $(function() {
 					var dpMoneyActivity4 = $.trim($(".dpMoneyActivity").val());
 					var EntertainTeacher = $(".EntertainTeacher").val();
 					var ConsultationTeacher = $(".ConsultationTeacher").val();
-					var professionalTeacher = $(".EntertainTeacher").val();
-					var Headmaster = $(".ConsultationTeacher").val();
 					dpMoney = dpMoney - dpMoneyActivity4;
 					if (studentName == "" || studentBirth == "" || startTime == "" || studentIDCard == "") {
 						alert("请填写 姓名- 出生日期-报名时间-身份证号！");
@@ -912,8 +909,6 @@ $(function() {
 							serviceCharge : serviceCharge,
 							ConsultationTeacher : ConsultationTeacher,
 							EntertainTeacher : EntertainTeacher,
-							Headmaster : Headmaster,
-							professionalTeacher : professionalTeacher
 						},
 						dataType : "json",
 						success : function(data) {
@@ -1147,7 +1142,6 @@ $(function() {
 					var numbers3 = $(".numbers3").val();
 					var EntertainTeacher = $(".EntertainTeacher").val();
 					var ConsultationTeacher = $(".ConsultationTeacher").val();
-					var Headmaster = $(".ConsultationTeacher").val();
 					var schoolTime = "";
 					for (var i = 0; i < $(".feecateIds2").length; i++) {
 						if ($(".feecateIds2").eq(i).val() != "") {
@@ -1267,7 +1261,6 @@ $(function() {
 							serviceCharge : serviceCharge,
 							ConsultationTeacher : ConsultationTeacher,
 							EntertainTeacher : EntertainTeacher,
-							Headmaster : Headmaster,
 						},
 						dataType : "json",
 						success : function(data) {

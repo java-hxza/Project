@@ -162,6 +162,9 @@ $(function() {
 	classTypes = function() {
 		location.href = "selectClassTypes.html";
 	};
+	selectClassTime = function() {
+		location.href = "selectClassTime.html";
+	}
 
 	/**
 	 * 切换账户
