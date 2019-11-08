@@ -481,18 +481,18 @@ public class HighesController {
 		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 		if (OrderHour >= 10) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + school.getSchoolNumber());
 		} else if (OrderHour >= 100) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + school.getSchoolNumber());
 		} else if (OrderHour >= 1000) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + school.getSchoolNumber());
 		} else {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + school.getSchoolNumber());
 		}
-		OrderHour += 1;
+		schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 		order.setGivehour(givehour);
 		order.setDepartmentofpediatricsId(departmentofpediatricsId);
 		order.setFeecateId(feecateId);
@@ -620,18 +620,18 @@ public class HighesController {
 		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 		if (OrderHour >= 10) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + school.getSchoolNumber());
 		} else if (OrderHour >= 100) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + school.getSchoolNumber());
 		} else if (OrderHour >= 1000) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + school.getSchoolNumber());
 		} else {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + school.getSchoolNumber());
 		}
-		OrderHour += 1;
+		schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 		order.setPaymentmethodId(paymentmethodId);
 		order.setIdentification(0);
 		if (orderService.addOrder(order) == 1) {
@@ -729,17 +729,18 @@ public class HighesController {
 		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 		if (OrderHour >= 10) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + school.getSchoolNumber());
 		} else if (OrderHour >= 100) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + school.getSchoolNumber());
 		} else if (OrderHour >= 1000) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + school.getSchoolNumber());
 		} else {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + school.getSchoolNumber());
 		}
+		schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 		OrderHour += 1;
 		order.setStuId(stuId);
 		if (orderService.addOrder(order) == 1) {
@@ -1084,18 +1085,18 @@ public class HighesController {
 		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 		if (OrderHour >= 10) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + school.getSchoolNumber());
 		} else if (OrderHour >= 100) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + school.getSchoolNumber());
 		} else if (OrderHour >= 1000) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + school.getSchoolNumber());
 		} else {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + school.getSchoolNumber());
 		}
-		OrderHour += 1;
+		schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 		try {
 			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(startTime + startTimes);
 			order.setStartTime(startTime1);
@@ -1584,18 +1585,18 @@ public class HighesController {
 		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 		if (OrderHour >= 10) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + school.getSchoolNumber());
 		} else if (OrderHour >= 100) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + school.getSchoolNumber());
 		} else if (OrderHour >= 1000) {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + school.getSchoolNumber());
 		} else {
 			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + school.getSchoolNumber());
 		}
-		OrderHour += 1;
+		schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 		order.setStuId(stuId);
 		if (orderService.addOrder(order) == 1) {
 			map.put("add", "1");
@@ -1910,18 +1911,18 @@ public class HighesController {
 				School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 				if (OrderHour >= 10) {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + school.getSchoolNumber());
 				} else if (OrderHour >= 100) {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + school.getSchoolNumber());
 				} else if (OrderHour >= 1000) {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + school.getSchoolNumber());
 				} else {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + school.getSchoolNumber());
 				}
-				OrderHour += 1;
+				schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 				order.setGivehour(givehour);
 				order.setTeacherId(teacherId);
 				order.setDepartmentofpediatricsId(departmentofpediatricsId);
@@ -2055,18 +2056,18 @@ public class HighesController {
 				School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 				if (OrderHour >= 10) {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + school.getSchoolNumber());
 				} else if (OrderHour >= 100) {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + school.getSchoolNumber());
 				} else if (OrderHour >= 1000) {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + school.getSchoolNumber());
 				} else {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + school.getSchoolNumber());
 				}
-				OrderHour += 1;
+				schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 				order.setPaymentmethodId(paymentmethodId);
 				order.setIdentification(0);
 				if (orderService.addOrder(order) == 1) {
@@ -2178,18 +2179,18 @@ public class HighesController {
 				School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 				if (OrderHour >= 10) {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + school.getSchoolNumber());
 				} else if (OrderHour >= 100) {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + school.getSchoolNumber());
 				} else if (OrderHour >= 1000) {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + school.getSchoolNumber());
 				} else {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + school.getSchoolNumber());
 				}
-				OrderHour += 1;
+				schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 				order.setPaymentmethodId(paymentmethodId);
 				order.setIdentification(0);
 				if (orderService.addOrder(order) == 1) {
@@ -2288,18 +2289,18 @@ public class HighesController {
 				School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 				if (OrderHour >= 10) {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + school.getSchoolNumber());
 				} else if (OrderHour >= 100) {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + school.getSchoolNumber());
 				} else if (OrderHour >= 1000) {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + school.getSchoolNumber());
 				} else {
 					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + school.getSchoolNumber());
 				}
-				OrderHour += 1;
+				schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 				order.setPaymentmethodId(paymentmethodId);
 				order.setIdentification(0);
 				if (orderService.addOrder(order) == 1) {

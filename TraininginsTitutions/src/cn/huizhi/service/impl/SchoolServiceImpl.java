@@ -36,4 +36,10 @@ public class SchoolServiceImpl implements SchoolService {
 		return schoolMapper.selectSchoolById(schoolId);
 	}
 
+	@Override
+	public Integer updateSchoolNumber(Integer schoolId, Integer schoolNumber) {
+		return schoolMapper.updateSchoolNumber(schoolId, schoolNumber);
+	}
+
+	
 }

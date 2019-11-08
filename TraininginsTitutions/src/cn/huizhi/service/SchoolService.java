@@ -31,4 +31,11 @@ public interface SchoolService {
 	 */
 	public School selectSchoolById(Integer schoolId);
 	
+	/**
+	 * 增加学校订单编号
+	 * @param school
+	 * @return
+	 */
+	public Integer updateSchoolNumber(Integer schoolId,Integer schoolNumber);
+	
 }

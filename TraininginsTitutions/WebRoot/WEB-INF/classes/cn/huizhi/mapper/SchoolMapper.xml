@@ -3,8 +3,8 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.huizhi.mapper.SchoolMapper">
-	<!--查询学校所需字段-->
-	
+	<!--查询学校所需字段 -->
+
 	<sql id="schoolCol">
 		schoolId,
 		schoolName,
@@ -12,48 +12,56 @@
 		schoolRemarks,
 		cityProperId,
 		schoolType,
-		schoolNameSx
+		schoolNameSx,
+		schoolNumber
 	</sql>
 	<sql id="schoolColByPro">
 		sc.schoolId as sc_schoolId,
 		sc.schoolName as sc_schoolName,
 		sc.cityId as sc_cityId,
 		sc.schooltype sc_schoolType,
-		sc.schoolRemarks sc_schoolRemarks,
+		sc.schoolRemarks
+		sc_schoolRemarks,
 		sc.cityProperId as sc_cityProperId,
-		p.provinceId as p_provinceId, 
+		p.provinceId as
+		p_provinceId,
 		p.provinceName p_provinceName,
 		c.cityId c_cityId,
 		c.cityName c_cityName
 	</sql>
-	
+
 	<select id="selectSchools" resultMap="schoolAllCol">
-		select <include refid="schoolColByPro"/>
-		from school sc 
+		select
+		<include refid="schoolColByPro" />
+		from school sc
 		join city c on c.cityId = sc.cityId
-		join province p on p.provinceId = sc.cityProperId
+		join province p on
+		p.provinceId =
+		sc.cityProperId
 	</select>
-	<!--查询全部学校映射字段-->
+	<!--查询全部学校映射字段 -->
 	<resultMap type="School" id="schoolAllCol">
-		<result column="sc_schoolId"	property="schoolId"/>
-		<result column="sc_schoolName" property="schoolName"/>
-		<result column="sc_cityId" property="cityId"/>
-		<result column="sc_schoolRemarks" property="schoolRemarks"/>
-		<result column="sc_cityProperId" property="cityProperId"/>
-		<result column="sc_schoolType" property="schoolType"/>
+		<result column="sc_schoolId" property="schoolId" />
+		<result column="sc_schoolName" property="schoolName" />
+		<result column="sc_cityId" property="cityId" />
+		<result column="sc_schoolRemarks" property="schoolRemarks" />
+		<result column="sc_cityProperId" property="cityProperId" />
+		<result column="sc_schoolType" property="schoolType" />
 		<collection property="city" javaType="City">
-				<id column="c_cityId" property="cityId"/>
-				<result column="c_cityName" property="cityName"/>
+			<id column="c_cityId" property="cityId" />
+			<result column="c_cityName" property="cityName" />
 		</collection>
 		<collection property="province" javaType="Province">
-			<id column="p_provinceId" property="provinceId"/>
-			<result column="p_provinceName" property="provinceName"/>
+			<id column="p_provinceId" property="provinceId" />
+			<result column="p_provinceName" property="provinceName" />
 		</collection>
 	</resultMap>
-	
-	<!--根据城市主键查询学校所在省市-->
-	<select id="selectSchoolByCityId" resultType="School" parameterType="java.lang.Integer">	
-		select <include refid="schoolCol"/>
+
+	<!--根据城市主键查询学校所在省市 -->
+	<select id="selectSchoolByCityId" resultType="School"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="schoolCol" />
 		from school
 		<where>
 			<if test="cityId != null and cityId != ''">
@@ -64,14 +72,19 @@
 			</if>
 		</where>
 	</select>
-	
+
 	<insert id="insertSchool" parameterType="School">
-		insert into school  (schoolName,  cityId,  schoolRemarks,cityProperId,schoolType ,schoolNameSx)
-			values (#{schoolName},#{cityId},#{schoolRemarks},#{cityProperId},#{schoolType},#{schoolNameSx})
+		insert into school
+		(schoolName, cityId, schoolRemarks,cityProperId,schoolType
+		,schoolNameSx)
+		values
+		(#{schoolName},#{cityId},#{schoolRemarks},#{cityProperId},#{schoolType},#{schoolNameSx})
 	</insert>
-	<!--根据学校主键查询学校信息-->
-	<select id="selectSchoolById" resultType="School" parameterType="java.lang.Integer">	
-		select <include refid="schoolCol"/>
+	<!--根据学校主键查询学校信息 -->
+	<select id="selectSchoolById" resultType="School"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="schoolCol" />
 		from school
 		<where>
 			<if test="schoolId != null and schoolId != ''">
@@ -79,5 +92,10 @@
 			</if>
 		</where>
 	</select>
-	
+
+	<update id="updateSchoolNumber">
+		UPDATE school SET schoolNumber = #{1} WHERE
+		schoolId=#{0}
+	</update>
+
 </mapper>
