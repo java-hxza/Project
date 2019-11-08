@@ -405,6 +405,8 @@ $(function() {
 				}
 			});
 		});
+	}else if($("#LX").attr("class") == 1) {
+		$(".professionalTeachers").remove();
 	}
 	$(".TiJiao").click(function() {
 		if ($(".classType").val() == 0) {
@@ -584,7 +586,6 @@ $(function() {
 				var discount = $.trim($(".dpMoneyActivity4").val());
 				var EntertainTeacher = $(".EntertainTeacher").val();
 				var ConsultationTeacher = $(".ConsultationTeacher").val();
-				var professionalTeacher = $(".EntertainTeacher").val();
 				var Headmaster = $(".ConsultationTeacher").val();
 				var schoolTime = "";
 				var startTimes = " " + Time.getHours() + ":" + Time.getMinutes().toString();
@@ -674,7 +675,6 @@ $(function() {
 						serviceCharge : serviceCharge,
 						ConsultationTeacher : ConsultationTeacher,
 						EntertainTeacher : EntertainTeacher,
-						professionalTeacher : professionalTeacher,
 						Headmaster : Headmaster
 					},
 					dataType : "json",
@@ -1147,7 +1147,6 @@ $(function() {
 					var numbers3 = $(".numbers3").val();
 					var EntertainTeacher = $(".EntertainTeacher").val();
 					var ConsultationTeacher = $(".ConsultationTeacher").val();
-					var professionalTeacher = $(".EntertainTeacher").val();
 					var Headmaster = $(".ConsultationTeacher").val();
 					var schoolTime = "";
 					for (var i = 0; i < $(".feecateIds2").length; i++) {
@@ -1269,7 +1268,6 @@ $(function() {
 							ConsultationTeacher : ConsultationTeacher,
 							EntertainTeacher : EntertainTeacher,
 							Headmaster : Headmaster,
-							professionalTeacher : professionalTeacher
 						},
 						dataType : "json",
 						success : function(data) {

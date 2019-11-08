@@ -210,7 +210,7 @@
 																	placeholder="来源学校：班主任" id="registrationChannels" />
 															</div>
 														</div>
-														<div class="col-3">
+														<div class="col-3 professionalTeachers">
 															<div class="form-group">
 																<label for="billing-state">专业老师</label> <input
 																	class="form-control professionalTeacher" type="text"
