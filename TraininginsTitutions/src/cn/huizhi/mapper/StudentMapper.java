@@ -158,10 +158,4 @@ public interface StudentMapper {
 	 */
 	public Integer StudentInsert(@Param("student") List<Student> student);
 	
-	/**
-	 * 为学生标明续费
-	 * @param studentId
-	 * @return
-	 */
-	public Integer updateStudentRenew(Integer studentId);
 }

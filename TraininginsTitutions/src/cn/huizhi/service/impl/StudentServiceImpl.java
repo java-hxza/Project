@@ -124,10 +124,4 @@ public class StudentServiceImpl implements StudentService {
 		return studentMapper.selectByClassIdStudent(schoolId, classId, studentName);
 	}
 
-	@Override
-	public Integer updateStudentRenew(Integer studentId) {
-		return studentMapper.updateStudentRenew(studentId);
-	}
-	
-	
 }

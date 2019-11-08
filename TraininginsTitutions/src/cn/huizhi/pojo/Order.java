@@ -41,6 +41,7 @@ public class Order {
 	private Integer teacherId;
 	private Double discount;
 	private Date endTime;
+	private Integer renew;
 	/**
 	 * 学生
 	 */
@@ -78,10 +79,11 @@ public class Order {
 			Integer identification, Double feecategoryMoney, Integer paymentmethodId, String personliable,
 			Integer departmentofpediatricsId, Integer addhour, Integer givehour, Date firstdate, Date lastdate,
 			String remarks, String orderNumber, Integer expenditureitemsId, Integer classId, String feecateMoney,
-			String feecateMoneyYiKao, Integer activityId, Double serviceCharge, Double sumDpMoney, Integer giftId,
-			Integer giftNumber, Double integral, Integer teacherId, Double discount, Date endTime, Student student,
-			PaymentMethod paymentMethod, DepartmentOfPediatrics departmentOfPediatrics, FeeCategory feeCategory,
-			Expenditureitems expenditureitems, School school, Gift gift, Teacher teacher, Class classes) {
+			String feecateMoneyYiKao, Integer activityId, Double serviceCharge, String cityId, String cityProperId,
+			Double sumDpMoney, Integer giftId, Integer giftNumber, Double integral, Integer teacherId, Double discount,
+			Date endTime, Integer renew, Student student, PaymentMethod paymentMethod,
+			DepartmentOfPediatrics departmentOfPediatrics, FeeCategory feeCategory, Expenditureitems expenditureitems,
+			School school, Gift gift, Teacher teacher, Class classes) {
 		super();
 		this.orderId = orderId;
 		this.feecateId = feecateId;
@@ -106,6 +108,8 @@ public class Order {
 		this.feecateMoneyYiKao = feecateMoneyYiKao;
 		this.activityId = activityId;
 		this.serviceCharge = serviceCharge;
+		this.cityId = cityId;
+		this.cityProperId = cityProperId;
 		this.sumDpMoney = sumDpMoney;
 		this.giftId = giftId;
 		this.giftNumber = giftNumber;
@@ -113,6 +117,7 @@ public class Order {
 		this.teacherId = teacherId;
 		this.discount = discount;
 		this.endTime = endTime;
+		this.renew = renew;
 		this.student = student;
 		this.paymentMethod = paymentMethod;
 		this.departmentOfPediatrics = departmentOfPediatrics;
@@ -450,6 +455,14 @@ public class Order {
 
 	public void setServiceCharge(Double serviceCharge) {
 		this.serviceCharge = serviceCharge;
+	}
+
+	public Integer getRenew() {
+		return renew;
+	}
+
+	public void setRenew(Integer renew) {
+		this.renew = renew;
 	}
 
 }

@@ -29,7 +29,6 @@ public class Student {
 	private String professionalTeacher;
 	private String entertainTeacher;
 	private String consultationTeacher;
-	private Integer renew;
 	private DepartmentOfPediatrics departmentOfPediatrics;
 	private Order order;
 	private PaymentMethod paymentMethod;
@@ -42,7 +41,7 @@ public class Student {
 			String registrationConsultant, String startTime, String endTime, String theSurrogate, String remarks,
 			Integer feeCategory, Double studentHour, Double integral, Double usedIntegral,
 			ChildrenesClassStudnet childrenesClassStudnet, Class classes, School schools, String headmaster,
-			String professionalTeacher, String entertainTeacher, String consultationTeacher, Integer renew,
+			String professionalTeacher, String entertainTeacher, String consultationTeacher,
 			DepartmentOfPediatrics departmentOfPediatrics, Order order, PaymentMethod paymentMethod,
 			FeeCategory feeCategorys, Reserveschool reserveschool) {
 		super();
@@ -72,7 +71,6 @@ public class Student {
 		this.professionalTeacher = professionalTeacher;
 		this.entertainTeacher = entertainTeacher;
 		this.consultationTeacher = consultationTeacher;
-		this.renew = renew;
 		this.departmentOfPediatrics = departmentOfPediatrics;
 		this.order = order;
 		this.paymentMethod = paymentMethod;
@@ -331,14 +329,6 @@ public class Student {
 
 	public void setConsultationTeacher(String consultationTeacher) {
 		this.consultationTeacher = consultationTeacher;
-	}
-
-	public Integer getRenew() {
-		return renew;
-	}
-
-	public void setRenew(Integer renew) {
-		this.renew = renew;
 	}
 
 }

@@ -130,10 +130,4 @@ public interface StudentService {
 	 */
 	public List<Student> selectByClassIdStudent(Integer schoolId,Integer classId,String studentName);
 	
-	/**
-	 * 为学生标明续费
-	 * @param studentId
-	 * @return
-	 */
-	public Integer updateStudentRenew(Integer studentId);
 }

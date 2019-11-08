@@ -641,9 +641,4 @@
 		</foreach>
 	</insert>
 	
-	<update id="updateStudentRenew">
-		UPDATE student SET renew = 1 WHERE
-		studentId=#{0}
-	</update>
-
 </mapper>

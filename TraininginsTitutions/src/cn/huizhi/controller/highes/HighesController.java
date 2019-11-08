@@ -502,6 +502,7 @@ public class HighesController {
 		order.setDiscount(discount);
 		order.setClassId(classId);
 		order.setIntegral(integral);
+		order.setRenew(1);
 		order.setGiftId(giftId);
 		order.setFeecateMoney(String.valueOf(dpMoney));
 		if (giftNumber == null) {
@@ -511,7 +512,6 @@ public class HighesController {
 		}
 		order.setPaymentmethodId(paymentmethodId);
 		if (orderService.addOrder(order) == 1) {
-			if (studentService.updateStudentRenew(stuId) == 1) {
 				if (studentService.updateStudentOrderHour(addhour + givehour, stuId, integral) == 1) {
 					if (giftNumber != null) {
 						if (giftService.updateGift(-giftNumber, giftId) == 1) {
@@ -527,10 +527,6 @@ public class HighesController {
 					map.put("add", "0");
 					return JSONArray.toJSONString(map);
 				}
-			} else {
-				map.put("add", "0");
-				return JSONArray.toJSONString(map);
-			}
 		} else {
 			map.put("add", "0");
 		}
@@ -617,6 +613,7 @@ public class HighesController {
 		order.setDpMoney(dpMoney);
 		order.setGiftId(giftId);
 		order.setClassId(classId);
+		order.setRenew(1);
 		order.setServiceCharge(serviceCharge);
 		order.setFeecateMoney(feecateMoney);
 		order.setIntegral(integral);
@@ -640,7 +637,6 @@ public class HighesController {
 		order.setPaymentmethodId(paymentmethodId);
 		order.setIdentification(0);
 		if (orderService.addOrder(order) == 1) {
-			if (studentService.updateStudentRenew(stuId) == 1) {
 				if (studentService.updateStudentOrderHour(hour, stuId, integral) == 1) {
 					if (giftNumber != 0) {
 						if (giftService.updateGift(-giftNumber, giftId) == 1) {
@@ -656,10 +652,6 @@ public class HighesController {
 					map.put("add", "0");
 					return JSONArray.toJSONString(map);
 				}
-			} else {
-				map.put("add", "0");
-				return JSONArray.toJSONString(map);
-			}
 		} else {
 			map.put("add", "0");
 		}
@@ -1871,7 +1863,7 @@ public class HighesController {
 	}
 
 	/**
-	 * 注册学生课时
+	 * 注册少儿课时
 	 * 
 	 * @param classId
 	 * @param student
@@ -1937,6 +1929,7 @@ public class HighesController {
 				order.setStartTime(childrenesClassStudnet.getEnrollmentTime());
 				order.setIdentification(0);
 				order.setAddhour(addhour);
+				order.setRenew(0);
 				School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 				if (OrderHour >= 10) {
 					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00"
@@ -2082,6 +2075,7 @@ public class HighesController {
 				order.setServiceCharge(serviceCharge);
 				order.setClassId(classId);
 				order.setActivityId(activityId);
+				order.setRenew(0);
 				order.setIntegral(integral);
 				order.setFeecateMoney(feecateMoney);
 				order.setDiscount(discount);
@@ -2208,6 +2202,7 @@ public class HighesController {
 				order.setFeecateId(feecateId);
 				order.setDpMoney(discount);
 				order.setGiftId(0);
+				order.setRenew(0);
 				order.setServiceCharge(serviceCharge);
 				order.setClassId(classId);
 				order.setIntegral(0.0);
@@ -2326,6 +2321,7 @@ public class HighesController {
 				order.setDpMoney(dpMoney);
 				order.setGiftId(giftId);
 				order.setClassId(0);
+				order.setRenew(0);
 				order.setServiceCharge(serviceCharge);
 				order.setIntegral(integral);
 				order.setActivityId(activityId);
