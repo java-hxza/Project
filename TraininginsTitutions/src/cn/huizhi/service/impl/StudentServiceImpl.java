@@ -123,6 +123,11 @@ public class StudentServiceImpl implements StudentService {
 	public List<Student> selectByClassIdStudent(Integer schoolId, Integer classId, String studentName) {
 		return studentMapper.selectByClassIdStudent(schoolId, classId, studentName);
 	}
+
+	@Override
+	public Integer updateStudentRenew(Integer studentId) {
+		return studentMapper.updateStudentRenew(studentId);
+	}
 	
 	
 }

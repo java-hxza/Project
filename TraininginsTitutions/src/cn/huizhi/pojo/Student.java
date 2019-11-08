@@ -25,10 +25,11 @@ public class Student {
 	private ChildrenesClassStudnet childrenesClassStudnet;
 	private Class classes;
 	private School schools;
-	private String Headmaster;
+	private String headmaster;
 	private String professionalTeacher;
-	private String EntertainTeacher;
-	private String ConsultationTeacher;
+	private String entertainTeacher;
+	private String consultationTeacher;
+	private Integer renew;
 	private DepartmentOfPediatrics departmentOfPediatrics;
 	private Order order;
 	private PaymentMethod paymentMethod;
@@ -41,7 +42,7 @@ public class Student {
 			String registrationConsultant, String startTime, String endTime, String theSurrogate, String remarks,
 			Integer feeCategory, Double studentHour, Double integral, Double usedIntegral,
 			ChildrenesClassStudnet childrenesClassStudnet, Class classes, School schools, String headmaster,
-			String professionalTeacher, String entertainTeacher, String consultationTeacher,
+			String professionalTeacher, String entertainTeacher, String consultationTeacher, Integer renew,
 			DepartmentOfPediatrics departmentOfPediatrics, Order order, PaymentMethod paymentMethod,
 			FeeCategory feeCategorys, Reserveschool reserveschool) {
 		super();
@@ -67,10 +68,11 @@ public class Student {
 		this.childrenesClassStudnet = childrenesClassStudnet;
 		this.classes = classes;
 		this.schools = schools;
-		Headmaster = headmaster;
+		this.headmaster = headmaster;
 		this.professionalTeacher = professionalTeacher;
-		EntertainTeacher = entertainTeacher;
-		ConsultationTeacher = consultationTeacher;
+		this.entertainTeacher = entertainTeacher;
+		this.consultationTeacher = consultationTeacher;
+		this.renew = renew;
 		this.departmentOfPediatrics = departmentOfPediatrics;
 		this.order = order;
 		this.paymentMethod = paymentMethod;
@@ -300,11 +302,11 @@ public class Student {
 	}
 
 	public String getHeadmaster() {
-		return Headmaster;
+		return headmaster;
 	}
 
 	public void setHeadmaster(String headmaster) {
-		Headmaster = headmaster;
+		this.headmaster = headmaster;
 	}
 
 	public String getProfessionalTeacher() {
@@ -316,19 +318,27 @@ public class Student {
 	}
 
 	public String getEntertainTeacher() {
-		return EntertainTeacher;
+		return entertainTeacher;
 	}
 
 	public void setEntertainTeacher(String entertainTeacher) {
-		EntertainTeacher = entertainTeacher;
+		this.entertainTeacher = entertainTeacher;
 	}
 
 	public String getConsultationTeacher() {
-		return ConsultationTeacher;
+		return consultationTeacher;
 	}
 
 	public void setConsultationTeacher(String consultationTeacher) {
-		ConsultationTeacher = consultationTeacher;
+		this.consultationTeacher = consultationTeacher;
+	}
+
+	public Integer getRenew() {
+		return renew;
+	}
+
+	public void setRenew(Integer renew) {
+		this.renew = renew;
 	}
 
 }
