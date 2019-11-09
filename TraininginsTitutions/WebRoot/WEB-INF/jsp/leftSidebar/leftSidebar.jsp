@@ -47,6 +47,8 @@
 					班级管理</span> <span class="menu-arrow"></span>
 		</a>
 			<ul class="side-nav-second-level" aria-expanded="false">
+			<li><a href="javascript:void(0)" onclick="selectClassTime()">上课时间管理
+				</a></li>
 				<li><a href="javascript:void(0)" onclick="classTypes()">班级类型管理
 				</a></li>
 				<li><a href="javascript:void(0)" onclick="classInfo()">学生信息管理

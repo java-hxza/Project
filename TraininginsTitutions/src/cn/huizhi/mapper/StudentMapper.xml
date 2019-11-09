@@ -149,7 +149,7 @@
 		registrationChannels,registrationConsultant,
 		startTime, endTime,
 		theSurrogate, remarks,
-		feeCategory,integral,ConsultationTeacher,EntertainTeacher,Headmaster,professionalTeacher
+		feeCategory,integral,consultationTeacher,entertainTeacher,headmaster,professionalTeacher
 		)
 		values (#{studentName},
 		#{studentSex}, #{studentIDCard},
@@ -160,7 +160,7 @@
 		#{registrationConsultant},
 		#{startTime},
 		#{endTime}, #{theSurrogate}, #{remarks},
-		#{feeCategory},#{integral},#{ConsultationTeacher},#{EntertainTeacher},#{Headmaster},#{professionalTeacher})
+		#{feeCategory},#{integral},#{consultationTeacher},#{entertainTeacher},#{headmaster},#{professionalTeacher})
 		<!--order属性是取数据生成之前(before)or生成之后(after) -->
 		<selectKey keyProperty="studentId"
 			resultType="java.lang.Integer" order="AFTER">
@@ -640,5 +640,5 @@
 			#{order.remarks},#{order.orderNumber},#{order.expenditureitemsId},#{order.classId},#{order.giftId},#{order.giftNumber},#{order.integral},#{order.teacherId},#{order.discount},#{order.feecateMoney},#{order.feecateMoneyYiKao},#{order.activityId},#{order.serviceCharge})
 		</foreach>
 	</insert>
-
+	
 </mapper>

@@ -157,4 +157,5 @@ public interface StudentMapper {
 	 * @return
 	 */
 	public Integer StudentInsert(@Param("student") List<Student> student);
+	
 }

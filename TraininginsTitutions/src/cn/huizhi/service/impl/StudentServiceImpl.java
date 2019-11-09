@@ -123,6 +123,5 @@ public class StudentServiceImpl implements StudentService {
 	public List<Student> selectByClassIdStudent(Integer schoolId, Integer classId, String studentName) {
 		return studentMapper.selectByClassIdStudent(schoolId, classId, studentName);
 	}
-	
-	
+
 }

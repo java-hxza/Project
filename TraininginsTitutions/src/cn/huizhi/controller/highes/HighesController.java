@@ -388,7 +388,7 @@ public class HighesController {
 		}
 		return JSONArray.toJSONString(map);
 	}
-	
+
 	/**
 	 * 根据班级选择学生2
 	 * 
@@ -402,21 +402,21 @@ public class HighesController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if (schoolType == 1) {
 			List<Student> children = studentService.selectStudentClass("childrenesclassstudnet", classId, 2);
-			if(children.size() > 0) {
+			if (children.size() > 0) {
 				Order order = orderService.selectOrderTF(children.get(0).getStudentId());
 				map.put("order", order);
 			}
 			map.put("children", children);
 		} else if (schoolType == 2) {
 			List<Student> children = studentService.selectStudentClass("highesclassstudnet", classId, 2);
-			if(children.size() > 0) {
+			if (children.size() > 0) {
 				Order order = orderService.selectOrderTF(children.get(0).getStudentId());
 				map.put("order", order);
 			}
 			map.put("children", children);
 		} else if (schoolType == 3) {
 			List<Student> children = studentService.selectStudentClass("artclassstudnet", classId, 2);
-			if(children.size() > 0) {
+			if (children.size() > 0) {
 				Order order = orderService.selectOrderTF(children.get(0).getStudentId());
 				map.put("order", order);
 			}
@@ -424,7 +424,7 @@ public class HighesController {
 		}
 		return JSONArray.toJSONString(map);
 	}
-	
+
 	/**
 	 * 根据学生选择订单
 	 * 
@@ -480,19 +480,19 @@ public class HighesController {
 		order.setAddhour(addhour);
 		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 		if (OrderHour >= 10) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00"
+					+ school.getSchoolNumber());
 		} else if (OrderHour >= 100) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0"
+					+ school.getSchoolNumber());
 		} else if (OrderHour >= 1000) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-"
+					+ school.getSchoolNumber());
 		} else {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000"
+					+ school.getSchoolNumber());
 		}
-		OrderHour += 1;
+		schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 		order.setGivehour(givehour);
 		order.setDepartmentofpediatricsId(departmentofpediatricsId);
 		order.setFeecateId(feecateId);
@@ -502,6 +502,7 @@ public class HighesController {
 		order.setDiscount(discount);
 		order.setClassId(classId);
 		order.setIntegral(integral);
+		order.setRenew(1);
 		order.setGiftId(giftId);
 		order.setFeecateMoney(String.valueOf(dpMoney));
 		if (giftNumber == null) {
@@ -511,21 +512,21 @@ public class HighesController {
 		}
 		order.setPaymentmethodId(paymentmethodId);
 		if (orderService.addOrder(order) == 1) {
-			if (studentService.updateStudentOrderHour(addhour + givehour, stuId, integral) == 1) {
-				if (giftNumber != null) {
-					if (giftService.updateGift(-giftNumber, giftId) == 1) {
-						map.put("add", "1");
+				if (studentService.updateStudentOrderHour(addhour + givehour, stuId, integral) == 1) {
+					if (giftNumber != null) {
+						if (giftService.updateGift(-giftNumber, giftId) == 1) {
+							map.put("add", "1");
+						} else {
+							map.put("add", "0");
+							return JSONArray.toJSONString(map);
+						}
 					} else {
-						map.put("add", "0");
-						return JSONArray.toJSONString(map);
+						map.put("add", "1");
 					}
 				} else {
-					map.put("add", "1");
+					map.put("add", "0");
+					return JSONArray.toJSONString(map);
 				}
-			} else {
-				map.put("add", "0");
-				return JSONArray.toJSONString(map);
-			}
 		} else {
 			map.put("add", "0");
 		}
@@ -612,6 +613,7 @@ public class HighesController {
 		order.setDpMoney(dpMoney);
 		order.setGiftId(giftId);
 		order.setClassId(classId);
+		order.setRenew(1);
 		order.setServiceCharge(serviceCharge);
 		order.setFeecateMoney(feecateMoney);
 		order.setIntegral(integral);
@@ -619,37 +621,37 @@ public class HighesController {
 		order.setDiscount(discount);
 		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 		if (OrderHour >= 10) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00"
+					+ school.getSchoolNumber());
 		} else if (OrderHour >= 100) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0"
+					+ school.getSchoolNumber());
 		} else if (OrderHour >= 1000) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-"
+					+ school.getSchoolNumber());
 		} else {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000"
+					+ school.getSchoolNumber());
 		}
-		OrderHour += 1;
+		schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 		order.setPaymentmethodId(paymentmethodId);
 		order.setIdentification(0);
 		if (orderService.addOrder(order) == 1) {
-			if (studentService.updateStudentOrderHour(hour, stuId, integral) == 1) {
-				if (giftNumber != 0) {
-					if (giftService.updateGift(-giftNumber, giftId) == 1) {
-						map.put("add", "1");
+				if (studentService.updateStudentOrderHour(hour, stuId, integral) == 1) {
+					if (giftNumber != 0) {
+						if (giftService.updateGift(-giftNumber, giftId) == 1) {
+							map.put("add", "1");
+						} else {
+							map.put("add", "0");
+							return JSONArray.toJSONString(map);
+						}
 					} else {
-						map.put("add", "0");
-						return JSONArray.toJSONString(map);
+						map.put("add", "1");
 					}
 				} else {
-					map.put("add", "1");
+					map.put("add", "0");
+					return JSONArray.toJSONString(map);
 				}
-			} else {
-				map.put("add", "0");
-				return JSONArray.toJSONString(map);
-			}
 		} else {
 			map.put("add", "0");
 		}
@@ -728,18 +730,19 @@ public class HighesController {
 		order.setGiftNumber(0);
 		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 		if (OrderHour >= 10) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00"
+					+ school.getSchoolNumber());
 		} else if (OrderHour >= 100) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0"
+					+ school.getSchoolNumber());
 		} else if (OrderHour >= 1000) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-"
+					+ school.getSchoolNumber());
 		} else {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000"
+					+ school.getSchoolNumber());
 		}
+		schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 		OrderHour += 1;
 		order.setStuId(stuId);
 		if (orderService.addOrder(order) == 1) {
@@ -1083,19 +1086,19 @@ public class HighesController {
 		order.setIntegral(0.0);
 		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 		if (OrderHour >= 10) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00"
+					+ school.getSchoolNumber());
 		} else if (OrderHour >= 100) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0"
+					+ school.getSchoolNumber());
 		} else if (OrderHour >= 1000) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-"
+					+ school.getSchoolNumber());
 		} else {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000"
+					+ school.getSchoolNumber());
 		}
-		OrderHour += 1;
+		schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 		try {
 			Date startTime1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(startTime + startTimes);
 			order.setStartTime(startTime1);
@@ -1391,15 +1394,15 @@ public class HighesController {
 		if (classes.size() > 0) {
 			if (schoolType == 1) {
 				List<Student> student = studentService.selectStudentClass("childrenesclassstudnet",
-						classes.get(0).getClassId(),1);
+						classes.get(0).getClassId(), 1);
 				model.addAttribute("student", student);
 			} else if (schoolType == 2) {
 				List<Student> student = studentService.selectStudentClass("highesclassstudnet",
-						classes.get(0).getClassId(),1);
+						classes.get(0).getClassId(), 1);
 				model.addAttribute("student", student);
 			} else if (schoolType == 3) {
 				List<Student> student = studentService.selectStudentClass("artclassstudnet",
-						classes.get(0).getClassId(),1);
+						classes.get(0).getClassId(), 1);
 				model.addAttribute("student", student);
 			}
 		}
@@ -1472,15 +1475,15 @@ public class HighesController {
 		if (classes.size() > 0) {
 			if (schoolType == 1) {
 				List<Student> student = studentService.selectStudentClass("childrenesclassstudnet",
-						classes.get(0).getClassId(),1);
+						classes.get(0).getClassId(), 1);
 				model.addAttribute("student", student);
 			} else if (schoolType == 2) {
 				List<Student> student = studentService.selectStudentClass("highesclassstudnet",
-						classes.get(0).getClassId(),1);
+						classes.get(0).getClassId(), 1);
 				model.addAttribute("student", student);
 			} else if (schoolType == 3) {
 				List<Student> student = studentService.selectStudentClass("artclassstudnet",
-						classes.get(0).getClassId(),1);
+						classes.get(0).getClassId(), 1);
 				model.addAttribute("student", student);
 			}
 		}
@@ -1524,18 +1527,19 @@ public class HighesController {
 		if (classes.size() > 0) {
 			if (schoolType == 1) {
 				List<Student> high = studentService.selectStudentClass("childrenesclassstudnet",
-						classes.get(0).getClassId(),2);
+						classes.get(0).getClassId(), 2);
 				Order order = orderService.selectOrderTF(high.get(0).getStudentId());
 				model.addAttribute("order", order);
 				model.addAttribute("high", high);
 			} else if (schoolType == 2) {
 				List<Student> high = studentService.selectStudentClass("highesclassstudnet",
-						classes.get(0).getClassId(),2);
+						classes.get(0).getClassId(), 2);
 				Order order = orderService.selectOrderTF(high.get(0).getStudentId());
 				model.addAttribute("order", order);
 				model.addAttribute("high", high);
 			} else if (schoolType == 3) {
-				List<Student> high = studentService.selectStudentClass("artclassstudnet", classes.get(0).getClassId(),2);
+				List<Student> high = studentService.selectStudentClass("artclassstudnet", classes.get(0).getClassId(),
+						2);
 				Order order = orderService.selectOrderTF(high.get(0).getStudentId());
 				model.addAttribute("order", order);
 				model.addAttribute("high", high);
@@ -1546,7 +1550,7 @@ public class HighesController {
 		model.addAttribute("paymentMethod", paymentMethod);
 		return "high/AddRefund";
 	}
-	
+
 	/**
 	 * 添加退费
 	 * 
@@ -1555,10 +1559,10 @@ public class HighesController {
 	 */
 	@RequestMapping("addRefund.html")
 	@ResponseBody
-	public Object addRefund(@RequestParam Integer stuId, @RequestParam String startTime,
-			@RequestParam String feecateId, @RequestParam String feecateMoney, @RequestParam String personliable,
-			@RequestParam String remarks, @RequestParam Integer paymentmethodId, @RequestParam String date,
-			@RequestParam Integer classId, @RequestParam String startTimes, @RequestParam Double serviceCharge) {
+	public Object addRefund(@RequestParam Integer stuId, @RequestParam String startTime, @RequestParam String feecateId,
+			@RequestParam String feecateMoney, @RequestParam String personliable, @RequestParam String remarks,
+			@RequestParam Integer paymentmethodId, @RequestParam String date, @RequestParam Integer classId,
+			@RequestParam String startTimes, @RequestParam Double serviceCharge) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		Order order = new Order();
 		order.setIdentification(3);
@@ -1583,19 +1587,19 @@ public class HighesController {
 		order.setGiftNumber(0);
 		School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 		if (OrderHour >= 10) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00"
+					+ school.getSchoolNumber());
 		} else if (OrderHour >= 100) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0"
+					+ school.getSchoolNumber());
 		} else if (OrderHour >= 1000) {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-"
+					+ school.getSchoolNumber());
 		} else {
-			order.setOrderNumber(
-					school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+			order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000"
+					+ school.getSchoolNumber());
 		}
-		OrderHour += 1;
+		schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"), school.getSchoolNumber() + 1);
 		order.setStuId(stuId);
 		if (orderService.addOrder(order) == 1) {
 			map.put("add", "1");
@@ -1859,37 +1863,56 @@ public class HighesController {
 	}
 
 	/**
-	 * 注册学生课时
+	 * 注册少儿课时
 	 * 
+	 * @param classId
 	 * @param student
-	 * @param classes
-	 * @param headmaster
+	 * @param feecateId
+	 * @param dpMoney
+	 * @param departmentofpediatricsId
+	 * @param addhour
+	 * @param givehour
+	 * @param remarks2
+	 * @param paymentmethodId
+	 * @param date
+	 * @param integral
+	 * @param giftId
+	 * @param giftNumber
+	 * @param teacherId
+	 * @param discount
+	 * @param activityId
+	 * @param schoolTime
+	 * @param serviceCharge
+	 * @param entertainTeacher
+	 * @param consultationTeacher
 	 * @return
 	 */
 	@RequestMapping("RegisterStudentsHour.html")
 	@ResponseBody
-	public Object RegisterStudentsHour(@RequestParam Integer classId, @RequestParam String headmaster, Student student,
-			@RequestParam String feecateId, @RequestParam Double dpMoney,
-			@RequestParam Integer departmentofpediatricsId, @RequestParam Integer addhour,
+	public Object RegisterStudentsHour(@RequestParam Integer classId, Student student, @RequestParam String feecateId,
+			@RequestParam Double dpMoney, @RequestParam Integer departmentofpediatricsId, @RequestParam Integer addhour,
 			@RequestParam Integer givehour, @RequestParam String remarks2, @RequestParam Integer paymentmethodId,
 			@RequestParam String date, @RequestParam Double integral, @RequestParam Integer giftId,
 			@RequestParam Integer giftNumber, @RequestParam Integer teacherId, @RequestParam Double discount,
-			@RequestParam Integer activityId, @RequestParam String schoolTime, @RequestParam Double serviceCharge) {
+			@RequestParam Integer activityId, @RequestParam String schoolTime, @RequestParam Double serviceCharge,
+			@RequestParam String entertainTeacher, @RequestParam String consultationTeacher,@RequestParam String headmasters) {
 		ChildrenesClassStudnet childrenesClassStudnet = new ChildrenesClassStudnet();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		student.setIntegral(0.0);
 		student.setFeeCategory(1);
 		student.setUsedIntegral(0.0);
 		student.setStudentHour(0.0);
+		student.setConsultationTeacher(consultationTeacher);
+		student.setEntertainTeacher(entertainTeacher);
 		if (studentService.addStudnetInfo(student) == 1) {
 			childrenesClassStudnet.setState("1");
 			childrenesClassStudnet.setStudentName(student.getStudentName());
-			childrenesClassStudnet.setHeadmaster(headmaster);
 			Student s = studentService.selectStudentId(student.getStudentName(), student.getStudentBirth(),
 					student.getStudentSex());
 			childrenesClassStudnet.setStudentId(s.getStudentId());
 			childrenesClassStudnet.setClassId(classId);
 			childrenesClassStudnet.setSchoolTime(schoolTime);
+			childrenesClassStudnet.setHeadmaster(headmasters);
 			try {
 				Date startTimes = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(student.getStartTime());
 				childrenesClassStudnet.setEnrollmentTime(startTimes);
@@ -1899,7 +1922,6 @@ public class HighesController {
 			}
 
 			if (childrenesClassStudnetService.addChildrenesClassStudnet(childrenesClassStudnet) == 1) {
-				map.put("add", "1");
 				Order order = new Order();
 				order.setStuId(childrenesClassStudnet.getStudentId());
 				order.setSchoolId((Integer) session.getAttribute("schoolId"));
@@ -1907,21 +1929,23 @@ public class HighesController {
 				order.setStartTime(childrenesClassStudnet.getEnrollmentTime());
 				order.setIdentification(0);
 				order.setAddhour(addhour);
+				order.setRenew(0);
 				School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 				if (OrderHour >= 10) {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00"
+							+ school.getSchoolNumber());
 				} else if (OrderHour >= 100) {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0"
+							+ school.getSchoolNumber());
 				} else if (OrderHour >= 1000) {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-"
+							+ school.getSchoolNumber());
 				} else {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000"
+							+ school.getSchoolNumber());
 				}
-				OrderHour += 1;
+				schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"),
+						school.getSchoolNumber() + 1);
 				order.setGivehour(givehour);
 				order.setTeacherId(teacherId);
 				order.setDepartmentofpediatricsId(departmentofpediatricsId);
@@ -1975,7 +1999,6 @@ public class HighesController {
 	 * 注册少儿学生时间段
 	 * 
 	 * @param classId
-	 * @param headmaster
 	 * @param student
 	 * @param feecateId
 	 * @param dpMoney
@@ -1983,6 +2006,8 @@ public class HighesController {
 	 * @param lastdate
 	 * @param personliable
 	 * @param remarks3
+	 * @param entertainTeacher
+	 * @param consultationTeacher
 	 * @param paymentmethodId
 	 * @param giftId
 	 * @param giftNumber
@@ -1994,29 +2019,31 @@ public class HighesController {
 	 */
 	@RequestMapping("RegisterStudentsCharge.html")
 	@ResponseBody
-	public Object RegisterStudentsCharge(@RequestParam Integer classId, @RequestParam String headmaster,
-			Student student, @RequestParam String feecateId, @RequestParam Double dpMoney,
-			@RequestParam String firstdate, @RequestParam String lastdate, @RequestParam String personliable,
-			@RequestParam String remarks3, @RequestParam Integer paymentmethodId, @RequestParam Integer giftId,
-			@RequestParam Integer giftNumber, @RequestParam Double integral, @RequestParam Integer hour,
-			@RequestParam String date, @RequestParam Double discount, @RequestParam String startTimes,
-			@RequestParam String feecateMoney, @RequestParam Integer activityId, @RequestParam String schoolTime,
-			@RequestParam Double serviceCharge) {
+	public Object RegisterStudentsCharge(@RequestParam Integer classId, Student student, @RequestParam String feecateId,
+			@RequestParam Double dpMoney, @RequestParam String firstdate, @RequestParam String lastdate,
+			@RequestParam String personliable, @RequestParam String remarks3, @RequestParam Integer paymentmethodId,
+			@RequestParam Integer giftId, @RequestParam Integer giftNumber, @RequestParam Double integral,
+			@RequestParam Integer hour, @RequestParam String date, @RequestParam Double discount,
+			@RequestParam String startTimes, @RequestParam String feecateMoney, @RequestParam Integer activityId,
+			@RequestParam String schoolTime, @RequestParam Double serviceCharge, @RequestParam String entertainTeacher,
+			@RequestParam String consultationTeacher,@RequestParam String headmasters) {
 		ChildrenesClassStudnet childrenesClassStudnet = new ChildrenesClassStudnet();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		student.setIntegral(0.0);
 		student.setFeeCategory(1);
 		student.setUsedIntegral(0.0);
 		student.setStudentHour(0.0);
+		student.setEntertainTeacher(entertainTeacher);
+		student.setConsultationTeacher(consultationTeacher);
 		if (studentService.addStudnetInfo(student) == 1) {
 			childrenesClassStudnet.setState("1");
 			childrenesClassStudnet.setStudentName(student.getStudentName());
-			childrenesClassStudnet.setHeadmaster(headmaster);
 			Student s = studentService.selectStudentId(student.getStudentName(), student.getStudentBirth(),
 					student.getStudentSex());
 			childrenesClassStudnet.setStudentId(s.getStudentId());
 			childrenesClassStudnet.setClassId(classId);
 			childrenesClassStudnet.setSchoolTime(schoolTime);
+			childrenesClassStudnet.setHeadmaster(headmasters);
 			try {
 				Date startTimes2 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(student.getStartTime() + startTimes);
 				childrenesClassStudnet.setEnrollmentTime(startTimes2);
@@ -2026,7 +2053,6 @@ public class HighesController {
 			}
 
 			if (childrenesClassStudnetService.addChildrenesClassStudnet(childrenesClassStudnet) == 1) {
-				map.put("add", "1");
 				Order order = new Order();
 				try {
 					Date firstdate1 = new SimpleDateFormat("yyyy-MM-dd").parse(firstdate);
@@ -2049,24 +2075,26 @@ public class HighesController {
 				order.setServiceCharge(serviceCharge);
 				order.setClassId(classId);
 				order.setActivityId(activityId);
+				order.setRenew(0);
 				order.setIntegral(integral);
 				order.setFeecateMoney(feecateMoney);
 				order.setDiscount(discount);
 				School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 				if (OrderHour >= 10) {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00"
+							+ school.getSchoolNumber());
 				} else if (OrderHour >= 100) {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0"
+							+ school.getSchoolNumber());
 				} else if (OrderHour >= 1000) {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-"
+							+ school.getSchoolNumber());
 				} else {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000"
+							+ school.getSchoolNumber());
 				}
-				OrderHour += 1;
+				schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"),
+						school.getSchoolNumber() + 1);
 				order.setPaymentmethodId(paymentmethodId);
 				order.setIdentification(0);
 				if (orderService.addOrder(order) == 1) {
@@ -2102,7 +2130,6 @@ public class HighesController {
 	 * 注册高中学生时间段
 	 * 
 	 * @param classId
-	 * @param headmaster
 	 * @param student
 	 * @param feecateId
 	 * @param dpMoney
@@ -2112,6 +2139,8 @@ public class HighesController {
 	 * @param remarks3
 	 * @param paymentmethodId
 	 * @param giftId
+	 * @param entertainTeacher
+	 * @param consultationTeacher
 	 * @param giftNumber
 	 * @param integral
 	 * @param hour
@@ -2121,26 +2150,29 @@ public class HighesController {
 	 */
 	@RequestMapping("RegisterStudentsCharges.html")
 	@ResponseBody
-	public Object RegisterStudentsCharges(@RequestParam Integer classId, @RequestParam String headmaster,
-			Student student, @RequestParam String feecateId, @RequestParam Double dpMoney,
-			@RequestParam String firstdate, @RequestParam String lastdate, @RequestParam String personliable,
-			@RequestParam String remarks3, @RequestParam Integer paymentmethodId, @RequestParam Integer hour,
-			@RequestParam String startTimes, @RequestParam String date, @RequestParam Double discount,
-			@RequestParam String feecateMoney, @RequestParam Double serviceCharge) {
+	public Object RegisterStudentsCharges(@RequestParam Integer classId, Student student,
+			@RequestParam String feecateId, @RequestParam Double dpMoney, @RequestParam String firstdate,
+			@RequestParam String lastdate, @RequestParam String personliable, @RequestParam String remarks3,
+			@RequestParam Integer paymentmethodId, @RequestParam Integer hour, @RequestParam String startTimes,
+			@RequestParam String date, @RequestParam Double discount, @RequestParam String feecateMoney,
+			@RequestParam Double serviceCharge, @RequestParam String entertainTeacher,
+			@RequestParam String consultationTeacher,@RequestParam String headmasters) {
 		ChildrenesClassStudnet childrenesClassStudnet = new ChildrenesClassStudnet();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		student.setIntegral(0.0);
 		student.setFeeCategory(1);
 		student.setUsedIntegral(0.0);
 		student.setStudentHour(0.0);
+		student.setConsultationTeacher(consultationTeacher);
+		student.setEntertainTeacher(entertainTeacher);
 		if (studentService.addStudnetInfo(student) == 1) {
 			childrenesClassStudnet.setState("1");
 			childrenesClassStudnet.setStudentName(student.getStudentName());
-			childrenesClassStudnet.setHeadmaster(headmaster);
 			Student s = studentService.selectStudentId(student.getStudentName(), student.getStudentBirth(),
 					student.getStudentSex());
 			childrenesClassStudnet.setStudentId(s.getStudentId());
 			childrenesClassStudnet.setClassId(classId);
+			childrenesClassStudnet.setHeadmaster(headmasters);
 			try {
 				Date startTimes2 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(student.getStartTime() + startTimes);
 				childrenesClassStudnet.setEnrollmentTime(startTimes2);
@@ -2170,6 +2202,7 @@ public class HighesController {
 				order.setFeecateId(feecateId);
 				order.setDpMoney(discount);
 				order.setGiftId(0);
+				order.setRenew(0);
 				order.setServiceCharge(serviceCharge);
 				order.setClassId(classId);
 				order.setIntegral(0.0);
@@ -2177,19 +2210,20 @@ public class HighesController {
 				order.setDiscount(dpMoney);
 				School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 				if (OrderHour >= 10) {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00"
+							+ school.getSchoolNumber());
 				} else if (OrderHour >= 100) {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0"
+							+ school.getSchoolNumber());
 				} else if (OrderHour >= 1000) {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-"
+							+ school.getSchoolNumber());
 				} else {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000"
+							+ school.getSchoolNumber());
 				}
-				OrderHour += 1;
+				schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"),
+						school.getSchoolNumber() + 1);
 				order.setPaymentmethodId(paymentmethodId);
 				order.setIdentification(0);
 				if (orderService.addOrder(order) == 1) {
@@ -2227,6 +2261,8 @@ public class HighesController {
 	 * @param remarks3
 	 * @param paymentmethodId
 	 * @param giftId
+	 * @param entertainTeacher
+	 * @param consultationTeacher
 	 * @param giftNumber
 	 * @param integral
 	 * @param hour
@@ -2242,13 +2278,19 @@ public class HighesController {
 			@RequestParam Integer giftNumber, @RequestParam Double integral, @RequestParam Integer hour,
 			@RequestParam String date, @RequestParam Double discount, @RequestParam String feecateMoney,
 			@RequestParam String feecateMoneyYiKao, @RequestParam String startTimes, @RequestParam Integer activityId,
-			@RequestParam Double serviceCharge) {
+			@RequestParam Double serviceCharge, @RequestParam String professionalTeacher,
+			@RequestParam String headmaster, @RequestParam String entertainTeacher,
+			@RequestParam String consultationTeacher) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		student.setIntegral(0.0);
 		student.setFeeCategory(1);
 		student.setUsedIntegral(0.0);
 		student.setStartTime(student.getStartTime() + startTimes);
 		student.setStudentHour(0.0);
+		student.setHeadmaster(headmaster);
+		student.setEntertainTeacher(entertainTeacher);
+		student.setConsultationTeacher(consultationTeacher);
+		student.setProfessionalTeacher(professionalTeacher);
 		if (studentService.addStudnetInfo(student) == 1) {
 			Student s = studentService.selectStudentId(student.getStudentName(), student.getStudentBirth(),
 					student.getStudentSex());
@@ -2279,6 +2321,7 @@ public class HighesController {
 				order.setDpMoney(dpMoney);
 				order.setGiftId(giftId);
 				order.setClassId(0);
+				order.setRenew(0);
 				order.setServiceCharge(serviceCharge);
 				order.setIntegral(integral);
 				order.setActivityId(activityId);
@@ -2287,19 +2330,20 @@ public class HighesController {
 				order.setDiscount(discount);
 				School school = schoolService.selectSchoolById((Integer) session.getAttribute("schoolId"));
 				if (OrderHour >= 10) {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-00"
+							+ school.getSchoolNumber());
 				} else if (OrderHour >= 100) {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-0"
+							+ school.getSchoolNumber());
 				} else if (OrderHour >= 1000) {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-"
+							+ school.getSchoolNumber());
 				} else {
-					order.setOrderNumber(
-							school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000" + OrderHour);
+					order.setOrderNumber(school.getSchoolNameSx() + "(" + school.getSchoolName() + ")-" + date + "-000"
+							+ school.getSchoolNumber());
 				}
-				OrderHour += 1;
+				schoolService.updateSchoolNumber((Integer) session.getAttribute("schoolId"),
+						school.getSchoolNumber() + 1);
 				order.setPaymentmethodId(paymentmethodId);
 				order.setIdentification(0);
 				if (orderService.addOrder(order) == 1) {

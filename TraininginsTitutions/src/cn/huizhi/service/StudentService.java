@@ -129,4 +129,5 @@ public interface StudentService {
 	 * @return
 	 */
 	public List<Student> selectByClassIdStudent(Integer schoolId,Integer classId,String studentName);
+	
 }
