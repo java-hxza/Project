@@ -182,6 +182,8 @@
 												<button type="button" class="btn btn-success btn-sm mt-2"
 													onclick="createSchool()">创建学校</button>
 												<button type="button" class="btn btn-success btn-sm mt-2"
+													onclick="createSchool()">删除学校</button>
+												<button type="button" class="btn btn-success btn-sm mt-2"
 													onclick="query()">查询</button>
 											</div>
 											<div class="col-sm-8">

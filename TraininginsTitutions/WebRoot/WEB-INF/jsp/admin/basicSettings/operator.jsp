@@ -84,6 +84,22 @@
 
 							<!-- end row -->
 
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="text-center">
+										<h3 class="">管理学校及城市</h3>
+										<p class="text-muted mt-3">需要先添加 省份--->城市--->学校--->创建账号 步骤</p>
+
+										<button type="button" class="btn btn-success btn-sm mt-2"
+											onclick="createUser()">添加学校操作员</button>
+										<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+											onclick="updateUser()">修改操作员</button>
+										<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+											onclick="delUser()">删除操作员</button>
+									</div>
+								</div>
+								<!-- end col -->
+							</div>
 							<!-- end row -->
 							<!-- Question/Answer -->
 							<div class="table-responsive">
