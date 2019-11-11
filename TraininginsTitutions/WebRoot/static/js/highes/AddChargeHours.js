@@ -152,6 +152,13 @@ $(function() {
 			alert("请选择学生！");
 			return flase;
 		}
+		if ($(".money").val() == "") {
+			alert("请填写应收金额！");
+			return false;
+		} else if (parseFloat($(".money").val()) < 1) {
+			alert("请填写正确的应收金额！");
+			return false;
+		}
 		if (dpMoney == "") {
 			alert("请填写实收金额！");
 			return false;
