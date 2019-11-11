@@ -7,6 +7,7 @@
 <head>
 <meta charset="utf-8" />
 <title>Login</title>
+<meta http-equiv=“X-UA-Compatible” content=“chrome=1″ />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta
 	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
@@ -14,7 +15,6 @@
 <meta content="Coderthemes" name="author" />
 <!-- App favicon -->
 <link rel="shortcut icon" href="assets/images/favicon.ico">
-
 <!-- App css -->
 <link href="${Path }/static/css/icons.min.css" rel="stylesheet" type="text/css" />
 <link href="${Path }/static/css/app.min.css" rel="stylesheet" type="text/css" />

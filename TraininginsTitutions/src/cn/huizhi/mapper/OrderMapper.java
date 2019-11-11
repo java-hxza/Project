@@ -227,4 +227,11 @@ public interface OrderMapper {
 	 * @return
 	 */
 	public Order selectOrderTF(Integer studentId);
+	
+	/**
+	 * 查询续费学生
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Order> queryOrderByRenew(@Param("schoolId")Integer schoolId,@Param("classId")Integer classId);
 }

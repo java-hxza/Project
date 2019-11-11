@@ -98,4 +98,13 @@
 		schoolId=#{0}
 	</update>
 
+	<delete id="delSchoolInfo">
+		delete from traininginstitutions.school
+		<where>
+			<if test="schoolId !=null and schoolId!=''">
+				 schoolId = #{schoolId}
+			</if>
+		</where>
+	</delete>
+
 </mapper>

@@ -35,6 +35,7 @@
 				<li><a href="javascript:void(0)" onclick="Incomeitems()">收入项目</a></li>
 				<li><a href="javascript:void(0)" onclick="Expenditureitemses()">支出项目</a></li>
 				<li><a href="javascript:void(0)" onclick="Teacher()">教师信息</a></li>
+				<li><a href="javascript:void(0)" onclick="TeacherType()">教师职业管理</a></li>
 				<c:if test="${schoolType == 1 }">
 					<li><a href="javascript:void(0)"
 						onclick="curriculumClassInfo()">课程信息</a></li>
@@ -118,11 +119,11 @@
 				<li><a href="javascript:void(0)"
 					onclick="selectOrderSchoolInfo()">收支明细报表</a></li>
 				<li><a href="javascript:void(0)" onclick="schoolListInfo()">收支汇总报表</a></li>
-
 				<c:if test="${schoolType == 1 }">
 					<li><a href="javascript:void(0)" onclick="teacherHourSum()">教师课时总表</a></li>
 					<li><a href="javascript:void(0)" onclick="studentHourInfo()">学生课时总表</a></li>
 					<li><a href="javascript:void(0)" onclick="teacherClassHour()">教师上课明细</a></li>
+					<li><a href="javascript:void(0)" onclick="studentRenew()">学生续费报表</a></li>
 				</c:if>
 				<li><a href="javascript:void(0)" onclick="addStudent()">新增学生报表</a></li>
 				<c:if test="${schoolType ==1 }">

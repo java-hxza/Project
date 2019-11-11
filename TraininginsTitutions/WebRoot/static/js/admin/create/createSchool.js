@@ -47,7 +47,7 @@ $(function() {
 					}, 2000);
 				}
 			},
-			error (XMLHttpRequest, textStatus, errorThrown) {
+			error :function(XMLHttpRequest, textStatus, errorThrown) {
 				$.NotificationApp.send("失败！", "创建学校失败请重新创建！。", "top-right", "rgba(0,0,0,0.2)", "success");
 				setTimeout(function() {
 					location.href = "erro.html";

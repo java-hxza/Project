@@ -38,6 +38,7 @@ import cn.huizhi.service.FeeCategoryService;
 import cn.huizhi.service.OrderService;
 import cn.huizhi.service.PaymentMethodService;
 import cn.huizhi.service.ReserveschoolService;
+import cn.huizhi.service.SchoolService;
 import cn.huizhi.service.StudentService;
 import cn.huizhi.service.TeacherService;
 import cn.huizhi.service.UserService;
@@ -74,7 +75,11 @@ public class SchoolController {
 	@Resource
 	TeacherService teacherService;
 
+	@Resource
 	ReserveschoolService reserveschoolService;
+	
+	@Resource
+	SchoolService schoolService;
 
 	@RequestMapping("expenditureOrder.html")
 	@ResponseBody
@@ -718,5 +723,17 @@ public class SchoolController {
 		session.setAttribute("schoolId", schoolId);
 
 		return "admin/highStudentFee/highStudentInfo";
+	}
+	
+	@RequestMapping("delSchoolInfo.html")
+	@ResponseBody
+	public Map<String, String> delSchoolInfo(String schoolId){
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		if(schoolService.delSchoolInfo(schoolId)>0) {
+			jsonMap.put("state","1");
+		}else {
+			jsonMap.put("state","0");
+		}
+		return jsonMap;
 	}
 }

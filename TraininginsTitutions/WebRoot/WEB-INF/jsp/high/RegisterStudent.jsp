@@ -9,6 +9,7 @@
 <head>
 <meta charset="utf-8" />
 <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta
 	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
@@ -436,6 +437,7 @@
 														</div>
 														<div class="col-3">
 															<div class="form-group">
+															<label for="billing-last-name">招生老师</label>
 																<select class="form-control teacherIds"
 																	style="text-align: center; text-align-last: center;"
 																	id="example-select">
@@ -632,6 +634,7 @@
 														</div>
 														<div class="col-3">
 															<div class="form-group">
+															<label for="billing-last-name">招生老师</label>
 																<select class="form-control teacherId2"
 																	style="text-align: center; text-align-last: center;"
 																	id="example-select">

@@ -1350,16 +1350,19 @@
 	</insert>
 
 	<select id="selectOrderTF" resultMap="selectOrderTFs">
-		SELECT o.feecateMoney,o.feecateId
-		ofi,g.chargeTypeName gc,o.orderId ooi,o.addhour,o.givehour,s.studentHour
+		SELECT
+		o.feecateMoney,o.feecateId
+		ofi,g.chargeTypeName gc,o.orderId
+		ooi,o.addhour,o.givehour,s.studentHour
 		FROM `order` o
-		JOIN student s ON o.stuId=s.studentId
+		JOIN student s ON
+		o.stuId=s.studentId
 		JOIN feecategory g ON o.feecateId=g.chargeTypeId
-		where o.stuId=#{0}  AND o.identification != 3
+		where o.stuId=#{0} AND o.identification != 3
 		ORDER BY o.orderId DESC
 		LIMIT 0,1
 	</select>
-	
+
 	<resultMap type="Order" id="selectOrderTFs">
 		<id column="ooi" property="orderId" />
 		<result column="o.feecateMoney" property="feecateMoney" />
@@ -1373,6 +1376,20 @@
 			<result column="s.studentHour" property="studentHour" />
 		</collection>
 	</resultMap>
+	
+	<select id="queryOrderByRenew" resultMap="selectOrderListBySchoolMap">
 
+		select <include refid="selectOrderListBySchoolCol"/>
+		from traininginstitutions.order o,student stu,paymentmethod p
+		<where>
+			 stu.studentId = o.stuId and p.paymentmethodId = o.paymentmethodId and  o.renew = 1 
+			<if test="schoolId != null and schoolId !=''">
+				and o.schoolId = #{schoolId}
+			</if>
+			<if test="classId != null and classId !=''">
+				and o.classId = #{classId}
+			</if>
+		</where> 
+	</select>
 </mapper>   
 

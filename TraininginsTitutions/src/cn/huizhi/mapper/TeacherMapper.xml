@@ -129,9 +129,6 @@
 			<if test="schoolId !=null and schoolId!=''">
 				sc.schoolId = #{schoolId }
 			</if>
-			<if test="teacherTypeId !=null and teacherTypeId !=''">
-				and t.teacherTypeId = #{teacherTypeId }
-			</if>
 		</where>
 
 	</select>

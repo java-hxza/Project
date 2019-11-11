@@ -24,5 +24,17 @@ public class TeacherTypeServiceImpl implements TeacherTypeService{
 		return teacherTypeMapper.selectTeacherType();
 	}
 
+	@Override
+	public Integer insertTeacherType(String teacherTypeName) {
+		// TODO Auto-generated method stub
+		return teacherTypeMapper.insertTeacherType(teacherTypeName);
+	}
+
+	@Override
+	public Integer delTeacherType(String teacherTypeId) {
+		// TODO Auto-generated method stub
+		return teacherTypeMapper.delTeacherType(teacherTypeId);
+	}
+
 	
 }
