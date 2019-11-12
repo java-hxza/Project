@@ -51,6 +51,9 @@ $(function() {
 //			}
 		}
 		var classIds = $(".classes option:selected").val();
+		if(classIds == undefined) {
+			classIds = 0;
+		}
 		$.ajax({
 			type : "POST",
 			url : "selectClassStudent.html",

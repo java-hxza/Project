@@ -512,21 +512,21 @@ public class HighesController {
 		}
 		order.setPaymentmethodId(paymentmethodId);
 		if (orderService.addOrder(order) == 1) {
-				if (studentService.updateStudentOrderHour(addhour + givehour, stuId, integral) == 1) {
-					if (giftNumber != null) {
-						if (giftService.updateGift(-giftNumber, giftId) == 1) {
-							map.put("add", "1");
-						} else {
-							map.put("add", "0");
-							return JSONArray.toJSONString(map);
-						}
-					} else {
+			if (studentService.updateStudentOrderHour(addhour + givehour, stuId, integral) == 1) {
+				if (giftNumber != null) {
+					if (giftService.updateGift(-giftNumber, giftId) == 1) {
 						map.put("add", "1");
+					} else {
+						map.put("add", "0");
+						return JSONArray.toJSONString(map);
 					}
 				} else {
-					map.put("add", "0");
-					return JSONArray.toJSONString(map);
+					map.put("add", "1");
 				}
+			} else {
+				map.put("add", "0");
+				return JSONArray.toJSONString(map);
+			}
 		} else {
 			map.put("add", "0");
 		}
@@ -637,21 +637,21 @@ public class HighesController {
 		order.setPaymentmethodId(paymentmethodId);
 		order.setIdentification(0);
 		if (orderService.addOrder(order) == 1) {
-				if (studentService.updateStudentOrderHour(hour, stuId, integral) == 1) {
-					if (giftNumber != 0) {
-						if (giftService.updateGift(-giftNumber, giftId) == 1) {
-							map.put("add", "1");
-						} else {
-							map.put("add", "0");
-							return JSONArray.toJSONString(map);
-						}
-					} else {
+			if (studentService.updateStudentOrderHour(hour, stuId, integral) == 1) {
+				if (giftNumber != 0) {
+					if (giftService.updateGift(-giftNumber, giftId) == 1) {
 						map.put("add", "1");
+					} else {
+						map.put("add", "0");
+						return JSONArray.toJSONString(map);
 					}
 				} else {
-					map.put("add", "0");
-					return JSONArray.toJSONString(map);
+					map.put("add", "1");
 				}
+			} else {
+				map.put("add", "0");
+				return JSONArray.toJSONString(map);
+			}
 		} else {
 			map.put("add", "0");
 		}
@@ -1528,20 +1528,26 @@ public class HighesController {
 			if (schoolType == 1) {
 				List<Student> high = studentService.selectStudentClass("childrenesclassstudnet",
 						classes.get(0).getClassId(), 2);
-				Order order = orderService.selectOrderTF(high.get(0).getStudentId());
-				model.addAttribute("order", order);
+				if (high.size() > 0) {
+					Order order = orderService.selectOrderTF(high.get(0).getStudentId());
+					model.addAttribute("order", order);
+				}
 				model.addAttribute("high", high);
 			} else if (schoolType == 2) {
 				List<Student> high = studentService.selectStudentClass("highesclassstudnet",
 						classes.get(0).getClassId(), 2);
-				Order order = orderService.selectOrderTF(high.get(0).getStudentId());
-				model.addAttribute("order", order);
+				if (high.size() > 0) {
+					Order order = orderService.selectOrderTF(high.get(0).getStudentId());
+					model.addAttribute("order", order);
+				}
 				model.addAttribute("high", high);
 			} else if (schoolType == 3) {
 				List<Student> high = studentService.selectStudentClass("artclassstudnet", classes.get(0).getClassId(),
 						2);
-				Order order = orderService.selectOrderTF(high.get(0).getStudentId());
-				model.addAttribute("order", order);
+				if (high.size() > 0) {
+					Order order = orderService.selectOrderTF(high.get(0).getStudentId());
+					model.addAttribute("order", order);
+				}
 				model.addAttribute("high", high);
 			}
 		}
@@ -1895,7 +1901,8 @@ public class HighesController {
 			@RequestParam String date, @RequestParam Double integral, @RequestParam Integer giftId,
 			@RequestParam Integer giftNumber, @RequestParam Integer teacherId, @RequestParam Double discount,
 			@RequestParam Integer activityId, @RequestParam String schoolTime, @RequestParam Double serviceCharge,
-			@RequestParam String entertainTeacher, @RequestParam String consultationTeacher,@RequestParam String headmasters) {
+			@RequestParam String entertainTeacher, @RequestParam String consultationTeacher,
+			@RequestParam String headmasters) {
 		ChildrenesClassStudnet childrenesClassStudnet = new ChildrenesClassStudnet();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		student.setIntegral(0.0);
@@ -2026,7 +2033,7 @@ public class HighesController {
 			@RequestParam Integer hour, @RequestParam String date, @RequestParam Double discount,
 			@RequestParam String startTimes, @RequestParam String feecateMoney, @RequestParam Integer activityId,
 			@RequestParam String schoolTime, @RequestParam Double serviceCharge, @RequestParam String entertainTeacher,
-			@RequestParam String consultationTeacher,@RequestParam String headmasters) {
+			@RequestParam String consultationTeacher, @RequestParam String headmasters) {
 		ChildrenesClassStudnet childrenesClassStudnet = new ChildrenesClassStudnet();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		student.setIntegral(0.0);
@@ -2156,7 +2163,7 @@ public class HighesController {
 			@RequestParam Integer paymentmethodId, @RequestParam Integer hour, @RequestParam String startTimes,
 			@RequestParam String date, @RequestParam Double discount, @RequestParam String feecateMoney,
 			@RequestParam Double serviceCharge, @RequestParam String entertainTeacher,
-			@RequestParam String consultationTeacher,@RequestParam String headmasters) {
+			@RequestParam String consultationTeacher, @RequestParam String headmasters) {
 		ChildrenesClassStudnet childrenesClassStudnet = new ChildrenesClassStudnet();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		student.setIntegral(0.0);
