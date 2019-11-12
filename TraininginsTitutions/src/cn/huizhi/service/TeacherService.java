@@ -55,7 +55,7 @@ public interface TeacherService {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<Teacher> findTeachersByTeacherTypeId(Integer teacherTypeId,Integer schoolId);
+	public List<Teacher> findTeachersByTeacherTypeId(Integer schoolId);
 	
 	
 	

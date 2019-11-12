@@ -5,7 +5,33 @@
 <mapper namespace="cn.huizhi.mapper.TeacherTypeMapper">
 
 	<select id="selectTeacherType" resultType="TeacherType">
-		SELECT * FROM teachertype
+		SELECT teacherTypeId,teacherTypeName FROM
+		teachertype
 	</select>
-	
+
+	<!-- 添加教师职业 -->
+	<insert id="insertTeacherType">
+
+		insert into traininginstitutions.teachertype
+		(
+		teacherTypeName
+		)
+		values
+		(
+		#{teacherTypeName}
+		)
+
+	</insert>
+
+	<delete id="delTeacherType">
+
+		delete from traininginstitutions.teachertype
+		<where>
+			<if test="teacherTypeId !=null and teacherTypeId != ''">
+
+				teacherTypeId = #{teacherTypeId}
+			</if>
+		</where>
+
+	</delete>
 </mapper>

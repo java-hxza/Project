@@ -53,7 +53,7 @@ public interface TeacherMapper {
 	 * @param schoolId
 	 * @return
 	 */
-	public List<Teacher> selecTeachersByTeacherTypeId(@Param("teacherTypeId")Integer teacherTypeId,@Param("schoolId")Integer schoolId);
+	public List<Teacher> selecTeachersByTeacherTypeId(@Param("schoolId")Integer schoolId);
 	
 	/**
 	 * 教师登录

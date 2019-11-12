@@ -28,6 +28,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 
+import cn.huizhi.mapper.TeacherTypeMapper;
 import cn.huizhi.pojo.ArtClassStudnet;
 import cn.huizhi.pojo.ArtStuRegistration;
 import cn.huizhi.pojo.ChildStuReistration;
@@ -48,6 +49,7 @@ import cn.huizhi.pojo.StudentLeave;
 import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.TeacherDiction;
 import cn.huizhi.pojo.TeacherHour;
+import cn.huizhi.pojo.TeacherType;
 import cn.huizhi.pojo.User;
 import cn.huizhi.pojo.UserDiction;
 import cn.huizhi.service.ArtClassStudnetService;
@@ -69,6 +71,7 @@ import cn.huizhi.service.StudentService;
 import cn.huizhi.service.TeacherDictionService;
 import cn.huizhi.service.TeacherHourService;
 import cn.huizhi.service.TeacherService;
+import cn.huizhi.service.TeacherTypeService;
 import cn.huizhi.service.UserDictionService;
 import cn.huizhi.service.UserService;
 import cn.huizhi.util.DataBaseUtils;
@@ -95,6 +98,7 @@ public class RootSchoolController {
 
 	@Resource
 	ClassService classService;
+
 	@Resource
 	ExpenditureitemsService expenditureitemsService;
 
@@ -139,6 +143,9 @@ public class RootSchoolController {
 
 	@Resource
 	StudentLeaveService studentLeaveService;
+	
+	@Resource
+	TeacherTypeService teacherTypeService;
 
 	@RequestMapping("index.html")
 	public String indexHtml(HttpSession session) {
@@ -162,7 +169,7 @@ public class RootSchoolController {
 			List<TeacherDiction> userListDiction = (List<TeacherDiction>) session.getAttribute("schoolListByUId");
 			Integer schoolId = userListDiction.get(0).getSchoolId();
 			session.setAttribute("schoolId", schoolId);
-			
+
 			School school = schoolService.selectSchoolById(schoolId);
 
 			session.setAttribute("schoolName", school.getSchoolName());
@@ -276,8 +283,7 @@ public class RootSchoolController {
 
 		BigDecimal bc = new BigDecimal(schoolFeeceat);
 		bc = bc.setScale(2, BigDecimal.ROUND_HALF_UP);
-		
-		
+
 		session.setAttribute("serviceCharge", serviceCharge);
 		session.setAttribute("schoolExPenSum", bd);
 		session.setAttribute("schoolFeeceat", bc);
@@ -287,7 +293,7 @@ public class RootSchoolController {
 		session.setAttribute("smList", smList);
 		session.setAttribute("schoolFeeCategories", schoolFeeCategories);
 		return "root/school/schoolInfo";
-		
+
 	}
 
 	@RequestMapping("schoolExpen.html")
@@ -1048,8 +1054,7 @@ public class RootSchoolController {
 			ChildrenesClassStudnet cStudnet = new ChildrenesClassStudnet();
 			cStudnet.setStudentId(order.getStuId());
 			cStudnet.setState("2");
-			if (orderService.addOrder(order) > 0
-					&& childrenesClassStudnetService.updateChildrenStudentState(cStudnet) > 0) {
+			if (childrenesClassStudnetService.updateChildrenStudentState(cStudnet) > 0) {
 				jsonMap.put("state", "1");
 			} else {
 				jsonMap.put("state", "0");
@@ -1060,8 +1065,7 @@ public class RootSchoolController {
 			HighesClassStudnet highesClassStudnet = new HighesClassStudnet();
 			highesClassStudnet.setClassesStudentId(order.getStuId());
 			highesClassStudnet.setState(2);
-			if (orderService.addOrder(order) > 0
-					&& highesClassStudnetService.updateHighStudentState(highesClassStudnet) > 0) {
+			if (highesClassStudnetService.updateHighStudentState(highesClassStudnet) > 0) {
 				jsonMap.put("state", "1");
 			} else {
 				jsonMap.put("state", "0");
@@ -1071,7 +1075,7 @@ public class RootSchoolController {
 			ArtClassStudnet artClassStudnet = new ArtClassStudnet();
 			artClassStudnet.setClassesStudentId(order.getStuId());
 			artClassStudnet.setState(2);
-			if (orderService.addOrder(order) > 0 && artClassStudnetService.updateArtStudentState(artClassStudnet) > 0) {
+			if (artClassStudnetService.updateArtStudentState(artClassStudnet) > 0) {
 				jsonMap.put("state", "1");
 			} else {
 				jsonMap.put("state", "0");
@@ -1503,6 +1507,24 @@ public class RootSchoolController {
 		return "root/studentInfo/studentFeeSituation";
 	}
 
+	@RequestMapping("studentRenew.html")
+	public String studentRenew(HttpSession session) {
+		Integer schoolId = (Integer) session.getAttribute("schoolId");
+		School school = schoolService.selectSchoolById(schoolId);
+
+		List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
+
+		session.setAttribute("classList", classList);
+
+		List<Order> renewOrderList = orderService.queryOrderByRenew(schoolId, null);
+
+		session.setAttribute("schoolName", school.getSchoolName());
+
+		session.setAttribute("renewOrderList", renewOrderList);
+
+		return "root/studentInfo/studentRenew";
+	}
+
 	/**
 	 * 返回学院收费情况报表
 	 * 
@@ -1771,11 +1793,11 @@ public class RootSchoolController {
 				feeMoneyArray.add(feeMoney);
 			}
 			if (student.getOrder().getFeecateMoneyYiKao() != null && student.getOrder().getFeecateMoneyYiKao() != "") {
-				if(student.getOrder().getFeecateMoneyYiKao() == null) {
+				if (student.getOrder().getFeecateMoneyYiKao() == null) {
 					student.getOrder().setFeecateMoneyYiKao("0,0,0");
 				}
 				feeYiKao = student.getOrder().getFeecateMoneyYiKao().split(",");
-				
+
 				feecateMoneyYiKaoList.add(feeYiKao);
 			}
 
@@ -1846,7 +1868,7 @@ public class RootSchoolController {
 				feeMoneyArray.add(feeMoney);
 			}
 			if (student.getOrder().getFeecateMoneyYiKao() != null && student.getOrder().getFeecateMoneyYiKao() != "") {
-				if(student.getOrder().getFeecateMoneyYiKao() == null) {
+				if (student.getOrder().getFeecateMoneyYiKao() == null) {
 					student.getOrder().setFeecateMoneyYiKao("0,0,0");
 				}
 				feeYiKao = student.getOrder().getFeecateMoneyYiKao().split(",");
@@ -1878,6 +1900,7 @@ public class RootSchoolController {
 
 	/**
 	 * 跳转学生请假页面
+	 * 
 	 * @param session
 	 * @return
 	 */
@@ -2162,8 +2185,8 @@ public class RootSchoolController {
 		session.setAttribute("studentList", studentList);
 
 		return "root/studentInfo/studentGraduation";
-
 	}
+
 	/**
 	 * 操作员授权
 	 * 
@@ -2178,17 +2201,68 @@ public class RootSchoolController {
 		session.setAttribute("dictionListByUId", dictionListByUId);
 		return "root/basicSettings/operatorRootAuthorization";
 	}
-	
+
 	@RequestMapping("quanxiansave.html")
 	@ResponseBody
-	public Map<String,String> quanxiansave(Integer state,Integer addState,Integer teacherId){
+	public Map<String, String> quanxiansave(Integer state, Integer addState, Integer teacherId) {
 		Map<String, String> jsonMap = new HashMap<String, String>();
-		if(teacherService.updateTeacherQuanXian(state, addState, teacherId)>0) {
-			jsonMap.put("state","1");
-		}else {
-			jsonMap.put("state","0");
+		if (teacherService.updateTeacherQuanXian(state, addState, teacherId) > 0) {
+			jsonMap.put("state", "1");
+		} else {
+			jsonMap.put("state", "0");
 		}
+
+		return jsonMap;
+	}
+
+	/**
+	 * 返回教师职业
+	 * 
+	 * @return
+	 */
+	@RequestMapping("profession.html")
+	public String profession(HttpSession session) {
+		List<TeacherType> teacherTypeList = teacherTypeService.selectTeacherType();
 		
+		session.setAttribute("teacherTypeList", teacherTypeList);
+
+		return "root/teacher/profession";
+	}
+
+	/**
+	 * 添加教师职业页面
+	 * 
+	 * @param teacherTypeName
+	 * @return
+	 */
+	@RequestMapping("addTeacherTypes.html")
+	@ResponseBody
+	public Map<String, String> addTeacherTypes(String teacherTypeName) {
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		if (teacherTypeService.insertTeacherType(teacherTypeName) > 0) {
+			jsonMap.put("state", "1");
+		} else {
+			jsonMap.put("state", "0");
+		}
+
+		return jsonMap;
+	}
+
+	/**
+	 * 删除教师职业
+	 * 
+	 * @param teacherTypeId
+	 * @return
+	 */
+	@RequestMapping("delTeacherTypes.html")
+	@ResponseBody
+	public Map<String, String> delTeacherTypes(String teacherTypeId) {
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		if (teacherTypeService.delTeacherType(teacherTypeId) > 0) {
+			jsonMap.put("state", "1");
+		} else {
+			jsonMap.put("state", "0");
+		}
 		return jsonMap;
 	}
 }

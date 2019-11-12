@@ -41,5 +41,11 @@ public class SchoolServiceImpl implements SchoolService {
 		return schoolMapper.updateSchoolNumber(schoolId, schoolNumber);
 	}
 
+	@Override
+	public Integer delSchoolInfo(String schoolId) {
+		// TODO Auto-generated method stub
+		return schoolMapper.delSchoolInfo(schoolId);
+	}
+
 	
 }

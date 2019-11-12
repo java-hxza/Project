@@ -16,7 +16,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 
-  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<script
+	src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <!-- App favicon -->
 <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -27,7 +28,7 @@
 	type="text/css" />
 <link href="${Path }/static/css/style.css" rel="stylesheet"
 	type="text/css" />
-
+<meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1">
 </head>
 <!--[if lt IE9]>
 	<script>
@@ -102,18 +103,6 @@
 								<button class="button-menu-mobile open-left disable-btn">
 									<i class="mdi mdi-menu"></i>
 								</button>
-								<div class="app-search">
-									<form>
-										<div class="input-group">
-											<input type="text" class="form-control"
-												placeholder="Search..."> <span
-												class="mdi mdi-magnify"></span>
-											<div class="input-group-append">
-												<button class="btn btn-primary" type="submit">Search</button>
-											</div>
-										</div>
-									</form>
-								</div>
 							</div>
 							<!-- end Topbar -->
 							<!-- start page title -->
@@ -181,11 +170,16 @@
 											<div class="col-sm-4">
 												<button type="button" class="btn btn-success btn-sm mt-2"
 													onclick="createSchool()">创建学校</button>
+												
 												<button type="button" class="btn btn-success btn-sm mt-2"
 													onclick="query()">查询</button>
+												<button type="button" class="btn btn-success btn-sm mt-2"
+													onclick="querySchool()">查看学校账户详情</button>
 											</div>
 											<div class="col-sm-8">
 												<div class="text-sm-right">
+												<button type="button" class="btn btn-success btn-sm mt-2"
+													onclick="delSchool()">删除学校</button>
 													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
 														onclick="createUser()">创建账号</button>
 													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
@@ -236,8 +230,10 @@
 														<tr class="schoolId">
 															<td>
 																<div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input">
-																	<label class="custom-control-label" for="customCheck2">&nbsp;</label>
+																	<input type="checkbox"
+																		class="custom-control-input customCheckes"> <label
+																		class="custom-control-label customCheck"
+																		for="customCheck2">&nbsp;</label>
 																</div>
 															</td>
 															<td class="table-user"><a href="javascript:void(0);"
@@ -265,14 +261,14 @@
 																class="text-body font-weight-semibold">${school.schoolFeeceat - school.schoolExPenSum}</a>
 															</td>
 															<td class="table-user"><a href="javascript:void(0);"
-																class="text-body font-weight-semibold">${serviceCharge}</a>
+																class="text-body font-weight-semibold">${school.serviceCharge}</a>
 															</td>
 															<td class="table-user"><a href="javascript:void(0);"
 																class="text-body font-weight-semibold"> <c:forEach
 																		items="${smList }" var="sm">
 																		<c:if test="${sm.schoolId == school.schoolId }">
 																	${sm.feeName } : ${sm.sumMoney }</a> </c:if>
-															</c:forEach>
+													</c:forEach>
 													</td>
 													</tr>
 													</c:forEach>

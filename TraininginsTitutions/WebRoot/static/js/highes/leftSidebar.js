@@ -1,4 +1,7 @@
 $(function() {
+	var addState = $("#addState").html();
+	var state = $("#state").html();
+	var loginType = $("#loginType").html();
 	/**
 	 * 跳转学校账户余额
 	 */
@@ -23,33 +26,47 @@ $(function() {
 	 * 跳转学生课时
 	 */
 	studentHour = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+
+		}
 		location.href = "classSchoolInfo.html";
 	}
-	
+
 	/**
 	 * 新增学员表
 	 */
 	addStudent = function() {
 		var startTime = formatTime(new Date(), 'Y-M-D h:m:s');
 		var endTime = formatTime(new Date(), 'Y-M-D h:m:s');
-		location.href = "schoolAddStudentInfo.html?startTime="+startTime+"&endTime="+endTime;
-		
-		
+		location.href = "schoolAddStudentInfo.html?startTime=" + startTime + "&endTime=" + endTime;
+
+
 	}
 	/**
 	 * 教师上课明细
 	 */
-	teacherClassHour = function(){
+	teacherClassHour = function() {
 		location.href = "teacherClassInfo.html";
 	}
-	
-	feeSituation = function(){
+
+	feeSituation = function() {
 		location.href = "feeSituation.html";
 	}
 	/**
 	 * 跳转班级课程页面
 	 */
 	curriculumClassInfo = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+
+		}
 		location.href = "curriculumClassInfo.html";
 	}
 	/**
@@ -63,6 +80,13 @@ $(function() {
 	 * 跳转班级科别管理
 	 */
 	classTypeInfo = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+
+		}
 		location.href = "classTypeInfo.html";
 	}
 
@@ -70,11 +94,25 @@ $(function() {
 	 * 返回操作员信息
 	 */
 	operatorChilk = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+
+		}
 		location.href = "schoolOperatorChilk.html";
 	}
 
 
 	rootTeacherInto = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有添加权限");
+				return false;
+			}
+
+		}
 		location.href = "rootOperatorAuthorize.html";
 	}
 
@@ -110,19 +148,26 @@ $(function() {
 	teacherHourSum = function() {
 		location.href = "teacherHourSum.html";
 	}
-	
+
 	/**
 	 * 跳转学生课时页面
 	 */
 	studentHourInfo = function() {
 		location.href = "classStudentHourInfo.html";
 	}
-	
-	
+
+
 	/**
 	 * 跳转到教师信息的页面
 	 */
 	Teacher = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+
+		}
 		location.href = "Teacher.html";
 	}
 	ChargeHours = function() {
@@ -158,7 +203,7 @@ $(function() {
 	RecruitStudents = function() {
 		location.href = "RecruitStudents.html";
 	};
-	
+
 	classTypes = function() {
 		location.href = "selectClassTypes.html";
 	};
@@ -182,74 +227,88 @@ $(function() {
 			$(this).prev().prop("checked", true);
 		}
 	});
-	
+
 	// 格式化日期，如月、日、时、分、秒保证为2位数
-	function formatNumber (n) {
-	    n = n.toString()
-	    return n[1] ? n : '0' + n;
+	function formatNumber(n) {
+		n = n.toString()
+		return n[1] ? n : '0' + n;
 	}
 	// 参数number为毫秒时间戳，format为需要转换成的日期格式
-	function formatTime (number, format) {
-	    let time = new Date(number)
-	    let newArr = []
-	    let formatArr = ['Y', 'M', 'D', 'h', 'm', 's']
-	    newArr.push(time.getFullYear())
-	    newArr.push(formatNumber(time.getMonth() + 1))
-	    newArr.push(formatNumber(time.getDate()))
+	function formatTime(number, format) {
+		let time = new Date(number)
+		let newArr = []
+		let formatArr = [ 'Y', 'M', 'D', 'h', 'm', 's' ]
+		newArr.push(time.getFullYear())
+		newArr.push(formatNumber(time.getMonth() + 1))
+		newArr.push(formatNumber(time.getDate()))
 
-	    newArr.push(formatNumber(time.getHours()))
-	    newArr.push(formatNumber(time.getMinutes()))
-	    newArr.push(formatNumber(time.getSeconds()))
+		newArr.push(formatNumber(time.getHours()))
+		newArr.push(formatNumber(time.getMinutes()))
+		newArr.push(formatNumber(time.getSeconds()))
 
-	    for (let i in newArr) {
-	        format = format.replace(formatArr[i], newArr[i])
-	    }
-	    return format;
+		for (let i in newArr) {
+			format = format.replace(formatArr[i], newArr[i])
+		}
+		return format;
 	}
-	
+
 	/**
 	 * 高中收费情况报表
 	 */
-	highFeeSituation = function(){
+	highFeeSituation = function() {
 		location.href = "highFeeSituation.html";
 	}
-	
+
 	/**
 	 *艺考收费报表 
 	 */
-	artFeeSituation = function(){
+	artFeeSituation = function() {
 		location.href = "rootArtStudentFooInfo.html";
 	}
-	
+
 	/**
 	 * 学院退学
 	 */
-	studentLeave = function(){
+	studentLeave = function() {
 		location.href = "studentLeave.html";
+	}
+	/**
+	 *学院续费报表 
+	 */
+	studentRenew = function() {
+		location.href = "studentRenew.html";
+	}
+	
+	/**
+	 * 教师职业信息页面
+	 */
+	TeacherType = function(){
+		location.href = "profession.html";
 	}
 	
 	/**
 	 * 学员结业
 	 */
-	studentGraduation = function(){
+	studentGraduation = function() {
 		location.href = "studentGraduation.html";
 	}
-	
-	$('input[type="date"]').change(function(){
-	 	var myDate = new Date();  //获取当前时间对象，精确到当前的时、分、秒
-	 	
-	 	var this_time=$('input[name="time"]').val();//获取用户选择后的时间值
-	 
-	 	var this_datetime=new Date(this_time);//获取用户选择的时间，生成时间对象  具体时间为时间8:00:00
-	 	var year = myDate.getFullYear();	//获取当前时间的年份 格式xxxx 如：2016
-	 	var month =myDate.getMonth()+1;		//获取当前时间的月份 格式1-9月为x， 10-12月为xx 如：11
-	 	var date = myDate.getDate();		//获取当前时间的日期 格式同月份 如11
-	 	 myDate=new Date(year+'-'+month+'-'+date);	//获取根据上述时间生成的时间对象 具体时间为0:00:00 	
-	 	var now=new Date(year+'-'+month+'-'+date+' 8:00:00'); 
-	 	myDate.setDate(now.getDate()-7); //设置now对象相应日期的七天前日期 具体时间为0:00:00
-	 	if(this_datetime<myDate||this_datetime>now){	//时间对象可以直接比较大小
-	 		alert('拜访时间需选择今天及以前7天内的时间');
-	 		$('input[name="time"]').val('');	
-	 	};
-	 });
+
+	$('input[type="date"]').change(function() {
+		var myDate = new Date(); //获取当前时间对象，精确到当前的时、分、秒
+
+		var this_time = $('input[name="time"]').val(); //获取用户选择后的时间值
+
+		var this_datetime = new Date(this_time); //获取用户选择的时间，生成时间对象  具体时间为时间8:00:00
+		var year = myDate.getFullYear(); //获取当前时间的年份 格式xxxx 如：2016
+		var month = myDate.getMonth() + 1; //获取当前时间的月份 格式1-9月为x， 10-12月为xx 如：11
+		var date = myDate.getDate(); //获取当前时间的日期 格式同月份 如11
+		myDate = new Date(year + '-' + month + '-' + date); //获取根据上述时间生成的时间对象 具体时间为0:00:00 	
+		var now = new Date(year + '-' + month + '-' + date + ' 8:00:00');
+		myDate.setDate(now.getDate() - 7); //设置now对象相应日期的七天前日期 具体时间为0:00:00
+		if (this_datetime < myDate || this_datetime > now) { //时间对象可以直接比较大小
+			alert('拜访时间需选择今天及以前7天内的时间');
+			$('input[name="time"]').val('');
+		}
+		;
+	});
 });

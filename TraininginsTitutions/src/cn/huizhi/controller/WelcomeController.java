@@ -91,7 +91,7 @@ public class WelcomeController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping({ "/", "welCome.html" })
+	@RequestMapping({ "/", "welCome.html" ,"/login"})
 	public String welcome(HttpSession session) {
 		/**
 		 * 第一次进入查询城市及省份
@@ -194,7 +194,7 @@ public class WelcomeController {
 					if (order2.getServiceCharge() == null) {
 						continue;
 					}
-					serviceCharge += order2.getServiceCharge();
+					school.setServiceCharge(serviceCharge += order2.getServiceCharge());
 				}
 			}
 
@@ -205,7 +205,6 @@ public class WelcomeController {
 				}
 			}
 		}
-		session.setAttribute("serviceCharge", serviceCharge);
 		session.setAttribute("smList", smList);
 		session.setAttribute("schoolListAll", schoolListAll);
 		return "admin/adminIndex";

@@ -126,10 +126,10 @@
 														<div class="row">
 															<div class="col-md-6">
 																<div class="form-group">
-																	<label for="billing-first-name">名字</label> <input
+																	<label for="billing-first-name" name="${studentId }"
+																		id="studentId">名字</label> <input
 																		class="form-control" type="text"
-																		value="${studentName}" name="${studentId }"
-																		id="studentId" />
+																		value="${studentName}"  />
 																</div>
 															</div>
 															<div class="col-md-6">

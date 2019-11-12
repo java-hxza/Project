@@ -66,11 +66,11 @@
 		</div>
 	</div>
 	<!-- /container -->
+	<script src="${Path }/static/js/jquery.min.js"></script>
 	<script src="${Path }/static/js/login/TweenLite.min.js"></script>
 	<script src="${Path }/static/js/login/EasePack.min.js"></script>
 	<script src="${Path }/static/js/login/rAF.js"></script>
 	<script src="${Path }/static/js/login/demo-1.js"></script>
-	<script src="${Path }/static/js/jquery.min.js"></script>
 	<script src="${Path }/static/js/app.min.js"></script>
 	<script src="${Path }/static/js/login.js"></script>
 	

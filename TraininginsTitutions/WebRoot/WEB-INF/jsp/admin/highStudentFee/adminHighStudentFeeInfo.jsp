@@ -8,6 +8,7 @@
 <head>
 <meta charset="utf-8" />
 <title>管理员页面</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta
 	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
@@ -96,24 +97,7 @@
 
 							<!-- end row -->
 
-							<div class="col-12">
-								<div class="card">
-									<div class="card-body">
-										<div class="row mb-2">
-											<div class="col-sm-4">
-												<button type="button" class="btn btn-success btn-sm mt-2"
-													onclick="createSchool()">创建学校</button>
-											</div>
-											<div class="col-sm-8">
-												<div class="text-sm-right">
-													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-														onclick="createUser()">创建账号</button>
-													<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-														onclick="createTeacher()">创建教师账号</button>
-												</div>
-											</div>
-											<!-- end col-->
-										</div>
+							
 
 										<!-- end row -->
 										<!-- Question/Answer -->
@@ -192,6 +176,5 @@
 										src="${Path }/static/js/admin/leftSidebar.js"></script>
 									<script type="text/javascript"
 										src="${Path }/static/js/admin/highStudentFee/adminArtStudentFeeInfo.js"></script>
-										<script src="${Path }/static/js/admin/adminIndex.js"></script>
 </body>
 </html>

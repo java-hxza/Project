@@ -116,6 +116,8 @@ public class LoginController {
 				teacher.setLoginName(teacher.getTeacherName());
 				List<TeacherDiction> schoolListByUId = teacherDictionService.findTeacherDictionListByTeacherId(teacher.getTeacherId());
 				session.setAttribute("loginType", 2);
+				session.setAttribute("state", teacher.getState());
+				session.setAttribute("addState", teacher.getAddState());
 				session.setAttribute("schoolListByUId", schoolListByUId);
 				session.setAttribute("user", teacher);
 				jsonMap.put("state", "1");

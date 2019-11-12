@@ -46,7 +46,7 @@
 	</resultMap>
 	<!--教师登录 -->
 	<select id="selectTeacherByLogin" resultMap="teacherByLogin">
-		select
+		select distinct 
 		<include refid="teacherByLoginCol" />
 		from teacher t, teacherdiction td ,school sc
 
@@ -128,9 +128,6 @@
 		<where>
 			<if test="schoolId !=null and schoolId!=''">
 				sc.schoolId = #{schoolId }
-			</if>
-			<if test="teacherTypeId !=null and teacherTypeId !=''">
-				and t.teacherTypeId = #{teacherTypeId }
 			</if>
 		</where>
 

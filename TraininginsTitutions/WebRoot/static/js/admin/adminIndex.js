@@ -1,45 +1,101 @@
-$(function(){
+$(function() {
 	/**
 	 * 创建学校账号跳转控制层
 	 */
-	createUser = function(){
-		location.href="createUser.html";
+	createUser = function() {
+		location.href = "createUser.html";
 	}
 	/**
 	 * 创建学校跳转控制层
 	 */
-	createSchool = function(){
-		location.href="createSchool.html";
+	createSchool = function() {
+		location.href = "createSchool.html";
 	}
-	
-	$(".schoolId").unbind("click").click(function(){
-		var schoolId = $(this).children().next().children().html();
-		var schoolName = $(this).children().next().next().children().html();
-		location.href="schoolInfo.html?schoolId="+schoolId+"&schoolName="+schoolName;
-	});
-	
+	/**
+	 * 删除学校
+	 */
+	delSchool = function(){
+		if ($(".customCheckes:checked").length < 1) {
+			if (!$(".customCheckes").prop("checked")) {
+				alert("请选中一条数据！");
+				return false;
+			}
+		} else if ($(".customCheckes:checked").length > 1) {
+			if ($(".customCheckes").prop("checked")) {
+				alert("只能选中一条数据！");
+				return false;
+			}
+		}
+		if(confirm("确认删除吗？删除后该学校的学生信息以及账户信息都会清空！！")){
+			
+			var schoolId = $(".customCheckes:checked").parent().parent().next().children().html();
+			
+			$.ajax({
+				url :"delSchoolInfo.html",
+				data : {
+					schoolId : schoolId
+				},
+				dataType : "JSON",
+				post : "post",
+				success: function(data){
+					if(data.state == "1"){
+						alert("删除成功！");
+						location.href="adminIndex.html";
+					}else{
+						alert("删除失败！");
+					}
+				}
+			});
+			
+			
+		}
+
+	}
+	/**
+	 * 查询学校详情
+	 */
+	querySchool = function() {
+		if ($(".customCheckes:checked").length < 1) {
+			if (!$(".customCheckes").prop("checked")) {
+				alert("请选中一条数据！");
+				return false;
+			}
+		} else if ($(".customCheckes:checked").length > 1) {
+			if ($(".customCheckes").prop("checked")) {
+				alert("只能选中一条数据！");
+				return false;
+			}
+		}
+
+		var schoolId = $(".customCheckes:checked").parent().parent().next().children().html();
+		var schoolName =  $(".customCheckes:checked").parent().parent().next().next().children().html();
+		location.href = "schoolInfo.html?schoolId=" + schoolId + "&schoolName=" + schoolName;
+
+	}
+
+
 	/**
 	 * 创建教师
 	 */
-	createTeacher = function(){
-		location.href="creageTeacher.html";
+	createTeacher = function() {
+		location.href = "creageTeacher.html";
 	}
-	
+
 	/**
 	 * 查询
 	 */
-	query = function(){
+	query = function() {
 		var endTime = $("#endTime").val();
 		var startTime = $("#startTime").val();
-		
+
 		var provinceId = $("#provinceId").val();
 		var cityId = $("#cityId").val();
-		
-		location.href = "querySchoolOrderByTime.html?endTime="+endTime+"&startTime="+startTime+"&provinceId="+provinceId+"&cityId="+cityId;
-		
+
+		location.href = "querySchoolOrderByTime.html?endTime=" + endTime + "&startTime=" + startTime + "&provinceId=" + provinceId + "&cityId=" + cityId;
+
 	}
-	
-	
-	
+
+
+
 
 });

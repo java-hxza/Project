@@ -179,7 +179,7 @@ public class ChildrenClassesController {
 	@ResponseBody
 	public String dpChange(Integer dpId, HttpSession session) {
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
-		List<Teacher> teacherUserList = teacherService.findTeachersByTeacherTypeId(null, schoolId);
+		List<Teacher> teacherUserList = teacherService.findTeachersByTeacherTypeId(schoolId);
 		
 		if (teacherUserList.size() > 0) {
 			return JSON.toJSONString(teacherUserList);

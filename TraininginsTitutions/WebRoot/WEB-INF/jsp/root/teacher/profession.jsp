@@ -94,17 +94,6 @@
 						<button class="button-menu-mobile open-left disable-btn">
 							<i class="mdi mdi-menu"></i>
 						</button>
-						<div class="app-search">
-							<form>
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search...">
-									<span class="mdi mdi-magnify"></span>
-									<div class="input-group-append">
-										<button class="btn btn-primary" type="submit">Search</button>
-									</div>
-								</div>
-							</form>
-						</div>
 					</div>
 					<!-- end Topbar -->
 					<!-- start page title -->
@@ -120,7 +109,7 @@
 										<li class="breadcrumb-item active">FAQ</li>
 									</ol>
 								</div>
-								<h4 class="page-title">上课时间</h4>
+								<h4 class="page-title">班级类型</h4>
 							</div>
 						</div>
 					</div>
@@ -135,17 +124,17 @@
 									<div class="row mb-2">
 										<div class="col-sm-4 AN">
 											<a href="javascript:void(0);"
-												class="btn btn-danger mb-2 adds" onclick="addClassTimes()"><i
-												class="mdi mdi-plus-circle mr-2"></i> 添加</a> <a
-												href="javascript:void(0);" class="btn btn-danger mb-2 del"
-												onclick="delClassTimes()"><i
+												class="btn btn-danger mb-2 adds" onclick="addClassTypes()"><i
+												class="mdi mdi-plus-circle mr-2"></i> 添加</a>
+												<a href="javascript:void(0);" class="btn btn-danger mb-2 del"
+												onclick="delClassTypes()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 删除</a>
 										</div>
 
 										<!-- end col-->
 									</div>
 
-									<div class="table-responsive mt-4 classTimes">
+									<div class="table-responsive mt-4 classTypes">
 										<table class="table table-bordered table-centered mb-0">
 											<thead class="thead-light">
 												<tr>
@@ -156,12 +145,12 @@
 																class="custom-control-label" for="customCheck1">&nbsp;</label>
 														</div>
 													</th>
-													<th>序号</th>
-													<th>上课时间</th>
+													<th class="LX">教师职业序号</th>
+													<th>教师职业名称</th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${classTime }" var="c">
+												<c:forEach items="${teacherTypeList }" var="c">
 													<tr>
 														<td>
 															<div class="custom-control custom-checkbox">
@@ -171,21 +160,21 @@
 																	for="customCheck2">&nbsp;</label>
 															</div>
 														</td>
-														<td>${c.classTimeId }</td>
-														<td>${c.classTimeName }</td>
+														<td>${c.teacherTypeId }</td>
+														<td>${c.teacherTypeName }</td>
 													</tr>
 												</c:forEach>
 											</tbody>
 										</table>
 									</div>
-									<div class="col-lg-6 addClassTimes2 " style="display:none;">
+									<div class="col-lg-6 addClassTypes2 " style="display:none;">
 										<div class="card">
 											<div class="card-body">
 												<form class="needs-validation" novalidate>
 													<div class="form-group position-relative mb-3">
-														<label for="validationTooltip01">班级类型名称</label> <input
-															type="text" class="form-control classTimeName"
-															id="validationTooltip01" placeholder="请填写上课时间段" required>
+														<label for="validationTooltip01">教师职业名称</label> <input
+															type="text" class="form-control teacherTypeName"
+															id="validationTooltip01" placeholder="请填写教师职业名称" required>
 													</div>
 													<button class="btn btn-primary add" type="button">提交</button>
 													<button class="btn btn-primary back" type="reset"
@@ -382,7 +371,7 @@
 		<!-- third party js -->
 		<%@include file="/WEB-INF/jsp/importJsFoot/foot.jsp"%>
 		<script type="text/javascript"
-			src="${Path }/static/js/highes/ClassTime.js"></script>
+			src="${Path }/static/js/root/ClassType.js"></script>
 		<!-- third party js ends -->
 </body>
 </html>

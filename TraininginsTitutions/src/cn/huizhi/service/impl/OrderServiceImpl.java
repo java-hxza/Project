@@ -195,5 +195,11 @@ public class OrderServiceImpl implements OrderService {
 		return orderMapper.selectOrderTF(studentId);
 	}
 
+	@Override
+	public List<Order> queryOrderByRenew(Integer schoolId, Integer classId) {
+		// TODO Auto-generated method stub
+		return orderMapper.queryOrderByRenew(schoolId, classId);
+	}
+
 	
 }

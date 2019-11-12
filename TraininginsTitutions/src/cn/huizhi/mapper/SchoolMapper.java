@@ -44,4 +44,11 @@ public interface SchoolMapper {
 	 * @return
 	 */
 	public Integer updateSchoolNumber(Integer schoolId,Integer schoolNumber);
+
+	/**
+	 * 删除学校信息
+	 * @param schoolId
+	 * @return
+	 */
+	public Integer delSchoolInfo(@Param("schoolId")String schoolId);
 }

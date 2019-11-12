@@ -12,6 +12,7 @@ public class School {
 	private FeeCategory feeCategory;
 	private String schoolNameSx;
 	private Integer schoolNumber;
+	private Double serviceCharge;
 	/**
 	 * 共支出
 	 */
@@ -31,7 +32,7 @@ public class School {
 
 	public School(Integer schoolId, String schoolName, Integer cityId, Integer cityProperId, String schoolRemarks,
 			Integer schoolType, FeeCategory feeCategory, String schoolNameSx, Integer schoolNumber,
-			Double schoolExPenSum, Double schoolFeeceat, City city, Province province) {
+			Double serviceCharge, Double schoolExPenSum, Double schoolFeeceat, City city, Province province) {
 		super();
 		this.schoolId = schoolId;
 		this.schoolName = schoolName;
@@ -42,10 +43,19 @@ public class School {
 		this.feeCategory = feeCategory;
 		this.schoolNameSx = schoolNameSx;
 		this.schoolNumber = schoolNumber;
+		this.serviceCharge = serviceCharge;
 		this.schoolExPenSum = schoolExPenSum;
 		this.schoolFeeceat = schoolFeeceat;
 		this.city = city;
 		this.province = province;
+	}
+
+	public Double getServiceCharge() {
+		return serviceCharge;
+	}
+
+	public void setServiceCharge(Double serviceCharge) {
+		this.serviceCharge = serviceCharge;
 	}
 
 	public Double getSchoolExPenSum() {
