@@ -50,6 +50,7 @@ $(function() {
 	 * 教师上课明细
 	 */
 	teacherClassHour = function() {
+		
 		location.href = "teacherClassInfo.html";
 	}
 
@@ -120,18 +121,39 @@ $(function() {
 	 * 跳转到账户信息的页面
 	 */
 	Accountinformation = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+
+		}
 		location.href = "Accountinformation.html";
 	}
 	/**
 	 * 跳转到收入的页面
 	 */
 	Incomeitems = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+
+		}
 		location.href = "Incomeitems.html";
 	}
 	/**
 	 * 跳转到支出的页面
 	 */
 	Expenditureitemses = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+
+		}
 		location.href = "Expenditureitemses.html";
 	}
 
@@ -139,6 +161,12 @@ $(function() {
 	 * 艺考学生分班
 	 */
 	assignment = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+		}
 		location.href = "assignment.html";
 	}
 
@@ -146,6 +174,13 @@ $(function() {
 	 * 教师课时总表
 	 */
 	teacherHourSum = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+
+		}
 		location.href = "teacherHourSum.html";
 	}
 
@@ -153,6 +188,13 @@ $(function() {
 	 * 跳转学生课时页面
 	 */
 	studentHourInfo = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+
+		}
 		location.href = "classStudentHourInfo.html";
 	}
 
@@ -186,9 +228,21 @@ $(function() {
 		location.href = "selectRefund.html?orderCounts=0&classId=0&studentName=000111";
 	}
 	Activitys = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+		}
 		location.href = "selectActivitySchools.html";
 	}
 	selectgifts = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+		}
 		location.href = "selectgifts.html";
 	}
 	selectUsedIntegrals = function() {
@@ -205,9 +259,22 @@ $(function() {
 	};
 
 	classTypes = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+		}
 		location.href = "selectClassTypes.html";
 	};
 	selectClassTime = function() {
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+
+		}
 		location.href = "selectClassTime.html";
 	}
 
@@ -283,6 +350,13 @@ $(function() {
 	 * 教师职业信息页面
 	 */
 	TeacherType = function(){
+		if (loginType == 2) {
+			if (addState == 0) {
+				alert("您没有权限查看");
+				return false;
+			}
+
+		}
 		location.href = "profession.html";
 	}
 	

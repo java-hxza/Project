@@ -161,7 +161,7 @@
 														class="text-body font-weight-semibold">${stuClassification}</a>
 													</td>
 													<td class="table-user"><a href="javascript:void(0);"
-														class="text-body font-weight-semibold">${stuCount }</a></td>
+														class="text-body font-weight-semibold">${stuCount}</a></td>
 												</tr>
 											</tbody>
 										</table>

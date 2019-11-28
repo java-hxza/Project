@@ -77,6 +77,12 @@ public class ClassServiceImpl implements ClassService {
 		return classMapper.delClassTable();
 	}
 
+	@Override
+	public Integer delClass(String classId) {
+		// TODO Auto-generated method stub
+		return classMapper.delClass(classId);
+	}
+
 	
 	
 }

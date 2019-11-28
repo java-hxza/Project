@@ -269,7 +269,34 @@ public class ChildrenClassesController {
 
 		return "";
 	}
-
+	
+	@RequestMapping("delClass.html")
+	@ResponseBody
+	public Map<String, String> delClass(String classId) {
+		Map jsonMap = new HashMap<String, String>();
+		if(classService.delClass(classId)>0) {
+			jsonMap.put("state","1");
+		}else {
+			jsonMap.put("state","0");
+		}
+		return jsonMap;
+	}
+	
+	/**
+	 *根据主键查询班级信息 
+	 * @param classId
+	 * @return
+	 */
+	@RequestMapping("queryClassByClassId.html")
+	@ResponseBody
+	public Map<String, Object> queryClassByClassId(Integer classId){
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		Class class1 = classService.findClassByClassId(classId);
+		jsonMap.put("class",class1);
+		return jsonMap;
+	}
+	
 	/**
 	 * 修改学生信息
 	 * 

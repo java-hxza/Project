@@ -90,6 +90,12 @@ public interface ClassMapper {
 	 */
 	public List<Class> selectMyClass(Integer schoolId);
 	
+	/**
+	 * 删除班级
+	 * @param classId
+	 * @return
+	 */
+	public Integer delClass(@Param("classId")String classId);
 	/*
 	 * 删除表数据
 	 * @return

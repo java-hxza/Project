@@ -1353,13 +1353,13 @@ public class RootSchoolController {
 		Integer schoolType = (Integer) session.getAttribute("schoolType");
 		Integer addstudentList = 0;
 		if (schoolType == 1) {
-			addstudentList = studentService.selectChildren((Integer) session.getAttribute("schoolId"), map);
+			addstudentList += studentService.selectChildren((Integer) session.getAttribute("schoolId"), map);
 			session.setAttribute("stuClassification", "少儿");
 		} else if (schoolType == 2) {
-			addstudentList = studentService.selectHigh((Integer) session.getAttribute("schoolId"), map);
+			addstudentList += studentService.selectHigh((Integer) session.getAttribute("schoolId"), map);
 			session.setAttribute("stuClassification", "高中");
 		} else {
-			addstudentList = studentService.selectHigh((Integer) session.getAttribute("schoolId"), map);
+			addstudentList += studentService.selectYiKao((Integer) session.getAttribute("schoolId"), map);
 			session.setAttribute("stuClassification", "艺考");
 		}
 

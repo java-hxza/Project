@@ -34,10 +34,9 @@
 		t.studentId=hc.studentId
 		JOIN class c ON hc.classId=c.classId
 		WHERE
-		c.schoolId=#{0} AND
-		t.feeCategory = 2
+		c.schoolId=#{schoolId}
 		<if test="map.startTime !=null and map.startTime!=''">
-			and date(t.startTime) between #{map.startTime} and
+			and t.startTime &gt;= #{map.startTime} and t.startTime &lt;=
 			#{map.endTime}
 		</if>
 
@@ -51,10 +50,10 @@
 		t.studentId=cl.studentId
 		JOIN class c ON cl.classId=c.classId
 		WHERE
-		c.schoolId=#{0} AND
+		c.schoolId=#{schoolId} AND
 		t.feeCategory = 1
 		<if test="map.startTime !=null and map.startTime!=''">
-			and date(t.startTime) between #{map.startTime} and
+			and t.startTime &gt;= #{map.startTime} and t.startTime &lt;=
 			#{map.endTime}
 		</if>
 	</select>
@@ -69,10 +68,10 @@
 		t.studentId=hc.studentId
 		JOIN class c ON hc.classId=c.classId
 		WHERE
-		c.schoolId=#{0} AND
+		c.schoolId=#{schoolId} AND
 		t.feeCategory = 3
 		<if test="map.startTime !=null and map.startTime!=''">
-			and date(t.startTime) between #{map.startTime} and
+			and t.startTime &gt;= #{map.startTime} and t.startTime &lt;=
 			#{map.endTime}
 		</if>
 	</select>
@@ -433,7 +432,8 @@
 				#{map.endTime}
 			</if>
 			<if test="map.studentName !=null and map.studentName !=''">
-				and  st.studentName like concat('%',#{map.studentName},'%')  
+				and st.studentName like
+				concat('%',#{map.studentName},'%')
 			</if>
 
 		</where>
@@ -576,20 +576,22 @@
 				#{map.endTime}
 			</if>
 			<if test="map.studentName !=null and map.studentName !=''">
-				and  st.studentName like concat('%',#{map.studentName},'%')  
+				and st.studentName like
+				concat('%',#{map.studentName},'%')
 			</if>
 		</where>
 	</select>
 
 	<select id="selectAllStudent" resultMap="selectAllStudents">
 		SELECT
-		s.studentId ss,s.studentName st,s.studentBirth sb,c.className cc
+		s.studentId
+		ss,s.studentName st,s.studentBirth sb,c.className cc
 		FROM student s
 		JOIN highesclassstudnet h ON s.studentId=h.studentId
-		JOIN class c ON h.classId=c.classId
+		JOIN class c ON
+		h.classId=c.classId
 		WHERE c.schoolId=#{0}
 	</select>
-
 	<resultMap type="Student" id="selectAllStudents">
 		<result column="ss" property="studentId" />
 		<result column="st" property="studentName" />
@@ -599,7 +601,8 @@
 		</collection>
 	</resultMap>
 
-	<select id="selectByClassIdStudent" resultMap="selectByClassIdStudents">
+	<select id="selectByClassIdStudent"
+		resultMap="selectByClassIdStudents">
 		SELECT
 		s.studentId ss,s.studentName st,s.studentBirth sb,c.className cc
 		FROM student s
@@ -624,7 +627,7 @@
 			<result column="cc" property="className" />
 		</collection>
 	</resultMap>
-	
+
 	<insert id="BulkChargingInsert">
 		INSERT INTO
 		traininginstitutions.order
@@ -640,5 +643,5 @@
 			#{order.remarks},#{order.orderNumber},#{order.expenditureitemsId},#{order.classId},#{order.giftId},#{order.giftNumber},#{order.integral},#{order.teacherId},#{order.discount},#{order.feecateMoney},#{order.feecateMoneyYiKao},#{order.activityId},#{order.serviceCharge})
 		</foreach>
 	</insert>
-	
+
 </mapper>
