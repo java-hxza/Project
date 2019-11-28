@@ -5,6 +5,10 @@ $(function() {
 		var classes = $(".classes option:selected").val();
 		var teacherId = $(".teacher option:selected").val();
 		var startTime = $(".Times").val();
+		if(teacherId == undefined) {
+			alert("暂无招生老师！");
+			return false;
+		}
 		if(studentName == "") {
 			studentName = null;
 		}else if(classes == 0) {
