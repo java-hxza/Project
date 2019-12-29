@@ -67,8 +67,8 @@
 									</a>
 
 									<!-- item-->
-									<a href="welCome.html" class="dropdown-item notify-item">
-										<i class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
+									<a href="welCome.html" class="dropdown-item notify-item"> <i
+										class="mdi mdi-lifebuoy mr-1"></i> <span>退出 </span>
 									</a>
 
 
@@ -103,14 +103,33 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-body">
-									<div class="row mb-2">
-										<div class="col-sm-4">
+									<div class="row">
+										<div class="col-sm-2">
 											<a href="javascript:void(0);" onclick="updateStudnet()"
 												class="btn btn-danger mb-2"><i
 												class="mdi mdi-plus-circle mr-2"></i> 修改学生信息</a>
 										</div>
-										<div class="col-sm-8">
+										<div class="col-sm-4">
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label for="billing-first-name">开始日期</label> <input
+															class="form-control" type="date" id="startTime" />
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label for="billing-first-name">结束日期</label> <input
+															class="form-control" type="date" id="endTime" />
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
 											<div class="text-sm-right">
+												<a href="javascript:void(0);" onclick="queryStudent(${classId})"
+													class="btn btn-danger mb-2"><i
+													class="mdi mdi-plus-circle mr-2"></i> 查询学生信息</a>
 												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
 													onclick="shiftWork()">学员转班</button>
 												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
@@ -120,9 +139,11 @@
 												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
 													data-toggle="modal" data-target="#top-modal">学员批量登记</button>
 											</div>
+
 										</div>
 										<!-- end col-->
 									</div>
+
 									<!-- Question/Answer -->
 									<div class="table-responsive">
 										<table

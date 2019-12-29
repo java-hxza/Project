@@ -505,7 +505,7 @@
 																	class="form-control classTimes"
 																	id="example-select">
 																	<c:forEach items="${classTime }" var="c">
-																		<option value="${c.classTimeId }">${c.classTimeName}</option>
+																		<option value="${c.classTimeName }">${c.classTimeName}</option>
 																	</c:forEach>
 																</select>
 															</div>

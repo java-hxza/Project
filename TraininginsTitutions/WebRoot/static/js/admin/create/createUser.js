@@ -12,6 +12,10 @@ $(function(){
 		var schoolId = $("#schoolId").val();
 		var userTypeId = $("#userTypeId").val();
 		var remarks = $("#remarks").val();
+		var state;
+		if(userTypeId == 1){
+			state = $("#state").val();
+		}
 		if((loginName,loginPassword,schoolId== null) || (userTypeId =="0")){
 			$.NotificationApp.send("错误!", "你必须输入账户名及密码。", "top-right", "rgba(0,0,0,0.2)", "error")
 			$("#loginBtn span").removeClass("spinner-border spinner-border-sm");
@@ -29,7 +33,8 @@ $(function(){
 				loginPassword : loginPassword,
 				remarks : remarks,
 				userTypeId : userTypeId,
-				schoolId : schoolId
+				schoolId : schoolId,
+				state : state
 			},
 			dataType: "JSON",
 			success: function(data){
@@ -55,6 +60,14 @@ $(function(){
 		});
 	}
 	
+	userType = function(){
+		var userTypeId = $("#userTypeId").val();
+		if(userTypeId == 1){
+			$("#d1").removeAttr("hidden");
+		}else{
+			$("#d1").prop("hidden",true);
+		}
+	}
 	
 	loginNameVerification = function(){
 		var loginName = $("#loginName").val();

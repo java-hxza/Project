@@ -105,6 +105,7 @@
 							<th>只删除记账数据，保留基础数据</th>
 						</tr>
 					</thead>
+					<span hidden="hidden" id="adminState">${user.state }</span>
 					<tbody>
 						<tr>
 							<td>

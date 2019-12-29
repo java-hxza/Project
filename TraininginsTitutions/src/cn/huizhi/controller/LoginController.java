@@ -107,6 +107,7 @@ public class LoginController {
 			session.setAttribute("loginType", 1);
 			jsonMap.put("state", "1");
 			jsonMap.put("UsertypeId", user.getUserTypeId());
+			System.out.println(user.getState());
 		} 
 		if(user == null) {
 			Teacher teacher = teacherService.findTeacherByLogin(loginName, loginPassword, null);

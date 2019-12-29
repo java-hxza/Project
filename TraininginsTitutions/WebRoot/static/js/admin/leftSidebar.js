@@ -1,4 +1,5 @@
 $(function() {
+	var adminState = $("#adminState").html();
 	/**
 	 * 学校账户信息
 	 */
@@ -69,7 +70,7 @@ $(function() {
 	 * 数据备份
 	 */
 	dbbackup = function() {
-
+		
 		$.ajax({
 			url : 'dbbackup.html',
 			data : "",
@@ -90,7 +91,10 @@ $(function() {
 	 * 数据清除
 	 */
 	dataEliminating = function() {
-		
+		if(adminState == 0){
+			alert("您没有权限！");
+			return false;
+		}
 		//获取显示区生成的验证码
 		var checkCode = $("#checkCode").html();
 		//获取输入的验证码

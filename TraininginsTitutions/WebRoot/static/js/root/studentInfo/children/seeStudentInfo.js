@@ -1,9 +1,9 @@
-$(function(){
-	
+$(function() {
+
 	/**
 	 * 修改学生信息
 	 */
-	updateStudnet = function(){
+	updateStudnet = function() {
 		if ($(".customCheckes:checked").length < 1) {
 			if (!$(".customCheckes").prop("checked")) {
 				alert("请选中一条数据！");
@@ -15,7 +15,7 @@ $(function(){
 				return false;
 			}
 		}
-		
+
 		var studentId = $(".customCheckes:checked").parent().parent().next().children().attr("name");
 		var classId = $(".customCheckes:checked").parent().parent().next().children().attr("id_classId");
 		$.ajax({
@@ -23,9 +23,9 @@ $(function(){
 			data : {
 				studentId : studentId
 			},
-			dataType: 'JSON',
+			dataType : 'JSON',
 			type : 'post',
-			success : function(data){
+			success : function(data) {
 				$(".table-responsive").empty();
 				data = JSON.parse(data);
 				$(".table-responsive").append(updateInfo(data));
@@ -50,7 +50,7 @@ $(function(){
 						alert("请输入正确的积分");
 						return false;
 					}
-					if (studentName, studentSex, studentBirth, school, registrationConsultant, registrationChannels,integral == null) {
+					if (studentName, studentSex, studentBirth, school, registrationConsultant, registrationChannels, integral == null) {
 						$.NotificationApp.send("错误!", "你必须输入学员信息。", "top-right", "rgba(0,0,0,0.2)", "error")
 						return false;
 					}
@@ -92,139 +92,137 @@ $(function(){
 						error : function(XMLHttpRequest, textStatus, errorThrown) {
 							alert(XMLHttpRequest.status);
 							aert(XMLHttpRequest.readyState);
-							alert(textStatus);;
+							alert(textStatus);
+							;
 							location.href = "seeStudentInfo.html?classId=" + classId;
 						}
 					});
 				});
 			},
-			error : function(){
-				
-			}
-			
+			error : function() {}
 		});
 	}
-	
-	
-	
+
+
+
 	/**
 	 * 更新页面
 	 */
-	updateInfo = function(data){
+	updateInfo = function(data) {
 		var $html = "<div class='tab-pane show active' id='billing-informatio'>" +
-				"<div class='row'>" +
-				"<div class='col-lg-8'>" +
-				"<h4 class='mt-2'>少儿学员信息录入</h4>" +
-				"<p class='text-muted mb-4'></p>" +
-				"<form>" +
-				"<div class='row'>" +
-				"<div class='col-md-6'>" +
-				"<div class='form-group'>" +
-				"<label for='billing-first-name'>名字</label>" +
-				"<input class='form-control' type='text' name='"+data.studentId+"' value='"+data.studentName+"' id='studentName' />" +
-				"</div>" +
-				"</div>" +
-				"<div class='col-md-6'>" +
-				"<div class='form-group'>" +
-				"<label for='billing-last-name'>性别</label>" +
-				"<select id='studentSex' class='form-control' selected='"+data.studentSex+"'><option value='0'>女</option><option value='1'>男</option></select>" +
-				"</div>" +
-				"</div>" +
-				"</div>" +
-				"<!-- end row -->" +
-				"<div class='row'>" +
-				"<div class='col-md-6'>" +
-				"<div class='form-group'>" +
-				"<label for='billing-email-address'>家长姓名<span class='text-danger'>*</span></label>" +
-				"<input class='form-control' type='email' value='"+data.parentName+"' id='parentName' />" +
-				"</div>" +
-				"</div>" +
-				"<div class='col-md-6'>" +
-				"<div class='form-group'>" +
-				"<label for='billing-phone'>手机号<span class='text-danger'>*</span></label>" +
-				"<input class='form-control' type='text' value='"+data.telephone+"' id='telephone'/>" +
-				"</div>" +
-				"</div>" +
-				"</div>" +
-				"<div class='row'>" +
-				"<div class='col-12'>" +
-				"<div class='form-group'>" +
-				"<label for='billing-address'>学员出生日期</label>" +
-				"<input class='form-control' type='date' value='"+data.studentBirth+"' id='studentBirth'>" +
-				"</div>" +
-				"</div>" +
-				"</div><!-- end row -->" +
-				"<div class='row'>" +
-				"<div class='col-12'>" +
-				"<div class='form-group'>" +
-				"<label for='billing-address'>家庭住址</label>" +
-				"<input class='form-control' type='text' value='"+data.familyAddress+"' id='familyAddress'>" +
-				"</div>" +
-				"</div>" +
-				"</div><!-- end row -->" +
-				"<div class='row'>" +
-				"<div class='col-md-4'>" +
-				"<div class='form-group'>" +
-				"<label for='billing-town-city'>学校</label>" +
-				"<input class='form-control' type='text' name='"+data.feeCategory+"' value='"+data.school+"' id='school'/>" +
-				"</div>" +
-				"</div>" +
-				"<div class='col-md-4'>" +
-				"<div class='form-group'>" +
-				"<label for='billing-state'>报名渠道</label>" +
-				"<input class='form-control' type='text' value='"+data.registrationChannels+"' id='registrationChannels'/>" +
-				"</div>" +
-				"</div>" +
-				"<div class='col-md-4'>" +
-				"<div class='form-group'>" +
-				"<label for='billing-zip-postal'>报名老师</label>" +
-				"<input class='form-control' type='text' value='"+data.registrationConsultant+"' id='registrationConsultant' />" +
-				"</div>" +
-				"</div>" +
-				"<div class='col-md-4'>" +
-				"<div class='form-group'>" +
-				"<label for='billing-zip-postal'>报名时间</label>" +
-				"<input class='form-control' type='date' value='"+data.startTime+"' id='startTime'/>" +
-				"</div>" +
-				"</div>" +
-				"<div class='col-md-4'>" +
-				"<div class='form-group'>" +
-				"<label for='billing-zip-postal'>积分</label>" +
-				"<input class='form-control' type='text' value='"+data.integral+"' id='integral'/>" +
-				"</div>" +
-				"</div>" +
-				"<div class='col-md-4'>" +
-				"<div class='form-group'>" +
-				"<label for='billing-zip-postal'>备注</label>" +
-				"<textarea class='form-control' id='remarks' rows='1' value='"+data.remarks+"'></textarea>" +
-				"</div>" +
-				"</div>" +
-				"</div><!-- end row -->" +
-				"<div class='row mt-4'>" +
-				"<div class='col-sm-6'>" +
-				"<a href='apps-ecommerce-shopping-cart.html'class='btn text-muted d-none d-sm-inline-block btn-link font-weight-semibold'>" +
-				"<i class='mdi mdi-arrow-left'></i>Back to Shopping Cart</a>" +
-				"</div><!-- end col -->" +
-				"<div class='col-sm-6'>" +
-				"<div class='text-sm-right'>" +
-				"<a href='javascript:void(0)' class='btn btn-danger' id='update'>" +
-				"<i class='mdi mdi-truck-fast mr-1'></i> 保存 </a>" +
-				"</div>" +
-				"</div><!-- end col -->" +
-				"</div><!-- end row -->" +
-				"</form>" +
-				"</div>" +
-				"</div><!-- End Billing Information Content-->" +
-				"</div>";
-						
+			"<div class='row'>" +
+			"<div class='col-lg-8'>" +
+			"<h4 class='mt-2'>少儿学员信息录入</h4>" +
+			"<p class='text-muted mb-4'></p>" +
+			"<form>" +
+			"<div class='row'>" +
+			"<div class='col-md-6'>" +
+			"<div class='form-group'>" +
+			"<label for='billing-first-name'>名字</label>" +
+			"<input class='form-control' type='text' name='" + data.studentId + "' value='" + data.studentName + "' id='studentName' />" +
+			"</div>" +
+			"</div>" +
+			"<div class='col-md-6'>" +
+			"<div class='form-group'>" +
+			"<label for='billing-last-name'>性别</label>" +
+			"<select id='studentSex' class='form-control' selected='" + data.studentSex + "'><option value='0'>女</option><option value='1'>男</option></select>" +
+			"</div>" +
+			"</div>" +
+			"</div>" +
+			"<!-- end row -->" +
+			"<div class='row'>" +
+			"<div class='col-md-6'>" +
+			"<div class='form-group'>" +
+			"<label for='billing-email-address'>家长姓名<span class='text-danger'>*</span></label>" +
+			"<input class='form-control' type='email' value='" + data.parentName + "' id='parentName' />" +
+			"</div>" +
+			"</div>" +
+			"<div class='col-md-6'>" +
+			"<div class='form-group'>" +
+			"<label for='billing-phone'>手机号<span class='text-danger'>*</span></label>" +
+			"<input class='form-control' type='text' value='" + data.telephone + "' id='telephone'/>" +
+			"</div>" +
+			"</div>" +
+			"</div>" +
+			"<div class='row'>" +
+			"<div class='col-12'>" +
+			"<div class='form-group'>" +
+			"<label for='billing-address'>学员出生日期</label>" +
+			"<input class='form-control' type='date' value='" + data.studentBirth + "' id='studentBirth'>" +
+			"</div>" +
+			"</div>" +
+			"</div><!-- end row -->" +
+			"<div class='row'>" +
+			"<div class='col-12'>" +
+			"<div class='form-group'>" +
+			"<label for='billing-address'>家庭住址</label>" +
+			"<input class='form-control' type='text' value='" + data.familyAddress + "' id='familyAddress'>" +
+			"</div>" +
+			"</div>" +
+			"</div><!-- end row -->" +
+			"<div class='row'>" +
+			"<div class='col-md-4'>" +
+			"<div class='form-group'>" +
+			"<label for='billing-town-city'>学校</label>" +
+			"<input class='form-control' type='text' name='" + data.feeCategory + "' value='" + data.school + "' id='school'/>" +
+			"</div>" +
+			"</div>" +
+			"<div class='col-md-4'>" +
+			"<div class='form-group'>" +
+			"<label for='billing-state'>报名渠道</label>" +
+			"<input class='form-control' type='text' value='" + data.registrationChannels + "' id='registrationChannels'/>" +
+			"</div>" +
+			"</div>" +
+			"<div class='col-md-4'>" +
+			"<div class='form-group'>" +
+			"<label for='billing-zip-postal'>报名老师</label>" +
+			"<input class='form-control' type='text' value='" + data.registrationConsultant + "' id='registrationConsultant' />" +
+			"</div>" +
+			"</div>" +
+			"<div class='col-md-4'>" +
+			"<div class='form-group'>" +
+			"<label for='billing-zip-postal'>报名时间</label>" +
+			"<input class='form-control' type='date' value='" + data.startTime + "' id='startTime'/>" +
+			"</div>" +
+			"</div>" +
+			"<div class='col-md-4'>" +
+			"<div class='form-group'>" +
+			"<label for='billing-zip-postal'>积分</label>" +
+			"<input class='form-control' type='text' value='" + data.integral + "' id='integral'/>" +
+			"</div>" +
+			"</div>" +
+			"<div class='col-md-4'>" +
+			"<div class='form-group'>" +
+			"<label for='billing-zip-postal'>备注</label>" +
+			"<textarea class='form-control' id='remarks' rows='1' value='" + data.remarks + "'></textarea>" +
+			"</div>" +
+			"</div>" +
+			"</div><!-- end row -->" +
+			"<div class='row mt-4'>" +
+			"<div class='col-sm-6'>" +
+			"<a href='apps-ecommerce-shopping-cart.html'class='btn text-muted d-none d-sm-inline-block btn-link font-weight-semibold'>" +
+			"<i class='mdi mdi-arrow-left'></i>Back to Shopping Cart</a>" +
+			"</div><!-- end col -->" +
+			"<div class='col-sm-6'>" +
+			"<div class='text-sm-right'>" +
+			"<a href='javascript:void(0)' class='btn btn-danger' id='update'>" +
+			"<i class='mdi mdi-truck-fast mr-1'></i> 保存 </a>" +
+			"</div>" +
+			"</div><!-- end col -->" +
+			"</div><!-- end row -->" +
+			"</form>" +
+			"</div>" +
+			"</div><!-- End Billing Information Content-->" +
+			"</div>";
+
 		return $html;
 	}
 
-	
+
 	/**
 	 * 学生转班
 	 */
-	shiftWork = function(){
+	shiftWork = function() {
 		if ($(".customCheckes:checked").length < 1) {
 			if (!$(".customCheckes").prop("checked")) {
 				alert("请选中一条数据！");
@@ -236,28 +234,28 @@ $(function(){
 				return false;
 			}
 		}
-		
+
 		var studentId = $(".customCheckes:checked").parent().parent().next().children().attr("name");
 		var classId = $(".customCheckes:checked").parent().parent().next().children().attr("id_classId");
-		
-		
-		location.href ="studentShiftWork.html?studentId="+studentId+"&classId="+classId;
-			
+
+
+		location.href = "studentShiftWork.html?studentId=" + studentId + "&classId=" + classId;
+
 	}
-	
+
 	/**
 	 * 下拉框事件
 	 */
-	classIdChange = function(){
+	classIdChange = function() {
 		var classId = $("#classIdes").val();
 		var classType = $("#classIdes").children().next().val();
 		var classesId = $("#classId").val();
 		var studentId = $("#studentId").attr("name");
 		var classese = classesId.split("_");
-		
+
 		classesId = classese[0];
 		var classesType = classese[1];
-		
+
 		$.ajax({
 			url : 'classIdChange.html',
 			data : {
@@ -267,34 +265,34 @@ $(function(){
 				classType : classType,
 				classesType : classesType
 			},
-			dataType: 'JSON',
+			dataType : 'JSON',
 			type : 'post',
-			success : function(data){
-				
+			success : function(data) {
+
 				$("#money").val(data.money);
 			}
 		});
-		
-		
+
+
 	}
-	
+
 	/**
 	 * 保存转班
 	 */
-	updateStudentShiftWork = function(){
+	updateStudentShiftWork = function() {
 		var classId = $("#classIdes").val();
-		
+
 		var studentId = $("#studentId").attr("name");
-		
+
 		var remarks = $("#remarks").val();
 		var money = $("#money").val();
-		
+
 		var reg = /\d+(\.\d+)?/;
 		if (!reg.test(money)) {
 			alert("请输入正确的金额");
 			return false;
 		}
-		if(classId == ""){
+		if (classId == "") {
 			alert("请选择正确的班级！");
 			return false;
 		}
@@ -308,40 +306,41 @@ $(function(){
 			},
 			dataType : 'JSON',
 			type : 'post',
-			success : function(data){
-				if(data.state ==1){
+			success : function(data) {
+				if (data.state == 1) {
 					alert("转班成功！");
 					location.href = "seeStudentInfo.html?classId=" + classId;
-				}else{
+				} else {
 					location.href = "seeStudentInfo.html?classId=" + classId;
 				}
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
 				alert(XMLHttpRequest.status);
 				aert(XMLHttpRequest.readyState);
-				alert(textStatus);;
+				alert(textStatus);
+				;
 				location.href = "seeStudentInfo.html?classId=" + classId;
-			} 
+			}
 		});
 	}
-	
+
 	/**
 	 * 全选
 	 */
-	allElection = function(){
-		$(".customCheckes").prop("checked",true);
+	allElection = function() {
+		$(".customCheckes").prop("checked", true);
 	}
-	
+
 	/**
 	 * 反选
 	 */
-	reverseElection = function(){
+	reverseElection = function() {
 		$(".customCheckes").prop("checked", false);
 	}
 	/**
 	 * 上课登记
 	 */
-	classBatchRegistration = function(){
+	classBatchRegistration = function() {
 		if ($(".customCheckes:checked").length < 1) {
 			if (!$(".customCheckes").prop("checked")) {
 				alert("请选中一条数据！");
@@ -369,48 +368,50 @@ $(function(){
 		/**
 		 * 读取课程信息
 		 */
-			var classHour = $(".checkes:checked").parent().parent().parent().children("td:last-child").children().html();
-			var dpId = $(".checkes:checked").parent().parent().parent().children("td:eq(2)").children().attr("name");
-			var classHours = $(".checkes:checked").parent().parent().parent().children("td:eq(3)").children().html();
-			var teacherId = $(".checkes:checked").parent().parent().parent().children("td:eq(1)").children().attr("name");
-			var teacherInClass = $(".checkes:checked").parent().parent().parent().children("td:eq(1)").children().html();
-			var thId = $(".checkes:checked").parent().parent().parent().children("td:eq(1)").children().attr("th_id");
-			var contentOfCourses = $("#contentOfCourses").val();
-			
+		var classHour = $(".checkes:checked").parent().parent().parent().children("td:last-child").children().html();
+		var dpId = $(".checkes:checked").parent().parent().parent().children("td:eq(2)").children().attr("name");
+		var classHours = $(".checkes:checked").parent().parent().parent().children("td:eq(3)").children().html();
+		var teacherId = $(".checkes:checked").parent().parent().parent().children("td:eq(1)").children().attr("name");
+		var teacherInClass = $(".checkes:checked").parent().parent().parent().children("td:eq(1)").children().html();
+		var thId = $(".checkes:checked").parent().parent().parent().children("td:eq(1)").children().attr("th_id");
+		var contentOfCourses = $("#contentOfCourses").val();
+
 
 		$.ajax({
 			url : 'childrenClassBatchRegistration.html',
-			data : {map : JSON.stringify({
-				classId : classId,
-				studentId : studentId,
-				studentName : studentName,
-				classHours : classHours,
-				dpId : dpId,
-				teacherId : teacherId,
-				classHour : classHour,
-				teacherInClass : teacherInClass,
-				thId : thId,
-				contentOfCourses : contentOfCourses
+			data : {
+				map : JSON.stringify({
+					classId : classId,
+					studentId : studentId,
+					studentName : studentName,
+					classHours : classHours,
+					dpId : dpId,
+					teacherId : teacherId,
+					classHour : classHour,
+					teacherInClass : teacherInClass,
+					thId : thId,
+					contentOfCourses : contentOfCourses
 				}
-			)} ,
+				)
+			},
 			dataType : 'JSON',
 			type : 'post',
-			success : function(data){
-				if(data.state == "1"){
+			success : function(data) {
+				if (data.state == "1") {
 					alert("登记成功！");
-					location.href ="seeStudentInfo.html?classId="+classId[0];
+					location.href = "seeStudentInfo.html?classId=" + classId[0];
 				}
 			}
 		});
 	}
-	
-	
-	
+
+
+
 
 	/**
 	 * 学生退学
 	 */
-	exitSchool = function(){
+	exitSchool = function() {
 		if ($(".customCheckes:checked").length < 1) {
 			if (!$(".customCheckes").prop("checked")) {
 				alert("请选中一条数据！");
@@ -422,21 +423,66 @@ $(function(){
 				return false;
 			}
 		}
-		
+
 		var studentId = $(".customCheckes:checked").parent().parent().parent().children("td:eq(1)").children().attr("name")
 		var classId = $(".customCheckes:checked").parent().parent().parent().children("td:eq(1)").children().attr("id_classId")
-		var studentName= $(".customCheckes:checked").parent().parent().next().next().next().children().html();
-		location.href = "exitSchool.html?studentId="+studentId+"&studentName="+studentName+"&classId="+classId;
+		var studentName = $(".customCheckes:checked").parent().parent().next().next().next().children().html();
+		location.href = "exitSchool.html?studentId=" + studentId + "&studentName=" + studentName + "&classId=" + classId;
+	}
+	// 格式化日期，如月、日、时、分、秒保证为2位数
+		function formatNumber (n) {
+		    n = n.toString()
+		    return n[1] ? n : '0' + n;
+		}
+	// 参数number为毫秒时间戳，format为需要转换成的日期格式
+	function formatTime(number, format) {
+		let time = new Date(number)
+		let newArr = []
+		let formatArr = [ 'Y', 'M', 'D', 'h', 'm', 's' ]
+		newArr.push(time.getFullYear())
+		newArr.push(formatNumber(time.getMonth() + 1))
+		newArr.push(formatNumber(time.getDate()))
+
+		newArr.push(formatNumber(time.getHours()))
+		newArr.push(formatNumber(time.getMinutes()))
+		newArr.push(formatNumber(time.getSeconds()))
+
+		for (let i in newArr) {
+			format = format.replace(formatArr[i], newArr[i])
+		}
+		return format;
 	}
 	
-	
+	queryStudent = function(classId) {
+		var startTime = $("#startTime").val();
+		var endTime = $("#endTime").val();
+		
+		alert(startTime);
+		//判断时间是都空值
+		if(startTime == '' || startTime == null){
+			startTime = new Date();
+		}
+		if(endTime == '' || endTime == null){
+			endTime = new Date();
+		}
+		if(startTime != '' || startTime != null){
+			startTime = formatTime(startTime, 'Y-M-D h:m:s');
+		}
+		if(endTime != '' || endTime != null){
+			endTime = formatTime(endTime, 'Y-M-D h:m:s');
+		}
+		
+		location.href = "queryStudentByTime.html?classId="+classId+"&startTime="+startTime+"&endTime="+endTime;
+
+	}
+
 	/**
 	 * 复选框单击选中取消事件
 	 */
 	$(".check").click(function() {
-		if($(this).prev().prop("checked")) {
+		if ($(this).prev().prop("checked")) {
 			$(this).prev().prop("checked", false);
-		}else {
+		} else {
 			$(this).prev().prop("checked", true);
 		}
 	});

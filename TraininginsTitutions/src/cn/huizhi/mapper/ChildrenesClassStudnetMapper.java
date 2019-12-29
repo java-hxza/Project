@@ -62,5 +62,14 @@ public interface ChildrenesClassStudnetMapper {
 	 * @return
 	 */
 	public Integer updateChildrenStudentGradution(@Param("list") List list);
+	
+	/**
+	 * 按着时间查询学生
+	 * @param classId
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	public List<ChildrenesClassStudnet> findChildrenesClassStudnetByClassIdAndTime(@Param("classId")String classId,@Param("startTime")String startTime,@Param("endTime")String endTime);
 
 }
