@@ -25,4 +25,5 @@ public interface CityMapper {
 	public List<City> selectCitysByProvinceId(@Param("provinceId")Integer provinceId);
 	
 	
+	
 }

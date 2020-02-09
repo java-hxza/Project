@@ -90,6 +90,10 @@ public class ClassServiceImpl implements ClassService {
 
 	
 
+	public Integer delClass(String classId) {
+		// TODO Auto-generated method stub
+		return classMapper.delClass(classId);
+	}
 
 	
 	

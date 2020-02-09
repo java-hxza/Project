@@ -127,9 +127,13 @@
 										<div class="col-sm-4">
 											<a href="javascript:void(0);" onclick="createClass()" class="btn btn-danger mb-2"><i
 												class="mdi mdi-plus-circle mr-2" ></i> 添加班级</a>
+											<a href="javascript:void(0);" onclick="delClass()" class="btn btn-danger mb-2"><i
+												class="mdi mdi-plus-circle mr-2" ></i> 删除班级</a>
 										</div>
 										<div class="col-sm-8">
 											<div class="text-sm-right">
+										<!-- 	<a href="javascript:void(0);" onclick="updateClass()" class="btn btn-danger mb-2"><i
+												class="mdi mdi-plus-circle mr-2" ></i>修改班级信息</a> -->
 												<button type="button" class="btn btn-success mb-2 mr-1" onclick="seeStudentInfo()">
 													<i class="mdi mdi-settings"></i>查看班级学生信息
 												</button>

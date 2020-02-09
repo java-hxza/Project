@@ -2,7 +2,6 @@ package cn.huizhi.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 
 import cn.huizhi.pojo.Class;
 /**
@@ -92,7 +91,12 @@ public interface ClassService {
 	 * @return
 	 */
 	public List<Class> selectMyClass(Integer schoolId);
-	
+	/**
+	 * 删除班级
+	 * @param classId
+	 * @return
+	 */
+	public Integer delClass(String classId);
 	/*
 	 * 删除表数据
 	 * @return

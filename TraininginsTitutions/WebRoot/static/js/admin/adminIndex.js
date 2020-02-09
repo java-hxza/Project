@@ -1,20 +1,33 @@
 $(function() {
+	var adminState = $("#adminState").html();
 	/**
 	 * 创建学校账号跳转控制层
 	 */
 	createUser = function() {
+		if(adminState == 0){
+			alert("您没有权限！");
+			return false;
+		}
 		location.href = "createUser.html";
 	}
 	/**
 	 * 创建学校跳转控制层
 	 */
 	createSchool = function() {
+		if(adminState == 0){
+			alert("您没有权限！");
+			return false;
+		}
 		location.href = "createSchool.html";
 	}
 	/**
 	 * 删除学校
 	 */
 	delSchool = function(){
+		if(adminState == 0){
+			alert("您没有权限！");
+			return false;
+		}
 		if ($(".customCheckes:checked").length < 1) {
 			if (!$(".customCheckes").prop("checked")) {
 				alert("请选中一条数据！");
@@ -78,6 +91,10 @@ $(function() {
 	 * 创建教师
 	 */
 	createTeacher = function() {
+		if(adminState == 0){
+			alert("您没有权限！");
+			return false;
+		}
 		location.href = "creageTeacher.html";
 	}
 

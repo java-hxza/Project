@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
+
 import cn.huizhi.pojo.Teacher;
 import cn.huizhi.pojo.User;
 
@@ -17,17 +19,28 @@ public class CustomInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String uri = request.getRequestURI();
-		
+
 		// UTL:除了login.jsp是可以公开访问的，其他的URL都进行拦截控制
 		if (uri.indexOf("/userLogin") >= 0) {
 			return true;
 		}
-		User user = (User) request.getSession().getAttribute("user");
-		if (user == null) {
+		Integer loginType = (Integer) request.getSession().getAttribute("loginType");
+		if(loginType == null) {
+			response.sendRedirect("login");
+			return false;
+		}
+		if (loginType == 1) {
+			User user = (User) request.getSession().getAttribute("user");
+			if (user == null) {
+				response.sendRedirect("login");
+				return false;
+			}
+		}
+
+		if (loginType == 2) {
 			Teacher teacher = (Teacher) request.getSession().getAttribute("user");
 			if (teacher == null) {
 				// 不符合条件的给出提示信息，并转发到登录页面
-				request.setAttribute("msg", "您还没有登录，请先登录！");
 				response.sendRedirect("login");
 				return false;
 			}

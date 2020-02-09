@@ -285,6 +285,11 @@
 			</if>
 		</where>
 	</select>
+	
+	<delete id="delClass">
+		delete from class 
+		where classId = #{classId}
+	</delete>
 	<!-- 清空表数据 -->
 	<update id="delClassTable">
 		truncate traininginstitutions.class

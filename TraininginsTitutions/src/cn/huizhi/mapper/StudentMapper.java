@@ -17,7 +17,7 @@ public interface StudentMapper {
 	 * 
 	 * @return
 	 */
-	public Integer selectHigh(Integer schoolId, @Param("map") Map<Object, Object> map);
+	public Integer selectHigh(@Param("schoolId")Integer schoolId, @Param("map") Map<Object, Object> map);
 
 	/**
 	 * 查询所有少儿学生
@@ -25,7 +25,7 @@ public interface StudentMapper {
 	 * @param feeCategory
 	 * @return
 	 */
-	public Integer selectChildren(Integer schoolId, @Param("map") Map<Object, Object> map);
+	public Integer selectChildren(@Param("schoolId")Integer schoolId, @Param("map") Map<Object, Object> map);
 
 	/**
 	 * 查询所有艺考学生
@@ -33,7 +33,7 @@ public interface StudentMapper {
 	 * @param feeCategory
 	 * @return
 	 */
-	public Integer selectYiKao(Integer schoolId, @Param("map") Map<Object, Object> map);
+	public Integer selectYiKao(@Param("schoolId")Integer schoolId, @Param("map") Map<Object, Object> map);
 
 	/**
 	 * 添加学生班级查询学生主键

@@ -102,6 +102,23 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="findChildrenesClassStudnetByClassIdAndTime"
+		parameterType="java.lang.Integer" resultMap="studnetByClassIdMap">
+		select
+		<include refid="childrenesClassStudnetCol" />
+		from childrenesclassstudnet ccs,student t
+		<where>
+			ccs.studentId = t.studentId and ccs.state != 2
+			<if test="classId !=null and classId!=''">
+				and classId = #{classId}
+			</if>
+			
+			<if test="startTime !=null and startTime !=''">
+				and ccs.enrollmentTime &gt;= #{startTime} and ccs.enrollmentTime &lt;= #{endTime}
+			</if>
+		</where>
+	</select>
 
 
 	<update id="updateChildrenesClassStudnet"

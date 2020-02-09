@@ -46,7 +46,7 @@
 							<div class="navbar-custom">
 								<ul class="list-unstyled topbar-right-menu float-right mb-0">
 
-
+									<span hidden="hidden" id="adminState">${user.state }</span>
 									<li class="dropdown notification-list"><a
 										class="nav-link dropdown-toggle nav-user arrow-none mr-0"
 										data-toggle="dropdown" href="#" role="button"

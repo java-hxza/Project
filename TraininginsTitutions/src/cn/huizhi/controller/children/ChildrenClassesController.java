@@ -249,7 +249,37 @@ public class ChildrenClassesController {
 
 		return "seeStudentInfo";
 	}
+	@RequestMapping("queryStudentByTime.html")
+	public String queryStudent(Integer classId,String startTime,String endTime, HttpSession session) {
 
+		Integer schoolType = (Integer) session.getAttribute("schoolType");
+		session.setAttribute("classId", classId);
+
+		List<Class> classList = classService
+				.findChildrenescClasses(String.valueOf((Integer) session.getAttribute("schoolId")));
+		List<TeacherHour> teacherHourList = teacherHourService.selectCurriculumInfo(classId, null, null);
+		session.setAttribute("teacherHourList", teacherHourList);
+		if (schoolType == 1) {
+			List<ChildrenesClassStudnet> childrenesClassStudnets = childrenesClassStudnetService
+					.findChildrenesClassStudnetByClassIdAndTime(String.valueOf(classId),startTime,endTime);
+			session.setAttribute("childrenesClassStudnets", childrenesClassStudnets);
+			return "root/studentInfo/children/seeStudentInfo";
+		}
+		if (schoolType == 2) {
+			List<HighesClassStudnet> highesClassStudnets = highesClassStudnetService
+					.findHighesClassStudnetListByClassId(classId);
+			session.setAttribute("classList", classList);
+			session.setAttribute("highesClassStudnets", highesClassStudnets);
+			return "root/studentInfo/high/seeStudentInfo";
+		}
+		if (schoolType == 3) {
+			List<ArtClassStudnet> artClassStudnets = artClassStudnetService.findArtClassStudnetListByClassId(classId);
+			session.setAttribute("artClassStudnets", artClassStudnets);
+			return "root/studentInfo/art/seeStudentInfo";
+		}
+
+		return "seeStudentInfo";
+	}
 	/**
 	 * 查询学生信息
 	 * 
@@ -269,7 +299,34 @@ public class ChildrenClassesController {
 
 		return "";
 	}
-
+	
+	@RequestMapping("delClass.html")
+	@ResponseBody
+	public Map<String, String> delClass(String classId) {
+		Map jsonMap = new HashMap<String, String>();
+		if(classService.delClass(classId)>0) {
+			jsonMap.put("state","1");
+		}else {
+			jsonMap.put("state","0");
+		}
+		return jsonMap;
+	}
+	
+	/**
+	 *根据主键查询班级信息 
+	 * @param classId
+	 * @return
+	 */
+	@RequestMapping("queryClassByClassId.html")
+	@ResponseBody
+	public Map<String, Object> queryClassByClassId(Integer classId){
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		Class class1 = classService.findClassByClassId(classId);
+		jsonMap.put("class",class1);
+		return jsonMap;
+	}
+	
 	/**
 	 * 修改学生信息
 	 * 

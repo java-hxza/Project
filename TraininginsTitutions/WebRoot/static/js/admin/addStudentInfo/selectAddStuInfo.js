@@ -57,10 +57,10 @@ $(function(){
 			endTime = new Date();
 		}
 		if(startTime != '' || startTime != null){
-			startTime = new Date(startTime);
+			startTime = formatTime(startTime, 'Y-M-D h:m:s');
 		}
 		if(endTime != '' || endTime != null){
-			endTime = new Date(endTime);
+			endTime = formatTime(endTime, 'Y-M-D h:m:s');
 		}
 		if(schoolType == 1){
 			location.href="childrenAddStudentInfo.html?schoolId="+schoolId+"&schoolName="+schoolName+"&startTime="+startTime+"&endTime="+endTime+"&schoolType="+schoolType;

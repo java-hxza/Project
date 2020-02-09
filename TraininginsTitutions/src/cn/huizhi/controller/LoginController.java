@@ -98,7 +98,6 @@ public class LoginController {
 	@RequestMapping("userLogin.html")
 	@ResponseBody
 	public HashMap<String, String> validateLogin(String loginName,String loginPassword,HttpSession session) {
-		
 		User user = userService.findUserByLogin(loginName, loginPassword);
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
 		if (user != null) {
@@ -108,7 +107,7 @@ public class LoginController {
 			session.setAttribute("loginType", 1);
 			jsonMap.put("state", "1");
 			jsonMap.put("UsertypeId", user.getUserTypeId());
-			
+			System.out.println(user.getState());
 		} 
 		if(user == null) {
 			Teacher teacher = teacherService.findTeacherByLogin(loginName, loginPassword, null);
@@ -118,14 +117,13 @@ public class LoginController {
 				session.setAttribute("loginType", 2);
 				session.setAttribute("state", teacher.getState());
 				session.setAttribute("addState", teacher.getAddState());
-				session.setAttribute("schoolListByUId", schoolListByUId);
 				session.setAttribute("user", teacher);
+				session.setAttribute("schoolListByUId", schoolListByUId);
 				jsonMap.put("state", "1");
 			}else {
 				jsonMap.put("state", "0");
 			}
 		}
- 
 		return jsonMap;
 	}
 	
@@ -136,7 +134,8 @@ public class LoginController {
 	 * @param schoolId
 	 * @param session
 	 * @return
-	 *//*
+	 */
+	/*
 	@RequestMapping("adminLogin.html")
 	@ResponseBody
 	public HashMap<String, String> validateAdminLogin(String loginName,String loginPassword,String schoolId,HttpSession session) {
@@ -158,7 +157,8 @@ public class LoginController {
 	 */
 	@RequestMapping("selectionModule.html")
 	public String toIndex() {
-		return"selectionModule";
+		
+		return "selectionModule";
 	}
 
 /*	@RequestMapping("teacherLogin.html")

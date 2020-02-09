@@ -356,7 +356,6 @@ public class WelcomeController {
 
 		Integer loginType = (Integer) session.getAttribute("loginType");
 		if (loginType == 1) {
-
 			List<UserDiction> list = (List<UserDiction>) session.getAttribute("schoolListByUId");
 			for (int i = 0; i < list.size(); i++) {
 				if (2 == list.get(i).getSchool().getSchoolType()) {
@@ -373,9 +372,7 @@ public class WelcomeController {
 				}
 			}
 		}
-
 		return "redirect:/selectionModule.html";
-
 	}
 
 	@RequestMapping("artSchoolLogin.html")
