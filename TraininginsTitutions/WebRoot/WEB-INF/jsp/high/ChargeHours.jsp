@@ -121,7 +121,10 @@
 														<div class="col-sm-4">
 															<a href="${Path }/ChargeHours.html"
 																class="btn btn-danger mb-2"><i
-																class="mdi mdi-plus-circle mr-2"></i> 添加</a> <a
+																class="mdi mdi-plus-circle mr-2"></i> 续费</a> <a
+																href="${Path }/ChargeHours2.html"
+																class="btn btn-danger mb-2"><i
+																class="mdi mdi-plus-circle mr-2"></i> 另开</a> <a
 																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="updateOrder()"><i
 																class="mdi mdi-plus-circle mr-2"></i> 修改</a> <a
@@ -133,7 +136,7 @@
 															<a><button type="button" id="btn2"
 																	class="btn btn-danger mb-2 Exports">导出Excel</button></a>
 														</div>
-														
+
 														<div class="row col-sm-12">
 															<div class="col-md-2">
 																<div class="input-group">
@@ -316,22 +319,22 @@
 														</table>
 														<c:if test="${JY == 1 }">
 															<div class="float-right">
-															<a
-																href="${pageContext.request.contextPath }/selectOrderHour.html?orderCounts=0&classId=0&studentName=000111"><input
-																type='button' class='btn btn-info button-next'
-																name='next' value="首页" /></a> <a
-																href="${pageContext.request.contextPath }/selectOrderHour.html?classId=0&studentName=000111&orderCounts= ${orderCounts - 2 }"><input
-																type='button' class='btn btn-info button-last'
-																name='last' value="上一页" /></a> <input type='button'
-																class='btn btn-info button-last' name='last'
-																value="${orderCounts }/${orderCount }" /> <a
-																href="${pageContext.request.contextPath }/selectOrderHour.html?classId=0&studentName=000111&orderCounts= ${orderCounts}"><input
-																type='button' class='btn btn-info button-next'
-																name='next' value="下一页" /></a> <a
-																href="${pageContext.request.contextPath }/selectOrderHour.html?classId=0&studentName=000111&orderCounts= ${orderCount }"><input
-																type='button' class='btn btn-info button-last'
-																name='last' value="末页" /></a>
-														</div>
+																<a
+																	href="${pageContext.request.contextPath }/selectOrderHour.html?orderCounts=0&classId=0&studentName=000111"><input
+																	type='button' class='btn btn-info button-next'
+																	name='next' value="首页" /></a> <a
+																	href="${pageContext.request.contextPath }/selectOrderHour.html?classId=0&studentName=000111&orderCounts= ${orderCounts - 2 }"><input
+																	type='button' class='btn btn-info button-last'
+																	name='last' value="上一页" /></a> <input type='button'
+																	class='btn btn-info button-last' name='last'
+																	value="${orderCounts }/${orderCount }" /> <a
+																	href="${pageContext.request.contextPath }/selectOrderHour.html?classId=0&studentName=000111&orderCounts= ${orderCounts}"><input
+																	type='button' class='btn btn-info button-next'
+																	name='next' value="下一页" /></a> <a
+																	href="${pageContext.request.contextPath }/selectOrderHour.html?classId=0&studentName=000111&orderCounts= ${orderCount }"><input
+																	type='button' class='btn btn-info button-last'
+																	name='last' value="末页" /></a>
+															</div>
 														</c:if>
 													</div>
 													<!-- end card-body-->

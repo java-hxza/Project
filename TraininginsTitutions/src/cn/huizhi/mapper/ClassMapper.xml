@@ -40,7 +40,8 @@
 		join school s on cc.schoolId = s.schoolId
 		join
 		departmentofpediatrics dp on cc.dpId = dp.dpId
-		join classtype ct on ct.classTypeId = cc.classTypeId
+		join classtype ct on
+		ct.classTypeId = cc.classTypeId
 		<where>
 			<if test="schoolId !=null and schoolId !=''">
 				cc.schoolId =#{schoolId}
@@ -70,7 +71,7 @@
 				javaType="java.lang.String" />
 		</collection>
 		<collection property="classType2" javaType="ClassType">
-			<result column="ct_classTypeName" property="classTypeName"/>
+			<result column="ct_classTypeName" property="classTypeName" />
 		</collection>
 	</resultMap>
 
@@ -78,7 +79,8 @@
 		insert into
 		traininginstitutions.class ( classNumber, className, dpId,
 		schoolId,classTypeId, headmaster, teacherId, classLevel)
-		values ( #{classNumber},#{className}, #{dpId}, #{schoolId},
+		values (
+		#{classNumber},#{className}, #{dpId}, #{schoolId},
 		#{classTypeId},
 		#{headmaster}, #{teacherId}, #{classLevel} )
 	</insert>
@@ -95,7 +97,8 @@
 		join school s on cc.schoolId =
 		s.schoolId
 		join departmentofpediatrics dp on cc.dpId = dp.dpId
-		join classtype ct on ct.classTypeId = cc.classTypeId
+		join
+		classtype ct on ct.classTypeId = cc.classTypeId
 		<where>
 			<if test="teacherId !=null and teacherId !=''">
 				cc.teacherId =#{teacherId}
@@ -116,7 +119,8 @@
 		school s ON c.schoolId=s.schoolId
 		JOIN classtype ct ON
 		c.classTypeId=ct.classTypeId
-		WHERE c.schoolId=#{0} AND ct.classTypeTime=#{1}
+		WHERE c.schoolId=#{0} AND
+		ct.classTypeTime=#{1}
 		ORDER BY cd
 	</select>
 
@@ -150,7 +154,8 @@
 		JOIN departmentofpediatrics d ON c.dpId=d.dpId
 		JOIN classtype ct ON
 		c.classTypeId=ct.classTypeId
-		WHERE c.schoolId=#{0} AND ct.classTypeTime=#{1}
+		WHERE c.schoolId=#{0} AND
+		ct.classTypeTime=#{1}
 		ORDER BY cd
 	</select>
 
@@ -289,5 +294,48 @@
 		resultType="Class">
 		SELECT * FROM class WHERE schoolId=#{0}
 	</select>
+
+	<select id="selectUnopenedClass"
+		parameterType="java.lang.Integer" resultType="Class">
+		SELECT
+		s.classId,s.className
+		FROM
+		studenttool s
+		WHERE s.studentId = #{0}
+	</select>
+
+	<select id="selectNotUnopenedClass"
+		statementType="STATEMENT" resultMap="selectNotUnopenedClasses">
+		SELECT
+		c.classId cd,c.classNumber,c.className,c.schoolId
+		cs,c.classTypeId,c.headmaster,c.teacherId,c.classLevel,d.dpId,d.dpTypeName,s.schoolName
+		ssi
+		FROM class c
+		JOIN departmentofpediatrics d ON c.dpId=d.dpId
+		JOIN
+		school s ON c.schoolId=s.schoolId
+		JOIN classtype ct ON
+		c.classTypeId=ct.classTypeId
+		WHERE c.classId NOT IN(${classId}) AND c.schoolId=${schoolId}
+	</select>
+	
+	<resultMap id="selectNotUnopenedClasses" type="Class">
+		<id column="cd" property="classId" />
+		<result column="c.classNumber" property="classNumber" />
+		<result column="c.className" property="className" />
+		<result column="c.classTypeId" property="classTypeId" />
+		<result column="cs" property="schoolId" />
+		<result column="c.headmaster" property="headmaster" />
+		<result column="c.teacherId" property="teacherId" />
+		<result column="c.classLevel" property="classLevel" />
+		<collection property="departmentOfPediatrics"
+			javaType="DepartmentOfPediatrics">
+			<id column="d.dpId" property="dpId" javaType="java.lang.Integer" />
+			<result column="d.dpTypeName" property="dpTypeName" />
+		</collection>
+		<collection property="school" javaType="School">
+			<result column="ssi" property="schoolName" />
+		</collection>
+	</resultMap>
 
 </mapper>

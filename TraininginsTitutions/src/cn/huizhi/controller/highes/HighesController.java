@@ -2,11 +2,13 @@ package cn.huizhi.controller.highes;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -363,6 +365,40 @@ public class HighesController {
 		model.addAttribute("feeCategory", feeCategory);
 		model.addAttribute("teacher", teacher);
 		return "high/AddChargeHours";
+	}
+	
+	/**
+	 * 收费按课时另开项目
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("ChargeHours2.html")
+	public String ChargeHours2(Model model) {
+		List<Student> student = studentService.selectStudentUsedIntegral("childrenesclassstudnet", (Integer) session.getAttribute("schoolId"));
+		if(student.size() > 0) {
+			List<Class> classes = classService.selectUnopenedClass(student.get(0).getStudentId());
+			String classIds = "";
+			for (int i = 0; i < classes.size(); i++) {
+				classIds += classes.get(i).getClassId() + ",";
+			}
+			System.out.println(classIds.substring(0,classIds.length()-1));
+			List<Class> classes2 = classService.selectNotUnopenedClass(classIds.substring(0,classIds.length()-1), (Integer) session.getAttribute("schoolId"));
+			model.addAttribute("classes", classes2);
+		}
+		List<PaymentMethod> paymentMethod = paymentMethodService.selectPaymentMethod();
+		List<FeeCategory> feeCategory = feecategoryService
+				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
+		List<Gift> gift = giftService.selectGift((Integer) session.getAttribute("schoolId"));
+		List<Teacher> teacher = teacherService.selectTeacherZS((Integer) session.getAttribute("schoolId"));
+		List<Activity> activity = activityService.selectActivitySchool((Integer) session.getAttribute("schoolId"));
+		model.addAttribute("activity", activity);
+		model.addAttribute("gift", gift);
+		model.addAttribute("student", student);
+		model.addAttribute("paymentMethod", paymentMethod);
+		model.addAttribute("feeCategory", feeCategory);
+		model.addAttribute("teacher", teacher);
+		return "high/AddChargeHours2";
 	}
 
 	/**

@@ -198,6 +198,7 @@
 		,ca.className FROM student t
 		JOIN ${table} c ON t.studentId=c.studentId
 		JOIN class ca ON c.classId=ca.classId WHERE ca.schoolId=${schoolId}
+		ORDER BY t.studentId desc
 	</select>
 
 	<resultMap type="Student" id="selectStudentUsedIntegrals">

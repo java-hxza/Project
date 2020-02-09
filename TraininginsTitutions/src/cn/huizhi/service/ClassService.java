@@ -98,4 +98,15 @@ public interface ClassService {
 	 * @return
 	 */
 	public Integer delClassTable();
+	
+	/**
+	 * 查询学生所参与班级主键
+	 */
+	public List<Class> selectUnopenedClass(Integer studentId);
+	
+
+	/**
+	 * 查询学生未参与班级
+	 */
+	public List<Class> selectNotUnopenedClass(String classId,Integer schoolId);
 }

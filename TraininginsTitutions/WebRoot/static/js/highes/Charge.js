@@ -565,4 +565,18 @@ $(function() {
 		iwindow.print(); //调用浏览器的打印功能打印指定区域
 		$("#ChargePeriods").css("width", "100%");
 	};
+//	$(window).bind('beforeunload',function(){
+//		
+//		$.ajax({
+//			type : "POST",
+//			url : "selectActivitySchools.html",
+//			data : {
+//
+//			},
+//			dataType : "json",
+//			success : function(data) {
+//				}
+//		});
+//		return "";
+//		});
 });

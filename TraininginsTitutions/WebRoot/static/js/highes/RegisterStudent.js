@@ -1177,7 +1177,7 @@ $(function() {
 						return false;
 					}
 					if (studentName == "" || studentBirth == "" || startTime == "") {
-						alert("请填写 姓名- 出生日期-报名时间！");
+						alert("请填写 姓名-出生日期-报名时间！");
 						return false;
 					}
 					for (var i = 0; i < $(".feecateIds2").length; i++) {
