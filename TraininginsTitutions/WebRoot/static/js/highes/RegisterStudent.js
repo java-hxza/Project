@@ -432,7 +432,7 @@ $(function() {
 					data = JSON.parse(data);
 					$(".classes option").remove();
 					for (var i = 0; i < data.classes.length; i++) {
-						$(".classes").append("<option class='" + data.classes[i].headmaster + "' value='" + data.classes[i].classId + "' name='" + data.classes[i].departmentOfPediatrics.dpId + "' dpTypeName='" + data.classes[i].departmentOfPediatrics.dpTypeName + "' classTypeId='" + data.classes[i].departmentOfPediatrics.classTypeId + "'>" + data.classes[i].className + "</option>");
+						$(".classes").append("<option class='" + data.classes[i].headmaster + "' value='" + data.classes[i].classId + "' name='" + data.classes[i].departmentOfPediatrics.dpId + "' dpTypeName='" + data.classes[i].departmentOfPediatrics.dpTypeName + "' classTypeId='" + data.classes[i].departmentOfPediatrics.classTypeId + "' teacherId='" + data.classes[i].teacherId + "'>" + data.classes[i].className + "</option>");
 					}
 					$(".departmentofpediatricsIds").val(data.classes[0].departmentOfPediatrics.dpTypeName);
 
@@ -588,7 +588,9 @@ $(function() {
 				var EntertainTeacher = $(".EntertainTeacher").val();
 				var ConsultationTeacher = $(".ConsultationTeacher").val();
 				var schoolTime = "";
+				var className = $(".classes option:selected").text();
 				var startTimes = " " + Time.getHours() + ":" + Time.getMinutes().toString();
+				var teachers = $(".classes option:selected").attr("teacherId");
 				if (discount != "" && discount != 0) {
 					dpMoney = (parseFloat($.trim($(".moneys").val())).toFixed(1) - discount).toFixed(1);
 				}
@@ -648,9 +650,11 @@ $(function() {
 					data : {
 						studentName : studentName,
 						parentName : parentName,
+						className : className,
 						telephone : telephone,
 						studentBirth : studentBirth,
 						remarks : remarks,
+						teachers : teachers,
 						familyAddress : familyAddress,
 						registrationConsultant : registrationConsultant,
 						startTime : startTime,
@@ -716,7 +720,7 @@ $(function() {
 						data = JSON.parse(data);
 						$(".classes option").remove();
 						for (var i = 0; i < data.classes.length; i++) {
-							$(".classes").append("<option class='" + data.classes[i].headmaster + "' value='" + data.classes[i].classId + "' name='" + data.classes[i].departmentOfPediatrics.dpId + "' dpTypeName='" + data.classes[i].departmentOfPediatrics.dpTypeName + "' classTypeId='" + data.classes[i].departmentOfPediatrics.classTypeId + "'>" + data.classes[i].className + "</option>");
+							$(".classes").append("<option class='" + data.classes[i].headmaster + "' value='" + data.classes[i].classId + "' name='" + data.classes[i].departmentOfPediatrics.dpId + "' dpTypeName='" + data.classes[i].departmentOfPediatrics.dpTypeName + "' classTypeId='" + data.classes[i].departmentOfPediatrics.classTypeId + "' teacherId='" + data.classes[i].teacherId + "'>" + data.classes[i].className + "</option>");
 						}
 						$(".departmentofpediatricsIds2").val(data.classes[0].departmentOfPediatrics.dpTypeName);
 
@@ -952,7 +956,7 @@ $(function() {
 						data = JSON.parse(data);
 						$(".classes option").remove();
 						for (var i = 0; i < data.classes.length; i++) {
-							$(".classes").append("<option class='" + data.classes[i].headmaster + "' value='" + data.classes[i].classId + "' name='" + data.classes[i].departmentOfPediatrics.dpId + "' dpTypeName='" + data.classes[i].departmentOfPediatrics.dpTypeName + "' classTypeId='" + data.classes[i].departmentOfPediatrics.classTypeId + "'>" + data.classes[i].className + "</option>");
+							$(".classes").append("<option class='" + data.classes[i].headmaster + "' value='" + data.classes[i].classId + "' name='" + data.classes[i].departmentOfPediatrics.dpId + "' dpTypeName='" + data.classes[i].departmentOfPediatrics.dpTypeName + "' classTypeId='" + data.classes[i].departmentOfPediatrics.classTypeId + "' teacherId='" + data.classes[i].teacherId + "'>" + data.classes[i].className + "</option>");
 						}
 						$(".departmentofpediatricsIds2").val(data.classes[0].departmentOfPediatrics.dpTypeName);
 
@@ -1150,6 +1154,8 @@ $(function() {
 					var EntertainTeacher = $(".EntertainTeacher").val();
 					var ConsultationTeacher = $(".ConsultationTeacher").val();
 					var schoolTime = "";
+					var className = $(".classes option:selected").text();
+					var teacherIds = $(".classes option:selected").attr("teacherId");
 					for (var i = 0; i < $(".feecateIds2").length; i++) {
 						if ($(".feecateIds2").eq(i).val() != "") {
 							feecateMoney = feecateMoney + "," + $(".feecateIds2").eq(i).val();
@@ -1239,6 +1245,7 @@ $(function() {
 							studentName : studentName,
 							parentName : parentName,
 							telephone : telephone,
+							className : className,
 							studentBirth : studentBirth,
 							remarks : remarks,
 							familyAddress : familyAddress,
@@ -1262,6 +1269,7 @@ $(function() {
 							date : date2,
 							discount : discount,
 							teacherId : teacherId,
+							teacherIds : teacherIds,
 							studentIDCard : studentIDCard,
 							feecateMoney : feecateMoney,
 							startTimes : startTimes,

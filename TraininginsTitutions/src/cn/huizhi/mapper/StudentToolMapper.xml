@@ -7,7 +7,7 @@
 	<insert id="addStudentTool" parameterType="java.lang.Integer">
 		INSERT INTO
 		traininginstitutions.studenttool (studentId, teacherId,
-		teacherName,className)VALUES(#{studentId}, #{teacherId}, #{teacherName},#{className});
+		teacherName,className,classId)VALUES(#{studentId}, #{teacherId}, #{teacherName},#{className},#{classId});
 	</insert>
 	
 </mapper>

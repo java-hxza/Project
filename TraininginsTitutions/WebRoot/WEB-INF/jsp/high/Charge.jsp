@@ -130,7 +130,10 @@
 														<div class="col-sm-4">
 															<a href="${Path }/ChargePeriod.html"
 																class="btn btn-danger mb-2"><i
-																class="mdi mdi-plus-circle mr-2"></i> 添加</a> <a
+																class="mdi mdi-plus-circle mr-2"></i> 续费</a> 
+																<a href="${Path }/ChargePeriod2.html"
+																class="btn btn-danger mb-2"><i
+																class="mdi mdi-plus-circle mr-2"></i> 另开</a><a
 																href="javascript:void(0);"
 																class="btn btn-danger mb-2 del" onclick="updateOrder()"><i
 																class="mdi mdi-plus-circle mr-2"></i> 修改</a> <a

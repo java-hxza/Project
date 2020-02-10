@@ -112,5 +112,5 @@ public interface ClassService {
 	/**
 	 * 查询学生未参与班级
 	 */
-	public List<Class> selectNotUnopenedClass(String classId,Integer schoolId);
+	public List<Class> selectNotUnopenedClass(String classId,Integer schoolId,Integer classTypeTime);
 }

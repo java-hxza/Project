@@ -91,6 +91,16 @@
 								<h4 style="text-align:center">另开项目</h4>
 								<div class="row mb-2 addOrderChildren">
 									<div class="col-md-12">
+										<div class="col-xl-12">
+											<div class="card">
+												<div class="card-body">
+													<h4 class="header-title" style="text-align: center;">${studentInformation }</h4>
+													<div id="datalables-bar" class="apex-charts"></div>
+												</div>
+												<!-- end card body-->
+											</div>
+											<!-- end card -->
+										</div>
 										<form novalidate>
 											<div class="row">
 												<div class="col-md-6">
@@ -103,7 +113,7 @@
 												<div class="col-md-6">
 													<div class="form-group mb-3">
 														<label for="example-select">学员名称</label> <select
-															class="form-control stuId" id="example-select">
+															class="form-control stuId" data-toggle="select2">
 															<c:forEach items="${student }" var="s">
 																<option value="${s.studentId }" class="delSt">${s.studentName}</option>
 															</c:forEach>

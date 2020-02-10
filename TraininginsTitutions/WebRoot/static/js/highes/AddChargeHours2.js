@@ -50,27 +50,51 @@ $(function() {
 //				$(".integral").val($(".money").val());
 //			}
 		}
-		var classIds = $(".classes option:selected").val();
-		if(classIds == undefined) {
-			classIds = 0;
+	});
+	$(".stuId").change(function() {
+		var stuId = $.trim($(".stuId").val());
+		if(stuId == "") {
+			return false;
 		}
 		$.ajax({
 			type : "POST",
-			url : "selectClassStudent.html",
+			url : "StudentInformation.html",
 			data : {
-				classId : classIds
+				studentId : stuId
 			},
 			dataType : "json",
 			success : function(data) {
 				data = JSON.parse(data);
-				$(".delSt").remove();
-				for (var i = 0; i < data.children.length; i++) {
-					$(".stuId").append("<option class='delSt' value='" + data.children[i].studentId + "'> " + data.children[i].studentName + "</option>");
-				}
+				$(".header-title").html(data.studentInformation);
 
 			},
 			error : function(data) {
-				alert("系统出错！");
+				alert("系统出错2！");
+				location.href = "selectOrderHour.html?orderCounts=0&classId=0&studentName=000111";
+			}
+		});
+		$.ajax({
+			type : "POST",
+			url : "ChargeHoursClass.html",
+			data : {
+				studentId : stuId,
+				classTypeTime : 1
+			},
+			dataType : "json",
+			success : function(data) {
+				data = JSON.parse(data);
+				$(".classes").empty();
+					if(data.classes == "0") {
+						alert("该学生已参与所有班级！");
+					}else {
+						for (var i = 0; i < data.classes.length; i++) {
+							$(".classes").append("<option value='" + data.classes[i].classId + "' name='" + data.classes[i].departmentOfPediatrics.dpId + "' dpTypeName='" + data.classes[i].departmentOfPediatrics.dpTypeName + "' classTypeId='" + data.classes[i].classTypeId + "' schoolIds2='" + data.classes[i].school.schoolName + "'> " + data.classes[i].className + "</option>");
+						}
+					}
+
+			},
+			error : function(data) {
+				alert("系统出错22！");
 				location.href = "selectOrderHour.html?orderCounts=0&classId=0&studentName=000111";
 			}
 		});

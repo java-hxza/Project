@@ -124,4 +124,12 @@ public class StudentServiceImpl implements StudentService {
 		return studentMapper.selectByClassIdStudent(schoolId, classId, studentName);
 	}
 
+	@Override
+	public List<Student> selectStudentInformation(Integer studentId) {
+		// TODO Auto-generated method stub
+		return studentMapper.selectStudentInformation(studentId);
+	}
+	
+	
+
 }

@@ -130,4 +130,11 @@ public interface StudentService {
 	 */
 	public List<Student> selectByClassIdStudent(Integer schoolId,Integer classId,String studentName);
 	
+	/**
+	 * 查询该学生的信息
+	 * @param studentId
+	 * @return
+	 */
+	public List<Student> selectStudentInformation(Integer studentId);
+	
 }

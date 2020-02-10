@@ -21,27 +21,6 @@ $(function() {
 		$(".date").val(Time.getFullYear() + "-" + month + "-" + Time.getDate());
 		$(".classes").click(function() {
 			$(".departmentofpediatricsIds").val($(".classes option:selected").attr("departmentOfPediatrics"));
-			var classIds = $(".classes option:selected").val();
-			$.ajax({
-				type : "POST",
-				url : "selectClassStudent.html",
-				data : {
-					classId : classIds
-				},
-				dataType : "json",
-				success : function(data) {
-					data = JSON.parse(data);
-					$(".delSt").remove();
-					for (var i = 0; i < data.children.length; i++) {
-						$(".stuId").append("<option class='delSt' value='" + data.children[i].studentId + "'> " + data.children[i].studentName + "</option>");
-					}
-
-				},
-				error : function(data) {
-					alert("系统出错！");
-					location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
-				}
-			});
 		});
 		$(".dpMoney").blur(function() {
 			if($(".dpMoney").val() == "" || $(".dpMoney").val() == 0) {
@@ -95,6 +74,7 @@ $(function() {
 				}
 			}
 		});
+		
 		$(".TiJiao").click(function() {
 			var date = $.trim($(".date").val());
 			var dpMoney = $.trim($(".dpMoneyActivity4").val());
@@ -234,27 +214,6 @@ $(function() {
 		});
 		$(".classes").click(function() {
 			$(".departmentofpediatricsIds").val($(".classes option:selected").attr("departmentOfPediatrics"));
-			var classIds = $(".classes option:selected").val();
-			$.ajax({
-				type : "POST",
-				url : "selectClassStudent.html",
-				data : {
-					classId : classIds
-				},
-				dataType : "json",
-				success : function(data) {
-					data = JSON.parse(data);
-					$(".delSt").remove();
-					for (var i = 0; i < data.children.length; i++) {
-						$(".stuId").append("<option class='delSt' value='" + data.children[i].studentId + "'> " + data.children[i].studentName + "</option>");
-					}
-
-				},
-				error : function(data) {
-					alert("系统出错！");
-					location.href = "selectOrderHour.html?orderCounts=0&classId=0&studentName=000111";
-				}
-			});
 		});
 		$(".giftNumber").blur(function() {
 			if (parseInt($.trim($(".giftNumber").val())) > parseInt($.trim($(".giftName option:selected").attr("name")))) {
@@ -321,6 +280,54 @@ $(function() {
 				$(".dpMoneyActivity4").val($(".dpMoney").val());
 				$(".integral").val($(".dpMoney").val());
 			}
+		});
+		$(".stuId").change(function() {
+			var stuId = $.trim($(".stuId").val());
+			if(stuId == "") {
+				return false;
+			}
+			$.ajax({
+				type : "POST",
+				url : "StudentInformation.html",
+				data : {
+					studentId : stuId
+				},
+				dataType : "json",
+				success : function(data) {
+					data = JSON.parse(data);
+					$(".header-title").html(data.studentInformation);
+
+				},
+				error : function(data) {
+					alert("系统出错！");
+					location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
+				}
+			});
+			$.ajax({
+				type : "POST",
+				url : "ChargeHoursClass.html",
+				data : {
+					studentId : stuId,
+					classTypeTime : 0
+				},
+				dataType : "json",
+				success : function(data) {
+					data = JSON.parse(data);
+					$(".classes").empty();
+						if(data.classes == "0") {
+							alert("该学生已参与所有班级！");
+						}else {
+							for (var i = 0; i < data.classes.length; i++) {
+								$(".classes").append("<option value='" + data.classes[i].classId + "' name='" + data.classes[i].departmentOfPediatrics.dpId + "' dpTypeName='" + data.classes[i].departmentOfPediatrics.dpTypeName + "' classTypeId='" + data.classes[i].classTypeId + "' schoolIds2='" + data.classes[i].school.schoolName + "'> " + data.classes[i].className + "</option>");
+							}
+						}
+
+				},
+				error : function(data) {
+					alert("系统出错！");
+					location.href = "selectOrderPeriod.html?orderCounts=0&classId=0&studentName=000111";
+				}
+			});
 		});
 		var time = null;
 		$(".firstdate").blur(function() {

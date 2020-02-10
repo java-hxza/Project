@@ -158,4 +158,11 @@ public interface StudentMapper {
 	 */
 	public Integer StudentInsert(@Param("student") List<Student> student);
 	
+	/**
+	 * 查询该学生的信息
+	 * @param studentId
+	 * @return
+	 */
+	public List<Student> selectStudentInformation(Integer studentId);
+	
 }

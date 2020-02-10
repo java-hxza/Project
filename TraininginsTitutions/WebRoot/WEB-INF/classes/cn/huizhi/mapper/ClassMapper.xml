@@ -321,7 +321,8 @@
 		school s ON c.schoolId=s.schoolId
 		JOIN classtype ct ON
 		c.classTypeId=ct.classTypeId
-		WHERE c.classId NOT IN(${classId}) AND c.schoolId=${schoolId}
+		JOIN classtype ctt ON c.classTypeId = ctt.classTypeId
+		WHERE c.classId NOT IN(${classId}) AND c.schoolId=${schoolId}  AND ctt.classTypeTime=${classTypeTime}
 	</select>
 	
 	<resultMap id="selectNotUnopenedClasses" type="Class">

@@ -36,7 +36,8 @@
 		WHERE
 		c.schoolId=#{schoolId}
 		<if test="map.startTime !=null and map.startTime!=''">
-			and t.startTime &gt;= #{map.startTime} and t.startTime &lt;=
+			and t.startTime &gt;= #{map.startTime} and t.startTime
+			&lt;=
 			#{map.endTime}
 		</if>
 
@@ -53,7 +54,8 @@
 		c.schoolId=#{schoolId} AND
 		t.feeCategory = 1
 		<if test="map.startTime !=null and map.startTime!=''">
-			and t.startTime &gt;= #{map.startTime} and t.startTime &lt;=
+			and t.startTime &gt;= #{map.startTime} and t.startTime
+			&lt;=
 			#{map.endTime}
 		</if>
 	</select>
@@ -71,7 +73,8 @@
 		c.schoolId=#{schoolId} AND
 		t.feeCategory = 3
 		<if test="map.startTime !=null and map.startTime!=''">
-			and t.startTime &gt;= #{map.startTime} and t.startTime &lt;=
+			and t.startTime &gt;= #{map.startTime} and t.startTime
+			&lt;=
 			#{map.endTime}
 		</if>
 	</select>
@@ -644,5 +647,27 @@
 			#{order.remarks},#{order.orderNumber},#{order.expenditureitemsId},#{order.classId},#{order.giftId},#{order.giftNumber},#{order.integral},#{order.teacherId},#{order.discount},#{order.feecateMoney},#{order.feecateMoneyYiKao},#{order.activityId},#{order.serviceCharge})
 		</foreach>
 	</insert>
+
+	<select id="selectStudentInformation"
+		resultMap="selectStudentInformations">
+		SELECT
+		s.studentId ss,s.studentName st,s.studentSex sex,s.studentBirth sb,GROUP_CONCAT(c.className)
+		cc
+		FROM student s
+		JOIN studenttool st ON s.studentId=st.studentId
+		JOIN class c ON c.classId=st.classId
+		WHERE s.studentId=#{0}
+		GROUP BY s.studentId
+	</select>
+
+	<resultMap type="Student" id="selectStudentInformations">
+		<result column="ss" property="studentId" />
+		<result column="st" property="studentName" />
+		<result column="sb" property="studentBirth" />
+		<result column="sex" property="studentSex" />
+		<collection property="classes" javaType="Class">
+			<result column="cc" property="className" />
+		</collection>
+	</resultMap>
 
 </mapper>

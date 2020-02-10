@@ -110,5 +110,5 @@ public interface ClassMapper {
 	/**
 	 * 查询学生未参与班级
 	 */
-	public List<Class> selectNotUnopenedClass(@Param("classId")String classId,@Param("schoolId")Integer schoolId);
+	public List<Class> selectNotUnopenedClass(@Param("classId")String classId,@Param("schoolId")Integer schoolId,@Param("classTypeTime")Integer classTypeTime);
 }
