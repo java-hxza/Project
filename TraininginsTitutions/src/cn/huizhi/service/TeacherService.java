@@ -108,4 +108,11 @@ public interface TeacherService {
 	 */
 	public Integer updateTeacherQuanXian(Integer state,Integer addState,Integer teacherId);
 	
+	/**
+	 * 学生注册页面老师
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Teacher> selectTeacherType(Integer schoolId);
+	
 }

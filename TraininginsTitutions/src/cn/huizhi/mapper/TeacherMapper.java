@@ -108,5 +108,10 @@ public interface TeacherMapper {
 	 */
 	public Integer updateTeacherQuanXian(@Param("state")Integer state,@Param("addState")Integer addState,@Param("teacherId")Integer teacherId);
 	
-	
+	/**
+	 * 学生注册页面老师
+	 * @param schoolId
+	 * @return
+	 */
+	public List<Teacher> selectTeacherType(Integer schoolId);
 }

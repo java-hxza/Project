@@ -278,6 +278,16 @@
 																</select>
 															</div>
 														</div>
+														<div class="col-md-6 teachers2" style="display: none;">
+													<div class="form-group mb-3">
+														<label for="example-select">班级老师</label> <select
+															class="form-control teachers" data-toggle="select2">
+															<c:forEach items="${teachers }" var="t">
+																<option value="${t.teacherId }" class="delSt">${t.teacherName}  —  ${t.remarks}</option>
+															</c:forEach>
+														</select>
+													</div>
+												</div>
 													</div>
 
 													<div class="row">
@@ -368,7 +378,8 @@
 														</div>
 														<div class="col-3">
 															<div class="form-group mb-3">
-																<label for="example-select">课程名称</label> <input
+																<label for="example-select">
+																课程名称</label> <input
 																	class="form-control departmentofpediatricsIds"
 																	type="text" id="billing-last-name" disabled />
 															</div>

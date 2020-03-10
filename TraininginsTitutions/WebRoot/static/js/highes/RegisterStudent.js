@@ -406,6 +406,7 @@ $(function() {
 			});
 		});
 	}else {
+		$(".teachers2").show();
 		$(".Headmasters").remove();
 		$(".professionalTeachers").remove();
 	}
@@ -590,12 +591,16 @@ $(function() {
 				var schoolTime = "";
 				var className = $(".classes option:selected").text();
 				var startTimes = " " + Time.getHours() + ":" + Time.getMinutes().toString();
-				var teachers = $(".classes option:selected").attr("teacherId");
+				var teachers = $(".teachers option:selected").val();
 				if (discount != "" && discount != 0) {
 					dpMoney = (parseFloat($.trim($(".moneys").val())).toFixed(1) - discount).toFixed(1);
 				}
 				if($(".classes option").val() == undefined) {
 					alert("暂时没有该类型班级！");
+					return false;
+				}
+				if(teachers == undefined) {
+					alert("请选择班级老师！");
 					return false;
 				}
 				if (numbers2 == "" || numbers2 == 0) {
@@ -1155,7 +1160,7 @@ $(function() {
 					var ConsultationTeacher = $(".ConsultationTeacher").val();
 					var schoolTime = "";
 					var className = $(".classes option:selected").text();
-					var teacherIds = $(".classes option:selected").attr("teacherId");
+					var teacherIds = $(".teachers option:selected").val();
 					for (var i = 0; i < $(".feecateIds2").length; i++) {
 						if ($(".feecateIds2").eq(i).val() != "") {
 							feecateMoney = feecateMoney + "," + $(".feecateIds2").eq(i).val();
@@ -1167,6 +1172,10 @@ $(function() {
 					}
 					feecateMoney = feecateMoney.substr(1);
 					var startTimes = " " + Time.getHours() + ":" + Time.getMinutes().toString();
+					if(teacherIds == undefined) {
+						alert("请选择班级老师!");
+						return false;
+					}
 					if (numbers3 == "" || numbers3 == 0) {
 						alert("请填写上课次数!");
 						return false;

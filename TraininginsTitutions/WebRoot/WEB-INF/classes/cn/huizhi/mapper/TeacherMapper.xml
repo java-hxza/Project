@@ -28,7 +28,8 @@
 		t.teacherName t_teacherName,
 		t.teacherTypeId t_teacherTypeId,
 		t.telephone as t_telephone,
-		t.remarks as t_remarks,
+		t.remarks
+		as t_remarks,
 		t.state as t_state,
 		t.addState as t_addState
 	</sql>
@@ -46,7 +47,7 @@
 	</resultMap>
 	<!--教师登录 -->
 	<select id="selectTeacherByLogin" resultMap="teacherByLogin">
-		select distinct 
+		select distinct
 		<include refid="teacherByLoginCol" />
 		from teacher t, teacherdiction td ,school sc
 
@@ -246,12 +247,12 @@
 	<update id="updateTeacherQuanXian">
 		update traininginstitutions.teacher
 		<set>
-		<if test="state !=null and state!=''">
-			state = #{state} ,
-		</if>
-		<if test="addState!=null and addState !=''">
-			addState = #{addState}
-		</if>
+			<if test="state !=null and state!=''">
+				state = #{state} ,
+			</if>
+			<if test="addState!=null and addState !=''">
+				addState = #{addState}
+			</if>
 		</set>
 		<where>
 			<if test="teacherId !=null and teacherId!=''">
@@ -259,5 +260,14 @@
 			</if>
 		</where>
 	</update>
+
+	<select id="selectTeacherType" resultType="Teacher">
+		SELECT
+		t.teacherId,t.teacherName,td.teacherTypeName AS remarks
+		FROM teacher t
+		JOIN teacherdiction d ON t.teacherId=d.teacherId
+		JOIN teachertype td ON t.teacherTypeId=td.teacherTypeId
+		WHERE d.schoolId=#{0}
+	</select>
 
 </mapper>

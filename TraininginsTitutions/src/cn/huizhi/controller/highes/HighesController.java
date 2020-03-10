@@ -1981,6 +1981,7 @@ public class HighesController {
 				.selectFeeCategory((Integer) session.getAttribute("schoolId"));
 		List<Gift> gift = giftService.selectGift((Integer) session.getAttribute("schoolId"));
 		List<Teacher> teacher = teacherService.selectTeacherZS((Integer) session.getAttribute("schoolId"));
+		List<Teacher> teachers = teacherService.selectTeacherType((Integer) session.getAttribute("schoolId"));
 		List<Activity> activity = activityService.selectActivitySchool((Integer) session.getAttribute("schoolId"));
 		List<ClassType> classType = classTypeService.selectClassTypes((Integer) session.getAttribute("schoolId"));
 		List<ClassTime> classTime = classTimeService.selectClassTime((Integer) session.getAttribute("schoolId"));
@@ -1988,6 +1989,7 @@ public class HighesController {
 		model.addAttribute("paymentMethod", paymentMethod);
 		model.addAttribute("feeCategory", feeCategory);
 		model.addAttribute("teacher", teacher);
+		model.addAttribute("teachers", teachers);
 		model.addAttribute("gift", gift);
 		model.addAttribute("classType", classType);
 		model.addAttribute("classTime", classTime);

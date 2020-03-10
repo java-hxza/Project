@@ -105,6 +105,14 @@ public class TeacherServiceImpl implements TeacherService{
 		// TODO Auto-generated method stub
 		return teacherMapper.updateTeacherQuanXian(state, addState, teacherId);
 	}
+
+
+	@Override
+	public List<Teacher> selectTeacherType(Integer schoolId) {
+		// TODO Auto-generated method stub
+		return teacherMapper.selectTeacherType(schoolId);
+	}
+	
 	
 	
 	
