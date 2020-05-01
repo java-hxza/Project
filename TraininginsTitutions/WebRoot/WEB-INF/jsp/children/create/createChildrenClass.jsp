@@ -66,12 +66,7 @@
 								</c:forEach>
 							</select>
 						</div>
-						<div class="form-group">
-							<label for="emailaddress">班主任</label> <select id="headmaster"
-								class="form-control">
-								<option value="">请选择班主任</option>
-							</select>
-						</div>
+
 						<div class="form-group">
 							<label for="emailaddress">班级所属分类</label> 
 							<select id="classTypeId" class="form-control">

@@ -13,7 +13,8 @@ public interface ChildStuReistrationService {
 	 * @param classId
 	 * @return
 	 */
-	public List<ChildStuReistration> findchildStuReistrationListByClass(Integer classId,String startTime,String endTime);
+
+	public List<ChildStuReistration> findchildStuReistrationListByClass(Integer classId,String startTime,String endTime,Integer schoolId);
 	
 	
 	/**

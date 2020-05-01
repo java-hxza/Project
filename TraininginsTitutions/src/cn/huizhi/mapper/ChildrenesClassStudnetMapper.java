@@ -70,6 +70,6 @@ public interface ChildrenesClassStudnetMapper {
 	 * @param endTime
 	 * @return
 	 */
-	public List<ChildrenesClassStudnet> findChildrenesClassStudnetByClassIdAndTime(@Param("classId")String classId,@Param("startTime")String startTime,@Param("endTime")String endTime);
+	public List<ChildrenesClassStudnet> findChildrenesClassStudnetByClassIdAndTime(@Param("classId")String classId,@Param("startTime")String startTime,@Param("endTime")String endTime,@Param("studentName")String studentName,@Param("teacherName")String teacherName,@Param("schoolTime")String schoolTime);
 
 }

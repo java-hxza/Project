@@ -2775,6 +2775,26 @@ public class HighesController {
 	}
 
 	/**
+	 * 删除本校上课时间
+	 * 
+	 * @param classTimeId
+	 * @return
+	 */
+	@RequestMapping("updateClassTime.html")
+	@ResponseBody
+	public Object updateClassTime(Integer classTimeId,String classTimeName) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		ClassTime classTime = new ClassTime();
+		classTime.setClassTimeId(classTimeId); 
+		classTime.setClassTimeName(classTimeName);
+		if (classTimeService.updateClassTime(classTime) == 1) {
+			map.put("del", "1");
+		} else {
+			map.put("del", "0");
+		}
+		return JSONArray.toJSONString(map);
+	}
+	/**
 	 * 转到批量收费页面
 	 * 
 	 * @param model

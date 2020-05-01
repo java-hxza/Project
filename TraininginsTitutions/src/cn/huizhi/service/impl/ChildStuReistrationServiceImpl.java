@@ -14,9 +14,10 @@ import cn.huizhi.service.ChildStuReistrationService;
 public class ChildStuReistrationServiceImpl implements ChildStuReistrationService {
 	@Resource
 	ChildStuReistrationMapper childStuReistrationMapper;
-	
-	public List<ChildStuReistration> findchildStuReistrationListByClass(Integer classId,String startTime,String endTime) {
-		return childStuReistrationMapper.childStuReistrationListByClass(classId, startTime, endTime);
+
+	@Override
+	public List<ChildStuReistration> findchildStuReistrationListByClass(Integer classId,String startTime,String endTime,Integer schoolId) {
+		return childStuReistrationMapper.childStuReistrationListByClass(classId, startTime, endTime,schoolId);
 	}
 
 	@Override

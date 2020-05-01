@@ -23,4 +23,18 @@
 		(classTimeName, schoolId)VALUES(#{classTimeName}, #{schoolId});
 	</insert>
 
+	<update id="updateClassTime">
+		update traininginstitutions.classtime
+		<set>
+			 <if test="classTimeName !=null and classTimeName != ''">
+				classTimeName = #{classTimeName}
+			 </if>
+		</set>
+		<where>
+			<if test="classTimeId !=null and classTimeId !=''">
+				classTimeId = #{classTimeId}  
+			</if>
+		</where>
+	</update>
+
 </mapper>

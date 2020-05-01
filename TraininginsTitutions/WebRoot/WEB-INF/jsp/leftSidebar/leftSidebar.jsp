@@ -52,8 +52,6 @@
 				</a></li>
 				<li><a href="javascript:void(0)" onclick="classTypes()">班级类型管理
 				</a></li>
-				<li><a href="javascript:void(0)" onclick="classInfo()">学生信息管理
-				</a></li>
 				<li><a href="javascript:void(0)" onclick="classTypeInfo()">学生科别管理
 				</a></li>
 				<c:if test="${schoolType == 3 }">

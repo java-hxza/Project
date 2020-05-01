@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+<title>同心同慧教育集团</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta
@@ -50,7 +50,7 @@
 		<div class="content-page">
 			<div class="content">
 
-				!-- Start Content-->
+				<!-- Start Content-->
 				<div class="container-fluid">
 					<div class="navbar-custom">
 						<ul class="list-unstyled topbar-right-menu float-right mb-0">
@@ -94,17 +94,7 @@
 						<button class="button-menu-mobile open-left disable-btn">
 							<i class="mdi mdi-menu"></i>
 						</button>
-						<div class="app-search">
-							<form>
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search...">
-									<span class="mdi mdi-magnify"></span>
-									<div class="input-group-append">
-										<button class="btn btn-primary" type="submit">Search</button>
-									</div>
-								</div>
-							</form>
-						</div>
+						
 					</div>
 					<!-- end Topbar -->
 					<!-- start page title -->
@@ -112,13 +102,7 @@
 						<div class="col-12">
 							<div class="page-title-box">
 								<div class="page-title-right">
-									<ol class="breadcrumb m-0">
-										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">Hyper</a></li>
-										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">Pages</a></li>
-										<li class="breadcrumb-item active">FAQ</li>
-									</ol>
+
 								</div>
 								<h4 class="page-title">上课时间</h4>
 							</div>
@@ -140,6 +124,10 @@
 												href="javascript:void(0);" class="btn btn-danger mb-2 del"
 												onclick="delClassTimes()"><i
 												class="mdi mdi-plus-circle mr-2"></i> 删除</a>
+												<a
+												href="javascript:void(0);" class="btn btn-danger mb-2 del"
+												onclick="updateClassTimes()"><i
+												class="mdi mdi-plus-circle mr-2"></i>修改</a>
 										</div>
 
 										<!-- end col-->
@@ -183,7 +171,7 @@
 											<div class="card-body">
 												<form class="needs-validation" novalidate>
 													<div class="form-group position-relative mb-3">
-														<label for="validationTooltip01">班级类型名称</label> <input
+														<label for="validationTooltip01">班级上课时间(如周三下午一二节)</label> <input
 															type="text" class="form-control classTimeName"
 															id="validationTooltip01" placeholder="请填写上课时间段" required>
 													</div>

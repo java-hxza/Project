@@ -482,6 +482,7 @@ $(function() {
 			$(".numbers2").blur(function() {
 				$(".schoolTimes2").remove();
 				if ($(".numbers2").val() != "") {
+					//wye 2020/04/07
 					for (var i = 0; i < parseInt($(".numbers2").val()); i++) {
 						$(".numbers").after("<div class='col-md-3 schoolTimes2'><div class='form-group mb-3'><label for='example-select'>上课时间段</label> <select class='form-control schoolTimes3' id='example-select'></select></div></div>");
 					}
@@ -567,7 +568,7 @@ $(function() {
 				var theSurrogate = $.trim($(".theSurrogate").val()).toString();
 				var remarks = $.trim($(".remarks").val()).toString();
 				var classId = parseInt($.trim($(".classes option:selected").val()));
-				var headmaster = $(".classes option:selected").attr("class");
+				var headmaster = $(".teachers option:selected").attr("name");
 				var studentIDCard = $.trim($(".studentIDCard").val()).toString();
 
 				var date = $.trim($(".dates").val());
@@ -939,7 +940,7 @@ $(function() {
 							}
 						},
 						error : function(data) {
-							alert("系统出错！");
+							alert("系统出错！!!!");
 							location.href = "StduentRegister.html";
 						}
 					});

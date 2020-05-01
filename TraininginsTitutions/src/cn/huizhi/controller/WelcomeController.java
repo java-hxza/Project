@@ -359,6 +359,9 @@ public class WelcomeController {
 			List<UserDiction> list = (List<UserDiction>) session.getAttribute("schoolListByUId");
 			for (int i = 0; i < list.size(); i++) {
 				if (2 == list.get(i).getSchool().getSchoolType()) {
+					session.setAttribute("schoolId",list.get(i).getSchoolId());
+
+					session.setAttribute("schoolName", list.get(i).getSchool().getSchoolName());
 					return "redirect:/index.html";
 				}
 			}
@@ -368,6 +371,9 @@ public class WelcomeController {
 			List<TeacherDiction> list = (List<TeacherDiction>) session.getAttribute("schoolListByUId");
 			for (int i = 0; i < list.size(); i++) {
 				if (2 == list.get(i).getSchool().getSchoolType()) {
+					session.setAttribute("schoolId",list.get(i).getSchoolId());
+
+					session.setAttribute("schoolName", list.get(i).getSchool().getSchoolName());
 					return "redirect:/index.html";
 				}
 			}
@@ -384,6 +390,9 @@ public class WelcomeController {
 			List<UserDiction> list = (List<UserDiction>) session.getAttribute("schoolListByUId");
 			for (int i = 0; i < list.size(); i++) {
 				if (3 == list.get(i).getSchool().getSchoolType()) {
+					session.setAttribute("schoolId",list.get(i).getSchoolId());
+
+					session.setAttribute("schoolName", list.get(i).getSchool().getSchoolName());
 					return "redirect:/index.html";
 				}
 			}
@@ -393,6 +402,9 @@ public class WelcomeController {
 			List<TeacherDiction> list = (List<TeacherDiction>) session.getAttribute("schoolListByUId");
 			for (int i = 0; i < list.size(); i++) {
 				if (3 == list.get(i).getSchool().getSchoolType()) {
+					session.setAttribute("schoolId",list.get(i).getSchoolId());
+
+					session.setAttribute("schoolName", list.get(i).getSchool().getSchoolName());
 					return "redirect:/index.html";
 				}
 			}

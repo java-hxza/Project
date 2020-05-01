@@ -3,9 +3,7 @@ package cn.huizhi.controller.root;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
-import java.time.temporal.ChronoUnit;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -154,12 +152,8 @@ public class RootSchoolController {
 		if (loginType == 1) {
 
 			List<UserDiction> userListDiction = (List<UserDiction>) session.getAttribute("schoolListByUId");
-			Integer schoolId = userListDiction.get(0).getSchoolId();
-			session.setAttribute("schoolId", schoolId);
-
+			Integer schoolId = (Integer) session.getAttribute("schoolId");
 			School school = schoolService.selectSchoolById(schoolId);
-
-			session.setAttribute("schoolName", school.getSchoolName());
 			List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
 
 			session.setAttribute("classList", classList);
@@ -228,7 +222,12 @@ public class RootSchoolController {
 			}
 			String feeId[] = orderListBySchool.get(i).getFeecateId().split(",");
 			if (orderListBySchool.get(i).getFeecateMoney() == null) {
-				orderListBySchool.get(i).setFeecateMoney("0");
+				if(orderListBySchool.get(i).getDpMoney() == null) {
+					orderListBySchool.get(i).setFeecateMoney("0");
+				}else {
+					orderListBySchool.get(i).setFeecateMoney(String.valueOf(orderListBySchool.get(i).getDpMoney()) );
+				}
+				
 			}
 			String feeMoney[] = orderListBySchool.get(i).getFeecateMoney().split(",");
 			// 循环收费项目订单
@@ -445,7 +444,7 @@ public class RootSchoolController {
 
 		if (schoolType == 1) {
 			List stuReistrationList = childStuReistrationService.findchildStuReistrationListByClass(classId, null,
-					null);
+					null,(Integer)session.getAttribute("schoolId"));
 			session.setAttribute("stuReistrationList", stuReistrationList);
 			return "admin/classStudent/studentHourInfo";
 		}
@@ -1291,8 +1290,7 @@ public class RootSchoolController {
 		Integer schoolId = (Integer) session.getAttribute("schoolId");
 
 		School school = schoolService.selectSchoolById(schoolId);
-		List<ChildStuReistration> stuReistrationList = childStuReistrationService
-				.findchildStuReistrationListByClass(null, null, null);
+		List<ChildStuReistration> stuReistrationList = childStuReistrationService.findchildStuReistrationListByClass(null, null, null,schoolId);
 		List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
 
 		session.setAttribute("classList", classList);
@@ -1330,7 +1328,7 @@ public class RootSchoolController {
 		}
 
 		List<ChildStuReistration> stuReistrationList = childStuReistrationService
-				.findchildStuReistrationListByClass(classId, startTime, endTime);
+				.findchildStuReistrationListByClass(classId, startTime, endTime,(Integer)session.getAttribute("schoolId"));
 		session.setAttribute("stuReistrationList", stuReistrationList);
 
 		return "root/classStudent/studentHourInfo";

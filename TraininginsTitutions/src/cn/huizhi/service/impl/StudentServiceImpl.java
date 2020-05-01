@@ -78,7 +78,7 @@ public class StudentServiceImpl implements StudentService {
 	public Student selectStudentId(String studentName, String parentName, Integer studentSex) {
 		return studentMapper.selectStudentId(studentName, parentName, studentSex);
 	}
-
+	@Override
 	public Student findStudentById(Integer studentId) {
 		// TODO Auto-generated method stub
 		return studentMapper.findStudentById(studentId);

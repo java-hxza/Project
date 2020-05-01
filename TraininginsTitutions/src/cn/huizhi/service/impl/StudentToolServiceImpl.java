@@ -19,5 +19,11 @@ public class StudentToolServiceImpl implements StudentToolService{
 		return studentToolMapper.addStudentTool(studentTool);
 	}
 
+	@Override
+	public Integer updateStudentTool(StudentTool studentTool) {
+		// TODO Auto-generated method stub
+		return studentToolMapper.updateStudentTool(studentTool);
+	}
+
 	
 }

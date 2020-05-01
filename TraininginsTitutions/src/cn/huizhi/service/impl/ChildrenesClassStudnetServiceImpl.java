@@ -55,9 +55,9 @@ public class ChildrenesClassStudnetServiceImpl implements ChildrenesClassStudnet
 
 	@Override
 	public List<ChildrenesClassStudnet> findChildrenesClassStudnetByClassIdAndTime(String classId, String startTime,
-			String endTime) {
+			String endTime,String studentName,String teacherName,String schoolTime) {
 		// TODO Auto-generated method stub
-		return childrenesClassStudnetMapper.findChildrenesClassStudnetByClassIdAndTime(classId, startTime, endTime);
+		return childrenesClassStudnetMapper.findChildrenesClassStudnetByClassIdAndTime(classId, startTime, endTime,studentName,teacherName,schoolTime);
 	}
 
 }
