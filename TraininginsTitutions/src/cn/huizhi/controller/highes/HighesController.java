@@ -2471,7 +2471,7 @@ public class HighesController {
 			@RequestParam String feecateMoneyYiKao, @RequestParam String startTimes, @RequestParam Integer activityId,
 			@RequestParam Double serviceCharge, @RequestParam String professionalTeacher,
 			@RequestParam String headmaster, @RequestParam String entertainTeacher,
-			@RequestParam String consultationTeacher) {
+			@RequestParam String consultationTeacher,@RequestParam Double deposit) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		student.setIntegral(0.0);
 		student.setFeeCategory(1);
@@ -2515,6 +2515,7 @@ public class HighesController {
 				order.setRenew(0);
 				order.setServiceCharge(serviceCharge);
 				order.setIntegral(integral);
+				order.setDeposit(deposit);
 				order.setActivityId(activityId);
 				order.setFeecateMoney(feecateMoney);
 				order.setFeecateMoneyYiKao(feecateMoneyYiKao);
@@ -2773,6 +2774,7 @@ public class HighesController {
 		}
 		return JSONArray.toJSONString(map);
 	}
+
 
 	/**
 	 * 转到批量收费页面

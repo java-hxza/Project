@@ -282,6 +282,7 @@
 													<div class="form-group mb-3">
 														<label for="example-select">班级老师</label> <select
 															class="form-control teachers" data-toggle="select2">
+															<option>请选择老师</option>
 															<c:forEach items="${teachers }" var="t">
 																<option value="${t.teacherId }" class="delSt">${t.teacherName}  —  ${t.remarks}</option>
 															</c:forEach>

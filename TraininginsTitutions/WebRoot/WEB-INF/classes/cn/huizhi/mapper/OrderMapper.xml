@@ -529,11 +529,11 @@
 		(feecateId,dpMoney,stuId,startTime,schoolId,identification,
 		feecategoryMoney,paymentmethodId,personliable,departmentofpediatricsId,
 		addhour,givehour,firstdate,lastdate,remarks,orderNumber,expenditureitemsId,
-		classId,giftId,giftNumber,integral,teacherId,discount,feecateMoney,feecateMoneyYiKao,activityId,serviceCharge,renew)VALUES(
+		classId,giftId,giftNumber,integral,teacherId,discount,feecateMoney,feecateMoneyYiKao,activityId,serviceCharge,renew,deposit)VALUES(
 		#{feecateId},#{dpMoney},#{stuId},#{startTime},#{schoolId},
 		#{identification},#{feecategoryMoney},#{paymentmethodId},#{personliable},
 		#{departmentofpediatricsId},#{addhour},#{givehour},#{firstdate},#{lastdate},
-		#{remarks},#{orderNumber},#{expenditureitemsId},#{classId},#{giftId},#{giftNumber},#{integral},#{teacherId},#{discount},#{feecateMoney},#{feecateMoneyYiKao},#{activityId},#{serviceCharge},#{renew});
+		#{remarks},#{orderNumber},#{expenditureitemsId},#{classId},#{giftId},#{giftNumber},#{integral},#{teacherId},#{discount},#{feecateMoney},#{feecateMoneyYiKao},#{activityId},#{serviceCharge},#{renew},#{deposit});
 	</insert>
 
 	<update id="updateOrderAll">

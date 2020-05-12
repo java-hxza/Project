@@ -26,5 +26,11 @@ public interface ClassTimeMapper {
 	 * @return
 	 */
 	public Integer addClassTime(ClassTime classTime);
+	/**
+	 * 添加本校上课时间
+	 * @param classTime
+	 * @return
+	 */
+	public Integer updateClassTime(ClassTime classTime);
 	
 }

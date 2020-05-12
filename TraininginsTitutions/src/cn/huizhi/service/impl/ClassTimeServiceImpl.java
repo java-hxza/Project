@@ -31,4 +31,10 @@ public class ClassTimeServiceImpl implements ClassTimeService {
 		return classTimeMapper.addClassTime(classTime);
 	}
 
+	@Override
+	public Integer updateClassTime(ClassTime classTime) {
+		// TODO Auto-generated method stub
+		return classTimeMapper.updateClassTime(classTime);
+	}
+
 }

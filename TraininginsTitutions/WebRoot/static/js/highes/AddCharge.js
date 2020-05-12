@@ -22,6 +22,10 @@ $(function() {
 		$(".classes").click(function() {
 			$(".departmentofpediatricsIds").val($(".classes option:selected").attr("departmentOfPediatrics"));
 			var classIds = $(".classes option:selected").val();
+			if(classIds == undefined) {
+				classIds = 0;
+			}
+			alert(classIds);return ;
 			$.ajax({
 				type : "POST",
 				url : "selectClassStudent.html",
@@ -235,6 +239,9 @@ $(function() {
 		$(".classes").click(function() {
 			$(".departmentofpediatricsIds").val($(".classes option:selected").attr("departmentOfPediatrics"));
 			var classIds = $(".classes option:selected").val();
+			if(classIds == undefined) {
+				classIds = 0;
+			}
 			$.ajax({
 				type : "POST",
 				url : "selectClassStudent.html",

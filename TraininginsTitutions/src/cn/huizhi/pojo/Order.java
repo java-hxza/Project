@@ -70,6 +70,11 @@ public class Order {
 	private Gift gift;
 	private Teacher teacher;
 	private Class classes;
+	
+	/**
+	 * 押金
+	 */
+	private Double deposit;
 
 	public Order() {
 		super();
@@ -465,4 +470,12 @@ public class Order {
 		this.renew = renew;
 	}
 
+	public Double getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(Double deposit) {
+		this.deposit = deposit;
+	}
+	
 }

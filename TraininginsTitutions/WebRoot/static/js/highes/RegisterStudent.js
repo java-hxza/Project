@@ -260,6 +260,7 @@ $(function() {
 			var ConsultationTeacher = $(".ConsultationTeacher").val();
 			var professionalTeacher = $(".professionalTeacher").val();
 			var Headmaster = $(".Headmaster").val();
+			var deposit = $(".deposit").val();
 			var feecateMoneyYiKao = "";
 			if ($.trim($(".YDBX").val()).toString() != "") {
 				feecateMoneyYiKao = feecateMoneyYiKao + ($.trim($(".YDBX").val()).toString()) + ",";
@@ -351,6 +352,7 @@ $(function() {
 				url : "RegisterStudentsYiKao.html",
 				data : {
 					studentName : studentName,
+					deposit : deposit,
 					parentName : parentName,
 					telephone : telephone,
 					studentBirth : studentBirth,
