@@ -350,9 +350,36 @@ public class WelcomeController {
 		return "admin/create/createTeacher";
 	}
 
+	@RequestMapping("artSchoolLogin.html")
+	public String artSchoolLogin(HttpSession session) {
+		session.setAttribute("schoolType", 3);
+		Integer loginType = (Integer) session.getAttribute("loginType");
+		if (loginType == 1) {
 
+			List<UserDiction> list = (List<UserDiction>) session.getAttribute("schoolListByUId");
+			for (int i = 0; i < list.size(); i++) {
+				if (3 == list.get(i).getSchool().getSchoolType()) {
+					session.setAttribute("schoolId",list.get(i).getSchoolId());
 
+					session.setAttribute("schoolName", list.get(i).getSchool().getSchoolName());
+					return "redirect:/index.html";
+				}
+			}
+		}
+		if (loginType == 2) {
 
+			List<TeacherDiction> list = (List<TeacherDiction>) session.getAttribute("schoolListByUId");
+			for (int i = 0; i < list.size(); i++) {
+				if (3 == list.get(i).getSchool().getSchoolType()) {
+					session.setAttribute("schoolId",list.get(i).getSchoolId());
+
+					session.setAttribute("schoolName", list.get(i).getSchool().getSchoolName());
+					return "redirect:/index.html";
+				}
+			}
+		}
+		return "redirect:/selectionModule.html";
+	}
 
 	@RequestMapping("highIndex.html")
 	public String highIndex(HttpSession session) {

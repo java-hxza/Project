@@ -45,7 +45,6 @@ $(function() {
 		var headmaster = $("#headmaster option:selected");
 		var classLevel = $("#classLevel").val();
 		var classTypeId = $("#classTypeId").val();
-		var headmaster = headmaster.text();
 		var teacherId = $("#headmaster").val();
 		var classType = $("#classType").val();
 		if (classNumber, className == null || $.trim(classNumber), $.trim(className) == '') {
@@ -66,7 +65,6 @@ $(function() {
 				dpId : dpId,
 				classLevel : classLevel,
 				classTypeId : classTypeId,
-				headmaster : headmaster,
 				teacherId : teacherId,
 				classType : classType
 			},

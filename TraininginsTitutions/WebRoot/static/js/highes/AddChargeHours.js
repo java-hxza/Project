@@ -173,7 +173,7 @@ $(function() {
 			alert("请填写本次新增课时！");
 			return false;
 		} else if (hour < 1) {
-			alert("请填写正确的新增课时！");
+			hour = 0;
 			return false;
 		}
 		if (hours == "") {

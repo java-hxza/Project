@@ -19,21 +19,21 @@
 	</sql>
 
 	<sql id="ChildStuReistrationCol">
-		css.childStuId ccs_childStuId,
-		css.classHour ccs_classHour,
-		css.classHours ccs_classHours,
-		css.contentOfCourses
+		o.stuId ccs_childStuId,
+		(select css.classHour from childsturegistration css where css.childStuId = o.stuId limit 1)ccs_classHour,
+		(select css.classHours from childsturegistration css where css.childStuId = o.stuId limit 1) ccs_classHours,
+		(select css.contentOfCourses from childsturegistration css where css.childStuId = o.stuId limit 1)
 		ccs_contentOfCourses,
-		css.dpId ccs_dpId,
-		css.remarks ccs_remarks,
-		css.rOCCId ccs_rOCCId,
-		css.state ccs_state,
-		css.studentName
+		(select css.dpId from childsturegistration css where css.childStuId = o.stuId limit 1) ccs_dpId,
+		(select css.remarks from childsturegistration css where css.childStuId = o.stuId limit 1)ccs_remarks,
+		(select css.rOCCId from childsturegistration css where css.childStuId = o.stuId limit 1) ccs_rOCCId,
+		(select css.state from childsturegistration css where css.childStuId = o.stuId limit 1) ccs_state,
+		(select  studentName from student a where a.studentId = o.stuId limit 1)
 		ccs_studentName,
-		css.teacherInClass ccs_teacherInClass,
+		(select css.teacherInClass from childsturegistration css where css.childStuId = o.stuId limit 1) ccs_teacherInClass,
 		ccs.classId
 		ccs_classId,
-		SUM(css.classHour) sum_Hour,
+		(select SUM(css.classHour) from childsturegistration css where css.childStuId = o.stuId limit 1) sum_Hour,
 		o.addhour o_addhour,
 		o.departmentofpediatricsId
 		o_departmentofpediatricsId,
@@ -107,17 +107,20 @@
 		resultMap="ChildStuReistrationMap">
 		select distinct
 		<include refid="ChildStuReistrationCol" />
-		from childsturegistration css ,childrenesclassstudnet ccs,
+		from  childrenesclassstudnet ccs,
 		traininginstitutions.class c
 		,traininginstitutions.order o
 		<where>
-		 	 and ccs.studentId = css.childStuId and c.classId = css.classId
-			and o.classId = css.classId  
+			c.classId = o.classId
+			AND o.classId = ccs.classId
 			<if test="classId!=null and classId!=''">
-				and c.classId = #{classId}
+				and o.classId = #{classId}
+			</if>
+			<if test="schoolId !=null and schoolId!=''">
+				and o.schoolId = #{schoolId}
 			</if>
 			<if test="startTime !=null and startTime !=''">
-				and date(css.classHours) between #{startTime} and #{endTime}
+				and date(o.startTime) between #{startTime} and #{endTime}
 			</if>
 		</where>
 		group by ccs.studentId

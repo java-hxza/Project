@@ -78,11 +78,10 @@
 	<insert id="insertChildrenescClass" parameterType="Class">
 		insert into
 		traininginstitutions.class ( classNumber, className, dpId,
-		schoolId,classTypeId, headmaster, teacherId, classLevel)
+		schoolId,classTypeId, teacherId, classLevel)
 		values (
 		#{classNumber},#{className}, #{dpId}, #{schoolId},
-		#{classTypeId},
-		#{headmaster}, #{teacherId}, #{classLevel} )
+		#{classTypeId},  0, #{classLevel} )
 	</insert>
 
 

@@ -327,7 +327,7 @@ public class AdminTeacherController {
 	@RequestMapping("childrenStudentHourInfo.html")
 	public String studentHourInfo(Integer schoolId, String schoolName, HttpSession session) {
 		List<ChildStuReistration> stuReistrationList = childStuReistrationService
-				.findchildStuReistrationListByClass(null, null, null);
+				.findchildStuReistrationListByClass(null, null, null,schoolId);
 		List<Class> classList = classService.findChildrenescClasses(String.valueOf(schoolId));
 
 		session.setAttribute("classList", classList);
@@ -356,7 +356,7 @@ public class AdminTeacherController {
 		}
 
 		List<ChildStuReistration> stuReistrationList = childStuReistrationService
-				.findchildStuReistrationListByClass(classId, startTime, endTime);
+				.findchildStuReistrationListByClass(classId, startTime, endTime,(Integer)session.getAttribute("schoolId"));
 		session.setAttribute("stuReistrationList", stuReistrationList);
 		return "admin/classStudent/studentHourInfo";
 	}

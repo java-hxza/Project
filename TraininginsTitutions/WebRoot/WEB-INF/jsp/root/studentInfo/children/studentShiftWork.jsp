@@ -64,26 +64,26 @@
 										<c:forEach items="${classListAll }" var="cc">
 											<c:choose>
 												<c:when test="${childrenesClassStudnet.classId  == cc.classId}">
-													<option value="${cc.classId }_${cc.classTypeId }">${cc.className }</option>
+													<option value="${cc.classId }_${cc.classTypeId }">${cc.className}</option>
 												</c:when>
 											</c:choose>
 										</c:forEach>
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="emailaddress">要转入的班级</label> 
+									<label for="emailaddress">要转入的任课老师</label> 
 									<select class="form-control"  onchange="classIdChange()" id="classIdes" >
-										<option>请选择转入的班级</option>
-										<c:forEach items="${classListAll }" var="c">
-											<option value="${c.classId }">${c.className }</option>
-											<span hidden="hidden">${c.classTypeId }</span>
+										<option>请选择任课老师</option>
+										<c:forEach items="${teacherAll }" var="c">
+											<option value="${c.teacherId }_${c.teacherName }">${c.teacherName }</option>
+											 
 										</c:forEach>
 									</select>
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label for="emailaddress">差额</label> 
 									<input type="text" class="form-control" id="money">
-								</div>
+								</div> -->
 								<div class="form-group">
 									<label for="emailaddress">转班原因</label> 
 									<input type="text" class="form-control" id="remarks">
@@ -119,6 +119,6 @@
 	<!-- App js -->
 	<script src="${Path }/static/js/jquery.min.js"></script>
 	<script src="${Path }/static/js/app.min.js"></script>
-	<script src="${Path }/static/js/root/studentInfo/high/seeStudentInfo.js"></script>
+	<script src="${Path }/static/js/root/studentInfo/children/seeStudentInfo.js"></script>
 </body>
 </html>

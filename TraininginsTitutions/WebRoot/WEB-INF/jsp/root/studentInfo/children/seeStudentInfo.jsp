@@ -108,37 +108,65 @@
 											<a href="javascript:void(0);" onclick="updateStudnet()"
 												class="btn btn-danger mb-2"><i
 												class="mdi mdi-plus-circle mr-2"></i> 修改学生信息</a>
+
 										</div>
-										<div class="col-sm-4">
+
+										<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+											onclick="queryStudent(${classId})">查询学生信息</button>
+										<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+											onclick="shiftWork()">学员转班</button>
+										<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+											onclick="exitSchool()">学员退学</button>
+										<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+											data-toggle="modal" data-target="#top-modal">学员上课登记</button>
+										<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
+											data-toggle="modal" data-target="#top-modal">学员批量登记</button>
+										<div class="col-sm-12">
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-3">
 													<div class="form-group">
 														<label for="billing-first-name">开始日期</label> <input
 															class="form-control" type="date" id="startTime" />
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-3">
 													<div class="form-group">
 														<label for="billing-first-name">结束日期</label> <input
 															class="form-control" type="date" id="endTime" />
 													</div>
 												</div>
+												<div class="col-sm-2">
+													<div class="form-group">
+														<label for="billing-first-name">学生姓名</label> <input
+															class="form-control" type="text" id="studentName" />
+													</div>
+												</div>
+												<div class="col-sm-2">
+													<div class="form-group">
+														<label for="billing-first-name">授课老师</label> 
+														<select id="teacherName" class="form-control">
+															<option value="">请选择</option>
+															<c:forEach items="${teacherAll}" var="c">
+																<option value="${c.teacherName}">${c.teacherName}</option>
+															</c:forEach>
+														</select>
+													</div>
+												</div>
+												<div class="col-sm-2">
+													<div class="form-group">
+														<label for="billing-first-name">上课时段</label> <select
+															id="schoolTime" class="form-control">
+															<option value="">请选择</option>
+															<c:forEach items="${classTimeAll}" var="c">
+																<option value="${c.classTimeName}">${c.classTimeName}</option>
+															</c:forEach>
+														</select>
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="col-sm-6">
-											<div class="text-sm-right">
-												<a href="javascript:void(0);" onclick="queryStudent(${classId})"
-													class="btn btn-danger mb-2"><i
-													class="mdi mdi-plus-circle mr-2"></i> 查询学生信息</a>
-												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-													onclick="shiftWork()">学员转班</button>
-												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-													onclick="exitSchool()">学员退学</button>
-												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-													data-toggle="modal" data-target="#top-modal">学员上课登记</button>
-												<button type="button" class="btn btn-info btn-sm mt-2 ml-1"
-													data-toggle="modal" data-target="#top-modal">学员批量登记</button>
-											</div>
+											<div class="text-sm-right"></div>
 
 										</div>
 										<!-- end col-->
@@ -179,6 +207,7 @@
 													<th>招生老师</th>
 													<th>接送人</th>
 													<th>上课时间段</th>
+													<th>授课老师</th>
 													<th>备注</th>
 												</tr>
 											</thead>
@@ -242,6 +271,9 @@
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${children.schoolTime}</a>
+														</td>
+														<td class="table-user"><a href="javascript:void(0);"
+															class="text-body font-weight-semibold">${children.student.teacherName}</a>
 														</td>
 														<td class="table-user"><a href="javascript:void(0);"
 															class="text-body font-weight-semibold">${children.student.remarks }</a>

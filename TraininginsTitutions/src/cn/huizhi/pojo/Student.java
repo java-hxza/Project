@@ -36,14 +36,17 @@ public class Student {
 
 	private Reserveschool reserveschool;
 
+	private String teacherName;
+
+
 	public Student(Integer studentId, String studentName, Integer studentSex, String studentIDCard, String studentBirth,
-			String school, String parentName, String telephone, String familyAddress, String registrationChannels,
-			String registrationConsultant, String startTime, String endTime, String theSurrogate, String remarks,
-			Integer feeCategory, Double studentHour, Double integral, Double usedIntegral,
-			ChildrenesClassStudnet childrenesClassStudnet, Class classes, School schools, String headmaster,
-			String professionalTeacher, String entertainTeacher, String consultationTeacher,
-			DepartmentOfPediatrics departmentOfPediatrics, Order order, PaymentMethod paymentMethod,
-			FeeCategory feeCategorys, Reserveschool reserveschool) {
+				   String school, String parentName, String telephone, String familyAddress, String registrationChannels,
+				   String registrationConsultant, String startTime, String endTime, String theSurrogate, String remarks,
+				   Integer feeCategory, Double studentHour, Double integral, Double usedIntegral,
+				   ChildrenesClassStudnet childrenesClassStudnet, Class classes, School schools, String headmaster,
+				   String professionalTeacher, String entertainTeacher, String consultationTeacher,
+				   DepartmentOfPediatrics departmentOfPediatrics, Order order, PaymentMethod paymentMethod,
+				   FeeCategory feeCategorys, Reserveschool reserveschool, String teacherName) {
 		super();
 		this.studentId = studentId;
 		this.studentName = studentName;
@@ -76,6 +79,15 @@ public class Student {
 		this.paymentMethod = paymentMethod;
 		this.feeCategorys = feeCategorys;
 		this.reserveschool = reserveschool;
+		this.teacherName = teacherName;
+	}
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
 	}
 
 	public Reserveschool getReserveschool() {

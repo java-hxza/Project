@@ -280,20 +280,23 @@ $(function() {
 	 * 保存转班
 	 */
 	updateStudentShiftWork = function() {
-		var classId = $("#classIdes").val();
-
+		var classType = $("#classIdes").val();
 		var studentId = $("#studentId").attr("name");
-
+		var classese = classType.split("_");
+		var teacherName = classese[1];
+		var classId = classese[0];
 		var remarks = $("#remarks").val();
 		var money = $("#money").val();
-
+		var classIds = $("#classId").val();
+		var ids = classIds.split("_")[0];
+		
 		var reg = /\d+(\.\d+)?/;
 		if (!reg.test(money)) {
 			alert("请输入正确的金额");
 			return false;
 		}
 		if (classId == "") {
-			alert("请选择正确的班级！");
+			alert("请选择正确的老师！");
 			return false;
 		}
 		$.ajax({
@@ -302,16 +305,17 @@ $(function() {
 				classId : classId,
 				studentId : studentId,
 				remarks : remarks,
-				money : money
+				money : money,
+				teacherName
 			},
 			dataType : 'JSON',
 			type : 'post',
 			success : function(data) {
 				if (data.state == 1) {
 					alert("转班成功！");
-					location.href = "seeStudentInfo.html?classId=" + classId;
+					location.href = "seeStudentInfo.html?classId=" + ids;
 				} else {
-					location.href = "seeStudentInfo.html?classId=" + classId;
+					location.href = "seeStudentInfo.html?classId=" + ids;
 				}
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -456,23 +460,28 @@ $(function() {
 	queryStudent = function(classId) {
 		var startTime = $("#startTime").val();
 		var endTime = $("#endTime").val();
+		var studentName = $("#studentName").val();
+		var teacherName = $("#teacherName").val();
+		var schoolTime = $("#schoolTime").val();
 		
-		alert(startTime);
+		 
 		//判断时间是都空值
 		if(startTime == '' || startTime == null){
-			startTime = new Date();
+			startTime = null;
 		}
 		if(endTime == '' || endTime == null){
-			endTime = new Date();
+			endTime = null;
 		}
-		if(startTime != '' || startTime != null){
+		if(startTime != '' && startTime != null){
 			startTime = formatTime(startTime, 'Y-M-D h:m:s');
 		}
-		if(endTime != '' || endTime != null){
+		if(endTime != '' && endTime != null){
 			endTime = formatTime(endTime, 'Y-M-D h:m:s');
 		}
+	 
+		location.href = "queryStudentByTime.html?classId="+classId+"&startTime=" +
+				""+startTime+"&endTime="+endTime+"&studentName="+studentName+"&teacherName="+teacherName+"&schoolTime="+schoolTime;
 		
-		location.href = "queryStudentByTime.html?classId="+classId+"&startTime="+startTime+"&endTime="+endTime;
 
 	}
 

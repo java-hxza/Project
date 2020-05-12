@@ -19,7 +19,7 @@ public interface ChildStuReistrationMapper {
 	 * @param classId
 	 * @return
 	 */
-	public List<ChildStuReistration> childStuReistrationListByClass(@Param("classId")Integer classId,@Param("startTime")String startTime,@Param("endTime")String endTime);
+	public List<ChildStuReistration> childStuReistrationListByClass(@Param("classId")Integer classId,@Param("startTime")String startTime,@Param("endTime")String endTime,@Param("schoolId")Integer schoolId);
 	
 	
 	/**

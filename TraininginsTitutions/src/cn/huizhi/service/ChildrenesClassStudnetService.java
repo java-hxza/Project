@@ -62,6 +62,9 @@ public interface ChildrenesClassStudnetService {
 	 * @param endTime
 	 * @return
 	 */
-	public List<ChildrenesClassStudnet> findChildrenesClassStudnetByClassIdAndTime(String classId,String startTime,String endTime);
+	public List<ChildrenesClassStudnet> findChildrenesClassStudnetByClassIdAndTime(String classId,String startTime,String endTime,String studentName,String teacherName,String schoolTime);
+
+
+ 
 
 }

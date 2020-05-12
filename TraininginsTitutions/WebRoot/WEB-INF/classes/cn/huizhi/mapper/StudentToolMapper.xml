@@ -7,7 +7,34 @@
 	<insert id="addStudentTool" parameterType="java.lang.Integer">
 		INSERT INTO
 		traininginstitutions.studenttool (studentId, teacherId,
-		teacherName,className,classId)VALUES(#{studentId}, #{teacherId}, #{teacherName},#{className},#{classId});
+		teacherName,className,classId)VALUES(#{studentId}, #{teacherId},
+		#{teacherName},#{className},#{classId});
 	</insert>
-	
+
+	<update id="updateStudentTool" parameterType="java.lang.Integer">
+
+		update traininginstitutions.studenttool
+		<set>
+		<if test="teacherName !=null and teacherName !=''">
+				teacherName = #{teacherName} ,
+			</if>
+			<if test="teacherId !=null and teacherId !=''">
+				teacherId = #{teacherId} ,
+			</if>
+			<if test="classId !=null and classId !=''">
+				classId = #{classId} ,
+			</if>
+			<if test="className !=null and className !=''">
+				className = #{className}
+			</if>
+		</set>
+
+		<where>
+			<if test="studentId !=null and studentId !=''">
+
+				studentId = #{studentId} 
+			</if>
+		</where>
+
+	</update>
 </mapper>

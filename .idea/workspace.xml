@@ -1,0 +1,1014 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="TraininginsTitutions" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="afd10a18-d6b0-48b3-b54f-9a7059b08caa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/controller/WelcomeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/controller/WelcomeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/controller/admin/school/AdminTeacherController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/controller/admin/school/AdminTeacherController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/controller/children/ChildrenClassesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/controller/children/ChildrenClassesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/controller/highes/HighesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/controller/highes/HighesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/controller/root/RootSchoolController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/controller/root/RootSchoolController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ChildStuReistrationMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ChildStuReistrationMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ChildStuReistrationMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ChildStuReistrationMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ChildrenesClassStudnetMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ChildrenesClassStudnetMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ChildrenesClassStudnetMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ChildrenesClassStudnetMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ClassMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ClassMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ClassTimeMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ClassTimeMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ClassTimeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ClassTimeMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/StudentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/StudentMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/StudentToolMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/StudentToolMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/StudentToolMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/StudentToolMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/pojo/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/pojo/Student.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/ChildStuReistrationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/ChildStuReistrationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/ChildrenesClassStudnetService.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/ChildrenesClassStudnetService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/ClassTimeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/ClassTimeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/StudentToolService.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/StudentToolService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/impl/ChildStuReistrationServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/impl/ChildStuReistrationServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/impl/ChildrenesClassStudnetServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/impl/ChildrenesClassStudnetServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/impl/ClassTimeServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/impl/ClassTimeServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/impl/StudentToolServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/service/impl/StudentToolServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/database.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/children/create/createChildrenClass.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/children/create/createChildrenClass.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/Charge.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/Charge.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/ChargeHours.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/ChargeHours.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/ClassTime.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/ClassTime.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/RegisterStudent.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/RegisterStudent.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/leftSidebar/leftSidebar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/leftSidebar/leftSidebar.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/root/school/schoolInfo.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/root/school/schoolInfo.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/root/studentInfo/children/seeStudentInfo.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/root/studentInfo/children/seeStudentInfo.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/root/studentInfo/children/studentShiftWork.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/root/studentInfo/children/studentShiftWork.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/children/create/createChildrenClass.js" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/children/create/createChildrenClass.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/highes/AddChargeHours.js" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/highes/AddChargeHours.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/highes/ClassTime.js" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/highes/ClassTime.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/highes/RegisterStudent.js" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/highes/RegisterStudent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/root/studentInfo/children/seeStudentInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/root/studentInfo/children/seeStudentInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/resource/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/resource/database.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/resource/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/resource/log4j.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/WelcomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/WelcomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/admin/school/AdminTeacherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/admin/school/AdminTeacherController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/children/ChildrenClassesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/children/ChildrenClassesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/highes/HighesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/highes/HighesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/root/RootSchoolController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/root/RootSchoolController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildStuReistrationMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildStuReistrationMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildStuReistrationMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildStuReistrationMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildrenesClassStudnetMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildrenesClassStudnetMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildrenesClassStudnetMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildrenesClassStudnetMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ClassMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ClassMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ClassTimeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ClassTimeMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ClassTimeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ClassTimeMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/StudentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/StudentMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/StudentToolMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/StudentToolMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/StudentToolMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/StudentToolMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/pojo/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/pojo/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/ChildStuReistrationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/ChildStuReistrationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/ChildrenesClassStudnetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/ChildrenesClassStudnetService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/ClassTimeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/ClassTimeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/StudentToolService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/StudentToolService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/ChildStuReistrationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/ChildStuReistrationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/ChildrenesClassStudnetServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/ChildrenesClassStudnetServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/ClassTimeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/ClassTimeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/StudentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/StudentToolServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/StudentToolServiceImpl.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Project" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/RegisterStudent.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5434">
+              <caret line="286" column="118" selection-start-line="286" selection-start-column="118" selection-end-line="286" selection-end-column="118" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/pojo/Student.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1539">
+              <caret line="81" column="39" selection-start-line="81" selection-start-column="39" selection-end-line="81" selection-end-column="39" />
+              <folding>
+                <element signature="e#3072#3073#0" expanded="true" />
+                <element signature="e#3097#3098#0" expanded="true" />
+                <element signature="e#3148#3149#0" expanded="true" />
+                <element signature="e#3185#3186#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildStuReistrationMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2147">
+              <caret line="113" column="33" selection-start-line="113" selection-start-column="33" selection-end-line="113" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/ChildStuReistrationService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/root/RootSchoolController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="1291" column="58" selection-start-line="1291" selection-start-column="58" selection-end-line="1291" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/WelcomeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="29" selection-start-column="29" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/root/classStudent/classInfo.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="646">
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/root/school/schoolInfo.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2128">
+              <caret line="112" column="44" selection-start-line="112" selection-start-column="44" selection-end-line="112" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>selectOrderPeriod</find>
+      <find>续费</find>
+      <find>selectStudentId</find>
+      <find>RegisterStudentsHour</find>
+      <find>class</find>
+      <find>classes</find>
+      <find>select</find>
+      <find>delSt</find>
+      <find>select2</find>
+      <find>var headmaster = $(&quot;.teachers option:selected&quot;).attr(&quot;name&quot;);</find>
+      <find>numbers2</find>
+      <find>wye</find>
+      <find>teachers</find>
+      <find>seeStudentInfo</find>
+      <find>findChildrenesClassStudnetByClassId</find>
+      <find>studnetByClassIdMap</find>
+      <find>serach</find>
+      <find>app-search</find>
+      <find>Hype</find>
+      <find>Hyper</find>
+      <find>jiaofei</find>
+      <find>studentBill</find>
+      <find>studentBill.html</find>
+      <find>StduentRegister</find>
+      <find>rootSchoolInfo</find>
+      <find>findchildStuReistrationListByClass</find>
+      <find>tuReistrationList</find>
+      <find>childStuReistrationListByClass</find>
+      <find>classStudentHourInfo</find>
+      <find>ChildStuReistrationCol</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/root/RootSchoolController.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/highes/HighesController.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/WelcomeController.java" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/children/create/createChildrenClass.jsp" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/children/create/createChildrenClass.js" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ClassMapper.xml" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/children/ChildrenClassesController.java" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/root/studentInfo/children/seeStudentInfo.jsp" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/pojo/Student.java" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/ClassTime.jsp" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/ChargeHours.jsp" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/Charge.jsp" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/StudentServiceImpl.java" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/StudentMapper.xml" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/highes/RegisterStudent.js" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildrenesClassStudnetMapper.xml" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/highes/HighesController.java" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/database.properties" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/resource/database.properties" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/root/school/schoolInfo.jsp" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/RegisterStudent.jsp" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/root/RootSchoolController.java" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ArtStuRegistrationMapper.xml" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/ChildStuReistrationService.java" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/ChildStuReistrationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/log4j.properties" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/resource/log4j.properties" />
+        <option value="$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildStuReistrationMapper.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:/Program Files/stup/apache-maven-3.5.2" />
+        <option name="userSettingsFile" value="D:\Program Files\stup\apache-maven-3.5.2\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+        <option value="$PROJECT_DIR$/.idea/Project.iml" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+        <option value="$PROJECT_DIR$/.idea/Project.iml" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/.idea/artifacts/TraininginsTitutions.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="528" />
+    <option name="y" value="351" />
+    <option name="width" value="981" />
+    <option name="height" value="1032" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="TraininginsTitutions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Project" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/TraininginsTitutions/WebRoot" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15264188" />
+    <property name="project.structure.side.proportion" value="0.20870535" />
+    <property name="settings.editor.selected.configurable" value="spring" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Tomcat 8.0.26" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.0.26" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:80/TraininginsTitutions" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <file path="$PROJECT_DIR$/TraininginsTitutions/WebRoot">
+          <settings>
+            <option name="CONTEXT_PATH" value="/TraininginsTitutions" />
+          </settings>
+        </file>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_Project_6" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="60890" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="MakeNoErrorCheck" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
+      <deployment />
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="_Project" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="60890" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SshConsoleOptionsProvider">
+    <option name="myEncoding" value="UTF-8" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\wye\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="afd10a18-d6b0-48b3-b54f-9a7059b08caa" name="Default Changelist" comment="" />
+      <created>1586175202060</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586175202060</updated>
+      <workItem from="1586175203550" duration="7688000" />
+      <workItem from="1586264094346" duration="7137000" />
+      <workItem from="1586348188645" duration="4766000" />
+      <workItem from="1586435779367" duration="3783000" />
+      <workItem from="1586439651078" duration="1913000" />
+      <workItem from="1586441608668" duration="2063000" />
+      <workItem from="1586443711857" duration="878000" />
+      <workItem from="1586625207226" duration="670000" />
+      <workItem from="1587385972677" duration="22000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="28920000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4968153" visible="true" weight="0.26558703" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="Favorites" order="5" sideWeight="0.50318474" side_tool="true" weight="0.2534413" />
+      <window_info id="UI Designer" order="6" />
+      <window_info id="Alibaba Cloud Explorer" order="7" />
+      <window_info id="Web" order="8" sideWeight="0.50318474" side_tool="true" weight="0.2534413" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.44385028" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49959514" weight="0.42602494" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.32976827" />
+      <window_info anchor="bottom" id="Spring" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50040483" side_tool="true" weight="0.43850267" />
+      <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.32976827" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
+      <window_info anchor="bottom" id="Version Control" order="14" weight="0.32976827" />
+      <window_info anchor="bottom" id="Flutter Performance" order="15" side_tool="true" />
+      <window_info anchor="bottom" id="Alibaba Cloud View" order="16" />
+      <window_info anchor="bottom" id="Messages" order="17" weight="0.32976827" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.32955465" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Flutter Inspector" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Flutter Outline" order="7" weight="0.32955465" />
+      <window_info anchor="right" id="Alibaba Function Compute" order="8" />
+      <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info anchor="right" id="Theme Preview" order="10" />
+      <window_info anchor="right" id="Alibaba Log Console" order="11" />
+      <window_info anchor="right" id="Bean Validation" order="12" />
+      <window_info anchor="right" id="Capture Analysis" order="13" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/root/RootSchoolController.java</url>
+          <line>1291</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-defaults>
+        <breakpoint suspend="THREAD" type="java-line" />
+      </breakpoints-defaults>
+      <breakpoints-dialog>
+        <breakpoints-dialog>
+          <selected-grouping-rules>
+            <grouping-rule id="XBreakpointGroupingByClassRule" />
+            <grouping-rule id="XBreakpointGroupingByPackageRule" />
+            <grouping-rule id="by-file" />
+          </selected-grouping-rules>
+        </breakpoints-dialog>
+      </breakpoints-dialog>
+      <default-breakpoints>
+        <breakpoint log-message="true" type="java-exception">
+          <properties />
+        </breakpoint>
+        <breakpoint type="dart-exception">
+          <properties />
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/CityMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ArtClassStudnetMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ClassMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="77" column="33" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/root/studentInfo/high/seeStudentInfo.jsp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/CityMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/root/studentInfo/children/seeStudentInfo.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1448">
+          <caret line="255" column="48" selection-start-line="255" selection-start-column="48" selection-end-line="255" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/leftSidebar/leftSidebar.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2764" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/Charge.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2451">
+          <caret line="129" column="77" selection-start-line="129" selection-start-column="77" selection-end-line="129" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/StudentServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="77" column="33" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/StudentMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1463">
+          <caret line="85" column="34" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/StudentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1463">
+          <caret line="82" column="7" selection-start-line="82" selection-start-column="7" selection-end-line="82" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/ChargeHours.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2280">
+          <caret line="120" column="75" selection-start-line="120" selection-start-column="75" selection-end-line="120" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/ClassTime.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3325">
+          <caret line="175" column="58" selection-start-line="175" selection-start-column="58" selection-end-line="175" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/highes/leftSidebar.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/root/studentInfo/art/seeStudentInfo.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/highes/RegisterStudent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="484" column="36" selection-start-line="484" selection-start-column="36" selection-end-line="484" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/applicationContext-mybatis.xml" />
+    <entry file="jar://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/lib/mysql-connector-java-5.1.25-bin.jar!/com/mysql/jdbc/Driver.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/database.properties" />
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/children/ChildrenClassesController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="219" selection-start-line="219" selection-end-line="219" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/children/ChildrenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/lib/spring-web-3.2.13.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="132" selection-start-line="132" selection-end-line="132" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/highes/HighesController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36784">
+          <caret line="1995" column="36" selection-start-line="1995" selection-start-column="21" selection-end-line="1995" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/StudentMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4123">
+          <caret line="217" column="26" selection-start-line="217" selection-start-column="26" selection-end-line="217" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/root/classStudent/studentHourInfo.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2470">
+          <caret line="130" column="128" selection-start-line="130" selection-start-column="117" selection-end-line="130" selection-end-column="128" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ArtStuRegistrationMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/impl/ChildStuReistrationServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="19" column="71" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildrenesClassStudnetMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="71">
+          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/resource/mybatis-config.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/resource/springmvc-servlet.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1798" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/resource/applicationContext-mybatis.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-453">
+          <caret line="24" column="56" lean-forward="true" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/resource/database.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/resource/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="37" lean-forward="true" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/log4j.properties" />
+    <entry file="jar://D:/Program Files/java/jdk1.8/src.zip!/java/net/URLClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="380" selection-start-line="380" selection-end-line="380" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/java/jdk1.8/src.zip!/java/lang/ClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="435" selection-start-line="435" selection-end-line="435" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/java/jdk1.8/src.zip!/java/lang/Integer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="579" selection-start-line="579" selection-end-line="579" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/lib/mysql-connector-java-5.1.25-bin.jar!/com/mysql/jdbc/ResultSetImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="357" selection-start-line="357" selection-end-line="357" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildStuReistrationMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/.project">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-57" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/casses/cn/huizhi/mapper/ChildStuReistrationMapper.class" />
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/casses/cn/huizhi/mapper/ChildStuReistrationMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/classes/cn/huizhi/mapper/ChildStuReistrationMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="876">
+          <caret line="122" column="17" selection-start-line="122" selection-start-column="17" selection-end-line="122" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/high/RegisterStudent.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5434">
+          <caret line="286" column="118" selection-start-line="286" selection-start-column="118" selection-end-line="286" selection-end-column="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/pojo/Student.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1539">
+          <caret line="81" column="39" selection-start-line="81" selection-start-column="39" selection-end-line="81" selection-end-column="39" />
+          <folding>
+            <element signature="e#3072#3073#0" expanded="true" />
+            <element signature="e#3097#3098#0" expanded="true" />
+            <element signature="e#3148#3149#0" expanded="true" />
+            <element signature="e#3185#3186#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/mapper/ChildStuReistrationMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2147">
+          <caret line="113" column="33" selection-start-line="113" selection-start-column="33" selection-end-line="113" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/service/ChildStuReistrationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/WelcomeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="29" selection-start-column="29" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/static/js/root/classStudent/classInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/WebRoot/WEB-INF/jsp/root/school/schoolInfo.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2128">
+          <caret line="112" column="44" selection-start-line="112" selection-start-column="44" selection-end-line="112" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TraininginsTitutions/src/cn/huizhi/controller/root/RootSchoolController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="1291" column="58" selection-start-line="1291" selection-start-column="58" selection-end-line="1291" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor>
+            <show-content>
+              <type id="artifact" />
+              <type id="javaee-facet-resources" />
+              <type id="jpa-descriptors" />
+              <type id="library" />
+            </show-content>
+          </artifact-editor>
+          <last-edited>TraininginsTitutions</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20870535" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Web (Project)|Web</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20870535" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Project</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20870535" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20870535" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

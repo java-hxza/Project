@@ -86,11 +86,6 @@
 							<div class="page-title-box">
 								<div class="page-title-right">
 									<ol class="breadcrumb m-0">
-										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">Hyper</a></li>
-										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">Pages</a></li>
-										<li class="breadcrumb-item active">FAQ</li>
 									</ol>
 								</div>
 								<h4 class="page-title">账户余额</h4>
@@ -102,18 +97,6 @@
 						<div class="col-sm-12">
 							<div class="text-center">
 								<h3 class="schoolId" id="schoolId" name="${schoolId}">${schoolName}</h3>
-								<div class="app-search">
-									<form>
-										<div class="input-group">
-											<input type="text" class="form-control"
-												placeholder="Search..."> <span
-												class="mdi mdi-magnify"></span>
-											<div class="input-group-append">
-												<button class="btn btn-primary" type="button">搜索</button>
-											</div>
-										</div>
-									</form>
-								</div>
 								<p class="text-muted mt-3"></p>
 							</div>
 						</div>
@@ -121,7 +104,7 @@
 					</div>
 					<!-- end row -->
 					<div class="row">
-						<div class="col-md-5">
+						<div class="col-sm-5">
 							<div class="form-group">
 								<label for="billing-first-name">开始日期</label> <input
 									class="form-control" type="date" id="startTime" />

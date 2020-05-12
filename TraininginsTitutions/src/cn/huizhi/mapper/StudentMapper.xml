@@ -224,6 +224,7 @@
 		LIKE
 		CONCAT('%',#{1},'%') AND
 		s.studentSex=#{2}
+		limit 1
 	</select>
 
 

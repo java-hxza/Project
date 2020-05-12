@@ -57,9 +57,9 @@
 			<result column="t_integral" property="integral" />
 			<result column="t_parentName" property="parentName" />
 			<result column="t_registrationChannels"
-				property="registrationChannels" />
+					property="registrationChannels" />
 			<result column="t_registrationConsultant"
-				property="registrationConsultant" />
+					property="registrationConsultant" />
 			<result column="t_remarks" property="remarks" />
 			<result column="t_school" property="school" />
 			<result column="t_startTime" property="startTime" />
@@ -69,6 +69,7 @@
 			<result column="t_studentSex" property="studentSex" />
 			<result column="t_telephone" property="telephone" />
 			<result column="t_theSurrogate" property="theSurrogate" />
+			<result column="st_teacherName" property="teacherName"/>
 		</association>
 	</resultMap>
 
@@ -93,12 +94,13 @@
 	<select id="findChildrenesClassStudnetByClassId"
 		parameterType="java.lang.Integer" resultMap="studnetByClassIdMap">
 		select
-		<include refid="childrenesClassStudnetCol" />
-		from childrenesclassstudnet ccs,student t
+		<include refid="childrenesClassStudnetCol" />,st.teacherName st_teacherName
+		from childrenesclassstudnet ccs,student t,studenttool st
 		<where>
+			and t.studentId = st.studentId and
 			ccs.studentId = t.studentId and ccs.state != 2
 			<if test="classId !=null and classId!=''">
-				and classId = #{classId}
+				and st.classId = #{classId}
 			</if>
 		</where>
 	</select>
@@ -107,14 +109,23 @@
 		parameterType="java.lang.Integer" resultMap="studnetByClassIdMap">
 		select
 		<include refid="childrenesClassStudnetCol" />
-		from childrenesclassstudnet ccs,student t
+		from childrenesclassstudnet ccs,student t,studenttool st
 		<where>
 			ccs.studentId = t.studentId and ccs.state != 2
+			and st.studentId = t.studentId
 			<if test="classId !=null and classId!=''">
-				and classId = #{classId}
+				and ccs.classId = #{classId}
 			</if>
-			
-			<if test="startTime !=null and startTime !=''">
+			<if test="studentName !=null and studentName !=''">
+				and  t.studentName like concat(#{studentName},'%')
+			</if>
+			<if test="teacherName !=null and teacherName !=''">
+				and  st.teacherName like concat(#{teacherName},'%')
+			</if>
+			<if test="schoolTime !=null and schoolTime !=''">
+				and  ccs.schoolTime like concat(#{schoolTime},'%')
+			</if>
+			<if test="startTime !=null and startTime !='' and endTime != null and endTime != ''">
 				and ccs.enrollmentTime &gt;= #{startTime} and ccs.enrollmentTime &lt;= #{endTime}
 			</if>
 		</where>

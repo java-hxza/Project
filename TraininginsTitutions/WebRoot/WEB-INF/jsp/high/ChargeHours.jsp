@@ -118,7 +118,7 @@
 											<div class="card">
 												<div class="card-body">
 													<div class="row mb-2">
-														<div class="col-sm-4">
+														<div class="col-sm-12">
 															<a href="${Path }/ChargeHours.html"
 																class="btn btn-danger mb-2"><i
 																class="mdi mdi-plus-circle mr-2"></i> 续费</a> <a
